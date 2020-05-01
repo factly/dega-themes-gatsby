@@ -14,11 +14,11 @@
     "factly"
   ],
   "bugs": {
-    "url": "https://github.com/factly/gatsby-themes/issues"
+    "url": "https://github.com/factly/dega-themes/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/factly/gatsby-themes.git",
+    "url": "https://github.com/factly/dega-themes.git",
     "directory": "themes/gatsby-theme-factly"
   },
   "scripts": {

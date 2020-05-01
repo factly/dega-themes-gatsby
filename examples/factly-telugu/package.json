@@ -1,9 +1,9 @@
 {
     "private": true,
-    "name": "factly",
+    "version": "1.0.0",
+    "name": "factly-telugu",
     "description": "factly default gatsby theme example",
     "author": "Mahipat <mahipat@factly.in>",
-    "version": "1.0.3",
     "license": "MIT",
     "scripts": {
         "build": "gatsby build",

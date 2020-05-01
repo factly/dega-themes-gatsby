@@ -1,7 +1,5 @@
 {
-  "name": "gatsby-themes",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "dega-themes",
   "license": "MIT",
   "private": true,
   "keywords": [
@@ -11,11 +9,11 @@
     "factly"
   ],
   "bugs": {
-    "url": "https://github.com/factly/gatsby-themes/issues"
+    "url": "https://github.com/factly/dega-themes/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/factly/gatsby-themes.git"
+    "url": "https://github.com/factly/dega-themes.git"
   },
   "workspaces": [
     "themes/*",
