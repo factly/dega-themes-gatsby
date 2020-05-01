@@ -3,7 +3,6 @@
     "name": "factly",
     "description": "factly default gatsby theme example",
     "author": "Mahipat <mahipat@factly.in>",
-    "version": "1.0.3",
     "license": "MIT",
     "scripts": {
         "build": "gatsby build",
