@@ -1,5 +1,5 @@
 {
-  "name": "@factly/gatsby-theme-factly",
+  "name": "@mhjadav/gatsby-theme-factly",
   "version": "1.0.4",
   "main": "index.js",
   "license": "MIT",
@@ -55,5 +55,5 @@
     "react-infinite-scroller": "^1.2.4",
     "tailwindcss": "^1.2.0"
   },
-  "gitHead": "c9d3604225d468624f03701f3e33cae7cacfd1e6"
+  "gitHead": "a01dd05b1968ef811e35f95f34fb3cd96d3fa7c6"
 }
