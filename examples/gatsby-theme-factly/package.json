@@ -3,7 +3,7 @@
     "name": "factly",
     "description": "factly default gatsby theme example",
     "author": "Mahipat <mahipat@factly.in>",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "license": "MIT",
     "scripts": {
         "build": "gatsby build",
@@ -12,7 +12,7 @@
         "clean": "gatsby clean"
     },
     "dependencies": {
-        "@factly/gatsby-theme-factly": "^1.0.2",
+        "@factly/gatsby-theme-factly": "^1.0.3",
         "gatsby": "^2.21.5",
         "gatsby-theme-factly": "^1.0.0",
         "react": "^16.13.1",
