@@ -1,0 +1,12 @@
+0 silly argv {
+0 silly argv   _: [ 'add' ],
+0 silly argv   scope: 'factly',
+0 silly argv   globs: [],
+0 silly argv   lernaVersion: '3.20.2',
+0 silly argv   '$0': 'C:\\Users\\mhjad\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js',
+0 silly argv   pkg: '@factly/gatsby-theme-factly'
+0 silly argv }
+1 notice cli v3.20.2
+2 verbose rootPath F:\factly\gatsby-themes
+3 error Error: 404 Not Found - GET https://registry.npmjs.org/@factly%2fgatsby-theme-factly - Not found
+3 error     at F:\factly\gatsby-themes\node_modules\@evocateur\npm-registry-fetch\check-response.js:104:15

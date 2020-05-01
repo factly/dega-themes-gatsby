@@ -1,0 +1,18 @@
+{
+    "extends": [
+        "wesbos"
+    ],
+    "rules": {
+        "no-console": 1,
+        "no-multi-assign": 2,
+        "jsx-a11y/html-has-lang": 0,
+        "react/destructuring-assignment": 0,
+        "react/no-danger": 0,
+        "prettier/prettier": [
+            "error",
+            {
+                "singleQuote": true
+            }
+        ]
+    }
+}

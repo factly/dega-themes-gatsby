@@ -1,0 +1,15 @@
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "loglevel": "success",
+  "registry": "https://registry.npmjs.org/",
+  "ignoreChanges": [],
+  "command": {
+    "publish": {
+      "allowBranch": "master",
+      "conventionalCommits": true,
+      "message": "chore(release): Publish"
+    }
+  }
+}
