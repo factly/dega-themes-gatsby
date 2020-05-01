@@ -1,12 +1,14 @@
-0 silly argv {
-0 silly argv   _: [ 'add' ],
-0 silly argv   scope: 'factly',
-0 silly argv   globs: [],
-0 silly argv   lernaVersion: '3.20.2',
-0 silly argv   '$0': 'C:\\Users\\mhjad\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js',
-0 silly argv   pkg: '@factly/gatsby-theme-factly'
-0 silly argv }
-1 notice cli v3.20.2
-2 verbose rootPath F:\factly\gatsby-themes
-3 error Error: 404 Not Found - GET https://registry.npmjs.org/@factly%2fgatsby-theme-factly - Not found
-3 error     at F:\factly\gatsby-themes\node_modules\@evocateur\npm-registry-fetch\check-response.js:104:15
+15 error Error: Command failed: git remote update
+15 error error: cannot lock ref 'refs/remotes/origin/master': is at e9696906e56cdbf1d81e5f3efbca0890f6fdc923 but expected c9d3604225d468624f03701f3e33cae7cacfd1e6
+15 error From https://github.com/mhjadav/gatsby-themes
+15 error  ! c9d3604..e969690  master     -> origin/master  (unable to update local ref)
+15 error error: Could not fetch origin
+15 error
+15 error Fetching origin
+15 error
+15 error     at makeError (F:\factly\gatsby-themes\node_modules\execa\index.js:174:9)
+15 error     at Function.module.exports.sync (F:\factly\gatsby-themes\node_modules\execa\index.js:338:15)
+15 error     at Object.execSync (F:\factly\gatsby-themes\node_modules\@lerna\child-process\index.js:26:16)
+15 error     at updateRemote (F:\factly\gatsby-themes\node_modules\@lerna\version\lib\is-behind-upstream.js:26:16)
+15 error     at isBehindUpstream (F:\factly\gatsby-themes\node_modules\@lerna\version\lib\is-behind-upstream.js:11:3)
+15 error     at VersionCommand.initialize (F:\factly\gatsby-themes\node_modules\@lerna\version\index.js:150:9)

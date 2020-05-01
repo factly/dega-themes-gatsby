@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "main": "index.js",
   "license": "MIT",
+  "author": "Mahipat <mahipat@factly.in",
   "publishConfig": {
     "access": "public"
   },
@@ -13,11 +14,11 @@
     "factly"
   ],
   "bugs": {
-    "url": "https://github.com/factly/gatsby-themes/issues"
+    "url": "https://github.com/mhjadav/gatsby-themes/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/factly/gatsby-themes.git",
+    "url": "https://github.com/mhjadav/gatsby-themes.git",
     "directory": "themes/gatsby-theme-factly"
   },
   "scripts": {
