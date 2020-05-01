@@ -1,5 +1,5 @@
 {
-  "name": "@mhjadav/gatsby-theme-factly",
+  "name": "@factly/gatsby-theme-factly",
   "version": "1.0.5",
   "main": "index.js",
   "license": "MIT",
@@ -14,11 +14,11 @@
     "factly"
   ],
   "bugs": {
-    "url": "https://github.com/mhjadav/gatsby-themes/issues"
+    "url": "https://github.com/factly/gatsby-themes/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mhjadav/gatsby-themes.git",
+    "url": "https://github.com/factly/gatsby-themes.git",
     "directory": "themes/gatsby-theme-factly"
   },
   "scripts": {

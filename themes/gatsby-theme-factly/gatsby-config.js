@@ -6,7 +6,6 @@ const tailwindConfig = require('./tailwind.config.js');
 const autoprefixer = require(`autoprefixer`);
 const cssnano = require(`cssnano`);
 const localMetadata = require('./data/site-config');
-
 module.exports = ({
   client = '',
   metaData = {},
@@ -65,7 +64,8 @@ module.exports = ({
           tailwind: true,
           content: [
             path.join(process.cwd(), 'src/**/!(*.d).{ts,js,jsx,tsx}'),
-            path.join(
+            path.join(process.cwd(), 'node_modules/@factly/gatsby-theme-factly/**/!(*.d).{ts,js,jsx,tsx}'),
+            process.env.Environment !== 'production' && path.join(
               process.cwd(),
               '../../node_modules/@factly/gatsby-theme-factly/src/**/!(*.d).{ts,js,jsx,tsx}'
             )
