@@ -24,7 +24,7 @@ const topCategory = [
     slug: '#goverment-of-india'
   },
   {
-    title: 'Coronavirus 0',
+    title: 'Coronavirus 10',
     slug: '#coronavirus'
   },
   {
