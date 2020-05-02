@@ -81,13 +81,13 @@ function ListItems({
           >
             <div className="flex flex-row flex-wrap">
               {item.author.map((value, index, arr) => (
-                <a
-                  href="/"
+                <Link
+                  to="/author-details"
                   className="text-gray-600 text-xs md:text-sm mr-2 normal-case"
                 >
                   {value}
                   {arr.length - index > 1 && ','}
-                </a>
+                </Link>
               ))}
             </div>
             <p className="text-gray-600 text-xs md:text-sm">Apr, 21 2020</p>
