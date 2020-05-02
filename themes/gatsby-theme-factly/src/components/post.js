@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import AuthorSingle from './authorSingle';
 import AuthorMultiple from './authorMultiple';
-import img from '../static/images/i.jpg';
 import { SliderArrowLeft, SliderArrowRight } from './icons';
 
 const postContent =

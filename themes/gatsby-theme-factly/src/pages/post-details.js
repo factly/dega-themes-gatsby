@@ -1,22 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import Layout from '../components/layout';
 import ListItems from '../components/listItems';
-import Footer from '../components/footer';
 import Post from '../components/post';
 
-const items = Array(20).fill({
-  title:
-    'A video clip from a web series is being falsely shared as ‘Sadhu strangling a policeman brutally’',
-  excerpt:
-    'After POTUS Donald Trump announced that USA is halting its funding to the WHO, there has been a lot of debate around WHO’s finances. So, who funds the WHO? What is the size of its budget? Here is a detailed explainer.',
-  author: ['Pavithra K M', 'Bharath Kancharla'],
-  time: '2 Min',
-  image: ''
-});
 const posts = Array(1000).fill({
   title:
     'A video clip from a web series is being falsely shared as ‘Sadhu strangling a policeman brutally’',

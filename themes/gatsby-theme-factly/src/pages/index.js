@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState} from 'react';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import Layout from '../components/layout';
 import ListItems from '../components/listItems';
 import Footer from '../components/footer';
-import img from '../static/images/i.jpg';
 
 const items = Array(20).fill({
   title:
@@ -90,10 +88,11 @@ function IndexPage({ data }) {
             </div> */}
           <div className="bg-white rounded-t rounded-b-none overflow-hidden px-6">
             <a
-              href="#"
+              href="/"
               className="flex flex-wrap no-underline hover:no-underline"
             >
               <img
+                alt=""
                 src="https://source.unsplash.com/collection/9419734/500x300"
                 className="h-full w-full rounded"
               />
