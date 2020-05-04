@@ -7,7 +7,7 @@ import Navbar from './navbar';
 const Layout = props => (
   <StaticQuery
     query={graphql`
-      query layoutMeta{
+      query layoutMeta {
         site {
           siteMetadata {
             description
@@ -55,7 +55,7 @@ const Layout = props => (
           <Navbar></Navbar>
           <div
             style={{ maxWidth: '1920px' }}
-            className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4"
+            className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 mx-auto"
           >
             {children}
           </div>
