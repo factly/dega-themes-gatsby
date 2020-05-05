@@ -29,7 +29,7 @@ function ListItems({
   imageSize = 'w-full h-40'
 }) {
   return (
-    <div
+    <article
       className={`flex flex-col leading-tight border-b last:border-b-0 ${className}`}
     >
       <LinkElement
@@ -66,35 +66,35 @@ function ListItems({
               {item.excerpt}
             </p>
           )}
+          {author && (
+            <div className="flex mt-auto pt-2">
+              {/* {orientation !== 'vertical' && (
+                <div
+                  className={`hidden md:flex ${imageSize} justify-start items-start pr-4`}
+                  style={{ height: '0' }}
+                ></div>
+              )} */}
+              <div
+                className={`flex flex-col w-full ${orientation} justify-between items-start`}
+              >
+                <div className="flex flex-row flex-wrap">
+                  {item.author.map((value, index, arr) => (
+                    <Link
+                      to="/author-details"
+                      className="text-gray-600 text-xs md:text-sm mr-2 normal-case"
+                    >
+                      {value}
+                      {arr.length - index > 1 && ','}
+                    </Link>
+                  ))}
+                </div>
+                <p className="text-gray-600 text-xs md:text-sm">Apr, 21 2020</p>
+              </div>
+            </div>
+          )}
         </div>
       </LinkElement>
-      {author && (
-        <div className="flex mt-auto py-2">
-          {orientation !== 'vertical' && (
-            <div
-              className={`hidden md:flex ${imageSize} justify-start items-start pr-4`}
-              style={{ height: '0' }}
-            ></div>
-          )}
-          <div
-            className={`flex flex-col w-full ${orientation} justify-between items-start`}
-          >
-            <div className="flex flex-row flex-wrap">
-              {item.author.map((value, index, arr) => (
-                <Link
-                  to="/author-details"
-                  className="text-gray-600 text-xs md:text-sm mr-2 normal-case"
-                >
-                  {value}
-                  {arr.length - index > 1 && ','}
-                </Link>
-              ))}
-            </div>
-            <p className="text-gray-600 text-xs md:text-sm">Apr, 21 2020</p>
-          </div>
-        </div>
-      )}
-    </div>
+    </article>
   );
 }
 
