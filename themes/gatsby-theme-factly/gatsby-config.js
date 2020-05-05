@@ -6,7 +6,7 @@ const tailwindConfig = require('./tailwind.config.js');
 const autoprefixer = require(`autoprefixer`);
 const cssnano = require(`cssnano`);
 const localMetadata = require('./data/site-config');
-
+console.log(process.env)
 module.exports = ({
   client = '',
   metaData = {},
@@ -39,6 +39,40 @@ module.exports = ({
           url: 'https://api.degacms.com/query',
           headers: {
             client
+          }
+        }
+      },
+      {
+        resolve: 'gatsby-source-custom-api',
+        options: {
+          url: `https://www.googleapis.com/youtube/v3/playlists?part=snippet%2CcontentDetails&maxResults=50&channelId=UCpi2S8wW4xLlUCVryhyBtsA&key=${process.env.GOOGLE_PRIVATE_KEY}`,
+          imageKeys: ['standard'],
+          rootKey: 'items',
+          schemas: {
+            items: `
+              id: String
+              snippet: snippet
+              contentDetails: contentDetails
+            `,
+            snippet: `
+              channelId: String
+              title: String
+              description: String
+              publishedAt: Date
+              channelTitle: String
+              thumbnails: thumbnails
+            `,
+            thumbnails: `
+              standard: standard
+            `,
+            standard: `
+              url: String
+              width: Int
+              height: Int
+            `,
+            contentDetails: `
+              itemCount: Int
+            `
           }
         }
       },

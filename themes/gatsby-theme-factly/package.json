@@ -55,5 +55,8 @@
     "react-infinite-scroller": "^1.2.4",
     "tailwindcss": "^1.2.0"
   },
-  "gitHead": "a01dd05b1968ef811e35f95f34fb3cd96d3fa7c6"
+  "gitHead": "a01dd05b1968ef811e35f95f34fb3cd96d3fa7c6",
+  "devDependencies": {
+    "gatsby-source-custom-api": "^2.1.4"
+  }
 }

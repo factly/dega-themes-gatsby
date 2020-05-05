@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { graphql, Link } from 'gatsby'
+import Img  from 'gatsby-image';
 import InfiniteScroll from 'react-infinite-scroller';
 import Layout from '../components/layout';
 import { Play } from '../components/icons';
@@ -16,14 +18,11 @@ const items = Array(20).fill({
   image: ''
 });
 
-const tabs = ['All', 'Stories', 'Factcheck'];
-
 function Playlists({ data }) {
+  console.log(data)
   const [postItems, setPostItems] = useState(items.slice(0, 2));
   const [hasNextPage, setHasNextPage] = useState(true);
-  const [activeTab, setActiveTab] = useState({
-    All: true
-  });
+  
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
     const nextPageItems = items.slice(postItems.length, postItems.length + 2);
@@ -57,20 +56,21 @@ function Playlists({ data }) {
               Subscribe
             </button>
           </div>
-          <div className="flex flex-row flex-wrap py-6 justify-center items-center">
-            {items.map(() => (
-              <a
-                className="flex flex-col lg:w-1/4 xl:w-1/5 no-underline hover:no-underline pr-6 pb-4 mb-6 border-b"
-                href="/playlist"
+          <div className="flex flex-row flex-wrap p-6 justify-center sm:justify-start items-center sm:items-start">
+            {data.allItems.nodes.map((playlist) => (
+              <Link
+                key={playlist.id}
+                className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline pr-6 pb-4 mb-6"
+                to={`playlist/${playlist.id}`}
               >
-                <div className="relative h-32">
-                  <img
-                    alt=""
-                    src="https://source.unsplash.com/collection/9419734/300x100"
+                <div className="relative">
+                  <Img
+                    alt={playlist.snippet.title}
+                    fluid={playlist.snippet.thumbnails.standard.local.childImageSharp.fluid}
                     className="h-full w-full"
                   />
                   <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
-                    <span className="text-white">34</span>
+                  <span className="text-white">{playlist.contentDetails.itemCount}</span>
                   </div>
                   <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
                     <Play className="text-white fill-current w-4 h-4"></Play>
@@ -82,16 +82,16 @@ function Playlists({ data }) {
                     id="nav-0"
                     className="w-full font-bold font-sans text-lg text-gray-800"
                   >
-                    A video clip from a web series
+                    {playlist.snippet.title}
                   </div>
                   <p className="text-gray-600 text-xs md:text-sm">
-                    Apr, 21 2020
+                  {playlist.snippet.publishedAt}
                   </p>
                   <span className="text-gray-600 text-xs md:text-sm pt-4 uppercase">
                     View full playlist
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -102,10 +102,35 @@ function Playlists({ data }) {
 }
 
 Playlists.propTypes = {
-  data: PropTypes.shape({
-    file: {
-      childImageSharp: {}
-    }
-  })
+  data: PropTypes.shape({})
 };
 export default Playlists;
+
+export const query = graphql`
+  query {
+    allItems(filter: {snippet: {thumbnails: {standard: {url: {ne: null}}}} contentDetails: {itemCount: {ne: null}}}) {
+      nodes {
+        id
+        contentDetails {
+          itemCount
+        }
+        snippet {
+          channelId
+          title
+          publishedAt(formatString: "MMMM Do, YYYY")
+          thumbnails {
+            standard {
+              local {
+                childImageSharp {
+                  fluid(maxWidth: 300, quality: 100) {
+                    ...GatsbyImageSharpFluid_withWebp
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
