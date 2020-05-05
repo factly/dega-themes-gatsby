@@ -89,10 +89,10 @@ function Playlist({ data }) {
             ></label>
           </div>
         </div>
-        <div className="flex flex-col w-full lg:w-2/5 pt-16 lg:px-4">
+        <div className="flex flex-col w-full lg:w-2/5 mt-16 lg:mx-4 border shadow-md">
           <div className="lg:relative lg:overflow-auto h-auto lg:h-screen">
             <div className="flex flex-col lg:absolute top-0 left-0 w-full h-full">
-              <div className="mb-4 pb-4 border-b">
+              <div className="mb-4 p-4 border-b">
                 <h5 className="text-base font-medium">
                   PAUSE - Debunking Fake News
                 </h5>
