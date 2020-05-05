@@ -31,7 +31,7 @@ export default function Navbar({ fixed }) {
           <nav className="flex flex-grow items-center justify-between px-0 lg:px-4 py-3 sm:p-0">
             <div className="flex flex-1 order-2 lg:order-1 items-center justify-end lg:justify-start">
               <MenuItems
-                className="order-3 lg:order-1"
+                className="order-4 lg:order-1"
                 Icon={({ show }) => (
                   <svg
                     className="fill-current w-4 h-4"
