@@ -28,6 +28,9 @@ function Playlist({ data }) {
       setVideoListHeight(videoElement.current.offsetHeight);
     };
     setVideoListHeight(videoElement.current.offsetHeight);
+    return () => {
+      window.onresize = null;
+    };
   }, [videoElement]);
   const handleLoadMore = () => {
     if (!hasNextPage) return false;

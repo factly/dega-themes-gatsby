@@ -32,15 +32,15 @@ function Author({ data }) {
   return (
     <Layout>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
-        <div className="main-content order-2 lg:order-1 lg:w-3/5 mx-auto -my-8 lg:my-0">
-          <div className="flex flex-col py-6">
-            <ul className="flex border-b">
+        <div className="main-content order-2 lg:order-1 lg:w-3/5 mx-auto lg:-my-16">
+          <div className="flex flex-col pb-6">
+            <ul className="flex px-8 pt-8 lg:pt-32 bg-gray-300">
               {tabs.map(tab => (
                 <li className="-mb-px mr-1">
                   <button
                     type="button"
-                    className={`bg-white inline-block py-2 px-4 font-semibold focus:outline-none border-b 
-                    ${activeTab[tab] && 'border-blue-500'}`}
+                    className={`inline-block py-2 px-4 border border-b-0 rounded-t font-medium text-lg focus:outline-none
+                    ${activeTab[tab] && 'bg-white'}`}
                     onClick={() => setActiveTab({ [tab]: tab })}
                   >
                     {tab}
@@ -83,8 +83,6 @@ function Author({ data }) {
                     orientation="vertical horizontal"
                     item={item}
                     index={index}
-                    image={false}
-                    author={false}
                     tags
                     excerpt
                     imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-0"
