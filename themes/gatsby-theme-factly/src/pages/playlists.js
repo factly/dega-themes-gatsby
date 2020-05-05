@@ -66,7 +66,7 @@ function Playlists({ data }) {
                 <div className="relative">
                   <Img
                     alt={playlist.snippet.title}
-                    fluid={playlist.snippet.thumbnails.maxers.local.childImageSharp.fluid}
+                    fluid={playlist.snippet.thumbnails.maxres.local.childImageSharp.fluid}
                     className="h-full w-full"
                   />
                   <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
@@ -108,7 +108,7 @@ export default Playlists;
 
 export const query = graphql`
   query {
-    allItems(filter: {snippet: {thumbnails: {maxers: {url: {ne: null}}}} contentDetails: {itemCount: {ne: null}}}) {
+    allItems(filter: {snippet: {thumbnails: {maxres: {url: {ne: null}}}} contentDetails: {itemCount: {ne: null}}}) {
       nodes {
         id
         contentDetails {
@@ -119,7 +119,7 @@ export const query = graphql`
           title
           publishedAt(formatString: "MMMM Do, YYYY")
           thumbnails {
-            maxers {
+            maxres {
               local {
                 childImageSharp {
                   fluid(maxWidth: 300, quality: 100) {
