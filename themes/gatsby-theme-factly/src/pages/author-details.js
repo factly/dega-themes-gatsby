@@ -94,7 +94,7 @@ function Author({ data }) {
             )}
           </div>
         </div>
-        <div className="flex flex-col order-1 lg:order-2 w-full lg:w-2/5 border-l pt-10 lg:pt-20 top-0 h-screen sticky overflow-y-hidden">
+        <div className="flex flex-col order-1 lg:order-2 w-full lg:w-2/5 border-l pt-10 lg:pt-20 top-0 h-auto lg:h-screen static lg:sticky overflow-y-hidden">
           <div className="flex flex-col px-6">
             <div className="flex py-4">
               <img
