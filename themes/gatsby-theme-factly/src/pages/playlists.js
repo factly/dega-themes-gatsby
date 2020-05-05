@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import Layout from '../components/layout';
-import ListItems from '../components/listItems';
+import { Play } from '../components/icons';
 import Footer from '../components/footer';
 import logo from '../static/images/factly-video.jpg';
 
@@ -34,7 +34,7 @@ function Playlists({ data }) {
   return (
     <Layout>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
-        <div className="main-content w-full mx-auto -my-8 lg:my-0">
+        <div className="main-content w-full -my-8 lg:my-0">
           <img
             alt=""
             src="https://source.unsplash.com/collection/9419734/1000x200"
@@ -60,19 +60,20 @@ function Playlists({ data }) {
           <div className="flex flex-row flex-wrap py-6 justify-center items-center">
             {items.map(() => (
               <a
-                className="flex flex-col w-1/6 no-underline hover:no-underline m-2"
+                className="flex flex-col xl:w-1/4 xl:w-1/6 no-underline hover:no-underline m-2"
                 href="/playlist"
               >
                 <div className="relative h-32">
                   <img
                     alt=""
-                    src="https://source.unsplash.com/collection/9419734/100x100"
+                    src="https://source.unsplash.com/collection/9419734/300x100"
                     className="h-full w-full"
                   />
                   <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
                     <span className="text-white">34</span>
                   </div>
                   <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
+                    <Play className="text-white fill-current w-4 h-4"></Play>
                     <span className="text-white text-base">Play All</span>
                   </div>
                 </div>
