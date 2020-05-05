@@ -60,7 +60,7 @@ function Playlists({ data }) {
           <div className="flex flex-row flex-wrap py-6 justify-center items-center">
             {items.map(() => (
               <a
-                className="flex flex-col xl:w-1/4 xl:w-1/5 no-underline hover:no-underline pr-6 pb-4 mb-6 border-b"
+                className="flex flex-col lg:w-1/4 xl:w-1/5 no-underline hover:no-underline pr-6 pb-4 mb-6 border-b"
                 href="/playlist"
               >
                 <div className="relative h-32">
