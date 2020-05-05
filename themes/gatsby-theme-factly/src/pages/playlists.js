@@ -60,7 +60,7 @@ function Playlists({ data }) {
             {data.allItems.nodes.map((playlist) => (
               <Link
                 key={playlist.id}
-                className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline pr-6 pb-4 mb-6"
+                className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
                 to={`playlist/${playlist.id}`}
               >
                 <div className="relative">
