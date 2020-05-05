@@ -38,7 +38,7 @@ function Playlist({ data }) {
 
   return (
     <Layout>
-      <div className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-20 xl:mx-20">
+      <div className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-10 xl:mx-20">
         <div className="main-content flex flex-col w-full lg:w-3/5">
           <div
             ref={videoElement}
@@ -108,7 +108,7 @@ function Playlist({ data }) {
                 >
                   <span className="text-sm text-gray-600 px-2">
                     {index === 2 ? (
-                      <Play className="fill-current w-3 h-3"></Play>
+                      <Play className="fill-current w-2 h-2"></Play>
                     ) : (
                       index + 1
                     )}
@@ -116,7 +116,7 @@ function Playlist({ data }) {
                   <img
                     alt=""
                     src="https://source.unsplash.com/collection/9419734/100x56"
-                    className="h-full"
+                    className="w-20 h-full"
                   />
                   <div className="hidden opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
                     <span className="text-white text-base">Play</span>
