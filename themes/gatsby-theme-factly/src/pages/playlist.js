@@ -105,7 +105,7 @@ function Playlist({ data }) {
               </div>
               {items.map((item, index) => (
                 <a
-                  className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 ${index ===
+                  className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 py-2 ${index ===
                     2 && 'video-active'}`}
                   href="/playlist"
                 >
