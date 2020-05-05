@@ -63,9 +63,9 @@ module.exports = ({
               thumbnails: thumbnails
             `,
             thumbnails: `
-              standard: standard
+              maxers: maxers
             `,
-            standard: `
+            maxers: `
               url: String
               width: Int
               height: Int
