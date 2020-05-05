@@ -1,5 +1,23 @@
 import React from 'react';
 
+export const Play = props => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    id="icon_play"
+    viewBox="0 0 13 14"
+    {...props}
+  >
+    <desc />
+    <defs />
+    <g>
+      <g id="Icons-AV" transform="translate(-88.000000, -88.000000)">
+        <g id="play-arrow" transform="translate(88.500000, 88.000000)">
+          <path d="M0,0 L0,14 L11,7 L0,0 Z" id="Shape" />
+        </g>
+      </g>
+    </g>
+  </svg>
+);
 export const False = props => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

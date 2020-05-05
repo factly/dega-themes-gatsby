@@ -70,6 +70,10 @@ body::-webkit-scrollbar-thumb {
     @apply text-blue-500
 }
 
+.video-active{
+    @apply bg-gray-200 flex
+}
+
 .main-content {
     @apply flex flex-col pt-16;
 }
@@ -123,7 +127,7 @@ a:hover{
   .read-more-trigger {
     cursor: pointer;
   }
-  
+
   @screen lg {
     .read-more-trigger{
         @apply hidden
