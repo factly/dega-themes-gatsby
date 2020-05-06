@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { graphql, Link } from 'gatsby'
-import Img  from 'gatsby-image';
+import { graphql, Link } from 'gatsby';
+import Img from 'gatsby-image';
 import InfiniteScroll from 'react-infinite-scroller';
 import Layout from '../components/layout';
 import { Play } from '../components/icons';
@@ -19,10 +19,10 @@ const items = Array(20).fill({
 });
 
 function Playlists({ data }) {
-  console.log(data)
+  console.log(data);
   const [postItems, setPostItems] = useState(items.slice(0, 2));
   const [hasNextPage, setHasNextPage] = useState(true);
-  
+
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
     const nextPageItems = items.slice(postItems.length, postItems.length + 2);
@@ -57,37 +57,44 @@ function Playlists({ data }) {
             </button>
           </div>
           <div className="flex flex-row flex-wrap p-6 justify-center sm:justify-start items-center sm:items-start">
-            {data.allItems.nodes.map((playlist) => (
+            {data.allPlaylist.nodes.map(playlist => (
               <Link
                 key={playlist.id}
                 className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
-                to={`playlist/${playlist.id}`}
+                to={`playlist/${playlist.playlistId}/${playlist.videos[0].contentDetails.videoId}`}
               >
                 <div className="relative">
                   <Img
                     alt={playlist.snippet.title}
-                    fluid={playlist.snippet.thumbnails.maxres.local.childImageSharp.fluid}
+                    fluid={playlist.local.childImageSharp.fluid}
                     className="h-full w-full"
                   />
-                  <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
-                  <span className="text-white">{playlist.contentDetails.itemCount}</span>
-                  </div>
+                  {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
+                    <span className="text-white">
+                      {playlist.contentDetails.itemCount}
+                    </span>
+                  </div> */}
                   <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
                     <Play className="text-white fill-current w-4 h-4"></Play>
                     <span className="text-white text-base">Play All</span>
                   </div>
                 </div>
                 <div className="w-full flex flex-col py-2">
+                  <div>
+                    <span className="inline-block align-text-top bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700">
+                      {playlist.contentDetails.itemCount} Videos
+                    </span>
+                  </div>
                   <div
                     id="nav-0"
                     className="w-full font-bold font-sans text-lg text-gray-800"
                   >
                     {playlist.snippet.title}
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm">
-                  {playlist.snippet.publishedAt}
-                  </p>
-                  <span className="text-gray-600 text-xs md:text-sm pt-4 uppercase">
+                  {/* <p className="text-gray-600 text-xs md:text-sm">
+                    {playlist.snippet.publishedAt}
+                  </p> */}
+                  <span className="text-gray-600 text-xs md:text-sm pt-2 uppercase">
                     View full playlist
                   </span>
                 </div>
@@ -107,26 +114,29 @@ Playlists.propTypes = {
 export default Playlists;
 
 export const query = graphql`
-  query {
-    allItems(filter: {snippet: {thumbnails: {maxres: {url: {ne: null}}}} contentDetails: {itemCount: {ne: null}}}) {
+  query PlaylistsPageQuery {
+    allPlaylist {
+      totalCount
       nodes {
         id
+        playlistId
+        videos {
+          contentDetails {
+            videoId
+          }
+        }
         contentDetails {
           itemCount
         }
         snippet {
           channelId
-          title
           publishedAt(formatString: "MMMM Do, YYYY")
-          thumbnails {
-            maxres {
-              local {
-                childImageSharp {
-                  fluid(maxWidth: 300, quality: 100) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
+          title
+        }
+        local {
+          childImageSharp {
+            fluid(maxWidth: 300, quality: 100) {
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }

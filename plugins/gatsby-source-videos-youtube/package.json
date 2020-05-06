@@ -1,0 +1,29 @@
+{
+  "name": "gatsby-source-videos-youtube",
+  "description": "Source all youtube videos from the selected channel, with playlist",
+  "version": "1.0.0",
+  "author": "Mahipat Jadav <mj@mojaave.com>",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dega-themes/plugins/gatsby-source-videos-youtube"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "source",
+    "youtube",
+    "videos",
+    "images",
+    "playlist"
+  ],
+  "dependencies": {
+    "gatsby-source-filesystem": "^2.0.29",
+    "node-fetch": "^2.3.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+      "generate-changelog": "^1.7.1"
+  }
+}
