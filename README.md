@@ -1,11 +1,9 @@
-# Factly
+# Dega Themes
 
 
-Factly dega themes is open sourced themes for the gatsby site
+The repository contains open sourced themes developed by Factly to generate modern websites using Dega CMS as a data source. Themes are developed using GatsbyJS and are free of cost to use.
 
-You can build site quickly using dega gatsby themes with dega CMS as data source for your site.
-
-We at factly making site building easier with dega-themes and dega-cms
+We at Factly are making developing quality websites easier with Dega Themes and Dega CMS.
 
 To run example site 
 
