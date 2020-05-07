@@ -172,7 +172,7 @@ exports.onCreateNode = async ({
     node.snippet.thumbnails.high
   ) {
     const imageName = node.snippet.thumbnails.high.url.match(/([^/]*)\/*$/)[1];
-    const imageCacheKey = `local-image-${imageName}`;
+    const imageCacheKey = `local-image-${imageName}-${node.id}`;
     const cachedImage = await cache.get(imageCacheKey);
     if (cachedImage) {
       const { fileNodeID } = cachedImage;
@@ -188,11 +188,11 @@ exports.onCreateNode = async ({
       createNodeId,
       parentNodeId: node.id
     });
-    await cache.set(imageCacheKey, {
-      fileNodeID: fileNode.id
-    });
 
     if (fileNode) {
+      await cache.set(imageCacheKey, {
+        fileNodeID: fileNode.id
+      });
       node.local = fileNode.id;
     }
     return node;

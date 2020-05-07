@@ -61,7 +61,7 @@ function Playlists({ data }) {
               <Link
                 key={playlist.id}
                 className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
-                to={`playlist/${playlist.playlistId}/${playlist.videos[0].contentDetails.videoId}`}
+                to={`playlist/${playlist.playlistId}`}
               >
                 <div className="relative">
                   <Img
@@ -120,11 +120,6 @@ export const query = graphql`
       nodes {
         id
         playlistId
-        videos {
-          contentDetails {
-            videoId
-          }
-        }
         contentDetails {
           itemCount
         }

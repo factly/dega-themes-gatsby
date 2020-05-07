@@ -7,37 +7,30 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const result = await graphql(`
     query VideoQuery {
-      allVideo {
+      allPlaylist {
         totalCount
         nodes {
-          id
-          contentDetails {
-            videoId
-          }
-          snippet {
-            playlistId
-          }
+          playlistId
         }
       }
     }
   `);
 
-  const videoTemplate = path.join(
+  const playlistTemplate = path.join(
     process.cwd(),
-    '../../node_modules/@factly/gatsby-theme-factly/src/templates/video.js'
+    '../../node_modules/@factly/gatsby-theme-factly/src/templates/playlist.js'
   );
 
-  result.data.allVideo.nodes.forEach(video => {
+  result.data.allPlaylist.nodes.forEach(playlist => {
     createPage({
       // will be the url for the page
-      path: `/playlist/${video.snippet.playlistId}/${video.contentDetails.videoId}`,
+      path: `/playlist/${playlist.playlistId}`,
       // specify the component template of your choice
-      component: slash(videoTemplate),
+      component: slash(playlistTemplate),
       // In the ^template's GraphQL query, 'id' will be available
       // as a GraphQL variable to query for this posts's data.
       context: {
-        id: video.id,
-        playlistId: video.snippet.playlistId
+        id: playlist.playlistId
       }
     });
   });

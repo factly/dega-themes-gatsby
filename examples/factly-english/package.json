@@ -6,7 +6,7 @@
     "author": "Mahipat <mahipat@factly.in>",
     "license": "MIT",
     "scripts": {
-        "build": "gatsby build",
+        "build": "gatsby build GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true --log-pages",
         "start": "gatsby develop",
         "serve": "gatsby serve",
         "clean": "gatsby clean"
