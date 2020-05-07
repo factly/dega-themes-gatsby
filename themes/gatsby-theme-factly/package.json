@@ -49,6 +49,7 @@
     "gatsby-source-graphql": "^2.5.0",
     "gatsby-source-videos-youtube": "^1.0.0",
     "gatsby-transformer-sharp": "^2.3.7",
+    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

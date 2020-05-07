@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
+import _ from "lodash";
 import Img from 'gatsby-image';
 import Layout from '../components/layout';
 import Footer from '../components/footer';
@@ -17,7 +18,9 @@ function Playlist({ data: { playlist }, location }) {
         video => video.contentDetails.videoId === videoId
       );
     }
-    return playlist.videos[0];
+    return playlist.videos.find(
+      video => video.snippet.position === 0
+    );;
   });
 
   const videoElement = useRef(null);
@@ -46,7 +49,7 @@ function Playlist({ data: { playlist }, location }) {
     };
     setPlaylistDivHieght();
     playlistElement.current.scrollTop =
-      document.getElementById(activeVideo.id).getBoundingClientRect().y - 200;
+      document.getElementById(activeVideo.id).offsetTop - 10;
     return () => {
       window.onresize = null;
     };
@@ -104,7 +107,7 @@ function Playlist({ data: { playlist }, location }) {
                   {activeVideo.snippet.position + 1}/{playlist.videos.length}
                 </p>
               </div>
-              {playlist.videos.map((playlistVideo, index) => (
+              {_.sortBy(playlist.videos, ["snippet.position"]).map((playlistVideo, index) => (
                 <Link
                   key={playlistVideo.id}
                   id={playlistVideo.id}
