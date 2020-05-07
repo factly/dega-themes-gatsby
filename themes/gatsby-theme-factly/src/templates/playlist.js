@@ -5,6 +5,7 @@ import Img from 'gatsby-image';
 import Layout from '../components/layout';
 import Footer from '../components/footer';
 import { Play } from '../components/icons';
+import defaultImg from '../static/images/default.png';
 
 function Playlist({ data: { playlist }, location }) {
   const videoId = location.search.substring(1).split('=')[1];
@@ -34,7 +35,9 @@ function Playlist({ data: { playlist }, location }) {
     const videoA = playlist.videos.find(
       video => video.contentDetails.videoId === videoId
     );
-    setActiveVideo(videoA);
+    if (videoA) {
+      setActiveVideo(videoA);
+    }
   }, [playlist.videos, videoId]);
 
   useEffect(() => {
@@ -118,11 +121,19 @@ function Playlist({ data: { playlist }, location }) {
                       playlistVideo.snippet.position + 1
                     )}
                   </span>
-                  <Img
-                    alt={playlistVideo.snippet.title}
-                    fluid={playlistVideo.local.childImageSharp.fluid}
-                    className="w-20 h-full"
-                  />
+                  {playlistVideo.local ? (
+                    <Img
+                      alt={playlistVideo.snippet.title}
+                      fluid={playlistVideo.local.childImageSharp.fluid}
+                      className="w-20 h-full"
+                    />
+                  ) : (
+                    <Img
+                      alt={playlistVideo.snippet.title}
+                      fluid={defaultImg}
+                      className="w-20 h-full"
+                    />
+                  )}
                   <div className="hidden opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
                     <span className="text-white text-base">Play</span>
                   </div>
