@@ -66,14 +66,16 @@ function IndexPage({ data }) {
               <h5 className="heading">Headlines</h5>
             </div>
             {categories.nodes.map((item, index) => (
-              <ListItems
-                hashRoute
-                item={item}
-                index={index}
-                image={false}
-                author={false}
-                className="py-2 px-6 border-gray-200"
-              />
+              <div
+              className='flex flex-col leading-tight border-b last:border-b-0 py-2 px-6 border-gray-200'
+            >
+              <a
+                href={`#${item.slug}`}
+                className={`w-full flex no-underline hover:no-underline font-bold font-sans text-base text-gray-800`}
+              >
+                  {item.name}
+              </a>
+            </div>
             ))}
           </div>
           <div className="flex w-full justify-start items-start my-4 p-4">
