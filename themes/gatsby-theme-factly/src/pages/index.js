@@ -7,54 +7,20 @@ import ListItems from '../components/listItems';
 import Footer from '../components/footer';
 import PostsGroup from '../components/postsGroup';
 
-const items = Array(20).fill({
-  title:
-    'A video clip from a web series is being falsely shared as ‘Sadhu strangling a policeman brutally’',
-  excerpt:
-    'After POTUS Donald Trump announced that USA is halting its funding to the WHO, there has been a lot of debate around WHO’s finances. So, who funds the WHO? What is the size of its budget? Here is a detailed explainer.',
-  author: ['Pavithra K M', 'Bharath Kancharla'],
-  time: '2 Min',
-  image: ''
-});
-
-const topCategory = [
-  {
-    title: 'Goverment2 of India',
-    slug: '#goverment-of-india'
-  },
-  {
-    title: 'Coronavirus 10',
-    slug: '#coronavirus'
-  },
-  {
-    title: 'Business In India',
-    slug: '#business-in-india'
-  },
-  {
-    title: 'Goverment of India',
-    slug: '#goverment-of-india'
-  },
-  {
-    title: 'Coronavirus',
-    slug: '#coronavirus'
-  },
-  {
-    title: 'Business In India',
-    slug: '#business-in-india'
-  }
-];
 function IndexPage({ data }) {
-  const { degaCMS: { factchecks, categories }} = data;
+  const { degaCMS: { factchecks, categories, posts }} = data;
+  const mergedPosts = [...posts.nodes, ...factchecks.nodes]
+
   const featured = factchecks.nodes[0] || {}
   console.log('top', factchecks)
-  const [postItems, setPostItems] = useState(items.slice(0, 2));
+  const [postItems, setPostItems] = useState(mergedPosts.slice(0, 2));
   const [hasNextPage, setHasNextPage] = useState(true);
 
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
-    const nextPageItems = items.slice(postItems.length, postItems.length + 2);
+    const nextPageItems = mergedPosts.slice(postItems.length, postItems.length + 2);
     setPostItems([...postItems, ...nextPageItems]);
-    setHasNextPage(postItems.length < items.length);
+    setHasNextPage(postItems.length < mergedPosts.length);
   };
 
   return (
@@ -169,7 +135,7 @@ function IndexPage({ data }) {
             <div className="mb-4 pb-4 border-b px-6">
               <h5 className="heading">Top In Factchecks</h5>
             </div>
-            {factchecks.nodes.map((item, index) => (
+            {factchecks.nodes.slice(0,10).map((item, index) => (
               <ListItems
                 orientation="vertical"
                 imageSize="h-40"
@@ -204,7 +170,27 @@ export const query = graphql`
          slug
        }
       }
-      factchecks{
+      posts(limit: 20){
+        nodes{
+          title
+          sub_title
+          published_date
+          excerpt
+          slug
+          __typename
+          media{
+            source_url
+            alt_text
+          }
+          degaUsers{
+            display_name
+          }
+          categories{
+            name
+          }
+        }
+      }
+      factchecks(limit: 20){
         nodes{
           title
           sub_title

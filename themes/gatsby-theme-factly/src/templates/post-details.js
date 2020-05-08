@@ -6,19 +6,10 @@ import Layout from '../components/layout';
 import ListItems from '../components/listItems';
 import Post from '../components/post';
 
-const posts = Array(1000).fill({
-  title:
-    'A video clip from a web series is being falsely shared as ‘Sadhu strangling a policeman brutally’',
-  excerpt:
-    'After POTUS Donald Trump announced that USA is halting its funding to the WHO, there has been a lot of debate around WHO’s finances. So, who funds the WHO? What is the size of its budget? Here is a detailed explainer.',
-  author: ['Pavithra K M', 'Bharath Kancharla'],
-  time: '2 Min',
-  image: ''
-});
 const PostDetails = ({ data }) => {
   const { degaCMS: { post, factcheck, posts, factchecks }} = data;
   const mergedPosts = [...posts.nodes, ...factchecks.nodes]
-  mergedPosts.unshift(post || factcheck);
+  // mergedPosts.unshift(post || factcheck);
   const [postItems, setPostItems] = useState(mergedPosts.slice(0, 1));
   const [hasNextPage, setHasNextPage] = useState(true);
   const [showSocialIcon, setShowSocialIcon] = useState(false);

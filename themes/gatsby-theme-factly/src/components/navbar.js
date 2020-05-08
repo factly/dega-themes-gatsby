@@ -4,14 +4,6 @@ import logo from '../static/images/logo/logo.png';
 import MenuItems from './menuItems';
 import ListItems from './listItems';
 
-const menuItems = Array(20).fill({
-  title:
-    'Lorem ipsum dolor sit ament, Lorem ipsum dolor sit ament,Lorem ipsum dolor sit ament',
-  excerpt:
-    'Lorem ipsum dolor sit ament, Lorem ipsum dolor sit ament, Lorem ipsum dolor sit ament',
-  author: 'John Doe',
-  time: '2 Min'
-});
 export default function Navbar({ fixed }) {
   const data = useStaticQuery(graphql`
     {
