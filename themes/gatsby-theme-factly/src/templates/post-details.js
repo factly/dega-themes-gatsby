@@ -16,30 +16,33 @@ const posts = Array(1000).fill({
   image: ''
 });
 const PostDetails = ({ data }) => {
-  const [postItems, setPostItems] = useState(posts.slice(0, 1));
+  const { degaCMS: { post, factcheck, posts, factchecks }} = data;
+  const mergedPosts = [...posts.nodes, ...factchecks.nodes]
+  mergedPosts.unshift(post || factcheck);
+  const [postItems, setPostItems] = useState(mergedPosts.slice(0, 1));
   const [hasNextPage, setHasNextPage] = useState(true);
   const [showSocialIcon, setShowSocialIcon] = useState(false);
   const [postActiveIndex, setPostActiveIndex] = useState(0);
-  const [relatedPosts, setRelatedPosts] = useState(posts.slice(0, 10));
+  const [relatedPosts, setRelatedPosts] = useState(mergedPosts.slice(0, 10));
   const [hasNextPageRelatedPost, setHasNextPageRelatedPost] = useState(true);
   const [observer, setObserver] = useState({
     observe: () => {}
   });
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
-    const nextPageItems = posts.slice(postItems.length, postItems.length + 1);
+    const nextPageItems = mergedPosts.slice(postItems.length, postItems.length + 1);
     setPostItems([...postItems, ...nextPageItems]);
-    setHasNextPage(postItems.length < posts.length);
+    setHasNextPage(postItems.length < mergedPosts.length);
   };
 
   const handleLoadMoreRelatedPosts = () => {
     if (!hasNextPageRelatedPost) return false;
-    const nextPageItems = posts.slice(
+    const nextPageItems = mergedPosts.slice(
       relatedPosts.length,
       relatedPosts.length + 10
     );
     setRelatedPosts([...relatedPosts, ...nextPageItems]);
-    setHasNextPageRelatedPost(relatedPosts.length < posts.length);
+    setHasNextPageRelatedPost(relatedPosts.length < mergedPosts.length);
   };
 
   const handleShowSocialIcon = entry => {
@@ -53,7 +56,7 @@ const PostDetails = ({ data }) => {
   const handleSetActiveLink = entry => {
     const id = entry.target.getAttribute('id');
     if (entry.intersectionRatio > 0) {
-      setPostActiveIndex(parseInt(id));
+      setPostActiveIndex(id);
     }
   };
 
@@ -97,7 +100,7 @@ const PostDetails = ({ data }) => {
             {relatedPosts.map((item, index) => (
               <ListItems
                 item={item}
-                index={index}
+                index={item._id}
                 postActiveIndex={postActiveIndex}
                 author={false}
                 image={false}
@@ -108,6 +111,7 @@ const PostDetails = ({ data }) => {
           </InfiniteScroll>
         </div>
         <div className="flex flex-col w-full lg:w-3/4 p-2 lg:p-6">
+          <Post post={post || factcheck} observer={observer} />
           <InfiniteScroll
             pageStart={0}
             loadMore={handleLoadMore}
@@ -118,8 +122,8 @@ const PostDetails = ({ data }) => {
               </div>
             }
           >
-            {postItems.map((item, index) => (
-              <Post index={index} observer={observer} />
+            {postItems.map((item) => (
+              <Post post={item} observer={observer} />
             ))}
           </InfiniteScroll>
           {showSocialIcon && (
@@ -188,7 +192,149 @@ PostDetails.propTypes = {
 };
 export default PostDetails;
 export const query = graphql`
-  query {
+  query ($id: String!, $categories: [String!]) {
+    degaCMS {
+      posts(limit: 20, categories: $categories){
+        nodes{
+          _id
+          __typename
+          title
+          slug
+          published_date
+          excerpt
+          content
+          tags{
+            name
+          }
+          media{
+            alt_text
+            source_url
+          }
+          degaUsers{
+            display_name
+            media{
+              alt_text
+              source_url
+            }
+            slug
+          }
+          categories{
+            name
+          }
+        }
+      }
+      factchecks(limit: 20, categories: $categories){
+        nodes{
+          _id
+          title
+          slug
+          __typename
+          published_date
+          excerpt
+          summary
+          tags{
+            name
+          }
+          media{
+            alt_text
+            source_url
+          }
+          degaUsers{
+            display_name
+            media{
+              alt_text
+              source_url
+            }
+            slug
+          }
+          categories{
+            name
+          }
+          claims{
+            _id
+            claim
+            review
+            rating{
+              media{
+                alt_text
+                source_url
+              }
+              slug
+              name
+            }
+            claimant{
+              name
+            }
+          }
+        }
+      }
+      post(id: $id) {
+        _id
+        title
+        published_date
+        excerpt
+        content
+        tags{
+          name
+        }
+        media{
+          alt_text
+          source_url
+        }
+        degaUsers{
+          display_name
+          media{
+            alt_text
+            source_url
+          }
+          slug
+        }
+        categories{
+          name
+        }
+      }
+      factcheck(id: $id) {
+        _id
+        title
+        published_date
+        excerpt
+        summary
+        tags{
+          name
+        }
+        media{
+          alt_text
+          source_url
+        }
+        degaUsers{
+          display_name
+          media{
+            alt_text
+            source_url
+          }
+          slug
+        }
+        categories{
+          name
+        }
+        claims{
+          _id
+          claim
+          review
+          rating{
+            media{
+              alt_text
+              source_url
+            }
+            slug
+            name
+          }
+          claimant{
+            name
+          }
+        }
+    } 
+  }
     file(relativePath: { eq: "logo/logo.png" }) {
       childImageSharp {
         # Specify the image processing specifications right in the query.

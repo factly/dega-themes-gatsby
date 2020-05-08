@@ -34,8 +34,8 @@ module.exports = ({
       {
         resolve: 'gatsby-source-graphql',
         options: {
-          typeName: 'Dega',
-          fieldName: 'siteContent',
+          typeName: 'DegaCMS',
+          fieldName: 'degaCMS',
           url: 'https://api.degacms.com/query',
           headers: {
             client

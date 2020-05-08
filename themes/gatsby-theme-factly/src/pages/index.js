@@ -1,10 +1,11 @@
 import React, { useState} from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import Layout from '../components/layout';
 import ListItems from '../components/listItems';
 import Footer from '../components/footer';
+import PostsGroup from '../components/postsGroup';
 
 const items = Array(20).fill({
   title:
@@ -43,6 +44,9 @@ const topCategory = [
   }
 ];
 function IndexPage({ data }) {
+  const { degaCMS: { factchecks, categories }} = data;
+  const featured = factchecks.nodes[0] || {}
+  console.log('top', factchecks)
   const [postItems, setPostItems] = useState(items.slice(0, 2));
   const [hasNextPage, setHasNextPage] = useState(true);
 
@@ -61,7 +65,7 @@ function IndexPage({ data }) {
             <div className="mb-4 pb-4 border-b px-6">
               <h5 className="heading">Headlines</h5>
             </div>
-            {topCategory.map((item, index) => (
+            {categories.nodes.map((item, index) => (
               <ListItems
                 hashRoute
                 item={item}
@@ -92,94 +96,43 @@ function IndexPage({ data }) {
               className="flex flex-wrap no-underline hover:no-underline"
             >
               <img
-                alt=""
-                src="https://source.unsplash.com/collection/9419734/500x300"
+                alt={featured.media.alt_text}
+                src={featured.media.source_url}
                 className="h-full w-full rounded"
               />
               <p className="w-full text-gray-600 text-xs md:text-sm pt-2">
-                Factchecks
+                {featured.sub_title}
               </p>
               <div className="w-full font-bold text-xl leading-tight text-gray-900 break-all">
-                Lorem ipsum dolor sit amet.
+                {featured.title}
               </div>
               <p className="text-gray-800 font-sans text-lg pt-2 break-all">
-                Lorem ipsum eu nunc commodo posuere et sit amet ligula.Lorem
-                ipsum eu nunc commodo posuere et sit amet ligula.Lorem ipsum eu
-                nunc commodo posuere et sit amet ligula.Lorem ipsum eu nunc
-                commodo posuere et sit amet ligula. Lorem ipsum eu nunc commodo
-                posuere et sit amet ligula.Lorem ipsum eu nunc commodo posuere
-                et sit amet ligula.Lorem ipsum eu nunc commodo posuere et sit
-                amet.
+                {featured.excerpt}
               </p>
             </a>
             <div className="flex-none mt-auto py-4">
               <div className="flex items-center justify-between">
                 <div className="flex justify-center items-center">
-                  <a href="/" className="text-gray-600 text-xs md:text-sm mr-2">
-                    John Doe,
-                  </a>
-                  <a href="/" className="text-gray-600 text-xs md:text-sm mr-2">
-                    John Doe Second
-                  </a>
+                  {featured.degaUsers && featured.degaUsers.map((value, index, arr) => (
+                    <Link
+                      to="/author-details"
+                      className="text-gray-600 text-xs md:text-sm mr-2"
+                    >
+                      {value.display_name}
+                      {arr.length - index > 1 && ','}
+                    </Link>
+                  ))}
                 </div>
-                <p className="text-gray-600 text-xs md:text-sm">Apr, 21 2020</p>
+                  <p className="text-gray-600 text-xs md:text-sm">{featured.published_date}</p>
               </div>
             </div>
           </div>
 
           <div className="flex flex-col py-6">
-            <div id="goverment-of-india">
-              <div className="mb-4 pb-4 border-b px-6">
-                <h5 className="font-semibold text-2xl leading-tight text-gray-900">
-                  Goverment Of India
-                </h5>
-              </div>
-              {items.slice(0, 4).map((item, index) => (
-                <ListItems
-                  orientation="vertical horizontal"
-                  item={item}
-                  index={index}
-                  tags
-                  excerpt
-                  imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-0"
-                />
-              ))}
-            </div>
-            <div id="coronavirus">
-              <div className="border-b p-6">
-                <h5 className="font-semibold text-2xl leading-tight text-gray-900">
-                  Coronavirus
-                </h5>
-              </div>
-              {items.slice(0, 4).map((item, index) => (
-                <ListItems
-                  orientation="vertical horizontal"
-                  item={item}
-                  index={index}
-                  tags
-                  excerpt
-                  imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-0"
-                />
-              ))}
-            </div>
-            <div id="business-in-india">
-              <div className="border-b p-6">
-                <h5 className="font-semibold text-2xl leading-tight text-gray-900">
-                  Business In India
-                </h5>
-              </div>
-              {items.slice(0, 4).map((item, index) => (
-                <ListItems
-                  orientation="vertical horizontal"
-                  item={item}
-                  index={index}
-                  tags
-                  excerpt
-                  imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-0"
-                />
-              ))}
-            </div>
-            <div id="more-stories">
+          {categories.nodes.map((category, index) => (
+            <PostsGroup category={category}></PostsGroup>
+            ))}
+          <div id="more-stories">
               <div className="border-b p-6">
                 <h5 className="font-semibold text-2xl leading-tight text-gray-900">
                   More stories from factly.....
@@ -214,7 +167,7 @@ function IndexPage({ data }) {
             <div className="mb-4 pb-4 border-b px-6">
               <h5 className="heading">Top In Factchecks</h5>
             </div>
-            {items.slice(0, 10).map((item, index) => (
+            {factchecks.nodes.map((item, index) => (
               <ListItems
                 orientation="vertical"
                 imageSize="h-40"
@@ -238,9 +191,38 @@ IndexPage.propTypes = {
     }
   })
 };
+
 export default IndexPage;
 export const query = graphql`
   query {
+    degaCMS {
+      categories(limit: 5, sortBy: "last_updated_date", sortOrder: "ASC"){
+        nodes{
+         name
+         slug
+       }
+      }
+      factchecks{
+        nodes{
+          title
+          sub_title
+          published_date
+          excerpt
+          slug
+          __typename
+          media{
+            source_url
+            alt_text
+          }
+          degaUsers{
+            display_name
+          }
+          categories{
+            name
+          }
+        }
+      }
+    }
     file(relativePath: { eq: "logo/logo.png" }) {
       childImageSharp {
         # Specify the image processing specifications right in the query.

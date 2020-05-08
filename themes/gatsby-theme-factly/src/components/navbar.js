@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import logo from '../static/images/logo/logo.png';
 import MenuItems from './menuItems';
 import ListItems from './listItems';
@@ -13,6 +13,46 @@ const menuItems = Array(20).fill({
   time: '2 Min'
 });
 export default function Navbar({ fixed }) {
+  const data = useStaticQuery(graphql`
+    {
+      degaCMS {
+        factchecks(limit: 10){
+          nodes{
+           title
+           slug
+           __typename
+           excerpt
+            tags{
+              name
+            }
+            categories{
+              name
+            }
+            featured
+            media{
+              alt_text
+              source_url
+            } 
+          }
+        }
+        posts(limit: 10) {
+          nodes {
+            title
+            slug
+            __typename
+            categories{
+              name
+            }
+            featured
+            media {
+              alt_text
+              source_url
+            }
+          }
+        }
+      }
+    }
+  `)
   return (
     <React.Fragment>
       {/* {navbarOpen && (
@@ -119,9 +159,9 @@ export default function Navbar({ fixed }) {
                 </div>
               </MenuItems>
               <MenuItems className="order-2" title="stories">
-                {menuItems.map((item, index) => (
+                {data.degaCMS.posts.nodes.map((post, index) => (
                   <ListItems
-                    item={item}
+                    item={post}
                     index={index}
                     author={false}
                     tags
@@ -130,9 +170,9 @@ export default function Navbar({ fixed }) {
                 ))}
               </MenuItems>
               <MenuItems className="order-1 lg:order-3" title="factcheck">
-                {menuItems.map((item, index) => (
+                {data.degaCMS.factchecks.nodes.map((factcheck, index) => (
                   <ListItems
-                    item={item}
+                    item={factcheck}
                     index={index}
                     author={false}
                     tags

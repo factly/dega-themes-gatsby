@@ -1,36 +1,35 @@
 import React from 'react';
-import authorImage from '../static/images/author.jpg';
+import { Link } from 'gatsby';
 
-function AuthorMultiple() {
-  const author = [1, 2];
+function AuthorMultiple({publishedDate, authors, categories}) {
   return (
     <div className="flex flex-col justify-start items-start py-2">
       <div className="flex flex-row flex-wrap">
-        {author.map(() => (
+        {authors.map((author) => (
           <img
             className="w-16 h-16 rounded-full mr-2 avatar"
-            data-tippy-content="Author Name"
-            src={authorImage}
-            alt="Avatar of Author"
+            data-tippy-content={author.display_name}
+            src={author.media.source_url}
+            alt={author.media.alt_text}
           />
         ))}
       </div>
       <div className="flex flex-col py-2">
         <div className="flex flex-row flex-wrap">
-          {author.map((i, index, arr) => (
-            <a href="/" className="font-medium text-blue-500 text-lg  px-1">
-              John Doe{arr.length - index > 1 && ','}
-            </a>
+          {authors.map((author, index, arr) => (
+            <Link to={author.slug} className="font-medium text-blue-500 text-lg  px-1">
+              {author.display_name}{arr.length - index > 1 && ','}
+            </Link>
           ))}
           <span className="font-medium text-lg ">in</span>
-          {['Bussiness', 'India', 'Coronavirus'].map((item, index, arr) => (
+          {categories.map((category, index, arr) => (
             <a href="/" className="font-medium text-blue-500 text-lg  px-1">
-              {item}
+              {category.name}
               {arr.length - index > 1 && ','}
             </a>
           ))}
         </div>
-        <span className="text-gray-600 text-lg">12 Apr 2020</span>
+          <span className="text-gray-600 text-lg">{publishedDate}</span>
       </div>
     </div>
   );
