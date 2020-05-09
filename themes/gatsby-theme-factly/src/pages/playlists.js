@@ -85,8 +85,8 @@ function Playlists({ data }) {
                   <h2 className="heading px-6 my-6">
                     {_.startCase(channelSection.playlist.snippet.title)}
                   </h2>
-                  <Play className="fill-current w-4 h-4"></Play>
-                  <span className="text-base">Play All</span>
+                  <Play className="hidden md:block fill-current w-4 h-4"></Play>
+                  <span className="hidden md:inline text-base">Play All</span>
                 </Link>
                 <div className="border-b flex flex-row flex-wrap px-6 justify-center sm:justify-start items-center sm:items-start">
                 {channelSection.videos.map(video => (
@@ -331,7 +331,7 @@ export const query = graphql`
         }
       }
     }
-    allPlaylist {
+    allPlaylist(filter: {list: {ne: false}}) {
       totalCount
       nodes {
         id
