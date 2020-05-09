@@ -28,7 +28,6 @@ function ListItems({
   className = 'p-6 border-gray-200',
   imageSize = 'w-full h-40'
 }) {
-  console.log('Item', item)
   const tag = item.categories && item.categories.length > 0 ? _.head(item.categories).name : '';
   return (
     <article

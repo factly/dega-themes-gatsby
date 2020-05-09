@@ -128,6 +128,10 @@ a:hover{
     cursor: pointer;
   }
 
+  .row-list-container section {
+    @apply flex flex-row flex-wrap p-6 justify-start items-start;
+  }
+
   @screen lg {
     .read-more-trigger{
         @apply hidden

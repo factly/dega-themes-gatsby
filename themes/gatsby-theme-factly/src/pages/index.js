@@ -12,7 +12,6 @@ function IndexPage({ data }) {
   const mergedPosts = [...posts.nodes, ...factchecks.nodes]
 
   const featured = factchecks.nodes[0] || {}
-  console.log('top', factchecks)
   const [postItems, setPostItems] = useState(mergedPosts.slice(0, 2));
   const [hasNextPage, setHasNextPage] = useState(true);
 

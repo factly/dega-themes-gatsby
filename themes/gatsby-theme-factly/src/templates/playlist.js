@@ -7,21 +7,34 @@ import Layout from '../components/layout';
 import Footer from '../components/footer';
 import { Play } from '../components/icons';
 import defaultImg from '../static/images/default.png';
+import InfiniteScroll from 'react-infinite-scroller';
 
 function Playlist({ data: { playlist }, location }) {
   const videoId = location.search.substring(1).split('=')[1];
-  console.log('videoId', videoId);
-  const [videListHeight, setVideoListHeight] = useState('366px');
+  const [videoListHeight, setVideoListHeight] = useState('366px');
   const [activeVideo, setActiveVideo] = useState(() => {
     if (videoId) {
-      return playlist.videos.find(
+      const videoIndex = playlist.videos.findIndex(
         video => video.contentDetails.videoId === videoId
       );
+      return {
+        videoIndex,
+        video: playlist.videos[videoIndex]
+      }
     }
-    return playlist.videos.find(
-      video => video.snippet.position === 0
-    );;
+    return {
+      videoIndex: 0,
+      video: playlist.videos[0]
+    }
   });
+  const [postItems, setPostItems] = useState(playlist.videos.slice(0, 20));
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const handleLoadMore = () => {
+    if (!hasNextPage) return false;
+    const nextPageItems = playlist.videos.slice(postItems.length, postItems.length + 20);
+    setPostItems([...postItems, ...nextPageItems]);
+    setHasNextPage(postItems.length < playlist.videos.length);
+  };
 
   const videoElement = useRef(null);
   const playlistElement = useRef(null);
@@ -35,11 +48,14 @@ function Playlist({ data: { playlist }, location }) {
   };
 
   useEffect(() => {
-    const videoA = playlist.videos.find(
+    const videoIndex = playlist.videos.findIndex(
       video => video.contentDetails.videoId === videoId
     );
-    if (videoA) {
-      setActiveVideo(videoA);
+    if (videoIndex >= 0) {
+      setActiveVideo({
+        video: playlist.videos[videoIndex],
+        videoIndex
+      });
     }
   }, [playlist.videos, videoId]);
 
@@ -49,7 +65,7 @@ function Playlist({ data: { playlist }, location }) {
     };
     setPlaylistDivHieght();
     playlistElement.current.scrollTop =
-      document.getElementById(activeVideo.id).offsetTop - 10;
+      document.getElementById(activeVideo.video.id).offsetTop - 10;
     return () => {
       window.onresize = null;
     };
@@ -66,8 +82,8 @@ function Playlist({ data: { playlist }, location }) {
           >
             <iframe
               className="absolute top-0 left-0 w-full h-full"
-              title={activeVideo.snippet.title}
-              src={`https://www.youtube.com/embed/${activeVideo.contentDetails.videoId}`}
+              title={activeVideo.video.snippet.title}
+              src={`https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`}
               frameBorder={0}
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -75,85 +91,98 @@ function Playlist({ data: { playlist }, location }) {
           </div>
           <div className="w-full flex flex-col py-4">
             <p className="w-full text-gray-600 text-xs lg:text-sm">
-              {activeVideo.snippet.channelTitle}
+              {activeVideo.video.snippet.channelTitle}
             </p>
             <div
               id="nav-0"
               className="w-full font-bold font-sans text-xl leading-tight text-gray-800 mb-2"
             >
-              {activeVideo.snippet.title}
+              {activeVideo.video.snippet.title}
             </div>
             <p className="text-gray-600 text-xs lg:text-sm">
-              {activeVideo.snippet.publishedAt}
+              {activeVideo.video.snippet.publishedAt}
             </p>
             <p className="text-base read-more-wrap py-2">
-              {activeVideo.snippet.description}
+              {activeVideo.video.snippet.description}
             </p>
           </div>
         </div>
         <div className="flex flex-col w-full lg:w-2/5 mt-16 lg:mx-4">
           <div
             ref={playlistElement}
-            className="lg:relative lg:overflow-auto h-auto lg:h-screen border lg:shadow-md"
-            style={{ height: `${videListHeight}` }}
+            className="lg:overflow-auto h-auto lg:h-screen border lg:shadow-md"
+            style={{ height: `${videoListHeight}` }}
           >
-            <div className="flex flex-col lg:absolute top-0 left-0 w-full h-full">
+            <div className="flex flex-col left-0 w-full h-full">
               <div className="mb-4 p-4 border-b">
                 <h5 className="text-base font-medium">
                   {playlist.snippet.title}
                 </h5>
                 <p className="text-gray-600 text-xs lg:text-sm">
                   {playlist.snippet.channelTitle} -{' '}
-                  {activeVideo.snippet.position + 1}/{playlist.videos.length}
+                  {activeVideo.videoIndex + 1}/{playlist.videos.length}
                 </p>
               </div>
-              {_.sortBy(playlist.videos, ["snippet.position"]).map((playlistVideo, index) => (
-                <Link
-                  key={playlistVideo.id}
-                  id={playlistVideo.id}
-                  className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 py-2 ${activeVideo
-                    .snippet.position === playlistVideo.snippet.position &&
-                    'video-active'}`}
-                  to={`playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
-                >
-                  <span className="text-sm text-gray-600 px-2">
-                    {activeVideo.snippet.position ===
-                    playlistVideo.snippet.position ? (
-                      <Play className="fill-current w-2 h-2"></Play>
-                    ) : (
-                      playlistVideo.snippet.position + 1
-                    )}
-                  </span>
-                  {playlistVideo.local ? (
-                    <Img
-                      alt={playlistVideo.snippet.title}
-                      fluid={playlistVideo.local.childImageSharp.fluid}
-                      className="w-20 h-full"
-                    />
-                  ) : (
-                    <Img
-                      alt={playlistVideo.snippet.title}
-                      fluid={defaultImg}
-                      className="w-20 h-full"
-                    />
-                  )}
-                  <div className="hidden opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
-                    <span className="text-white text-base">Play</span>
-                  </div>
-                  <div className="w-4/5 flex flex-col px-2">
-                    <div
-                      id="nav-0"
-                      className="w-full font-bold font-sans text-sm leading-tight text-gray-800 mb-2"
-                    >
-                      {playlistVideo.snippet.title}
+                <InfiniteScroll
+                  pageStart={0}
+                  element="section"
+                  loadMore={handleLoadMore}
+                  hasMore={hasNextPage}
+                  useWindow={videoListHeight === 'auto'}
+                  getScrollParent={() => playlistElement.current}
+                  loader={
+                    <div className="loader" key={0}>
+                      Loading ...
                     </div>
-                    <p className="text-gray-600 text-xs">
-                      {playlistVideo.snippet.channelTitle} -{' '}
-                      {playlistVideo.snippet.publishedAt}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                  }
+                >
+                {postItems.map((playlistVideo, index) => (
+                    <Link
+                      key={playlistVideo.id}
+                      id={playlistVideo.id}
+                      className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 py-2 
+                      ${activeVideo.videoIndex === index && 'video-active'}`}
+                      to={`playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
+                    >
+                      <span className="text-sm text-gray-600 px-2">
+                        {activeVideo.videoIndex === index ? (
+                          <Play className="fill-current w-2 h-2"></Play>
+                        ) : (
+                          index + 1
+                        )}
+                      </span>
+                      {playlistVideo.local ? (
+                        <Img
+                          alt={playlistVideo.snippet.title}
+                          fluid={playlistVideo.local.childImageSharp.fluid}
+                          className="w-20 h-full"
+                        />
+                      ) : (
+                        <Img
+                          alt={playlistVideo.snippet.title}
+                          fluid={defaultImg}
+                          className="w-20 h-full"
+                        />
+                      )}
+                      <div className="hidden opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
+                        <span className="text-white text-base">Play</span>
+                      </div>
+                      <div className="w-4/5 flex flex-col px-2">
+                        <div
+                          id="nav-0"
+                          className="w-full font-bold font-sans text-sm leading-tight text-gray-800 mb-2"
+                        >
+                          {playlistVideo.snippet.title}
+                        </div>
+                        <p className="text-gray-600 text-xs">
+                          {playlistVideo.snippet.channelTitle} -{' '}
+                          {playlistVideo.snippet.publishedAt}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+              </InfiniteScroll>
+              
             </div>
           </div>
         </div>

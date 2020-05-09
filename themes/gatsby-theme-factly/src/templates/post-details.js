@@ -55,8 +55,6 @@ const PostDetails = ({ data }) => {
     const o = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.target.hasAttribute('social-icon')) {
-          console.log('entry', entry);
-
           handleShowSocialIcon(entry);
         } else if (entry.target.hasAttribute('post')) {
           handleSetActiveLink(entry);
