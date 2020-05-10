@@ -110,10 +110,10 @@ function Playlist({ data: { playlist }, location }) {
         <div className="flex flex-col w-full lg:w-2/5 mt-16 lg:mx-4">
           <div
             ref={playlistElement}
-            className="lg:overflow-auto h-auto lg:h-screen border lg:shadow-md"
+            className="lg:relative lg:overflow-auto h-auto lg:h-screen border lg:shadow-md"
             style={{ height: `${videoListHeight}` }}
           >
-            <div className="flex flex-col left-0 w-full h-full">
+            <div className="flex flex-col lg:absolute top-0 left-0 w-full h-full">
               <div className="mb-4 p-4 border-b">
                 <h5 className="text-base font-medium">
                   {playlist.snippet.title}
