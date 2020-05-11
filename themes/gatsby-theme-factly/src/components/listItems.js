@@ -79,12 +79,12 @@ function ListItems({
                 className={`flex flex-col w-full ${orientation} justify-between items-start`}
               >
                 <div className="flex flex-row flex-wrap">
-                  {item.degaUsers && item.degaUsers.map((value, index, arr) => (
+                  {item.degaUsers && item.degaUsers.map((author, index, arr) => (
                     <Link
-                      to="/author-details"
+                      to={`/author/${author.slug}`}
                       className="text-gray-600 text-xs md:text-sm mr-2 normal-case"
                     >
-                      {value.display_name}
+                      {author.display_name}
                       {arr.length - index > 1 && ','}
                     </Link>
                   ))}

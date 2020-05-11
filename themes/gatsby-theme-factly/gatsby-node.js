@@ -8,6 +8,12 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     query NodeQuery {
       degaCMS {
+        users(limit: 20) {
+          nodes{
+            slug
+            _id
+          }
+        }
         posts(limit: 20) {
           nodes {
             _id
@@ -37,13 +43,29 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const playlistTemplate = path.join(
     process.cwd(),
-    '../../node_modules/@factly/gatsby-theme-factly/src/templates/playlist.js'
+    '../../node_modules/@factly/gatsby-theme-factly/src/template/playlist.js'
   );
 
   const postDetailsTemplate = path.join(
     process.cwd(),
-    '../../node_modules/@factly/gatsby-theme-factly/src/templates/post-details.js'
+    '../../node_modules/@factly/gatsby-theme-factly/src/template/post-details.js'
   );
+
+  const authorDetailsTemplate = path.join(
+    process.cwd(),
+    '../../node_modules/@factly/gatsby-theme-factly/src/template/author-details.js'
+  );
+
+  result.data.degaCMS.users.nodes.forEach(author => {
+    createPage({
+      path: `/author/${author.slug}`,
+      component: slash(authorDetailsTemplate),
+      context: {
+        id:author._id
+      }
+    });
+  });
+
   const posts = [...result.data.degaCMS.factchecks.nodes, ...result.data.degaCMS.posts.nodes]
   posts.forEach(post => {
     createPage({

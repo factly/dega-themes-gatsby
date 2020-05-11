@@ -12,9 +12,11 @@ function PostsGroup({category}) {
             categories{
               name
             }
+            published_date
             slug
             __typename
             degaUsers{
+              slug
               display_name
             }
             excerpt

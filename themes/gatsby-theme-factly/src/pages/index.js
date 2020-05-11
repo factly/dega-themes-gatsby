@@ -80,12 +80,12 @@ function IndexPage({ data }) {
             <div className="flex-none mt-auto py-4">
               <div className="flex items-center justify-between">
                 <div className="flex justify-center items-center">
-                  {featured.degaUsers && featured.degaUsers.map((value, index, arr) => (
+                  {featured.degaUsers && featured.degaUsers.map((author, index, arr) => (
                     <Link
-                      to="/author-details"
+                      to={`/author/${author.slug}`}
                       className="text-gray-600 text-xs md:text-sm mr-2"
                     >
-                      {value.display_name}
+                      {author.display_name}
                       {arr.length - index > 1 && ','}
                     </Link>
                   ))}
@@ -182,6 +182,7 @@ export const query = graphql`
             alt_text
           }
           degaUsers{
+            slug
             display_name
           }
           categories{
@@ -202,6 +203,7 @@ export const query = graphql`
             alt_text
           }
           degaUsers{
+            slug
             display_name
           }
           categories{
