@@ -6,14 +6,10 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Layout from '../components/layout';
 import { Play } from '../components/icons';
 import Footer from '../components/footer';
-import logo from '../static/images/factly-video.jpg';
 import _ from 'lodash';
 
 const tabs = ['Home', 'Videos', 'Playlists'];
 
-const VideoContainer = () => {
-  return <div className="flex flex-row flex-wrap p-6 justify-center sm:justify-start items-center sm:items-start"></div>
-}
 function Playlists({ data }) {
   const [activeTab, setActiveTab] = useState({
     Home: true

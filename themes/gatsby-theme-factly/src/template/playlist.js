@@ -27,7 +27,12 @@ function Playlist({ data: { playlist }, location }) {
       video: playlist.videos[0]
     }
   });
-  const [postItems, setPostItems] = useState(playlist.videos.slice(0, 20));
+  const [postItems, setPostItems] = useState(() => {
+    const video =  playlist.videos.splice(activeVideo.videoIndex, 1)
+    playlist.videos.unshift(video[0])
+    return playlist.videos.slice(0, 20)
+  });
+  
   const [hasNextPage, setHasNextPage] = useState(true);
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
