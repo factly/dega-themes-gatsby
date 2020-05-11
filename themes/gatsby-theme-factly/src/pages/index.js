@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useMemo} from 'react';
 import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -10,8 +10,7 @@ import PostsGroup from '../components/postsGroup';
 function IndexPage({ data }) {
   const { degaCMS: { factchecks, categories, posts }} = data;
   const mergedPosts = [...posts.nodes, ...factchecks.nodes]
-
-  const featured = factchecks.nodes[0] || {}
+  const featured = factchecks.nodes[0]
   const [postItems, setPostItems] = useState(mergedPosts.slice(0, 2));
   const [hasNextPage, setHasNextPage] = useState(true);
 
@@ -58,8 +57,8 @@ function IndexPage({ data }) {
               </h5>
             </div> */}
           <div className="bg-white rounded-t rounded-b-none overflow-hidden px-6">
-            <a
-              href="/"
+            <Link
+              to={featured.__typename && `/${featured.__typename.toLowerCase()}/${featured.slug}`}
               className="flex flex-wrap no-underline hover:no-underline"
             >
               <img
@@ -76,7 +75,7 @@ function IndexPage({ data }) {
               <p className="text-gray-800 font-sans text-lg pt-2 break-all">
                 {featured.excerpt}
               </p>
-            </a>
+            </Link>
             <div className="flex-none mt-auto py-4">
               <div className="flex items-center justify-between">
                 <div className="flex justify-center items-center">
@@ -134,7 +133,7 @@ function IndexPage({ data }) {
             <div className="mb-4 pb-4 border-b px-6">
               <h5 className="heading">Top In Factchecks</h5>
             </div>
-            {factchecks.nodes.slice(0,10).map((item, index) => (
+            {factchecks.nodes.slice(1,10).map((item, index) => (
               <ListItems
                 orientation="vertical"
                 imageSize="h-40"

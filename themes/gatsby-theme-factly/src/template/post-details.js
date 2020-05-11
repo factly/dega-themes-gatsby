@@ -73,7 +73,7 @@ const PostDetails = ({ data }) => {
       <div className="flex flex-row justify-between">
         <div className="sidebar lg:flex lg:w-1/4 border-r border-l sticky">
           <div className="mb-4 pb-4 border-b px-6">
-            <h5 className="heading">Other Posts</h5>
+            <h5 className="heading">Recent Posts</h5>
           </div>
           <InfiniteScroll
             pageStart={0}
@@ -181,9 +181,9 @@ PostDetails.propTypes = {
 };
 export default PostDetails;
 export const query = graphql`
-  query ($id: String!, $categories: [String!]) {
+  query ($id: String!) {
     degaCMS {
-      posts(limit: 20, categories: $categories){
+      posts(limit: 20, sortBy: "published_date"){
         nodes{
           _id
           __typename
@@ -212,7 +212,7 @@ export const query = graphql`
           }
         }
       }
-      factchecks(limit: 20, categories: $categories){
+      factchecks(limit: 20, sortBy: "published_date"){
         nodes{
           _id
           title
