@@ -17,7 +17,7 @@ function AuthorMultiple({publishedDate, authors, categories}) {
       <div className="flex flex-col py-2">
         <div className="flex flex-row flex-wrap">
           {authors.map((author, index, arr) => (
-            <Link to={author.slug} className="font-medium text-blue-500 text-lg  px-1">
+            <Link to={`/author/${author.slug}/`} className="font-medium text-blue-500 text-lg  px-1">
               {author.display_name}{arr.length - index > 1 && ','}
             </Link>
           ))}

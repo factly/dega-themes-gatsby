@@ -201,6 +201,7 @@ export const query = graphql`
           }
           degaUsers{
             display_name
+            slug
             media{
               alt_text
               source_url
@@ -230,6 +231,7 @@ export const query = graphql`
           }
           degaUsers{
             display_name
+            slug
             media{
               alt_text
               source_url
@@ -272,6 +274,7 @@ export const query = graphql`
         }
         degaUsers{
           display_name
+          slug
           media{
             alt_text
             source_url
@@ -297,6 +300,7 @@ export const query = graphql`
         }
         degaUsers{
           display_name
+          slug
           media{
             alt_text
             source_url
