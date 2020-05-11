@@ -43,7 +43,7 @@ function Playlists({ data }) {
               </div>
               <a
                 rel="noopener noreferrer"
-                href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA"
+                href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA?sub_confirmation=1"
                 target="_blank"
                 type="button"
                 className="block lg:px-4 uppercase font-medium text-sm focus:outline-none bg-gray-100 rounded p-2"
