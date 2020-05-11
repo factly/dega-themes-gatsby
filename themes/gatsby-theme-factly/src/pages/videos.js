@@ -36,13 +36,13 @@ function Playlists({ data }) {
           <div className="flex justify-between items-start border-b p-6 bg-gray-300">
               <div className="flex flex-row">
                 {/* <Img alt={channel.snippet.title} fluid={channel.local.childImageSharp.fluid} className="h-24" /> */}
-                <img alt={channel.snippet.title} src={channel.snippet.thumbnails.high.url} className="h-24" />
+                <img alt={channel.snippet.title} src={channel.snippet.thumbnails.high.url} className="h-16" />
                 <div className="flex flex-col justify-start px-4">
                   <h5 className="heading">{channel.snippet.title}</h5>
                   <span className="text-gray-600 text-xs md:text-sm pb-2">
                     {Number(channel.statistics.subscriberCount).toLocaleString()} Subscribers
                   </span>
-                  <p className="text-base hidden md:inline">{channel.snippet.description}</p>
+                  {/* <p className="text-base hidden md:inline">{channel.snippet.description}</p> */}
                 </div>
               </div>
               <a
@@ -55,7 +55,7 @@ function Playlists({ data }) {
                 Subscribe
               </a>
             </div>
-            <ul className="flex px-8 pt-8 bg-gray-300">
+            <ul className="flex px-8 bg-gray-300">
               {tabs.map(tab => (
                 <li className="-mb-px mr-1">
                   <button

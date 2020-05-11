@@ -174,7 +174,7 @@ export default function Navbar({ fixed }) {
                 ))}
               </MenuItems>
               <Link
-                to="/playlists"
+                to="/videos"
                 className="block px-2 lg:px-4 order-3 lg:order-4 uppercase font-semibold focus:outline-none"
               >
                 Videos
