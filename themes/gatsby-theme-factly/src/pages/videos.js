@@ -29,27 +29,27 @@ function Playlists({ data }) {
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
         <div className="main-content w-full -my-8">
           <div>
-          <div className="flex justify-between items-start border-b p-6 bg-gray-300">
-              <div className="flex flex-row">
+          <div className="flex items-start border-b p-6 bg-gray-300">
                 {/* <Img alt={channel.snippet.title} fluid={channel.local.childImageSharp.fluid} className="h-24" /> */}
-                <img alt={channel.snippet.title} src={channel.snippet.thumbnails.high.url} className="h-16" />
+                <a rel="noopener noreferrer" target="_blank" href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA">
+                  <img alt={channel.snippet.title} src={channel.snippet.thumbnails.high.url} className="h-24" />
+                </a>
                 <div className="flex flex-col justify-start px-4">
-                  <h5 className="heading">{channel.snippet.title}</h5>
+                  <a rel="noopener noreferrer" target="_blank" href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA" className="heading">{channel.snippet.title}</a>
                   <span className="text-gray-600 text-xs md:text-sm pb-2">
                     {Number(channel.statistics.subscriberCount).toLocaleString()} Subscribers
                   </span>
+                  <a
+                    rel="noopener noreferrer"
+                    href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA?sub_confirmation=1"
+                    target="_blank"
+                    type="button"
+                    className="block lg:px-4 uppercase text-center font-medium text-sm focus:outline-none bg-gray-100 rounded p-2"
+                  >
+                    Subscribe
+                  </a>
                   {/* <p className="text-base hidden md:inline">{channel.snippet.description}</p> */}
                 </div>
-              </div>
-              <a
-                rel="noopener noreferrer"
-                href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA?sub_confirmation=1"
-                target="_blank"
-                type="button"
-                className="block lg:px-4 uppercase font-medium text-sm focus:outline-none bg-gray-100 rounded p-2"
-              >
-                Subscribe
-              </a>
             </div>
             <ul className="flex px-8 bg-gray-300">
               {tabs.map(tab => (

@@ -48,7 +48,7 @@ function Playlist({ data: { playlist }, location }) {
     if (window.innerWidth <= 1025) {
       setVideoListHeight('auto');
     } else {
-      setVideoListHeight(`${videoElement.current.offsetHeight}px`);
+      setVideoListHeight(`${document.getElementsByClassName('main-content')[0].clientHeight}px`);
     }
   };
 
@@ -112,22 +112,25 @@ function Playlist({ data: { playlist }, location }) {
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-full lg:w-2/5 mt-16 lg:mx-4">
+        <div 
+        className="flex flex-col w-full lg:w-2/5 mt-16 lg:mx-4 h-screen border lg:shadow-md"
+        style={{height: videoListHeight }}
+        >
+          <div className="mb-4 p-4 border-b">
+            <h5 className="text-base font-medium">
+              {playlist.snippet.title}
+            </h5>
+            <p className="text-gray-600 text-xs lg:text-sm">
+              {playlist.snippet.channelTitle} -{' '}
+              {activeVideo.videoIndex + 1}/{playlist.videos.length}
+            </p>
+          </div>
           <div
             ref={playlistElement}
-            className="lg:relative lg:overflow-auto h-auto lg:h-screen border lg:shadow-md"
-            style={{ height: `${videoListHeight}` }}
+            className="lg:relative lg:overflow-auto h-screen"
+            style={{height: videoListHeight }}
           >
             <div className="flex flex-col lg:absolute top-0 left-0 w-full h-full">
-              <div className="mb-4 p-4 border-b">
-                <h5 className="text-base font-medium">
-                  {playlist.snippet.title}
-                </h5>
-                <p className="text-gray-600 text-xs lg:text-sm">
-                  {playlist.snippet.channelTitle} -{' '}
-                  {activeVideo.videoIndex + 1}/{playlist.videos.length}
-                </p>
-              </div>
                 <InfiniteScroll
                   pageStart={0}
                   element="section"
