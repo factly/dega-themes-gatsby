@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import _ from "lodash";
@@ -11,7 +12,9 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 function Playlist({ data: { playlist }, location }) {
   const videoId = location.search.substring(1).split('=')[1];
+  const [schemaVideoList, setSchemaVideoList] = useState();
   const [videoListHeight, setVideoListHeight] = useState('366px');
+  const [schemaVideo, setSchemaVideo] = useState({});
   const [activeVideo, setActiveVideo] = useState(() => {
     if (videoId) {
       const videoIndex = playlist.videos.findIndex(
@@ -65,10 +68,62 @@ function Playlist({ data: { playlist }, location }) {
   }, [playlist.videos, videoId]);
 
   useEffect(() => {
+    setVideoSchemaObject();
+  }, [activeVideo]);
+
+  const setVideoSchemaObject = () => {
+    setSchemaVideo({
+      "@context": "http://schema.org/",
+      "@type": "VideoObject",
+      "name": activeVideo.video.snippet.title,
+      "description": activeVideo.video.snippet.description,
+      "thumbnailUrl": [
+        activeVideo.video.snippet.thumbnails.high.url,
+        activeVideo.video.snippet.thumbnails.default.url,
+      ],
+      "uploadDate": activeVideo.video.snippet.publishedAt,
+      "embedUrl": `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": { "@type": "http://schema.org/WatchAction" },
+      }
+    })
+  }
+
+  const setVideoSchemaObjectList = () => {
+    const itemListElement = [];
+
+    postItems.forEach((videoItem) => {
+      itemListElement.push({
+        "@type": "VideoObject",
+        "name": videoItem.snippet.title,
+        "description": videoItem.snippet.description,
+        "thumbnailUrl": [
+          videoItem.snippet.thumbnails.high.url,
+          videoItem.snippet.thumbnails.default.url,
+        ],
+        "uploadDate": videoItem.snippet.publishedAt,
+        "embedUrl": `https://www.youtube.com/embed/${videoItem.contentDetails.videoId}`,
+        "interactionStatistic": {
+          "@type": "InteractionCounter",
+          "interactionType": { "@type": "http://schema.org/WatchAction" },
+        }
+      })
+    });
+
+    setSchemaVideoList({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": itemListElement
+    });
+  }
+
+  useEffect(() => {
     window.onresize = () => {
       setPlaylistDivHieght();
     };
     setPlaylistDivHieght();
+    setVideoSchemaObjectList();
     playlistElement.current.scrollTop =
       document.getElementById(activeVideo.video.id).offsetTop - 10;
     return () => {
@@ -76,8 +131,16 @@ function Playlist({ data: { playlist }, location }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
   return (
     <Layout>
+      <Helmet>
+        <title>{activeVideo.video.snippet.title}</title>
+        <meta name="description" content={activeVideo.video.snippet.description} />
+        <meta name="image" content={activeVideo.video.snippet.thumbnails.default.url} />
+        <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
+        <script type="application/ld+json">{JSON.stringify(schemaVideoList)}</script>
+      </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-10 xl:mx-20">
         <div className="main-content flex flex-col w-full lg:w-3/5">
           <div
@@ -250,6 +313,14 @@ export const query = graphql`
         title
         publishedAt(formatString: "MMMM Do, YYYY")
         channelTitle
+        thumbnails {
+          default {
+            url
+          }
+          high{
+            url
+          }
+        }
       }
       videos {
         id
@@ -269,6 +340,14 @@ export const query = graphql`
           description
           publishedAt(formatString: "MMMM Do, YYYY")
           channelTitle
+          thumbnails {
+            default {
+              url
+            }
+            high{
+              url
+            }
+          }
         }
       }
     }
