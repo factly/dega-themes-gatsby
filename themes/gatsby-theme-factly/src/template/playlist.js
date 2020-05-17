@@ -28,22 +28,10 @@ function Playlist({ data: { playlist }, location }) {
       video: playlist.videos[0]
     }
   });
-  const schemaVideo = useMemo({
-    "@context": "http://schema.org/",
-    "@type": "VideoObject",
-    "name": activeVideo.video.snippet.title,
-    "description": activeVideo.video.snippet.description,
-    "thumbnailUrl": [
-      activeVideo.video.snippet.thumbnails.high.url,
-      activeVideo.video.snippet.thumbnails.default.url,
-    ],
-    "uploadDate": activeVideo.video.snippet.publishedAt,
-    "embedUrl": `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
-    "interactionStatistic": {
-      "@type": "InteractionCounter",
-      "interactionType": { "@type": "http://schema.org/WatchAction" },
-    }
+  const schemaVideo = useMemo(() => {
+
   }, [playlist.videos, videoId]);
+  
   const [postItems, setPostItems] = useState(() => {
     const video =  playlist.videos.splice(activeVideo.videoIndex, 1)
     playlist.videos.unshift(video[0])
