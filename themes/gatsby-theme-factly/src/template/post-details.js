@@ -103,9 +103,9 @@ const PostDetails = ({ data }) => {
   return (
     <Layout>
        <Helmet>
-        <title>{post.title}</title>
-        <meta name="description" content={post.excerpt} />
-        <meta name="image" content={post.media.source_url} />
+        <title>{article.title}</title>
+        <meta name="description" content={article.excerpt} />
+        <meta name="image" content={article.media.source_url} />
         <script type="application/ld+json">{JSON.stringify(schemas)}</script>
       </Helmet>
       <div className="flex flex-row justify-between">
