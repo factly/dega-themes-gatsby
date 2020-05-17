@@ -16,7 +16,6 @@ function Author({ data }) {
     }
     return tabList;
   })
-  console.log('Tabs', tabs, posts, factchecks)
   const [activeTab, setActiveTab] = useState({
     All: true
   });

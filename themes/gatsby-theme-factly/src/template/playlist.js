@@ -107,7 +107,7 @@ function Playlist({ data: { playlist }, location }) {
       <Helmet>
         <title>{activeVideo.video.snippet.title}</title>
         <meta name="description" content={activeVideo.video.snippet.description} />
-        <meta name="image" content={activeVideo.video.snippet.thumbnails.default.url} />
+        <meta name="image" content={activeVideo.video.snippet.thumbnails.default && activeVideo.video.snippet.thumbnails.default.url} />
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
       </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-10 xl:mx-20">
