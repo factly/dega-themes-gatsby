@@ -12,7 +12,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 function Playlist({ data: { playlist }, location }) {
   const videoId = location.search.substring(1).split('=')[1];
-  const [schemaVideoList, setSchemaVideoList] = useState();
   const [videoListHeight, setVideoListHeight] = useState('366px');
   const [schemaVideo, setSchemaVideo] = useState({});
   const [activeVideo, setActiveVideo] = useState(() => {

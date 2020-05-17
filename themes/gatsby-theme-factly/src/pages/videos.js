@@ -15,6 +15,7 @@ function Playlists({ data }) {
   const [activeTab, setActiveTab] = useState({
     Home: true
   });
+  const [schemaVideoList, setSchemaVideoList] = useState();
   const { allPlaylist: { nodes: playlists }, allVideo: { nodes: videos, totalCount }, channel, allChannelSections } = data;
   const [postItems, setPostItems] = useState(videos.slice(0, 20));
   const [hasNextPage, setHasNextPage] = useState(true);
