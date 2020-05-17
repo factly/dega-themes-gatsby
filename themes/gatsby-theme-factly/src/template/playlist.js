@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';

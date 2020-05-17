@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
@@ -15,7 +15,7 @@ function Playlists({ data }) {
   const [activeTab, setActiveTab] = useState({
     Home: true
   });
-  const [schemaVideoList, setSchemaVideoList] = useState();
+
   const { allPlaylist: { nodes: playlists }, allVideo: { nodes: videos, totalCount }, channel, allChannelSections } = data;
   const [postItems, setPostItems] = useState(videos.slice(0, 20));
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -26,9 +26,8 @@ function Playlists({ data }) {
     setHasNextPage(postItems.length < videos.length);
   };
 
-  const setVideoSchemaObjectList = () => {
+  const schemaVideoList = useMemo(() => {
     const itemListElement = [];
-
     postItems.forEach((videoItem) => {
       itemListElement.push({
         "@type": "VideoObject",
@@ -46,17 +45,12 @@ function Playlists({ data }) {
         }
       })
     });
-
-    setSchemaVideoList({
+    return {
       "@context": "https://schema.org",
       "@type": "ItemList",
       "itemListElement": itemListElement
-    });
-  }
-
-  useEffect(() => {
-    setVideoSchemaObjectList();
-  }, [])
+    }
+  }, []);
 
   return (
     <Layout>

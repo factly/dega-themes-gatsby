@@ -15,7 +15,7 @@ const PostDetails = ({ data }) => {
   const [postItems, setPostItems] = useState(mergedPosts.slice(0, 1));
   const schemas = useMemo(() => {
     if(!post){
-      return factcheck.schemas;
+      return factcheck.schemas.join(",");
     }
 
     return {
@@ -30,9 +30,10 @@ const PostDetails = ({ data }) => {
         article.media.source_url
        ],
       "datePublished": article.published_date,
+      "dateModified": article.published_date,
       "author": {
         "@type": "Person",
-        "name": article.degaUsers.display_name
+        "name": article.degaUsers.display_name || "Other"
       },
        "publisher": {
         "@type": "Organization",
