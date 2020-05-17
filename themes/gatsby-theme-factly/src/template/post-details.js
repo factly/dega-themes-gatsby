@@ -15,7 +15,11 @@ const PostDetails = ({ data }) => {
   const [postItems, setPostItems] = useState(mergedPosts.slice(0, 1));
   const schemas = useMemo(() => {
     if(!post){
-      return factcheck.schemas.join(",");
+      return {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": factcheck.schemas
+      }
     }
 
     return {
