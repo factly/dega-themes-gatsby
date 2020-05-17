@@ -58,6 +58,8 @@ function Playlist({ data: { playlist }, location }) {
     const videoIndex = playlist.videos.findIndex(
       video => video.contentDetails.videoId === videoId
     );
+    setVideoSchemaObject();
+
     if (videoIndex >= 0) {
       setActiveVideo({
         video: playlist.videos[videoIndex],
@@ -65,10 +67,6 @@ function Playlist({ data: { playlist }, location }) {
       });
     }
   }, [playlist.videos, videoId]);
-
-  useEffect(() => {
-    setVideoSchemaObject();
-  }, [activeVideo]);
 
   const setVideoSchemaObject = () => {
     setSchemaVideo({
@@ -94,6 +92,7 @@ function Playlist({ data: { playlist }, location }) {
       setPlaylistDivHieght();
     };
     setPlaylistDivHieght();
+    setVideoSchemaObject();
     playlistElement.current.scrollTop =
       document.getElementById(activeVideo.video.id).offsetTop - 10;
     return () => {
@@ -106,7 +105,7 @@ function Playlist({ data: { playlist }, location }) {
     <Layout>
       <Helmet>
         <title>{activeVideo.video.snippet.title}</title>
-        <meta name="description" content={activeVideo.video.snippet.description} />
+        <meta name="description" content={activeVideo.video.snippet.description.substring(0, 150)} />
         <meta name="image" content={activeVideo.video.snippet.thumbnails.default && activeVideo.video.snippet.thumbnails.default.url} />
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
       </Helmet>
