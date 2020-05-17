@@ -13,7 +13,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 function Playlist({ data: { playlist }, location }) {
   const videoId = location.search.substring(1).split('=')[1];
   const [videoListHeight, setVideoListHeight] = useState('366px');
-  const [schemaVideo, setSchemaVideo] = useState({});
   const [activeVideo, setActiveVideo] = useState(() => {
     if (videoId) {
       const videoIndex = playlist.videos.findIndex(
@@ -29,6 +28,22 @@ function Playlist({ data: { playlist }, location }) {
       video: playlist.videos[0]
     }
   });
+  const schemaVideo = useMemo({
+    "@context": "http://schema.org/",
+    "@type": "VideoObject",
+    "name": activeVideo.video.snippet.title,
+    "description": activeVideo.video.snippet.description,
+    "thumbnailUrl": [
+      activeVideo.video.snippet.thumbnails.high.url,
+      activeVideo.video.snippet.thumbnails.default.url,
+    ],
+    "uploadDate": activeVideo.video.snippet.publishedAt,
+    "embedUrl": `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
+    "interactionStatistic": {
+      "@type": "InteractionCounter",
+      "interactionType": { "@type": "http://schema.org/WatchAction" },
+    }
+  }, [playlist.videos, videoId]);
   const [postItems, setPostItems] = useState(() => {
     const video =  playlist.videos.splice(activeVideo.videoIndex, 1)
     playlist.videos.unshift(video[0])
@@ -58,7 +73,6 @@ function Playlist({ data: { playlist }, location }) {
     const videoIndex = playlist.videos.findIndex(
       video => video.contentDetails.videoId === videoId
     );
-    setVideoSchemaObject();
 
     if (videoIndex >= 0) {
       setActiveVideo({
@@ -68,31 +82,11 @@ function Playlist({ data: { playlist }, location }) {
     }
   }, [playlist.videos, videoId]);
 
-  const setVideoSchemaObject = () => {
-    setSchemaVideo({
-      "@context": "http://schema.org/",
-      "@type": "VideoObject",
-      "name": activeVideo.video.snippet.title,
-      "description": activeVideo.video.snippet.description,
-      "thumbnailUrl": [
-        activeVideo.video.snippet.thumbnails.high.url,
-        activeVideo.video.snippet.thumbnails.default.url,
-      ],
-      "uploadDate": activeVideo.video.snippet.publishedAt,
-      "embedUrl": `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
-      "interactionStatistic": {
-        "@type": "InteractionCounter",
-        "interactionType": { "@type": "http://schema.org/WatchAction" },
-      }
-    })
-  }
-
   useEffect(() => {
     window.onresize = () => {
       setPlaylistDivHieght();
     };
     setPlaylistDivHieght();
-    setVideoSchemaObject();
     playlistElement.current.scrollTop =
       document.getElementById(activeVideo.video.id).offsetTop - 10;
     return () => {
