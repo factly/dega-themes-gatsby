@@ -7,6 +7,7 @@ import Layout from '../components/layout';
 import { Play } from '../components/icons';
 import Footer from '../components/footer';
 import _ from 'lodash';
+import Helmet from 'react-helmet';
 
 const tabs = ['Home', 'Videos', 'Playlists'];
 

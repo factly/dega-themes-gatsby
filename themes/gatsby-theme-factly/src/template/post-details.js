@@ -5,12 +5,45 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Layout from '../components/layout';
 import ListItems from '../components/listItems';
 import Post from '../components/post';
+import Helmet from 'react-helmet';
 
 const PostDetails = ({ data }) => {
-  const { degaCMS: { post, factcheck, posts, factchecks }} = data;
+  const { degaCMS: { organization, post, factcheck, posts, factchecks }} = data;
+  const article = post || factcheck;
   const mergedPosts = [...posts.nodes, ...factchecks.nodes]
   // mergedPosts.unshift(post || factcheck);
   const [postItems, setPostItems] = useState(mergedPosts.slice(0, 1));
+  const schemas = useMemo(() => {
+    if(!post){
+      return factcheck.schemas;
+    }
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://google.com/article"
+      },
+      "headline": article.title,
+      "image": [
+        article.media.source_url
+       ],
+      "datePublished": article.published_date,
+      "author": {
+        "@type": "Person",
+        "name": article.degaUsers.display_name
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": organization.name,
+        "logo": {
+          "@type": "ImageObject",
+          "url": organization.mediaLogo.url
+        }
+      }
+    }
+  }, [])
   const [hasNextPage, setHasNextPage] = useState(true);
   const [showSocialIcon, setShowSocialIcon] = useState(false);
   const [postActiveIndex, setPostActiveIndex] = useState(0);
@@ -67,9 +100,14 @@ const PostDetails = ({ data }) => {
     createObserver();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <Layout>
+       <Helmet>
+        <title>{post.title}</title>
+        <meta name="description" content={post.excerpt} />
+        <meta name="image" content={post.media.source_url} />
+        <script type="application/ld+json">{JSON.stringify(schemas)}</script>
+      </Helmet>
       <div className="flex flex-row justify-between">
         <div className="sidebar lg:flex lg:w-1/4 border-r border-l sticky">
           <div className="mb-4 pb-4 border-b px-6">
@@ -100,7 +138,7 @@ const PostDetails = ({ data }) => {
           </InfiniteScroll>
         </div>
         <div className="flex flex-col w-full lg:w-3/4 p-2 lg:p-6">
-          <Post post={post || factcheck} observer={observer} />
+          <Post post={article} observer={observer} />
           <InfiniteScroll
             pageStart={0}
             loadMore={handleLoadMore}
@@ -183,6 +221,12 @@ export default PostDetails;
 export const query = graphql`
   query ($id: String!) {
     degaCMS {
+      organization{
+        name
+        mediaLogo{
+          url
+        }
+      }
       posts(limit: 20, sortBy: "published_date"){
         nodes{
           _id
@@ -323,6 +367,24 @@ export const query = graphql`
             name
           }
           claimant{
+            name
+          }
+        }
+        schemas{
+          context
+          type
+          datePublished
+          url
+          author {
+            name
+            url
+            image
+          }
+          claimReviewed
+          reviewRating {
+            image
+          }
+          itemReviewed {
             name
           }
         }
