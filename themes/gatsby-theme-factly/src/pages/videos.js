@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
@@ -24,8 +24,46 @@ function Playlists({ data }) {
     setHasNextPage(postItems.length < videos.length);
   };
 
+  const setVideoSchemaObjectList = () => {
+    const itemListElement = [];
+
+    postItems.forEach((videoItem) => {
+      itemListElement.push({
+        "@type": "VideoObject",
+        "name": videoItem.snippet.title,
+        "description": videoItem.snippet.description,
+        "thumbnailUrl": [
+          videoItem.snippet.thumbnails.high.url,
+          videoItem.snippet.thumbnails.default.url,
+        ],
+        "uploadDate": videoItem.snippet.publishedAt,
+        "embedUrl": `https://www.youtube.com/embed/${videoItem.contentDetails.videoId}`,
+        "interactionStatistic": {
+          "@type": "InteractionCounter",
+          "interactionType": { "@type": "http://schema.org/WatchAction" },
+        }
+      })
+    });
+
+    setSchemaVideoList({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": itemListElement
+    });
+  }
+
+  useEffect(() => {
+    setVideoSchemaObjectList();
+  }, [])
+
   return (
     <Layout>
+      <Helmet>
+        <title>{channel.snippet.title}</title>
+        <meta name="description" content={channel.snippet.description} />
+        <meta name="image" content={channel.snippet.thumbnails.high.url} />
+        <script type="application/ld+json">{JSON.stringify(schemaVideoList)}</script>
+      </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
         <div className="main-content w-full -my-8">
           <div>

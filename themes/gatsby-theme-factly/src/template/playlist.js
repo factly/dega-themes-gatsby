@@ -90,40 +90,11 @@ function Playlist({ data: { playlist }, location }) {
     })
   }
 
-  const setVideoSchemaObjectList = () => {
-    const itemListElement = [];
-
-    postItems.forEach((videoItem) => {
-      itemListElement.push({
-        "@type": "VideoObject",
-        "name": videoItem.snippet.title,
-        "description": videoItem.snippet.description,
-        "thumbnailUrl": [
-          videoItem.snippet.thumbnails.high.url,
-          videoItem.snippet.thumbnails.default.url,
-        ],
-        "uploadDate": videoItem.snippet.publishedAt,
-        "embedUrl": `https://www.youtube.com/embed/${videoItem.contentDetails.videoId}`,
-        "interactionStatistic": {
-          "@type": "InteractionCounter",
-          "interactionType": { "@type": "http://schema.org/WatchAction" },
-        }
-      })
-    });
-
-    setSchemaVideoList({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "itemListElement": itemListElement
-    });
-  }
-
   useEffect(() => {
     window.onresize = () => {
       setPlaylistDivHieght();
     };
     setPlaylistDivHieght();
-    setVideoSchemaObjectList();
     playlistElement.current.scrollTop =
       document.getElementById(activeVideo.video.id).offsetTop - 10;
     return () => {
@@ -139,7 +110,6 @@ function Playlist({ data: { playlist }, location }) {
         <meta name="description" content={activeVideo.video.snippet.description} />
         <meta name="image" content={activeVideo.video.snippet.thumbnails.default.url} />
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
-        <script type="application/ld+json">{JSON.stringify(schemaVideoList)}</script>
       </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-10 xl:mx-20">
         <div className="main-content flex flex-col w-full lg:w-3/5">
