@@ -34,7 +34,7 @@ function Playlists({ data }) {
         "name": videoItem.snippet.title,
         "description": videoItem.snippet.description,
         "thumbnailUrl": [
-          video.local ? video.local.childImageSharp.fluid.src : ''
+          videoItem.local ? videoItem.local.childImageSharp.fluid.src : ''
         ],
         "uploadDate": videoItem.snippet.publishedAt,
         "embedUrl": `https://www.youtube.com/embed/${videoItem.contentDetails.videoId}`,
