@@ -32,7 +32,9 @@ function Playlists({ data }) {
       itemListElement.push({
         "@type": "VideoObject",
         "name": videoItem.snippet.title,
-        "description": videoItem.snippet.description,
+        "description":videoItem.snippet.description,
+        "position":  videoItem.snippet.position,
+        "url": `/playlist/${videoItem.snippet.playlistId}?v=${videoItem.contentDetails.videoId}`,
         "thumbnailUrl": [
           videoItem.local ? videoItem.local.childImageSharp.fluid.src : ''
         ],
@@ -328,7 +330,7 @@ export const query = graphql`
           snippet {
             playlistId
             channelTitle
-            publishedAt(formatString: "MMMM Do, YYYY")
+            publishedAt(formatString: "DD-MM-YYYY")
             title
           }
         }
@@ -350,7 +352,9 @@ export const query = graphql`
         snippet {
           playlistId
           channelTitle
-          publishedAt(formatString: "MMMM Do, YYYY")
+          position
+          description
+          publishedAt(formatString: "DD-MM-YYYY")
           title
         }
       }
@@ -365,7 +369,7 @@ export const query = graphql`
         }
         snippet {
           channelId
-          publishedAt(formatString: "MMMM Do, YYYY")
+          publishedAt(formatString: "DD-MM-YYYY")
           title
         }
         local {

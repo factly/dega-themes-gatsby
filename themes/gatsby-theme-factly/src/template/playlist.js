@@ -28,13 +28,16 @@ function Playlist({ data: { playlist }, location }) {
       video: playlist.videos[0]
     }
   });
+  console.log("Mahipat",activeVideo)
   const schemaVideo = useMemo(() => ({
     "@context": "http://schema.org/",
     "@type": "VideoObject",
     "name": activeVideo.video.snippet.title,
     "description": activeVideo.video.snippet.description,
+    "position":  activeVideo.video.snippet.position,
+    "url": `/playlist/${activeVideo.video.snippet.playlistId}?v=${activeVideo.video.contentDetails.videoId}`,
     "thumbnailUrl": [
-      activeVideo.local ? activeVideo.local.childImageSharp.fluid.src : ''
+      activeVideo.video.local ? activeVideo.video.local.childImageSharp.fluid.src : ''
     ],
     "uploadDate": activeVideo.video.snippet.publishedAt,
     "embedUrl": `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
@@ -272,7 +275,7 @@ export const query = graphql`
       id
       snippet {
         title
-        publishedAt(formatString: "MMMM Do, YYYY")
+        publishedAt(formatString: "DD-MM-YYYY")
         channelTitle
         thumbnails {
           default {
@@ -299,7 +302,7 @@ export const query = graphql`
           position
           title
           description
-          publishedAt(formatString: "MMMM Do, YYYY")
+          publishedAt(formatString: "DD-MM-YYYY")
           channelTitle
         }
       }
