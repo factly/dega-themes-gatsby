@@ -28,10 +28,21 @@ function Playlist({ data: { playlist }, location }) {
       video: playlist.videos[0]
     }
   });
-  const schemaVideo = useMemo(() => {
-
+  const schemaVideo = useMemo({
+    "@context": "http://schema.org/",
+    "@type": "VideoObject",
+    "name": activeVideo.video.snippet.title,
+    "description": activeVideo.video.snippet.description,
+    "thumbnailUrl": [
+      activeVideo.local.childImageSharp.fluid.src
+    ],
+    "uploadDate": activeVideo.video.snippet.publishedAt,
+    "embedUrl": `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
+    "interactionStatistic": {
+      "@type": "InteractionCounter",
+      "interactionType": { "@type": "http://schema.org/WatchAction" },
+    }
   }, [playlist.videos, videoId]);
-  
   const [postItems, setPostItems] = useState(() => {
     const video =  playlist.videos.splice(activeVideo.videoIndex, 1)
     playlist.videos.unshift(video[0])
@@ -88,7 +99,7 @@ function Playlist({ data: { playlist }, location }) {
       <Helmet>
         <title>{activeVideo.video.snippet.title}</title>
         <meta name="description" content={activeVideo.video.snippet.description.substring(0, 150)} />
-        <meta name="image" content={activeVideo.video.snippet.thumbnails.default && activeVideo.video.snippet.thumbnails.default.url} />
+        <meta name="image" content={activeVideo.local.childImageSharp.fluid.src} />
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
       </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-10 xl:mx-20">
@@ -290,14 +301,6 @@ export const query = graphql`
           description
           publishedAt(formatString: "MMMM Do, YYYY")
           channelTitle
-          thumbnails {
-            default {
-              url
-            }
-            high{
-              url
-            }
-          }
         }
       }
     }

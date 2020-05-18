@@ -34,8 +34,7 @@ function Playlists({ data }) {
         "name": videoItem.snippet.title,
         "description": videoItem.snippet.description,
         "thumbnailUrl": [
-          videoItem.snippet.thumbnails.high.url,
-          videoItem.snippet.thumbnails.default.url,
+          video.local.childImageSharp.fluid.src
         ],
         "uploadDate": videoItem.snippet.publishedAt,
         "embedUrl": `https://www.youtube.com/embed/${videoItem.contentDetails.videoId}`,
@@ -353,14 +352,6 @@ export const query = graphql`
           channelTitle
           publishedAt(formatString: "MMMM Do, YYYY")
           title
-          thumbnails {
-            default {
-              url
-            }
-            high{
-              url
-            }
-          }
         }
       }
     }
