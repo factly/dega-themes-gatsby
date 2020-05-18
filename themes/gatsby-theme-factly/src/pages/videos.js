@@ -353,6 +353,14 @@ export const query = graphql`
           channelTitle
           publishedAt(formatString: "MMMM Do, YYYY")
           title
+          thumbnails {
+            default {
+              url
+            }
+            high{
+              url
+            }
+          }
         }
       }
     }
