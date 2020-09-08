@@ -1,12 +1,10 @@
-const siteMetadata = require('./data/site-config');
-
 module.exports = {
   plugins: [
     {
       resolve: '@factly/gatsby-theme-factly',
       options: {
-        client: 'factly',
-        metaData: siteMetadata
+        client: 1,
+        api: 'http://127.0.0.1:9000/query',
       }
     }
   ]

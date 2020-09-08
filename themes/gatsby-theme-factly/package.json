@@ -47,7 +47,7 @@
     "gatsby-plugin-sitemap": "^2.2.22",
     "gatsby-source-filesystem": "^2.1.40",
     "gatsby-source-graphql": "^2.5.0",
-    "gatsby-source-videos-youtube": "^1.0.0",
+    "gatsby-source-videos-youtube": "*",
     "gatsby-transformer-sharp": "^2.3.7",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
