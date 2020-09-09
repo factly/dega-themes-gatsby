@@ -3,9 +3,9 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import ListItems from "../components/listItems";
 
-function Tag({ data }) {
+function User({ data }) {
   const {
-    dega: { tag, posts },
+    dega: { user, posts },
   } = data;
 
   return (
@@ -15,7 +15,6 @@ function Tag({ data }) {
           <div className="flex flex-col pb-6">
             {posts.nodes.map((item, index) => (
               <ListItems
-                key={"posts" + index}
                 orientation="vertical horizontal"
                 item={item}
                 index={index}
@@ -31,10 +30,15 @@ function Tag({ data }) {
           <div className="flex flex-col px-6">
             <div className="flex py-4">
               <div className="px-4">
-                <h2 className="font-bold">{tag.name}</h2>
+                <h2 className="font-bold">{user.first_name}</h2>
+                <a
+                  href={`mailto:${user.email}`}
+                  className="font-medium text-blue-500 text-lg"
+                >
+                  {user.email}
+                </a>
               </div>
             </div>
-            <p className="text-base read-more-wrap">{tag.description}</p>
           </div>
         </div>
       </div>
@@ -42,18 +46,18 @@ function Tag({ data }) {
   );
 }
 
-export default Tag;
+export default User;
 
 export const query = graphql`
   query($id: Int!) {
     dega {
-      tag(id: $id) {
-        description
+      user(id: $id) {
         id
-        name
-        slug
+        first_name
+        last_name
+        email
       }
-      posts(tags: [$id]) {
+      posts(users: [$id]) {
         nodes {
           users {
             id

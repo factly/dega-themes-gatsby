@@ -1,5 +1,3 @@
-const path = require('path');
-
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -52,15 +50,32 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  console.log(result.data.dega.sitemap.tags)
-
-  const tagDetailTemplate = path.resolve(`src/templates/tag-details.js`)
   result.data.dega.sitemap.tags.forEach(tag => {
     createPage({
-      path: `/tag/${tag.slug}`,
-      component: tagDetailTemplate,
+      path: `/tags/${tag.slug}`,
+      component: require.resolve('./src/templates/tag-details.js'),
       context: {
-        id: tag.id
+        id: parseInt(tag.id)
+      }
+    });
+  });
+
+  result.data.dega.sitemap.categories.forEach(category => {
+    createPage({
+      path: `/categories/${category.slug}`,
+      component: require.resolve('./src/templates/category-details.js'),
+      context: {
+        id: parseInt(category.id)
+      }
+    });
+  });
+
+  result.data.dega.sitemap.users.forEach(user => {
+    createPage({
+      path: `/users/${user.id}`,
+      component: require.resolve('./src/templates/user-details.js'),
+      context: {
+        id: parseInt(user.id)
       }
     });
   });

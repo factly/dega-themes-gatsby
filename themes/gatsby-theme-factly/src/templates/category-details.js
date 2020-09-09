@@ -5,7 +5,7 @@ import ListItems from "../components/listItems";
 
 function Tag({ data }) {
   const {
-    dega: { tag, posts },
+    dega: { category, posts },
   } = data;
 
   return (
@@ -31,10 +31,10 @@ function Tag({ data }) {
           <div className="flex flex-col px-6">
             <div className="flex py-4">
               <div className="px-4">
-                <h2 className="font-bold">{tag.name}</h2>
+                <h2 className="font-bold">{category.name}</h2>
               </div>
             </div>
-            <p className="text-base read-more-wrap">{tag.description}</p>
+            <p className="text-base read-more-wrap">{category.description}</p>
           </div>
         </div>
       </div>
@@ -47,13 +47,17 @@ export default Tag;
 export const query = graphql`
   query($id: Int!) {
     dega {
-      tag(id: $id) {
+      category(id: $id) {
         description
         id
+        medium {
+          alt_text
+          url
+        }
         name
         slug
       }
-      posts(tags: [$id]) {
+      posts(categories: [$id]) {
         nodes {
           users {
             id
