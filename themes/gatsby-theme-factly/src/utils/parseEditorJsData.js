@@ -19,9 +19,8 @@ const parseEditorJsData = (data) => {
       default:
         break;
     }
-    return console.log(block.type);
+    return null;
   });
-  console.log(htm.join(""));
   return htm.join("");
 };
 
