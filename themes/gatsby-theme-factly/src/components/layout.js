@@ -29,7 +29,6 @@ const Layout = (props) => (
       
       const { space } = dega;
       const { children } = props;
-      console.log(space.logo.url)
       return (
         <>
           <Helmet

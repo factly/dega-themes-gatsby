@@ -45,38 +45,52 @@ exports.createPages = async ({ graphql, actions }) => {
             id
             slug
           }
+          formats {
+            id
+            slug
+          }
         }
       } 
     }
   `);
-
-  result.data.dega.sitemap.tags.forEach(tag => {
+  
+  result.data.dega.sitemap.posts.forEach(post => {
     createPage({
-      path: `/tags/${tag.slug}`,
-      component: require.resolve('./src/templates/tag-details.js'),
+      path: `/${post.slug}`,
+      component: require.resolve('./src/templates/post-details.js'),
       context: {
-        id: parseInt(tag.id)
+        id: parseInt(post.id)
       }
     });
   });
 
-  result.data.dega.sitemap.categories.forEach(category => {
-    createPage({
-      path: `/categories/${category.slug}`,
-      component: require.resolve('./src/templates/category-details.js'),
-      context: {
-        id: parseInt(category.id)
-      }
-    });
-  });
+  // result.data.dega.sitemap.tags.forEach(tag => {
+  //   createPage({
+  //     path: `/tags/${tag.slug}`,
+  //     component: require.resolve('./src/templates/tag-details.js'),
+  //     context: {
+  //       id: parseInt(tag.id)
+  //     }
+  //   });
+  // });
 
-  result.data.dega.sitemap.users.forEach(user => {
-    createPage({
-      path: `/users/${user.id}`,
-      component: require.resolve('./src/templates/user-details.js'),
-      context: {
-        id: parseInt(user.id)
-      }
-    });
-  });
+  // result.data.dega.sitemap.categories.forEach(category => {
+  //   createPage({
+  //     path: `/categories/${category.slug}`,
+  //     component: require.resolve('./src/templates/category-details.js'),
+  //     context: {
+  //       id: parseInt(category.id)
+  //     }
+  //   });
+  // });
+
+  // result.data.dega.sitemap.users.forEach(user => {
+  //   createPage({
+  //     path: `/users/${user.id}`,
+  //     component: require.resolve('./src/templates/user-details.js'),
+  //     context: {
+  //       id: parseInt(user.id)
+  //     }
+  //   });
+  // });
 };

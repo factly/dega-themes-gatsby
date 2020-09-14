@@ -24,7 +24,6 @@ function ListItems({
   className = "p-6 border-gray-200",
   imageSize = "w-full h-40",
 }) {
-  console.log(item)
   return (
     <article
       className={`flex flex-col leading-tight border-b last:border-b-0 ${className}`}

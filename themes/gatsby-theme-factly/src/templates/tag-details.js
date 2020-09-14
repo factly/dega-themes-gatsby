@@ -68,7 +68,7 @@ export const query = graphql`
             alt_text
             url
           }
-          created_date
+          created_at
           id
           status
           subtitle
