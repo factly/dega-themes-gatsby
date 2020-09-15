@@ -1,13 +1,14 @@
-import React from 'react';
+import React from "react";
+import { Link } from "gatsby";
 
 const Tag = ({ url, name }) => {
   return (
-    <a
-      href={url}
+    <Link
+      to={url}
       className="text-center text-gray-800 text-sm md:text-md rounded p-2 m-2 bg-gray-300"
     >
       {name}
-    </a>
+    </Link>
   );
 };
 

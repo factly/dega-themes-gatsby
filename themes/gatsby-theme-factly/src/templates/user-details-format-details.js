@@ -5,7 +5,7 @@ import StoryCard from '../components/StoryCard';
 import Tabs from '../components/Tabs';
 import User from '../components/User';
 
-function UserDetailsAll({ data }) {
+function UserDetailsFormat({ data }) {
   const { dega } = data;
   
   return (
@@ -49,10 +49,10 @@ function UserDetailsAll({ data }) {
   );
 }
 
-export default UserDetailsAll;
+export default UserDetailsFormat;
 
 export const query = graphql`
-  query($id: Int!) {
+  query($id: Int!, $format_id: Int!) {
     dega {
       user(id: $id) {
         id
@@ -60,7 +60,7 @@ export const query = graphql`
         last_name
         email
       }
-      posts(users: [$id]) {
+      posts(users: [$id] formats:[$format_id]) {
         nodes {
           users {
             id
