@@ -33,7 +33,7 @@ function Tag({ data }) {
 export default Tag;
 
 export const query = graphql`
-  query($id: Int!) {
+  query($id: Int!, $format_id: Int!) {
     dega {
       tag(id: $id) {
         description
@@ -41,7 +41,7 @@ export const query = graphql`
         name
         slug
       }
-      posts(tags: [$id]) {
+      posts(tags: [$id], formats: [$format_id]) {
         nodes {
           users {
             id

@@ -5,8 +5,7 @@ export default function Navbar({ logo }) {
   return (
     <React.Fragment>
       <div
-        className="fixed top-0 inset-x-0 bg-white border-b border-gray-300 z-10 fadeInUp"
-        style={{ animationDelay: `${0.5}s` }}
+        className="fixed top-0 inset-x-0 bg-white border-b border-gray-300 z-10"
       >
         <header className="flex item-center justify-between border-b  border-gray-100 p-2 text-sm font-semibold text-gray-800">
           <nav className="flex flex-grow items-center justify-between px-0 lg:px-4 py-3 sm:p-0">

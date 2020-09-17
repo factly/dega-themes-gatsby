@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 const Tag = ({ url, name }) => {
   return (
     <Link
-      to={url}
+      to={`/tags/${url}`}
       className="text-center text-gray-800 text-sm md:text-md rounded p-2 m-2 bg-gray-300"
     >
       {name}

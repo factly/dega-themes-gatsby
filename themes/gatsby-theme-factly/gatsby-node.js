@@ -54,6 +54,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
+  // create post details page
   result.data.dega.sitemap.posts.forEach((post) => {
     createPage({
       path: `/${post.slug}`,
@@ -64,26 +65,57 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  // result.data.dega.sitemap.tags.forEach(tag => {
-  //   createPage({
-  //     path: `/tags/${tag.slug}`,
-  //     component: require.resolve('./src/templates/tag-details.js'),
-  //     context: {
-  //       id: parseInt(tag.id)
-  //     }
-  //   });
-  // });
+  // create tag details page
+  result.data.dega.sitemap.tags.forEach(tag => {
+    createPage({
+      path: `/tags/${tag.slug}`,
+      component: require.resolve('./src/templates/tag-details.js'),
+      context: {
+        id: parseInt(tag.id)
+      }
+    });
 
-  // result.data.dega.sitemap.categories.forEach(category => {
-  //   createPage({
-  //     path: `/categories/${category.slug}`,
-  //     component: require.resolve('./src/templates/category-details.js'),
-  //     context: {
-  //       id: parseInt(category.id)
-  //     }
-  //   });
-  // });
+    // create tag details page with each format
+    result.data.dega.sitemap.formats.forEach((format) => {
+      createPage({
+        path: `/tags/${tag.slug}/formats/${format.slug}`,
+        component: require.resolve(
+          "./src/templates/tag-details-format-details.js"
+        ),
+        context: {
+          id: parseInt(tag.id),
+          format_id: parseInt(format.id),
+        },
+      });
+    });
+  });
 
+  // create category details page
+  result.data.dega.sitemap.categories.forEach(category => {
+    createPage({
+      path: `/categories/${category.slug}`,
+      component: require.resolve('./src/templates/category-details.js'),
+      context: {
+        id: parseInt(category.id)
+      }
+    });
+
+    // create category details page with each format
+    result.data.dega.sitemap.formats.forEach((format) => {
+      createPage({
+        path: `/categories/${category.slug}/formats/${format.slug}`,
+        component: require.resolve(
+          "./src/templates/category-details-format-details.js"
+        ),
+        context: {
+          id: parseInt(category.id),
+          format_id: parseInt(format.id),
+        },
+      });
+    });
+  });
+
+  // create user details page
   result.data.dega.sitemap.users.forEach((user) => {
     createPage({
       path: `/users/${user.id}`,
@@ -93,6 +125,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
 
+    // create user details page with each format
     result.data.dega.sitemap.formats.forEach((format) => {
       createPage({
         path: `/users/${user.id}/formats/${format.slug}`,

@@ -5,7 +5,7 @@ import StoryCard from "../components/StoryCard";
 import Tabs from "../components/Tabs";
 import Category from "../components/Category";
 
-function CategoryDetailsAll({ data }) {
+function CategoryDetailsFormat({ data }) {
   const { dega } = data;
 
   return (
@@ -42,10 +42,10 @@ function CategoryDetailsAll({ data }) {
   );
 }
 
-export default CategoryDetailsAll;
+export default CategoryDetailsFormat;
 
 export const query = graphql`
-  query($id: Int!) {
+  query($id: Int!, $format_id: Int!) {
     dega {
       category(id: $id) {
         description
@@ -57,7 +57,7 @@ export const query = graphql`
         name
         slug
       }
-      posts(categories: [$id]) {
+      posts(categories: [$id], formats: [$format_id]) {
         nodes {
           users {
             id

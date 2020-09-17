@@ -30,9 +30,9 @@ const Tabs = ({ baseUrl }) => {
               All
             </Link>
           </li>
-          {data.dega.formats.nodes.map((tab) => {
+          {data.dega.formats.nodes.map((tab, index) => {
             return (
-              <li className="mx-1">
+              <li key={index} className="mx-1">
                 <Link
                   to={`${baseUrl}/formats/${tab.slug}`}
                   activeClassName="bg-white"
