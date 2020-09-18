@@ -2,7 +2,7 @@ import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import Navbar from "./Navbar";
+import Navbar from "./FormatNavbar";
 
 const Layout = (props) => (
   <StaticQuery
