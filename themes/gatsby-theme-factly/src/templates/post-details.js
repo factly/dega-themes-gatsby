@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import InfiniteScroll from "react-infinite-scroller";
 import Post from "../components/Post";
 import StoryLinks from "../components/StoryLinks";
-import Layout from "../components/BasicLayout";
+import Layout from "../components/Layout";
 
 const PostDetails = ({ data }) => {
   const { dega } = data;

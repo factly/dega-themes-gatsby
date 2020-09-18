@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/BasicLayout";
+import Layout from "../components/Layout";
 import StoryCard from "../components/StoryCard";
 
 function Homepage({ data }) {
