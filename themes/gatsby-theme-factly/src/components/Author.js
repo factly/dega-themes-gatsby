@@ -9,17 +9,6 @@ import { Link } from "gatsby";
 const Author = ({ users, categories, date }) => {
   return (
     <div className="flex flex-col justify-start items-start py-2">
-      <div className="flex flex-row flex-wrap">
-        {/* {authors.map((author, i) => (
-          <img
-            key={i}
-            className="w-16 h-16 rounded-full mr-2 avatar"
-            data-tippy-content={author.display_name}
-            src={author.medium.url}
-            alt={author.medium.alt_text}
-          />
-        ))} */}
-      </div>
       <div className="flex flex-col py-2">
         <div className="flex flex-row flex-wrap">
           {users.map((user, i, arr) => (

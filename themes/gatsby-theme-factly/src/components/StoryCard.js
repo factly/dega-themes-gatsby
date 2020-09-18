@@ -64,7 +64,7 @@ const StoryCard = ({
                     <p className="text-gray-600 text-xs md:text-sm mr-2 normal-case">
                       {storyData.users.map((user, i, arr) => (
                         <span key={i}>
-                          {user.display_name} {arr.length - i > 1 && ","}
+                          {user.first_name + " " + user.last_name} {arr.length - i > 1 && ","}
                         </span>
                       ))}
                     </p>
@@ -109,7 +109,7 @@ const StoryCard = ({
             <div className="flex items-center justify-between">
               <div className="flex justify-center items-center">
                 <p className="text-gray-600 text-xs md:text-sm mr-2 normal-case">
-                  {storyData.users[0].display_name}
+                  {storyData.users[0].first_name + " " + storyData.users[0].last_name }
                 </p>
               </div>
               <p className="text-gray-600 text-xs md:text-sm">
@@ -156,7 +156,7 @@ const StoryCard = ({
                 >
                   <div className="flex flex-row flex-wrap">
                     <p className="text-gray-600 text-xs md:text-sm mr-2 normal-case">
-                      {storyData.users[0].display_name}
+                      {storyData.users[0].first_name + " " + storyData.users[0].last_name}
                     </p>
                   </div>
                   <p className="text-gray-600 text-xs md:text-sm">

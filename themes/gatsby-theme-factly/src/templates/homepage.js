@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import StoryCard from "../components/StoryCard";
 
 function Homepage({ data }) {
@@ -14,13 +14,6 @@ function Homepage({ data }) {
             <div className="mb-4 pb-4 border-b px-6">
               <h5 className="heading">Headlines</h5>
             </div>
-          </div>
-          <div className="flex w-full justify-start items-start my-4 p-4">
-            <img
-              alt=""
-              src="https://factly.in/wp-content/uploads//2018/09/banner-survey-side.png"
-              className="w-full object-cover rounded"
-            />
           </div>
         </div>
         {/* Main/ Middle part of the homepage */}
