@@ -31,6 +31,7 @@ function Homepage({ data }) {
           <div className="flex flex-col py-6">
             {dega.posts.nodes.slice(1, 20).map((item, index) => (
               <StoryCard
+                key={"homepage-post-" + index}
                 cardStyle="basic"
                 storyData={item}
                 excerpt
@@ -47,6 +48,7 @@ function Homepage({ data }) {
             </div>
             {dega.factchecks.nodes.map((item, index) => (
               <StoryCard
+                key={"homepage-factcheck-" + index}
                 cardStyle="vertical"
                 storyData={item}
                 imageSize="h-40"

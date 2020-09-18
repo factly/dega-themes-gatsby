@@ -26,6 +26,7 @@ export default function Navbar({ logo }) {
                   {data.dega.formats.nodes.map((tab, index) => {
                     return (
                       <Link
+                        key={"navbar-"+ index}
                         to={`/formats/${tab.slug}`}
                         className="block px-2 lg:px-4 order-3 lg:order-4 uppercase font-semibold focus:outline-none"
                       >
