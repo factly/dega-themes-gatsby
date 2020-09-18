@@ -26,7 +26,6 @@ const Layout = (props) => (
       }
     `}
     render={({ dega }) => {
-      
       const { space } = dega;
       const { children } = props;
       return (
@@ -53,7 +52,7 @@ const Layout = (props) => (
           >
             <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider"></body>
           </Helmet>
-          <Navbar logo={space.logo.url.replace(/^"(.*)"$/, '$1')}></Navbar>
+          <Navbar logo={space.logo.url.replace(/^"(.*)"$/, "$1")}></Navbar>
           <div
             style={{ maxWidth: "1920px" }}
             className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 mx-auto"

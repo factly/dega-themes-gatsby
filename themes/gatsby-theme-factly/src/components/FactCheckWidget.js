@@ -71,8 +71,9 @@ function FactCheckWidget({ claims }) {
               onClick={handlePrevClick}
               href-id="claim-1"
               disabled={disable.left}
-              className={`border border-gray-200 rounded text-left text-lg p-2 focus:outline-none ${disable.left &&
-                "cursor-not-allowed opacity-50"}`}
+              className={`border border-gray-200 rounded text-left text-lg p-2 focus:outline-none ${
+                disable.left && "cursor-not-allowed opacity-50"
+              }`}
             >
               <FontAwesomeIcon
                 icon={faChevronLeft}
@@ -85,8 +86,9 @@ function FactCheckWidget({ claims }) {
               onClick={handleNextClick}
               href-id="claim-1"
               disabled={disable.right}
-              className={`border border-gray-200 rounded text-left text-lg p-2 focus:outline-none ${disable.right &&
-                "cursor-not-allowed opacity-50"}`}
+              className={`border border-gray-200 rounded text-left text-lg p-2 focus:outline-none ${
+                disable.right && "cursor-not-allowed opacity-50"
+              }`}
             >
               <FontAwesomeIcon
                 icon={faChevronRight}

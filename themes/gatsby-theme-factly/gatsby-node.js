@@ -54,6 +54,40 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
+  var format_factcheck = [];
+  var format_without_factcheck = [];
+  result.data.dega.sitemap.formats
+    .filter((item) => item.slug === "fact-check")
+    .forEach((item) => {
+      format_factcheck.push(parseInt(item.id));
+    });
+
+  result.data.dega.sitemap.formats
+    .filter((item) => item.slug !== "fact-check")
+    .forEach((item) => {
+      format_without_factcheck.push(parseInt(item.id));
+    });
+
+  // homepage
+  createPage({
+    path: "/",
+    component: require.resolve("./src/templates/homepage.js"),
+    context: {
+      format_factcheck,
+      format_without_factcheck,
+    },
+  });
+
+  result.data.dega.sitemap.formats.forEach((format) => {
+    createPage({
+      path: `/formats/${format.slug}`,
+      component: require.resolve("./src/templates/format-details.js"),
+      context: {
+        id: parseInt(format.id),
+      },
+    });
+  });
+
   // create post details page
   result.data.dega.sitemap.posts.forEach((post) => {
     createPage({
@@ -66,13 +100,13 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   // create tag details page
-  result.data.dega.sitemap.tags.forEach(tag => {
+  result.data.dega.sitemap.tags.forEach((tag) => {
     createPage({
       path: `/tags/${tag.slug}`,
-      component: require.resolve('./src/templates/tag-details.js'),
+      component: require.resolve("./src/templates/tag-details.js"),
       context: {
-        id: parseInt(tag.id)
-      }
+        id: parseInt(tag.id),
+      },
     });
 
     // create tag details page with each format
@@ -91,13 +125,13 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   // create category details page
-  result.data.dega.sitemap.categories.forEach(category => {
+  result.data.dega.sitemap.categories.forEach((category) => {
     createPage({
       path: `/categories/${category.slug}`,
-      component: require.resolve('./src/templates/category-details.js'),
+      component: require.resolve("./src/templates/category-details.js"),
       context: {
-        id: parseInt(category.id)
-      }
+        id: parseInt(category.id),
+      },
     });
 
     // create category details page with each format

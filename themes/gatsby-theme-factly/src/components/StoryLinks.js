@@ -18,8 +18,9 @@ const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
           )}
           <div
             id={`nav-${index}`}
-            className={`w-full font-bold font-sans text-lg text-gray-800 ${postActiveIndex ===
-              index && "active"}`}
+            className={`w-full font-bold font-sans text-lg text-gray-800 ${
+              postActiveIndex === index && "active"
+            }`}
           >
             {post.title}
           </div>

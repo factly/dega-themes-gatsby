@@ -25,8 +25,8 @@ const Author = ({ users, categories, date }) => {
           {users.map((user, i, arr) => (
             <React.Fragment key={i}>
               <Link
-                to={`/users/${user.id}/`}
-                className="font-medium text-blue-500 text-lg  px-1"
+                to={`/users/${user.id}`}
+                className="font-medium text-blue-500 text-lg px-1"
               >
                 {user.first_name + " " + user.last_name}
               </Link>
@@ -38,11 +38,11 @@ const Author = ({ users, categories, date }) => {
             <React.Fragment key={i}>
               <Link
                 to={`/categories/${category.slug}`}
-                className="font-medium text-blue-500 text-lg  px-1"
+                className="font-medium text-blue-500 text-lg px-1"
               >
                 {category.name}
               </Link>
-              {arr.length - i > 1 && ","}
+              {arr.length - i > 1 && ", "}
             </React.Fragment>
           ))}
         </div>

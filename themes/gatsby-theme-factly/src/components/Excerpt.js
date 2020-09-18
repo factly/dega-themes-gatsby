@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /**
  * TODO:
@@ -10,14 +10,16 @@ const Excerpt = ({ excerpt, image, img = true }) => {
       {img && (
         <div className="flex-1">
           <img
-            src={image.url.replace(/^"(.*)"$/, '$1')}
+            src={image.url.replace(/^"(.*)"$/, "$1")}
             alt={image.alt_text}
             className="w-full h-full rounded-t rounded-l-none md:rounded-t-none md:rounded-l object-cover"
           />
         </div>
       )}
       <div className="flex flex-col flex-1 p-4">
-        <div className="w-full font-bold text-2xl leading-tight text-gray-900">Excerpt</div>
+        <div className="w-full font-bold text-2xl leading-tight text-gray-900">
+          Excerpt
+        </div>
         <p className="text-gray-800 font-sans text-lg pt-2">{excerpt}</p>
       </div>
     </div>

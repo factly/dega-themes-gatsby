@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const User = ({ user }) => {
   return (
@@ -11,7 +11,10 @@ const User = ({ user }) => {
         />
         <div className="px-4">
           <h2 className="font-bold">{user.display_name}</h2>
-          <a href={`mailto:${user.email}`} className="font-medium text-blue-500 text-lg ">
+          <a
+            href={`mailto:${user.email}`}
+            className="font-medium text-blue-500 text-lg "
+          >
             {user.email}
           </a>
         </div>

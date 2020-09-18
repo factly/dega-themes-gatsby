@@ -31,14 +31,17 @@ const StoryCard = ({
             >
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url}
+                src={storyData.medium.url.replace(/^"(.*)"$/, "$1")}
                 className="h-full w-full object-cover rounded"
               />
             </div>
             <div className="w-full flex flex-col">
               <p className="text-blue-500 text-xs px-1">
                 {storyData.categories.map((category, i, arr) => (
-                  <span key={i}>{category.name}{arr.length - i > 1 && ", "}</span>
+                  <span key={i}>
+                    {category.name}
+                    {arr.length - i > 1 && ", "}
+                  </span>
                 ))}
               </p>
 
@@ -87,7 +90,7 @@ const StoryCard = ({
             >
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url}
+                src={storyData.medium.url.replace(/^"(.*)"$/, "$1")}
                 className="h-full w-full rounded object-cover"
               />
             </div>
@@ -129,7 +132,7 @@ const StoryCard = ({
             >
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url}
+                src={storyData.medium.url.replace(/^"(.*)"$/, "$1")}
                 className="h-full w-full object-cover rounded"
               />
             </div>
