@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import StoryCard from "../components/StoryCard";
+import CategoriesGroup from "../components/CategoriesGroup";
 
 function Homepage({ data }) {
   const { dega } = data;
@@ -13,6 +14,7 @@ function Homepage({ data }) {
           <div className="block">
             <div className="mb-4 pb-4 border-b px-6">
               <h5 className="heading">Headlines</h5>
+              <CategoriesGroup categories={dega.categories.nodes}/>
             </div>
           </div>
         </div>
@@ -66,7 +68,14 @@ export default Homepage;
 export const query = graphql`
   query($format_factcheck: [Int!], $format_without_factcheck: [Int!]) {
     dega {
-      posts: posts(formats: $format_factcheck) {
+      categories {
+        nodes {
+          id
+          slug
+          name
+        }
+      }
+      posts: posts(formats: $format_without_factcheck) {
         nodes {
           users {
             id
@@ -89,7 +98,7 @@ export const query = graphql`
           slug
         }
       }
-      factchecks: posts(formats: $format_without_factcheck) {
+      factchecks: posts(formats: $format_factcheck) {
         nodes {
           users {
             id
