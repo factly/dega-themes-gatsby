@@ -1,52 +1,55 @@
-const path = require('path');
+const path = require("path")
 
-const tailwindConfig = require('./tailwind.config.js');
+const tailwindConfig = require("./tailwind.config.js")
 
-const autoprefixer = require(`autoprefixer`);
-const cssnano = require(`cssnano`);
+const autoprefixer = require(`autoprefixer`)
+const cssnano = require(`cssnano`)
 
-module.exports = ({
-  client,
-  api,
-  tailwindCustomConfig = {}
-}) => {
+module.exports = ({ client, api, tailwindCustomConfig = {} }) => {
   return {
     plugins: [
-      'gatsby-plugin-react-helmet',
+      "gatsby-plugin-react-helmet",
       {
-        resolve: 'gatsby-source-filesystem',
+        resolve: "gatsby-source-filesystem",
         options: {
-          name: 'images',
-          path: path.join(__dirname, `src`, `static/images`)
-        }
+          name: "images",
+          path: path.join(__dirname, `src`, `static/images`),
+        },
       },
       {
-        resolve: 'gatsby-source-graphql',
+        resolve: "gatsby-source-videos-youtube",
+        options: {
+          API_KEY: process.env.GOOGLE_PRIVATE_KEY,
+          channelID: "UCpi2S8wW4xLlUCVryhyBtsA",
+        },
+      },
+      {
+        resolve: "gatsby-source-graphql",
         options: {
           typeName: "dega",
           fieldName: "dega",
           url: api,
           headers: {
-            space: client
-          }
-        }
+            space: client,
+          },
+        },
       },
-      'gatsby-plugin-sharp',
-      'gatsby-transformer-sharp',
+      "gatsby-plugin-sharp",
+      "gatsby-transformer-sharp",
       {
         resolve: `gatsby-plugin-postcss`,
         options: {
           postCssPlugins: [
             require(`tailwindcss`)({
               ...tailwindConfig,
-              ...tailwindCustomConfig
+              ...tailwindCustomConfig,
             }),
             autoprefixer,
-            cssnano
-          ]
-        }
+            cssnano,
+          ],
+        },
       },
-      'gatsby-plugin-offline',
-    ]
-  };
-};
+      "gatsby-plugin-offline",
+    ],
+  }
+}
