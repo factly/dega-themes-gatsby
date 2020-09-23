@@ -23,6 +23,8 @@ const ShareButtonGroup = ({ data }) => {
       <a
         title="Share on Facebook"
         href={`https://www.facebook.com/sharer.php?u=${data.url}`}
+        target="_blank"
+        rel="noopener noreferrer"
         className="block mx-2 first:mx-0 my-2 font-semibold rounded "
       >
         <FontAwesomeIcon color={brandColors.facebook} size="lg" icon={faFacebookSquare} />
@@ -30,6 +32,8 @@ const ShareButtonGroup = ({ data }) => {
       <a
         title="Tweet it"
         href={`https://twitter.com/share?url=${data.url}&text=${data.title}&hashtags=${data.hashtags}`}
+        target="_blank"
+        rel="noopener noreferrer"
         className="block mx-2 first:mx-0 my-2 font-semibold rounded "
       >
         <FontAwesomeIcon color={brandColors.twitter} size="lg" icon={faTwitterSquare} />
@@ -37,6 +41,8 @@ const ShareButtonGroup = ({ data }) => {
       <a
         title="Share on WhatsApp"
         href={`https://api.whatsapp.com/send?text=${data.title}-${data.url}`}
+        target="_blank"
+        rel="noopener noreferrer"
         className="block mx-2 first:mx-0 my-2 font-semibold rounded "
       >
         <FontAwesomeIcon color={brandColors.whatsapp} size="lg" icon={faWhatsappSquare} />

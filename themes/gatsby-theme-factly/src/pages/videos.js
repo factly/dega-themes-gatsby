@@ -106,8 +106,8 @@ function Playlists({ data }) {
               </div>
             </div>
             <ul className="flex px-8 bg-gray-300">
-              {tabs.map((tab) => (
-                <li className="-mb-px mr-1">
+              {tabs.map((tab, i) => (
+                <li className="-mb-px mr-1" key={i}>
                   <button
                     type="button"
                     className={`inline-block py-2 px-4 border border-b-0 rounded-t font-medium text-lg focus:outline-none
@@ -132,7 +132,7 @@ function Playlists({ data }) {
                     ? 'Recent Videos'
                     : channelSection.playlist.snippet.title;
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={channelSection.playlist.id}>
                     <Link
                       className="flex items-center"
                       to={`playlist/${channelSection.playlist.id}`}

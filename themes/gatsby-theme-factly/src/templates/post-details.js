@@ -13,7 +13,7 @@ const PostDetails = ({ data }) => {
 
   const [postItems, setPostItems] = React.useState(posts.slice(0, 1));
   const [hasNextPage, setHasNextPage] = React.useState(true);
-  const [showSocialIcon, setShowSocialIcon] = React.useState(false);
+  //const [showSocialIcon, setShowSocialIcon] = React.useState(false);
   const [postActiveIndex, setPostActiveIndex] = React.useState(0);
   const [relatedPosts, setRelatedPosts] = React.useState(posts.slice(0, 10));
   const [hasNextPageRelatedPost, setHasNextPageRelatedPost] = React.useState(true);
@@ -35,14 +35,14 @@ const PostDetails = ({ data }) => {
     setHasNextPageRelatedPost(relatedPosts.length < posts.length);
   };
 
-  const handleShowSocialIcon = (entry) => {
+  /* const handleShowSocialIcon = (entry) => {
     if (entry.intersectionRatio > 0) {
       setShowSocialIcon(false);
     } else {
       setShowSocialIcon(true);
     }
   };
-
+ */
   const handleSetActiveLink = (entry) => {
     const id = entry.target.getAttribute('id');
     if (entry.intersectionRatio > 0) {
@@ -53,9 +53,10 @@ const PostDetails = ({ data }) => {
   const createObserver = () => {
     const o = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.target.hasAttribute('social-icon')) {
+        /*   if (entry.target.hasAttribute('social-icon')) {
           handleShowSocialIcon(entry);
-        } else if (entry.target.hasAttribute('post')) {
+        } else */
+        if (entry.target.hasAttribute('post')) {
           handleSetActiveLink(entry);
         }
       });
@@ -111,7 +112,7 @@ const PostDetails = ({ data }) => {
               <Post key={'details' + item.id} post={item} observer={observer} />
             ))}
           </InfiniteScroll>
-          {showSocialIcon && (
+          {/*  {showSocialIcon && (
             <div
               className="hidden md:flex flex-col fixed right-0 top-auto items-center justify-start md:justify-end"
               style={{
@@ -158,7 +159,7 @@ const PostDetails = ({ data }) => {
                 </g>
               </svg>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </Layout>

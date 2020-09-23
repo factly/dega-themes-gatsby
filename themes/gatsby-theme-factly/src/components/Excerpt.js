@@ -4,10 +4,10 @@ import React from 'react';
  * TODO:
  */
 
-const Excerpt = ({ excerpt, image, img = true }) => {
+const Excerpt = ({ excerpt, image }) => {
   return (
     <div className="flex flex-col md:flex-row flex-wrap my-6 bg-gray-200">
-      {img && (
+      {image && (
         <div className="flex-1">
           <img
             src={image.url.replace(/^"(.*)"$/, '$1')}

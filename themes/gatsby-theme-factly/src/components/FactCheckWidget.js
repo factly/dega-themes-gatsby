@@ -60,7 +60,7 @@ function FactCheckWidget({ claims }) {
 
   return (
     <div className="w-full lg:w-3/4 mx-auto font-sans text-xl">
-      {claims && (
+      {claims.length >= 1 && (
         <React.Fragment>
           <div className="flex flex-row justify-between pt-6 pb-2">
             <button
