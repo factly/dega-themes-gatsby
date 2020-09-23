@@ -127,68 +127,81 @@ function Playlists({ data }) {
           </div>
           {activeTab.Home && (
             <div>
-              {allChannelSections.nodes.map(channelSection => (
-                <React.Fragment>
-                  <Link
-                    className="flex items-center"
-                    to={`playlist/${channelSection.playlist.id}`}
-                  >
-                    <h2 className="heading px-6 my-6">
-                      {_.startCase(channelSection.playlist.snippet.title)}
-                    </h2>
-                    <FontAwesomeIcon
-                      icon={faPlay}
-                      className="hidden md:block fill-current w-4 h-4"
-                    />
+              {allChannelSections.nodes.map(channelSection => {
+                let playlistId =
+                  channelSection.playlist.id ===
+                  channel.contentDetails.relatedPlaylists.uploads
+                    ? channel.contentDetails.relatedPlaylists.uploads
+                    : channelSection.playlist.id
+                let playlistTitle =
+                  channelSection.playlist.snippet.title === "Uploads"
+                    ? "Recent Videos"
+                    : channelSection.playlist.snippet.title
+                return (
+                  <React.Fragment>
+                    <Link
+                      className="flex items-center"
+                      to={`playlist/${channelSection.playlist.id}`}
+                    >
+                      <h2 className="heading px-6 my-6">
+                        {_.startCase(playlistTitle)}
+                      </h2>
+                      <FontAwesomeIcon
+                        icon={faPlay}
+                        className="hidden md:block fill-current w-4 h-4"
+                      />
 
-                    <span className="hidden md:inline text-base">Play All</span>
-                  </Link>
-                  <div className="border-b flex flex-row flex-wrap px-6 justify-center sm:justify-start items-center sm:items-start">
-                    {channelSection.videos.map(video => (
-                      <Link
-                        key={video.id}
-                        className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
-                        to={`playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
-                      >
-                        <div className="relative">
-                          {video.local && (
-                            <Img
-                              alt={video.snippet.title}
-                              fluid={video.local.childImageSharp.fluid}
-                              className="h-full w-full"
-                            />
-                          )}
-                          {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
+                      <span className="hidden md:inline text-base">
+                        Play All
+                      </span>
+                    </Link>
+                    <div className="border-b flex flex-row flex-wrap px-6 justify-center sm:justify-start items-center sm:items-start">
+                      {channelSection.videos.map(video => (
+                        <Link
+                          key={video.id}
+                          className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
+                          to={`playlist/${playlistId}?v=${video.contentDetails.videoId}`}
+                        >
+                          <div className="relative">
+                            {video.local && (
+                              <Img
+                                alt={video.snippet.title}
+                                fluid={video.local.childImageSharp.fluid}
+                                className="h-full w-full"
+                              />
+                            )}
+                            {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
                       <span className="text-white">
                         {playlist.contentDetails.itemCount}
                       </span>
                     </div> */}
-                          <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
-                            <FontAwesomeIcon
-                              icon={faPlay}
-                              className="text-white fill-current w-4 h-4"
-                            />
+                            <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
+                              <FontAwesomeIcon
+                                icon={faPlay}
+                                className="text-white fill-current w-4 h-4"
+                              />
 
-                            <span className="text-white text-base">Play</span>
+                              <span className="text-white text-base">Play</span>
+                            </div>
                           </div>
-                        </div>
-                        <div className="w-full flex flex-col py-2">
-                          <div
-                            id="nav-0"
-                            className="w-full font-bold font-sans text-base text-gray-800"
-                          >
-                            {video.snippet.title}
+                          <div className="w-full flex flex-col py-2">
+                            <div
+                              id="nav-0"
+                              className="w-full font-bold font-sans text-base text-gray-800"
+                            >
+                              {video.snippet.title}
+                            </div>
+                            <p className="text-gray-600 text-xs pt-1">
+                              {video.snippet.channelTitle} -{" "}
+                              {video.snippet.publishedAt}
+                            </p>
                           </div>
-                          <p className="text-gray-600 text-xs pt-1">
-                            {video.snippet.channelTitle} -{" "}
-                            {video.snippet.publishedAt}
-                          </p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </React.Fragment>
-              ))}
+                        </Link>
+                      ))}
+                    </div>
+                  </React.Fragment>
+                )
+              })}
             </div>
           )}
           {activeTab.Videos && (
