@@ -9,13 +9,13 @@ module.exports = ({ client, api, tailwindCustomConfig = {} }) => {
   return {
     plugins: [
       "gatsby-plugin-react-helmet",
-      {
+      /* {
         resolve: "gatsby-source-filesystem",
         options: {
           name: "images",
           path: path.join(__dirname, `src`, `static/images`),
         },
-      },
+      }, */
       {
         resolve: "gatsby-source-videos-youtube",
         options: {

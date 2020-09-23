@@ -2,12 +2,10 @@ import React, { useState, useMemo, useRef, useEffect } from "react"
 import Helmet from "react-helmet"
 import PropTypes from "prop-types"
 import { graphql, Link } from "gatsby"
-import _ from "lodash"
 import Img from "gatsby-image"
-import Layout from "../components/layout"
-import Footer from "../components/footer"
-import { Play } from "../components/icons"
-import defaultImg from "../static/images/default.png"
+import Layout from "../components/Layout"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlay } from "@fortawesome/free-solid-svg-icons"
 import InfiniteScroll from "react-infinite-scroller"
 
 function Playlist({ data: { playlist }, location }) {
@@ -28,7 +26,7 @@ function Playlist({ data: { playlist }, location }) {
       video: playlist.videos[0],
     }
   })
-  console.log("Mahipat", activeVideo)
+
   const schemaVideo = useMemo(
     () => ({
       "@context": "http://schema.org/",
@@ -49,6 +47,7 @@ function Playlist({ data: { playlist }, location }) {
         interactionType: { "@type": "http://schema.org/WatchAction" },
       },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [playlist.videos, videoId]
   )
   const [postItems, setPostItems] = useState(() => {
@@ -164,7 +163,11 @@ function Playlist({ data: { playlist }, location }) {
           style={{ height: videoListHeight }}
         >
           <div className="mb-4 p-4 border-b">
-            <h5 className="text-base font-medium">{playlist.snippet.title}</h5>
+            <h5 className="text-base font-medium">
+              {playlist.snippet.title === "Uploads"
+                ? "Recent Videos"
+                : playlist.snippet.title}
+            </h5>
             <p className="text-gray-600 text-xs lg:text-sm">
               {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/
               {playlist.videos.length}
@@ -199,7 +202,10 @@ function Playlist({ data: { playlist }, location }) {
                   >
                     <span className="text-sm text-gray-600 px-2">
                       {activeVideo.videoIndex === index ? (
-                        <Play className="fill-current w-2 h-2"></Play>
+                        <FontAwesomeIcon
+                          icon={faPlay}
+                          className="fill-current w-2 h-2"
+                        />
                       ) : (
                         index + 1
                       )}
@@ -211,9 +217,9 @@ function Playlist({ data: { playlist }, location }) {
                         className="w-20 h-full"
                       />
                     ) : (
-                      <Img
+                      <img
                         alt={playlistVideo.snippet.title}
-                        fluid={defaultImg}
+                        src="https://source.unsplash.com/random/150x150"
                         className="w-20 h-full"
                       />
                     )}
@@ -239,7 +245,6 @@ function Playlist({ data: { playlist }, location }) {
           </div>
         </div>
       </div>
-      <Footer full></Footer>
     </Layout>
   )
 }
@@ -286,8 +291,8 @@ Playlist.propTypes = {
 }
 
 export const query = graphql`
-  query($id: String!) {
-    playlist(playlistId: { eq: $id }) {
+  query($playlistId: String!) {
+    playlist(playlistId: { eq: $playlistId }) {
       playlistId
       id
       snippet {

@@ -1,11 +1,12 @@
-import React, { useState, useMemo, useEffect } from "react"
+import React, { useState, useMemo } from "react"
 import PropTypes from "prop-types"
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import InfiniteScroll from "react-infinite-scroller"
-import Layout from "../components/layout"
-import { Play } from "../components/icons"
-import Footer from "../components/footer"
+import Layout from "../components/Layout"
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlay } from "@fortawesome/free-solid-svg-icons"
 import _ from "lodash"
 import Helmet from "react-helmet"
 
@@ -18,7 +19,7 @@ function Playlists({ data }) {
 
   const {
     allPlaylist: { nodes: playlists },
-    allVideo: { nodes: videos, totalCount },
+    allVideo: { nodes: videos },
     channel,
     allChannelSections,
   } = data
@@ -56,7 +57,7 @@ function Playlists({ data }) {
       "@type": "ItemList",
       itemListElement: itemListElement,
     }
-  }, [])
+  }, [postItems])
 
   return (
     <Layout>
@@ -76,7 +77,7 @@ function Playlists({ data }) {
               <a
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA"
+                href={`https://www.youtube.com/channel/${channel.channelId}`}
               >
                 <img
                   alt={channel.snippet.title}
@@ -88,7 +89,7 @@ function Playlists({ data }) {
                 <a
                   rel="noopener noreferrer"
                   target="_blank"
-                  href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA"
+                  href={`https://www.youtube.com/channel/${channel.channelId}`}
                   className="heading"
                 >
                   {channel.snippet.title}
@@ -99,7 +100,7 @@ function Playlists({ data }) {
                 </span>
                 <a
                   rel="noopener noreferrer"
-                  href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA?sub_confirmation=1"
+                  href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
                   target="_blank"
                   type="button"
                   className="block lg:px-4 uppercase text-center font-medium text-sm focus:outline-none bg-gray-100 rounded p-2"
@@ -135,7 +136,11 @@ function Playlists({ data }) {
                     <h2 className="heading px-6 my-6">
                       {_.startCase(channelSection.playlist.snippet.title)}
                     </h2>
-                    <Play className="hidden md:block fill-current w-4 h-4"></Play>
+                    <FontAwesomeIcon
+                      icon={faPlay}
+                      className="hidden md:block fill-current w-4 h-4"
+                    />
+
                     <span className="hidden md:inline text-base">Play All</span>
                   </Link>
                   <div className="border-b flex flex-row flex-wrap px-6 justify-center sm:justify-start items-center sm:items-start">
@@ -143,7 +148,7 @@ function Playlists({ data }) {
                       <Link
                         key={video.id}
                         className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
-                        to={`playlist/${video.snippet.playlistId}?v=${video.contentDetails.videoId}`}
+                        to={`playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
                       >
                         <div className="relative">
                           {video.local && (
@@ -159,7 +164,11 @@ function Playlists({ data }) {
                       </span>
                     </div> */}
                           <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
-                            <Play className="text-white fill-current w-4 h-4"></Play>
+                            <FontAwesomeIcon
+                              icon={faPlay}
+                              className="text-white fill-current w-4 h-4"
+                            />
+
                             <span className="text-white text-base">Play</span>
                           </div>
                         </div>
@@ -189,7 +198,10 @@ function Playlists({ data }) {
                 to={`playlist/${channel.contentDetails.relatedPlaylists.uploads}`}
               >
                 <h2 className="heading pr-6">Uploads</h2>
-                <Play className="fill-current w-4 h-4"></Play>
+                <FontAwesomeIcon
+                  icon={faPlay}
+                  className="fill-current w-4 h-4"
+                />
                 <span className="text-base">Play All</span>
               </Link>
               <div className="row-list-container">
@@ -208,7 +220,7 @@ function Playlists({ data }) {
                     <Link
                       key={video.id}
                       className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
-                      to={`playlist/${video.snippet.playlistId}?v=${video.contentDetails.videoId}`}
+                      to={`playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
                     >
                       <div className="relative">
                         {video.local && (
@@ -224,7 +236,11 @@ function Playlists({ data }) {
                     </span>
                   </div> */}
                         <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
-                          <Play className="text-white fill-current w-4 h-4"></Play>
+                          <FontAwesomeIcon
+                            icon={faPlay}
+                            className="text-white fill-current w-4 h-4"
+                          />
+
                           <span className="text-white text-base">Play</span>
                         </div>
                       </div>
@@ -266,7 +282,10 @@ function Playlists({ data }) {
                     </span>
                   </div> */}
                     <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
-                      <Play className="text-white fill-current w-4 h-4"></Play>
+                      <FontAwesomeIcon
+                        icon={faPlay}
+                        className="text-white fill-current w-4 h-4"
+                      />
                       <span className="text-white text-base">Play All</span>
                     </div>
                   </div>
@@ -295,7 +314,6 @@ function Playlists({ data }) {
           )}
         </div>
       </div>
-      <Footer full></Footer>
     </Layout>
   )
 }
@@ -308,6 +326,7 @@ export default Playlists
 export const query = graphql`
   query PlaylistsPageQuery {
     channel {
+      channelId
       statistics {
         subscriberCount
         videoCount

@@ -179,12 +179,14 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     })
   })
+  //create playlist page for each playlist
   result.data.allPlaylist.nodes.forEach(playlist => {
     createPage({
       path: `/playlist/${playlist.playlistId}`,
       component: require.resolve("./src/templates/playlist.js"),
       context: {
-        id: playlist.playlistId,
+        id: playlist.id,
+        playlistId: playlist.playlistId,
       },
     })
   })
