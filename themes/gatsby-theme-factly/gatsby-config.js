@@ -4,6 +4,9 @@ const tailwindConfig = require("./tailwind.config.js")
 
 const autoprefixer = require(`autoprefixer`)
 const cssnano = require(`cssnano`)
+require("dotenv").config({
+  path: `.env`,
+})
 
 module.exports = ({ client, api, tailwindCustomConfig = {} }) => {
   return {
@@ -20,7 +23,7 @@ module.exports = ({ client, api, tailwindCustomConfig = {} }) => {
         resolve: "gatsby-source-videos-youtube",
         options: {
           API_KEY: process.env.GOOGLE_PRIVATE_KEY,
-          channelID: "UCpi2S8wW4xLlUCVryhyBtsA",
+          channelID: process.env.CHANNEL_ID,
         },
       },
       {

@@ -35,7 +35,7 @@ const getAllData = async ({
   let data = []
   let response = {}
   while (response.nextPageToken || data.length === 0) {
-    const URL = `https://www.googleapis.com/youtube/v3/${type}?part=${part}&maxResults=50&key=AIzaSyAKjjTJOpqrRziHAfx8NtvRzEawPAC_R9c${query}&pageToken=${response.nextPageToken ||
+    const URL = `https://www.googleapis.com/youtube/v3/${type}?part=${part}&maxResults=50&key=${API_KEY}${query}&pageToken=${response.nextPageToken ||
       ""}`
     response = await fetch(URL).then(res => res.json())
     data.push(...response.items)

@@ -70,7 +70,7 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
-
+.env.*
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
@@ -107,5 +107,6 @@ public
 # Temporary folders
 tmp/
 temp/
+
 
 # End of https://www.gitignore.io/api/node
