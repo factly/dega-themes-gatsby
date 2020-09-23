@@ -1,10 +1,10 @@
-import React from "react";
-import Author from "./Author";
-import ShareButtonGroup from "./ShareButtonGroup";
-import FactCheckWidget from "./FactCheckWidget";
-import Tag from "./Tag";
-import Excerpt from "./Excerpt";
-import parseEditorJsData from "./../utils/parseEditorJsData";
+import React from 'react';
+import Author from './Author';
+import ShareButtonGroup from './ShareButtonGroup';
+import FactCheckWidget from './FactCheckWidget';
+import Tag from './Tag';
+import Excerpt from './Excerpt';
+import parseEditorJsData from './../utils/parseEditorJsData';
 
 /**
  * TODO:
@@ -21,11 +21,7 @@ const Post = ({ post }) => {
       <div className="bg-white rounded-t rounded-b-none overflow-hidden">
         <h1 className="font-medium text-3xl py-2">{post.title}</h1>
         <div className="flex flex-col md:flex-row">
-          <Author
-            date={post.created_date}
-            users={post.users}
-            categories={post.categories}
-          />
+          <Author date={post.created_date} users={post.users} categories={post.categories} />
           <ShareButtonGroup data={{ url: post.slug, title: post.title }} />
         </div>
       </div>

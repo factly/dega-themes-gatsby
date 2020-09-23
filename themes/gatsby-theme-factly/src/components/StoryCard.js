@@ -1,5 +1,5 @@
-import { Link } from "gatsby";
-import React from "react";
+import { Link } from 'gatsby';
+import React from 'react';
 
 /**
  * TODO: Change the data structure of props
@@ -12,13 +12,13 @@ import React from "react";
 
 const StoryCard = ({
   storyData,
-  cardStyle = "basic",
+  cardStyle = 'basic',
   excerpt = false,
-  imageSize = "w-full h-40",
+  imageSize = 'w-full h-40',
 }) => {
   return (
     <>
-      {cardStyle === "basic" && (
+      {cardStyle === 'basic' && (
         <article
           className={`flex flex-col leading-tight border-b last:border-b-0 p-6 border-gray-200 ${cardStyle}`}
         >
@@ -26,12 +26,10 @@ const StoryCard = ({
             to={`/${storyData.slug}`}
             className={`w-full flex vertical horizontal no-underline hover:no-underline`}
           >
-            <div
-              className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}
-            >
+            <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.replace(/^"(.*)"$/, "$1")}
+                src={storyData.medium.url.replace(/^"(.*)"$/, '$1')}
                 className="h-full w-full object-cover rounded"
               />
             </div>
@@ -40,7 +38,7 @@ const StoryCard = ({
                 {storyData.categories.map((category, i, arr) => (
                   <span key={i}>
                     {category.name}
-                    {arr.length - i > 1 && ", "}
+                    {arr.length - i > 1 && ', '}
                   </span>
                 ))}
               </p>
@@ -52,9 +50,7 @@ const StoryCard = ({
                 {storyData.title}
               </div>
               {excerpt && (
-                <p className="text-gray-800 font-sans text-base pt-2">
-                  {storyData.excerpt}
-                </p>
+                <p className="text-gray-800 font-sans text-base pt-2">{storyData.excerpt}</p>
               )}
               <div className="flex mt-auto pt-2">
                 <div
@@ -64,14 +60,12 @@ const StoryCard = ({
                     <p className="text-gray-600 text-xs md:text-sm mr-2 normal-case">
                       {storyData.users.map((user, i, arr) => (
                         <span key={i}>
-                          {user.first_name + " " + user.last_name} {arr.length - i > 1 && ","}
+                          {user.first_name + ' ' + user.last_name} {arr.length - i > 1 && ','}
                         </span>
                       ))}
                     </p>
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm">
-                    {storyData.created_date}
-                  </p>
+                  <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
                 </div>
               </div>
             </div>
@@ -79,47 +73,39 @@ const StoryCard = ({
         </article>
       )}
 
-      {cardStyle === "featured" && (
+      {cardStyle === 'featured' && (
         <article className="bg-white rounded-t rounded-b-none overflow-hidden px-6">
           <Link
             to={`/${storyData.slug}`}
             className="flex flex-wrap no-underline hover:no-underline"
           >
-            <div
-              className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}
-            >
+            <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.replace(/^"(.*)"$/, "$1")}
+                src={storyData.medium.url.replace(/^"(.*)"$/, '$1')}
                 className="h-full w-full rounded object-cover"
               />
             </div>
 
-            <p className="w-full text-gray-600 text-xs md:text-sm pt-2">
-              {storyData.subtitle}
-            </p>
+            <p className="w-full text-gray-600 text-xs md:text-sm pt-2">{storyData.subtitle}</p>
             <div className="w-full font-bold text-xl leading-tight text-gray-900 break-words active">
               {storyData.title}
             </div>
-            <p className="text-gray-800 font-sans text-lg pt-2 break-words">
-              {storyData.excerpt}
-            </p>
+            <p className="text-gray-800 font-sans text-lg pt-2 break-words">{storyData.excerpt}</p>
           </Link>
           <div className="flex-none mt-auto py-4">
             <div className="flex items-center justify-between">
               <div className="flex justify-center items-center">
                 <p className="text-gray-600 text-xs md:text-sm mr-2 normal-case">
-                  {storyData.users[0].first_name + " " + storyData.users[0].last_name }
+                  {storyData.users[0].first_name + ' ' + storyData.users[0].last_name}
                 </p>
               </div>
-              <p className="text-gray-600 text-xs md:text-sm">
-                {storyData.created_date}
-              </p>
+              <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
             </div>
           </div>
         </article>
       )}
-      {cardStyle === "vertical" && (
+      {cardStyle === 'vertical' && (
         <article
           className={`flex flex-col leading-tight border-b last:border-b-0 p-6 border-gray-200 ${cardStyle}`}
         >
@@ -127,12 +113,10 @@ const StoryCard = ({
             to={`/${storyData.slug}`}
             className={`w-full flex vertical no-underline hover:no-underline`}
           >
-            <div
-              className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}
-            >
+            <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.replace(/^"(.*)"$/, "$1")}
+                src={storyData.medium.url.replace(/^"(.*)"$/, '$1')}
                 className="h-full w-full object-cover rounded"
               />
             </div>
@@ -146,9 +130,7 @@ const StoryCard = ({
               >
                 {storyData.title}
               </div>
-              <p className="text-gray-800 font-sans text-base pt-2">
-                {storyData.excerpt}
-              </p>
+              <p className="text-gray-800 font-sans text-base pt-2">{storyData.excerpt}</p>
 
               <div className="flex mt-auto pt-2">
                 <div
@@ -156,20 +138,18 @@ const StoryCard = ({
                 >
                   <div className="flex flex-row flex-wrap">
                     <p className="text-gray-600 text-xs md:text-sm mr-2 normal-case">
-                      {storyData.users[0].first_name + " " + storyData.users[0].last_name}
+                      {storyData.users[0].first_name + ' ' + storyData.users[0].last_name}
                     </p>
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm">
-                    {storyData.created_date}
-                  </p>
+                  <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
                 </div>
               </div>
             </div>
           </Link>
         </article>
       )}
-      {cardStyle === "withoutimage" && <article>card without image</article>}
-      {cardStyle === "basicthumbnail" && <article>basic thumbnail</article>}
+      {cardStyle === 'withoutimage' && <article>card without image</article>}
+      {cardStyle === 'basicthumbnail' && <article>basic thumbnail</article>}
     </>
   );
 };

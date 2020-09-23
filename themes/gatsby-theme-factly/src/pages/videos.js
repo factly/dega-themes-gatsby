@@ -1,63 +1,61 @@
-import React, { useState, useMemo } from "react"
-import PropTypes from "prop-types"
-import { graphql, Link } from "gatsby"
-import Img from "gatsby-image"
-import InfiniteScroll from "react-infinite-scroller"
-import Layout from "../components/Layout"
+import React, { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { graphql, Link } from 'gatsby';
+import Img from 'gatsby-image';
+import InfiniteScroll from 'react-infinite-scroller';
+import Layout from '../components/Layout';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlay } from "@fortawesome/free-solid-svg-icons"
-import _ from "lodash"
-import Helmet from "react-helmet"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import _ from 'lodash';
+import Helmet from 'react-helmet';
 
-const tabs = ["Home", "Videos", "Playlists"]
+const tabs = ['Home', 'Videos', 'Playlists'];
 
 function Playlists({ data }) {
   const [activeTab, setActiveTab] = useState({
     Home: true,
-  })
+  });
 
   const {
     allPlaylist: { nodes: playlists },
     allVideo: { nodes: videos },
     channel,
     allChannelSections,
-  } = data
-  const [postItems, setPostItems] = useState(videos.slice(0, 20))
-  const [hasNextPage, setHasNextPage] = useState(true)
+  } = data;
+  const [postItems, setPostItems] = useState(videos.slice(0, 20));
+  const [hasNextPage, setHasNextPage] = useState(true);
   const handleLoadMore = () => {
-    if (!hasNextPage) return false
-    const nextPageItems = videos.slice(postItems.length, postItems.length + 20)
-    setPostItems([...postItems, ...nextPageItems])
-    setHasNextPage(postItems.length < videos.length)
-  }
+    if (!hasNextPage) return false;
+    const nextPageItems = videos.slice(postItems.length, postItems.length + 20);
+    setPostItems([...postItems, ...nextPageItems]);
+    setHasNextPage(postItems.length < videos.length);
+  };
 
   const schemaVideoList = useMemo(() => {
-    const itemListElement = []
-    postItems.forEach(videoItem => {
+    const itemListElement = [];
+    postItems.forEach((videoItem) => {
       itemListElement.push({
-        "@type": "VideoObject",
+        '@type': 'VideoObject',
         name: videoItem.snippet.title,
         description: videoItem.snippet.description,
         position: videoItem.snippet.position,
         url: `/playlist/${videoItem.snippet.playlistId}?v=${videoItem.contentDetails.videoId}`,
-        thumbnailUrl: [
-          videoItem.local ? videoItem.local.childImageSharp.fluid.src : "",
-        ],
+        thumbnailUrl: [videoItem.local ? videoItem.local.childImageSharp.fluid.src : ''],
         uploadDate: videoItem.snippet.publishedAt,
         embedUrl: `https://www.youtube.com/embed/${videoItem.contentDetails.videoId}`,
         interactionStatistic: {
-          "@type": "InteractionCounter",
-          interactionType: { "@type": "http://schema.org/WatchAction" },
+          '@type': 'InteractionCounter',
+          interactionType: { '@type': 'http://schema.org/WatchAction' },
         },
-      })
-    })
+      });
+    });
     return {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
       itemListElement: itemListElement,
-    }
-  }, [postItems])
+    };
+  }, [postItems]);
 
   return (
     <Layout>
@@ -65,9 +63,7 @@ function Playlists({ data }) {
         <title>{channel.snippet.title}</title>
         <meta name="description" content={channel.snippet.description} />
         <meta name="image" content={channel.snippet.thumbnails.high.url} />
-        <script type="application/ld+json">
-          {JSON.stringify(schemaVideoList)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(schemaVideoList)}</script>
       </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
         <div className="main-content w-full -my-8">
@@ -95,8 +91,7 @@ function Playlists({ data }) {
                   {channel.snippet.title}
                 </a>
                 <span className="text-gray-600 text-xs md:text-sm pb-2">
-                  {Number(channel.statistics.subscriberCount).toLocaleString()}{" "}
-                  Subscribers
+                  {Number(channel.statistics.subscriberCount).toLocaleString()} Subscribers
                 </span>
                 <a
                   rel="noopener noreferrer"
@@ -111,12 +106,12 @@ function Playlists({ data }) {
               </div>
             </div>
             <ul className="flex px-8 bg-gray-300">
-              {tabs.map(tab => (
+              {tabs.map((tab) => (
                 <li className="-mb-px mr-1">
                   <button
                     type="button"
                     className={`inline-block py-2 px-4 border border-b-0 rounded-t font-medium text-lg focus:outline-none
-                    ${activeTab[tab] && "bg-white"}`}
+                    ${activeTab[tab] && 'bg-white'}`}
                     onClick={() => setActiveTab({ [tab]: tab })}
                   >
                     {tab}
@@ -127,36 +122,31 @@ function Playlists({ data }) {
           </div>
           {activeTab.Home && (
             <div>
-              {allChannelSections.nodes.map(channelSection => {
+              {allChannelSections.nodes.map((channelSection) => {
                 let playlistId =
-                  channelSection.playlist.id ===
-                  channel.contentDetails.relatedPlaylists.uploads
+                  channelSection.playlist.id === channel.contentDetails.relatedPlaylists.uploads
                     ? channel.contentDetails.relatedPlaylists.uploads
-                    : channelSection.playlist.id
+                    : channelSection.playlist.id;
                 let playlistTitle =
-                  channelSection.playlist.snippet.title === "Uploads"
-                    ? "Recent Videos"
-                    : channelSection.playlist.snippet.title
+                  channelSection.playlist.snippet.title === 'Uploads'
+                    ? 'Recent Videos'
+                    : channelSection.playlist.snippet.title;
                 return (
                   <React.Fragment>
                     <Link
                       className="flex items-center"
                       to={`playlist/${channelSection.playlist.id}`}
                     >
-                      <h2 className="heading px-6 my-6">
-                        {_.startCase(playlistTitle)}
-                      </h2>
+                      <h2 className="heading px-6 my-6">{_.startCase(playlistTitle)}</h2>
                       <FontAwesomeIcon
                         icon={faPlay}
                         className="hidden md:block fill-current w-4 h-4"
                       />
 
-                      <span className="hidden md:inline text-base">
-                        Play All
-                      </span>
+                      <span className="hidden md:inline text-base">Play All</span>
                     </Link>
                     <div className="border-b flex flex-row flex-wrap px-6 justify-center sm:justify-start items-center sm:items-start">
-                      {channelSection.videos.map(video => (
+                      {channelSection.videos.map((video) => (
                         <Link
                           key={video.id}
                           className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
@@ -192,15 +182,14 @@ function Playlists({ data }) {
                               {video.snippet.title}
                             </div>
                             <p className="text-gray-600 text-xs pt-1">
-                              {video.snippet.channelTitle} -{" "}
-                              {video.snippet.publishedAt}
+                              {video.snippet.channelTitle} - {video.snippet.publishedAt}
                             </p>
                           </div>
                         </Link>
                       ))}
                     </div>
                   </React.Fragment>
-                )
+                );
               })}
             </div>
           )}
@@ -211,10 +200,7 @@ function Playlists({ data }) {
                 to={`playlist/${channel.contentDetails.relatedPlaylists.uploads}`}
               >
                 <h2 className="heading pr-6">Uploads</h2>
-                <FontAwesomeIcon
-                  icon={faPlay}
-                  className="fill-current w-4 h-4"
-                />
+                <FontAwesomeIcon icon={faPlay} className="fill-current w-4 h-4" />
                 <span className="text-base">Play All</span>
               </Link>
               <div className="row-list-container">
@@ -229,7 +215,7 @@ function Playlists({ data }) {
                     </div>
                   }
                 >
-                  {postItems.map(video => (
+                  {postItems.map((video) => (
                     <Link
                       key={video.id}
                       className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
@@ -265,8 +251,7 @@ function Playlists({ data }) {
                           {video.snippet.title}
                         </div>
                         <p className="text-gray-600 text-xs pt-1">
-                          {video.snippet.channelTitle} -{" "}
-                          {video.snippet.publishedAt}
+                          {video.snippet.channelTitle} - {video.snippet.publishedAt}
                         </p>
                       </div>
                     </Link>
@@ -277,7 +262,7 @@ function Playlists({ data }) {
           )}
           {activeTab.Playlists && (
             <div className="flex flex-row flex-wrap p-6 justify-center sm:justify-start items-center sm:items-start">
-              {playlists.map(playlist => (
+              {playlists.map((playlist) => (
                 <Link
                   key={playlist.id}
                   className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
@@ -295,10 +280,7 @@ function Playlists({ data }) {
                     </span>
                   </div> */}
                     <div className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
-                      <FontAwesomeIcon
-                        icon={faPlay}
-                        className="text-white fill-current w-4 h-4"
-                      />
+                      <FontAwesomeIcon icon={faPlay} className="text-white fill-current w-4 h-4" />
                       <span className="text-white text-base">Play All</span>
                     </div>
                   </div>
@@ -308,10 +290,7 @@ function Playlists({ data }) {
                         {playlist.contentDetails.itemCount} Videos
                       </span>
                     </div>
-                    <div
-                      id="nav-0"
-                      className="w-full font-bold font-sans text-lg text-gray-800"
-                    >
+                    <div id="nav-0" className="w-full font-bold font-sans text-lg text-gray-800">
                       {playlist.snippet.title}
                     </div>
                     {/* <p className="text-gray-600 text-xs md:text-sm">
@@ -328,13 +307,13 @@ function Playlists({ data }) {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
 
 Playlists.propTypes = {
   data: PropTypes.shape({}),
-}
-export default Playlists
+};
+export default Playlists;
 
 export const query = graphql`
   query PlaylistsPageQuery {
@@ -446,4 +425,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

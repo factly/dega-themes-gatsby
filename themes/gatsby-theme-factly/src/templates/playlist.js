@@ -1,110 +1,103 @@
-import React, { useState, useMemo, useRef, useEffect } from "react"
-import Helmet from "react-helmet"
-import PropTypes from "prop-types"
-import { graphql, Link } from "gatsby"
-import Img from "gatsby-image"
-import Layout from "../components/Layout"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlay } from "@fortawesome/free-solid-svg-icons"
-import InfiniteScroll from "react-infinite-scroller"
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
+import { graphql, Link } from 'gatsby';
+import Img from 'gatsby-image';
+import Layout from '../components/Layout';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import InfiniteScroll from 'react-infinite-scroller';
 
 function Playlist({ data: { playlist }, location }) {
-  const videoId = location.search.substring(1).split("=")[1]
-  const [videoListHeight, setVideoListHeight] = useState("366px")
+  const videoId = location.search.substring(1).split('=')[1];
+  const [videoListHeight, setVideoListHeight] = useState('366px');
   const [activeVideo, setActiveVideo] = useState(() => {
     if (videoId) {
       const videoIndex = playlist.videos.findIndex(
-        video => video.contentDetails.videoId === videoId
-      )
+        (video) => video.contentDetails.videoId === videoId,
+      );
       return {
         videoIndex,
         video: playlist.videos[videoIndex],
-      }
+      };
     }
     return {
       videoIndex: 0,
       video: playlist.videos[0],
-    }
-  })
+    };
+  });
 
   const schemaVideo = useMemo(
     () => ({
-      "@context": "http://schema.org/",
-      "@type": "VideoObject",
+      '@context': 'http://schema.org/',
+      '@type': 'VideoObject',
       name: activeVideo.video.snippet.title,
       description: activeVideo.video.snippet.description,
       position: activeVideo.video.snippet.position,
       url: `/playlist/${activeVideo.video.snippet.playlistId}?v=${activeVideo.video.contentDetails.videoId}`,
       thumbnailUrl: [
-        activeVideo.video.local
-          ? activeVideo.video.local.childImageSharp.fluid.src
-          : "",
+        activeVideo.video.local ? activeVideo.video.local.childImageSharp.fluid.src : '',
       ],
       uploadDate: activeVideo.video.snippet.publishedAt,
       embedUrl: `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
       interactionStatistic: {
-        "@type": "InteractionCounter",
-        interactionType: { "@type": "http://schema.org/WatchAction" },
+        '@type': 'InteractionCounter',
+        interactionType: { '@type': 'http://schema.org/WatchAction' },
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [playlist.videos, videoId]
-  )
+    [playlist.videos, videoId],
+  );
   const [postItems, setPostItems] = useState(() => {
-    const video = playlist.videos.splice(activeVideo.videoIndex, 1)
-    playlist.videos.unshift(video[0])
-    return playlist.videos.slice(0, 20)
-  })
+    const video = playlist.videos.splice(activeVideo.videoIndex, 1);
+    playlist.videos.unshift(video[0]);
+    return playlist.videos.slice(0, 20);
+  });
 
-  const [hasNextPage, setHasNextPage] = useState(true)
+  const [hasNextPage, setHasNextPage] = useState(true);
   const handleLoadMore = () => {
-    if (!hasNextPage) return false
-    const nextPageItems = playlist.videos.slice(
-      postItems.length,
-      postItems.length + 20
-    )
-    setPostItems([...postItems, ...nextPageItems])
-    setHasNextPage(postItems.length < playlist.videos.length)
-  }
+    if (!hasNextPage) return false;
+    const nextPageItems = playlist.videos.slice(postItems.length, postItems.length + 20);
+    setPostItems([...postItems, ...nextPageItems]);
+    setHasNextPage(postItems.length < playlist.videos.length);
+  };
 
-  const videoElement = useRef(null)
-  const playlistElement = useRef(null)
+  const videoElement = useRef(null);
+  const playlistElement = useRef(null);
 
   const setPlaylistDivHieght = () => {
     if (window.innerWidth <= 1025) {
-      setVideoListHeight("auto")
+      setVideoListHeight('auto');
     } else {
-      setVideoListHeight(
-        `${document.getElementsByClassName("main-content")[0].clientHeight}px`
-      )
+      setVideoListHeight(`${document.getElementsByClassName('main-content')[0].clientHeight}px`);
     }
-  }
+  };
 
   useEffect(() => {
     const videoIndex = playlist.videos.findIndex(
-      video => video.contentDetails.videoId === videoId
-    )
+      (video) => video.contentDetails.videoId === videoId,
+    );
 
     if (videoIndex >= 0) {
       setActiveVideo({
         video: playlist.videos[videoIndex],
         videoIndex,
-      })
+      });
     }
-  }, [playlist.videos, videoId])
+  }, [playlist.videos, videoId]);
 
   useEffect(() => {
     window.onresize = () => {
-      setPlaylistDivHieght()
-    }
-    setPlaylistDivHieght()
+      setPlaylistDivHieght();
+    };
+    setPlaylistDivHieght();
     playlistElement.current.scrollTop =
-      document.getElementById(activeVideo.video.id).offsetTop - 10
+      document.getElementById(activeVideo.video.id).offsetTop - 10;
     return () => {
-      window.onresize = null
-    }
+      window.onresize = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <Layout>
@@ -116,21 +109,13 @@ function Playlist({ data: { playlist }, location }) {
         />
         <meta
           name="image"
-          content={
-            activeVideo.local && activeVideo.local.childImageSharp.fluid.src
-          }
+          content={activeVideo.local && activeVideo.local.childImageSharp.fluid.src}
         />
-        <script type="application/ld+json">
-          {JSON.stringify(schemaVideo)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
       </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-10 xl:mx-20">
         <div className="main-content flex flex-col w-full lg:w-3/5">
-          <div
-            ref={videoElement}
-            className="relative"
-            style={{ paddingBottom: `56%` }}
-          >
+          <div ref={videoElement} className="relative" style={{ paddingBottom: `56%` }}>
             <iframe
               className="absolute top-0 left-0 w-full h-full"
               title={activeVideo.video.snippet.title}
@@ -153,9 +138,7 @@ function Playlist({ data: { playlist }, location }) {
             <p className="text-gray-600 text-xs lg:text-sm">
               {activeVideo.video.snippet.publishedAt}
             </p>
-            <p className="text-base read-more-wrap py-2">
-              {activeVideo.video.snippet.description}
-            </p>
+            <p className="text-base read-more-wrap py-2">{activeVideo.video.snippet.description}</p>
           </div>
         </div>
         <div
@@ -164,9 +147,7 @@ function Playlist({ data: { playlist }, location }) {
         >
           <div className="mb-4 p-4 border-b">
             <h5 className="text-base font-medium">
-              {playlist.snippet.title === "Uploads"
-                ? "Recent Videos"
-                : playlist.snippet.title}
+              {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
             </h5>
             <p className="text-gray-600 text-xs lg:text-sm">
               {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/
@@ -184,7 +165,7 @@ function Playlist({ data: { playlist }, location }) {
                 element="section"
                 loadMore={handleLoadMore}
                 hasMore={hasNextPage}
-                useWindow={videoListHeight === "auto"}
+                useWindow={videoListHeight === 'auto'}
                 getScrollParent={() => playlistElement.current}
                 loader={
                   <div className="loader" key={0}>
@@ -197,15 +178,12 @@ function Playlist({ data: { playlist }, location }) {
                     key={playlistVideo.id}
                     id={playlistVideo.id}
                     className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 py-2 
-                      ${activeVideo.videoIndex === index && "video-active"}`}
+                      ${activeVideo.videoIndex === index && 'video-active'}`}
                     to={`playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
                   >
                     <span className="text-sm text-gray-600 px-2">
                       {activeVideo.videoIndex === index ? (
-                        <FontAwesomeIcon
-                          icon={faPlay}
-                          className="fill-current w-2 h-2"
-                        />
+                        <FontAwesomeIcon icon={faPlay} className="fill-current w-2 h-2" />
                       ) : (
                         index + 1
                       )}
@@ -234,8 +212,7 @@ function Playlist({ data: { playlist }, location }) {
                         {playlistVideo.snippet.title}
                       </div>
                       <p className="text-gray-600 text-xs">
-                        {playlistVideo.snippet.channelTitle} -{" "}
-                        {playlistVideo.snippet.publishedAt}
+                        {playlistVideo.snippet.channelTitle} - {playlistVideo.snippet.publishedAt}
                       </p>
                     </div>
                   </Link>
@@ -246,7 +223,7 @@ function Playlist({ data: { playlist }, location }) {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
 
 Playlist.propTypes = {
@@ -288,7 +265,7 @@ Playlist.propTypes = {
       },
     },
   }),
-}
+};
 
 export const query = graphql`
   query($playlistId: String!) {
@@ -330,6 +307,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default Playlist
+export default Playlist;

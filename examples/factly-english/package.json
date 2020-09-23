@@ -1,20 +1,20 @@
 {
-    "private": true,
-    "version": "1.0.0",
-    "name": "factly-english",
-    "description": "factly default gatsby theme example",
-    "author": "Mahipat <mahipat@factly.in>",
-    "license": "MIT",
-    "scripts": {
-        "build": "gatsby build GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true --log-pages",
-        "start": "gatsby develop",
-        "serve": "gatsby serve",
-        "clean": "gatsby clean"
-    },
-    "dependencies": {
-        "@factly/gatsby-theme-factly": "^1.0.3",
-        "gatsby": "^2.21.5",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1"
-    }
+  "private": true,
+  "version": "1.0.0",
+  "name": "factly-english",
+  "description": "factly default gatsby theme example",
+  "author": "Mahipat <mahipat@factly.in>",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true --log-pages",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@factly/gatsby-theme-factly": "^1.0.3",
+    "gatsby": "^2.21.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
 }

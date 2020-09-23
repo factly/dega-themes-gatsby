@@ -1,8 +1,8 @@
-import React from "react";
-import { graphql, StaticQuery } from "gatsby";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
-import Navbar from "./Navbar";
+import React from 'react';
+import { graphql, StaticQuery } from 'gatsby';
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
+import Navbar from './Navbar';
 
 const Layout = (props) => (
   <StaticQuery
@@ -34,27 +34,27 @@ const Layout = (props) => (
             title={`${space.name} ${space.tag_line}`}
             meta={[
               {
-                name: "description",
+                name: 'description',
                 content: space.description,
               },
-              { property: "og:url", content: space.site_address },
+              { property: 'og:url', content: space.site_address },
               {
-                property: "og:image",
+                property: 'og:image',
                 content: space.logo.url,
               },
-              { property: "og:title", content: space.name },
+              { property: 'og:title', content: space.name },
               {
-                property: "og:description",
+                property: 'og:description',
                 content: space.description,
               },
             ]}
-            link={[{ rel: "canonical", href: space.site_address }]}
+            link={[{ rel: 'canonical', href: space.site_address }]}
           >
             <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider"></body>
           </Helmet>
-          <Navbar logo={space.logo.url.replace(/^"(.*)"$/, "$1")}></Navbar>
+          <Navbar logo={space.logo.url.replace(/^"(.*)"$/, '$1')}></Navbar>
           <div
-            style={{ maxWidth: "1920px" }}
+            style={{ maxWidth: '1920px' }}
             className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 mx-auto"
           >
             {children}

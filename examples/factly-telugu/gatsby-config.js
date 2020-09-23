@@ -6,8 +6,8 @@ module.exports = {
       resolve: '@factly/gatsby-theme-factly',
       options: {
         client: 'factly-telugu',
-        metaData: siteMetadata
-      }
-    }
-  ]
+        metaData: siteMetadata,
+      },
+    },
+  ],
 };

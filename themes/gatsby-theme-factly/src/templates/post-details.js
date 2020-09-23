@@ -1,9 +1,9 @@
-import React from "react";
-import { graphql } from "gatsby";
-import InfiniteScroll from "react-infinite-scroller";
-import Post from "../components/Post";
-import StoryLinks from "../components/StoryLinks";
-import Layout from "../components/Layout";
+import React from 'react';
+import { graphql } from 'gatsby';
+import InfiniteScroll from 'react-infinite-scroller';
+import Post from '../components/Post';
+import StoryLinks from '../components/StoryLinks';
+import Layout from '../components/Layout';
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
@@ -16,9 +16,7 @@ const PostDetails = ({ data }) => {
   const [showSocialIcon, setShowSocialIcon] = React.useState(false);
   const [postActiveIndex, setPostActiveIndex] = React.useState(0);
   const [relatedPosts, setRelatedPosts] = React.useState(posts.slice(0, 10));
-  const [hasNextPageRelatedPost, setHasNextPageRelatedPost] = React.useState(
-    true
-  );
+  const [hasNextPageRelatedPost, setHasNextPageRelatedPost] = React.useState(true);
   const [observer, setObserver] = React.useState({
     observe: () => {},
   });
@@ -32,10 +30,7 @@ const PostDetails = ({ data }) => {
   const handleLoadMoreRelatedPosts = () => {
     if (!hasNextPageRelatedPost) return false;
 
-    const nextPageItems = posts.slice(
-      relatedPosts.length,
-      relatedPosts.length + 10
-    );
+    const nextPageItems = posts.slice(relatedPosts.length, relatedPosts.length + 10);
     setRelatedPosts([...relatedPosts, ...nextPageItems]);
     setHasNextPageRelatedPost(relatedPosts.length < posts.length);
   };
@@ -49,7 +44,7 @@ const PostDetails = ({ data }) => {
   };
 
   const handleSetActiveLink = (entry) => {
-    const id = entry.target.getAttribute("id");
+    const id = entry.target.getAttribute('id');
     if (entry.intersectionRatio > 0) {
       setPostActiveIndex(id);
     }
@@ -58,9 +53,9 @@ const PostDetails = ({ data }) => {
   const createObserver = () => {
     const o = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.target.hasAttribute("social-icon")) {
+        if (entry.target.hasAttribute('social-icon')) {
           handleShowSocialIcon(entry);
-        } else if (entry.target.hasAttribute("post")) {
+        } else if (entry.target.hasAttribute('post')) {
           handleSetActiveLink(entry);
         }
       });
@@ -91,7 +86,7 @@ const PostDetails = ({ data }) => {
           >
             {relatedPosts.map((post, index) => (
               <StoryLinks
-                key={"link" + post.id}
+                key={'link' + post.id}
                 post={post}
                 postActiveIndex={postActiveIndex}
                 categories
@@ -113,21 +108,18 @@ const PostDetails = ({ data }) => {
             }
           >
             {postItems.map((item) => (
-              <Post key={"details" + item.id} post={item} observer={observer} />
+              <Post key={'details' + item.id} post={item} observer={observer} />
             ))}
           </InfiniteScroll>
           {showSocialIcon && (
             <div
               className="hidden md:flex flex-col fixed right-0 top-auto items-center justify-start md:justify-end"
               style={{
-                top: "40vh",
+                top: '40vh',
               }}
             >
               {[1, 2, 3, 4].map(() => (
-                <a
-                  className="block px-2 py-1 font-semibold rounded hover:bg-gray-800"
-                  href="/"
-                >
+                <a className="block px-2 py-1 font-semibold rounded hover:bg-gray-800" href="/">
                   <svg
                     className="fill-current text-gray-400  w-5 h-5"
                     xmlns="http://www.w3.org/2000/svg"

@@ -1,9 +1,9 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Layout from "../components/Layout";
-import StoryCard from "../components/StoryCard";
-import Tabs from "../components/Tabs";
-import Category from "../components/Category";
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
+import StoryCard from '../components/StoryCard';
+import Tabs from '../components/Tabs';
+import Category from '../components/Category';
 
 function CategoryDetailsAll({ data }) {
   const { dega } = data;
@@ -31,8 +31,8 @@ function CategoryDetailsAll({ data }) {
             category={{
               name: dega.category.name,
               medium: {
-                url: "https://source.unsplash.com/150x150?person",
-                alt_text: "Category Image",
+                url: 'https://source.unsplash.com/150x150?person',
+                alt_text: 'Category Image',
               },
             }}
           />

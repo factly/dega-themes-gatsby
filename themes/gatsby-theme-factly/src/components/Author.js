@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "gatsby";
+import React from 'react';
+import { Link } from 'gatsby';
 
 /* 
  TODO 1. Make images optional
@@ -13,13 +13,10 @@ const Author = ({ users, categories, date }) => {
         <div className="flex flex-row flex-wrap">
           {users.map((user, i, arr) => (
             <React.Fragment key={i}>
-              <Link
-                to={`/users/${user.id}`}
-                className="font-medium text-blue-500 text-lg px-1"
-              >
-                {user.first_name + " " + user.last_name}
+              <Link to={`/users/${user.id}`} className="font-medium text-blue-500 text-lg px-1">
+                {user.first_name + ' ' + user.last_name}
               </Link>
-              {arr.length - i > 1 && ","}
+              {arr.length - i > 1 && ','}
             </React.Fragment>
           ))}
           <span className="font-medium text-lg ">in</span>
@@ -31,7 +28,7 @@ const Author = ({ users, categories, date }) => {
               >
                 {category.name}
               </Link>
-              {arr.length - i > 1 && ", "}
+              {arr.length - i > 1 && ', '}
             </React.Fragment>
           ))}
         </div>

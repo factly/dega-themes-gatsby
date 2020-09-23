@@ -1,5 +1,5 @@
-import React from "react";
-import { StaticQuery, graphql, Link } from "gatsby";
+import React from 'react';
+import { StaticQuery, graphql, Link } from 'gatsby';
 
 const Tabs = ({ baseUrl }) => {
   return (
@@ -24,7 +24,7 @@ const Tabs = ({ baseUrl }) => {
               to={baseUrl}
               activeClassName="bg-white"
               className={
-                "inline-block py-2 px-4 border border-b-0 rounded-t font-medium text-lg focus:outline-none"
+                'inline-block py-2 px-4 border border-b-0 rounded-t font-medium text-lg focus:outline-none'
               }
             >
               All
@@ -37,7 +37,7 @@ const Tabs = ({ baseUrl }) => {
                   to={`${baseUrl}/formats/${tab.slug}`}
                   activeClassName="bg-white"
                   className={
-                    "inline-block py-2 px-4 border border-b-0 rounded-t font-medium text-lg focus:outline-none"
+                    'inline-block py-2 px-4 border border-b-0 rounded-t font-medium text-lg focus:outline-none'
                   }
                 >
                   {tab.name}

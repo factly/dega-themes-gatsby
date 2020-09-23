@@ -1,9 +1,9 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Layout from "../components/Layout";
-import StoryCard from "../components/StoryCard";
-import Tabs from "../components/Tabs";
-import User from "../components/User";
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
+import StoryCard from '../components/StoryCard';
+import Tabs from '../components/Tabs';
+import User from '../components/User';
 
 function UserDetailsAll({ data }) {
   const { dega } = data;
@@ -30,10 +30,10 @@ function UserDetailsAll({ data }) {
         <div className="flex flex-col order-1 lg:order-2 w-full lg:w-2/5 border-l pt-10 lg:pt-20 top-0 h-auto lg:h-screen static lg:sticky overflow-y-hidden">
           <User
             user={{
-              display_name: dega.user.first_name + " " + dega.user.last_name,
+              display_name: dega.user.first_name + ' ' + dega.user.last_name,
               medium: {
-                url: "https://source.unsplash.com/150x150?person",
-                alt_text: "Author Image",
+                url: 'https://source.unsplash.com/150x150?person',
+                alt_text: 'Author Image',
               },
               email: dega.user.email,
             }}

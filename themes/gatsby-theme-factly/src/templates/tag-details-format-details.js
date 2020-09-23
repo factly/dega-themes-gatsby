@@ -1,15 +1,15 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Layout from "../components/Layout";
-import StoryCard from "../components/StoryCard";
-import Tabs from "../components/Tabs";
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
+import StoryCard from '../components/StoryCard';
+import Tabs from '../components/Tabs';
 
 function Tag({ data }) {
   const { dega } = data;
 
   return (
     <Layout>
-      <div className="mx-auto lg:-my-16" style={{ maxWidth: "1024px" }}>
+      <div className="mx-auto lg:-my-16" style={{ maxWidth: '1024px' }}>
         <div className="flex flex-col pb-6 lg:pt-16">
           <h2 className="text-center my-4">Browsing: {dega.tag.name}</h2>
           <Tabs baseUrl={`/tags/${dega.tag.slug}`} />

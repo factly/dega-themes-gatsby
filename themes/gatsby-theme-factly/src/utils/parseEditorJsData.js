@@ -3,17 +3,15 @@ const parseEditorJsData = (data) => {
   let htm = blocks.map((block) => {
     const { data } = block;
     switch (block.type) {
-      case "header":
+      case 'header':
         return `<h${data.level}> ${data.text} </h${data.level}>`;
 
-      case "paragraph":
+      case 'paragraph':
         return `<p> ${data.text} </p>`;
 
-      case "list":
-        let style = data.style === "unordered" ? "ul" : "ol";
-        let list = data.items
-          .map((i) => `<li> ${i} </li>`)
-          .reduce((a, c) => a + c, "");
+      case 'list':
+        let style = data.style === 'unordered' ? 'ul' : 'ol';
+        let list = data.items.map((i) => `<li> ${i} </li>`).reduce((a, c) => a + c, '');
         return `<${style}> ${list} </${style}>`;
 
       default:
@@ -21,7 +19,7 @@ const parseEditorJsData = (data) => {
     }
     return null;
   });
-  return htm.join("");
+  return htm.join('');
 };
 
 export default parseEditorJsData;

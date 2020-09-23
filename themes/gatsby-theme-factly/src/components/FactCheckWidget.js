@@ -1,11 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import parseEditorJsData from "./../utils/parseEditorJsData";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import parseEditorJsData from './../utils/parseEditorJsData';
 
 /**
  * TODO: Add resize observer
@@ -14,11 +11,11 @@ import parseEditorJsData from "./../utils/parseEditorJsData";
  */
 
 const CLAIM_RATING = {
-  false: "bg-red-600",
-  true: "bg-green-600",
-  misleading: "bg-gray-600",
-  unverified: "bg-yellow-600",
-  "partly-true": "bg-citrus",
+  false: 'bg-red-600',
+  true: 'bg-green-600',
+  misleading: 'bg-gray-600',
+  unverified: 'bg-yellow-600',
+  'partly-true': 'bg-citrus',
 };
 
 function FactCheckWidget({ claims }) {
@@ -40,13 +37,13 @@ function FactCheckWidget({ claims }) {
 
     if (sliderElement.current.childElementCount <= 1) {
       setDisable({ left: true, right: true });
-      sliderElement.current.style = { "overflow-x": "unset" };
+      sliderElement.current.style = { 'overflow-x': 'unset' };
       return;
     }
 
     const maxScroll = Math.round(
       sliderElement.current.children[1].getBoundingClientRect().x -
-        sliderElement.current.firstElementChild.getBoundingClientRect().x
+        sliderElement.current.firstElementChild.getBoundingClientRect().x,
     );
     setScrollWidth(maxScroll);
   }, []);
@@ -72,13 +69,10 @@ function FactCheckWidget({ claims }) {
               href-id="claim-1"
               disabled={disable.left}
               className={`border border-gray-200 rounded text-left text-lg p-2 focus:outline-none ${
-                disable.left && "cursor-not-allowed opacity-50"
+                disable.left && 'cursor-not-allowed opacity-50'
               }`}
             >
-              <FontAwesomeIcon
-                icon={faChevronLeft}
-                className="fill-current w-4 h-4"
-              />
+              <FontAwesomeIcon icon={faChevronLeft} className="fill-current w-4 h-4" />
             </button>
             <h2 className="w-full py-2 heading text-center">List of claims</h2>
             <button
@@ -87,25 +81,15 @@ function FactCheckWidget({ claims }) {
               href-id="claim-1"
               disabled={disable.right}
               className={`border border-gray-200 rounded text-left text-lg p-2 focus:outline-none ${
-                disable.right && "cursor-not-allowed opacity-50"
+                disable.right && 'cursor-not-allowed opacity-50'
               }`}
             >
-              <FontAwesomeIcon
-                icon={faChevronRight}
-                className="fill-current w-4 h-4"
-              />
+              <FontAwesomeIcon icon={faChevronRight} className="fill-current w-4 h-4" />
             </button>
           </div>
-          <div
-            ref={sliderElement}
-            className="flex overflow-x-auto scrolling-touch slider pb-6"
-          >
+          <div ref={sliderElement} className="flex overflow-x-auto scrolling-touch slider pb-6">
             {claims.map((claim, i) => (
-              <div
-                id={`claim-${i}`}
-                key={i}
-                className="inline-block flex-none w-full mr-6"
-              >
+              <div id={`claim-${i}`} key={i} className="inline-block flex-none w-full mr-6">
                 <div className="w-full flex flex-col  border rounded shadow-lg">
                   <div className="flex justify-center items-center">
                     <div className="flex p-4">
@@ -142,9 +126,7 @@ function FactCheckWidget({ claims }) {
                     </div>
                   </div>
                   <div
-                    className={`flex flex-col p-4 text-white ${
-                      CLAIM_RATING[claim.rating.slug]
-                    }`}
+                    className={`flex flex-col p-4 text-white ${CLAIM_RATING[claim.rating.slug]}`}
                   >
                     <h2 className="font-bold P-4">Claim</h2>
                     <div className="flex">
@@ -155,10 +137,7 @@ function FactCheckWidget({ claims }) {
                       />
                       {claim.rating.medium && (
                         <img
-                          src={claim.rating.medium.url.replace(
-                            /^"(.*)"$/,
-                            "$1"
-                          )}
+                          src={claim.rating.medium.url.replace(/^"(.*)"$/, '$1')}
                           alt={claim.rating.medium.alt_text}
                           className="w-1/6 h-full rounded-t m-2"
                         />

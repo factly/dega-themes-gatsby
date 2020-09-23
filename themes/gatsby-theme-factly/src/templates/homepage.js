@@ -1,8 +1,8 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Layout from "../components/Layout";
-import StoryCard from "../components/StoryCard";
-import CategoriesGroup from "../components/CategoriesGroup";
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
+import StoryCard from '../components/StoryCard';
+import CategoriesGroup from '../components/CategoriesGroup';
 
 function Homepage({ data }) {
   const { dega } = data;
@@ -14,7 +14,7 @@ function Homepage({ data }) {
           <div className="block">
             <div className="mb-4 pb-4 border-b px-6">
               <h5 className="heading">Headlines</h5>
-              <CategoriesGroup categories={dega.categories.nodes}/>
+              <CategoriesGroup categories={dega.categories.nodes} />
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@ function Homepage({ data }) {
           <div className="flex flex-col py-6">
             {dega.posts.nodes.slice(1, 20).map((item, index) => (
               <StoryCard
-                key={"homepage-post-" + index}
+                key={'homepage-post-' + index}
                 cardStyle="basic"
                 storyData={item}
                 excerpt
@@ -50,7 +50,7 @@ function Homepage({ data }) {
             </div>
             {dega.factchecks.nodes.map((item, index) => (
               <StoryCard
-                key={"homepage-factcheck-" + index}
+                key={'homepage-factcheck-' + index}
                 cardStyle="vertical"
                 storyData={item}
                 imageSize="h-40"

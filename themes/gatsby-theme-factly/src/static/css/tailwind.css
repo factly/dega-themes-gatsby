@@ -1,8 +1,8 @@
-@import "tailwindcss/base";
+@import 'tailwindcss/base';
 
-@import "tailwindcss/components";
+@import 'tailwindcss/components';
 
-@import "tailwindcss/utilities";
+@import 'tailwindcss/utilities';
 
 .dropdown:hover .dropdown-menu {
   display: block;
@@ -118,11 +118,11 @@ a:hover {
 }
 
 .read-more-state ~ .read-more-trigger:before {
-  content: "show more";
+  content: 'show more';
 }
 
 .read-more-state:checked ~ .read-more-trigger:before {
-  content: "show less";
+  content: 'show less';
 }
 
 .read-more-trigger {
