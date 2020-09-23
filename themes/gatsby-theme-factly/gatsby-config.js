@@ -4,11 +4,14 @@ const tailwindConfig = require("./tailwind.config.js")
 
 const autoprefixer = require(`autoprefixer`)
 const cssnano = require(`cssnano`)
-require("dotenv").config({
-  path: `.env`,
-})
 
-module.exports = ({ client, api, tailwindCustomConfig = {} }) => {
+module.exports = ({
+  client,
+  api,
+  youtube_api_key,
+  channel_id,
+  tailwindCustomConfig = {},
+}) => {
   return {
     plugins: [
       "gatsby-plugin-react-helmet",
@@ -22,8 +25,8 @@ module.exports = ({ client, api, tailwindCustomConfig = {} }) => {
       {
         resolve: "gatsby-source-videos-youtube",
         options: {
-          API_KEY: process.env.GOOGLE_PRIVATE_KEY,
-          channelID: process.env.CHANNEL_ID,
+          API_KEY: youtube_api_key,
+          channelID: channel_id,
         },
       },
       {
