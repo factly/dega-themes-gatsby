@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import _ from 'lodash';
 import Helmet from 'react-helmet';
+import Footer from '../components/Footer';
 
 const tabs = ['Home', 'Videos', 'Playlists'];
 
@@ -66,7 +67,7 @@ function Playlists({ data }) {
         <script type="application/ld+json">{JSON.stringify(schemaVideoList)}</script>
       </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
-        <div className="main-content w-full -my-8">
+        <div className="main-content w-full -mt-8">
           <div>
             <div className="flex items-start border-b p-6 bg-gray-300">
               {/* <Img alt={channel.snippet.title} fluid={channel.local.childImageSharp.fluid} className="h-24" /> */}
@@ -306,6 +307,7 @@ function Playlists({ data }) {
           )}
         </div>
       </div>
+      <Footer full />
     </Layout>
   );
 }

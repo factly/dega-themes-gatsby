@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
 import Tabs from '../components/Tabs';
 import User from '../components/User';
+import Footer from '../components/Footer';
 
 function UserDetailsAll({ data }) {
   const { dega } = data;
@@ -11,7 +12,7 @@ function UserDetailsAll({ data }) {
   return (
     <Layout>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
-        <div className="main-content order-2 lg:order-1 lg:w-3/5 mx-auto lg:-my-16">
+        <div className="main-content order-2 lg:order-1 lg:w-3/5 mx-auto lg:-mt-8">
           <div className="flex flex-col pb-6">
             <Tabs baseUrl={`/users/${dega.user.id}`} />
             <div>
@@ -40,6 +41,7 @@ function UserDetailsAll({ data }) {
           />
         </div>
       </div>
+      <Footer full />
     </Layout>
   );
 }

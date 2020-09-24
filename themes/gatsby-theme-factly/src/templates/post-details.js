@@ -4,6 +4,8 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Post from '../components/Post';
 import StoryLinks from '../components/StoryLinks';
 import Layout from '../components/Layout';
+import Footer from '../components/Footer';
+import Helmet from 'react-helmet';
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
@@ -14,7 +16,7 @@ const PostDetails = ({ data }) => {
   const [postItems, setPostItems] = React.useState(posts.slice(0, 1));
   const [hasNextPage, setHasNextPage] = React.useState(true);
   //const [showSocialIcon, setShowSocialIcon] = React.useState(false);
-  const [postActiveIndex, setPostActiveIndex] = React.useState(0);
+  const [postActiveIndex, setPostActiveIndex] = React.useState(parseInt(dega.post.id));
   const [relatedPosts, setRelatedPosts] = React.useState(posts.slice(0, 10));
   const [hasNextPageRelatedPost, setHasNextPageRelatedPost] = React.useState(true);
   const [observer, setObserver] = React.useState({
@@ -44,9 +46,11 @@ const PostDetails = ({ data }) => {
   };
  */
   const handleSetActiveLink = (entry) => {
-    const id = entry.target.getAttribute('id');
+    const id = entry.target.getAttribute('slug');
     if (entry.intersectionRatio > 0) {
+      console.log(entry);
       setPostActiveIndex(id);
+      window.history.pushState('page2', 'Title', id);
     }
   };
 
@@ -69,6 +73,9 @@ const PostDetails = ({ data }) => {
   }, []);
   return (
     <Layout>
+      <Helmet>
+        <title>{dega.post.title}</title>
+      </Helmet>
       <div className="flex flex-row justify-between">
         <div className="sidebar lg:flex lg:w-1/4 border-r border-l sticky">
           <div className="mb-4 pb-4 border-b px-6">
@@ -97,7 +104,6 @@ const PostDetails = ({ data }) => {
           </InfiniteScroll>
         </div>
         <div className="flex flex-col w-full lg:w-3/4 p-2 lg:p-6">
-          <Post post={posts[0]} observer={observer} />
           <InfiniteScroll
             pageStart={0}
             loadMore={handleLoadMore}
@@ -112,7 +118,8 @@ const PostDetails = ({ data }) => {
               <Post key={'details' + item.id} post={item} observer={observer} />
             ))}
           </InfiniteScroll>
-          {/*  {showSocialIcon && (
+          {/*  
+          {showSocialIcon && (
             <div
               className="hidden md:flex flex-col fixed right-0 top-auto items-center justify-start md:justify-end"
               style={{
@@ -162,6 +169,7 @@ const PostDetails = ({ data }) => {
           )} */}
         </div>
       </div>
+      <Footer full />
     </Layout>
   );
 };

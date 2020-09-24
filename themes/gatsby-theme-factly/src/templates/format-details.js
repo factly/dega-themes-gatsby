@@ -2,13 +2,14 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
+import Footer from '../components/Footer';
 
 function FormatDetails({ data }) {
   const { dega } = data;
 
   return (
     <Layout>
-      <div className="mx-auto lg:-my-16" style={{ maxWidth: '1024px' }}>
+      <div className="mx-auto lg:-mt-8" style={{ maxWidth: '1024px' }}>
         <div className="flex flex-col pb-6 lg:pt-16">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {dega.posts.nodes.map((item, i) => (
@@ -23,6 +24,7 @@ function FormatDetails({ data }) {
           </div>
         </div>
       </div>
+      <Footer full />
     </Layout>
   );
 }

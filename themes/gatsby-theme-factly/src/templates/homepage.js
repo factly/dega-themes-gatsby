@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
 import CategoriesGroup from '../components/CategoriesGroup';
+import Footer from '../components/Footer';
 
 function Homepage({ data }) {
   const { dega } = data;
@@ -56,6 +57,7 @@ function Homepage({ data }) {
                 imageSize="h-40"
               />
             ))}
+            <Footer />
           </div>
         </div>
       </div>
