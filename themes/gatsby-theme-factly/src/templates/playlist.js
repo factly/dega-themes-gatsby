@@ -119,7 +119,7 @@ function Playlist({ data: { playlist }, location }) {
             <iframe
               className="absolute top-0 left-0 w-full h-full"
               title={activeVideo.video.snippet.title}
-              src={`https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`}
+              src={`https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}?autoplay=1`}
               frameBorder={0}
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, createRef} from 'react';
 import Author from './Author';
 import ShareButtonGroup from './ShareButtonGroup';
 import FactCheckWidget from './FactCheckWidget';
@@ -12,8 +12,10 @@ import parseEditorJsData from './../utils/parseEditorJsData';
 
 const Post = ({ post, observer }) => {
   const postSection = useRef(null);
+  const headerSocialIcon = createRef();
   useEffect(() => {
     observer.observe(postSection.current);
+    observer.observe(headerSocialIcon.current)
   }, [observer]);
   return (
     <article post={post.id} ref={postSection} slug={post.slug} className="flex flex-col p-6 mb-12">
@@ -21,7 +23,7 @@ const Post = ({ post, observer }) => {
         <h1 className="font-medium text-3xl py-2">{post.title}</h1>
         <div className="flex flex-col md:flex-row">
           <Author date={post.created_date} users={post.users} categories={post.categories} />
-          <ShareButtonGroup
+          <ShareButtonGroup setRef={headerSocialIcon}
             data={{
               url: typeof window !== 'undefined' ? window.location.href : post.slug,
               title: post.title,

@@ -5,16 +5,22 @@ import Post from '../components/Post';
 import StoryLinks from '../components/StoryLinks';
 import Layout from '../components/Layout';
 import Helmet from 'react-helmet';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFacebookSquare,
+  faTwitterSquare,
+  faWhatsappSquare,
+} from '@fortawesome/free-brands-svg-icons';
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
-
   const posts = dega.posts.nodes.filter((post) => post.id !== dega.post.id);
   posts.unshift(dega.post);
+  
 
   const [postItems, setPostItems] = React.useState(posts.slice(0, 1));
   const [hasNextPage, setHasNextPage] = React.useState(true);
-  //const [showSocialIcon, setShowSocialIcon] = React.useState(false);
+  const [showSocialIcon, setShowSocialIcon] = React.useState(false);
   const [postActiveIndex, setPostActiveIndex] = React.useState(parseInt(dega.post.id));
   const [relatedPosts, setRelatedPosts] = React.useState(posts.slice(0, 10));
   const [hasNextPageRelatedPost, setHasNextPageRelatedPost] = React.useState(true);
@@ -36,32 +42,31 @@ const PostDetails = ({ data }) => {
     setHasNextPageRelatedPost(relatedPosts.length < posts.length);
   };
 
-  /* const handleShowSocialIcon = (entry) => {
+  const handleShowSocialIcon = (entry) => {
     if (entry.intersectionRatio > 0) {
       setShowSocialIcon(false);
     } else {
       setShowSocialIcon(true);
     }
   };
- */
+
   const handleSetActiveLink = (entry) => {
     const id = entry.target.getAttribute('slug');
     if (entry.intersectionRatio > 0) {
       setPostActiveIndex(id);
-      if(typeof window !=='undefined') {
-        window.history.pushState('page2', 'Title', id);
+      if (typeof window !== 'undefined') {
+        window.history.pushState('page2', 'Title', `/${id}`);
       }
-      
     }
   };
 
   const createObserver = () => {
     const o = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        /*   if (entry.target.hasAttribute('social-icon')) {
+        if (entry.target.hasAttribute('social-icon')) {
           handleShowSocialIcon(entry);
-        } else */
-        if (entry.target.hasAttribute('post')) {
+        } else if (entry.target.hasAttribute('post')) {
+          
           handleSetActiveLink(entry);
         }
       });
@@ -72,6 +77,9 @@ const PostDetails = ({ data }) => {
     createObserver();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  //for sharing links
+  let title = encodeURIComponent(dega.post.title);
+  let url = typeof window !== 'undefined' ? window.location.href : dega.post.slug;
   return (
     <Layout>
       <Helmet>
@@ -118,17 +126,45 @@ const PostDetails = ({ data }) => {
             {postItems.map((item) => (
               <Post key={'details' + item.id} post={item} observer={observer} />
             ))}
-          </InfiniteScroll>
-          {/*  
+          </InfiniteScroll>  
           {showSocialIcon && (
+            <>
             <div
               className="hidden md:flex flex-col fixed right-0 top-auto items-center justify-start md:justify-end"
               style={{
                 top: '40vh',
               }}
             >
-              {[1, 2, 3, 4].map(() => (
-                <a className="block px-2 py-1 font-semibold rounded hover:bg-gray-800" href="/">
+               <a
+        title="Share on Facebook"
+        href={`https://www.facebook.com/sharer.php?u=${url}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+      >
+        <FontAwesomeIcon color="#3b5998" size="lg" icon={faFacebookSquare} />
+      </a>
+      <a
+        title="Tweet it"
+        href={`https://twitter.com/share?text=${title}-&url=${url}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+      >
+        <FontAwesomeIcon color="#1da1f2" size="lg" icon={faTwitterSquare} />
+      </a>
+      <a
+        title="Share on WhatsApp"
+        href={`https://api.whatsapp.com/send?text=${title}-${url}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+      >
+        <FontAwesomeIcon color="#25d366" size="lg" icon={faWhatsappSquare} />
+      </a>
+    
+     {/*          {[1, 2, 3, 4].map((i) => (
+                <a key={i} className="block px-2 py-1 font-semibold rounded hover:bg-gray-800" href="/">
                   <svg
                     className="fill-current text-gray-400  w-5 h-5"
                     xmlns="http://www.w3.org/2000/svg"
@@ -139,9 +175,7 @@ const PostDetails = ({ data }) => {
                   </svg>
                 </a>
               ))}
-            </div>
-          )}
-          {showSocialIcon && (
+      */}       </div>
             <div className="lg:hidden fixed m-2 bottom-0 right-0">
               <svg
                 className="fill-current stroke-current text-gray-400"
@@ -167,10 +201,10 @@ const PostDetails = ({ data }) => {
                 </g>
               </svg>
             </div>
-          )} */}
+            </>
+          )}
         </div>
       </div>
-      
     </Layout>
   );
 };

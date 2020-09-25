@@ -12,7 +12,7 @@ import {
  * TODO: Possibly add native share by using navigator.share
  */
 
-const ShareButtonGroup = ({ data }) => {
+const ShareButtonGroup = ({ data, setRef }) => {
   let title = encodeURIComponent(data.title);
   const brandColors = {
     facebook: '#3b5998',
@@ -20,7 +20,7 @@ const ShareButtonGroup = ({ data }) => {
     twitter: '#1da1f2',
   };
   return (
-    <div className="flex flex-1 items-center justify-start md:justify-end">
+    <div social-icon="" ref={setRef} className="flex flex-1 items-center justify-start md:justify-end">
       <a
         title="Share on Facebook"
         href={`https://www.facebook.com/sharer.php?u=${data.url}`}
