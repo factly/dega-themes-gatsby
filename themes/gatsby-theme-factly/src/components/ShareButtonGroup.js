@@ -20,7 +20,11 @@ const ShareButtonGroup = ({ data, setRef }) => {
     twitter: '#1da1f2',
   };
   return (
-    <div social-icon="" ref={setRef} className="flex flex-1 items-center justify-start md:justify-end">
+    <div
+      social-icon=""
+      ref={setRef}
+      className="flex flex-1 items-center justify-start md:justify-end"
+    >
       <a
         title="Share on Facebook"
         href={`https://www.facebook.com/sharer.php?u=${data.url}`}
