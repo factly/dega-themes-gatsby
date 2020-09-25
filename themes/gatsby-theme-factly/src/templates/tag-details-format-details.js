@@ -3,7 +3,6 @@ import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
 import Tabs from '../components/Tabs';
-import Footer from '../components/Footer';
 
 function Tag({ data }) {
   const { dega } = data;
@@ -27,7 +26,6 @@ function Tag({ data }) {
           </div>
         </div>
       </div>
-      <Footer full />
     </Layout>
   );
 }

@@ -3,6 +3,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Layout = (props) => (
   <StaticQuery
@@ -59,6 +60,7 @@ const Layout = (props) => (
           >
             {children}
           </div>
+          <Footer />
         </>
       );
     }}

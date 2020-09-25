@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
-import Footer from '../components/Footer';
 
 function FormatDetails({ data }) {
   const { dega } = data;
@@ -24,7 +23,6 @@ function FormatDetails({ data }) {
           </div>
         </div>
       </div>
-      <Footer full />
     </Layout>
   );
 }

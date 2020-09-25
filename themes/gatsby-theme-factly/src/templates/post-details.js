@@ -4,7 +4,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Post from '../components/Post';
 import StoryLinks from '../components/StoryLinks';
 import Layout from '../components/Layout';
-import Footer from '../components/Footer';
 import Helmet from 'react-helmet';
 
 const PostDetails = ({ data }) => {
@@ -48,9 +47,11 @@ const PostDetails = ({ data }) => {
   const handleSetActiveLink = (entry) => {
     const id = entry.target.getAttribute('slug');
     if (entry.intersectionRatio > 0) {
-      console.log(entry);
       setPostActiveIndex(id);
-      window.history.pushState('page2', 'Title', id);
+      if(typeof window !=='undefined') {
+        window.history.pushState('page2', 'Title', id);
+      }
+      
     }
   };
 
@@ -169,7 +170,7 @@ const PostDetails = ({ data }) => {
           )} */}
         </div>
       </div>
-      <Footer full />
+      
     </Layout>
   );
 };

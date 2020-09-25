@@ -13,7 +13,7 @@ import FooterLinks from './FooterLinks';
  * TODO:
  */
 
-function Footer({ full, className }) {
+function Footer({ className }) {
   const {
     dega: { space },
   } = useStaticQuery(
@@ -48,7 +48,7 @@ function Footer({ full, className }) {
   };
   return (
     <React.Fragment>
-      {full ? (
+      {
         <footer
           id="footer"
           className={`absolute left-0 right-0 bg-gray-300 pt-8 pb-6 ${className}`}
@@ -114,36 +114,7 @@ function Footer({ full, className }) {
             </div>
           </div>
         </footer>
-      ) : (
-        <footer id="footer" className={`relative bg-gray-300 pt-8 pb-6 ${className}`}>
-          <div className="container mx-auto px-4">
-            <div className="flex flex-wrap">
-              <div className="w-full">
-                <FooterLinks />
-              </div>
-            </div>
-            <div>
-              <hr className="my-6 border-gray-400" />
-              <div className="flex flex-wrap items-center justify-center">
-                <div className="w-full px-4 mx-auto text-center">
-                  <div className="text-sm text-gray-600 font-semibold py-1">
-                    Copyright © {/* */}2020{/* */} Factly Portal by{/* */}{' '}
-                    <a
-                      href="/"
-                      className="text-gray-600 hover:text-gray-900"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Factly Media
-                    </a>
-                    .
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-      )}
+      }
     </React.Fragment>
   );
 }

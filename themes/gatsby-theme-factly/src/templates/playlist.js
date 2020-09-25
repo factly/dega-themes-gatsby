@@ -7,7 +7,6 @@ import Layout from '../components/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import InfiniteScroll from 'react-infinite-scroller';
-import Footer from '../components/Footer';
 
 function Playlist({ data: { playlist }, location }) {
   const videoId = location.search.substring(1).split('=')[1];
@@ -223,7 +222,6 @@ function Playlist({ data: { playlist }, location }) {
           </div>
         </div>
       </div>
-      <Footer full />
     </Layout>
   );
 }

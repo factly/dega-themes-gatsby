@@ -21,7 +21,12 @@ const Post = ({ post, observer }) => {
         <h1 className="font-medium text-3xl py-2">{post.title}</h1>
         <div className="flex flex-col md:flex-row">
           <Author date={post.created_date} users={post.users} categories={post.categories} />
-          <ShareButtonGroup data={{ url: post.slug, title: post.title }} />
+          <ShareButtonGroup
+            data={{
+              url: typeof window !== 'undefined' ? window.location.href : post.slug,
+              title: post.title,
+            }}
+          />
         </div>
       </div>
       <Excerpt excerpt={post.excerpt} image={post.medium} />

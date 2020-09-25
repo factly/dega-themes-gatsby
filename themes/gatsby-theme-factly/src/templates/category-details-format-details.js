@@ -4,7 +4,6 @@ import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
 import Tabs from '../components/Tabs';
 import Category from '../components/Category';
-import Footer from '../components/Footer';
 
 function CategoryDetailsFormat({ data }) {
   const { dega } = data;
@@ -39,7 +38,6 @@ function CategoryDetailsFormat({ data }) {
           />
         </div>
       </div>
-      <Footer full />
     </Layout>
   );
 }

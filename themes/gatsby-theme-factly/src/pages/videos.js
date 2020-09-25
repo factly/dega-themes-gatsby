@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import _ from 'lodash';
 import Helmet from 'react-helmet';
-import Footer from '../components/Footer';
 
 const tabs = ['Home', 'Videos', 'Playlists'];
 
@@ -307,7 +306,6 @@ function Playlists({ data }) {
           )}
         </div>
       </div>
-      <Footer full />
     </Layout>
   );
 }
