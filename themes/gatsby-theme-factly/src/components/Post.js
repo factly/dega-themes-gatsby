@@ -16,7 +16,7 @@ const Post = ({ post, observer }) => {
   useEffect(() => {
     observer.observe(postSection.current);
     observer.observe(headerSocialIcon.current);
-  }, [observer,postSection,headerSocialIcon]);
+  }, [observer, postSection, headerSocialIcon]);
   return (
     <article post={post.id} ref={postSection} slug={post.slug} className="flex flex-col p-6 mb-12">
       <div className="bg-white rounded-t rounded-b-none overflow-hidden">
