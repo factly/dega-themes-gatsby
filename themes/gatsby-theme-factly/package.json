@@ -33,6 +33,11 @@
     "react-dom": "^16.13.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-regular-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "dotenv": "^8.2.0",
     "gatsby": "^2.18.7",
     "gatsby-image": "^2.2.34",
@@ -47,7 +52,7 @@
     "gatsby-plugin-sitemap": "^2.2.22",
     "gatsby-source-filesystem": "^2.1.40",
     "gatsby-source-graphql": "^2.5.0",
-    "gatsby-source-videos-youtube": "^1.0.0",
+    "gatsby-source-videos-youtube": "*",
     "gatsby-transformer-sharp": "^2.3.7",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",

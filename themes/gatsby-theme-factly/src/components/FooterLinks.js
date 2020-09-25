@@ -1,16 +1,20 @@
 import React from 'react';
-import { Link } from 'gatsby';
+
+/**
+ * TODO:
+ */
 
 function LinkTag({ text, to }) {
   return (
     <li>
-      <Link
+      <a
         className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-        to={to}
+        href={to}
         target="_blank"
+        rel="noopener noreferrer"
       >
         {text}
-      </Link>
+      </a>
     </li>
   );
 }

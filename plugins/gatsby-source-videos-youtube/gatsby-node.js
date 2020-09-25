@@ -16,8 +16,8 @@ const createNodeFromData = (item, nodeType, helpers) => {
     internal: {
       type: nodeType,
       content: JSON.stringify(item),
-      contentDigest: helpers.createContentDigest(item)
-    }
+      contentDigest: helpers.createContentDigest(item),
+    },
   };
 
   const node = Object.assign({}, item, nodeMetadata);
@@ -26,12 +26,14 @@ const createNodeFromData = (item, nodeType, helpers) => {
 };
 
 // https://www.googleapis.com/youtube/v3/channels?part=statistics%2Csnippet&id=UCpi2S8wW4xLlUCVryhyBtsA&key=[YOUR_API_KEY] HTTP/1.1
-const getAllData = async ({ type = 'playlists', query = '', API_KEY, part="contentDetails" }) => {
-  let data = []
-  let response = { };
-  while(response.nextPageToken || data.length === 0){
-    const URL = `https://www.googleapis.com/youtube/v3/${type}?part=${part}&maxResults=50&key=${API_KEY}${query}&pageToken=${response.nextPageToken || ''}`;
-    response = await fetch(URL).then(res => res.json());
+const getAllData = async ({ type = 'playlists', query = '', API_KEY, part = 'contentDetails' }) => {
+  let data = [];
+  let response = {};
+  while (response.nextPageToken || data.length === 0) {
+    const URL = `https://www.googleapis.com/youtube/v3/${type}?part=${part}&maxResults=50&key=${API_KEY}${query}&pageToken=${
+      response.nextPageToken || ''
+    }`;
+    response = await fetch(URL).then((res) => res.json());
     data.push(...response.items);
   }
   return data;
@@ -84,20 +86,13 @@ exports.createSchemaCustomization = ({ actions }) => {
  */
 
 exports.sourceNodes = async function sourceNodes(
-  {
-    actions,
-    cache,
-    createContentDigest,
-    createNodeId,
-    getNodesByType,
-    getNode
-  },
-  { API_KEY = '', channelID = '' }
+  { actions, cache, createContentDigest, createNodeId, getNodesByType, getNode },
+  { API_KEY = '', channelID = '' },
 ) {
   const { createNode, createTypes, touchNode } = actions;
   const helpers = Object.assign({}, actions, {
     createContentDigest,
-    createNodeId
+    createNodeId,
   });
   // you can access plugin options here if need be
   // const typeDefs = createTypeDef(schemas, imageKeys)
@@ -107,10 +102,10 @@ exports.sourceNodes = async function sourceNodes(
   // console.log(await cache.get(`hello`))
 
   // touch nodes to ensure they aren't garbage collected
-  getNodesByType('Channel').forEach(node => touchNode({ nodeId: node.id }));
-  getNodesByType('ChannelSections').forEach(node => touchNode({ nodeId: node.id }));
-  getNodesByType('Playlist').forEach(node => touchNode({ nodeId: node.id }));
-  getNodesByType('Video').forEach(node => touchNode({ nodeId: node.id }));
+  getNodesByType('Channel').forEach((node) => touchNode({ nodeId: node.id }));
+  getNodesByType('ChannelSections').forEach((node) => touchNode({ nodeId: node.id }));
+  getNodesByType('Playlist').forEach((node) => touchNode({ nodeId: node.id }));
+  getNodesByType('Video').forEach((node) => touchNode({ nodeId: node.id }));
   // getNodesByType(AUTHOR_NODE_TYPE).forEach(node =>
   //   touchNode({ nodeId: node.id })
   // )
@@ -128,8 +123,8 @@ exports.sourceNodes = async function sourceNodes(
     channelsData = await getAllData({
       type: 'channels',
       query: `&id=${channelID}`,
-      part: "statistics,snippet,contentDetails",
-      API_KEY
+      part: 'statistics,snippet,contentDetails',
+      API_KEY,
     });
     await cache.set(`channels`, channelsData);
   }
@@ -138,8 +133,8 @@ exports.sourceNodes = async function sourceNodes(
     channelSections = await getAllData({
       type: 'channelSections',
       query: `&channelId=${channelID}`,
-      part: "snippet,contentDetails",
-      API_KEY
+      part: 'snippet,contentDetails',
+      API_KEY,
     });
     await cache.set(`channelSections`, channelSections);
   }
@@ -148,8 +143,8 @@ exports.sourceNodes = async function sourceNodes(
     playlistData = await getAllData({
       type: 'playlists',
       query: `&channelId=${channelID}`,
-      part: "snippet,contentDetails",
-      API_KEY
+      part: 'snippet,contentDetails',
+      API_KEY,
     });
     await cache.set(`playlists`, playlistData);
   }
@@ -159,10 +154,10 @@ exports.sourceNodes = async function sourceNodes(
     const videoRequest = playlistData.map(async (playlist, index) =>
       getAllData({
         type: 'playlistItems',
-        part: "snippet,contentDetails",
+        part: 'snippet,contentDetails',
         query: `&playlistId=${playlist.id}`,
-        API_KEY
-      })
+        API_KEY,
+      }),
     );
     allVideos = await Promise.all(videoRequest);
     // allVideos = await getAllData({
@@ -174,75 +169,83 @@ exports.sourceNodes = async function sourceNodes(
     await cache.set(`videos`, allVideos);
   }
 
-  if(!channelUploadVideos){
+  if (!channelUploadVideos) {
     channelUploadVideos = await getAllData({
       type: 'playlistItems',
-      part: "snippet,contentDetails",
+      part: 'snippet,contentDetails',
       query: `&playlistId=${channelsData[0].contentDetails.relatedPlaylists.uploads}`,
-      API_KEY
-    })
+      API_KEY,
+    });
     await cache.set(`channelUploadVideos`, channelUploadVideos);
   }
 
-  //Build Data 
-  channelsData.forEach(channel => {
+  //Build Data
+  channelsData.forEach((channel) => {
     channel.channelId = channel.id;
     createNodeFromData(channel, 'Channel', helpers);
   });
 
-  allVideos = _.flatten(allVideos)
-  allVideos = [...allVideos, ...channelUploadVideos]
+  allVideos = _.flatten(allVideos);
+  allVideos = [...allVideos, ...channelUploadVideos];
   const videoNodeId = {};
 
-  const groupedVideos = _.groupBy(allVideos, "contentDetails.videoId")
-  allVideos =_.sortBy(_.values(_.mapValues(groupedVideos, (videos) => {
-    const playlistIds = _.map(videos, "snippet.playlistId");
-    return {
-      ...videos[0],
-      playlistIds
-    }
-  })), "snippet.publishedAt")
-  
-  allVideos.forEach(video => {
+  const groupedVideos = _.groupBy(allVideos, 'contentDetails.videoId');
+  allVideos = _.sortBy(
+    _.values(
+      _.mapValues(groupedVideos, (videos) => {
+        const playlistIds = _.map(videos, 'snippet.playlistId');
+        return {
+          ...videos[0],
+          playlistIds,
+        };
+      }),
+    ),
+    'snippet.publishedAt',
+  );
+
+  allVideos.forEach((video) => {
     const node = createNodeFromData(video, 'Video', helpers);
     video.playlistIds.forEach((playlistId) => {
-      if(!videoNodeId[playlistId]) {
+      if (!videoNodeId[playlistId]) {
         videoNodeId[playlistId] = [];
       }
-      videoNodeId[playlistId].push(node.id)
-    })
+      videoNodeId[playlistId].push(node.id);
+    });
   });
-  
+
   playlistData.push({
-    id:channelsData[0].contentDetails.relatedPlaylists.uploads,
+    id: channelsData[0].contentDetails.relatedPlaylists.uploads,
     list: false,
     snippet: {
-      title: "Uploads",
-      channelTitle: channelsData[0].snippet.title
+      title: 'Uploads',
+      channelTitle: channelsData[0].snippet.title,
     },
-    contentDetails: {
-
+    contentDetails: {},
+  });
+  channelSections.forEach((section) => {
+    if (section.snippet.type === 'recentUploads') {
+      section.videos = _.reverse(
+        videoNodeId[channelsData[0].contentDetails.relatedPlaylists.uploads],
+      ).slice(0, 5);
+      section.playlist = _.find(playlistData, {
+        id: channelsData[0].contentDetails.relatedPlaylists.uploads,
+      });
+    } else if (section.snippet.type === 'singlePlaylist') {
+      section.videos = _.reverse(videoNodeId[section.contentDetails.playlists[0]]).slice(0, 5);
+      section.playlist = _.find(playlistData, {
+        id: section.contentDetails.playlists[0],
+      });
     }
-  })
-  channelSections.forEach(section => {
-    if(section.snippet.type === 'recentUploads'){
-      section.videos =  _.reverse(videoNodeId[channelsData[0].contentDetails.relatedPlaylists.uploads]).slice(0, 5);
-      section.playlist = _.find(playlistData, {id: channelsData[0].contentDetails.relatedPlaylists.uploads})
-    } else if(section.snippet.type === 'singlePlaylist'){
-      section.videos =  _.reverse(videoNodeId[section.contentDetails.playlists[0]]).slice(0, 5)
-      section.playlist = _.find(playlistData, {id: section.contentDetails.playlists[0]})
-    }
-    if(section.videos){
+    if (section.videos) {
       createNodeFromData(section, 'ChannelSections', helpers);
     }
-  })
-  
+  });
+
   playlistData.forEach((playlist, index) => {
-    playlist.videos =  videoNodeId[playlist.id]
+    playlist.videos = videoNodeId[playlist.id];
     playlist.playlistId = playlist.id;
     createNodeFromData(playlist, 'Playlist', helpers);
   });
- 
 };
 
 /**
@@ -260,10 +263,12 @@ exports.onCreateNode = async ({
   getCache,
   cache,
   createNodeId,
-  node
+  node,
 }) => {
   if (
-    (node.internal.type === 'Channel' || node.internal.type === 'Playlist' || node.internal.type === 'Video') &&
+    (node.internal.type === 'Channel' ||
+      node.internal.type === 'Playlist' ||
+      node.internal.type === 'Video') &&
     node.snippet.thumbnails &&
     node.snippet.thumbnails.high
   ) {
@@ -282,12 +287,12 @@ exports.onCreateNode = async ({
       getCache,
       createNode,
       createNodeId,
-      parentNodeId: node.id
+      parentNodeId: node.id,
     });
 
     if (fileNode) {
       await cache.set(imageCacheKey, {
-        fileNodeID: fileNode.id
+        fileNodeID: fileNode.id,
       });
       node.local = fileNode.id;
     }

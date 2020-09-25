@@ -2,12 +2,10 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
-import _ from "lodash";
 import Img from 'gatsby-image';
-import Layout from '../components/layout';
-import Footer from '../components/footer';
-import { Play } from '../components/icons';
-import defaultImg from '../static/images/default.png';
+import Layout from '../components/Layout';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import InfiniteScroll from 'react-infinite-scroller';
 
 function Playlist({ data: { playlist }, location }) {
@@ -16,42 +14,46 @@ function Playlist({ data: { playlist }, location }) {
   const [activeVideo, setActiveVideo] = useState(() => {
     if (videoId) {
       const videoIndex = playlist.videos.findIndex(
-        video => video.contentDetails.videoId === videoId
+        (video) => video.contentDetails.videoId === videoId,
       );
       return {
         videoIndex,
-        video: playlist.videos[videoIndex]
-      }
+        video: playlist.videos[videoIndex],
+      };
     }
     return {
       videoIndex: 0,
-      video: playlist.videos[0]
-    }
+      video: playlist.videos[0],
+    };
   });
-  console.log("Mahipat",activeVideo)
-  const schemaVideo = useMemo(() => ({
-    "@context": "http://schema.org/",
-    "@type": "VideoObject",
-    "name": activeVideo.video.snippet.title,
-    "description": activeVideo.video.snippet.description,
-    "position":  activeVideo.video.snippet.position,
-    "url": `/playlist/${activeVideo.video.snippet.playlistId}?v=${activeVideo.video.contentDetails.videoId}`,
-    "thumbnailUrl": [
-      activeVideo.video.local ? activeVideo.video.local.childImageSharp.fluid.src : ''
-    ],
-    "uploadDate": activeVideo.video.snippet.publishedAt,
-    "embedUrl": `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
-    "interactionStatistic": {
-      "@type": "InteractionCounter",
-      "interactionType": { "@type": "http://schema.org/WatchAction" },
-    }
-  }), [playlist.videos, videoId]);
+
+  const schemaVideo = useMemo(
+    () => ({
+      '@context': 'http://schema.org/',
+      '@type': 'VideoObject',
+      name: activeVideo.video.snippet.title,
+      description: activeVideo.video.snippet.description,
+      position: activeVideo.video.snippet.position,
+      url: `/playlist/${activeVideo.video.snippet.playlistId}?v=${activeVideo.video.contentDetails.videoId}`,
+      thumbnailUrl: [
+        activeVideo.video.local ? activeVideo.video.local.childImageSharp.fluid.src : '',
+      ],
+      uploadDate: activeVideo.video.snippet.publishedAt,
+      embedUrl: `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
+      interactionStatistic: {
+        '@type': 'InteractionCounter',
+        interactionType: { '@type': 'http://schema.org/WatchAction' },
+      },
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [playlist.videos, videoId],
+  );
   const [postItems, setPostItems] = useState(() => {
-    const video =  playlist.videos.splice(activeVideo.videoIndex, 1)
-    playlist.videos.unshift(video[0])
-    return playlist.videos.slice(0, 20)
+    const video = playlist.videos.splice(activeVideo.videoIndex, 1);
+    playlist.videos.unshift(video[0]);
+    return playlist.videos.slice(0, 20);
   });
-  
+
   const [hasNextPage, setHasNextPage] = useState(true);
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
@@ -73,13 +75,13 @@ function Playlist({ data: { playlist }, location }) {
 
   useEffect(() => {
     const videoIndex = playlist.videos.findIndex(
-      video => video.contentDetails.videoId === videoId
+      (video) => video.contentDetails.videoId === videoId,
     );
 
     if (videoIndex >= 0) {
       setActiveVideo({
         video: playlist.videos[videoIndex],
-        videoIndex
+        videoIndex,
       });
     }
   }, [playlist.videos, videoId]);
@@ -96,26 +98,28 @@ function Playlist({ data: { playlist }, location }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   return (
     <Layout>
       <Helmet>
         <title>{activeVideo.video.snippet.title}</title>
-        <meta name="description" content={activeVideo.video.snippet.description.substring(0, 150)} />
-        <meta name="image" content={activeVideo.local && activeVideo.local.childImageSharp.fluid.src} />
+        <meta
+          name="description"
+          content={activeVideo.video.snippet.description.substring(0, 150)}
+        />
+        <meta
+          name="image"
+          content={activeVideo.local && activeVideo.local.childImageSharp.fluid.src}
+        />
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
       </Helmet>
       <div className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-10 xl:mx-20">
         <div className="main-content flex flex-col w-full lg:w-3/5">
-          <div
-            ref={videoElement}
-            className="relative"
-            style={{ paddingBottom: `56%` }}
-          >
+          <div ref={videoElement} className="relative" style={{ paddingBottom: `56%` }}>
             <iframe
               className="absolute top-0 left-0 w-full h-full"
               title={activeVideo.video.snippet.title}
-              src={`https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`}
+              src={`https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}?autoplay=1`}
               frameBorder={0}
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -134,95 +138,90 @@ function Playlist({ data: { playlist }, location }) {
             <p className="text-gray-600 text-xs lg:text-sm">
               {activeVideo.video.snippet.publishedAt}
             </p>
-            <p className="text-base read-more-wrap py-2">
-              {activeVideo.video.snippet.description}
-            </p>
+            <p className="text-base read-more-wrap py-2">{activeVideo.video.snippet.description}</p>
           </div>
         </div>
-        <div 
-        className="flex flex-col w-full lg:w-2/5 mt-16 lg:mx-4 h-screen border lg:shadow-md"
-        style={{height: videoListHeight }}
+        <div
+          className="flex flex-col w-full lg:w-2/5 mt-16 lg:mx-4 h-screen border lg:shadow-md"
+          style={{ height: videoListHeight }}
         >
           <div className="mb-4 p-4 border-b">
             <h5 className="text-base font-medium">
-              {playlist.snippet.title}
+              {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
             </h5>
             <p className="text-gray-600 text-xs lg:text-sm">
-              {playlist.snippet.channelTitle} -{' '}
-              {activeVideo.videoIndex + 1}/{playlist.videos.length}
+              {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/
+              {playlist.videos.length}
             </p>
           </div>
           <div
             ref={playlistElement}
             className="lg:relative lg:overflow-auto h-screen"
-            style={{height: videoListHeight }}
+            style={{ height: videoListHeight }}
           >
             <div className="flex flex-col lg:absolute top-0 left-0 w-full h-full">
-                <InfiniteScroll
-                  pageStart={0}
-                  element="section"
-                  loadMore={handleLoadMore}
-                  hasMore={hasNextPage}
-                  useWindow={videoListHeight === 'auto'}
-                  getScrollParent={() => playlistElement.current}
-                  loader={
-                    <div className="loader" key={0}>
-                      Loading ...
-                    </div>
-                  }
-                >
+              <InfiniteScroll
+                pageStart={0}
+                element="section"
+                loadMore={handleLoadMore}
+                hasMore={hasNextPage}
+                useWindow={videoListHeight === 'auto'}
+                getScrollParent={() => playlistElement.current}
+                loader={
+                  <div className="loader" key={0}>
+                    Loading ...
+                  </div>
+                }
+              >
                 {postItems.map((playlistVideo, index) => (
-                    <Link
-                      key={playlistVideo.id}
-                      id={playlistVideo.id}
-                      className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 py-2 
+                  <Link
+                    key={playlistVideo.id}
+                    id={playlistVideo.id}
+                    className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 py-2 
                       ${activeVideo.videoIndex === index && 'video-active'}`}
-                      to={`playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
-                    >
-                      <span className="text-sm text-gray-600 px-2">
-                        {activeVideo.videoIndex === index ? (
-                          <Play className="fill-current w-2 h-2"></Play>
-                        ) : (
-                          index + 1
-                        )}
-                      </span>
-                      {playlistVideo.local ? (
-                        <Img
-                          alt={playlistVideo.snippet.title}
-                          fluid={playlistVideo.local.childImageSharp.fluid}
-                          className="w-20 h-full"
-                        />
+                    to={`playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
+                  >
+                    <span className="text-sm text-gray-600 px-2">
+                      {activeVideo.videoIndex === index ? (
+                        <FontAwesomeIcon icon={faPlay} className="fill-current w-2 h-2" />
                       ) : (
-                        <Img
-                          alt={playlistVideo.snippet.title}
-                          fluid={defaultImg}
-                          className="w-20 h-full"
-                        />
+                        index + 1
                       )}
-                      <div className="hidden opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
-                        <span className="text-white text-base">Play</span>
+                    </span>
+                    {playlistVideo.local ? (
+                      <Img
+                        alt={playlistVideo.snippet.title}
+                        fluid={playlistVideo.local.childImageSharp.fluid}
+                        className="w-20 h-full"
+                      />
+                    ) : (
+                      <img
+                        alt={playlistVideo.snippet.title}
+                        src="https://source.unsplash.com/random/150x150"
+                        className="w-20 h-full"
+                      />
+                    )}
+                    <div className="hidden opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0">
+                      <span className="text-white text-base">Play</span>
+                    </div>
+                    <div className="w-4/5 flex flex-col px-2">
+                      <div
+                        id="nav-0"
+                        className="w-full font-bold font-sans text-sm leading-tight text-gray-800 mb-2"
+                      >
+                        {playlistVideo.snippet.title}
                       </div>
-                      <div className="w-4/5 flex flex-col px-2">
-                        <div
-                          id="nav-0"
-                          className="w-full font-bold font-sans text-sm leading-tight text-gray-800 mb-2"
-                        >
-                          {playlistVideo.snippet.title}
-                        </div>
-                        <p className="text-gray-600 text-xs">
-                          {playlistVideo.snippet.channelTitle} -{' '}
-                          {playlistVideo.snippet.publishedAt}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
+                      <p className="text-gray-600 text-xs">
+                        {playlistVideo.snippet.channelTitle} - {playlistVideo.snippet.publishedAt}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
               </InfiniteScroll>
-              
             </div>
           </div>
         </div>
       </div>
-      <Footer full></Footer>
     </Layout>
   );
 }
@@ -231,7 +230,7 @@ Playlist.propTypes = {
   data: PropTypes.shape({
     video: {
       contentDetails: {
-        videoId: PropTypes.string
+        videoId: PropTypes.string,
       },
       id: PropTypes.string,
       snippet: {
@@ -239,8 +238,8 @@ Playlist.propTypes = {
         position: PropTypes.number,
         channelTitle: PropTypes.string,
         description: PropTypes.string,
-        publishedAt: PropTypes.string
-      }
+        publishedAt: PropTypes.string,
+      },
     },
     playlist: {
       playlistId: PropTypes.string,
@@ -248,29 +247,29 @@ Playlist.propTypes = {
       snippet: {
         title: PropTypes.string,
         publishedAt: PropTypes.string,
-        channelTitle: PropTypes.string
+        channelTitle: PropTypes.string,
       },
       videos: {
         id: PropTypes.string,
         local: {
           childImageSharp: {
-            fluid: PropTypes.string
-          }
+            fluid: PropTypes.string,
+          },
         },
         snippet: {
           position: PropTypes.number,
           title: PropTypes.string,
           publishedAt: PropTypes.string,
-          channelTitle: PropTypes.string
-        }
-      }
-    }
-  })
+          channelTitle: PropTypes.string,
+        },
+      },
+    },
+  }),
 };
 
 export const query = graphql`
-  query($id: String!) {
-    playlist(playlistId: { eq: $id }) {
+  query($playlistId: String!) {
+    playlist(playlistId: { eq: $playlistId }) {
       playlistId
       id
       snippet {
@@ -281,7 +280,7 @@ export const query = graphql`
           default {
             url
           }
-          high{
+          high {
             url
           }
         }

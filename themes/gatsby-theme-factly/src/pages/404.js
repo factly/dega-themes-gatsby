@@ -1,33 +1,28 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
-import PropTypes from 'prop-types';
 
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 
 const PageNotFound = ({ data }) => (
   <Layout>
-    <h1>Page Not Found</h1>
-    <Img fixed={data.file.childImageSharp.fixed} />
+    <div className="text-center">
+      <h1>Page Not Found</h1>
+      <img
+        className="mx-auto"
+        src={data.dega.space.logo.url.replace(/^"(.*)"$/, '$1')}
+        alt="Logo"
+      />
+    </div>
   </Layout>
 );
 
-PageNotFound.propTypes = {
-  data: PropTypes.shape({
-    file: {
-      childImageSharp: {}
-    }
-  })
-};
 export default PageNotFound;
 export const query = graphql`
   query {
-    file(relativePath: { eq: "logo/logo.png" }) {
-      childImageSharp {
-        # Specify the image processing specifications right in the query.
-        # Makes it trivial to update as your page's design changes.
-        fixed(width: 125, height: 125) {
-          ...GatsbyImageSharpFixed
+    dega {
+      space {
+        logo {
+          url
         }
       }
     }

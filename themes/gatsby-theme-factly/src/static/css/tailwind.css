@@ -1,143 +1,144 @@
-@import "tailwindcss/base";
+@import 'tailwindcss/base';
 
-@import "tailwindcss/components";
+@import 'tailwindcss/components';
 
-@import "tailwindcss/utilities";
+@import 'tailwindcss/utilities';
 
 .dropdown:hover .dropdown-menu {
-    display: block;
+  display: block;
 }
 div::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+  width: 4px;
+  height: 4px;
 }
 div::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px white;
+  box-shadow: inset 0 0 6px white;
 }
 
 div::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 outline-none
+  @apply bg-gray-300 outline-none;
 }
 div {
-    scrollbar-width: thin;
+  scrollbar-width: thin;
 }
-body, html{
-    @apply scrolling-touch;
-    scrollbar-width: thin;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+body,
+html {
+  @apply scrolling-touch;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 body::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 body::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 8px white;
+  box-shadow: inset 0 0 8px white;
 }
 
 body::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 
+  @apply bg-gray-300;
 }
 
 .sidebar {
-    height: 100vh;
-    top: 0;
-    @apply hidden flex-col w-full pt-20 sticky overflow-y-hidden;
+  height: 100vh;
+  top: 0;
+  @apply hidden flex-col w-full pt-20 sticky overflow-y-hidden;
 }
 
 .slider {
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 .heading {
-    @apply uppercase text-xl font-bold;
+  @apply uppercase text-xl font-bold;
 }
 
 .sidebar:hover {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
-.vertical{
-    @apply flex-col;
+.vertical {
+  @apply flex-col;
 }
 
 @screen md {
-    .horizontal {
-        @apply flex-row;
-    }
+  .horizontal {
+    @apply flex-row;
+  }
 }
 
 .active {
-    @apply text-blue-500
+  @apply text-blue-500;
 }
 
-.video-active{
-    @apply bg-gray-200 flex
+.video-active {
+  @apply bg-gray-200 flex;
 }
 
 .main-content {
-    @apply flex flex-col pt-16;
+  @apply flex flex-col pt-16;
 }
 
-a:hover{
-    @apply opacity-75
+a:hover {
+  @apply opacity-75;
 }
 
 .fadeInUp {
-    animation-name: fadeInUp;
-    animation-duration: 0.45s;
-    animation-fill-mode: both;
-  }
-  
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-  
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Add read more to any content*/
-  .read-more-state {
-    display: none;
-  }
-  
-  .read-more-target {
+  animation-name: fadeInUp;
+  animation-duration: 0.45s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+  0% {
     opacity: 0;
-    font-size: 0;
-    transition: .25s step-start;
+    transform: translateY(20px);
   }
-  
-  .read-more-state:checked ~ .read-more-wrap .read-more-target {
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add read more to any content*/
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  font-size: 0;
+  transition: 0.25s step-start;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'show less';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+}
+
+.row-list-container section {
+  @apply flex flex-row flex-wrap p-6 justify-start items-start;
+}
+
+@screen lg {
+  .read-more-trigger {
+    @apply hidden;
+  }
+  .read-more-target {
     opacity: 1;
     font-size: inherit;
   }
-  
-  .read-more-state ~ .read-more-trigger:before {
-    content: 'show more';
-  }
-  
-  .read-more-state:checked ~ .read-more-trigger:before {
-    content: 'show less';
-  }
-  
-  .read-more-trigger {
-    cursor: pointer;
-  }
-
-  .row-list-container section {
-    @apply flex flex-row flex-wrap p-6 justify-start items-start;
-  }
-
-  @screen lg {
-    .read-more-trigger{
-        @apply hidden
-    }
-    .read-more-target {
-        opacity: 1;
-        font-size: inherit;
-    }
-  }
+}
