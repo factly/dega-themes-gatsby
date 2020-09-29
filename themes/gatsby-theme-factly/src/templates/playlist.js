@@ -45,7 +45,7 @@ function Playlist({ data: { playlist }, location }) {
         interactionType: { '@type': 'http://schema.org/WatchAction' },
       },
     }),
-    [activeVideo],
+    [activeVideo, playlist.playlistId],
   );
   const [postItems, setPostItems] = useState(() => {
     const video = playlist.videos.splice(activeVideo.videoIndex, 1);
@@ -128,10 +128,7 @@ function Playlist({ data: { playlist }, location }) {
             <p className="w-full text-gray-600 text-xs lg:text-sm">
               {activeVideo.video.snippet.channelTitle}
             </p>
-            <div
-              id="nav-0"
-              className="w-full font-bold font-sans text-xl leading-tight text-gray-800 mb-2"
-            >
+            <div id="nav-0" className="w-full font-bold  text-xl leading-tight text-gray-800 mb-2">
               {activeVideo.video.snippet.title}
             </div>
             <p className="text-gray-600 text-xs lg:text-sm">
@@ -206,7 +203,7 @@ function Playlist({ data: { playlist }, location }) {
                     <div className="w-4/5 flex flex-col px-2">
                       <div
                         id="nav-0"
-                        className="w-full font-bold font-sans text-sm leading-tight text-gray-800 mb-2"
+                        className="w-full font-bold  text-sm leading-tight text-gray-800 mb-2"
                       >
                         {playlistVideo.snippet.title}
                       </div>
