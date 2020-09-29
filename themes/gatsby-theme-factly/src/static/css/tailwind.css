@@ -2,8 +2,16 @@
 
 @import 'tailwindcss/components';
 
+@import '../fonts/fonts.css';
+
 @import 'tailwindcss/utilities';
 
+@import './typography.css';
+
+html,
+body {
+  @apply font-inter;
+}
 .dropdown:hover .dropdown-menu {
   display: block;
 }
@@ -50,7 +58,7 @@ body::-webkit-scrollbar-thumb {
   scroll-behavior: smooth;
 }
 .heading {
-  @apply uppercase text-xl font-bold;
+  @apply font-metropolis uppercase text-xl font-bold;
 }
 
 .sidebar:hover {
