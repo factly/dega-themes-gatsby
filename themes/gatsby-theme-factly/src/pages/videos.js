@@ -175,10 +175,7 @@ function Playlists({ data }) {
                             </div>
                           </div>
                           <div className="w-full flex flex-col py-2">
-                            <div
-                              id="nav-0"
-                              className="w-full font-bold font-sans text-base text-gray-800"
-                            >
+                            <div id="nav-0" className="w-full font-bold  text-base text-gray-800">
                               {video.snippet.title}
                             </div>
                             <p className="text-gray-600 text-xs pt-1">
@@ -244,10 +241,7 @@ function Playlists({ data }) {
                         </div>
                       </div>
                       <div className="w-full flex flex-col py-2">
-                        <div
-                          id="nav-0"
-                          className="w-full font-bold font-sans text-base text-gray-800"
-                        >
+                        <div id="nav-0" className="w-full font-bold  text-base text-gray-800">
                           {video.snippet.title}
                         </div>
                         <p className="text-gray-600 text-xs pt-1">
@@ -290,7 +284,7 @@ function Playlists({ data }) {
                         {playlist.contentDetails.itemCount} Videos
                       </span>
                     </div>
-                    <div id="nav-0" className="w-full font-bold font-sans text-lg text-gray-800">
+                    <div id="nav-0" className="w-full font-bold  text-lg text-gray-800">
                       {playlist.snippet.title}
                     </div>
                     {/* <p className="text-gray-600 text-xs md:text-sm">

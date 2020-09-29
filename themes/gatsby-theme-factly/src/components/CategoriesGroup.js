@@ -9,7 +9,7 @@ const Categories = ({ categories }) => {
     >
       <Link
         to={`/categories/${category.slug}`}
-        className="w-full flex no-underline hover:no-underline font-bold font-sans text-base text-gray-800"
+        className="w-full flex no-underline hover:no-underline font-bold  text-base text-gray-800"
       >
         {category.name}
       </Link>

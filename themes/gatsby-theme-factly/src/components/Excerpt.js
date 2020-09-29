@@ -18,7 +18,7 @@ const Excerpt = ({ excerpt, image }) => {
       )}
       <div className="flex flex-col flex-1 p-4">
         <div className="w-full font-bold text-2xl leading-tight text-gray-900">Excerpt</div>
-        <p className="text-gray-800 font-sans text-lg pt-2">{excerpt}</p>
+        <p className="text-gray-800  text-lg pt-2">{excerpt}</p>
       </div>
     </div>
   );

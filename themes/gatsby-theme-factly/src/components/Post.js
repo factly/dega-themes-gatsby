@@ -81,7 +81,7 @@ const Post = ({ post, observer }) => {
         </div>
         <Excerpt excerpt={post.excerpt} image={post.medium} />
 
-        <div className="w-full lg:w-3/4 mx-auto font-sans text-xl">
+        <div className="w-full lg:w-3/4 mx-auto  text-xl">
           {post.claims && <FactCheckWidget claims={post.claims} />}
           <div
             className="my-6 pb-6 border-b text-gray-800"
