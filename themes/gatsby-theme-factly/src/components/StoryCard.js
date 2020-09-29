@@ -1,5 +1,6 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import parseDate from '../utils/parseDate';
 
 /**
  * TODO: Change the data structure of props
@@ -65,7 +66,9 @@ const StoryCard = ({
                       ))}
                     </p>
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
+                  <p className="text-gray-600 text-xs md:text-sm">
+                    {parseDate(storyData.created_at)}
+                  </p>
                 </div>
               </div>
             </div>
@@ -100,7 +103,7 @@ const StoryCard = ({
                   {storyData.users[0].first_name + ' ' + storyData.users[0].last_name}
                 </p>
               </div>
-              <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
+              <p className="text-gray-600 text-xs md:text-sm">{parseDate(storyData.created_at)}</p>
             </div>
           </div>
         </article>
@@ -141,7 +144,9 @@ const StoryCard = ({
                       {storyData.users[0].first_name + ' ' + storyData.users[0].last_name}
                     </p>
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
+                  <p className="text-gray-600 text-xs md:text-sm">
+                    {parseDate(storyData.created_at)}
+                  </p>
                 </div>
               </div>
             </div>

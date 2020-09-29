@@ -4,7 +4,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Post from '../components/Post';
 import StoryLinks from '../components/StoryLinks';
 import Layout from '../components/Layout';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookSquare,
@@ -14,6 +14,7 @@ import {
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
+
   const posts = dega.posts.nodes.filter((post) => post.id !== dega.post.id);
   posts.unshift(dega.post);
 

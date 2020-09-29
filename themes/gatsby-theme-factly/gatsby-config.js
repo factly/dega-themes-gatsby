@@ -7,6 +7,10 @@ const cssnano = require(`cssnano`);
 
 module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConfig = {} }) => {
   return {
+    siteMetadata: {
+      title: 'epage',
+      siteUrl: 'http://localhost:9002',
+    },
     plugins: [
       'gatsby-plugin-react-helmet',
       {
@@ -49,6 +53,10 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
           ],
         },
       },
+      {
+        resolve: `gatsby-plugin-advanced-sitemap`,
+      },
+      'gatsby-plugin-robots-txt',
       'gatsby-plugin-offline',
     ],
   };

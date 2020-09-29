@@ -14,6 +14,11 @@ const parseEditorJsData = (data) => {
         let list = data.items.map((i) => `<li> ${i} </li>`).reduce((a, c) => a + c, '');
         return `<${style}> ${list} </${style}>`;
 
+      case 'embed':
+        return `<div class="my-8 text-center"><iframe class="mx-auto" src=${data.embed} width=${data.width} height=${data.height}></iframe><p class="mt-4 text-sm">${data.caption}</p></div>`;
+      case 'raw':
+        return data.html;
+
       default:
         break;
     }

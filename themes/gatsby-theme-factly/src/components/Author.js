@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import parseDate from '../utils/parseDate';
 
 /* 
  TODO 1. Make images optional
@@ -32,7 +33,7 @@ const Author = ({ users, categories, date }) => {
             </React.Fragment>
           ))}
         </div>
-        <span className="text-gray-600 text-lg">{date}</span>
+        <span className="text-gray-600 text-lg">{parseDate(date)}</span>
       </div>
     </div>
   );

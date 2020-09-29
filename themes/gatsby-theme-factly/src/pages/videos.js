@@ -8,7 +8,7 @@ import Layout from '../components/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import _ from 'lodash';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 const tabs = ['Home', 'Videos', 'Playlists'];
 
@@ -135,7 +135,7 @@ function Playlists({ data }) {
                   <React.Fragment key={channelSection.playlist.id}>
                     <Link
                       className="flex items-center"
-                      to={`playlist/${channelSection.playlist.id}`}
+                      to={`/playlist/${channelSection.playlist.id}`}
                     >
                       <h2 className="heading px-6 my-6">{_.startCase(playlistTitle)}</h2>
                       <FontAwesomeIcon
@@ -150,7 +150,7 @@ function Playlists({ data }) {
                         <Link
                           key={video.id}
                           className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
-                          to={`playlist/${playlistId}?v=${video.contentDetails.videoId}`}
+                          to={`/playlist/${playlistId}?v=${video.contentDetails.videoId}`}
                         >
                           <div className="relative">
                             {video.local && (
@@ -197,7 +197,7 @@ function Playlists({ data }) {
             <div>
               <Link
                 className="flex items-center px-6 mt-6"
-                to={`playlist/${channel.contentDetails.relatedPlaylists.uploads}`}
+                to={`/playlist/${channel.contentDetails.relatedPlaylists.uploads}`}
               >
                 <h2 className="heading pr-6">Uploads</h2>
                 <FontAwesomeIcon icon={faPlay} className="fill-current w-4 h-4" />
@@ -219,7 +219,7 @@ function Playlists({ data }) {
                     <Link
                       key={video.id}
                       className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
-                      to={`playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
+                      to={`/playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
                     >
                       <div className="relative">
                         {video.local && (
@@ -266,7 +266,7 @@ function Playlists({ data }) {
                 <Link
                   key={playlist.id}
                   className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
-                  to={`playlist/${playlist.playlistId}`}
+                  to={`/playlist/${playlist.playlistId}`}
                 >
                   <div className="relative">
                     <Img

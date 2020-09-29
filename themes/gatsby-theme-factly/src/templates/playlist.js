@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
+// import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import Layout from '../components/Layout';
@@ -34,7 +34,7 @@ function Playlist({ data: { playlist }, location }) {
       name: activeVideo.video.snippet.title,
       description: activeVideo.video.snippet.description,
       position: activeVideo.video.snippet.position,
-      url: `/playlist/${activeVideo.video.snippet.playlistId}?v=${activeVideo.video.contentDetails.videoId}`,
+      url: `/playlist/${playlist.playlistId}?v=${activeVideo.video.contentDetails.videoId}`,
       thumbnailUrl: [
         activeVideo.video.local ? activeVideo.video.local.childImageSharp.fluid.src : '',
       ],
@@ -45,8 +45,7 @@ function Playlist({ data: { playlist }, location }) {
         interactionType: { '@type': 'http://schema.org/WatchAction' },
       },
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [playlist.videos, videoId],
+    [activeVideo],
   );
   const [postItems, setPostItems] = useState(() => {
     const video = playlist.videos.splice(activeVideo.videoIndex, 1);
@@ -179,7 +178,7 @@ function Playlist({ data: { playlist }, location }) {
                     id={playlistVideo.id}
                     className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 py-2 
                       ${activeVideo.videoIndex === index && 'video-active'}`}
-                    to={`playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
+                    to={`/playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
                   >
                     <span className="text-sm text-gray-600 px-2">
                       {activeVideo.videoIndex === index ? (
@@ -226,7 +225,7 @@ function Playlist({ data: { playlist }, location }) {
   );
 }
 
-Playlist.propTypes = {
+/* Playlist.propTypes = {
   data: PropTypes.shape({
     video: {
       contentDetails: {
@@ -266,7 +265,7 @@ Playlist.propTypes = {
     },
   }),
 };
-
+ */
 export const query = graphql`
   query($playlistId: String!) {
     playlist(playlistId: { eq: $playlistId }) {
