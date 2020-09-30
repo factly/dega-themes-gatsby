@@ -11,7 +11,7 @@ const Author = ({ users, categories, date }) => {
   return (
     <div className="flex flex-col justify-start items-start py-2">
       <div className="flex flex-col py-2">
-        <div className="flex flex-row flex-wrap">
+        <div className="flex flex-row flex-wrap items-center">
           {users.map((user, i, arr) => (
             <React.Fragment key={i}>
               <Link to={`/users/${user.id}`} className="font-medium text-blue-500 text-lg px-1">

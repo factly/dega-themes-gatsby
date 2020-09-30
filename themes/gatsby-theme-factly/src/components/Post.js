@@ -14,51 +14,17 @@ import { Helmet } from 'react-helmet';
 const Post = ({ post, observer }) => {
   const postSection = useRef(null);
   const headerSocialIcon = createRef();
-  let schemaPost = () => {
-    let authors = post.users.map((a) => {
-      return `${a.first_name}  ${a.last_name} `;
-    });
-    let schema;
-    if (post.schemas.length >= 1) {
-      schema = post.schemas;
-    } else {
-      schema = {
-        '@context': 'https://schema.org',
-        '@type': 'NewsArticle',
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': 'https://google.com/article',
-        },
-        headline: post.title,
-        image: post.medium.url,
-        datePublished: post.created_at,
-        dateModified: post.created_at,
-        author: {
-          '@type': 'Person',
-          name: authors,
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'Factly',
-          logo: {
-            '@type': 'ImageObject',
-            url: 'https://source.unsplash.com/random/200x200',
-          },
-        },
-      };
-    }
-    return schema;
-  };
 
   useEffect(() => {
     observer.observe(postSection.current);
     observer.observe(headerSocialIcon.current);
   }, [observer, postSection, headerSocialIcon]);
+
   return (
     <>
       <Helmet>
         <title>{post.title}</title>
-        <script type="application/ld+json">{JSON.stringify(schemaPost())}</script>
+        <script type="application/ld+json">{JSON.stringify(post.schemas)}</script>
       </Helmet>
       <article
         post={post.id}

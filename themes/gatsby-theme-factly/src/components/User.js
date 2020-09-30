@@ -7,7 +7,7 @@ const User = ({ user }) => {
         {user.medium.url && (
           <img
             alt={user.medium.alt_text}
-            src={user.medium.url}
+            src={user.medium.url.raw}
             className="h-20 lg:h-40 object-cover rounded"
           />
         )}

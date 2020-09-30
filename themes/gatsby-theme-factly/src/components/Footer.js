@@ -58,11 +58,7 @@ function Footer({ className }) {
               <div className="w-full md:w-1/2 px-4">
                 <div className="order-1 lg:order-2 mb-4">
                   <a href="/">
-                    <img
-                      className="h-8"
-                      src={logo.url.replace(/^"(.*)"$/, '$1')}
-                      alt="factly"
-                    ></img>
+                    <img className="h-8" src={logo.url.raw} alt="factly"></img>
                   </a>
                 </div>
                 <h5 className="text-lg mt-0 mb-2 text-gray-700">{description}</h5>

@@ -31,7 +31,7 @@ function CategoryDetailsFormat({ data }) {
             category={{
               name: dega.category.name,
               medium: {
-                url: 'https://source.unsplash.com/150x150?person',
+                url: { raw: 'https://source.unsplash.com/150x150?person' },
                 alt_text: 'Category Image',
               },
             }}

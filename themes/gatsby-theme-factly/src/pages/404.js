@@ -7,11 +7,7 @@ const PageNotFound = ({ data }) => (
   <Layout>
     <div className="text-center">
       <h1>Page Not Found</h1>
-      <img
-        className="mx-auto"
-        src={data.dega.space.logo.url.replace(/^"(.*)"$/, '$1')}
-        alt="Logo"
-      />
+      <img className="mx-auto" src={data.dega.space.logo.url.raw} alt="Logo" />
     </div>
   </Layout>
 );

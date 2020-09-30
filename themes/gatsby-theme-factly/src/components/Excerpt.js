@@ -10,7 +10,7 @@ const Excerpt = ({ excerpt, image }) => {
       {image && (
         <div className="flex-1">
           <img
-            src={image.url.replace(/^"(.*)"$/, '$1')}
+            src={image.url.raw}
             alt={image.alt_text}
             className="w-full h-full rounded-t rounded-l-none md:rounded-t-none md:rounded-l object-cover"
           />

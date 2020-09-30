@@ -8,10 +8,6 @@
 
 @import './typography.css';
 
-html,
-body {
-  @apply font-inter;
-}
 .dropdown:hover .dropdown-menu {
   display: block;
 }

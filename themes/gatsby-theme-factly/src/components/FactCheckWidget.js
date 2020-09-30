@@ -137,7 +137,7 @@ function FactCheckWidget({ claims }) {
                       />
                       {claim.rating.medium && (
                         <img
-                          src={claim.rating.medium.url.replace(/^"(.*)"$/, '$1')}
+                          src={claim.rating.medium.url.raw}
                           alt={claim.rating.medium.alt_text}
                           className="w-1/6 h-full rounded-t m-2"
                         />

@@ -251,7 +251,7 @@ export const query = graphql`
           claims {
             checked_date
             claim_date
-            claim_source
+            claim_sources
             claimant {
               description
               id
@@ -330,7 +330,7 @@ export const query = graphql`
         claims {
           checked_date
           claim_date
-          claim_source
+          claim_sources
           claimant {
             description
             id
