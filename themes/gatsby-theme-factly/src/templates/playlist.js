@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import InfiniteScroll from 'react-infinite-scroller';
 
-function Playlist({ data: { playlist }, location }) {
+function Playlist({ data: { playlist, channel }, location }) {
   const videoId = location.search.substring(1).split('=')[1];
   const [videoListHeight, setVideoListHeight] = useState('366px');
   const [activeVideo, setActiveVideo] = useState(() => {
@@ -125,15 +125,53 @@ function Playlist({ data: { playlist }, location }) {
             />
           </div>
           <div className="w-full flex flex-col py-4">
-            <p className="w-full text-gray-600 text-xs lg:text-sm">
+            {/* <p className="w-full text-gray-600 text-xs lg:text-sm">
               {activeVideo.video.snippet.channelTitle}
-            </p>
+            </p> */}
             <div id="nav-0" className="w-full font-bold  text-xl leading-tight text-gray-800 mb-2">
               {activeVideo.video.snippet.title}
             </div>
-            <p className="text-gray-600 text-xs lg:text-sm">
+            <p className="text-gray-600 text-xs lg:text-sm pb-2">
               {activeVideo.video.snippet.publishedAt}
             </p>
+            <hr />
+            <div className="flex items-center border-b p-6">
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href={`https://www.youtube.com/channel/${channel.channelId}`}
+              >
+                <img
+                  alt={channel.snippet.title}
+                  src={channel.snippet.thumbnails.high.url}
+                  className="h-12 rounded-full"
+                />
+              </a>
+              <div>
+                <div className="flex flex-col justify-start px-4">
+                  <a
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href={`https://www.youtube.com/channel/${channel.channelId}`}
+                    className="heading"
+                  >
+                    {channel.snippet.title}
+                  </a>
+                  <span className="text-gray-600 text-xs md:text-sm pb-2">
+                    {Number(channel.statistics.subscriberCount).toLocaleString()} Subscribers
+                  </span>
+                </div>
+              </div>
+              <a
+                rel="noopener noreferrer"
+                href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
+                target="_blank"
+                type="button"
+                className="ml-auto block lg:px-4 uppercase text-center font-medium text-sm focus:outline-none bg-gray-300 rounded p-2"
+              >
+                Subscribe
+              </a>
+            </div>
             <p className="text-base read-more-wrap py-2">{activeVideo.video.snippet.description}</p>
           </div>
         </div>
@@ -300,6 +338,35 @@ export const query = graphql`
           publishedAt(formatString: "DD-MM-YYYY")
           channelTitle
         }
+      }
+    }
+    channel {
+      channelId
+      statistics {
+        subscriberCount
+        videoCount
+      }
+      contentDetails {
+        relatedPlaylists {
+          uploads
+        }
+      }
+      local {
+        childImageSharp {
+          fluid(maxWidth: 300, quality: 100) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      snippet {
+        thumbnails {
+          high {
+            url
+          }
+        }
+        customUrl
+        description
+        title
       }
     }
   }
