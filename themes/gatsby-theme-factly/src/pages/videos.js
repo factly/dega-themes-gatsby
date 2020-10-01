@@ -373,7 +373,10 @@ export const query = graphql`
         }
       }
     }
-    allVideo(sort: { fields: snippet___publishedAt, order: DESC }) {
+    allVideo(
+      sort: { fields: snippet___publishedAt, order: DESC }
+      filter: { snippet: { title: { ne: "Private video" } } }
+    ) {
       totalCount
       nodes {
         contentDetails {
