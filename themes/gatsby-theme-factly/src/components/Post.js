@@ -24,7 +24,9 @@ const Post = ({ post, observer }) => {
     <>
       <Helmet>
         <title>{post.title}</title>
-        <script type="application/ld+json">{JSON.stringify(post.schemas)}</script>
+        {post.schemas.map((schema) => (
+          <script type="application/ld+json">{JSON.stringify(schema)}</script>
+        ))}
       </Helmet>
       <article
         post={post.id}
