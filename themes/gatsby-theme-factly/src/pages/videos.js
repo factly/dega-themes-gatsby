@@ -375,7 +375,7 @@ export const query = graphql`
     }
     allVideo(
       sort: { fields: snippet___publishedAt, order: DESC }
-      filter: { snippet: { title: { ne: "Private video" } } }
+      filter: { snippet: { title: { nin: ["Private video", "Deleted video"] } } }
     ) {
       totalCount
       nodes {
