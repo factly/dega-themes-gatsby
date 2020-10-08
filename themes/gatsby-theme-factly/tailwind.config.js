@@ -30,20 +30,8 @@ module.exports = {
     enabled: true,
     layers: ['utilities'],
     content: [
+      path.join(__dirname, 'src/**/!(*.d).{ts,js,jsx,tsx}'),
       path.join(process.cwd(), 'src/**/!(*.d).{ts,js,jsx,tsx}'),
-      path.join(
-        process.cwd(),
-        'node_modules/@factly/gatsby-theme-factly/**/!(*.d).{ts,js,jsx,tsx}',
-      ),
-      process.env.Environment !== 'production' &&
-        path.join(
-          process.cwd(),
-          '../../node_modules/@factly/gatsby-theme-factly/src/**/!(*.d).{ts,js,jsx,tsx}',
-        ),
-      path.join(
-        process.cwd(),
-        '../../node_modules/@factly/gatsby-theme-factly/src/**/!(*.d).{ts,js,jsx,tsx}',
-      ),
     ],
   },
 };
