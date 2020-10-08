@@ -46,9 +46,11 @@ const LayoutAmp = (props) => (
                 content: space.description,
               },
             ]}
-          ></Helmet>
-          <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>
+          >
             {' '}
+            <link rel="icon" href={space.fav_icon.url.raw} />
+          </Helmet>
+          <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>
             <div style={{ maxWidth: '702px', margin: '0 auto', textAlign: 'center' }}>
               <a style={{ textDecoration: 'none' }} href={space.site_address}>
                 <amp-img

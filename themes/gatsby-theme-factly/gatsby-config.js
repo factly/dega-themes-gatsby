@@ -54,25 +54,6 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
           ],
         },
       },
-      // {
-      //   resolve: `gatsby-plugin-purgecss`,
-      //   options: {
-      //     printRejected: true,
-      //     develop: true,
-      //     tailwind: true,
-      //     content: [
-      //       path.join(process.cwd(), 'src/**/!(*.d).{ts,js,jsx,tsx}'),
-      //       path.join(
-      //         process.cwd(),
-      //         'node_modules/@factly/gatsby-theme-factly/**/!(*.d).{ts,js,jsx,tsx}',
-      //       ),
-      //       path.join(
-      //         process.cwd(),
-      //         '../../node_modules/@factly/gatsby-theme-factly/src/**/!(*.d).{ts,js,jsx,tsx}',
-      //       ),
-      //     ],
-      //   },
-      // },
       {
         resolve: `gatsby-plugin-amp`,
         options: {
