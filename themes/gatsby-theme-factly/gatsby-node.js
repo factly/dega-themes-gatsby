@@ -103,6 +103,13 @@ exports.createPages = async ({ graphql, actions }) => {
         id: parseInt(post.id),
       },
     });
+    createPage({
+      path: `/${post.slug}/amp/`,
+      component: require.resolve('./src/templates/post-details.amp.js'),
+      context: {
+        id: parseInt(post.id),
+      },
+    });
   });
 
   // create tag details page

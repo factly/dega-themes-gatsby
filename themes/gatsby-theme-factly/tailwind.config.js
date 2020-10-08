@@ -1,4 +1,9 @@
+const path = require('path');
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
   theme: {
     extend: {
       fontFamily: {
@@ -21,4 +26,24 @@ module.exports = {
     borderWidth: ['responsive', 'last', 'hover', 'focus', 'first'],
   },
   plugins: [],
+  purge: {
+    enabled: true,
+    layers: ['utilities'],
+    content: [
+      path.join(process.cwd(), 'src/**/!(*.d).{ts,js,jsx,tsx}'),
+      path.join(
+        process.cwd(),
+        'node_modules/@factly/gatsby-theme-factly/**/!(*.d).{ts,js,jsx,tsx}',
+      ),
+      process.env.Environment !== 'production' &&
+        path.join(
+          process.cwd(),
+          '../../node_modules/@factly/gatsby-theme-factly/src/**/!(*.d).{ts,js,jsx,tsx}',
+        ),
+      path.join(
+        process.cwd(),
+        '../../node_modules/@factly/gatsby-theme-factly/src/**/!(*.d).{ts,js,jsx,tsx}',
+      ),
+    ],
+  },
 };

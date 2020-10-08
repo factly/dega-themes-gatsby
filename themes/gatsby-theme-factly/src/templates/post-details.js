@@ -1,9 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import InfiniteScroll from 'react-infinite-scroller';
-import Post from '../components/Post';
-import StoryLinks from '../components/StoryLinks';
-import Layout from '../components/Layout';
 import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -11,6 +8,10 @@ import {
   faTwitterSquare,
   faWhatsappSquare,
 } from '@fortawesome/free-brands-svg-icons';
+
+import Post from '../components/Post';
+import StoryLinks from '../components/StoryLinks';
+import Layout from '../components/Layout';
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
@@ -76,13 +77,17 @@ const PostDetails = ({ data }) => {
     createObserver();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  //for sharing links
-  let title = encodeURIComponent(dega.post.title);
-  let url = typeof window !== 'undefined' ? window.location.href : dega.post.slug;
+  // for sharing links
+  const title = encodeURIComponent(dega.post.title);
+  const url = typeof window !== 'undefined' ? window.location.href : dega.post.slug;
   return (
     <Layout>
       <Helmet>
         <title>{dega.post.title}</title>
+        {/* <link
+          rel="amphtml"
+          href={typeof window !== 'undefined' ? window.location.href.concat('amp') : ''}
+        /> */}
       </Helmet>
       <div className="flex flex-row justify-between">
         <div className="sidebar lg:flex lg:w-1/4 border-r border-l sticky">
@@ -161,19 +166,6 @@ const PostDetails = ({ data }) => {
                 >
                   <FontAwesomeIcon color="#25d366" size="lg" icon={faWhatsappSquare} />
                 </a>
-                {/*          {[1, 2, 3, 4].map((i) => (
-                <a key={i} className="block px-2 py-1 font-semibold rounded hover:bg-gray-800" href="/">
-                  <svg
-                    className="fill-current text-gray-400  w-5 h-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <title>Twitter</title>
-                    <path d="M6.29 18.25c7.55 0 11.67-6.25 11.67-11.67v-.53c.8-.59 1.49-1.3 2.04-2.13-.75.33-1.54.55-2.36.65a4.12 4.12 0 0 0 1.8-2.27c-.8.48-1.68.81-2.6 1a4.1 4.1 0 0 0-7 3.74 11.65 11.65 0 0 1-8.45-4.3 4.1 4.1 0 0 0 1.27 5.49C2.01 8.2 1.37 8.03.8 7.7v.05a4.1 4.1 0 0 0 3.3 4.03 4.1 4.1 0 0 1-1.86.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 0 16.4a11.62 11.62 0 0 0 6.29 1.84"></path>
-                  </svg>
-                </a>
-              ))}
-      */}{' '}
               </div>
               <div className="lg:hidden fixed m-2 bottom-0 right-0">
                 <svg

@@ -6,7 +6,36 @@
 
 @import 'tailwindcss/utilities';
 
-@import './typography.css';
+html,
+body {
+  @apply font-inter;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-metropolis;
+}
+
+body,
+html {
+  @apply scrolling-touch;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 8px white;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
+}
 
 .dropdown:hover .dropdown-menu {
   display: block;
@@ -24,23 +53,6 @@ div::-webkit-scrollbar-thumb {
 }
 div {
   scrollbar-width: thin;
-}
-body,
-html {
-  @apply scrolling-touch;
-  scrollbar-width: thin;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-}
-body::-webkit-scrollbar {
-  width: 8px;
-}
-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 8px white;
-}
-
-body::-webkit-scrollbar-thumb {
-  @apply bg-gray-300;
 }
 
 .sidebar {

@@ -9,17 +9,17 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
   return {
     siteMetadata: {
       title: 'epage',
-      siteUrl: 'http://localhost:9002',
+      siteUrl: 'http://festive-nobel.netlify.app',
     },
     plugins: [
       'gatsby-plugin-react-helmet',
-      {
+      /* {
         resolve: 'gatsby-source-filesystem',
         options: {
           name: 'images',
           path: path.join(__dirname, `src`, `static/images`),
         },
-      },
+      }, */
       {
         resolve: 'gatsby-source-videos-youtube',
         options: {
@@ -40,6 +40,7 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
       },
       'gatsby-plugin-sharp',
       'gatsby-transformer-sharp',
+
       {
         resolve: `gatsby-plugin-postcss`,
         options: {
@@ -53,10 +54,41 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
           ],
         },
       },
+      // {
+      //   resolve: `gatsby-plugin-purgecss`,
+      //   options: {
+      //     printRejected: true,
+      //     develop: true,
+      //     tailwind: true,
+      //     content: [
+      //       path.join(process.cwd(), 'src/**/!(*.d).{ts,js,jsx,tsx}'),
+      //       path.join(
+      //         process.cwd(),
+      //         'node_modules/@factly/gatsby-theme-factly/**/!(*.d).{ts,js,jsx,tsx}',
+      //       ),
+      //       path.join(
+      //         process.cwd(),
+      //         '../../node_modules/@factly/gatsby-theme-factly/src/**/!(*.d).{ts,js,jsx,tsx}',
+      //       ),
+      //     ],
+      //   },
+      // },
+      {
+        resolve: `gatsby-plugin-amp`,
+        options: {
+          canonicalBaseUrl: 'http://festive-nobel.netlify.app/',
+          components: [],
+          excludedPaths: ['/404*', '/'],
+          pathIdentifier: '/amp/',
+          relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
+          relCanonicalPattern: '{{canonicalBaseUrl}}{{pathname}}',
+        },
+      },
       {
         resolve: `gatsby-plugin-advanced-sitemap`,
       },
       'gatsby-plugin-robots-txt',
+      'gatsby-plugin-manifest',
       'gatsby-plugin-offline',
     ],
   };

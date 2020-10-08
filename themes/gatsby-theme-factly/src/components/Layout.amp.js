@@ -1,14 +1,11 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import Navbar from './Navbar';
-import Footer from './Footer';
 
-const Layout = (props) => (
+const LayoutAmp = (props) => (
   <StaticQuery
     query={graphql`
-      query layoutQuery {
+      query layoutsQuery {
         dega {
           space {
             description
@@ -19,7 +16,7 @@ const Layout = (props) => (
             fav_icon {
               url
             }
-            logo {
+            logo_mobile {
               url
             }
           }
@@ -41,7 +38,7 @@ const Layout = (props) => (
               { property: 'og:url', content: space.site_address },
               {
                 property: 'og:image',
-                content: space.logo.url,
+                content: space.logo_mobile.url,
               },
               { property: 'og:title', content: space.name },
               {
@@ -49,26 +46,26 @@ const Layout = (props) => (
                 content: space.description,
               },
             ]}
-
-          >
-            <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider" />
-          </Helmet>
-          <Navbar logo={space.logo.url.raw}></Navbar>
-          <div
-            style={{ maxWidth: '1920px' }}
-            className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 mx-auto"
-          >
-            {children}
-          </div>
-          <Footer />
+          ></Helmet>
+          <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>
+            {' '}
+            <div style={{ maxWidth: '702px', margin: '0 auto', textAlign: 'center' }}>
+              <a style={{ textDecoration: 'none' }} href={space.site_address}>
+                <amp-img
+                  src={space.logo_mobile.url.raw}
+                  width="97"
+                  height="54"
+                  alt={space.name}
+                  layout="fixed"
+                />
+              </a>
+            </div>
+          </nav>
+          <div style={{ maxWidth: '702px', margin: '0 auto' }}>{children}</div>
         </>
       );
     }}
   />
 );
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default Layout;
+export default LayoutAmp;
