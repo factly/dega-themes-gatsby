@@ -58,7 +58,7 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
         resolve: `gatsby-plugin-amp`,
         options: {
           canonicalBaseUrl: 'http://festive-nobel.netlify.app/',
-          components: [],
+          components: ['amp-iframe'],
           excludedPaths: ['/404*', '/'],
           pathIdentifier: '/amp/',
           relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',

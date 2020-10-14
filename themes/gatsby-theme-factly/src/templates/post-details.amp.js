@@ -30,7 +30,7 @@ const PostDetails = ({ data }) => {
           <strong>Description</strong>
           <div
             dangerouslySetInnerHTML={{
-              __html: parseEditorJsData(post.description),
+              __html: parseEditorJsData(post.description, true),
             }}
           ></div>
         </div>
