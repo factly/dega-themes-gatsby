@@ -130,11 +130,8 @@ function FactCheckWidget({ claims }) {
                   >
                     <h2 className="font-bold P-4">Claim</h2>
                     <div className="flex">
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: parseEditorJsData(claim.description),
-                        }}
-                      />
+                      {parseEditorJsData(claim.description)}
+
                       {claim.rating.medium && (
                         <img
                           src={claim.rating.medium.url.raw}

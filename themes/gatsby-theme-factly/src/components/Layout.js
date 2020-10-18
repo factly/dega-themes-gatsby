@@ -50,6 +50,7 @@ const Layout = (props) => (
               },
             ]}
           >
+            <html lang="en" />
             <link rel="icon" href={space.fav_icon.url.raw} />
             <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider" />
           </Helmet>

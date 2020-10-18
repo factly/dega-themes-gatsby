@@ -172,7 +172,9 @@ function Playlist({ data: { playlist, channel }, location }) {
                 Subscribe
               </a>
             </div>
-            <p className="text-base read-more-wrap py-2">{activeVideo.video.snippet.description}</p>
+            <p className="text-base read-more-wrap py-2 whitespace-pre">
+              {activeVideo.video.snippet.description}
+            </p>
           </div>
         </div>
         <div

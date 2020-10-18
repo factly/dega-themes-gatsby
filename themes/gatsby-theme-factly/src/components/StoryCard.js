@@ -86,9 +86,9 @@ const StoryCard = ({
             </div>
 
             <p className="w-full text-gray-600 text-xs md:text-sm pt-2">{storyData.subtitle}</p>
-            <div className="w-full font-bold text-xl leading-tight text-gray-900 break-words active">
+            <h2 className="w-full font-bold text-xl leading-tight text-gray-900 break-words active">
               {storyData.title}
-            </div>
+            </h2>
             <p className="text-gray-800  text-lg pt-2 break-words">{storyData.excerpt}</p>
           </Link>
           <div className="flex-none mt-auto py-4">

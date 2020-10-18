@@ -16,7 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-metropolis;
+  @apply font-metropolis font-bold;
 }
 
 body,
@@ -96,7 +96,7 @@ div {
 }
 
 a:hover {
-  @apply opacity-75;
+  @apply text-brand;
 }
 
 .fadeInUp {
