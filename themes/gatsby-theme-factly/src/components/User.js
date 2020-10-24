@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
+import addDefaultSrc from '../utils/addDefaultSrc';
 
 const User = ({ user }) => {
   return (
@@ -9,6 +11,7 @@ const User = ({ user }) => {
             alt={user.medium.alt_text}
             src={user.medium.url.raw}
             className="h-20 lg:h-40 object-cover rounded"
+            onError={addDefaultSrc}
           />
         )}
         <div className="px-4">

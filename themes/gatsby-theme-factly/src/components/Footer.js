@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +9,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 import FooterLinks from './FooterLinks';
-
+import addDefaultSrc from '../utils/addDefaultSrc';
 /**
  * TODO:
  */
@@ -58,7 +59,12 @@ function Footer({ className }) {
               <div className="w-full md:w-1/2 px-4">
                 <div className="order-1 lg:order-2 mb-4">
                   <a href="/">
-                    <img className="h-8" src={logo.url.raw} alt="factly"></img>
+                    <img
+                      className="h-8"
+                      src={logo.url.raw}
+                      alt="factly"
+                      onError={addDefaultSrc}
+                    ></img>
                   </a>
                 </div>
                 <h5 className="text-lg mt-0 mb-2 text-gray-700">{description}</h5>

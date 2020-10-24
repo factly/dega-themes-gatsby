@@ -6,6 +6,7 @@ import FactCheckWidget from './FactCheckWidget';
 import Tag from './Tag';
 import Excerpt from './Excerpt';
 import parseEditorJsData from '../utils/parseEditorJsData';
+import { isBrowser } from '../utils/isBrowser';
 
 /**
  * TODO:
@@ -44,7 +45,7 @@ const Post = ({ post, observer }) => {
             <ShareButtonGroup
               setRef={headerSocialIcon}
               data={{
-                url: typeof window !== 'undefined' ? window.location.href : post.slug,
+                url: isBrowser ? window.location.href : post.slug,
                 title: post.title,
               }}
             />

@@ -12,6 +12,7 @@ import {
 import Post from '../components/Post';
 import StoryLinks from '../components/StoryLinks';
 import Layout from '../components/Layout';
+import { isBrowser } from '../utils/isBrowser';
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
@@ -55,7 +56,7 @@ const PostDetails = ({ data }) => {
     const id = entry.target.getAttribute('slug');
     if (entry.intersectionRatio > 0) {
       setPostActiveIndex(id);
-      if (typeof window !== 'undefined') {
+      if (isBrowser) {
         window.history.pushState('page2', 'Title', `/${id}`);
       }
     }
@@ -79,7 +80,7 @@ const PostDetails = ({ data }) => {
   }, []);
   // for sharing links
   const title = encodeURIComponent(dega.post.title);
-  const url = typeof window !== 'undefined' ? window.location.href : dega.post.slug;
+  const url = isBrowser ? window.location.href : dega.post.slug;
   return (
     <Layout>
       <Helmet>

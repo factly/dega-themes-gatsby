@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useRef, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import parseEditorJsData from './../utils/parseEditorJsData';
-
+import addDefaultSrc from '../utils/addDefaultSrc';
 /**
  * TODO: Add resize observer
  * TODO: Disabling the buttons for first and last buttons
@@ -136,6 +137,7 @@ function FactCheckWidget({ claims }) {
                         <img
                           src={claim.rating.medium.url.raw}
                           alt={claim.rating.medium.alt_text}
+                          onError={addDefaultSrc}
                           className="w-1/6 h-full rounded-t m-2"
                         />
                       )}

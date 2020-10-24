@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
-
+import addDefaultSrc from '../utils/addDefaultSrc';
 /**
  * TODO:
  */
@@ -13,6 +14,7 @@ const Excerpt = ({ excerpt, image }) => {
             src={image.url.raw}
             alt={image.alt_text}
             className="w-full h-full rounded-t rounded-l-none md:rounded-t-none md:rounded-l object-cover"
+            onError={addDefaultSrc}
           />
         </div>
       )}
