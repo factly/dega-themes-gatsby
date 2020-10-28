@@ -94,7 +94,7 @@ module.exports = {
             icon: 'pause.png',
             playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
           },
-        ]                // optional, array of objects containing im
+        ]                // optional, array of objects with info about banner playlists
       }
 
     }

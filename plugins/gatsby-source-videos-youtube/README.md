@@ -1,5 +1,6 @@
-# @factly/gatsby-source-youtube
-
+<h1 align="center">
+  @factly/gatsby-source-youtube
+</h1>
 Source from [Youtube](https://developers.google.com/youtube/v3/getting-started) API (v3) in Gatsby.
 
 ---
@@ -32,7 +33,7 @@ It should look something like this:
 
 ```
 API_KEY=your-api-key-here
-CHANNEL_ID=your-session-id-here
+CHANNEL_ID=you-channel-id-here
 ```
 
 ### gatsby-config
