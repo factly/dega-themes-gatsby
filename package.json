@@ -31,7 +31,6 @@
       "pre-commit": "yarn format"
     }
   },
-  
   "devDependencies": {
     "babel-eslint": "^9.0.0",
     "eslint": "^5.14.1",

@@ -1,13 +1,9 @@
-const { createRemoteFileNode } = require('gatsby-source-filesystem');
-const fetch = require('node-fetch');
+const fetch = require('isomorphic-unfetch');
 const _ = require('lodash');
-/**
- * ============================================================================
- * Helper functions and constants
- * ============================================================================
- */
+const { createRemoteFileNode } = require('gatsby-source-filesystem');
 
-// helper function for creating nodes
+exports.onPreInit = () => console.log('Loaded source-plugin');
+
 const createNodeFromData = (item, nodeType, helpers) => {
   const nodeMetadata = {
     id: helpers.createNodeId(`${nodeType}-${item.id}`),
@@ -25,106 +21,54 @@ const createNodeFromData = (item, nodeType, helpers) => {
   return node;
 };
 
-// https://www.googleapis.com/youtube/v3/channels?part=statistics%2Csnippet&id=UCpi2S8wW4xLlUCVryhyBtsA&key=[YOUR_API_KEY] HTTP/1.1
-const getAllData = async ({ type = 'playlists', query = '', API_KEY, part = 'contentDetails' }) => {
+const getAllData = async ({ type = 'playlists', query = '', apiKey, part = 'contentDetails' }) => {
   let data = [];
   let response = {};
   while (response.nextPageToken || data.length === 0) {
-    const URL = `https://www.googleapis.com/youtube/v3/${type}?part=${part}&maxResults=50&key=${API_KEY}${query}&pageToken=${
+    const URL = `https://www.googleapis.com/youtube/v3/${type}?part=${part}&maxResults=50&key=${apiKey}${query}&pageToken=${
       response.nextPageToken || ''
     }`;
-    response = await fetch(URL).then((res) => res.json());
+    response = await fetch(URL)
+      .then((res) => res.json())
+      .catch((err) => console.error('Error in fetching data from youtube api: ', err));
     data.push(...response.items);
   }
   return data;
 };
-
-/**
- * ============================================================================
- * Verify plugin loads
- * ============================================================================
- */
-
-// should see message in console when running `gatsby develop` in example-site
-exports.onPreInit = () => console.log('Loaded source-plugin');
-
-/**
- * ============================================================================
- * Link nodes together with a customized GraphQL Schema
- * ============================================================================
- */
-
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions;
-  const typeDefs = `
-  type Channel implements Node {
-    id: ID!
-    local: File @link
-  }
-  type Playlist implements Node {
-    id: ID!
-    local: File @link
-    videos: [Video] @link
-  }
-  type Video implements Node {
-    id: ID!
-    local: File @link
-  }
-
-  type ChannelSections implements Node {
-    id: ID!
-    videos: [Video] @link
-  }
-`;
-  createTypes(typeDefs);
-};
-
-/**
- * ============================================================================
- * Source and cache nodes from the API
- * ============================================================================
- */
-
-exports.sourceNodes = async function sourceNodes(
-  { actions, cache, createContentDigest, createNodeId, getNodesByType, getNode },
-  { API_KEY = '', channelID = '' },
-) {
-  const { createNode, createTypes, touchNode } = actions;
-  const helpers = Object.assign({}, actions, {
+exports.sourceNodes = async (
+  {
+    actions: { createNode, createTypes, touchNode },
     createContentDigest,
     createNodeId,
-  });
-  // you can access plugin options here if need be
-  // const typeDefs = createTypeDef(schemas, imageKeys)
-  // createTypes(typeDefs)
-  // simple caching example, you can find in .cache/caches/source-plugin/some-diskstore
-  // await cache.set(`hello`, `world`)
-  // console.log(await cache.get(`hello`))
+    cache,
+    getNodesByType,
+    getNode,
+    reporter,
+  },
+  { apiKey, channelId },
+) => {
+  if (!apiKey) return reporter.panic('gatsby-source-youtube: You must provide your api key');
+  if (!channelId) return reporter.panic('gatssby-source-youtube: You must provide your channel id');
+  const helpers = { createNode, createContentDigest, createNodeId };
 
-  // touch nodes to ensure they aren't garbage collected
   getNodesByType('Channel').forEach((node) => touchNode({ nodeId: node.id }));
   getNodesByType('ChannelSections').forEach((node) => touchNode({ nodeId: node.id }));
   getNodesByType('Playlist').forEach((node) => touchNode({ nodeId: node.id }));
   getNodesByType('Video').forEach((node) => touchNode({ nodeId: node.id }));
-  // getNodesByType(AUTHOR_NODE_TYPE).forEach(node =>
-  //   touchNode({ nodeId: node.id })
-  // )
 
-  // store the response from the API in the cache
-  // const cacheKey = "your-source-data-key"
-  // let sourceData = await cache.get(cacheKey)
   let playlistData = await cache.get(`playlists`);
   let channelsData = await cache.get(`channels`);
   let allVideos = await cache.get(`videos`);
   let channelSections = await cache.get('channelSections');
   let channelUploadVideos = await cache.get('channelUploadVideos');
 
+  // get data
   if (!channelsData) {
     channelsData = await getAllData({
       type: 'channels',
-      query: `&id=${channelID}`,
+      query: `&id=${channelId}`,
       part: 'statistics,snippet,contentDetails',
-      API_KEY,
+      apiKey,
     });
     await cache.set(`channels`, channelsData);
   }
@@ -132,9 +76,9 @@ exports.sourceNodes = async function sourceNodes(
   if (!channelSections) {
     channelSections = await getAllData({
       type: 'channelSections',
-      query: `&channelId=${channelID}`,
+      query: `&channelId=${channelId}`,
       part: 'snippet,contentDetails',
-      API_KEY,
+      apiKey,
     });
     await cache.set(`channelSections`, channelSections);
   }
@@ -142,9 +86,9 @@ exports.sourceNodes = async function sourceNodes(
   if (!playlistData) {
     playlistData = await getAllData({
       type: 'playlists',
-      query: `&channelId=${channelID}`,
+      query: `&channelId=${channelId}`,
       part: 'snippet,contentDetails',
-      API_KEY,
+      apiKey,
     });
     await cache.set(`playlists`, playlistData);
   }
@@ -156,15 +100,17 @@ exports.sourceNodes = async function sourceNodes(
         type: 'playlistItems',
         part: 'snippet,contentDetails',
         query: `&playlistId=${playlist.id}`,
-        API_KEY,
+        apiKey,
       }),
     );
+
+    // await??
     allVideos = await Promise.all(videoRequest);
     // allVideos = await getAllData({
     //   type: 'playlistItems',
     //   part: "snippet,contentDetails",
     //   query: `&playlistId=${channelsData[0].contentDetails.relatedPlaylists.uploads}`,
-    //   API_KEY
+    //   apiKey
     // });
     await cache.set(`videos`, allVideos);
   }
@@ -174,17 +120,19 @@ exports.sourceNodes = async function sourceNodes(
       type: 'playlistItems',
       part: 'snippet,contentDetails',
       query: `&playlistId=${channelsData[0].contentDetails.relatedPlaylists.uploads}`,
-      API_KEY,
+      apiKey,
     });
     await cache.set(`channelUploadVideos`, channelUploadVideos);
   }
 
-  //Build Data
+  // build data
+  // build channels data
   channelsData.forEach((channel) => {
     channel.channelId = channel.id;
     createNodeFromData(channel, 'Channel', helpers);
   });
 
+  // build videos data
   allVideos = _.flatten(allVideos);
   allVideos = [...allVideos, ...channelUploadVideos];
   const videoNodeId = {};
@@ -213,6 +161,7 @@ exports.sourceNodes = async function sourceNodes(
     });
   });
 
+  // build playlist data
   playlistData.push({
     id: channelsData[0].contentDetails.relatedPlaylists.uploads,
     list: false,
@@ -222,6 +171,13 @@ exports.sourceNodes = async function sourceNodes(
     },
     contentDetails: {},
   });
+
+  playlistData.forEach((playlist) => {
+    playlist.videos = videoNodeId[playlist.id];
+    playlist.playlistId = playlist.id;
+    createNodeFromData(playlist, 'Playlist', helpers);
+  });
+  //build channelsection data
   channelSections.forEach((section) => {
     if (section.snippet.type === 'recentUploads') {
       section.videos = _.reverse(
@@ -240,61 +196,85 @@ exports.sourceNodes = async function sourceNodes(
       createNodeFromData(section, 'ChannelSections', helpers);
     }
   });
-
-  playlistData.forEach((playlist, index) => {
-    playlist.videos = videoNodeId[playlist.id];
-    playlist.playlistId = playlist.id;
-    createNodeFromData(playlist, 'Playlist', helpers);
-  });
 };
 
-/**
- * ============================================================================
- * Transform remote file nodes
- * ============================================================================
- */
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+  type Channel implements Node {
+    id: ID!
+    local: File @link
+  }
+  type Playlist implements Node {
+    id: ID!
+    local: File @link
+    videos: [Video] @link
+  }
+  type Video implements Node {
+    id: ID!
+    local: File @link
+  }
 
-function isImageKey(key, imageKeys) {
-  return imageKeys.includes(key);
-}
+  type ChannelSections implements Node {
+    id: ID!
+    videos: [Video] @link
+  }
+`;
+  createTypes(typeDefs);
+};
 
 exports.onCreateNode = async ({
-  actions: { createNode, touchNode },
-  getCache,
+  actions: { createNode },
+  node,
+  store,
   cache,
   createNodeId,
-  node,
+  reporter,
 }) => {
   if (
-    (node.internal.type === 'Channel' ||
-      node.internal.type === 'Playlist' ||
-      node.internal.type === 'Video') &&
-    node.snippet.thumbnails &&
-    node.snippet.thumbnails.high
+    node.internal.type === 'Channel' ||
+    node.internal.type === 'Playlist' ||
+    (node.internal.type === 'Video' && node.snippet.thumbnails && node.snippet.thumbnails.high)
   ) {
-    const imageName = node.snippet.thumbnails.high.url.match(/([^/]*)\/*$/)[1];
-    const imageCacheKey = `local-image-${imageName}-${node.id}`;
-    const cachedImage = await cache.get(imageCacheKey);
-    if (cachedImage) {
-      const { fileNodeID } = cachedImage;
-      touchNode({ nodeId: fileNodeID });
-      console.log(`Image from Cache: ${imageName}`);
-      node.local = fileNodeID;
-      return;
+    let fileNode;
+    let imageCacheKey = null;
+    if (node.snippet.title !== 'Uploads') {
+      const imageName = node.snippet.thumbnails.high.url.match(/([^/]*)\/*$/)[1];
+      imageCacheKey = `local-image-${imageName}-${node.id}`;
+      const cachedImage = await cache.get(imageCacheKey);
+      if (cachedImage) {
+        const { fileNodeID } = cachedImage;
+        touchNode({ nodeId: fileNodeID });
+        console.log(`Image from Cache: ${imageName}`);
+        node.local = fileNodeID;
+        return;
+      }
     }
-    const fileNode = await createRemoteFileNode({
-      url: node.snippet.thumbnails.high.url,
-      getCache,
-      createNode,
-      createNodeId,
-      parentNodeId: node.id,
-    });
 
-    if (fileNode) {
+    try {
+      if (node.snippet.title !== 'Uploads') {
+        const { id } = await createRemoteFileNode({
+          url: node.snippet.thumbnails.high.url,
+          cache,
+          store,
+          createNode,
+          createNodeId,
+          parentNodeId: node.id,
+        });
+        fileNode = id;
+      }
+    } catch (err) {
+      reporter.log(`gatsby-source-youtube: Error occured handling file at ${node.snippet.title}. Skipping!
+Error: ${err}`);
+    }
+
+    node.file___NODE = fileNode;
+
+    if (fileNode && imageCacheKey) {
       await cache.set(imageCacheKey, {
-        fileNodeID: fileNode.id,
+        fileNodeID: fileNode,
       });
-      node.local = fileNode.id;
+      node.local = fileNode;
     }
     return node;
   }
