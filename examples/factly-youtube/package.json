@@ -1,0 +1,18 @@
+{
+  "name": "factly-youtube",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@factly/gatsby-theme-youtube": "^1.0.0",
+    "gatsby": "^2.24.87",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
