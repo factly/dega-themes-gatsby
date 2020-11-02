@@ -1,4 +1,4 @@
-module.exports = ({ apiKey, channelId, trackingId  }) => ({
+module.exports = ({ apiKey, channelId, trackingId }) => ({
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-theme-ui`,

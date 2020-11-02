@@ -118,9 +118,7 @@ const IndexPage = ({ data, pageContext }) => {
                 >
                   {channel.snippet.title}
                 </a>
-                <span
-                  sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 1], pb: 2 }}
-                >
+                <span sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 1], pb: 2 }}>
                   {Number(channel.statistics.subscriberCount).toLocaleString()} Subscribers
                 </span>
                 <a
@@ -155,34 +153,18 @@ const IndexPage = ({ data, pageContext }) => {
                     px: 4,
                   }}
                 >
-                  <h3
-                    sx={{ textAlign: 'center', fontWeight: 'bold', py: 2 }}
-                  >
-                    {bannerTitle}
-                  </h3>
-                  <div
-                    sx={{ display: 'flex', justifyContent: 'center', px: 4 }}
-                  >
+                  <h3 sx={{ textAlign: 'center', fontWeight: 'bold', py: 2 }}>{bannerTitle}</h3>
+                  <div sx={{ display: 'flex', justifyContent: 'center', px: 4 }}>
                     {bannerData.map((item, i) => (
-                      <Link
-                        to={`${baseUrl}/playlist/${item.playlistId}`}
-                        sx={{ px: 6 }}
-                        key={i}
-                      >
-                        <img
-                          src={`/${item.icon}`}
-                          alt={item.name}
-                          sx={{ height: 20 }}
-                        />
+                      <Link to={`${baseUrl}/playlist/${item.playlistId}`} sx={{ px: 6 }} key={i}>
+                        <img src={`/${item.icon}`} alt={item.name} sx={{ height: 20 }} />
                       </Link>
                     ))}
                   </div>
                 </div>
               )}
             </div>
-            <ul
-              sx={{ display: 'flex', px: 8, bg: (theme) => `${theme.colors.gray[3]}` }}
-            >
+            <ul sx={{ display: 'flex', px: 8, bg: (theme) => `${theme.colors.gray[3]}` }}>
               {tabs.map((tab, i) => (
                 <li key={i} sx={{ mr: 1, mb: '-0.25rem' }}>
                   <button
@@ -239,11 +221,7 @@ const IndexPage = ({ data, pageContext }) => {
                         }}
                       />
 
-                      <span
-                        sx={{ display: ['none', 'inline'], fontSize: 2 }}
-                      >
-                        Play All
-                      </span>
+                      <span sx={{ display: ['none', 'inline'], fontSize: 2 }}>Play All</span>
                     </Link>
                     <div
                       sx={{
@@ -307,11 +285,7 @@ const IndexPage = ({ data, pageContext }) => {
                                 sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
                               />
 
-                              <span
-                                sx={{ color: 'white', fontSize: 2 }}
-                              >
-                                Play
-                              </span>
+                              <span sx={{ color: 'white', fontSize: 2 }}>Play</span>
                             </div>
                           </div>
                           <div
@@ -329,7 +303,11 @@ const IndexPage = ({ data, pageContext }) => {
                               {video.snippet.title}
                             </div>
                             <p
-                              sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0,pt:1 }}
+                              sx={{
+                                color: (theme) => `${theme.colors.gray[6]}`,
+                                fontSize: 0,
+                                pt: 1,
+                              }}
                             >
                               {video.snippet.channelTitle} - {video.snippet.publishedAt}
                             </p>
@@ -351,13 +329,8 @@ const IndexPage = ({ data, pageContext }) => {
                 <h2 className="heading" sx={{ pr: 6 }}>
                   Uploads
                 </h2>
-                <FontAwesomeIcon
-                  icon={faPlay}
-                  sx={{ fill: 'currentColor', width: 4, height: 4 }}
-                />
-                <span sx={{ fontSize: 2 }}>
-                  Play All
-                </span>
+                <FontAwesomeIcon icon={faPlay} sx={{ fill: 'currentColor', width: 4, height: 4 }} />
+                <span sx={{ fontSize: 2 }}>Play All</span>
               </Link>
               <div className="row-list-container">
                 <InfiniteScroll
@@ -420,16 +393,10 @@ const IndexPage = ({ data, pageContext }) => {
                             sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
                           />
 
-                          <span
-                            sx={{ color: 'white', fontSize: 2 }}
-                          >
-                            Play
-                          </span>
+                          <span sx={{ color: 'white', fontSize: 2 }}>Play</span>
                         </div>
                       </div>
-                      <div
-                        sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}
-                      >
+                      <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}>
                         <div
                           id="nav-0"
                           sx={{
@@ -441,9 +408,7 @@ const IndexPage = ({ data, pageContext }) => {
                         >
                           {video.snippet.title}
                         </div>
-                        <p
-                          sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0, pt: 1 }}
-                        >
+                        <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0, pt: 1 }}>
                           {video.snippet.channelTitle} - {video.snippet.publishedAt}
                         </p>
                       </div>
@@ -521,14 +486,10 @@ const IndexPage = ({ data, pageContext }) => {
                         icon={faPlay}
                         sx={{ color: 'white', fill: 'currentColor', width: 4, height: 4 }}
                       />
-                      <span sx={{ color: 'white', fontSize: 2 }}>
-                        Play All
-                      </span>
+                      <span sx={{ color: 'white', fontSize: 2 }}>Play All</span>
                     </div>
                   </div>
-                  <div
-                    sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}
-                  >
+                  <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}>
                     <div>
                       <span
                         sx={{

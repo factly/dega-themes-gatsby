@@ -131,11 +131,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
           className="main-content"
           sx={{ display: 'flex', flexDirection: 'column', width: ['full', 'full', '3/5'] }}
         >
-          <div
-            ref={videoElement}
-            style={{ paddingBottom: `56.25%` }}
-            sx={{ position: 'relative' }}
-          >
+          <div ref={videoElement} style={{ paddingBottom: `56.25%` }} sx={{ position: 'relative' }}>
             <iframe
               sx={{
                 position: 'absolute',
@@ -151,9 +147,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               allowFullScreen
             />
           </div>
-          <div
-            sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 4 }}
-          >
+          <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 4 }}>
             {/* <p className="w-full text-gray-600 text-xs lg:text-sm">
               {activeVideo.video.snippet.channelTitle}
             </p> */}
@@ -170,15 +164,11 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             >
               {activeVideo.video.snippet.title}
             </div>
-            <p
-              sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1], pb: 2 }}
-            >
+            <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1], pb: 2 }}>
               {activeVideo.video.snippet.publishedAt}
             </p>
             <hr />
-            <div
-              sx={{ display: 'flex', alignItems: 'center', borderBottomWidth: 'px', p: 6 }}
-            >
+            <div sx={{ display: 'flex', alignItems: 'center', borderBottomWidth: 'px', p: 6 }}>
               <a
                 rel="noopener noreferrer"
                 target="_blank"
@@ -236,10 +226,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                 Subscribe
               </a>
             </div>
-            <p
-              className="read-more-wrap"
-              sx={{ whiteSpace: 'pre-line', py: 2, fontSize: 2 }}
-            >
+            <p className="read-more-wrap" sx={{ whiteSpace: 'pre-line', py: 2, fontSize: 2 }}>
               {activeVideo.video.snippet.description}
             </p>
           </div>
@@ -254,16 +241,14 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             mx: [null, null, 4],
             height: 'screenHeight',
             borderWidth: 'px',
-            boxShadow: [null,null,'md'],
+            boxShadow: [null, null, 'md'],
           }}
         >
           <div sx={{ mb: 4, p: 4, borderBottomWidth: 'px' }}>
             <h5 sx={{ fontSize: 2, fontWeight: 'medium' }}>
               {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
             </h5>
-            <p
-              sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1] }}
-            >
+            <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1] }}>
               {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/
               {playlist.videos.length}
             </p>
@@ -320,9 +305,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     }}
                     to={`/playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
                   >
-                    <span
-                      sx={{ px: 2, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}
-                    >
+                    <span sx={{ px: 2, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}>
                       {activeVideo.videoIndex === index ? (
                         <FontAwesomeIcon
                           icon={faPlay}
@@ -362,13 +345,9 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                         height: 'full',
                       }}
                     >
-                      <span sx={{ color: 'white', fontSize: 2 }}>
-                        Play
-                      </span>
+                      <span sx={{ color: 'white', fontSize: 2 }}>Play</span>
                     </div>
-                    <div
-                      sx={{ width: '4/5', display: 'flex', flexDirection: 'column', px: 2 }}
-                    >
+                    <div sx={{ width: '4/5', display: 'flex', flexDirection: 'column', px: 2 }}>
                       <div
                         id="nav-0"
                         sx={{
@@ -382,9 +361,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                       >
                         {playlistVideo.snippet.title}
                       </div>
-                      <p
-                        sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0 }}
-                      >
+                      <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0 }}>
                         {playlistVideo.snippet.channelTitle} - {playlistVideo.snippet.publishedAt}
                       </p>
                     </div>

@@ -56,9 +56,7 @@ const ShareButtonGroup = ({ data }) => {
     },
   ];
   return (
-    <div
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flex: '1 1 0%' }}
-    >
+    <div sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flex: '1 1 0%' }}>
       {icons.map((i) => (
         <a
           key={i.color}
