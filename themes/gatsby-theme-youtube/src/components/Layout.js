@@ -47,13 +47,7 @@ const Layout = ({ children, baseUrl, logo }) => {
           }}
         >
           <Link to={url} sx={{ fontWeight: 'semibold', fontSize: 4, letterSpacing: 'tight' }}>
-            <img
-              src={imgSrc}
-              alt="logo"
-              className="h-10"
-              sx={{ height: 10 }}
-              onError={addDefaultSrc}
-            />
+            <img src={imgSrc} alt="logo" sx={{ height: 10 }} onError={addDefaultSrc} />
           </Link>
         </div>
         <div

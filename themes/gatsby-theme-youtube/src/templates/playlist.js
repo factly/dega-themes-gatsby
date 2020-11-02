@@ -118,7 +118,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
       </Helmet>
       <div
-        className="flex flex-col lg:flex-row justify-between lg:border-b mx-2 pb-16 md:mx-10 xl:mx-20"
         sx={{
           display: 'flex',
           flexDirection: ['column', 'column', 'row'],
@@ -129,17 +128,15 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
         }}
       >
         <div
-          className="main-content flex flex-col w-full lg:w-3/5"
+          className="main-content"
           sx={{ display: 'flex', flexDirection: 'column', width: ['full', 'full', '3/5'] }}
         >
           <div
             ref={videoElement}
-            className="relative"
             style={{ paddingBottom: `56.25%` }}
             sx={{ position: 'relative' }}
           >
             <iframe
-              className="absolute top-0 left-0 w-full h-full"
               sx={{
                 position: 'absolute',
                 top: 0,
@@ -155,7 +152,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             />
           </div>
           <div
-            className="w-full flex flex-col py-4"
             sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 4 }}
           >
             {/* <p className="w-full text-gray-600 text-xs lg:text-sm">
@@ -163,7 +159,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             </p> */}
             <div
               id="nav-0"
-              className="w-full font-bold  text-xl leading-tight text-gray-800 mb-2"
               sx={{
                 width: 'full',
                 fontWeight: 'bold',
@@ -176,14 +171,12 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               {activeVideo.video.snippet.title}
             </div>
             <p
-              className="text-gray-600 text-xs lg:text-sm pb-2"
               sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1], pb: 2 }}
             >
               {activeVideo.video.snippet.publishedAt}
             </p>
             <hr />
             <div
-              className="flex items-center border-b p-6"
               sx={{ display: 'flex', alignItems: 'center', borderBottomWidth: 'px', p: 6 }}
             >
               <a
@@ -194,13 +187,11 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                 <img
                   alt={channel.snippet.title}
                   src={channel.snippet.thumbnails.high.url}
-                  className="h-12 rounded-full"
                   sx={{ height: 12, borderRadius: 'full' }}
                 />
               </a>
               <div>
                 <div
-                  className="flex flex-col justify-start px-4"
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -217,7 +208,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     {channel.snippet.title}
                   </a>
                   <span
-                    className="text-gray-600 text-xs md:text-sm pb-2"
                     sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 1], pb: 2 }}
                   >
                     {Number(channel.statistics.subscriberCount).toLocaleString()} Subscribers
@@ -229,7 +219,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                 href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
                 target="_blank"
                 type="button"
-                className="ml-auto block lg:px-4 uppercase text-center font-medium text-sm focus:outline-none bg-gray-300 rounded p-2"
                 sx={{
                   ml: 'auto',
                   display: 'block',
@@ -248,7 +237,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               </a>
             </div>
             <p
-              className="text-base read-more-wrap py-2 whitespace-pre-line"
+              className="read-more-wrap"
               sx={{ whiteSpace: 'pre-line', py: 2, fontSize: 2 }}
             >
               {activeVideo.video.snippet.description}
@@ -256,7 +245,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
           </div>
         </div>
         <div
-          className="flex flex-col w-full lg:w-2/5 mt-16 lg:mt-0 lg:mx-4 h-screen border lg:shadow-md"
           style={{ height: videoListHeight }}
           sx={{
             display: 'flex',
@@ -266,15 +254,14 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             mx: [null, null, 4],
             height: 'screenHeight',
             borderWidth: 'px',
-            boxShadow: 'md',
+            boxShadow: [null,null,'md'],
           }}
         >
-          <div className="mb-4 p-4 border-b" sx={{ mb: 4, p: 4, borderBottomWidth: 'px' }}>
-            <h5 className="text-base font-medium" sx={{ fontSize: 2, fontWeight: 'medium' }}>
+          <div sx={{ mb: 4, p: 4, borderBottomWidth: 'px' }}>
+            <h5 sx={{ fontSize: 2, fontWeight: 'medium' }}>
               {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
             </h5>
             <p
-              className="text-gray-600 text-xs lg:text-sm"
               sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1] }}
             >
               {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/
@@ -283,7 +270,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
           </div>
           <div
             ref={playlistElement}
-            className="lg:relative lg:overflow-auto h-screen"
             style={{ height: videoListHeight }}
             sx={{
               position: [null, null, 'relative'],
@@ -292,7 +278,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             }}
           >
             <div
-              className="flex flex-col lg:absolute top-0 left-0 w-full h-full"
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -320,8 +305,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                   <Link
                     key={index}
                     id={playlistVideo.id}
-                    className={`relative flex flex-row w-full justify-between items-center no-underline hover:no-underline mb-2 py-2 
-                      ${activeVideo.videoIndex === index && 'video-active'}`}
+                    className={`${activeVideo.videoIndex === index && 'video-active'}`}
                     sx={{
                       position: 'relative',
                       display: 'flex',
@@ -337,13 +321,11 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     to={`/playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
                   >
                     <span
-                      className="text-sm text-gray-600 px-2"
-                      sx={{ px: 4, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}
+                      sx={{ px: 2, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}
                     >
                       {activeVideo.videoIndex === index ? (
                         <FontAwesomeIcon
                           icon={faPlay}
-                          className="fill-current w-2 h-2"
                           sx={{ width: 2, height: 2, fill: 'currentColor' }}
                         />
                       ) : (
@@ -354,19 +336,17 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                       <Img
                         alt={playlistVideo.snippet.title}
                         fluid={playlistVideo.local.childImageSharp.fluid}
-                        className="w-20 h-full"
                         sx={{ width: 20, height: 'full' }}
                       />
                     ) : (
                       <img
                         alt={playlistVideo.snippet.title}
                         src="https://source.unsplash.com/random/150x150"
-                        className="w-20 h-full"
                         sx={{ width: 20, height: 'full' }}
                       />
                     )}
                     <div
-                      className="hidden opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0"
+                      className="hidden flex"
                       sx={{
                         opacity: '0',
                         ':hover': { opacity: '0.75' },
@@ -382,17 +362,15 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                         height: 'full',
                       }}
                     >
-                      <span className="text-white text-base" sx={{ color: 'white', fontSize: 2 }}>
+                      <span sx={{ color: 'white', fontSize: 2 }}>
                         Play
                       </span>
                     </div>
                     <div
-                      className="w-4/5 flex flex-col px-2"
                       sx={{ width: '4/5', display: 'flex', flexDirection: 'column', px: 2 }}
                     >
                       <div
                         id="nav-0"
-                        className="w-full font-bold  text-sm leading-tight text-gray-800 mb-2"
                         sx={{
                           width: 'full',
                           mb: 2,
@@ -405,7 +383,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                         {playlistVideo.snippet.title}
                       </div>
                       <p
-                        className="text-gray-600 text-xs"
                         sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0 }}
                       >
                         {playlistVideo.snippet.channelTitle} - {playlistVideo.snippet.publishedAt}

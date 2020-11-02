@@ -27,6 +27,7 @@ module.exports = {
       options: {
         apiKey: YOUR_API_KEY, // mandatory
         channelId: CHANNEL_ID, // mandatory
+        trackingId: YOUR_GOOGLE_ANALYTICS_TRACKING_ID,
         logo: 'logo.png',
       },
     },

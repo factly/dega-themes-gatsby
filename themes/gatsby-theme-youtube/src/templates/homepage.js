@@ -71,7 +71,6 @@ const IndexPage = ({ data, pageContext }) => {
         <script type="application/ld+json">{JSON.stringify(schemaVideoList)}</script>
       </Helmet>
       <div
-        className="flex flex-col lg:flex-row justify-between lg:border-b"
         sx={{
           display: 'flex',
           flexDirection: ['column', 'column', 'row'],
@@ -79,10 +78,9 @@ const IndexPage = ({ data, pageContext }) => {
           borderBottomWidth: [null, null, 'px'],
         }}
       >
-        <div className="main-content w-full -mt-8" sx={{ width: 'full', marginTop: '-2rem' }}>
+        <div className="main-content" sx={{ width: 'full', marginTop: '-2rem' }}>
           <div>
             <div
-              className="flex items-start border-b p-6 bg-gray-300"
               sx={{
                 display: 'flex',
                 alignItems: 'flex-start',
@@ -100,12 +98,10 @@ const IndexPage = ({ data, pageContext }) => {
                 <img
                   alt={channel.snippet.title}
                   src={channel.snippet.thumbnails.high.url}
-                  className="h-24"
                   sx={{ height: 24 }}
                 />
               </a>
               <div
-                className="flex flex-col justify-start px-4"
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -117,13 +113,12 @@ const IndexPage = ({ data, pageContext }) => {
                   rel="noopener noreferrer"
                   target="_blank"
                   href={`https://www.youtube.com/channel/${channel.channelId}`}
-                  className="heading font-bold"
+                  className="heading"
                   sx={{ fontWeight: 'bold' }}
                 >
                   {channel.snippet.title}
                 </a>
                 <span
-                  className="text-gray-600 text-xs md:text-sm pb-2"
                   sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 1], pb: 2 }}
                 >
                   {Number(channel.statistics.subscriberCount).toLocaleString()} Subscribers
@@ -133,7 +128,6 @@ const IndexPage = ({ data, pageContext }) => {
                   href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
                   target="_blank"
                   type="button"
-                  className="block lg:px-4 uppercase text-center font-medium text-sm focus:outline-none bg-gray-100 rounded p-2"
                   sx={{
                     display: 'block',
                     p: 2,
@@ -153,7 +147,6 @@ const IndexPage = ({ data, pageContext }) => {
               </div>
               {bannerData.length > 0 && (
                 <div
-                  className="hidden none lg:flex flex-grow flex-col justify-center px-4"
                   sx={{
                     display: ['none', 'none', 'none', 'flex'],
                     flexGrow: '1',
@@ -163,26 +156,22 @@ const IndexPage = ({ data, pageContext }) => {
                   }}
                 >
                   <h3
-                    className="text-center font-bold py-2"
                     sx={{ textAlign: 'center', fontWeight: 'bold', py: 2 }}
                   >
                     {bannerTitle}
                   </h3>
                   <div
-                    className="flex justify-center px-4"
                     sx={{ display: 'flex', justifyContent: 'center', px: 4 }}
                   >
                     {bannerData.map((item, i) => (
                       <Link
                         to={`${baseUrl}/playlist/${item.playlistId}`}
-                        className="px-6"
                         sx={{ px: 6 }}
                         key={i}
                       >
                         <img
                           src={`/${item.icon}`}
                           alt={item.name}
-                          className="h-20"
                           sx={{ height: 20 }}
                         />
                       </Link>
@@ -192,15 +181,13 @@ const IndexPage = ({ data, pageContext }) => {
               )}
             </div>
             <ul
-              className="flex px-8 bg-gray-300"
               sx={{ display: 'flex', px: 8, bg: (theme) => `${theme.colors.gray[3]}` }}
             >
               {tabs.map((tab, i) => (
-                <li className="-mb-px mr-1" key={i} sx={{ mr: 1, mb: '-0.25rem' }}>
+                <li key={i} sx={{ mr: 1, mb: '-0.25rem' }}>
                   <button
                     type="button"
-                    className={`inline-block py-2 px-4 border border-b-0 rounded-t font-medium text-lg focus:outline-none
-                    ${activeTab[tab] && 'bg-white'}`}
+                    className={`${activeTab[tab] && 'bg-white'}`}
                     sx={{
                       borderWidth: 'px',
                       borderBottomWidth: '0',
@@ -236,18 +223,16 @@ const IndexPage = ({ data, pageContext }) => {
                 return (
                   <React.Fragment key={i}>
                     <Link
-                      className="flex items-center"
                       sx={{ display: 'flex', alignItems: 'center' }}
                       to={`${baseUrl}/playlist/${channelSection.playlist.id}`}
                     >
-                      <h2 className="heading px-6 my-6" sx={{ px: 6, my: 6 }}>
+                      <h2 className="heading" sx={{ px: 6, my: 6 }}>
                         {_.startCase(playlistTitle)}
                       </h2>
                       <FontAwesomeIcon
                         icon={faPlay}
-                        className="hidden md:block fill-current w-4 h-4"
                         sx={{
-                          display: ['none', 'none', 'block'],
+                          display: ['none', 'block'],
                           fill: 'currentColor',
                           width: 4,
                           height: 4,
@@ -255,14 +240,12 @@ const IndexPage = ({ data, pageContext }) => {
                       />
 
                       <span
-                        className="hidden md:inline text-base"
                         sx={{ display: ['none', 'inline'], fontSize: 2 }}
                       >
                         Play All
                       </span>
                     </Link>
                     <div
-                      className="border-b flex flex-row flex-wrap px-6 justify-center sm:justify-start items-center sm:items-start"
                       sx={{
                         borderBottomWidth: 'px',
                         display: 'flex',
@@ -276,7 +259,6 @@ const IndexPage = ({ data, pageContext }) => {
                       {channelSection.videos.map((video, index) => (
                         <Link
                           key={index}
-                          className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
                           sx={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -291,12 +273,11 @@ const IndexPage = ({ data, pageContext }) => {
                           }}
                           to={`${baseUrl}/playlist/${playlistId}?v=${video.contentDetails.videoId}`}
                         >
-                          <div className="relative" sx={{ position: 'relative' }}>
+                          <div sx={{ position: 'relative' }}>
                             {video.local && (
                               <Img
                                 alt={video.snippet.title}
                                 fluid={video.local.childImageSharp.fluid}
-                                className="h-full w-full"
                                 sx={{ height: 'full', width: 'full' }}
                               />
                             )}
@@ -306,7 +287,6 @@ const IndexPage = ({ data, pageContext }) => {
                       </span>
                     </div> */}
                             <div
-                              className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0"
                               sx={{
                                 opacity: 0,
                                 ':hover': { opacity: '0.75' },
@@ -324,12 +304,10 @@ const IndexPage = ({ data, pageContext }) => {
                             >
                               <FontAwesomeIcon
                                 icon={faPlay}
-                                className="text-white fill-current w-4 h-4"
                                 sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
                               />
 
                               <span
-                                className="text-white text-base"
                                 sx={{ color: 'white', fontSize: 2 }}
                               >
                                 Play
@@ -337,12 +315,10 @@ const IndexPage = ({ data, pageContext }) => {
                             </div>
                           </div>
                           <div
-                            className="w-full flex flex-col py-2"
                             sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}
                           >
                             <div
                               id="nav-0"
-                              className="w-full font-bold  text-base text-gray-800"
                               sx={{
                                 width: 'full',
                                 fontWeight: 'bold',
@@ -353,8 +329,7 @@ const IndexPage = ({ data, pageContext }) => {
                               {video.snippet.title}
                             </div>
                             <p
-                              className="text-gray-600 text-xs pt-1"
-                              sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0 }}
+                              sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0,pt:1 }}
                             >
                               {video.snippet.channelTitle} - {video.snippet.publishedAt}
                             </p>
@@ -370,19 +345,17 @@ const IndexPage = ({ data, pageContext }) => {
           {activeTab.Videos && (
             <div>
               <Link
-                className="flex items-center px-6 mt-6"
                 sx={{ display: 'flex', alignItems: 'center', px: 6, mt: 6 }}
                 to={`${baseUrl}/playlist/${channel.contentDetails.relatedPlaylists.uploads}`}
               >
-                <h2 className="heading pr-6" sx={{ pr: 6 }}>
+                <h2 className="heading" sx={{ pr: 6 }}>
                   Uploads
                 </h2>
                 <FontAwesomeIcon
                   icon={faPlay}
-                  className="fill-current w-4 h-4"
                   sx={{ fill: 'currentColor', width: 4, height: 4 }}
                 />
-                <span className="text-base" sx={{ fontSize: 2 }}>
+                <span sx={{ fontSize: 2 }}>
                   Play All
                 </span>
               </Link>
@@ -401,7 +374,6 @@ const IndexPage = ({ data, pageContext }) => {
                   {postItems.map((video, i) => (
                     <Link
                       key={i}
-                      className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
                       sx={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -414,12 +386,11 @@ const IndexPage = ({ data, pageContext }) => {
                       }}
                       to={`${baseUrl}/playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
                     >
-                      <div className="relative" sx={{ position: 'relative' }}>
+                      <div sx={{ position: 'relative' }}>
                         {video.local && (
                           <Img
                             alt={video.snippet.title}
                             fluid={video.local.childImageSharp.fluid}
-                            className="h-full w-full"
                             sx={{ width: 'full', height: 'full' }}
                           />
                         )}
@@ -429,7 +400,6 @@ const IndexPage = ({ data, pageContext }) => {
                     </span>
                   </div> */}
                         <div
-                          className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0"
                           sx={{
                             opacity: 0,
                             ':hover': { opacity: '0.75' },
@@ -448,11 +418,9 @@ const IndexPage = ({ data, pageContext }) => {
                           <FontAwesomeIcon
                             icon={faPlay}
                             sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
-                            className="text-white fill-current w-4 h-4"
                           />
 
                           <span
-                            className="text-white text-base"
                             sx={{ color: 'white', fontSize: 2 }}
                           >
                             Play
@@ -460,12 +428,10 @@ const IndexPage = ({ data, pageContext }) => {
                         </div>
                       </div>
                       <div
-                        className="w-full flex flex-col py-2"
                         sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}
                       >
                         <div
                           id="nav-0"
-                          className="w-full font-bold  text-base text-gray-800"
                           sx={{
                             width: 'full',
                             fontWeight: 'bold',
@@ -476,7 +442,6 @@ const IndexPage = ({ data, pageContext }) => {
                           {video.snippet.title}
                         </div>
                         <p
-                          className="text-gray-600 text-xs pt-1"
                           sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0, pt: 1 }}
                         >
                           {video.snippet.channelTitle} - {video.snippet.publishedAt}
@@ -490,7 +455,6 @@ const IndexPage = ({ data, pageContext }) => {
           )}
           {activeTab.Playlists && (
             <div
-              className="flex flex-row flex-wrap p-6 justify-center sm:justify-start items-center sm:items-start"
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -503,7 +467,6 @@ const IndexPage = ({ data, pageContext }) => {
               {playlists.map((playlist, i) => (
                 <Link
                   key={i}
-                  className="flex flex-col w-full sm:w-1/3 lg:w-1/4 xl:w-1/5 no-underline hover:no-underline sm:pr-6 pb-4 mb-6"
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -518,12 +481,11 @@ const IndexPage = ({ data, pageContext }) => {
                   }}
                   to={`${baseUrl}/playlist/${playlist.playlistId}?v=${playlist.videos[0].contentDetails.videoId}`}
                 >
-                  <div className="relative" sx={{ position: 'relative' }}>
+                  <div sx={{ position: 'relative' }}>
                     {playlist.local ? (
                       <Img
                         alt={playlist.snippet.title}
                         fluid={playlist.local.childImageSharp.fluid}
-                        className="h-full w-full"
                         sx={{ width: 'full', height: 'full' }}
                       />
                     ) : (
@@ -531,7 +493,6 @@ const IndexPage = ({ data, pageContext }) => {
                         src={placeholderImg}
                         alt="placeholder"
                         style={{ padding: '12% 0' }}
-                        className="h-full w-full"
                         sx={{ width: 'full', height: 'full' }}
                       />
                     )}
@@ -541,7 +502,6 @@ const IndexPage = ({ data, pageContext }) => {
                     </span>
                   </div> */}
                     <div
-                      className="opacity-0 hover:opacity-75 flex justify-center items-center p-6 bg-black absolute w-full h-full top-0 left-0"
                       sx={{
                         opacity: 0,
                         ':hover': { opacity: '0.75' },
@@ -559,21 +519,18 @@ const IndexPage = ({ data, pageContext }) => {
                     >
                       <FontAwesomeIcon
                         icon={faPlay}
-                        className="text-white fill-current w-4 h-4"
                         sx={{ color: 'white', fill: 'currentColor', width: 4, height: 4 }}
                       />
-                      <span className="text-white text-base" sx={{ color: 'white', fontSize: 2 }}>
+                      <span sx={{ color: 'white', fontSize: 2 }}>
                         Play All
                       </span>
                     </div>
                   </div>
                   <div
-                    className="w-full flex flex-col py-2"
                     sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}
                   >
                     <div>
                       <span
-                        className="inline-block align-text-top bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-700"
                         sx={{
                           display: 'inline-block',
                           verticalAlign: 'text-top',
@@ -591,7 +548,6 @@ const IndexPage = ({ data, pageContext }) => {
                     </div>
                     <div
                       id="nav-0"
-                      className="w-full font-bold  text-lg text-gray-800"
                       sx={{
                         width: 'full',
                         fontWeight: 'bold',
@@ -605,7 +561,6 @@ const IndexPage = ({ data, pageContext }) => {
                     {playlist.snippet.publishedAt}
                   </p> */}
                     <span
-                      className="text-gray-600 text-xs md:text-sm pt-2 uppercase"
                       sx={{
                         color: (theme) => `${theme.colors.gray[6]}`,
                         fontSize: [0, 1],

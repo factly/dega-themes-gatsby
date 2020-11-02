@@ -57,7 +57,6 @@ const ShareButtonGroup = ({ data }) => {
   ];
   return (
     <div
-      className="flex flex-1 items-center justify-end"
       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flex: '1 1 0%' }}
     >
       {icons.map((i) => (
@@ -67,7 +66,6 @@ const ShareButtonGroup = ({ data }) => {
           href={i.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="block mx-2 first:mx-0 my-2 font-semibold rounded "
           sx={{ display: 'block', mx: 2, my: 2, fontWeight: 'semibold', borderRadius: 'default' }}
         >
           <FontAwesomeIcon color={i.color} size="lg" icon={i.icon} />
