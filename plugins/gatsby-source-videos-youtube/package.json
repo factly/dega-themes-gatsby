@@ -23,7 +23,7 @@
     "lodash": "^4.17.20"
   },
   "peerDependencies": {
-    "gatsby": "^2.21.7",
+    "gatsby": "^2.24.87",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

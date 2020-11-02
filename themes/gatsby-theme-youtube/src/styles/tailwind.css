@@ -1,9 +1,0 @@
-@tailwind base;
-
-@tailwind components;
-
-@tailwind utilities;
-
-.row-list-container section {
-  @apply flex flex-row flex-wrap p-6 justify-start items-start;
-}

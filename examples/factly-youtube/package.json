@@ -10,7 +10,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@factly/gatsby-theme-youtube": "^1.0.0",
+    "@factly/gatsby-theme-youtube": "^0.0.1",
     "gatsby": "^2.24.87",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"

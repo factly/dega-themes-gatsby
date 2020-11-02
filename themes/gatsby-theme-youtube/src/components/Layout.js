@@ -1,9 +1,13 @@
+/** @jsx jsx */
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
+
+// import styled from '@emotion/styled'
+import { jsx } from 'theme-ui';
 import ShareButtonGroup from './ShareButtonGroup';
 import placeholderLogo from '../static/images/logo.png';
-import '../styles/tailwind.css';
 
 const Layout = ({ children, baseUrl, logo }) => {
   let url;
@@ -14,7 +18,7 @@ const Layout = ({ children, baseUrl, logo }) => {
   }
 
   let data;
-  if (window !== 'undefined') {
+  if (typeof window !== 'undefined') {
     data = {
       url: window.location.href,
       title: window.document.title,
@@ -24,22 +28,69 @@ const Layout = ({ children, baseUrl, logo }) => {
   const addDefaultSrc = (e) => (e.target.src = placeholderLogo);
   return (
     <>
-      <nav className="flex items-center justify-between flex-wrap bg-white p-6">
-        <div className="flex items-center flex-grow flex-shrink-0 text-black">
-          <Link to={url} className="font-semibold text-xl tracking-tight">
-            <img src={imgSrc} alt="logo" className="h-10" onError={addDefaultSrc} />
+      <nav
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          background: 'white',
+          padding: 6,
+        }}
+      >
+        <div
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            color: 'black',
+            flex: '1 0 auto',
+          }}
+        >
+          <Link to={url} sx={{ fontWeight: 'semibold', fontSize: 4, letterSpacing: 'tight' }}>
+            <img
+              src={imgSrc}
+              alt="logo"
+              className="h-10"
+              sx={{ height: 10 }}
+              onError={addDefaultSrc}
+            />
           </Link>
         </div>
-        <div className="block lg:flex lg:items-center lg:w-auto">
+        <div
+          sx={{
+            display: ['block', 'block', 'flex'],
+            alignItems: [null, null, 'center'],
+            width: [null, null, 'auto'],
+          }}
+        >
           <ShareButtonGroup data={data} />
         </div>
       </nav>
+
       <main
         style={{ maxWidth: '1920px' }}
-        className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 mx-auto"
+        sx={{
+          width: 'full',
+          fontSize: [4, 5],
+          color: (theme) => `${theme.colors.gray[8]}`,
+          lineHeight: 'normal',
+          px: [null, null, 6],
+          mt: 10,
+          pt: 4,
+          mx: 'auto',
+        }}
       >
         {children}
-        <footer className="text-sm text-right my-8">&copy; Factly 2020. All rights reserved</footer>
+        <footer
+          sx={{
+            fontSize: 1,
+            textAlign: 'right',
+            my: 8,
+            color: (theme) => `${theme.colors.gray[6]}`,
+          }}
+        >
+          &copy; Factly 2020. All rights reserved
+        </footer>
       </main>
     </>
   );

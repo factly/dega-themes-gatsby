@@ -1,6 +1,8 @@
 module.exports = ({ apiKey, channelId }) => ({
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-theme-ui`,
+    `gatsby-plugin-emotion`,
     {
       resolve: `@factly/gatsby-source-youtube`,
       options: {
