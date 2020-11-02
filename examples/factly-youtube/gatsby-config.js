@@ -1,10 +1,15 @@
+require('dotenv').config({
+  path: `.env`,
+});
+
 module.exports = {
   plugins: [
     {
       resolve: `@factly/gatsby-theme-youtube`,
       options: {
-        apiKey: 'AIzaSyAKjjTJOpqrRziHAfx8NtvRzEawPAC_R9c',
-        channelId: 'UCpi2S8wW4xLlUCVryhyBtsA',
+        apiKey: process.env.GOOGLE_PRIVATE_KEY,
+        channelId: process.env.CHANNEL_ID,
+        trackingId: process.env.GA_TRACKING_ID,
         basePath: '/',
         logo: 'logo.png',
         bannerData: [
