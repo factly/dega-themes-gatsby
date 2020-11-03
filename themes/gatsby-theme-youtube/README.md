@@ -65,8 +65,8 @@ your-gatsby-project
 |   apiKey    |        ''        | Google private youtube API                                                  |
 |  basePath   |       '/'        | Root url for all blog posts                                                 |
 |  channelId  |        ''        | Youtube Channel Id                                                          |
-|    logo     |        ''        | Your logo image name  |
-|    trackingId     |        ''        | Your google analytics ID |
+|    logo     |        ''        | Your logo image name                                                        |
+| trackingId  |        ''        | Your google analytics ID                                                    |
 | bannerTitle | 'Featured Shows' | Title of the banner element in Homepage                                     |
 | bannerData  |        []        | Array of objects (maxed at 3 ) containing data about the featured playlists |
 
@@ -79,7 +79,7 @@ module.exports = {
       resolve: `@factly/gatsby-theme-youtube`,
       options: {
         apiKey: YOUR_API_KEY, // mandatory
-        channelId:CHANNEL_ID, // mandatory
+        channelId: CHANNEL_ID, // mandatory
         basePath: '/youtube', // optional, default to '/'
         trackingId: YOUR_GOOGLE_ANALYTICS_TRACKING_ID,
         bannerTitle: '', // optional
@@ -99,23 +99,25 @@ module.exports = {
             icon: 'pause.png',
             playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
           },
-        ]   // optional, array of objects with info about banner images with playlist images
-      }
-
-    }
-  ]
-}
+        ], // optional, array of objects with info about banner images with playlist images
+      },
+    },
+  ],
+};
 ```
 
-
 ### Run the site by running
+
 ```shell
 gatsby develop
 ```
+
 ### Build the site by running
+
 ```shell
 gatsby build
 ```
+
 ### Dependencies
 
 1. gatsby

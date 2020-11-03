@@ -308,7 +308,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                   >
                     <span sx={{ px: 2, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}>
                       {activeVideo.videoIndex === index ? (
-                        <FaPlay size="1rem" sx={{ width: 2, height: 2, fill: 'currentColor' }}            />
+                        <FaPlay size="1rem" sx={{ width: 2, height: 2, fill: 'currentColor' }} />
                       ) : (
                         index + 1
                       )}

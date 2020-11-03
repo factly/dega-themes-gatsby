@@ -6,7 +6,7 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import {FaPlay} from 'react-icons/fa'
+import { FaPlay } from 'react-icons/fa';
 import _ from 'lodash';
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
@@ -213,14 +213,16 @@ const IndexPage = ({ data, pageContext }) => {
                       <h2 className="heading" sx={{ px: 6, my: 6 }}>
                         {_.startCase(playlistTitle)}
                       </h2>
-                      <FaPlay  sx={{
+                      <FaPlay
+                        sx={{
                           display: ['none', 'none', 'block'],
                           fill: 'currentColor',
                           width: 4,
                           height: 4,
-                        }} />
+                        }}
+                      />
 
-                      <span sx={{ display: ['none', 'none', 'inline'], fontSize: 2, ml:2 }}>
+                      <span sx={{ display: ['none', 'none', 'inline'], fontSize: 2, ml: 2 }}>
                         Play All
                       </span>
                     </Link>
@@ -281,8 +283,10 @@ const IndexPage = ({ data, pageContext }) => {
                                 left: 0,
                               }}
                             >
-                            <FaPlay sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }} />
-                              <span sx={{ color: 'white', fontSize: 2, ml:2 }}>Play</span>
+                              <FaPlay
+                                sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
+                              />
+                              <span sx={{ color: 'white', fontSize: 2, ml: 2 }}>Play</span>
                             </div>
                           </div>
                           <div
@@ -326,8 +330,8 @@ const IndexPage = ({ data, pageContext }) => {
                 <h2 className="heading" sx={{ pr: 6 }}>
                   Uploads
                 </h2>
-                <FaPlay  sx={{ fill: 'currentColor', width: 4, height: 4 }}/>
-                <span sx={{ fontSize: 2, ml:2 }}>Play All</span>
+                <FaPlay sx={{ fill: 'currentColor', width: 4, height: 4 }} />
+                <span sx={{ fontSize: 2, ml: 2 }}>Play All</span>
               </Link>
               <div className="row-list-container">
                 <InfiniteScroll
@@ -385,9 +389,11 @@ const IndexPage = ({ data, pageContext }) => {
                             left: 0,
                           }}
                         >
-                        <FaPlay sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}/>
+                          <FaPlay
+                            sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
+                          />
 
-                          <span sx={{ color: 'white', fontSize: 2, ml:2 }}>Play</span>
+                          <span sx={{ color: 'white', fontSize: 2, ml: 2 }}>Play</span>
                         </div>
                       </div>
                       <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}>
@@ -476,8 +482,8 @@ const IndexPage = ({ data, pageContext }) => {
                         left: 0,
                       }}
                     >
-                    <FaPlay sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}/>
-                      <span sx={{ color: 'white', fontSize: 2, ml:2 }}>Play All</span>
+                      <FaPlay sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }} />
+                      <span sx={{ color: 'white', fontSize: 2, ml: 2 }}>Play All</span>
                     </div>
                   </div>
                   <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}>
