@@ -16,14 +16,6 @@ const Layout = ({ children, baseUrl, logo }) => {
   } else {
     url = baseUrl;
   }
-
-  let data;
-  if (typeof window !== 'undefined') {
-    data = {
-      url: window.location.href,
-      title: window.document.title,
-    };
-  }
   const imgSrc = logo ? `/${logo}` : placeholderLogo;
   const addDefaultSrc = (e) => (e.target.src = placeholderLogo);
   return (
@@ -57,7 +49,7 @@ const Layout = ({ children, baseUrl, logo }) => {
             width: [null, null, 'auto'],
           }}
         >
-          <ShareButtonGroup data={data} />
+          <ShareButtonGroup />
         </div>
       </nav>
 

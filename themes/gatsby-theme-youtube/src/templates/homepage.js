@@ -5,8 +5,8 @@ import React, { useState, useMemo } from 'react';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import InfiniteScroll from 'react-infinite-scroller';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+
+import {FaPlay} from 'react-icons/fa'
 import _ from 'lodash';
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
@@ -73,9 +73,9 @@ const IndexPage = ({ data, pageContext }) => {
       <div
         sx={{
           display: 'flex',
-          flexDirection: ['column', 'column', 'row'],
+          flexDirection: ['column', 'column', 'column', 'row'],
           justifyContent: 'space-between',
-          borderBottomWidth: [null, null, 'px'],
+          borderBottomWidth: [null, null, null, 'px'],
         }}
       >
         <div className="main-content" sx={{ width: 'full', marginTop: '-2rem' }}>
@@ -129,12 +129,14 @@ const IndexPage = ({ data, pageContext }) => {
                   sx={{
                     display: 'block',
                     p: 2,
-                    px: [null, null, 4],
+                    px: [null, null, null, 4],
                     textTransform: 'uppercase',
                     textAlign: 'center',
                     fontWeight: 'medium',
                     fontSize: 1,
+                    transition: 'all 0.5s',
                     ':focus': { outline: 'none' },
+                    ':hover': { color: 'white', bg: '#e62117' },
                     bg: (theme) => `${theme.colors.gray[1]}`,
                     borderRadius: 'default',
                   }}
@@ -146,7 +148,7 @@ const IndexPage = ({ data, pageContext }) => {
               {bannerData.length > 0 && (
                 <div
                   sx={{
-                    display: ['none', 'none', 'none', 'flex'],
+                    display: ['none', 'none', 'none', 'none', 'flex'],
                     flexGrow: '1',
                     flexDirection: 'column',
                     justifyContent: 'center',
@@ -211,17 +213,16 @@ const IndexPage = ({ data, pageContext }) => {
                       <h2 className="heading" sx={{ px: 6, my: 6 }}>
                         {_.startCase(playlistTitle)}
                       </h2>
-                      <FontAwesomeIcon
-                        icon={faPlay}
-                        sx={{
-                          display: ['none', 'block'],
+                      <FaPlay  sx={{
+                          display: ['none', 'none', 'block'],
                           fill: 'currentColor',
                           width: 4,
                           height: 4,
-                        }}
-                      />
+                        }} />
 
-                      <span sx={{ display: ['none', 'inline'], fontSize: 2 }}>Play All</span>
+                      <span sx={{ display: ['none', 'none', 'inline'], fontSize: 2, ml:2 }}>
+                        Play All
+                      </span>
                     </Link>
                     <div
                       sx={{
@@ -280,12 +281,8 @@ const IndexPage = ({ data, pageContext }) => {
                                 left: 0,
                               }}
                             >
-                              <FontAwesomeIcon
-                                icon={faPlay}
-                                sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
-                              />
-
-                              <span sx={{ color: 'white', fontSize: 2 }}>Play</span>
+                            <FaPlay sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }} />
+                              <span sx={{ color: 'white', fontSize: 2, ml:2 }}>Play</span>
                             </div>
                           </div>
                           <div
@@ -329,8 +326,8 @@ const IndexPage = ({ data, pageContext }) => {
                 <h2 className="heading" sx={{ pr: 6 }}>
                   Uploads
                 </h2>
-                <FontAwesomeIcon icon={faPlay} sx={{ fill: 'currentColor', width: 4, height: 4 }} />
-                <span sx={{ fontSize: 2 }}>Play All</span>
+                <FaPlay  sx={{ fill: 'currentColor', width: 4, height: 4 }}/>
+                <span sx={{ fontSize: 2, ml:2 }}>Play All</span>
               </Link>
               <div className="row-list-container">
                 <InfiniteScroll
@@ -388,12 +385,9 @@ const IndexPage = ({ data, pageContext }) => {
                             left: 0,
                           }}
                         >
-                          <FontAwesomeIcon
-                            icon={faPlay}
-                            sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
-                          />
+                        <FaPlay sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}/>
 
-                          <span sx={{ color: 'white', fontSize: 2 }}>Play</span>
+                          <span sx={{ color: 'white', fontSize: 2, ml:2 }}>Play</span>
                         </div>
                       </div>
                       <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}>
@@ -482,11 +476,8 @@ const IndexPage = ({ data, pageContext }) => {
                         left: 0,
                       }}
                     >
-                      <FontAwesomeIcon
-                        icon={faPlay}
-                        sx={{ color: 'white', fill: 'currentColor', width: 4, height: 4 }}
-                      />
-                      <span sx={{ color: 'white', fontSize: 2 }}>Play All</span>
+                    <FaPlay sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}/>
+                      <span sx={{ color: 'white', fontSize: 2, ml:2 }}>Play All</span>
                     </div>
                   </div>
                   <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}>
@@ -524,7 +515,7 @@ const IndexPage = ({ data, pageContext }) => {
                     <span
                       sx={{
                         color: (theme) => `${theme.colors.gray[6]}`,
-                        fontSize: [0, 1],
+                        fontSize: [0, 0, 1],
                         pt: 2,
                         textTransform: 'uppercase',
                       }}

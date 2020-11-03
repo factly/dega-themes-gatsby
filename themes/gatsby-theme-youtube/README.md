@@ -42,6 +42,8 @@ module.exports = {
 ```text
 your-gatsby-project
 ├── src
+|   ├── gatsby-plugin--theme-ui
+|   |   └── index.js // edit here to make changes to theme defaults
 |   └── @factly
 │       └── gatsby-theme-youtube
 |           └── components
@@ -63,7 +65,8 @@ your-gatsby-project
 |   apiKey    |        ''        | Google private youtube API                                                  |
 |  basePath   |       '/'        | Root url for all blog posts                                                 |
 |  channelId  |        ''        | Youtube Channel Id                                                          |
-|    logo     |        ''        | Your logo image name                                                        |
+|    logo     |        ''        | Your logo image name  |
+|    trackingId     |        ''        | Your google analytics ID |
 | bannerTitle | 'Featured Shows' | Title of the banner element in Homepage                                     |
 | bannerData  |        []        | Array of objects (maxed at 3 ) containing data about the featured playlists |
 
@@ -77,8 +80,9 @@ module.exports = {
       options: {
         apiKey: YOUR_API_KEY, // mandatory
         channelId:CHANNEL_ID, // mandatory
-        basePath: '/youtube' // optional, default to '/'
-        bannerTitle: '' // optional
+        basePath: '/youtube', // optional, default to '/'
+        trackingId: YOUR_GOOGLE_ANALYTICS_TRACKING_ID,
+        bannerTitle: '', // optional
         bannerData: [
           {
             name: 'Decode',
@@ -95,7 +99,7 @@ module.exports = {
             icon: 'pause.png',
             playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
           },
-        ]                // optional, array of objects with info about banner playlists
+        ]   // optional, array of objects with info about banner images with playlist images
       }
 
     }
@@ -103,6 +107,15 @@ module.exports = {
 }
 ```
 
+
+### Run the site by running
+```shell
+gatsby develop
+```
+### Build the site by running
+```shell
+gatsby build
+```
 ### Dependencies
 
 1. gatsby

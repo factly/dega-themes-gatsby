@@ -5,8 +5,7 @@ import { Helmet } from 'react-helmet';
 // import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FaPlay } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroller';
 // import styled from '@emotion/styled';
 import { jsx } from 'theme-ui';
@@ -120,16 +119,16 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       <div
         sx={{
           display: 'flex',
-          flexDirection: ['column', 'column', 'row'],
+          flexDirection: ['column', 'column', 'column', 'row'],
           justifyContent: 'space-between',
-          borderBottomWidth: [null, null, 'px'],
-          mx: [2, 10, 10, 20],
+          borderBottomWidth: [null, null, null, 'px'],
+          mx: [2, 10, 10, 10, 20],
           pb: 16,
         }}
       >
         <div
           className="main-content"
-          sx={{ display: 'flex', flexDirection: 'column', width: ['full', 'full', '3/5'] }}
+          sx={{ display: 'flex', flexDirection: 'column', width: ['full', 'full', 'full', '3/5'] }}
         >
           <div ref={videoElement} style={{ paddingBottom: `56.25%` }} sx={{ position: 'relative' }}>
             <iframe
@@ -164,7 +163,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             >
               {activeVideo.video.snippet.title}
             </div>
-            <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1], pb: 2 }}>
+            <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 0, 1], pb: 2 }}>
               {activeVideo.video.snippet.publishedAt}
             </p>
             <hr />
@@ -198,7 +197,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     {channel.snippet.title}
                   </a>
                   <span
-                    sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 1], pb: 2 }}
+                    sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1], pb: 2 }}
                   >
                     {Number(channel.statistics.subscriberCount).toLocaleString()} Subscribers
                   </span>
@@ -213,13 +212,15 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                   ml: 'auto',
                   display: 'block',
                   p: 2,
-                  px: [null, null, 4],
+                  px: [null, null, null, 4],
                   bg: (theme) => `${theme.colors.gray[3]}`,
                   textTransform: 'uppercase',
                   textAlign: 'center',
                   fontWeight: 'medium',
                   fontSize: 1,
                   borderRadius: 'default',
+                  transition: 'all 0.5s',
+                  ':hover': { bg: '#e62117', color: 'white' },
                   ':focus': { outline: 'none' },
                 }}
               >
@@ -236,12 +237,12 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            width: ['full', 'full', '2/5'],
-            mt: [16, 16, 0],
-            mx: [null, null, 4],
+            width: ['full', 'full', 'full', '2/5'],
+            mt: [16, 16, 16, 0],
+            mx: [null, null, null, 4],
             height: 'screenHeight',
             borderWidth: 'px',
-            boxShadow: [null, null, 'md'],
+            boxShadow: [null, null, null, 'md'],
           }}
         >
           <div sx={{ mb: 4, p: 4, borderBottomWidth: 'px' }}>
@@ -257,8 +258,8 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             ref={playlistElement}
             style={{ height: videoListHeight }}
             sx={{
-              position: [null, null, 'relative'],
-              overflow: [null, null, 'auto'],
+              position: [null, null, null, 'relative'],
+              overflow: [null, null, null, 'auto'],
               height: 'screenHeight',
             }}
           >
@@ -266,7 +267,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                position: [null, null, 'absolute'],
+                position: [null, null, null, 'absolute'],
                 top: 0,
                 left: 0,
                 width: 'full',
@@ -307,10 +308,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                   >
                     <span sx={{ px: 2, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}>
                       {activeVideo.videoIndex === index ? (
-                        <FontAwesomeIcon
-                          icon={faPlay}
-                          sx={{ width: 2, height: 2, fill: 'currentColor' }}
-                        />
+                        <FaPlay size="1rem" sx={{ width: 2, height: 2, fill: 'currentColor' }}            />
                       ) : (
                         index + 1
                       )}

@@ -15,17 +15,17 @@ module.exports = {
         bannerData: [
           {
             name: 'Decode',
-            icon: 'decode.png',
+            icon: 'decode.jpg',
             playlistId: 'PLEQcsVYyf3IA_pPC8LR81vpEPkDl1czou',
           },
           {
             name: 'Decode Lite',
-            icon: 'decode-lite.png',
+            icon: 'decode-lite.jpg',
             playlistId: 'PLEQcsVYyf3IBlzW5qPaozJZRKeS-aFpfv',
           },
           {
             name: 'Pause',
-            icon: 'pause.png',
+            icon: 'pause.jpg',
             playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
           },
         ],
