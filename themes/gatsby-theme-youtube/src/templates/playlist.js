@@ -11,6 +11,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
 import linkify from '../utils/linkify';
+import addAttribution from '../utils/addAttribution';
 
 function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const { baseUrl, logo } = pageContext;
@@ -102,7 +103,9 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    document.addEventListener('copy', addAttribution);
+  }, []);
   return (
     <Layout baseUrl={baseUrl} logo={logo}>
       <Helmet>
