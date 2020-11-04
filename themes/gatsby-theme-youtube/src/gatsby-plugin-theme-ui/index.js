@@ -143,7 +143,7 @@ export default {
     grayDark: '#2d3748',
     text: '#2d3748',
     background: '#fff',
-    primary: '#2b6cb0',
+    primary: '#ea364a',
     primaryHover: '#2c5282',
     secondary: '#718096',
     muted: '#e2e8f0',
@@ -348,6 +348,7 @@ export default {
         textDecoration: 'none',
         ':hover': {
           textDecoration: 'none',
+          color: 'primary',
         },
       },
       h1: {
