@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import { graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
+import addDefaultSrc from '../utils/addDefaultSrc';
 
 const PageNotFound = ({ data }) => (
   <Layout>
@@ -9,8 +11,9 @@ const PageNotFound = ({ data }) => (
       <h1>Page Not Found</h1>
       <img
         className="mx-auto"
-        src={data.dega.space.logo.url.replace(/^"(.*)"$/, '$1')}
+        src={data.dega.space.logo.url.raw}
         alt="Logo"
+        onError={addDefaultSrc}
       />
     </div>
   </Layout>

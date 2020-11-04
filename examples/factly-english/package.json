@@ -8,13 +8,13 @@
   "scripts": {
     "build": "gatsby build GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true --log-pages",
     "start": "gatsby develop",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve -p 9002",
     "clean": "gatsby clean"
   },
   "dependencies": {
     "@factly/gatsby-theme-factly": "^1.0.3",
-    "gatsby": "^2.21.5",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "gatsby": "^2.24.87",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }

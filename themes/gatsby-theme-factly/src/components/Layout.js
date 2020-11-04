@@ -49,11 +49,12 @@ const Layout = (props) => (
                 content: space.description,
               },
             ]}
-            link={[{ rel: 'canonical', href: space.site_address }]}
           >
-            <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider"></body>
+            <html lang="en" />
+            <link rel="icon" href={space.fav_icon.url.raw} />
+            <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider" />
           </Helmet>
-          <Navbar logo={space.logo.url.replace(/^"(.*)"$/, '$1')}></Navbar>
+          <Navbar logo={space.logo.url.raw}></Navbar>
           <div
             style={{ maxWidth: '1920px' }}
             className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 mx-auto"

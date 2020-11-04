@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import parseDate from '../utils/parseDate';
 
 /* 
  TODO 1. Make images optional
@@ -10,7 +11,7 @@ const Author = ({ users, categories, date }) => {
   return (
     <div className="flex flex-col justify-start items-start py-2">
       <div className="flex flex-col py-2">
-        <div className="flex flex-row flex-wrap">
+        <div className="flex flex-row flex-wrap items-center">
           {users.map((user, i, arr) => (
             <React.Fragment key={i}>
               <Link to={`/users/${user.id}`} className="font-medium text-blue-500 text-lg px-1">
@@ -32,7 +33,7 @@ const Author = ({ users, categories, date }) => {
             </React.Fragment>
           ))}
         </div>
-        <span className="text-gray-600 text-lg">{date}</span>
+        <span className="text-gray-600 text-lg">{parseDate(date)}</span>
       </div>
     </div>
   );

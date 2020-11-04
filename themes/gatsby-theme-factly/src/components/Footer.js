@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +9,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 import FooterLinks from './FooterLinks';
-
+import addDefaultSrc from '../utils/addDefaultSrc';
 /**
  * TODO:
  */
@@ -60,8 +61,9 @@ function Footer({ className }) {
                   <a href="/">
                     <img
                       className="h-8"
-                      src={logo.url.replace(/^"(.*)"$/, '$1')}
+                      src={logo.url.raw}
                       alt="factly"
+                      onError={addDefaultSrc}
                     ></img>
                   </a>
                 </div>

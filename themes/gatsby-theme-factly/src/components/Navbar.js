@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
-
+import addDefaultSrc from '../utils/addDefaultSrc';
 export default function Navbar({ logo }) {
   return (
     <StaticQuery
@@ -43,7 +44,7 @@ export default function Navbar({ logo }) {
                 </div>
                 <div className="order-1 lg:order-2">
                   <Link to="/">
-                    <img className="h-8" src={logo} alt="factly"></img>
+                    <img className="h-8" src={logo} alt="factly" onError={addDefaultSrc}></img>
                   </Link>
                 </div>
                 <div className="hidden lg:order-3 lg:flex flex-1 items-center justify-end">

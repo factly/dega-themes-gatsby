@@ -1,5 +1,6 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import parseDate from '../utils/parseDate';
 
 /**
  * TODO: Change the data structure of props
@@ -29,7 +30,7 @@ const StoryCard = ({
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.replace(/^"(.*)"$/, '$1')}
+                src={storyData.medium.url.raw}
                 className="h-full w-full object-cover rounded"
               />
             </div>
@@ -43,15 +44,10 @@ const StoryCard = ({
                 ))}
               </p>
 
-              <div
-                id={`nav-0`}
-                className={`w-full font-bold font-sans text-lg text-gray-800 active`}
-              >
+              <div id={`nav-0`} className={`w-full font-bold  text-lg text-gray-800 active`}>
                 {storyData.title}
               </div>
-              {excerpt && (
-                <p className="text-gray-800 font-sans text-base pt-2">{storyData.excerpt}</p>
-              )}
+              {excerpt && <p className="text-gray-800  text-base pt-2">{storyData.excerpt}</p>}
               <div className="flex mt-auto pt-2">
                 <div
                   className={`flex flex-col w-full vertical horizontal justify-between items-start`}
@@ -65,7 +61,9 @@ const StoryCard = ({
                       ))}
                     </p>
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
+                  <p className="text-gray-600 text-xs md:text-sm">
+                    {parseDate(storyData.created_at)}
+                  </p>
                 </div>
               </div>
             </div>
@@ -82,16 +80,16 @@ const StoryCard = ({
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.replace(/^"(.*)"$/, '$1')}
+                src={storyData.medium.url.raw}
                 className="h-full w-full rounded object-cover"
               />
             </div>
 
             <p className="w-full text-gray-600 text-xs md:text-sm pt-2">{storyData.subtitle}</p>
-            <div className="w-full font-bold text-xl leading-tight text-gray-900 break-words active">
+            <h2 className="w-full font-bold text-xl leading-tight text-gray-900 break-words active">
               {storyData.title}
-            </div>
-            <p className="text-gray-800 font-sans text-lg pt-2 break-words">{storyData.excerpt}</p>
+            </h2>
+            <p className="text-gray-800  text-lg pt-2 break-words">{storyData.excerpt}</p>
           </Link>
           <div className="flex-none mt-auto py-4">
             <div className="flex items-center justify-between">
@@ -100,7 +98,7 @@ const StoryCard = ({
                   {storyData.users[0].first_name + ' ' + storyData.users[0].last_name}
                 </p>
               </div>
-              <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
+              <p className="text-gray-600 text-xs md:text-sm">{parseDate(storyData.created_at)}</p>
             </div>
           </div>
         </article>
@@ -116,7 +114,7 @@ const StoryCard = ({
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.replace(/^"(.*)"$/, '$1')}
+                src={storyData.medium.url.raw}
                 className="h-full w-full object-cover rounded"
               />
             </div>
@@ -124,13 +122,10 @@ const StoryCard = ({
               <p className="w-full text-gray-600 text-xs md:text-sm pb-1">
                 {storyData.categories[0].name}
               </p>
-              <div
-                id={`nav-0`}
-                className={`w-full font-bold font-sans text-lg text-gray-800 active`}
-              >
+              <div id={`nav-0`} className={`w-full font-bold  text-lg text-gray-800 active`}>
                 {storyData.title}
               </div>
-              <p className="text-gray-800 font-sans text-base pt-2">{storyData.excerpt}</p>
+              <p className="text-gray-800  text-base pt-2">{storyData.excerpt}</p>
 
               <div className="flex mt-auto pt-2">
                 <div
@@ -141,7 +136,9 @@ const StoryCard = ({
                       {storyData.users[0].first_name + ' ' + storyData.users[0].last_name}
                     </p>
                   </div>
-                  <p className="text-gray-600 text-xs md:text-sm">{storyData.created_date}</p>
+                  <p className="text-gray-600 text-xs md:text-sm">
+                    {parseDate(storyData.created_at)}
+                  </p>
                 </div>
               </div>
             </div>

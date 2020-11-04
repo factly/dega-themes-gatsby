@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useRef, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import parseEditorJsData from './../utils/parseEditorJsData';
-
+import addDefaultSrc from '../utils/addDefaultSrc';
 /**
  * TODO: Add resize observer
  * TODO: Disabling the buttons for first and last buttons
@@ -59,7 +60,7 @@ function FactCheckWidget({ claims }) {
   },[sliderElement.current ]) */
 
   return (
-    <div className="w-full lg:w-3/4 mx-auto font-sans text-xl">
+    <div className="w-full lg:w-3/4 mx-auto  text-xl">
       {claims.length >= 1 && (
         <React.Fragment>
           <div className="flex flex-row justify-between pt-6 pb-2">
@@ -130,15 +131,13 @@ function FactCheckWidget({ claims }) {
                   >
                     <h2 className="font-bold P-4">Claim</h2>
                     <div className="flex">
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: parseEditorJsData(claim.description),
-                        }}
-                      />
+                      {parseEditorJsData(claim.description)}
+
                       {claim.rating.medium && (
                         <img
-                          src={claim.rating.medium.url.replace(/^"(.*)"$/, '$1')}
+                          src={claim.rating.medium.url.raw}
                           alt={claim.rating.medium.alt_text}
+                          onError={addDefaultSrc}
                           className="w-1/6 h-full rounded-t m-2"
                         />
                       )}
