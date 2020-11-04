@@ -10,6 +10,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 // import styled from '@emotion/styled';
 import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
+import linkify from '../utils/linkify';
 
 function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const { baseUrl, logo } = pageContext;
@@ -227,9 +228,11 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                 Subscribe
               </a>
             </div>
-            <p className="read-more-wrap" sx={{ whiteSpace: 'pre-line', py: 2, fontSize: 2 }}>
-              {activeVideo.video.snippet.description}
-            </p>
+            <p
+              className="read-more-wrap"
+              sx={{ whiteSpace: 'pre-line', py: 2, fontSize: 2 }}
+              dangerouslySetInnerHTML={{ __html: linkify(activeVideo.video.snippet.description) }}
+            ></p>
           </div>
         </div>
         <div
