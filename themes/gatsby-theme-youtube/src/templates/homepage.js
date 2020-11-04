@@ -159,7 +159,11 @@ const IndexPage = ({ data, pageContext }) => {
                   <div sx={{ display: 'flex', justifyContent: 'center', px: 4 }}>
                     {bannerData.map((item, i) => (
                       <Link to={`${baseUrl}/playlist/${item.playlistId}`} sx={{ px: 6 }} key={i}>
-                        <img src={`/${item.icon}`} alt={item.name} sx={{ height: 20 }} />
+                        <img
+                          src={`/${item.icon}`}
+                          alt={item.name}
+                          sx={{ height: 20, borderRadius: 'default' }}
+                        />
                       </Link>
                     ))}
                   </div>
