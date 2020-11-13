@@ -9,12 +9,20 @@ import { FaPlay } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroller';
 // import styled from '@emotion/styled';
 import { jsx } from 'theme-ui';
+import Modal from 'react-modal';
 import Layout from '../components/Layout';
 import linkify from '../utils/linkify';
 import addAttribution from '../utils/addAttribution';
+import ShareModal from '../components/ShareModal';
 
 function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const { baseUrl, logo } = pageContext;
+  let title;
+  let url;
+  if (typeof window !== 'undefined') {
+    title = window.document.title;
+    url = window.location.href;
+  }
   const videoId = location.search.substring(1).split('=')[1];
   const [videoListHeight, setVideoListHeight] = useState('366px');
   const [activeVideo, setActiveVideo] = useState(() => {
@@ -59,6 +67,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     playlist.videos.unshift(video[0]);
     return playlist.videos.slice(0, 20);
   });
+
   const [hasNextPage, setHasNextPage] = useState(true);
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
@@ -171,19 +180,27 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               {activeVideo.video.snippet.publishedAt}
             </p>
             <hr />
-            <div sx={{ display: 'flex', alignItems: 'center', borderBottomWidth: 'px', p: 6 }}>
-              <a
-                rel="noopener noreferrer"
-                target="_blank"
-                href={`https://www.youtube.com/channel/${channel.channelId}`}
-              >
-                <img
-                  alt={channel.snippet.title}
-                  src={channel.snippet.thumbnails.high.url}
-                  sx={{ height: 12, borderRadius: 'full' }}
-                />
-              </a>
-              <div>
+            <div
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                borderBottomWidth: 'px',
+                p: 6,
+              }}
+            >
+              <div sx={{ display: 'flex', flexGrow: 1 }}>
+                <a
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={`https://www.youtube.com/channel/${channel.channelId}`}
+                >
+                  <img
+                    alt={channel.snippet.title}
+                    src={channel.snippet.thumbnails.high.url}
+                    sx={{ height: 12, borderRadius: 'full' }}
+                  />
+                </a>
                 <div
                   sx={{
                     display: 'flex',
@@ -207,29 +224,32 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                   </span>
                 </div>
               </div>
-              <a
-                rel="noopener noreferrer"
-                href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
-                target="_blank"
-                type="button"
-                sx={{
-                  ml: 'auto',
-                  display: 'block',
-                  p: 2,
-                  px: [null, null, null, 4],
-                  bg: (theme) => `${theme.colors.gray[3]}`,
-                  textTransform: 'uppercase',
-                  textAlign: 'center',
-                  fontWeight: 'medium',
-                  fontSize: 1,
-                  borderRadius: 'default',
-                  transition: 'all 0.5s',
-                  ':hover': { bg: '#e62117', color: 'white' },
-                  ':focus': { outline: 'none' },
-                }}
-              >
-                Subscribe
-              </a>
+              <div sx={{ display: 'flex', ml: 'auto', my: [4, 0, 0] }}>
+                <ShareModal title={title} url={url} />
+                <a
+                  rel="noopener noreferrer"
+                  href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
+                  target="_blank"
+                  type="button"
+                  sx={{
+                    ml: 'auto',
+                    display: 'block',
+                    p: 2,
+                    px: [null, null, null, 4],
+                    bg: (theme) => `${theme.colors.gray[3]}`,
+                    textTransform: 'uppercase',
+                    textAlign: 'center',
+                    fontWeight: 'medium',
+                    fontSize: 1,
+                    borderRadius: 'default',
+                    transition: 'all 0.5s',
+                    ':hover': { bg: '#e62117', color: 'white' },
+                    ':focus': { outline: 'none' },
+                  }}
+                >
+                  Subscribe
+                </a>
+              </div>
             </div>
             <p
               className="read-more-wrap"

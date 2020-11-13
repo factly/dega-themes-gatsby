@@ -49,7 +49,15 @@ const Layout = ({ children, baseUrl, logo }) => {
             width: [null, null, 'auto'],
           }}
         >
-          <ShareButtonGroup />
+          <ShareButtonGroup
+            type="static"
+            links={{
+              facebook: 'https://www.facebook.com/factlyindia',
+              twitter: 'https://twitter.com/factlyindia',
+              instagram: 'https://www.instagram.com/factlyindia/',
+              whatsapp: 'https://wa.me/+919247052470',
+            }}
+          />
         </div>
       </nav>
 
