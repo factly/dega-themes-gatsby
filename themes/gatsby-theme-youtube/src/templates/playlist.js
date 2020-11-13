@@ -9,7 +9,6 @@ import { FaPlay } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroller';
 // import styled from '@emotion/styled';
 import { jsx } from 'theme-ui';
-import Modal from 'react-modal';
 import Layout from '../components/Layout';
 import linkify from '../utils/linkify';
 import addAttribution from '../utils/addAttribution';
@@ -112,9 +111,9 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    document.addEventListener('copy', addAttribution);
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener('copy', addAttribution);
+  // }, []);
   return (
     <Layout baseUrl={baseUrl} logo={logo}>
       <Helmet>
@@ -254,6 +253,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             <p
               className="read-more-wrap"
               sx={{ whiteSpace: 'pre-line', py: 2, fontSize: 2 }}
+              onCopy={addAttribution}
               dangerouslySetInnerHTML={{ __html: linkify(activeVideo.video.snippet.description) }}
             ></p>
           </div>
