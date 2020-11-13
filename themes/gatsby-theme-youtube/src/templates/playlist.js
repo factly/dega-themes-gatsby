@@ -252,7 +252,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             </div>
             <p
               className="read-more-wrap"
-              sx={{ whiteSpace: 'pre-line', py: 2, fontSize: 2 }}
+              sx={{ whiteSpace: 'pre-line', py: 2, px: 4, fontSize: 2 }}
               onCopy={addAttribution}
               dangerouslySetInnerHTML={{ __html: linkify(activeVideo.video.snippet.description) }}
             ></p>

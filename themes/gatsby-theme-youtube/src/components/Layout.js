@@ -28,6 +28,7 @@ const Layout = ({ children, baseUrl, logo }) => {
           flexWrap: 'wrap',
           background: 'white',
           padding: 6,
+          borderBottom: '1px solid #ececec',
         }}
       >
         <div
