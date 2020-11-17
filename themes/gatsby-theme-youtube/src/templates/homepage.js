@@ -265,18 +265,12 @@ const IndexPage = ({ data, pageContext }) => {
                                 fluid={video.local.childImageSharp.fluid}
                                 sx={{ height: 'full', width: 'full' }}
                               />
-                            )    : (
-                  (
-                  (
-(
-                                                                                 <img
-                                                  src={placeholderImg}
-                                                  alt="placeholder"
-                                                  sx={{ width: 'full', height: 'full' }}
-                                                />
-                            )
-                            )
-                            )
+                            ) : (
+                              <img
+                                src={placeholderImg}
+                                alt="placeholder"
+                                sx={{ width: 'full', height: 'full' }}
+                              />
                             )}
                             {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
                       <span className="text-white">
@@ -383,14 +377,12 @@ const IndexPage = ({ data, pageContext }) => {
                             fluid={video.local.childImageSharp.fluid}
                             sx={{ width: 'full', height: 'full' }}
                           />
-                        )  : (
-                          (
+                        ) : (
                           <img
-                              src={placeholderImg}
-                              alt="placeholder"
-                              sx={{ width: 'full', height: 'full' }}
-                            />
-                        )
+                            src={placeholderImg}
+                            alt="placeholder"
+                            sx={{ width: 'full', height: 'full' }}
+                          />
                         )}
                         {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
                     <span className="text-white">
