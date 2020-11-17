@@ -259,12 +259,24 @@ const IndexPage = ({ data, pageContext }) => {
                           to={`${baseUrl}/playlist/${playlistId}?v=${video.contentDetails.videoId}`}
                         >
                           <div sx={{ position: 'relative' }}>
-                            {video.local && (
+                            {video.local ? (
                               <Img
                                 alt={video.snippet.title}
                                 fluid={video.local.childImageSharp.fluid}
                                 sx={{ height: 'full', width: 'full' }}
                               />
+                            )    : (
+                  (
+                  (
+(
+                                                                                 <img
+                                                  src={placeholderImg}
+                                                  alt="placeholder"
+                                                  sx={{ width: 'full', height: 'full' }}
+                                                />
+                            )
+                            )
+                            )
                             )}
                             {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
                       <span className="text-white">
@@ -365,12 +377,20 @@ const IndexPage = ({ data, pageContext }) => {
                       to={`${baseUrl}/playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
                     >
                       <div sx={{ position: 'relative' }}>
-                        {video.local && (
+                        {video.local ? (
                           <Img
                             alt={video.snippet.title}
                             fluid={video.local.childImageSharp.fluid}
                             sx={{ width: 'full', height: 'full' }}
                           />
+                        )  : (
+                          (
+                          <img
+                              src={placeholderImg}
+                              alt="placeholder"
+                              sx={{ width: 'full', height: 'full' }}
+                            />
+                        )
                         )}
                         {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
                     <span className="text-white">

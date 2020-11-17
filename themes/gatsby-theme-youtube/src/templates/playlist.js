@@ -14,6 +14,8 @@ import linkify from '../utils/linkify';
 import addAttribution from '../utils/addAttribution';
 import ShareModal from '../components/ShareModal';
 
+import placeholderImg from '../static/images/placeholder.jpg';
+
 function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const { baseUrl, logo } = pageContext;
   let title;
@@ -136,7 +138,28 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
         />
         <meta
           name="image"
-          content={activeVideo.local && activeVideo.local.childImageSharp.fluid.src}
+          content={
+            activeVideo.video.snippet &&
+            activeVideo.video.snippet.thumbnails &&
+            activeVideo.video.snippet.thumbnails.default.url
+          }
+        />
+        <meta property="og:title" content={activeVideo.video.snippet.title} />
+        <meta
+          property="og:description"
+          content={activeVideo.video.snippet.description.substring(0, 150)}
+        />
+        <meta
+          property="og:image"
+          content={
+            
+            
+            activeVideo.video.snippet &&
+            activeVideo.video.snippet.thumbnails &&
+            activeVideo.video.snippet.thumbnails.default.url
+          
+          
+          }
         />
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
       </Helmet>
@@ -241,7 +264,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                 </div>
               </div>
               <div sx={{ display: 'flex', ml: 'auto', my: [4, 0, 0] }}>
-                <ShareModal title={title} url={url} />
+                <ShareModal title={`${activeVideo.video.snippet.title}`} url={url} />
                 <a
                   rel="noopener noreferrer"
                   href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
@@ -372,7 +395,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     ) : (
                       <img
                         alt={playlistVideo.snippet.title}
-                        src="https://source.unsplash.com/random/150x150"
+                        src={placeholderImg}
                         sx={{ width: 20, height: 'full' }}
                       />
                     )}
@@ -503,6 +526,11 @@ export const query = graphql`
           position
           title
           description
+          thumbnails {
+            default {
+              url
+            }
+          }
           publishedAt(formatString: "MMM DD, YYYY")
           channelTitle
         }
