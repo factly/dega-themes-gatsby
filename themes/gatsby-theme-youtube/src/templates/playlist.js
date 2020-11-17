@@ -23,20 +23,32 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     url = window.location.href;
   }
   const videoId = location.search.substring(1).split('=')[1];
+
+  const positionsArr = playlist.videos.map((video) =>
+    video.positions.find((e) => e.playlist === playlist.playlistId),
+  );
+  let sortedVideos = playlist.videos;
+  if (playlist.snippet.title !== 'Uploads') {
+    sortedVideos = playlist.videos
+      .map((video, i) => {
+        return { ...video, pos: positionsArr[i].position };
+      })
+      .sort((a, b) => a.pos - b.pos);
+  }
   const [videoListHeight, setVideoListHeight] = useState('366px');
   const [activeVideo, setActiveVideo] = useState(() => {
     if (videoId) {
-      const videoIndex = playlist.videos.findIndex(
+      const videoIndex = sortedVideos.findIndex(
         (video) => video.contentDetails.videoId === videoId,
       );
       return {
         videoIndex,
-        video: playlist.videos[videoIndex],
+        video: sortedVideos[videoIndex],
       };
     }
     return {
       videoIndex: 0,
-      video: playlist.videos[0],
+      video: sortedVideos[0],
     };
   });
 
@@ -62,17 +74,17 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
   );
 
   const [postItems, setPostItems] = useState(() => {
-    const video = playlist.videos.splice(activeVideo.videoIndex, 1);
-    playlist.videos.unshift(video[0]);
-    return playlist.videos.slice(0, 20);
+    const video = sortedVideos.splice(activeVideo.videoIndex, 1);
+    sortedVideos.unshift(video[0]);
+    return sortedVideos.slice(0, 20);
   });
 
   const [hasNextPage, setHasNextPage] = useState(true);
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
-    const nextPageItems = playlist.videos.slice(postItems.length, postItems.length + 20);
+    const nextPageItems = sortedVideos.slice(postItems.length, postItems.length + 20);
     setPostItems([...postItems, ...nextPageItems]);
-    setHasNextPage(postItems.length < playlist.videos.length);
+    setHasNextPage(postItems.length < sortedVideos.length);
   };
 
   const videoElement = useRef(null);
@@ -82,18 +94,19 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     if (window.innerWidth <= 1025) {
       setVideoListHeight('auto');
     } else {
-      setVideoListHeight(`${document.getElementsByClassName('main-content')[0].clientHeight}px`);
+      console.log();
+      setVideoListHeight(
+        `${document.getElementsByClassName('embed-content')[0].clientHeight}px`,
+      );
     }
   };
 
   useEffect(() => {
-    const videoIndex = playlist.videos.findIndex(
-      (video) => video.contentDetails.videoId === videoId,
-    );
+    const videoIndex = sortedVideos.findIndex((video) => video.contentDetails.videoId === videoId);
 
     if (videoIndex >= 0) {
       setActiveVideo({
-        video: playlist.videos[videoIndex],
+        video: sortedVideos[videoIndex],
         videoIndex,
       });
     }
@@ -142,7 +155,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
           className="main-content"
           sx={{ display: 'flex', flexDirection: 'column', width: ['full', 'full', 'full', '3/5'] }}
         >
-          <div ref={videoElement} style={{ paddingBottom: `56.25%` }} sx={{ position: 'relative' }}>
+          <div ref={videoElement} style={{ paddingBottom: `56.25%` }} className='embed-content' sx={{ position: 'relative' }}>
             <iframe
               sx={{
                 position: 'absolute',
@@ -284,8 +297,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
             </h5>
             <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1] }}>
-              {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/
-              {playlist.videos.length}
+              {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/{sortedVideos.length}
             </p>
           </div>
           <div
@@ -478,6 +490,10 @@ export const query = graphql`
         }
         contentDetails {
           videoId
+        }
+        positions {
+          position
+          playlist
         }
         snippet {
           position
