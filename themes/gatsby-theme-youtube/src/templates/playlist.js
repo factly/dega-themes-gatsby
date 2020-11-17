@@ -139,21 +139,13 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
         <meta
           name="image"
           content={
-            (((activeVideo.video.snippet &&
-                  activeVideo.video.snippet.thumbnails &&
-                  activeVideo.video.snippet.thumbnails.maxres.url))) ||
-
-
-                                  activeVideo.video.snippet.thumbnails.standard.url ||
-
-
-                                  activeVideo.video.snippet.thumbnails.high.url ||
-
-
-                                  activeVideo.video.snippet.thumbnails.medium.url ||
-
-
-                                  activeVideo.video.snippet.thumbnails.default.url
+            activeVideo.video.snippet &&
+            activeVideo.video.snippet.thumbnails &&
+            (activeVideo.video.snippet.thumbnails.maxres.url ||
+              activeVideo.video.snippet.thumbnails.standard.url ||
+              activeVideo.video.snippet.thumbnails.high.url ||
+              activeVideo.video.snippet.thumbnails.medium.url ||
+              activeVideo.video.snippet.thumbnails.default.url)
           }
         />
         <meta property="og:title" content={activeVideo.video.snippet.title} />
@@ -164,21 +156,13 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
         <meta
           property="og:image"
           content={
-            (((activeVideo.video.snippet &&
-                  activeVideo.video.snippet.thumbnails &&
-                  activeVideo.video.snippet.thumbnails.maxres.url))) ||
-           
-           
-            activeVideo.video.snippet.thumbnails.standard.url ||
-           
-           
-            activeVideo.video.snippet.thumbnails.high.url ||
-           
-           
-            activeVideo.video.snippet.thumbnails.medium.url ||
-           
-           
-            activeVideo.video.snippet.thumbnails.default.url
+            activeVideo.video.snippet &&
+            activeVideo.video.snippet.thumbnails &&
+            (activeVideo.video.snippet.thumbnails.maxres.url ||
+              activeVideo.video.snippet.thumbnails.standard.url ||
+              activeVideo.video.snippet.thumbnails.high.url ||
+              activeVideo.video.snippet.thumbnails.medium.url ||
+              activeVideo.video.snippet.thumbnails.default.url)
           }
         />
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>

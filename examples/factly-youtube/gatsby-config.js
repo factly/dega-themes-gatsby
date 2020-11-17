@@ -12,6 +12,7 @@ module.exports = {
         trackingId: process.env.GA_TRACKING_ID,
         basePath: '/',
         logo: 'logo.png',
+        favicon: 'static/favicon.png',
         bannerData: [
           {
             name: 'Decode Season 1',
