@@ -95,7 +95,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       setVideoListHeight('auto');
     } else {
       console.log();
-      setVideoListHeight(`${document.getElementsByClassName('embed-content')[0].clientHeight}px`);
+      setVideoListHeight(`${document.getElementsByClassName('main-content')[0].clientHeight}px`);
     }
   };
 
@@ -108,6 +108,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
         videoIndex,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playlist.videos, videoId]);
 
   useEffect(() => {
