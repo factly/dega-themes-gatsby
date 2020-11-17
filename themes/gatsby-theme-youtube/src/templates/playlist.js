@@ -95,9 +95,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       setVideoListHeight('auto');
     } else {
       console.log();
-      setVideoListHeight(
-        `${document.getElementsByClassName('embed-content')[0].clientHeight}px`,
-      );
+      setVideoListHeight(`${document.getElementsByClassName('embed-content')[0].clientHeight}px`);
     }
   };
 
@@ -155,7 +153,12 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
           className="main-content"
           sx={{ display: 'flex', flexDirection: 'column', width: ['full', 'full', 'full', '3/5'] }}
         >
-          <div ref={videoElement} style={{ paddingBottom: `56.25%` }} className='embed-content' sx={{ position: 'relative' }}>
+          <div
+            ref={videoElement}
+            style={{ paddingBottom: `56.25%` }}
+            className="embed-content"
+            sx={{ position: 'relative' }}
+          >
             <iframe
               sx={{
                 position: 'absolute',
