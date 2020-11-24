@@ -8,6 +8,7 @@ import Img from 'gatsby-image';
 import { FaPlay } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroller';
 // import styled from '@emotion/styled';
+import { navigate } from '@reach/router';
 import { jsx } from 'theme-ui';
 import Youtube from 'react-youtube';
 import Layout from '../components/Layout';
@@ -16,7 +17,7 @@ import addAttribution from '../utils/addAttribution';
 import ShareModal from '../components/ShareModal';
 
 import placeholderImg from '../static/images/placeholder.jpg';
-import { navigate } from '@reach/router';
+
 
 function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const { baseUrl, logo } = pageContext;
@@ -104,17 +105,19 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     }
   };
   const handleAutoplay = (event) => {
-    event.target.checked ? setAutoplayStatus(true) : setAutoplayStatus(false);
+    return event.target.checked ? setAutoplayStatus(true) : setAutoplayStatus(false);
   };
 
   const onVideoEnd = async () => {
     if (autoplayStatus === true) {
       await setActiveVideo((prev) => {
-        navigate(`?v=${sortedVideos[prev.videoIndex + 1].contentDetails.videoId}`);
-        return {
-          video: sortedVideos[prev.videoIndex + 1],
-          videoIndex: prev.videoIndex + 1,
-        };
+        if (prev.videoIndex < sortedVideos.length) {
+          navigate(`?v=${sortedVideos[prev.videoIndex + 1].contentDetails.videoId}`);
+          return {
+            video: sortedVideos[prev.videoIndex + 1],
+            videoIndex: prev.videoIndex + 1,
+          };
+        }
       });
     }
     console.log('video ended');
