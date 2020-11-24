@@ -9,12 +9,14 @@ import { FaPlay } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroller';
 // import styled from '@emotion/styled';
 import { jsx } from 'theme-ui';
+import Youtube from 'react-youtube';
 import Layout from '../components/Layout';
 import linkify from '../utils/linkify';
 import addAttribution from '../utils/addAttribution';
 import ShareModal from '../components/ShareModal';
 
 import placeholderImg from '../static/images/placeholder.jpg';
+import { navigate } from '@reach/router';
 
 function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const { baseUrl, logo } = pageContext;
@@ -29,7 +31,9 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const positionsArr = playlist.videos.map((video) =>
     video.positions.find((e) => e.playlist === playlist.playlistId),
   );
+
   let sortedVideos = playlist.videos;
+
   if (playlist.snippet.title !== 'Uploads') {
     sortedVideos = playlist.videos
       .map((video, i) => {
@@ -37,7 +41,9 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       })
       .sort((a, b) => a.pos - b.pos);
   }
+
   const [videoListHeight, setVideoListHeight] = useState('366px');
+  const [autoplayStatus, setAutoplayStatus] = useState(true);
   const [activeVideo, setActiveVideo] = useState(() => {
     if (videoId) {
       const videoIndex = sortedVideos.findIndex(
@@ -88,19 +94,31 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     setPostItems([...postItems, ...nextPageItems]);
     setHasNextPage(postItems.length < sortedVideos.length);
   };
-
-  const videoElement = useRef(null);
   const playlistElement = useRef(null);
 
   const setPlaylistDivHieght = () => {
     if (window.innerWidth <= 1025) {
       setVideoListHeight('auto');
     } else {
-      console.log();
       setVideoListHeight(`${document.getElementsByClassName('main-content')[0].clientHeight}px`);
     }
   };
+  const handleAutoplay = (event) => {
+    event.target.checked ? setAutoplayStatus(true) : setAutoplayStatus(false);
+  };
 
+  const onVideoEnd = async () => {
+    if (autoplayStatus === true) {
+      await setActiveVideo((prev) => {
+        navigate(`?v=${sortedVideos[prev.videoIndex + 1].contentDetails.videoId}`);
+        return {
+          video: sortedVideos[prev.videoIndex + 1],
+          videoIndex: prev.videoIndex + 1,
+        };
+      });
+    }
+    console.log('video ended');
+  };
   useEffect(() => {
     const videoIndex = sortedVideos.findIndex((video) => video.contentDetails.videoId === videoId);
 
@@ -111,8 +129,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playlist.videos, videoId]);
-
+  }, [playlist.videos, location, videoId]);
   useEffect(() => {
     window.onresize = () => {
       setPlaylistDivHieght();
@@ -125,9 +142,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // useEffect(() => {
-  //   document.addEventListener('copy', addAttribution);
-  // }, []);
   return (
     <Layout baseUrl={baseUrl} logo={logo}>
       <Helmet>
@@ -191,7 +205,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
           className="main-content"
           sx={{ display: 'flex', flexDirection: 'column', width: ['full', 'full', 'full', '3/5'] }}
         >
-          <div
+          {/* <div
             ref={videoElement}
             style={{ paddingBottom: `56.25%` }}
             className="embed-content"
@@ -211,7 +225,18 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
-          </div>
+          </div> */}
+          <Youtube
+            videoId={activeVideo.video.contentDetails.videoId}
+            className="video-frame"
+            containerClassName="video-container"
+            opts={{
+              playerVars: {
+                autoplay: 1,
+              },
+            }}
+            onEnd={onVideoEnd}
+          />
           <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 4 }}>
             {/* <p className="w-full text-gray-600 text-xs lg:text-sm">
               {activeVideo.video.snippet.channelTitle}
@@ -296,7 +321,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     fontSize: 1,
                     borderRadius: 'default',
                     transition: 'all 0.5s',
-                    ':hover': { bg: '#e62117', color: 'white' },
+                    ':hover': { bg: 'blue', color: 'white' },
                     ':focus': { outline: 'none' },
                   }}
                 >
@@ -333,13 +358,30 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             boxShadow: [null, null, null, 'md'],
           }}
         >
-          <div sx={{ mb: 4, p: 4, borderBottomWidth: 'px' }}>
-            <h5 sx={{ fontSize: 2, fontWeight: 'medium' }}>
-              {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
-            </h5>
-            <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1] }}>
-              {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/{sortedVideos.length}
-            </p>
+          <div
+            sx={{
+              mb: 4,
+              p: 4,
+              borderBottomWidth: 'px',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div>
+              <h5 sx={{ fontSize: 2, fontWeight: 'medium' }}>
+                {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
+              </h5>
+              <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1] }}>
+                {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/{sortedVideos.length}
+              </p>
+            </div>
+            <div sx={{ display: 'flex', alignSelf: 'center' }}>
+              <p sx={{ fontSize: 2, px: 2 }}>Autoplay</p>
+              <label class="switch">
+                <input type="checkbox" name="autoplayStatus" onChange={handleAutoplay} />
+                <span class="slider round" />
+              </label>
+            </div>
           </div>
           <div
             ref={playlistElement}

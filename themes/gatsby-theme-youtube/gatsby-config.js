@@ -19,7 +19,6 @@ module.exports = ({ apiKey, channelId, trackingId, favicon }) => ({
     },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

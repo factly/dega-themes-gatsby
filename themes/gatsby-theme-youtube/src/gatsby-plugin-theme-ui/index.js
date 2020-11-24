@@ -20,6 +20,7 @@ export default {
     transparent: 'transparent',
     black: '#000',
     white: '#fff',
+    blue: 'rgb(6,95,212)',
     gray: [
       null,
       '#f7fafc',
@@ -91,18 +92,6 @@ export default {
       '#2c7a7b',
       '#285e61',
       '#234e52',
-    ],
-    blue: [
-      null,
-      '#ebf8ff',
-      '#bee3f8',
-      '#90cdf4',
-      '#63b3ed',
-      '#4299e1',
-      '#3182ce',
-      '#2b6cb0',
-      '#2c5282',
-      '#2a4365',
     ],
     indigo: [
       null,

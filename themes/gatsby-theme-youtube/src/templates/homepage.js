@@ -136,7 +136,7 @@ const IndexPage = ({ data, pageContext }) => {
                     fontSize: 1,
                     transition: 'all 0.5s',
                     ':focus': { outline: 'none' },
-                    ':hover': { color: 'white', bg: '#e62117' },
+                    ':hover': { color: 'white', bg: 'blue' },
                     bg: (theme) => `${theme.colors.gray[1]}`,
                     borderRadius: 'default',
                   }}

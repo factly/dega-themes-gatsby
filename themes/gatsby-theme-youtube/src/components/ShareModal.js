@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /** @jsx jsx */
 import React, { useState, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import {
@@ -63,7 +64,7 @@ const ShareModal = ({ title, url }) => {
           fontSize: 1,
           borderRadius: 'default',
           transition: 'all 0.5s',
-          ':hover': { bg: '#e62117', color: 'white' },
+          ':hover': { bg: 'blue', color: 'white' },
           ':focus': { outline: 'none' },
         }}
       >
