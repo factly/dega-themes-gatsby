@@ -380,12 +380,12 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             </div>
             <div sx={{ display: 'flex', alignSelf: 'center' }}>
               <p sx={{ fontSize: 2, px: 2 }}>Autoplay</p>
-              <label className="switch" htmlFor="autoplayStatus">
+              <label className="switch">
                 <input
                   type="checkbox"
                   name="autoplayStatus"
-                  checked
-                  onChange={() => handleAutoplay}
+                  defaultChecked="true"
+                  onChange={handleAutoplay}
                 />
                 <span className="slider" />
               </label>
