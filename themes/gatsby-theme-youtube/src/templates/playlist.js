@@ -235,6 +235,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             opts={{
               playerVars: {
                 autoplay: 1,
+                cc_load_policy: 1,
                 rel: 0,
               },
             }}
