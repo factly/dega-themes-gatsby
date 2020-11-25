@@ -18,7 +18,6 @@ import ShareModal from '../components/ShareModal';
 
 import placeholderImg from '../static/images/placeholder.jpg';
 
-
 function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const { baseUrl, logo } = pageContext;
   let title;
@@ -236,6 +235,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             opts={{
               playerVars: {
                 autoplay: 1,
+                rel: 0,
               },
             }}
             onEnd={onVideoEnd}
@@ -317,14 +317,15 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     display: 'block',
                     p: 2,
                     px: [null, null, null, 4],
-                    bg: (theme) => `${theme.colors.gray[3]}`,
+                    bg: 'blue',
+                    color: 'white',
                     textTransform: 'uppercase',
                     textAlign: 'center',
                     fontWeight: 'medium',
                     fontSize: 1,
                     borderRadius: 'default',
                     transition: 'all 0.5s',
-                    ':hover': { bg: 'blue', color: 'white' },
+                    ':hover': { bg: 'lightBlue', color: 'white' },
                     ':focus': { outline: 'none' },
                   }}
                 >

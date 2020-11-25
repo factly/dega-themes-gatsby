@@ -21,6 +21,7 @@ export default {
     black: '#000',
     white: '#fff',
     blue: 'rgb(6,95,212)',
+    lightBlue: 'rgb(57,140,249)',
     gray: [
       null,
       '#f7fafc',

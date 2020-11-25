@@ -57,14 +57,15 @@ const ShareModal = ({ title, url }) => {
           p: 2,
           mr: 4,
           px: [null, null, null, 4],
-          bg: (theme) => `${theme.colors.gray[3]}`,
+          bg: 'blue',
+          color: 'white',
           textTransform: 'uppercase',
           textAlign: 'center',
           fontWeight: 'medium',
           fontSize: 1,
           borderRadius: 'default',
           transition: 'all 0.5s',
-          ':hover': { bg: 'blue', color: 'white' },
+          ':hover': { bg: 'lightBlue', color: 'white' },
           ':focus': { outline: 'none' },
         }}
       >
