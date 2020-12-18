@@ -23,7 +23,7 @@ exports.onPreBootstrap = ({ store }) => {
   }
 };
 
-exports.createPages = async ({ graphql, actions, store }) => {
+exports.createPages = async ({ graphql, actions, store, reporter }) => {
   const { createPage } = actions;
 
   const result = await graphql(`
@@ -76,12 +76,6 @@ exports.createPages = async ({ graphql, actions, store }) => {
           }
         }
       }
-      allPlaylist {
-        totalCount
-        nodes {
-          playlistId
-        }
-      }
     }
   `);
 
@@ -99,7 +93,14 @@ exports.createPages = async ({ graphql, actions, store }) => {
       format_without_factcheck.push(parseInt(item.id));
     });
   // manifest
-  saveIcon(result.data.dega.space.fav_icon.url.raw);
+  let icon;
+  icon = result.data.dega.space.fav_icon && result.data.dega.space.fav_icon.url.raw;
+  console.log(result.data.dega.space);
+  if (icon) {
+    saveIcon(icon);
+  } else {
+    reporter.log('no favicon found on your space!!');
+  }
 
   const state = store.getState();
 
@@ -224,17 +225,6 @@ exports.createPages = async ({ graphql, actions, store }) => {
           format_id: parseInt(format.id),
         },
       });
-    });
-  });
-  //create playlist page for each playlist
-  result.data.allPlaylist.nodes.forEach((playlist) => {
-    createPage({
-      path: `/playlist/${playlist.playlistId}`,
-      component: require.resolve('./src/templates/playlist.js'),
-      context: {
-        id: playlist.id,
-        playlistId: playlist.playlistId,
-      },
     });
   });
 };
