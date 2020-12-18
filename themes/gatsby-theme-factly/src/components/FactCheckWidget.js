@@ -60,7 +60,7 @@ function FactCheckWidget({ claims }) {
   },[sliderElement.current ]) */
 
   return (
-    <div className="w-full lg:w-3/4 mx-auto  text-xl">
+    <div className="w-full lg:w-3/4 mx-auto  text-xl mb-4">
       {claims.length >= 1 && (
         <React.Fragment>
           <div className="flex flex-row justify-between pt-6 pb-2">
@@ -88,7 +88,7 @@ function FactCheckWidget({ claims }) {
               <FontAwesomeIcon icon={faChevronRight} className="fill-current w-4 h-4" />
             </button>
           </div>
-          <div ref={sliderElement} className="flex overflow-x-auto scrolling-touch slider pb-6">
+          <div ref={sliderElement} className="flex overflow-x-auto scrolling-touch sliderF pb-6">
             {claims.map((claim, i) => (
               <div id={`claim-${i}`} key={i} className="inline-block flex-none w-full mr-6">
                 <div className="w-full flex flex-col  border rounded shadow-lg">
@@ -129,8 +129,8 @@ function FactCheckWidget({ claims }) {
                   <div
                     className={`flex flex-col p-4 text-white ${CLAIM_RATING[claim.rating.slug]}`}
                   >
-                    <h2 className="font-bold P-4">Claim</h2>
-                    <div className="flex">
+                    <h2 className="font-bold P-4">Claim: </h2>
+                    <div className="flex parsed">
                       {parseEditorJsData(claim.description)}
 
                       {claim.rating.medium && (
@@ -144,8 +144,9 @@ function FactCheckWidget({ claims }) {
                     </div>
                   </div>
                   <div className="flex flex-col p-4 border-b">
-                    <h2 className="font-bold">Fact</h2>
-                    <div dangerouslySetInnerHTML={{ __html: claim.review }} />
+                    <h2 className="font-bold">Fact: </h2>
+
+                    <div className="parsed">{parseEditorJsData(claim.review)}</div>
                   </div>
                 </div>
               </div>

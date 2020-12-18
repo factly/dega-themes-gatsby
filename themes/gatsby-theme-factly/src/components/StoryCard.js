@@ -1,6 +1,10 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/prop-types */
 import { Link } from 'gatsby';
 import React from 'react';
+import _ from 'lodash';
 import parseDate from '../utils/parseDate';
+import addDefaultSrc from '../utils/addDefaultSrc';
 
 /**
  * TODO: Change the data structure of props
@@ -28,11 +32,14 @@ const StoryCard = ({
             className={`w-full flex vertical horizontal no-underline hover:no-underline`}
           >
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
-              <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
-                className="h-full w-full object-cover rounded"
-              />
+              {storyData.medium && (
+                <img
+                  alt={storyData.medium.alt_text}
+                  src={storyData.medium.url.raw}
+                  className="h-full w-full object-cover rounded"
+                  onError={addDefaultSrc}
+                />
+              )}
             </div>
             <div className="w-full flex flex-col">
               <p className="text-blue-500 text-xs px-1">
@@ -82,6 +89,7 @@ const StoryCard = ({
                 alt={storyData.medium.alt_text}
                 src={storyData.medium.url.raw}
                 className="h-full w-full rounded object-cover"
+                onError={addDefaultSrc}
               />
             </div>
 
@@ -116,6 +124,7 @@ const StoryCard = ({
                 alt={storyData.medium.alt_text}
                 src={storyData.medium.url.raw}
                 className="h-full w-full object-cover rounded"
+                onError={addDefaultSrc}
               />
             </div>
             <div className="w-full flex flex-col">
@@ -146,7 +155,34 @@ const StoryCard = ({
         </article>
       )}
       {cardStyle === 'withoutimage' && <article>card without image</article>}
-      {cardStyle === 'basicthumbnail' && <article>basic thumbnail</article>}
+      {cardStyle === 'card' && (
+        <Link to={`/${storyData.slug}`} className="w-full no-underline hover:no-underline">
+          <article className="flex flex-col sm:flex-row border m-4 rounded-lg">
+            <div style={{ minWidth: '15rem', maxWidth: '40rem' }} className="rounded-lg">
+              <img
+                alt={storyData.medium.alt_text}
+                src={storyData.medium.url.raw}
+                className="h-48 sm:h-full w-full object-cover rounded-lg"
+                onError={addDefaultSrc}
+              />
+            </div>
+            <div className="p-6 flex flex-col justify-between">
+              <h2 className="pb-2">{storyData.title}</h2>
+              <p className="text-md">
+                {_.truncate(storyData.excerpt, {
+                  length: 150,
+                  separator: /,?\.* +/,
+                })}
+              </p>
+              <p className="text-gray-500 text-sm pt-2">
+                <span>{`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}</span>
+                {' | '}
+                <span>{parseDate(storyData.created_at)}</span>
+              </p>
+            </div>
+          </article>
+        </Link>
+      )}
     </>
   );
 };

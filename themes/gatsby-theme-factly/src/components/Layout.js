@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import '../static/css/tailwind.css';
 
 const Layout = (props) => (
   <StaticQuery

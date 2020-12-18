@@ -67,7 +67,8 @@ const PostDetails = ({ data }) => {
       entries.forEach((entry) => {
         if (entry.target.hasAttribute('social-icon')) {
           handleShowSocialIcon(entry);
-        } else if (entry.target.hasAttribute('post')) {
+        }
+        if (entry.target.hasAttribute('post')) {
           handleSetActiveLink(entry);
         }
       });

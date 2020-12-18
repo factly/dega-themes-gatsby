@@ -17,6 +17,7 @@ function CategoryDetailsFormat({ data }) {
             <div>
               {dega.posts.nodes.map((item, index) => (
                 <StoryCard
+                  key={index}
                   cardStyle="basic"
                   storyData={item}
                   excerpt
