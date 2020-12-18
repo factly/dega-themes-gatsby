@@ -176,6 +176,7 @@ const IndexPage = ({ data, pageContext }) => {
                 <li key={i} sx={{ mr: 1 }}>
                   <button
                     type="button"
+                    key={i}
                     className={`${activeTab[tab] && 'bg-white'}`}
                     sx={{
                       borderWidth: 'px',
