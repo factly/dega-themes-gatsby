@@ -13,6 +13,7 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta veritatis corporis repudiandae dolor aperiam molestias autem perspiciatis similique quibusdam, eius adipisci debitis quam amet, unde rerum minus nulla atque quidem!',
     },
+    flags: { QUERY_ON_DEMAND: true },
     plugins: [
       'gatsby-plugin-react-helmet',
       /* {
@@ -62,6 +63,7 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
       },
       'gatsby-plugin-sharp',
       'gatsby-transformer-sharp',
+      `gatsby-plugin-sass`,
       'gatsby-plugin-styled-components',
       {
         resolve: `gatsby-plugin-postcss`,

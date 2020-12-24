@@ -85,12 +85,14 @@ const StoryCard = ({
             className="flex flex-wrap no-underline hover:no-underline"
           >
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
-              <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
-                className="h-full w-full rounded object-cover"
-                onError={addDefaultSrc}
-              />
+                            {storyData.medium && (
+                <img
+                  alt={storyData.medium.alt_text}
+                  src={storyData.medium.url.raw}
+                  className="h-full w-full object-cover rounded"
+                  onError={addDefaultSrc}
+                />
+              )}
             </div>
 
             <p className="w-full text-gray-600 text-xs md:text-sm pt-2">{storyData.subtitle}</p>
@@ -120,12 +122,14 @@ const StoryCard = ({
             className={`w-full flex vertical no-underline hover:no-underline`}
           >
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
-              <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
-                className="h-full w-full object-cover rounded"
-                onError={addDefaultSrc}
-              />
+                            {storyData.medium && (
+                <img
+                  alt={storyData.medium.alt_text}
+                  src={storyData.medium.url.raw}
+                  className="h-full w-full object-cover rounded"
+                  onError={addDefaultSrc}
+                />
+              )}
             </div>
             <div className="w-full flex flex-col">
               <p className="w-full text-gray-600 text-xs md:text-sm pb-1">
@@ -158,17 +162,19 @@ const StoryCard = ({
       {cardStyle === 'card' && (
         <Link to={`/${storyData.slug}`} className="w-full no-underline hover:no-underline">
           <article className="flex flex-col sm:flex-row border m-4 rounded-lg">
-            <div style={{ minWidth: '15rem', maxWidth: '40rem' }} className="rounded-lg">
-              <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
-                className="h-48 sm:h-full w-full object-cover rounded-lg"
-                onError={addDefaultSrc}
-              />
+            <div style={{ minWidth: '15rem', maxWidth: '15rem',maxHeight:'15rem' }} className="rounded-lg">
+                            {storyData.medium && (
+                <img
+                  alt={storyData.medium.alt_text}
+                  src={storyData.medium.url.raw}
+                  className="h-full w-full object-cover rounded"
+                  onError={addDefaultSrc}
+                />
+              )}
             </div>
             <div className="p-6 flex flex-col justify-between">
               <h2 className="pb-2">{storyData.title}</h2>
-              <p className="text-md">
+              <p className="text-sm">
                 {_.truncate(storyData.excerpt, {
                   length: 150,
                   separator: /,?\.* +/,

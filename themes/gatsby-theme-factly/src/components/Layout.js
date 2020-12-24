@@ -42,7 +42,7 @@ const Layout = (props) => (
               { property: 'og:url', content: space.site_address },
               {
                 property: 'og:image',
-                content: space.logo.url,
+                content: space.logo && space.logo.url,
               },
               { property: 'og:title', content: space.name },
               {
@@ -52,13 +52,13 @@ const Layout = (props) => (
             ]}
           >
             <html lang="en" />
-            <link rel="icon" href={space.fav_icon.url.raw} />
+             {space.fav_icon && <link rel="icon" href={space.fav_icon.url.raw} />}
             <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider" />
           </Helmet>
           <Navbar logo={space.logo.url.raw}></Navbar>
           <div
             style={{ maxWidth: '1920px' }}
-            className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 mx-auto"
+            className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 sm:pt-0 mx-auto"
           >
             {children}
           </div>

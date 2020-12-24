@@ -205,9 +205,9 @@ const PostDetails = ({ data }) => {
 export default PostDetails;
 
 export const query = graphql`
-  query($id: Int!) {
+  query($id: Int!,  $sid: [Int!]) {
     dega {
-      posts(page: 1, limit: 20, sortBy: "created_at", sortOrder: "desc") {
+      posts(page: 1, limit: 20, sortBy: "created_at", sortOrder: "desc", spaces: $sid) {
         nodes {
           created_at
           description

@@ -8,7 +8,7 @@ export default function Navbar({ logo }) {
       query={graphql`
         query NavsQuery {
           dega {
-            formats {
+            formats(spaces: 8) {
               nodes {
                 id
                 slug
