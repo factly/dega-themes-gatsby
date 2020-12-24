@@ -85,7 +85,7 @@ const StoryCard = ({
             className="flex flex-wrap no-underline hover:no-underline"
           >
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
-                            {storyData.medium && (
+              {storyData.medium && (
                 <img
                   alt={storyData.medium.alt_text}
                   src={storyData.medium.url.raw}
@@ -122,7 +122,7 @@ const StoryCard = ({
             className={`w-full flex vertical no-underline hover:no-underline`}
           >
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
-                            {storyData.medium && (
+              {storyData.medium && (
                 <img
                   alt={storyData.medium.alt_text}
                   src={storyData.medium.url.raw}
@@ -162,8 +162,11 @@ const StoryCard = ({
       {cardStyle === 'card' && (
         <Link to={`/${storyData.slug}`} className="w-full no-underline hover:no-underline">
           <article className="flex flex-col sm:flex-row border m-4 rounded-lg">
-            <div style={{ minWidth: '15rem', maxWidth: '15rem',maxHeight:'15rem' }} className="rounded-lg">
-                            {storyData.medium && (
+            <div
+              style={{ minWidth: '15rem', maxWidth: '15rem', maxHeight: '15rem' }}
+              className="rounded-lg"
+            >
+              {storyData.medium && (
                 <img
                   alt={storyData.medium.alt_text}
                   src={storyData.medium.url.raw}

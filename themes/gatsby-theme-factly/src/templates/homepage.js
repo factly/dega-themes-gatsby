@@ -65,9 +65,9 @@ function Homepage({ data }) {
 export default Homepage;
 
 export const query = graphql`
-  query($format_factcheck: [Int!], $format_without_factcheck: [Int!],  $sid:  [Int!]) {
+  query($format_factcheck: [Int!], $format_without_factcheck: [Int!], $sid: [Int!]) {
     dega {
-      categories(spaces:  $sid) {
+      categories(spaces: $sid) {
         nodes {
           id
           slug

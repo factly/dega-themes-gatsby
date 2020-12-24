@@ -52,7 +52,7 @@ const Layout = (props) => (
             ]}
           >
             <html lang="en" />
-             {space.fav_icon && <link rel="icon" href={space.fav_icon.url.raw} />}
+            {space.fav_icon && <link rel="icon" href={space.fav_icon.url.raw} />}
             <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider" />
           </Helmet>
           <Navbar logo={space.logo.url.raw}></Navbar>

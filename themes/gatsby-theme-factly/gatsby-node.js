@@ -220,8 +220,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   }
   // homepage
   if (homepage === 1) {
-    
-    console.log("homepage v1");
+    console.log('homepage v1');
     createPage({
       path: '/',
       component: require.resolve('./src/templates/homepage.js'),
@@ -231,9 +230,9 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
         sid: client,
       },
     });
-  } 
+  }
   if (homepage === 2) {
-    console.log("homepage v2");
+    console.log('homepage v2');
     createPage({
       path: '/',
       component: require.resolve('./src/templates/homepageTwo.js'),

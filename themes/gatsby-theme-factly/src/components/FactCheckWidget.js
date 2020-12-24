@@ -6,6 +6,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import parseEditorJsData from './../utils/parseEditorJsData';
 import addDefaultSrc from '../utils/addDefaultSrc';
 /**
+ * TODO: Chnage PLaceholder Img to color
  * TODO: Add resize observer
  * TODO: Disabling the buttons for first and last buttons
  * TODO: Fix the resize issue on canvas for basic widget
@@ -131,7 +132,7 @@ function FactCheckWidget({ claims }) {
                   >
                     <h2 className="font-bold P-4">Claim: </h2>
                     <div className="flex parsed">
-                      {parseEditorJsData(claim.description)}
+                      {claim.description && parseEditorJsData(claim.description)}
 
                       {claim.rating.medium && (
                         <img

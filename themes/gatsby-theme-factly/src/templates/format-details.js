@@ -30,9 +30,9 @@ function FormatDetails({ data }) {
 export default FormatDetails;
 
 export const query = graphql`
-  query($id: Int!, $sid:  [Int!]) {
+  query($id: Int!, $sid: [Int!]) {
     dega {
-      posts(formats: [$id],  spaces: $sid) {
+      posts(formats: [$id], spaces: $sid) {
         nodes {
           users {
             id
