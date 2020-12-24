@@ -39,7 +39,6 @@ const HomePageTwo = ({ data }) => {
                     <p className="card-desc">{i.content}</p>
                   </React.Fragment>
                 ))} */}
-                    <h3>Stats</h3>
                     <div className="info">
                       {item.meta_fields.stats.map((i, idx) => (
                         <div key={idx}>
