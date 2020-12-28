@@ -174,7 +174,13 @@ const parseEditorJsData = (content, amp = false) => {
               <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ py: 2 }} />
             );
           case 'paragraph':
-            return <p key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ py: 1 }} />;
+            return (
+              <p
+                key={i}
+                dangerouslySetInnerHTML={{ __html: data.text }}
+                sx={{ py: 1, a: { display: 'block' } }}
+              />
+            );
 
           case 'list':
             return (

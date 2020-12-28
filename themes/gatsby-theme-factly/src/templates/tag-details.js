@@ -17,7 +17,7 @@ function TagDetailsAll({ data }) {
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
         <div className="main-content order-2 lg:order-1 lg:w-3/5 mx-auto">
           <div className="flex flex-col pb-6">
-            <h1 sx={{ textAlign: 'center', fontSize: 6, mb: 4, textTransform: 'capitalize' }}>
+            <h1 sx={{ textAlign: 'center', fontSize: [5,   6], mb: 4, textTransform: 'capitalize' }}>
               {dega.tag.name}
             </h1>
             <div
@@ -44,6 +44,7 @@ function TagDetailsAll({ data }) {
                   lineHeight: 'inherit',
                   listStyle: 'none',
                   display: 'inline-flex',
+                  maxWidth:   '100vw',
                   li: {
                     fontSize: '16px',
                     fontWeight: 700,
@@ -85,7 +86,11 @@ function TagDetailsAll({ data }) {
             {/* <Tabs baseUrl={`/categories/${dega.category.slug}`} /> */}
             {dega.posts.nodes.length > 0 ? (
               <div
-                sx={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gridGap: '0.5rem' }}
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: ['1fr', '1fr', 'repeat(2,1fr)'],
+                  gridGap: '0.5rem',
+                }}
               >
                 {dega.posts.nodes.map((item, index) => (
                   <StoryCard

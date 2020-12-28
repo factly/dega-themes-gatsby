@@ -10,7 +10,7 @@ function FormatDetails({ data }) {
   return (
     <Layout>
       <div className="mx-auto" style={{ maxWidth: '1024px' }}>
-        <h1 sx={{ marginTop: '4.5rem', textAlign: 'center', fontSize: 6 }}>
+        <h1 sx={{ marginTop: '4.5rem', textAlign: 'center', fontSize: [5, 6] }}>
           {dega.posts.nodes[0].format.name}
         </h1>
         <div className="flex flex-col pb-6 lg:pt-8">

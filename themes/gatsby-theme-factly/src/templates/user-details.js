@@ -93,7 +93,11 @@ function UserDetailsAll({ data }) {
             </div>
             {dega.posts.nodes.length > 0 ? (
               <div
-                sx={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gridGap: '0.5rem' }}
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: ['1fr', '1fr', 'repeat(2,1fr)'],
+                  gridGap: '0.5rem',
+                }}
               >
                 {dega.posts.nodes.map((item, index) => (
                   <StoryCard
