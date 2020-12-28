@@ -25,17 +25,17 @@ module.exports = ({ apiKey, channelId, trackingId, favicon }) => ({
         trackingId,
       },
     },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: 'Factly Videos',
-        short_name: 'Factly Videos',
-        start_url: '/',
-        background_color: '#fff',
-        theme_color: '#fff',
-        display: 'standalone',
-        icon: favicon, // This path is relative to the root of the site.
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-manifest`,
+    //   options: {
+    //     name: 'Factly Videos',
+    //     short_name: 'Factly Videos',
+    //     start_url: '/',
+    //     background_color: '#fff',
+    //     theme_color: '#fff',
+    //     display: 'standalone',
+    //     icon: favicon, // This path is relative to the root of the site.
+    //   },
+    // },
   ],
 });

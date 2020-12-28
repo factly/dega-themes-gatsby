@@ -1,26 +1,29 @@
+/** @jsx jsx */
 import React from 'react';
 import { graphql } from 'gatsby';
+import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
 
+
 function FormatDetails({ data }) {
   const { dega } = data;
-
   return (
     <Layout>
-      <div className="mx-auto lg:-mt-8" style={{ maxWidth: '1024px' }}>
-        <div className="flex flex-col pb-6 lg:pt-16">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            {dega.posts.nodes.map((item, i) => (
-              <StoryCard
-                key={i}
-                cardStyle="basic"
-                storyData={item}
-                excerpt
-                imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-0"
-              />
-            ))}
-          </div>
+      <div className="mx-auto" style={{ maxWidth: '1024px' }}>
+      <h1 sx={{marginTop:'4.5rem', textAlign:'center',fontSize:'3rem'}}>{dega.posts.nodes[0].format.name}</h1>
+        <div className="flex flex-col pb-6 lg:pt-8">
+         { dega.posts.nodes.length>0 ?(<div sx={{display:'grid', gridTemplateColumns:['1fr','1fr','repeat(2,1fr)'], gridGap:'0.5rem'}}>
+              {dega.posts.nodes.map((item, index) => (
+                <StoryCard
+                  key={index}
+                  cardStyle="iframely"
+                  storyData={item}
+                  excerpt
+                  imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-4"
+                />
+              ))}
+            </div>): <h2 sx={{textAlign:'center'}}>No posts found</h2>}
         </div>
       </div>
     </Layout>
@@ -47,8 +50,12 @@ export const query = graphql`
             alt_text
             url
           }
+          format {
+            name
+          }
           created_at
           id
+          excerpt
           status
           subtitle
           title

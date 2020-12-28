@@ -68,7 +68,7 @@ div {
 .sidebar {
   height: 100vh;
   top: 0;
-  @apply hidden flex-col w-full pt-20 sticky overflow-y-hidden;
+  @apply hidden flex-col w-full pt-20 sticky overflow-y-scroll;
 }
 
 .sliderF {
@@ -194,4 +194,33 @@ input:focus + .sliderF {
 .parsed a {
   box-shadow: white 0px -0.05em inset, #ea364a 0px -0.1em inset;
   /*@apply text-blue-500*/
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.flex-column {
+  flex-direction: column;
+}
+.nav-pills {
+}
+.nav-item {
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+}
+
+.nav-item ul {
+  padding-left: 1rem;
+  display: none;
+  position: relative;
+}
+
+.nav-item ul.show {
+  display: block;
 }

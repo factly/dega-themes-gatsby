@@ -1,5 +1,7 @@
+/** @jsx jsx */
 import React from 'react';
 import InnerHTML from 'dangerously-set-html-content';
+import { jsx } from 'theme-ui';
 
 const parseEditorJsData = (content, amp = false) => {
   const patterns = {
@@ -14,12 +16,17 @@ const parseEditorJsData = (content, amp = false) => {
     ],
     twitter: [/^https?:\/\/twitter\.com\/(?:\w+)\/status(?:es)?\/(\d+)/i],
     instagram: [
-      /^https?:\/\/www\.instagram\.com\/(?:[a-zA-Z0-9_\-\.]+\/)?(?:p|tv|reel)\/([a-zA-Z0-9_-]+)\/?/i,
-      /^https?:\/\/instagr\.am\/(?:[a-zA-Z0-9_\-\.]+\/)?p\/([a-zA-Z0-9_-]+)/i,
-      /^https?:\/\/www\.instagram\.com\/(?:[a-zA-Z0-9_\-\.]+\/)?(?:p|tv)\/([a-zA-Z0-9_-]+)$/i,
+      /^https?:\/\/www\.instagram\.com\/(?:[a-zA-Z0-9_\-.]+\/)?(?:p|tv|reel)\/([a-zA-Z0-9_-]+)\/?/i,
+      /^https?:\/\/instagr\.am\/(?:[a-zA-Z0-9_\-.]+\/)?p\/([a-zA-Z0-9_-]+)/i,
+      /^https?:\/\/www\.instagram\.com\/(?:[a-zA-Z0-9_\-.]+\/)?(?:p|tv)\/([a-zA-Z0-9_-]+)$/i,
     ],
   };
 
+  // before removing useless escape ().) instagram: [
+  //   /^https?:\/\/www\.instagram\.com\/(?:[a-zA-Z0-9_\-\.]+\/)?(?:p|tv|reel)\/([a-zA-Z0-9_-]+)\/?/i,
+  //   /^https?:\/\/instagr\.am\/(?:[a-zA-Z0-9_\-\.]+\/)?p\/([a-zA-Z0-9_-]+)/i,
+  //   /^https?:\/\/www\.instagram\.com\/(?:[a-zA-Z0-9_\-\.]+\/)?(?:p|tv)\/([a-zA-Z0-9_-]+)$/i,
+  // ],
   const ampify = (data, i) => {
     const getId = (url, site) => {
       for (let i = 0; i < patterns[site].length; ++i) {
@@ -155,29 +162,38 @@ const parseEditorJsData = (content, amp = false) => {
           style = data.style === 'unordered' ? 'ul' : 'ol';
           ListTag = `${style}`;
           list = data.items
-            .map((listItem, i) => <li key={i}> ${listItem} </li>)
-            .reduce((a, c) => a + c, '');
+            .map((listItem, i) => {
+              return <li key={i}> {listItem} </li>;
+            })
+            .reduce((a, c) => [a, '', c]);
         }
 
         switch (block.type) {
           case 'header':
-            return <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} />;
+            return <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{py:2}} />;
           case 'paragraph':
-            return <p key={i} dangerouslySetInnerHTML={{ __html: data.text }} />;
+            return <p key={i} dangerouslySetInnerHTML={{ __html: data.text }}  sx={{py:1}}/>;
 
           case 'list':
-            return <ListTag key={i}>{list}</ListTag>;
+            return (
+              <ListTag sx={{listStylePosition:'inside', listStyleType:'disc', pl:4}} key={i}>
+                {list}
+              </ListTag>
+            );
+            case 'uppy':
+            return <React.Fragment key={i}><img sx={{mx:'auto',maxWidth:'600px'}} src={data.url.raw} alt={data.alt_text}/>{data.caption && <p className="img-caption">{data.caption}</p>}</React.Fragment>
 
           case 'embed':
             return amp ? (
               ampify(data, i)
             ) : (
-              <InnerHTML className="embeds" key={i} html={data.html} />
+              <InnerHTML className="embeds" key={i} html={data.html} sx={{py:2}} />
             );
 
           case 'raw':
             return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} />;
-
+          case 'code':
+            return <code>{data.code}</code>;
           default:
             break;
         }

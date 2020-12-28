@@ -64,6 +64,7 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
       'gatsby-plugin-sharp',
       'gatsby-transformer-sharp',
       `gatsby-plugin-sass`,
+      `gatsby-plugin-theme-ui`,
       'gatsby-plugin-styled-components',
       {
         resolve: `gatsby-plugin-postcss`,
@@ -101,7 +102,7 @@ module.exports = ({ client, api, youtube_api_key, channel_id, tailwindCustomConf
         resolve: `gatsby-plugin-advanced-sitemap`,
       },
       'gatsby-plugin-robots-txt',
-      'gatsby-plugin-manifest',
+       // 'gatsby-plugin-manifest',
       {
         resolve: 'gatsby-plugin-feed',
         options: {

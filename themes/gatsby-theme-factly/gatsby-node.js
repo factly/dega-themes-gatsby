@@ -192,7 +192,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   // manifest
   let icon;
 
-  icon = result.data.dega.space.fav_icon && result.data.dega.space.fav_icon.url.raw;
+  icon = result.data.dega.space.fav_icon.url.raw;
   if (icon) {
     saveIcon(icon);
   } else {

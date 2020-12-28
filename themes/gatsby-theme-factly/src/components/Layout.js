@@ -58,7 +58,7 @@ const Layout = (props) => (
           <Navbar logo={space.logo.url.raw}></Navbar>
           <div
             style={{ maxWidth: '1920px' }}
-            className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-10 pt-4 sm:pt-0 mx-auto"
+            className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-12 pt-4 sm:pt-0 mx-auto"
           >
             {children}
           </div>
