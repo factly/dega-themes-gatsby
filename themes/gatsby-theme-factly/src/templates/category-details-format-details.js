@@ -42,7 +42,7 @@ function CategoryDetailsFormat({ data }) {
                   lineHeight: 'inherit',
                   listStyle: 'none',
                   display: 'inline-flex',
-                  maxWidth:   '100vw',
+                  maxWidth: '100vw',
                   li: {
                     fontSize: '16px',
                     fontWeight: 700,
