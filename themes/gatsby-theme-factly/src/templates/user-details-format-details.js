@@ -15,20 +15,20 @@ function UserDetailsFormat({ data }) {
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
         <div className="main-content order-2 lg:order-1 lg:w-3/5 mx-auto">
           <div className="flex flex-col pb-6">
-          <div>
+            <div>
               <h1 sx={{ textAlign: 'center', fontSize: 4, mb: 4, textTransform: 'capitalize' }}>
-              {dega.user.first_name + ' ' + dega.user.last_name}
-            </h1>
-            <p sx={{ textAlign: 'center', pb: 4 }}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit iste nulla ipsum,
-              earum pariatur quos debitis unde, accusantium quod quaerat modi atque corporis!
-              Facilis officia illum deserunt amet placeat quia!
-            </p>
-            <div sx={{ textAlign: 'center', fontSize: 4, mb: 4 }}>
-              Mail:<a href={`mailto:${dega.user.email}`}> {dega.user.email}</a>
+                {dega.user.first_name + ' ' + dega.user.last_name}
+              </h1>
+              <p sx={{ textAlign: 'center', pb: 4 }}>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit iste nulla ipsum,
+                earum pariatur quos debitis unde, accusantium quod quaerat modi atque corporis!
+                Facilis officia illum deserunt amet placeat quia!
+              </p>
+              <div sx={{ textAlign: 'center', fontSize: 4, mb: 4 }}>
+                Mail:<a href={`mailto:${dega.user.email}`}> {dega.user.email}</a>
+              </div>
             </div>
-          </div>
-          
+
             <div
               className="tabs"
               sx={{

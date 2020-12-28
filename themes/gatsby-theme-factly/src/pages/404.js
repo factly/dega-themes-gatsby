@@ -10,12 +10,12 @@ const PageNotFound = ({ data }) => (
   <Layout>
     <div className="text-center">
       <h1 sx={{ py: '2rem' }}>Page Not Found</h1>
-      <Link to="/" sx={{ py: '1rem', display:'block' }}>
+      <Link to="/" sx={{ py: '1rem', display: 'block' }}>
         {' '}
         Go to HomePage
       </Link>
       <img
-          sx={{  mx:  'auto', display:  'block'  }}
+        sx={{ mx: 'auto', display: 'block' }}
         src={data.dega.space.logo.url.raw}
         alt="Logo"
         onError={addDefaultSrc}
