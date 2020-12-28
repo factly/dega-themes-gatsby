@@ -17,7 +17,7 @@ function TagDetailsAll({ data }) {
       <div className="flex flex-col lg:flex-row justify-between lg:border-b">
         <div className="main-content order-2 lg:order-1 lg:w-3/5 mx-auto">
           <div className="flex flex-col pb-6">
-            <h1 sx={{ textAlign: 'center', fontSize: 8, mb: 4, textTransform: 'capitalize' }}>
+            <h1 sx={{ textAlign: 'center', fontSize: 6, mb: 4, textTransform: 'capitalize' }}>
               {dega.tag.name}
             </h1>
             <div
