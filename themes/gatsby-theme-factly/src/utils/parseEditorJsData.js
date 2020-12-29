@@ -178,7 +178,7 @@ const parseEditorJsData = (content, amp = false) => {
               <p
                 key={i}
                 dangerouslySetInnerHTML={{ __html: data.text }}
-                sx={{ py: 1, a: { display: 'block' } }}
+                sx={{ py: 1, wordBreak: 'break-word' }}
               />
             );
 
