@@ -193,7 +193,9 @@ input:focus + .sliderF {
 
 .parsed a {
   display: inline-block;
-  box-shadow: white 0px -0.05em inset, #ea364a 0px -0.1em inset;
+  text-decoration-color: #ea364a;
+  text-decoration:underline;
+  /*box-shadow: white 0px -0.05em inset, #ea364a 0px -0.1em inset;*/
   /*@apply text-blue-500*/
 }
 
