@@ -144,74 +144,73 @@ const parseEditorJsData = (content, amp = false) => {
         );
     }
   };
-  const { blocks } = content;
+  const { blocks } = content || {};
 
   const htm = (
     <>
-      {blocks.map((block, i) => {
-        const { data } = block;
-        let HeaderTag;
-        let style;
-        let ListTag;
-        let list;
-        if (data.level) {
-          HeaderTag = `h${data.level}`;
-        }
+      {blocks &&
+        blocks.map((block, i) => {
+          const { data } = block;
+          let HeaderTag;
+          let style;
+          let ListTag;
+          let list;
+          if (data.level) {
+            HeaderTag = `h${data.level}`;
+          }
 
-        if (data.style) {
-          style = data.style === 'unordered' ? 'ul' : 'ol';
-          ListTag = `${style}`;
-          list = data.items
-            .map((listItem, i) => {
-              return <li key={i}> {listItem} </li>;
-            })
-            .reduce((a, c) => [a, '', c]);
-        }
+          if (data.style) {
+            style = data.style === 'unordered' ? 'ul' : 'ol';
+            ListTag = `${style}`;
+            list = data.items
+              .map((listItem, i) => <li key={i}> {listItem} </li>)
+              .reduce((a, c) => [a, '', c]);
+          }
 
-        switch (block.type) {
-          case 'header':
-            return (
-              <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ py: 3 }} />
-            );
-          case 'paragraph':
-            return (
-              <p
-                key={i}
-                dangerouslySetInnerHTML={{ __html: data.text }}
-                sx={{ py: 3, wordBreak: 'break-word' }}
-              />
-            );
+          switch (block.type) {
+            case 'header':
+              return (
+                <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ py: 3 }} />
+              );
+            case 'paragraph':
+              return (
+                <p
+                  key={i}
+                  dangerouslySetInnerHTML={{ __html: data.text }}
+                  sx={{ py: 3, wordBreak: 'break-word' }}
+                />
+              );
 
-          case 'list':
-            return (
-              <ListTag sx={{ listStylePosition: 'inside', listStyleType: 'disc', pl: 4 }} key={i}>
-                {list}
-              </ListTag>
-            );
-          case 'uppy':
-            return (
-              <React.Fragment key={i}>
-                <img sx={{ mx: 'auto', py: 4 }} src={data.url.raw} alt={data.alt_text} />
-                {data.caption && <p className="img-caption">{data.caption}</p>}
-              </React.Fragment>
-            );
+            case 'list':
+              return (
+                <ListTag sx={{ listStylePosition: 'inside', listStyleType: 'disc', pl: 4 }} key={i}>
+                  {list}
+                </ListTag>
+              );
+            case 'uppy':
+              return (
+                <React.Fragment key={i}>
+                  <img sx={{ mx: 'auto', py: 4 }} src={data.url.raw} alt={data.alt_text} />
+                  {data.caption && <p className="img-caption">{data.caption}</p>}
+                </React.Fragment>
+              );
 
-          case 'embed':
-            return amp ? (
-              ampify(data, i)
-            ) : (
-              <InnerHTML className="embeds" key={i} html={data.html} sx={{ py: 4 }} />
-            );
+            case 'embed':
+              return amp ? (
+                ampify(data, i)
+              ) : (
+                <InnerHTML className="embeds" key={i} html={data.html} sx={{ py: 4 }} />
+              );
 
-          case 'raw':
-            return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} sx={{ py: 3 }} />;
-          case 'code':
-            return <code sx={{ py: 3 }}>{data.code}</code>;
-          default:
-            break;
-        }
-        return null;
-      })}
+            case 'raw':
+              return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} sx={{ py: 3 }} />;
+            case 'code':
+              return <code sx={{ py: 3 }}>{data.code}</code>;
+            default:
+              break;
+          }
+          return null;
+        })}
     </>
   );
   return htm;

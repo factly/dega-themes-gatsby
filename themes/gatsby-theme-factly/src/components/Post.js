@@ -58,7 +58,7 @@ const Post = ({ post, observer }) => {
           <div className="parsed">{parseEditorJsData(post.description)}</div>
           {post.claims &&
             post.claims.map((claim) => (
-              <div className="parsed">{parseEditorJsData(claim.description)}</div>
+              claim.description &&<div className="parsed">{parseEditorJsData(claim.description)}</div>
             ))}
           <div className="flex flex-wrap pb-6 border-b">
             <div className="flex flex-wrap">
