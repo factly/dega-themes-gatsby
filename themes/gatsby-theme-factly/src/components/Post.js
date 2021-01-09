@@ -56,6 +56,10 @@ const Post = ({ post, observer }) => {
         <div className="w-full lg:w-3/4 mx-auto  text-xl">
           {post.claims && <FactCheckWidget claims={post.claims} />}
           <div className="parsed">{parseEditorJsData(post.description)}</div>
+          {post.claims &&
+            post.claims.map((claim) => (
+              <div className="parsed">{parseEditorJsData(claim.description)}</div>
+            ))}
           <div className="flex flex-wrap pb-6 border-b">
             <div className="flex flex-wrap">
               {post.tags.map((tag, i) => (

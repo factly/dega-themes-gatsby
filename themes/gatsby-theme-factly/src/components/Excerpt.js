@@ -9,7 +9,7 @@ const Excerpt = ({ excerpt, image }) => {
   return (
     <div className="flex flex-col md:flex-row flex-wrap my-6 bg-gray-200">
       {image && (
-        <div className="flex-1">
+        <div className="flex-1 w-full">
           <img
             src={image.url.raw}
             alt={image.alt_text}

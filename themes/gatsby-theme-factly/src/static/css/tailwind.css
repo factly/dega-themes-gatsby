@@ -190,12 +190,30 @@ input:checked + .sliderF {
 input:focus + .sliderF {
   box-shadow: 0 0 1px #065fd4;
 }
-
+.parsed {
+  word-break: break-word;
+}
 .parsed a {
+display:inline;
+position: relative;
+line-height: 1.5;
   @apply text-brand;
+border-bottom: 2px solid red;
   /*box-shadow: white 0px -0.05em inset, #ea364a 0px -0.1em inset;*/
   /*@apply text-blue-500*/
 }
+.parsed a::before {
+  position: absolute;
+  background:red;
+  content:"";
+  clip-path:polygon(0 0 , 0 0, 0% 100%, 0 100% );
+  transition: clip-path 275ms ease;
+
+}
+.parsed a:hover::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
 
 .nav {
   display: flex;

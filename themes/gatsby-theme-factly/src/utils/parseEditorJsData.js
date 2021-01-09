@@ -171,14 +171,14 @@ const parseEditorJsData = (content, amp = false) => {
         switch (block.type) {
           case 'header':
             return (
-              <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ py: 2 }} />
+              <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ py: 3 }} />
             );
           case 'paragraph':
             return (
               <p
                 key={i}
                 dangerouslySetInnerHTML={{ __html: data.text }}
-                sx={{ py: 1, wordBreak: 'break-word' }}
+                sx={{ py: 3, wordBreak: 'break-word' }}
               />
             );
 
@@ -200,13 +200,13 @@ const parseEditorJsData = (content, amp = false) => {
             return amp ? (
               ampify(data, i)
             ) : (
-              <InnerHTML className="embeds" key={i} html={data.html} sx={{ py: 2 }} />
+              <InnerHTML className="embeds" key={i} html={data.html} sx={{ py: 4 }} />
             );
 
           case 'raw':
-            return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} />;
+            return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} sx={{ py: 3 }} />;
           case 'code':
-            return <code>{data.code}</code>;
+            return <code sx={{ py: 3 }}>{data.code}</code>;
           default:
             break;
         }

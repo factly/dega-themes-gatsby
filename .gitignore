@@ -107,6 +107,6 @@ public
 # Temporary folders
 tmp/
 temp/
-
-
+factly-dega/
+youtube-two/
 # End of https://www.gitignore.io/api/node

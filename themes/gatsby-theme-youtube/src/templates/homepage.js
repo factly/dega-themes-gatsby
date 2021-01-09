@@ -78,7 +78,7 @@ const IndexPage = ({ data, pageContext }) => {
           borderBottomWidth: [null, null, null, 'px'],
         }}
       >
-        <div className="main-content" sx={{ width: 'full', marginTop: '-2rem' }}>
+        <div className="main-content" sx={{ width: 'full' }}>
           <div>
             <div
               sx={{
