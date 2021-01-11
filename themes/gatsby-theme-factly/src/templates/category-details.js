@@ -4,8 +4,6 @@ import { graphql, Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
-import Tabs from '../components/Tabs';
-import Category from '../components/Category';
 
 function CategoryDetailsAll({ data }) {
   const { dega } = data;

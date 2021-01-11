@@ -6,7 +6,7 @@ const saveIcon = async (url) => {
   await fetch(url)
     .then((res) => res.buffer())
     .then((buffer) =>
-      fs.writeFile('./src/Icons/favicon.png', buffer, () =>
+      fs.writeFile('../static/Icons/favicon.png', buffer, () =>
         console.log('finished loading favicon to src icons'),
       ),
     );
@@ -211,7 +211,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       background_color: '#ffffff',
       theme_color: `#ffffff`,
       display: `minimal-ui`,
-      icon: './src/Icons/favicon.png',
+      icon: '/Icons/favicon.png',
     };
   };
   if (plugin) {
@@ -238,6 +238,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       component: require.resolve('./src/templates/homepageTwo.js'),
       context: {
         sid: [client],
+        homepage,
       },
     });
   }

@@ -3,8 +3,6 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
-import Tabs from '../components/Tabs';
-import Category from '../components/Category';
 import { jsx } from 'theme-ui';
 
 function CategoryDetailsFormat({ data }) {

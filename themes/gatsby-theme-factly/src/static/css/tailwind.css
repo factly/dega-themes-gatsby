@@ -194,26 +194,21 @@ input:focus + .sliderF {
   word-break: break-word;
 }
 .parsed a {
-display:inline;
-position: relative;
-line-height: 1.5;
-  @apply text-brand;
-border-bottom: 2px solid red;
+  display: inline;
+  position: relative;
+  line-height: 1.5;
+  @apply text-black;
+  background: linear-gradient(to bottom, #ea364a 0%, #ea364a 100%);
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+  background-size: 1px 1px;
+  transition: all 0.2s;
   /*box-shadow: white 0px -0.05em inset, #ea364a 0px -0.1em inset;*/
   /*@apply text-blue-500*/
 }
-.parsed a::before {
-  position: absolute;
-  background:red;
-  content:"";
-  clip-path:polygon(0 0 , 0 0, 0% 100%, 0 100% );
-  transition: clip-path 275ms ease;
-
+.parsed a:hover {
+  background-size: 100% 100%;
 }
-.parsed a:hover::before {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-
 
 .nav {
   display: flex;
