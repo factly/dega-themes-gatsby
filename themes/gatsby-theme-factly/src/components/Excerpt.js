@@ -21,13 +21,12 @@ const Excerpt = ({ excerpt, image }) => {
           />
         </div>
       )}
-      {
-        excerpt && <div className="flex flex-col flex-1 p-4">
-        <div className="w-full font-bold text-2xl leading-tight text-gray-900">Excerpt</div>
-        <p className="text-gray-800  text-lg pt-2">{excerpt}</p>
-      </div>
-      }
-     
+      {excerpt && (
+        <div className="flex flex-col flex-1 p-4">
+          <div className="w-full font-bold text-2xl leading-tight text-gray-900">Excerpt</div>
+          <p className="text-gray-800  text-lg pt-2">{excerpt}</p>
+        </div>
+      )}
     </div>
   );
 };
