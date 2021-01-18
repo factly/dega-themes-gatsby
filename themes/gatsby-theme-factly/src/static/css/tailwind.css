@@ -197,8 +197,9 @@ input:focus + .sliderF {
   display: inline;
   position: relative;
   line-height: 1.5;
-  @apply text-black;
-  background: linear-gradient(to bottom, #ea364a 0%, #ea364a 100%);
+  color: inherit;
+  background: linear-gradient(180deg,#4299e1 0%,#3b82f6 100%);
+padding: 0 4px;
   background-position: 0 100%;
   background-repeat: repeat-x;
   background-size: 1px 1px;
@@ -208,6 +209,7 @@ input:focus + .sliderF {
 }
 .parsed a:hover {
   background-size: 100% 100%;
+  color:inherit;
 }
 
 .nav {
