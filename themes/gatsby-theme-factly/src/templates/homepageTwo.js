@@ -14,9 +14,8 @@ const HomePageTwo = ({ data }) => {
   });
 
   const filteredCategories = categories
-    .filter((i) => i.meta_fields !== null)
+    .filter((i) => i.meta_fields !== null && i.meta_fields.stats)
     .sort((a, b) => a.meta_fields.order - b.meta_fields.order);
-
   return (
     <Layout>
       <div className="row">
@@ -32,7 +31,7 @@ const HomePageTwo = ({ data }) => {
                   }}
                 >
                   <div className="card-body" style={{ backgroundColor: item.meta_fields.color }}>
-                    <span className="card-count">{i + 1}</span>
+                    {/* <span className="card-count">{i + 1}</span> */}
                     {/* {item.meta_fields.stats.map((i, idx) => (
                   <React.Fragment key={idx}>
                     <h3 className="card-goal">{i.value}</h3>
