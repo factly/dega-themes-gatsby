@@ -7,7 +7,7 @@ const Tabs = ({ baseUrl }) => {
       query={graphql`
         query FormatsQuery {
           dega {
-            formats {
+            formats(spaces: [8]) {
               nodes {
                 id
                 slug

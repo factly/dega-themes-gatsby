@@ -8,28 +8,55 @@ import Img from 'gatsby-image';
 import { FaPlay } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroller';
 // import styled from '@emotion/styled';
+import { navigate } from '@reach/router';
 import { jsx } from 'theme-ui';
+import Youtube from 'react-youtube';
 import Layout from '../components/Layout';
 import linkify from '../utils/linkify';
 import addAttribution from '../utils/addAttribution';
+import ShareModal from '../components/ShareModal';
+
+import placeholderImg from '../static/images/placeholder.jpg';
 
 function Playlist({ data: { playlist, channel }, pageContext, location }) {
   const { baseUrl, logo } = pageContext;
+  let title;
+  let url;
+  if (typeof window !== 'undefined') {
+    title = window.document.title;
+    url = window.location.href;
+  }
   const videoId = location.search.substring(1).split('=')[1];
+
+  const positionsArr = playlist.videos.map((video) =>
+    video.positions.find((e) => e.playlist === playlist.playlistId),
+  );
+
+  let sortedVideos = playlist.videos;
+
+  if (playlist.snippet.title !== 'Uploads') {
+    sortedVideos = playlist.videos
+      .map((video, i) => {
+        return { ...video, pos: positionsArr[i].position };
+      })
+      .sort((a, b) => a.pos - b.pos);
+  }
+
   const [videoListHeight, setVideoListHeight] = useState('366px');
+  const [autoplayStatus, setAutoplayStatus] = useState(true);
   const [activeVideo, setActiveVideo] = useState(() => {
     if (videoId) {
-      const videoIndex = playlist.videos.findIndex(
+      const videoIndex = sortedVideos.findIndex(
         (video) => video.contentDetails.videoId === videoId,
       );
       return {
         videoIndex,
-        video: playlist.videos[videoIndex],
+        video: sortedVideos[videoIndex],
       };
     }
     return {
       videoIndex: 0,
-      video: playlist.videos[0],
+      video: sortedVideos[0],
     };
   });
 
@@ -55,19 +82,18 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
   );
 
   const [postItems, setPostItems] = useState(() => {
-    const video = playlist.videos.splice(activeVideo.videoIndex, 1);
-    playlist.videos.unshift(video[0]);
-    return playlist.videos.slice(0, 20);
+    const video = sortedVideos.splice(activeVideo.videoIndex, 1);
+    sortedVideos.unshift(video[0]);
+    return sortedVideos.slice(0, 20);
   });
+
   const [hasNextPage, setHasNextPage] = useState(true);
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
-    const nextPageItems = playlist.videos.slice(postItems.length, postItems.length + 20);
+    const nextPageItems = sortedVideos.slice(postItems.length, postItems.length + 20);
     setPostItems([...postItems, ...nextPageItems]);
-    setHasNextPage(postItems.length < playlist.videos.length);
+    setHasNextPage(postItems.length < sortedVideos.length);
   };
-
-  const videoElement = useRef(null);
   const playlistElement = useRef(null);
 
   const setPlaylistDivHieght = () => {
@@ -77,20 +103,35 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       setVideoListHeight(`${document.getElementsByClassName('main-content')[0].clientHeight}px`);
     }
   };
+  const handleAutoplay = (event) => {
+    return event.target.checked ? setAutoplayStatus(true) : setAutoplayStatus(false);
+  };
 
+  const onVideoEnd = async () => {
+    if (autoplayStatus === true) {
+      await setActiveVideo((prev) => {
+        if (prev.videoIndex < sortedVideos.length) {
+          navigate(`?v=${sortedVideos[prev.videoIndex + 1].contentDetails.videoId}`);
+          return {
+            video: sortedVideos[prev.videoIndex + 1],
+            videoIndex: prev.videoIndex + 1,
+          };
+        }
+      });
+    }
+    console.log('video ended');
+  };
   useEffect(() => {
-    const videoIndex = playlist.videos.findIndex(
-      (video) => video.contentDetails.videoId === videoId,
-    );
+    const videoIndex = sortedVideos.findIndex((video) => video.contentDetails.videoId === videoId);
 
     if (videoIndex >= 0) {
       setActiveVideo({
-        video: playlist.videos[videoIndex],
+        video: sortedVideos[videoIndex],
         videoIndex,
       });
     }
-  }, [playlist.videos, videoId]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playlist.videos, location, videoId]);
   useEffect(() => {
     window.onresize = () => {
       setPlaylistDivHieght();
@@ -103,9 +144,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    document.addEventListener('copy', addAttribution);
-  }, []);
   return (
     <Layout baseUrl={baseUrl} logo={logo}>
       <Helmet>
@@ -116,7 +154,42 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
         />
         <meta
           name="image"
-          content={activeVideo.local && activeVideo.local.childImageSharp.fluid.src}
+          content={
+            activeVideo.video.snippet &&
+            activeVideo.video.snippet.thumbnails &&
+            ((activeVideo.video.snippet.thumbnails.maxres &&
+              activeVideo.video.snippet.thumbnails.maxres.url) ||
+              (activeVideo.video.snippet.thumbnails.standard &&
+                activeVideo.video.snippet.thumbnails.standard.url) ||
+              (activeVideo.video.snippet.thumbnails.high &&
+                activeVideo.video.snippet.thumbnails.high.url) ||
+              (activeVideo.video.snippet.thumbnails.medium &&
+                activeVideo.video.snippet.thumbnails.medium.url) ||
+              (activeVideo.video.snippet.thumbnails.default &&
+                activeVideo.video.snippet.thumbnails.default.url))
+          }
+        />
+        <meta property="og:title" content={activeVideo.video.snippet.title} />
+        <meta
+          property="og:description"
+          content={activeVideo.video.snippet.description.substring(0, 150)}
+        />
+        <meta
+          property="og:image"
+          content={
+            activeVideo.video.snippet &&
+            activeVideo.video.snippet.thumbnails &&
+            ((activeVideo.video.snippet.thumbnails.maxres &&
+              activeVideo.video.snippet.thumbnails.maxres.url) ||
+              (activeVideo.video.snippet.thumbnails.standard &&
+                activeVideo.video.snippet.thumbnails.standard.url) ||
+              (activeVideo.video.snippet.thumbnails.high &&
+                activeVideo.video.snippet.thumbnails.high.url) ||
+              (activeVideo.video.snippet.thumbnails.medium &&
+                activeVideo.video.snippet.thumbnails.medium.url) ||
+              (activeVideo.video.snippet.thumbnails.default &&
+                activeVideo.video.snippet.thumbnails.default.url))
+          }
         />
         <script type="application/ld+json">{JSON.stringify(schemaVideo)}</script>
       </Helmet>
@@ -134,7 +207,12 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
           className="main-content"
           sx={{ display: 'flex', flexDirection: 'column', width: ['full', 'full', 'full', '3/5'] }}
         >
-          <div ref={videoElement} style={{ paddingBottom: `56.25%` }} sx={{ position: 'relative' }}>
+          {/* <div
+            ref={videoElement}
+            style={{ paddingBottom: `56.25%` }}
+            className="embed-content"
+            sx={{ position: 'relative' }}
+          >
             <iframe
               sx={{
                 position: 'absolute',
@@ -149,7 +227,20 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
-          </div>
+          </div> */}
+          <Youtube
+            videoId={activeVideo.video.contentDetails.videoId}
+            className="video-frame"
+            containerClassName="video-container"
+            opts={{
+              playerVars: {
+                autoplay: 1,
+                cc_load_policy: 1,
+                rel: 0,
+              },
+            }}
+            onEnd={onVideoEnd}
+          />
           <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 4 }}>
             {/* <p className="w-full text-gray-600 text-xs lg:text-sm">
               {activeVideo.video.snippet.channelTitle}
@@ -171,19 +262,27 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
               {activeVideo.video.snippet.publishedAt}
             </p>
             <hr />
-            <div sx={{ display: 'flex', alignItems: 'center', borderBottomWidth: 'px', p: 6 }}>
-              <a
-                rel="noopener noreferrer"
-                target="_blank"
-                href={`https://www.youtube.com/channel/${channel.channelId}`}
-              >
-                <img
-                  alt={channel.snippet.title}
-                  src={channel.snippet.thumbnails.high.url}
-                  sx={{ height: 12, borderRadius: 'full' }}
-                />
-              </a>
-              <div>
+            <div
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                borderBottomWidth: 'px',
+                p: 6,
+              }}
+            >
+              <div sx={{ display: 'flex', flexGrow: 1 }}>
+                <a
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={`https://www.youtube.com/channel/${channel.channelId}`}
+                >
+                  <img
+                    alt={channel.snippet.title}
+                    src={channel.snippet.thumbnails.high.url}
+                    sx={{ height: 12, borderRadius: 'full' }}
+                  />
+                </a>
                 <div
                   sx={{
                     display: 'flex',
@@ -207,33 +306,46 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                   </span>
                 </div>
               </div>
-              <a
-                rel="noopener noreferrer"
-                href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
-                target="_blank"
-                type="button"
-                sx={{
-                  ml: 'auto',
-                  display: 'block',
-                  p: 2,
-                  px: [null, null, null, 4],
-                  bg: (theme) => `${theme.colors.gray[3]}`,
-                  textTransform: 'uppercase',
-                  textAlign: 'center',
-                  fontWeight: 'medium',
-                  fontSize: 1,
-                  borderRadius: 'default',
-                  transition: 'all 0.5s',
-                  ':hover': { bg: '#e62117', color: 'white' },
-                  ':focus': { outline: 'none' },
-                }}
-              >
-                Subscribe
-              </a>
+              <div sx={{ display: 'flex', ml: 'auto', my: [4, 0, 0] }}>
+                <ShareModal title={`${activeVideo.video.snippet.title}`} url={url} />
+                <a
+                  rel="noopener noreferrer"
+                  href={`https://www.youtube.com/channel/${channel.channelId}?sub_confirmation=1`}
+                  target="_blank"
+                  type="button"
+                  sx={{
+                    ml: 'auto',
+                    display: 'block',
+                    p: 2,
+                    px: [null, null, null, 4],
+                    bg: 'blue',
+                    color: 'white',
+                    textTransform: 'uppercase',
+                    textAlign: 'center',
+                    fontWeight: 'medium',
+                    fontSize: 1,
+                    borderRadius: 'default',
+                    transition: 'all 0.5s',
+                    ':hover': { bg: 'lightBlue', color: 'white' },
+                    ':focus': { outline: 'none' },
+                  }}
+                >
+                  Subscribe
+                </a>
+              </div>
             </div>
             <p
               className="read-more-wrap"
-              sx={{ whiteSpace: 'pre-line', py: 2, fontSize: 2 }}
+              sx={{
+                whiteSpace: 'pre-line',
+                py: 2,
+                px: 4,
+                fontSize: 2,
+                a: {
+                  color: '#2196f3',
+                },
+              }}
+              onCopy={addAttribution}
               dangerouslySetInnerHTML={{ __html: linkify(activeVideo.video.snippet.description) }}
             ></p>
           </div>
@@ -251,14 +363,35 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             boxShadow: [null, null, null, 'md'],
           }}
         >
-          <div sx={{ mb: 4, p: 4, borderBottomWidth: 'px' }}>
-            <h5 sx={{ fontSize: 2, fontWeight: 'medium' }}>
-              {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
-            </h5>
-            <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1] }}>
-              {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/
-              {playlist.videos.length}
-            </p>
+          <div
+            sx={{
+              mb: 4,
+              p: 4,
+              borderBottomWidth: 'px',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div>
+              <h5 sx={{ fontSize: 2, fontWeight: 'medium' }}>
+                {playlist.snippet.title === 'Uploads' ? 'Recent Videos' : playlist.snippet.title}
+              </h5>
+              <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, 0, 1] }}>
+                {playlist.snippet.channelTitle} - {activeVideo.videoIndex + 1}/{sortedVideos.length}
+              </p>
+            </div>
+            <div sx={{ display: 'flex', alignSelf: 'center' }}>
+              <p sx={{ fontSize: 2, px: 2 }}>Autoplay</p>
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  name="autoplayStatus"
+                  defaultChecked="true"
+                  onChange={handleAutoplay}
+                />
+                <span className="slider" />
+              </label>
+            </div>
           </div>
           <div
             ref={playlistElement}
@@ -328,7 +461,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     ) : (
                       <img
                         alt={playlistVideo.snippet.title}
-                        src="https://source.unsplash.com/random/150x150"
+                        src={placeholderImg}
                         sx={{ width: 20, height: 'full' }}
                       />
                     )}
@@ -451,10 +584,31 @@ export const query = graphql`
         contentDetails {
           videoId
         }
+        positions {
+          position
+          playlist
+        }
         snippet {
           position
           title
           description
+          thumbnails {
+            default {
+              url
+            }
+            high {
+              url
+            }
+            standard {
+              url
+            }
+            maxres {
+              url
+            }
+            medium {
+              url
+            }
+          }
           publishedAt(formatString: "MMM DD, YYYY")
           channelTitle
         }

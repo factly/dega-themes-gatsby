@@ -13,26 +13,27 @@ const PostDetails = ({ data }) => {
       <Helmet>
         <html lang="en" amp />
         <title>{post.title}</title>
+        {/* <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
+        <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
+        <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
+        <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script> */}
+        {/* <script async custom-element="amp-pinterest" src="https://cdn.ampproject.org/v0/amp-pinterest-0.1.js"></script> */}
       </Helmet>
       <article>
         <h1 className="text-4xl">
           <strong>{post.title}</strong>
         </h1>
         {post.users.map((user, i, arr) => (
-          <React.Fragment key={i}>
-            <a href={`/users/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
+          <div key={i}>
+            By <a href={`/users/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
             {arr.length - i > 1 && ','}
-          </React.Fragment>
+          </div>
         ))}
         <div>
           <strong>Excerpt</strong>
           <p>{post.excerpt}</p>
           <strong>Description</strong>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: parseEditorJsData(post.description, true),
-            }}
-          ></div>
+          <div className="parsed">{parseEditorJsData(post.description, 'true')}</div>
         </div>
       </article>
     </LayoutAmp>

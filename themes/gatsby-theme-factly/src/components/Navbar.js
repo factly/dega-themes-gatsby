@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/** @jsx jsx */
 import React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
 import addDefaultSrc from '../utils/addDefaultSrc';
+import { jsx } from 'theme-ui';
 export default function Navbar({ logo }) {
   return (
     <StaticQuery
       query={graphql`
         query NavsQuery {
           dega {
-            formats {
+            formats(spaces: 8) {
               nodes {
                 id
                 slug
@@ -20,7 +22,10 @@ export default function Navbar({ logo }) {
       `}
       render={(data) => (
         <React.Fragment>
-          <div className="fixed top-0 inset-x-0 bg-white border-b border-gray-300 z-10">
+          <div
+            className="fixed top-0 inset-x-0 bg-white border-b border-gray-300 z-10"
+            sx={{ zIndex: '9999' }}
+          >
             <header className="flex item-center justify-between border-b  border-gray-100 p-2 text-sm font-semibold text-gray-800">
               <nav className="flex flex-grow items-center justify-between px-0 lg:px-4 py-3 sm:p-0">
                 <div className="flex flex-1 order-2 lg:order-1 items-center justify-end lg:justify-start">

@@ -1,6 +1,12 @@
+/** @jsx jsx */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/prop-types */
 import { Link } from 'gatsby';
+import { jsx } from 'theme-ui';
 import React from 'react';
+import _ from 'lodash';
 import parseDate from '../utils/parseDate';
+import addDefaultSrc from '../utils/addDefaultSrc';
 
 /**
  * TODO: Change the data structure of props
@@ -28,11 +34,14 @@ const StoryCard = ({
             className={`w-full flex vertical horizontal no-underline hover:no-underline`}
           >
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
-              <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
-                className="h-full w-full object-cover rounded"
-              />
+              {storyData.medium && (
+                <img
+                  alt={storyData.medium.alt_text}
+                  src={storyData.medium.url.raw}
+                  className="h-full w-full object-cover rounded"
+                  onError={addDefaultSrc}
+                />
+              )}
             </div>
             <div className="w-full flex flex-col">
               <p className="text-blue-500 text-xs px-1">
@@ -78,11 +87,14 @@ const StoryCard = ({
             className="flex flex-wrap no-underline hover:no-underline"
           >
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
-              <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
-                className="h-full w-full rounded object-cover"
-              />
+              {storyData.medium && (
+                <img
+                  alt={storyData.medium.alt_text}
+                  src={storyData.medium.url.raw}
+                  className="h-full w-full object-cover rounded"
+                  onError={addDefaultSrc}
+                />
+              )}
             </div>
 
             <p className="w-full text-gray-600 text-xs md:text-sm pt-2">{storyData.subtitle}</p>
@@ -112,11 +124,14 @@ const StoryCard = ({
             className={`w-full flex vertical no-underline hover:no-underline`}
           >
             <div className={`flex justify-start items-start pr-4 py-2 ${imageSize}`}>
-              <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
-                className="h-full w-full object-cover rounded"
-              />
+              {storyData.medium && (
+                <img
+                  alt={storyData.medium.alt_text}
+                  src={storyData.medium.url.raw}
+                  className="h-full w-full object-cover rounded"
+                  onError={addDefaultSrc}
+                />
+              )}
             </div>
             <div className="w-full flex flex-col">
               <p className="w-full text-gray-600 text-xs md:text-sm pb-1">
@@ -146,7 +161,186 @@ const StoryCard = ({
         </article>
       )}
       {cardStyle === 'withoutimage' && <article>card without image</article>}
-      {cardStyle === 'basicthumbnail' && <article>basic thumbnail</article>}
+      {cardStyle === 'card' && (
+        <Link to={`/${storyData.slug}`} className="w-full no-underline hover:no-underline">
+          <article className="flex flex-col sm:flex-row border m-4 rounded-lg">
+            <div
+              style={{ minWidth: '15rem', maxWidth: '15rem', maxHeight: '15rem' }}
+              className="rounded-lg"
+            >
+              {storyData.medium && (
+                <img
+                  alt={storyData.medium.alt_text}
+                  src={storyData.medium.url.raw}
+                  className="h-full w-full object-cover rounded"
+                  onError={addDefaultSrc}
+                />
+              )}
+            </div>
+            <div className="p-6 flex flex-col justify-between">
+              <h2 className="pb-2">{storyData.title}</h2>
+              <p className="text-sm">
+                {_.truncate(storyData.excerpt, {
+                  length: 150,
+                  separator: /,?\.* +/,
+                })}
+              </p>
+              <p className="text-gray-500 text-sm pt-2">
+                <span>{`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}</span>
+                {' | '}
+                <span>{parseDate(storyData.created_at)}</span>
+              </p>
+            </div>
+          </article>
+        </Link>
+      )}
+      {cardStyle === 'iframely' && (
+        <div
+          sx={{
+            display: 'flex',
+            border: '1px solid rgb(222,222,222)',
+          }}
+        >
+          <div className="iframely-card" sx={{ display: 'flex', flexDirection: 'column' }}>
+            <div sx={{ maxWidth: '100%', width: '100%', display: 'flex', overflow: 'hidden' }}>
+              <div
+                sx={{
+                  paddingBottom: '56.24999999%',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  width: '100%',
+                }}
+              >
+                <div sx={{ position: 'absolute', width: '100%', height: ' 100%' }}>
+                  <Link
+                    to={`/${storyData.slug}`}
+                    sx={{
+                      zIndex: 20,
+                      display: 'block',
+                      width: '100%',
+                      height: '100%',
+                      background: 'no-repeat center',
+                      backgroundSize: ' cover',
+                      backgroundImage: `url(${storyData.medium.url.raw})`,
+                      position: 'absolute',
+                      textDecoration: 'none',
+                      touchAction: 'manipulation',
+                    }}
+                  ></Link>
+                </div>
+              </div>
+            </div>
+            <Link
+              to={`/${storyData.slug}`}
+              sx={{
+                p: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                flex: '1 0 auto',
+              }}
+            >
+              <h3>{storyData.title}</h3>
+              <p className="text-sm" sx={{ fontSize: '0.85rem' }}>
+                {_.truncate(storyData.excerpt, {
+                  length: 250,
+                  separator: /,?\.* +/,
+                  omission: '...',
+                })}
+              </p>
+              <div
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  span: { mr: 2, fontSize: '0.75rem', color: '#919191' },
+                }}
+              >
+                {storyData.format && (
+                  <>
+                    <span>{storyData.format.name}</span>
+                    <span>/</span>
+                  </>
+                )}
+                {storyData.users && (
+                  <>
+                    {' '}
+                    <span>{`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}</span>
+                    <span>/</span>
+                  </>
+                )}
+                <span>{parseDate(storyData.created_at)}</span>
+              </div>
+            </Link>
+          </div>
+        </div>
+      )}
+      {cardStyle === 'iframely-small' && (
+        <div
+          sx={{
+            display: 'flex',
+            my: 4,
+            border: '1px solid rgb(222,222,222)',
+          }}
+        >
+          <div className="iframely-small" sx={{ display: 'flex', alignItems: 'center' }}>
+            <div sx={{ width: '150px', maxWidth: '150px', height: '150px' }}>
+              <Link
+                to={`/${storyData.slug}`}
+                sx={{
+                  display: 'block',
+                  width: '150px',
+                  height: '150px',
+                  background: 'no-repeat center',
+                  backgroundSize: ' cover',
+                  backgroundImage: `url(${storyData.medium.url.raw})`,
+                  textDecoration: 'none',
+                  touchAction: 'manipulation',
+                }}
+              ></Link>
+            </div>
+            <Link
+              to={`/${storyData.slug}`}
+              sx={{
+                p: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <h3>{storyData.title}</h3>
+              <p className="text-sm" sx={{ fontSize: '0.85rem' }}>
+                {_.truncate(storyData.excerpt, {
+                  length: 150,
+                  separator: /,?\.* +/,
+                  omission: '...',
+                })}
+              </p>
+              <div
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  span: { mr: 2, fontSize: '0.75rem', color: '#919191' },
+                }}
+              >
+                {storyData.format && (
+                  <>
+                    <span>{storyData.format.name}</span>
+                    <span>/</span>
+                  </>
+                )}
+                {storyData.users && (
+                  <>
+                    {' '}
+                    <span>{`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}</span>
+                    <span>/</span>
+                  </>
+                )}
+                <span>{parseDate(storyData.created_at)}</span>
+              </div>
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 };

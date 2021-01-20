@@ -34,9 +34,8 @@ function Homepage({ data }) {
             {dega.posts.nodes.slice(1, 20).map((item, index) => (
               <StoryCard
                 key={'homepage-post-' + index}
-                cardStyle="basic"
+                cardStyle="card"
                 storyData={item}
-                excerpt
                 imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-0"
               />
             ))}
@@ -46,7 +45,7 @@ function Homepage({ data }) {
         <div className="sidebar lg:flex lg:w-2/6 xl:w-1/4 border-l sticky">
           <div className="block overflow-y-scroll">
             <div className="mb-4 pb-4 border-b px-6">
-              <h5 className="heading">Top In Factchecks</h5>
+              <h5 className="heading">Recent In Factchecks</h5>
             </div>
             {dega.factchecks.nodes.map((item, index) => (
               <StoryCard
@@ -66,9 +65,9 @@ function Homepage({ data }) {
 export default Homepage;
 
 export const query = graphql`
-  query($format_factcheck: [Int!], $format_without_factcheck: [Int!]) {
+  query($format_factcheck: [Int!], $format_without_factcheck: [Int!], $sid: [Int!]) {
     dega {
-      categories {
+      categories(spaces: $sid) {
         nodes {
           id
           slug
@@ -96,6 +95,7 @@ export const query = graphql`
           subtitle
           title
           slug
+          excerpt
         }
       }
       factchecks: posts(formats: $format_factcheck) {

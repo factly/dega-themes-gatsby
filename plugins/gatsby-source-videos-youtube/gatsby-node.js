@@ -140,11 +140,16 @@ exports.sourceNodes = async (
   const groupedVideos = _.groupBy(allVideos, 'contentDetails.videoId');
   allVideos = _.sortBy(
     _.values(
-      _.mapValues(groupedVideos, (videos) => {
+      _.mapValues(groupedVideos, (videos, i) => {
+        const getPosition = (video) => {
+          return { position: video.snippet.position, playlist: video.snippet.playlistId };
+        };
         const playlistIds = _.map(videos, 'snippet.playlistId');
+        const positions = _.map(videos, getPosition);
         return {
-          ...videos[0],
           playlistIds,
+          positions,
+          ...videos[0],
         };
       }),
     ),

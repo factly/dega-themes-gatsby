@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config({
   path: `.env`,
 });
@@ -12,11 +13,12 @@ module.exports = {
         trackingId: process.env.GA_TRACKING_ID,
         basePath: '/',
         logo: 'logo.png',
+        favicon: 'static/favicon.png',
         bannerData: [
           {
-            name: 'Decode',
+            name: 'Decode Season 1',
             icon: 'decode.jpg',
-            playlistId: 'PLEQcsVYyf3IA_pPC8LR81vpEPkDl1czou',
+            playlistId: 'PLEQcsVYyf3ICmFn7ZP00y362M2YdPHwHt',
           },
           {
             name: 'Decode Lite',

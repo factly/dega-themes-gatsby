@@ -78,7 +78,7 @@ const IndexPage = ({ data, pageContext }) => {
           borderBottomWidth: [null, null, null, 'px'],
         }}
       >
-        <div className="main-content" sx={{ width: 'full', marginTop: '-2rem' }}>
+        <div className="main-content" sx={{ width: 'full' }}>
           <div>
             <div
               sx={{
@@ -135,9 +135,10 @@ const IndexPage = ({ data, pageContext }) => {
                     fontWeight: 'medium',
                     fontSize: 1,
                     transition: 'all 0.5s',
+                    color: 'white',
                     ':focus': { outline: 'none' },
-                    ':hover': { color: 'white', bg: '#e62117' },
-                    bg: (theme) => `${theme.colors.gray[1]}`,
+                    ':hover': { color: 'white', bg: 'lightBlue' },
+                    bg: 'blue',
                     borderRadius: 'default',
                   }}
                 >
@@ -172,9 +173,10 @@ const IndexPage = ({ data, pageContext }) => {
             </div>
             <ul sx={{ display: 'flex', px: 8, bg: (theme) => `${theme.colors.gray[3]}` }}>
               {tabs.map((tab, i) => (
-                <li key={i} sx={{ mr: 1, mb: '-0.25rem' }}>
+                <li key={i} sx={{ mr: 1 }}>
                   <button
                     type="button"
+                    key={i}
                     className={`${activeTab[tab] && 'bg-white'}`}
                     sx={{
                       borderWidth: 'px',
@@ -259,11 +261,17 @@ const IndexPage = ({ data, pageContext }) => {
                           to={`${baseUrl}/playlist/${playlistId}?v=${video.contentDetails.videoId}`}
                         >
                           <div sx={{ position: 'relative' }}>
-                            {video.local && (
+                            {video.local ? (
                               <Img
                                 alt={video.snippet.title}
                                 fluid={video.local.childImageSharp.fluid}
                                 sx={{ height: 'full', width: 'full' }}
+                              />
+                            ) : (
+                              <img
+                                src={placeholderImg}
+                                alt="placeholder"
+                                sx={{ width: 'full', height: 'full' }}
                               />
                             )}
                             {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
@@ -365,10 +373,16 @@ const IndexPage = ({ data, pageContext }) => {
                       to={`${baseUrl}/playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
                     >
                       <div sx={{ position: 'relative' }}>
-                        {video.local && (
+                        {video.local ? (
                           <Img
                             alt={video.snippet.title}
                             fluid={video.local.childImageSharp.fluid}
+                            sx={{ width: 'full', height: 'full' }}
+                          />
+                        ) : (
+                          <img
+                            src={placeholderImg}
+                            alt="placeholder"
                             sx={{ width: 'full', height: 'full' }}
                           />
                         )}
@@ -433,108 +447,120 @@ const IndexPage = ({ data, pageContext }) => {
                 alignItems: 'flex-start',
               }}
             >
-              {playlists.map((playlist, i) => (
-                <Link
-                  key={i}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: ['full', '1/3', '1/4', '1/5'],
-                    textDecoration: 'none',
-                    ':hover': {
+              {playlists.map((playlist, i) => {
+                const positionsArr = playlist.videos.map((video) =>
+                  video.positions.find((e) => e.playlist === playlist.playlistId),
+                );
+                const sortedVideos = playlist.videos
+                  .map((video, i) => {
+                    return { ...video, pos: positionsArr[i].position };
+                  })
+                  .sort((a, b) => a.pos - b.pos);
+                return (
+                  <Link
+                    key={i}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: ['full', '1/3', '1/4', '1/5'],
                       textDecoration: 'none',
-                    },
-                    pr: 6,
-                    pb: 4,
-                    mb: 6,
-                  }}
-                  to={`${baseUrl}/playlist/${playlist.playlistId}?v=${playlist.videos[0].contentDetails.videoId}`}
-                >
-                  <div sx={{ position: 'relative' }}>
-                    {playlist.local ? (
-                      <Img
-                        alt={playlist.snippet.title}
-                        fluid={playlist.local.childImageSharp.fluid}
-                        sx={{ width: 'full', height: 'full' }}
-                      />
-                    ) : (
-                      <img
-                        src={placeholderImg}
-                        alt="placeholder"
-                        style={{ padding: '12% 0' }}
-                        sx={{ width: 'full', height: 'full' }}
-                      />
-                    )}
-                    {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
+                      ':hover': {
+                        textDecoration: 'none',
+                      },
+                      pr: 6,
+                      pb: 4,
+                      mb: 6,
+                    }}
+                    to={`${baseUrl}/playlist/${playlist.playlistId}?v=${sortedVideos[0].contentDetails.videoId}`}
+                  >
+                    <div sx={{ position: 'relative' }}>
+                      {playlist.local ? (
+                        <Img
+                          alt={playlist.snippet.title}
+                          fluid={playlist.local.childImageSharp.fluid}
+                          sx={{ width: 'full', height: 'full' }}
+                        />
+                      ) : (
+                        <img
+                          src={placeholderImg}
+                          alt="placeholder"
+                          style={{ padding: '12% 0' }}
+                          sx={{ width: 'full', height: 'full' }}
+                        />
+                      )}
+                      {/* <div className="flex justify-center items-center p-6 bg-black opacity-75 absolute h-full top-0 right-0">
                     <span className="text-white">
                       {playlist.contentDetails.itemCount}
                     </span>
                   </div> */}
-                    <div
-                      sx={{
-                        opacity: 0,
-                        ':hover': { opacity: '0.75' },
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        p: 6,
-                        bg: 'black',
-                        position: 'absolute',
-                        width: 'full',
-                        height: 'full',
-                        top: 0,
-                        left: 0,
-                      }}
-                    >
-                      <FaPlay sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }} />
-                      <span sx={{ color: 'white', fontSize: 2, ml: 2 }}>Play All</span>
-                    </div>
-                  </div>
-                  <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}>
-                    <div>
-                      <span
+                      <div
                         sx={{
-                          display: 'inline-block',
-                          verticalAlign: 'text-top',
-                          bg: (theme) => `${theme.colors.gray[2]}`,
-                          borderRadius: 'default',
-                          px: 3,
-                          py: 1,
-                          fontSize: 1,
-                          fontWeight: 'semibold',
-                          color: (theme) => `${theme.colors.gray[7]}`,
+                          opacity: 0,
+                          ':hover': { opacity: '0.75' },
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          p: 6,
+                          bg: 'black',
+                          position: 'absolute',
+                          width: 'full',
+                          height: 'full',
+                          top: 0,
+                          left: 0,
                         }}
                       >
-                        {playlist.contentDetails.itemCount} Videos
-                      </span>
+                        <FaPlay
+                          sx={{ width: 4, height: 4, fill: 'currentColor', color: 'white' }}
+                        />
+                        <span sx={{ color: 'white', fontSize: 2, ml: 2 }}>Play All</span>
+                      </div>
                     </div>
-                    <div
-                      id="nav-0"
-                      sx={{
-                        width: 'full',
-                        fontWeight: 'bold',
-                        fontSize: 3,
-                        color: (theme) => `${theme.colors.gray[8]}`,
-                      }}
-                    >
-                      {playlist.snippet.title}
-                    </div>
-                    {/* <p className="text-gray-600 text-xs md:text-sm">
+                    <div sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}>
+                      <div>
+                        <span
+                          sx={{
+                            display: 'inline-block',
+                            verticalAlign: 'text-top',
+                            bg: (theme) => `${theme.colors.gray[2]}`,
+                            borderRadius: 'default',
+                            px: 3,
+                            py: 1,
+                            fontSize: 1,
+                            fontWeight: 'semibold',
+                            color: (theme) => `${theme.colors.gray[7]}`,
+                          }}
+                        >
+                          {playlist.contentDetails.itemCount} Videos
+                        </span>
+                      </div>
+                      <div
+                        id="nav-0"
+                        sx={{
+                          width: 'full',
+                          fontWeight: 'bold',
+                          fontSize: 3,
+                          color: (theme) => `${theme.colors.gray[8]}`,
+                        }}
+                      >
+                        {playlist.snippet.title}
+                      </div>
+                      {/* <p className="text-gray-600 text-xs md:text-sm">
                     {playlist.snippet.publishedAt}
                   </p> */}
-                    <span
-                      sx={{
-                        color: (theme) => `${theme.colors.gray[6]}`,
-                        fontSize: [0, 0, 1],
-                        pt: 2,
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      View full playlist
-                    </span>
-                  </div>
-                </Link>
-              ))}
+                      <span
+                        sx={{
+                          color: (theme) => `${theme.colors.gray[6]}`,
+                          fontSize: [0, 0, 1],
+                          pt: 2,
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        View full playlist
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>
@@ -644,6 +670,10 @@ export const query = graphql`
         id
         playlistId
         videos {
+          positions {
+            position
+            playlist
+          }
           contentDetails {
             videoId
           }

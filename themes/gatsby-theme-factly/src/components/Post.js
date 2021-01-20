@@ -1,5 +1,7 @@
+/** @jsx jsx */
 import React, { useRef, useEffect, createRef } from 'react';
 import { Helmet } from 'react-helmet';
+import { jsx } from 'theme-ui';
 import Author from './Author';
 import ShareButtonGroup from './ShareButtonGroup';
 import FactCheckWidget from './FactCheckWidget';
@@ -55,7 +57,26 @@ const Post = ({ post, observer }) => {
 
         <div className="w-full lg:w-3/4 mx-auto  text-xl">
           {post.claims && <FactCheckWidget claims={post.claims} />}
-          {parseEditorJsData(post.description)}
+          <div className="parsed">{parseEditorJsData(post.description)}</div>
+          {post.claims &&
+            post.claims.map((claim, i) => (
+              <React.Fragment key={i}>
+                {post.claims.length > 1 && (
+                    <div sx={{ bg: 'rgb(237, 242, 247)', p: 4, mt: 4 }}>
+                      <p sx={{ mb: 4 }}>
+                        <span sx={{ fontWeight: 'bold' }}>Claim: </span>
+                        {claim.title}
+                      </p>
+                      <p>
+                        <span sx={{ fontWeight: 'bold' }}>Fact:</span>
+                        {parseEditorJsData(claim.review)}
+                      </p>
+                    </div>
+                )}
+
+                <div className="parsed">{parseEditorJsData(claim.description)}</div>
+              </React.Fragment>
+            ))}
           <div className="flex flex-wrap pb-6 border-b">
             <div className="flex flex-wrap">
               {post.tags.map((tag, i) => (

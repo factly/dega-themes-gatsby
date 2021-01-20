@@ -3,6 +3,9 @@ require('dotenv').config({
 });
 
 module.exports = {
+  flags: {
+    LAZY_IMAGES: true,
+  },
   plugins: [
     {
       resolve: '@factly/gatsby-theme-factly',

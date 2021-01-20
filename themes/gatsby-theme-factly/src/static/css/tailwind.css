@@ -6,6 +6,16 @@
 
 @import 'tailwindcss/utilities';
 
+/* CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-bottom-width: 0px;
+  border-style: solid;
+  border-color: #e2e8f0;
+}
 html,
 body {
   @apply font-inter;
@@ -58,10 +68,10 @@ div {
 .sidebar {
   height: 100vh;
   top: 0;
-  @apply hidden flex-col w-full pt-20 sticky overflow-y-hidden;
+  @apply hidden flex-col w-full pt-20 sticky overflow-y-scroll;
 }
 
-.slider {
+.sliderF {
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
 }
@@ -157,4 +167,76 @@ a:hover {
     opacity: 1;
     font-size: inherit;
   }
+}
+
+.embeds {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+/* The slider */
+.sliderF {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .sliderF {
+  background-color: #065fd4;
+}
+
+input:focus + .sliderF {
+  box-shadow: 0 0 1px #065fd4;
+}
+.parsed {
+  word-break: break-word;
+}
+.parsed a {
+  display: inline;
+  position: relative;
+  line-height: 1.5;
+  color: inherit;
+  background: linear-gradient(180deg,#4299e1 0%,#3b82f6 100%);
+padding: 0 4px;
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+  background-size: 1px 1px;
+  transition: all 0.2s;
+  /*box-shadow: white 0px -0.05em inset, #ea364a 0px -0.1em inset;*/
+  /*@apply text-blue-500*/
+}
+.parsed a:hover {
+  background-size: 100% 100%;
+  color:inherit;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.flex-column {
+  flex-direction: column;
+}
+.nav-pills {
+}
+.nav-item {
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+}
+
+.nav-item ul {
+  padding-left: 1rem;
+  display: none;
+  position: relative;
+}
+
+.nav-item ul.show {
+  display: block;
 }
