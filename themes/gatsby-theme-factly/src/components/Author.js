@@ -1,5 +1,7 @@
-import React from 'react';
+/** @jsx jsx */
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
+import { jsx } from 'theme-ui';
 import parseDate from '../utils/parseDate';
 
 /* 
@@ -7,38 +9,60 @@ import parseDate from '../utils/parseDate';
  TODO 2. 
  */
 
-const Author = ({ users, categories, date }) => {
-  return (
-    <div className="flex flex-col justify-start items-start py-2">
-      <div className="flex flex-col py-2">
-        <div className="flex flex-row flex-wrap items-baseline">
-          {users &&
-            users.map((user, i, arr) => (
-              <React.Fragment key={i}>
-                <Link to={`/users/${user.id}`} className="font-medium text-blue-500 text-lg px-1">
-                  {user.first_name + ' ' + user.last_name}
-                </Link>
-                {arr.length - i > 1 && ','}
-              </React.Fragment>
-            ))}
-          <span className="font-medium text-lg ">in</span>
-          {categories &&
-            categories.map((category, i, arr) => (
-              <React.Fragment key={i}>
-                <Link
-                  to={`/categories/${category.slug}`}
-                  className="font-medium text-blue-500 text-lg px-1"
-                >
-                  {category.name}
-                </Link>
-                {arr.length - i > 1 && ', '}
-              </React.Fragment>
-            ))}
-        </div>
-        <span className="text-gray-600 text-lg">{parseDate(date)}</span>
+const Author = ({ users, categories, date }) => (
+  <div
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      py: 2,
+    }}
+  >
+    <div sx={{ display: 'flex', flexDirection: 'column', py: 2 }}>
+      <div sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline' }}>
+        {users &&
+          users.map((user, i, arr) => (
+            <React.Fragment key={i}>
+              <Link
+                to={`/users/${user.id}`}
+                sx={{
+                  fontWeight: 'medium',
+                  color: (theme) => `${theme.colors.blue[5]}`,
+                  fontSize: 3,
+                  px: 1,
+                  '&:first-child': { pl: 0 },
+                }}
+              >
+                {`${user.first_name} ${user.last_name}`}
+              </Link>
+              {arr.length - i > 1 && ','}
+            </React.Fragment>
+          ))}
+        <span sx={{ fontWeight: 'medium', fontSize: 3 }}>in</span>
+        {categories &&
+          categories.map((category, i, arr) => (
+            <React.Fragment key={i}>
+              <Link
+                to={`/categories/${category.slug}`}
+                sx={{
+                  px: 1,
+                  fontWeight: 'medium',
+                  color: (theme) => `${theme.colors.blue[5]}`,
+                  fontSize: 3,
+                }}
+              >
+                {category.name}
+              </Link>
+              {arr.length - i > 1 && ', '}
+            </React.Fragment>
+          ))}
       </div>
+      <span sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 3 }}>
+        {parseDate(date)}
+      </span>
     </div>
-  );
-};
+  </div>
+);
 
 export default Author;

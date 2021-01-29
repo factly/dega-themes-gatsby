@@ -1,13 +1,44 @@
-import React from 'react';
+/** @jsx jsx */
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
+import { jsx } from 'theme-ui';
 
 const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
   return (
-    <article className="flex flex-col leading-tight border-b last:border-b-0 py-2 px-6 border-gray-200 cursor-pointer">
-      <Link to={`/${post.slug}`} className="w-full flex horizontal no-underline hover:no-underline">
-        <div className="w-full flex flex-col">
+    <article
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        lineHeight: 'tight',
+        borderBottomWidth: '1px',
+        '&:last-child': { borderBottomWidth: '1px' },
+        py: 2,
+        px: 6,
+        cursor: 'pointer',
+        borderColor: (theme) => `${theme.colors.gray[2]}`,
+      }}
+    >
+      <Link
+        to={`/${post.slug}`}
+        className="horizontal"
+        sx={{
+          width: 'full',
+          display: 'flex',
+          textDecoration: 'none',
+          '&:hover': { textDecoration: 'none' },
+        }}
+      >
+        <div sx={{ width: 'full', display: 'flex', flexDirection: 'column' }}>
           {post.categories && (
-            <p className="w-full text-gray-600 text-xs md:text-sm pb-1">
+            <p
+              sx={{
+                width: 'full',
+                color: (theme) => `${theme.colors.gray[6]}`,
+                fontSize: [0, null, 1],
+                pb: 1,
+                my: 1,
+              }}
+            >
               {post.categories.map((category, i, arr) => {
                 return category.name + (arr.length - i > 1 ? ', ' : '');
               })}
@@ -15,9 +46,13 @@ const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
           )}
           <div
             id={`nav-${index}`}
-            className={`w-full font-bold  text-lg text-gray-800 ${
-              postActiveIndex === post.slug ? 'active' : ''
-            }`}
+            className={`${postActiveIndex === post.slug ? 'active' : ''}`}
+            sx={{
+              width: 'full',
+              fontWeight: 'bold',
+              fontSize: 3,
+              color: (theme) => `${theme.colors.gray[8]}`,
+            }}
           >
             {post.title}
           </div>

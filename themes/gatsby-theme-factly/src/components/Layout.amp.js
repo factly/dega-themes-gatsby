@@ -47,7 +47,6 @@ const LayoutAmp = (props) => (
               },
             ]}
           >
-            {' '}
             <link rel="icon" href={space.fav_icon.url.raw} />
           </Helmet>
           <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>

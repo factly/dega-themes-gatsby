@@ -2,15 +2,16 @@
 /** @jsx jsx */
 import React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import addDefaultSrc from '../utils/addDefaultSrc';
 import { jsx } from 'theme-ui';
+import addDefaultSrc from '../utils/addDefaultSrc';
+
 export default function Navbar({ logo }) {
   return (
     <StaticQuery
       query={graphql`
         query NavsQuery {
           dega {
-            formats(spaces: 8) {
+            formats(spaces: [8]) {
               nodes {
                 id
                 slug
@@ -23,45 +24,124 @@ export default function Navbar({ logo }) {
       render={(data) => (
         <React.Fragment>
           <div
-            className="fixed top-0 inset-x-0 bg-white border-b border-gray-300 z-10"
-            sx={{ zIndex: '9999' }}
+            sx={{
+              zIndex: '9999',
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bg: 'white',
+              borderBottomWidth: '1px',
+              borderColor: (theme) => `${theme.colors.gray[3]}`,
+              fontFamily: (theme) => `${theme.fonts.inter}`,
+              // zIndex: 10,
+            }}
           >
-            <header className="flex item-center justify-between border-b  border-gray-100 p-2 text-sm font-semibold text-gray-800">
-              <nav className="flex flex-grow items-center justify-between px-0 lg:px-4 py-3 sm:p-0">
-                <div className="flex flex-1 order-2 lg:order-1 items-center justify-end lg:justify-start">
-                  {data.dega.formats.nodes.map((tab, index) => {
-                    return (
-                      <Link
-                        key={'navbar-' + index}
-                        to={`/formats/${tab.slug}`}
-                        className="block px-2 lg:px-4 order-3 lg:order-4 uppercase font-semibold focus:outline-none"
-                      >
-                        {tab.name}
-                      </Link>
-                    );
-                  })}
-                  <Link
+            <header
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                borderBottomWidth: '1px',
+                borderColor: (theme) => `${theme.colors.gray[1]}`,
+                p: 2,
+                fontSize: 1,
+                fontWeight: 'semibold',
+                color: (theme) => `${theme.colors.gray[8]}`,
+              }}
+            >
+              <nav
+                sx={{
+                  display: 'flex',
+                  flexGrow: '1',
+                  // alignItems: 'center',
+                  justifyContent: 'center',
+                  px: [0, null, null, 4],
+                  py: 3,
+                  p: [null, 0],
+                }}
+              >
+                <div
+                  sx={{
+                    display: 'flex',
+                    flex: '1 1 0%',
+                    order: [2, null, null, 1],
+                    // alignItems: 'center',
+                    justifyContent: ['flex-end', null, null, 'flex-start'],
+                  }}
+                >
+                  {data.dega.formats.nodes.map((tab, index) => (
+                    <Link
+                      key={`navbar-${index}`}
+                      to={`/formats/${tab.slug}`}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        px: [2, null, null, 4],
+                        order: [3, null, null, 4],
+                        textTransform: 'uppercase',
+                        fontWeight: 'semibold',
+                        '&:focus': { outline: 'none' },
+                      }}
+                    >
+                      {tab.name}
+                    </Link>
+                  ))}
+                  {/* <Link
                     to="/videos"
-                    className="block px-2 lg:px-4 order-3 lg:order-4 uppercase font-semibold focus:outline-none"
+                    sx={{
+                      display: 'flex',
+                      px: [2, null, null, 4],
+                      order: [3, null, null, 4],
+                      alignItems: 'center',
+                      textTransform: 'uppercase',
+                      fontWeight: 'semibold',
+                      '&:focus': { outline: 'none' },
+                    }}
                   >
                     Videos
-                  </Link>
+                  </Link> */}
                 </div>
-                <div className="order-1 lg:order-2">
+                <div sx={{ order: [1, null, null, 2] }}>
                   <Link to="/">
-                    <img className="h-8" src={logo} alt="factly" onError={addDefaultSrc}></img>
+                    <img sx={{ height: 8 }} src={logo} alt="factly" onError={addDefaultSrc}></img>
                   </Link>
                 </div>
-                <div className="hidden lg:order-3 lg:flex flex-1 items-center justify-end">
+                <div
+                  sx={{
+                    display: ['none', null, null, 'flex'],
+                    order: [null, null, null, 3],
+                    flex: '1 1 0%',
+                    justifyContent: 'flex-end',
+                  }}
+                >
                   <Link
                     to="/about"
-                    className="block px-2 lg:px-4 uppercase font-semibold focus:outline-none"
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      px: [2, null, null, 4],
+                      textTransform: 'uppercase',
+                      fontWeight: 'semibold',
+                      '&:focus': { outline: 'none' },
+                    }}
                   >
                     About Us
                   </Link>
                   <button
                     type="button"
-                    className="block lg:px-4 uppercase font-semibold focus:outline-none bg-gray-300 rounded p-2"
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      px: [null, null, null, 4],
+                      textTransform: 'uppercase',
+                      fontWeight: 'semibold',
+                      '&:focus': { outline: 'none' },
+                      bg: (theme) => `${theme.colors.gray[3]}`,
+                      borderRadius: 'default',
+                      p: 2,
+                      fontFamily: 'inherit',
+                    }}
                   >
                     Subscribe
                   </button>

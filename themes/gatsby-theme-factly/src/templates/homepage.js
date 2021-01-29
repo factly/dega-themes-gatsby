@@ -1,5 +1,7 @@
-import React from 'react';
+/** @jsx jsx */
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
+import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
 import StoryCard from '../components/StoryCard';
 import CategoriesGroup from '../components/CategoriesGroup';
@@ -8,51 +10,82 @@ function Homepage({ data }) {
   const { dega } = data;
   return (
     <Layout>
-      <div className="flex flex-row justify-between lg:border-b">
+      <div
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          borderBottomWidth: [null, null, null, 'px'],
+        }}
+      >
         {/* Left sidebar */}
-        <div className="sidebar xl:flex xl:w-1/4 border-r sticky">
-          <div className="block">
-            <div className="mb-4 pb-4 border-b px-6">
+        <div
+          className="sidebar"
+          sx={{
+            display: [null, null, null, null, 'flex'],
+            width: [null, null, null, null, '1/4'],
+            borderRightWidth: 'px',
+            position: 'sticky',
+          }}
+        >
+          <div sx={{ display: 'bblock' }}>
+            <div sx={{ mb: 4, pb: 4, px: 6, borderBottomWidth: 'px' }}>
               <h5 className="heading">Categories</h5>
               <CategoriesGroup categories={dega.categories.nodes} />
             </div>
           </div>
         </div>
         {/* Main/ Middle part of the homepage */}
-        <div className="main-content w-full md:w-3/4 xl:w-2/4 mx-auto">
+        <div
+          className="main-content"
+          sx={{ width: ['full', null, '3/4', null, '2/4'], mx: 'auto' }}
+        >
           {/* Featured Card */}
           {dega.posts.nodes.length > 0 ? (
             <StoryCard
               cardStyle="featured"
               storyData={dega.posts.nodes[0]}
-              imageSize="w-full h-64"
+              // imageSize="w-full h-64"
+              imageSize={{ width: 'full', height: 64 }}
             />
           ) : null}
 
           {/* Articles list */}
-          <div className="flex flex-col py-6">
+          <div sx={{ display: 'flex', flexDirection: 'column', py: 6 }}>
             {dega.posts.nodes.slice(1, 20).map((item, index) => (
               <StoryCard
-                key={'homepage-post-' + index}
+                key={`homepage-post-${index}`}
                 cardStyle="card"
                 storyData={item}
-                imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-0"
+                imageSize={{
+                  width: ['full', null, '1/3'],
+                  height: [48, null, 'full'],
+                  py: [4, null, 0],
+                }}
               />
             ))}
           </div>
         </div>
         {/* Right sidebar */}
-        <div className="sidebar lg:flex lg:w-2/6 xl:w-1/4 border-l sticky">
-          <div className="block overflow-y-scroll">
-            <div className="mb-4 pb-4 border-b px-6">
+        <div
+          className="sidebar"
+          sx={{
+            display: [null, null, null, 'flex'],
+            width: [null, null, null, '2/6', '1/4'],
+            borderLeftWidth: 'px',
+            position: 'sticky',
+          }}
+        >
+          <div sx={{ display: 'block' }}>
+            <div sx={{ mb: 4, pb: 4, px: 6, borderBottomWidth: 'px' }}>
               <h5 className="heading">Recent In Factchecks</h5>
             </div>
             {dega.factchecks.nodes.map((item, index) => (
               <StoryCard
-                key={'homepage-factcheck-' + index}
+                key={`homepage-factcheck-${index}`}
                 cardStyle="vertical"
                 storyData={item}
-                imageSize="h-40"
+                imageSize={{ height: 40 }}
               />
             ))}
           </div>

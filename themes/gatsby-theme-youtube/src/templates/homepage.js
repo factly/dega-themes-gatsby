@@ -138,7 +138,7 @@ const IndexPage = ({ data, pageContext }) => {
                     color: 'white',
                     ':focus': { outline: 'none' },
                     ':hover': { color: 'white', bg: 'lightBlue' },
-                    bg: 'blue',
+                    bg: 'Ytblue',
                     borderRadius: 'default',
                   }}
                 >
@@ -201,6 +201,7 @@ const IndexPage = ({ data, pageContext }) => {
           </div>
           {activeTab.Home && (
             <div>
+              {/* console.log(allChannelSections) */}
               {allChannelSections.nodes.map((channelSection, i) => {
                 const playlistId =
                   channelSection.playlist.id === channel.contentDetails.relatedPlaylists.uploads
@@ -302,7 +303,12 @@ const IndexPage = ({ data, pageContext }) => {
                             </div>
                           </div>
                           <div
-                            sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}
+                            sx={{
+                              width: 'full',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              py: 2,
+                            }}
                           >
                             <div
                               id="nav-0"
@@ -590,7 +596,7 @@ export const query = graphql`
       local {
         childImageSharp {
           fluid(maxWidth: 300, quality: 100) {
-            ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -625,7 +631,7 @@ export const query = graphql`
           local {
             childImageSharp {
               fluid(maxWidth: 300, quality: 100) {
-                ...GatsbyImageSharpFluid_withWebp
+                ...GatsbyImageSharpFluid
               }
             }
           }
@@ -650,7 +656,7 @@ export const query = graphql`
         local {
           childImageSharp {
             fluid(maxWidth: 300, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
+              ...GatsbyImageSharpFluid
             }
           }
         }
@@ -689,7 +695,7 @@ export const query = graphql`
         local {
           childImageSharp {
             fluid(maxWidth: 300, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
+              ...GatsbyImageSharpFluid
             }
           }
         }

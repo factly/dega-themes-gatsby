@@ -1,10 +1,13 @@
-import React from 'react';
+/** @jsx jsx */
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import { jsx } from 'theme-ui';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import '../static/css/tailwind.css';
+// import { useThemeUI } from 'theme-ui';
 
 const Layout = (props) => (
   <StaticQuery
@@ -30,6 +33,8 @@ const Layout = (props) => (
     render={({ dega }) => {
       const { space } = dega;
       const { children } = props;
+      // const themeUIContext = useThemeUI();
+      // const { theme } = themeUIContext;
       return (
         <>
           <Helmet
@@ -53,12 +58,30 @@ const Layout = (props) => (
           >
             <html lang="en" />
             {space.fav_icon && <link rel="icon" href={space.fav_icon.url.raw} />}
-            <body className="bg-white text-gray-900 leading-normal mx-auto tracking-wider" />
+            {/* <body
+              style={{
+                backgroundColor: theme.colors.white,
+                color: theme.colors.gray[9],
+                lineHeight: theme.lineHeights.normal,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                letterSpacing: theme.letterSpacings.wider,
+              }}
+            /> */}
           </Helmet>
           <Navbar logo={space.logo.url.raw}></Navbar>
           <div
             style={{ maxWidth: '1920px' }}
-            className="w-full text-xl md:text-2xl text-gray-800 leading-normal lg:px-6 mt-12 pt-4 sm:pt-0 mx-auto"
+            sx={{
+              width: 'full',
+              fontSize: [4, 4, 5],
+              color: (theme) => `${theme.colors.gray[8]}`,
+              lineHeight: 'normal',
+              pt: [4, 0, 0],
+              px: [null, null, null, 6],
+              mt: 12,
+              mx: 'auto',
+            }}
           >
             {children}
           </div>
