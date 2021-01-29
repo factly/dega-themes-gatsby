@@ -1,6 +1,11 @@
 const fs = require('fs');
+const path = require('path');
 const fetch = require('node-fetch');
 const mkdirp = require('mkdirp');
+
+const { createSchemaCustomization } = require('./utils/youtubeSourceSchema');
+
+exports.createSchemaCustomization = createSchemaCustomization;
 
 const saveIcon = async (url) => {
   await fetch(url)
@@ -10,18 +15,41 @@ const saveIcon = async (url) => {
         console.log('finished loading favicon to src icons'),
       ),
     );
-  return;
 };
 
 exports.onPreBootstrap = ({ store }) => {
-  const { program } = store.getState();
+  const { flattenedPlugins, program } = store.getState();
   const dir = `${program.directory}/src/Icons`;
   console.log(`ensuring ${dir} exists`);
   if (!fs.existsSync(dir)) {
     console.log(`creating ${dir}`);
     mkdirp.sync(dir);
   }
+
+  const youtubePlugin = flattenedPlugins.find(
+    (plugin) => plugin.name === '@factly/gatsby-theme-youtube',
+  );
+  if (youtubePlugin) {
+    console.log('fount it');
+    const createShadowComponent = async () => {
+      await fs.promises
+        .mkdir(path.join(__dirname, '/src/@factly/gatsby-theme-youtube/components'), {
+          recursive: true,
+        })
+        .catch(console.error);
+      await fs.writeFile(
+        path.join(__dirname, 'src/@factly/gatsby-theme-youtube/components/Layout.js'),
+        `import Layout from '../../../components/Layout';\n\nexport default Layout;`,
+        function (err) {
+          if (err) throw err;
+          console.log('Saved! youtube theme shoadowing');
+        },
+      );
+    };
+    createShadowComponent();
+  }
 };
+
 
 exports.createPages = async ({ graphql, actions, store, reporter }, { client, homepage = 1 }) => {
   const { createPage } = actions;
@@ -151,6 +179,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
           }
           users {
             id
+            slug
           }
           posts {
             id
@@ -165,8 +194,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     }
   `);
 
-  var format_factcheck = [];
-  var format_without_factcheck = [];
+  const format_factcheck = [];
+  const format_without_factcheck = [];
 
   formats.data.dega.formats.nodes
     .filter((item) => item.slug === 'fact-check')
@@ -190,9 +219,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   //     format_without_factcheck.push(parseInt(item.id));
   //   });
   // manifest
-  let icon;
 
-  icon = result.data.dega.space.fav_icon.url.raw;
+  const icon = result.data.dega.space.fav_icon.url.raw;
   if (icon) {
     saveIcon(icon);
   } else {
@@ -200,27 +228,24 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   }
 
   const state = store.getState();
-
   const plugin = state.flattenedPlugins.find((plugin) => plugin.name === 'gatsby-plugin-manifest');
 
-  const resolveManifestOptions = (data) => {
-    return {
-      name: data.name,
-      short_name: data.name,
-      start_url: '/',
-      background_color: '#ffffff',
-      theme_color: `#ffffff`,
-      display: `minimal-ui`,
-      icon: '/Icons/favicon.png',
-    };
-  };
+  const resolveManifestOptions = (data) => ({
+    name: data.name,
+    short_name: data.name,
+    start_url: '/',
+    background_color: '#ffffff',
+    theme_color: `#ffffff`,
+    display: `minimal-ui`,
+    icon: '/Icons/favicon.png',
+  });
   if (plugin) {
     const manifestOptions = await resolveManifestOptions(result.data.dega.space);
     plugin.pluginOptions = { ...plugin.pluginOptions, ...manifestOptions };
   }
   // homepage
   if (homepage === 1) {
-    console.log('homepage v1');
+    console.log('creating homepage v1');
     createPage({
       path: '/',
       component: require.resolve('./src/templates/homepage.js'),
@@ -232,12 +257,12 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     });
   }
   if (homepage === 2) {
-    console.log('homepage v2');
+    console.log('creating homepage v2');
     createPage({
       path: '/',
       component: require.resolve('./src/templates/homepageTwo.js'),
       context: {
-        sid: [client],
+        sid: client,
         homepage,
       },
     });
@@ -393,7 +418,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   // create user details page
   users.data.dega.users.nodes.forEach((user) => {
     createPage({
-      path: `/users/${user.id}`,
+      path: `/users/${user.slug || user.id}`,
       component: require.resolve('./src/templates/user-details.js'),
       context: {
         id: parseInt(user.id),
@@ -405,7 +430,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
 
     formats.data.dega.formats.nodes.forEach((format) => {
       createPage({
-        path: `/users/${user.id}/formats/${format.slug}`,
+        path: `/users/${user.slug || user.id}/formats/${format.slug}`,
         component: require.resolve('./src/templates/user-details-format-details.js'),
         context: {
           id: parseInt(user.id),

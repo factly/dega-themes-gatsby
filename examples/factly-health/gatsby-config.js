@@ -15,9 +15,10 @@ module.exports = {
       options: {
         client: 8,
         homepage: 2,
+        siteUrl: 'https://quizzical-keller-c9fd10.netlify.app',
         api: 'http://dega-api.factly.org/query',
-        youtube_api_key: process.env.GOOGLE_PRIVATE_KEY,
-        channel_id: process.env.CHANNEL_ID,
+        // youtubeApiKey: process.env.GOOGLE_PRIVATE_KEY,
+        // channelId: process.env.CHANNEL_ID,
       },
     },
   ],

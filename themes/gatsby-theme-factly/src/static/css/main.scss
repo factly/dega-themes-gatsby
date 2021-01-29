@@ -5,7 +5,7 @@
   margin: 1rem auto;
   .card {
     position: relative;
-    margin: 0;
+    margin: 0.25rem;
     padding: 0;
     border: 0;
     flex: 0 0 100%;
@@ -110,9 +110,9 @@
     }
     img {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
-      max-width: 150px;
+      bottom: 16px;
+      left: 16px;
+      max-width: calc(100% - 32px);
     }
     #view-more {
       color: black;
@@ -151,8 +151,8 @@
   }
   @media (min-width: 768px) {
     .card {
-      flex: 0 0 33.33332%;
-      max-width: 33.33332%;
+      flex: 0 0 32%;
+      max-width: 32%;
     }
   }
   /* @media (min-width: 992px) {
