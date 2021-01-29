@@ -1,4 +1,6 @@
-import React from 'react';
+/** @jsx jsx */
+import React from 'react'; // eslint-disable-line no-unused-vars
+import { jsx } from 'theme-ui';
 
 /**
  * TODO:
@@ -8,7 +10,16 @@ function LinkTag({ text, to }) {
   return (
     <li>
       <a
-        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+        sx={{
+          color: (theme) => `${theme.colors.gray[7]}`,
+          fontWeight: 'semibold',
+          display: 'block',
+          pb: 2,
+          fontSize: 1,
+          '&:hover': {
+            color: (theme) => `${theme.colors.gray[9]}`,
+          },
+        }}
         href={to}
         target="_blank"
         rel="noopener noreferrer"
@@ -21,23 +32,41 @@ function LinkTag({ text, to }) {
 
 function FooterLinks() {
   return (
-    <div className="flex items-top mb-6">
-      <div className="pt-6 md:pt-0 m-auto">
-        <span className="block uppercase text-gray-600 text-sm font-semibold mb-2">
+    <div sx={{ display: 'flex', mb: 6 }}>
+      <div sx={{ pt: [6, null, 0], m: 'auto' }}>
+        <span
+          sx={{
+            display: 'block',
+            textTransform: 'uppercase',
+            color: (theme) => `${theme.colors.gray[6]}`,
+            fontSize: 1,
+            fontWeight: 'semibold',
+            mb: 2,
+          }}
+        >
           Useful Links
         </span>
-        <ul className="list-unstyled">
+        <ul sx={{ listStyle: 'none' }}>
           <LinkTag text="About Us" to="/about" />
           <LinkTag text="Facebook" to="https://facebook.com/factly" />
           <LinkTag text="Github" to="https://github.com/factly" />
           <LinkTag text="Free Produs" to="/about" />
         </ul>
       </div>
-      <div className="pt-6 md:pt-0 md:px-4 m-auto">
-        <span className="block uppercase text-gray-600 text-sm font-semibold mb-2">
+      <div sx={{ pt: [6, null, 0], px: [null, null, 4], m: 'auto' }}>
+        <span
+          sx={{
+            display: 'block',
+            textTransform: 'uppercase',
+            color: (theme) => `${theme.colors.gray[6]}`,
+            fontSize: 1,
+            fontWeight: 'semibold',
+            mb: 2,
+          }}
+        >
           Other Resources
         </span>
-        <ul className="list-unstyled">
+        <ul sx={{ listStyle: 'none' }}>
           <LinkTag text="MIT License" to="/" />
           <LinkTag text="Terms &amp; Conditions" to="/term" />
           <LinkTag text="Privacy Policy" to="/policy" />
