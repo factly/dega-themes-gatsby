@@ -68,6 +68,7 @@ const IndexPage = ({ data, pageContext }) => {
         <title>{channel.snippet.title}</title>
         <meta name="description" content={channel.snippet.description} />
         <meta name="image" content={channel.snippet.thumbnails.high.url} />
+        <meta name="og:image" content={channel.snippet.thumbnails.high.url} />
         <script type="application/ld+json">{JSON.stringify(schemaVideoList)}</script>
       </Helmet>
       <div
@@ -179,7 +180,7 @@ const IndexPage = ({ data, pageContext }) => {
                     key={i}
                     className={`${activeTab[tab] && 'bg-white'}`}
                     sx={{
-                      borderWidth: 'px',
+                      borderWidth: '1px',
                       borderBottomWidth: '0',
                       display: 'inline-block',
                       py: 2,

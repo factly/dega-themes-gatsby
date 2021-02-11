@@ -1,5 +1,10 @@
 export default {
-  breakpoints: ['640px', '768px', '1024px', '1280px'],
+  // useLocalStorage: false,
+  // useCustomProperties: false,
+  // useColorSchemeMediaQuery: false,
+  //useBodyStyles: false,
+  useBorderBox: true,
+  breakpoints: ['640px', '768px', '1024px', '1280px', '1536px'],
   // sm, md, lg, xl
   // mediaQueries: ({breakpoints = this.breakpoints})=> ({
   //   mobile: `@media screen and (max-width: ${breakpoints[0]})`,
@@ -20,8 +25,20 @@ export default {
     transparent: 'transparent',
     black: '#000',
     white: '#fff',
-    blue: 'rgb(6,95,212)',
+    Ytblue: '#065fd4',
     lightBlue: 'rgb(57,140,249)',
+    blue: [
+      '#EFF6FF',
+      '#DBEAFE',
+      '#BFDBFE',
+      '#93C5FD',
+      '#60A5FA',
+      '#3B82F6',
+      '#2563EB',
+      '#1D4ED8',
+      '#1E40AF',
+      '#1E3A8A',
+    ],
     gray: [
       null,
       '#f7fafc',
