@@ -65,16 +65,21 @@ const PostDetails = ({ data }) => {
   };
 
   const createObserver = () => {
-    const o = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.target.hasAttribute('social-icon')) {
-          handleShowSocialIcon(entry);
-        }
-        if (entry.target.hasAttribute('post')) {
-          handleSetActiveLink(entry);
-        }
-      });
-    });
+    const o = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.hasAttribute('social-icon')) {
+            handleShowSocialIcon(entry);
+          }
+          if (entry.target.hasAttribute('post')) {
+            handleSetActiveLink(entry);
+          }
+        });
+      },
+      {
+        rootMargin: '-300px',
+      },
+    );
     setObserver(o);
   };
   React.useEffect(() => {
@@ -83,7 +88,11 @@ const PostDetails = ({ data }) => {
   }, []);
   // for sharing links
   const title = encodeURIComponent(dega.post.title);
-  const url = isBrowser ? window.location.href : dega.post.slug;
+  let url;
+  if (isBrowser) {
+    url = encodeURIComponent(window.location.href);
+  }
+
   return (
     <Layout>
       <Helmet>
@@ -178,8 +187,8 @@ const PostDetails = ({ data }) => {
                   sx={{
                     display: 'block',
                     mx: 2,
-                    '&:first-child': { mx: 0 },
-                    my: 2,
+                    '&:first-of-type': { mx: 0 },
+                    my: 1,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
@@ -194,8 +203,8 @@ const PostDetails = ({ data }) => {
                   sx={{
                     display: 'block',
                     mx: 2,
-                    '&:first-child': { mx: 0 },
-                    my: 2,
+                    '&:first-of-type': { mx: 0 },
+                    my: 1,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
@@ -210,8 +219,8 @@ const PostDetails = ({ data }) => {
                   sx={{
                     display: 'block',
                     mx: 2,
-                    '&:first-child': { mx: 0 },
-                    my: 2,
+                    '&:first-of-type': { mx: 0 },
+                    my: 1,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
@@ -286,6 +295,7 @@ export const query = graphql`
             first_name
             last_name
             id
+            slug
           }
           tags {
             id
