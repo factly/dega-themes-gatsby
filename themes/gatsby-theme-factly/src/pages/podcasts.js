@@ -35,8 +35,8 @@ const PodcastsPage = () => {
               src={unviralImg}
               alt="Un-Viral"
               sx={{
-                maxWidth: [150, 250],
-                maxHeight: [150, 250],
+                maxWidth: [150, 200, 250],
+                maxHeight: [150, 200, 250],
                 height: '100%',
                 width: 'auto',
                 mx: 'auto',

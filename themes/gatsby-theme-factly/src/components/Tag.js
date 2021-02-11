@@ -9,12 +9,19 @@ const Tag = ({ url, name }) => {
       to={`/tags/${url}`}
       sx={{
         textAlign: 'center',
-        color: (theme) => `${theme.colors.gray[8]}`,
+        color: (theme) => `${theme.colors.white}`,
         fontSize: [1, null, 2],
+        borderWidth: '1px',
+        borderColor: (theme) => `${theme.colors.primary}`,
         borderRadius: 'default',
         p: 2,
         m: 2,
-        bg: (theme) => `${theme.colors.gray[3]}`,
+        bg: (theme) => `${theme.colors.primary}`,
+        transition: '0.3s',
+        '&:hover': {
+          color: (theme) => `${theme.colors.primary}`,
+          bg: (theme) => `${theme.colors.white}`,
+        },
       }}
     >
       {name}

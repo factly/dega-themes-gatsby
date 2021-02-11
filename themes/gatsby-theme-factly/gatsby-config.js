@@ -74,6 +74,7 @@ module.exports = ({
     `gatsby-plugin-sass`,
     `gatsby-plugin-theme-ui`,
     'gatsby-plugin-styled-components',
+    'gatsby-plugin-emotion',
     // {
     //   resolve: `gatsby-plugin-postcss`,
     //   options: {

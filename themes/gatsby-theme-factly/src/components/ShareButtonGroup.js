@@ -39,7 +39,7 @@ const ShareButtonGroup = ({ data, setRef }) => {
         sx={{
           display: 'block',
           mx: 1,
-          '&:first-child': { ml: 0 },
+          '&:first-of-type': { ml: 0 },
           my: 1,
           fontWeight: 'semibold',
           borderRadius: 'default',
@@ -55,7 +55,7 @@ const ShareButtonGroup = ({ data, setRef }) => {
         sx={{
           display: 'block',
           mx: 1,
-          '&:first-child': { mx: 0 },
+          '&:first-of-type': { mx: 0 },
           my: 1,
           fontWeight: 'semibold',
           borderRadius: 'default',
@@ -71,7 +71,7 @@ const ShareButtonGroup = ({ data, setRef }) => {
         sx={{
           display: 'block',
           mx: 1,
-          '&:first-child': { mx: 0 },
+          '&:first-of-type': { mx: 0 },
           my: 1,
           fontWeight: 'semibold',
           borderRadius: 'default',

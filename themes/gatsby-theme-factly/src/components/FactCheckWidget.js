@@ -82,7 +82,7 @@ function FactCheckWidget({ claims }) {
               href-id="claim-1"
               disabled={disable.left}
               sx={{
-                borderWidth: 'px',
+                borderWidth: '1px',
                 borderColor: (theme) => `${theme.colors.gray[2]}`,
                 borderRadius: 'default',
                 textAlign: 'left',
@@ -145,7 +145,7 @@ function FactCheckWidget({ claims }) {
                   }}
                 >
                   <div sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <div sx={{ display: 'flex', p: 4 }}>
+                    <div sx={{ display: 'flex', p: 4, alignItems: 'baseline' }}>
                       <h2 sx={{ fontWeight: 'bold', mr: 2 }}>Claimant: </h2>
                       {claim.claimant.name}
                     </div>
@@ -208,12 +208,12 @@ function FactCheckWidget({ claims }) {
                       bg: CLAIM_RATING[claim.rating.slug],
                     }}
                   >
-                    <h2 sx={{ fontWeight: 'bold', p: 4 }}>Claim: </h2>
+                    <h2 sx={{ fontWeight: 'bold', py: 2 }}>Claim: </h2>
                     <div className="parsed" sx={{ display: 'flex' }}>
                       {claim.title}
                       {claim.rating.medium && (
                         <img
-                          src={claim.rating.medium.url.raw}
+                          src={claim.rating.medium.url.proxy}
                           alt={claim.rating.medium.alt_text}
                           onError={addDefaultSrc}
                           sx={{

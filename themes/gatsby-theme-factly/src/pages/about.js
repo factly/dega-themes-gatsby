@@ -6,10 +6,16 @@ import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
 
 const menuItems = [
+  { title: 'About the Fellowship', slug: '#fellowship' },
+  {
+    title: 'About Factly',
+    slug: '#about-factly',
+  },
   {
     title: 'Background',
     slug: '#background',
   },
+
   {
     title: 'Mission',
     slug: '#mission',
@@ -148,6 +154,39 @@ const About = () => {
             p: [2, null, 6],
           }}
         >
+          <section sx={{ pl: [2, null, null, 8] }} id="fellowship">
+            <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
+              <h3 className="heading">About the Fellowship</h3>
+            </div>
+            <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
+              As part of their fact-checking program, social media giant Facebook has launched a
+              Global Fellowship to combat Health Misinformation. Factly Media & Research has been
+              shortlisted among the 10 fact-checking organizations across the globe to be offered
+              this fellowship. The Fellowship announcement comes at a time when the world is reeling
+              under the repercussions of misinformation owing to the ongoing COVID-19 pandemic.
+              During the Fellowship, the selected Fellows will take part in virtual training
+              sessions by third-party experts and from CrowdTangle, a social analytics tool. On
+              account of being Facebook’s credible Fact-checking partner, Factly aims to map the
+              health misinformation landscape in India and accordingly develop methodologies and
+              strategies to combat health-related misinformation in the country
+            </div>
+          </section>
+          <section sx={{ pl: [2, null, null, 8] }} id="about-factly">
+            <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
+              <h3 className="heading">About Factly</h3>
+            </div>
+            <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
+              Started as an idea in 2014, it was in the mid-2010s that Factly moved into the Data
+              journalism space, which was still in its nascent stages. By 2015, Factly had evolved
+              from a blog to a company with an aim to transform the public information landscape by
+              making data and information meaningful to people. Between 2016-18, Factly launched its
+              own website and boosted the publishing of its in-house articles- this combination of
+              the data stories along with YouTube videos helped Factly gain a foothold in the news
+              media space through increased subscribers to its content. Today, Factly undertakes
+              three broad categories of work- content production; tool-building; and consulting &
+              training projects.
+            </div>
+          </section>
           <section sx={{ pl: [2, null, null, 8] }} id="background">
             <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
               <h3 className="heading">Background</h3>
@@ -198,7 +237,7 @@ const About = () => {
               }}
             >
               <div sx={{ display: 'flex', flexDirection: 'column', flex: '1 1 auto' }}>
-                <h2 sx={{ fontWeight: 'bold', fontSize: 5, my: 4 }}>Data Journalism/Fact Check</h2>
+                <h2 sx={{ fontWeight: 'bold', fontSize: 4, my: 4 }}>Data Journalism/Fact Check</h2>
                 <p sx={{ py: 4 }}>
                   Factly’s written and visual stories layout facts with evidence and help separate
                   the wheat from the chaff in times of hyper-connectivity and constant information
@@ -208,7 +247,7 @@ const About = () => {
                 </p>
               </div>
               <div sx={{ display: 'flex', flexDirection: 'column' }}>
-                <h2 sx={{ fontWeight: 'bold', fontSize: 5, my: 4 }}>Information Tools</h2>
+                <h2 sx={{ fontWeight: 'bold', fontSize: 4, my: 4 }}>Information Tools</h2>
                 <p sx={{ py: 4 }}>
                   Creating and developing tools that will increase access to public data and
                   information by making it easy, interactive and intuitive. Counting India is
@@ -231,7 +270,7 @@ const About = () => {
                         textAlign: 'center',
                       }}
                     >
-                      <h3 sx={{ fontSize: 4, mb: 4, textTransform: 'uppercase' }}>{tool.name}</h3>
+                      <h3 sx={{ fontSize: 3, mb: 4, textTransform: 'uppercase' }}>{tool.name}</h3>
                       <p sx={{ fontSize: 3 }}>{tool.desc}</p>
                     </div>
                   ))}
@@ -239,7 +278,7 @@ const About = () => {
               </div>
 
               <div sx={{ display: 'flex', flexDirection: 'column' }}>
-                <h2 sx={{ fontWeight: 'bold', fontSize: 5, my: 4 }}>Advocating Open Data</h2>
+                <h2 sx={{ fontWeight: 'bold', fontSize: 4, my: 4 }}>Advocating Open Data</h2>
                 <p sx={{ py: 4 }}>
                   Factly believes that for better public engagement with government data, the supply
                   side also has to be strengthened. Factly actively advocates ‘Open Data’ policy to

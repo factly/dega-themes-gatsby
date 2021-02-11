@@ -2,6 +2,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
+import parseDate from '../utils/parseDate';
 
 const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
   return (
@@ -29,7 +30,7 @@ const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
         }}
       >
         <div sx={{ width: 'full', display: 'flex', flexDirection: 'column' }}>
-          {post.categories && (
+          {/* {post.categories && (
             <p
               sx={{
                 width: 'full',
@@ -43,7 +44,7 @@ const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
                 return category.name + (arr.length - i > 1 ? ', ' : '');
               })}
             </p>
-          )}
+          )} */}
           <div
             id={`nav-${index}`}
             className={`${postActiveIndex === post.slug ? 'active' : ''}`}
@@ -55,6 +56,9 @@ const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
             }}
           >
             {post.title}
+          </div>
+          <div>
+            <span sx={{ fontSize: 1 }}>{parseDate(post.created_at)}</span>
           </div>
         </div>
       </Link>

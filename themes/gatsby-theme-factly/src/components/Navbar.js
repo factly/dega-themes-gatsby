@@ -76,19 +76,20 @@ export default function Navbar({ logo }) {
                       to={`/formats/${tab.slug}`}
                       sx={{
                         display: 'flex',
-                        alignItems: 'center',
                         px: [2, null, null, 4],
                         order: [3, null, null, 4],
+                        alignItems: 'center',
                         textTransform: 'uppercase',
                         fontWeight: 'semibold',
+                        fontSize: ['0.675rem', 1],
                         '&:focus': { outline: 'none' },
                       }}
                     >
                       {tab.name}
                     </Link>
                   ))}
-                  {/* <Link
-                    to="/videos"
+                  <Link
+                    to="/podcasts"
                     sx={{
                       display: 'flex',
                       px: [2, null, null, 4],
@@ -96,11 +97,12 @@ export default function Navbar({ logo }) {
                       alignItems: 'center',
                       textTransform: 'uppercase',
                       fontWeight: 'semibold',
+                      fontSize: ['0.675rem', 1],
                       '&:focus': { outline: 'none' },
                     }}
                   >
-                    Videos
-                  </Link> */}
+                    Podcasts
+                  </Link>
                 </div>
                 <div sx={{ order: [1, null, null, 2] }}>
                   <Link to="/">
@@ -128,23 +130,6 @@ export default function Navbar({ logo }) {
                   >
                     About Us
                   </Link>
-                  <button
-                    type="button"
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      px: [null, null, null, 4],
-                      textTransform: 'uppercase',
-                      fontWeight: 'semibold',
-                      '&:focus': { outline: 'none' },
-                      bg: (theme) => `${theme.colors.gray[3]}`,
-                      borderRadius: 'default',
-                      p: 2,
-                      fontFamily: 'inherit',
-                    }}
-                  >
-                    Subscribe
-                  </button>
                 </div>
               </nav>
             </header>

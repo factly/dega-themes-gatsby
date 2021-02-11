@@ -78,14 +78,14 @@ const Post = ({ post, observer }) => {
               <React.Fragment key={i}>
                 {post.claims.length > 1 && (
                   <div sx={{ bg: 'rgb(237, 242, 247)', p: 4, mt: 4 }}>
-                    <p sx={{ mb: 4 }}>
-                      <span sx={{ fontWeight: 'bold' }}>Claim: </span>
+                    <div sx={{ mb: 4 }}>
+                      <h4 sx={{ fontWeight: 'bold' }}>Claim: </h4>
                       {claim.title}
-                    </p>
-                    <p>
-                      <span sx={{ fontWeight: 'bold' }}>Fact:</span>
+                    </div>
+                    <div>
+                      <h4 sx={{ fontWeight: 'bold' }}>Fact:</h4>
                       {parseEditorJsData(claim.review, true)}
-                    </p>
+                    </div>
                   </div>
                 )}
 
