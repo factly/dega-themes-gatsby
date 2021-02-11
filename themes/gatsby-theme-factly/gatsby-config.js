@@ -91,7 +91,7 @@ module.exports = ({
     {
       resolve: `gatsby-plugin-amp`,
       options: {
-        canonicalBaseUrl: 'http://festive-nobel.netlify.app/',
+        canonicalBaseUrl: `${siteUrl}/`,
         components: [
           'amp-social-share',
           'amp-pinterest',
