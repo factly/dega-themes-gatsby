@@ -14,7 +14,7 @@ module.exports = {
       options: {
         client: 8,
         homepage: 2,
-        siteUrl: 'https://boring-varahamihira.netlify.app',
+        siteUrl: 'https://health.factly.in',
         api: 'http://dega-api.factly.org/query',
         // youtubeApiKey: process.env.GOOGLE_PRIVATE_KEY,
         // channelId: process.env.CHANNEL_ID,
