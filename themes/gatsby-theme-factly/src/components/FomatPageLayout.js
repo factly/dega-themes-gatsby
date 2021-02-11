@@ -72,16 +72,13 @@ const FormatPageLayout = ({ type, posts, formats, item, header }) => {
                 }}
               >
                 <li>
-                  <Link to={`/${type}/${item.slug || item.id}`} activeClassName="active">
+                  <Link to={`/${type}/${item.id}`} activeClassName="active">
                     All
                   </Link>
                 </li>
                 {formats.map((tab, index) => (
                   <li key={index}>
-                    <Link
-                      to={`/${type}/${item.slug || item.id}/formats/${tab.slug}`}
-                      activeClassName="active"
-                    >
+                    <Link to={`/${type}/${item.id}/formats/${tab.slug}`} activeClassName="active">
                       {tab.name}
                     </Link>
                   </li>

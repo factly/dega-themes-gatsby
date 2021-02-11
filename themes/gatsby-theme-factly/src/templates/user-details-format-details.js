@@ -2,24 +2,74 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
+import {
+  FaEnvelope,
+  FaFacebookSquare,
+  FaInstagramSquare,
+  FaLink,
+  FaLinkedin,
+  FaTwitterSquare,
+} from 'react-icons/fa';
+
 import FormatPageLayout from '../components/FomatPageLayout';
+
 function UserDetailsFormat({ data }) {
   const { dega } = data;
-  const header = (item) => (
-    <>
-      <h1 sx={{ textAlign: 'center', fontSize: 4, mb: 4, textTransform: 'capitalize' }}>
-        {`${item.first_name} ${item.last_name}`}
-      </h1>
-      <p sx={{ textAlign: 'center', pb: 4 }}>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit iste nulla ipsum, earum
-        pariatur quos debitis unde, accusantium quod quaerat modi atque corporis! Facilis officia
-        illum deserunt amet placeat quia!
-      </p>
-      <div sx={{ textAlign: 'center', fontSize: 4, mb: 4 }}>
-        Mail:<a href={`mailto:${item.email}`}> {item.email}</a>
+  const getIcon = (name) => {
+    switch (name) {
+      case 'twitter':
+        return <FaTwitterSquare color="#1da1f2" size="1.75rem" />;
+      case 'facebook':
+        return <FaFacebookSquare color="#3b5998" size="1.75rem" />;
+      case 'instagram':
+        return <FaInstagramSquare color="#e1306c" size="1.75rem" />;
+      case 'linkedin':
+        return <FaLinkedin size="1.75rem" color="#0077b5" />;
+      case 'email':
+        return <FaEnvelope size="1.75rem" color="#172b4d" />;
+      default:
+        return <FaLink size="1.75rem" />;
+    }
+  };
+  const header = (item) => {
+    const name = item.display_name
+      ? `${item.display_name}`
+      : `${item.first_name} ${item.last_name}`;
+    return (
+      <div sx={{ mb: 4 }}>
+        {item.medium && item.medium.url && (
+          <img
+            src={item.medium.url.proxy}
+            alt=""
+            sx={{ borderRadius: '50%', width: 40, height: 40, mx: 'auto' }}
+          />
+        )}
+        <h1 sx={{ textAlign: 'center', fontSize: 6, mb: 4, textTransform: 'capitalize' }}>
+          {name}
+        </h1>
+        {item.description && <p sx={{ textAlign: 'center', pb: 4 }}>{item.description}</p>}
+
+        <div sx={{ display: 'flex', justifyContent: 'center' }}>
+          {item.social_media_urls &&
+            Object.keys(item.social_media_urls).map((name) => (
+              <a
+                key={name}
+                title={name}
+                href={item.social_media_urls[name]}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ mr: 2 }}
+              >
+                {getIcon(name)}
+              </a>
+            ))}
+          <a href={`mailto:${item.email}`} title="email">
+            {getIcon('email')}
+          </a>
+        </div>
       </div>
-    </>
-  );
+    );
+  };
   return (
     <FormatPageLayout
       type="users"
@@ -41,6 +91,12 @@ export const query = graphql`
         first_name
         last_name
         email
+        display_name
+        social_media_urls
+        description
+        medium {
+          url
+        }
       }
       formats(spaces: $sid) {
         nodes {
