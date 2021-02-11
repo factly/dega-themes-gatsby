@@ -47,13 +47,13 @@ const LayoutAmp = (props) => (
               },
             ]}
           >
-            <link rel="icon" href={space.fav_icon.url.raw} />
+            <link rel="icon" href={space.fav_icon.url.proxy} />
           </Helmet>
           <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>
             <div style={{ maxWidth: '702px', margin: '0 auto', textAlign: 'center' }}>
               <a style={{ textDecoration: 'none' }} href={space.site_address}>
                 <amp-img
-                  src={space.logo_mobile.url.raw}
+                  src={space.logo_mobile.url.proxy}
                   width="97"
                   height="54"
                   alt={space.name}

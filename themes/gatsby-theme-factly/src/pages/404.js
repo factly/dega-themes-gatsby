@@ -16,7 +16,7 @@ const PageNotFound = ({ data }) => (
       </Link>
       <img
         sx={{ mx: 'auto', display: 'block' }}
-        src={data.dega.space.logo.url.raw}
+        src={data.dega.space.logo.url.proxy}
         alt="Logo"
         onError={addDefaultSrc}
       />

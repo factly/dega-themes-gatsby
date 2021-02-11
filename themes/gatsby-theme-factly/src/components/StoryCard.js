@@ -60,7 +60,7 @@ const StoryCard = ({
             {storyData.medium && (
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
+                src={storyData.medium.url.proxy}
                 sx={{
                   height: 'full',
                   width: 'full',
@@ -168,7 +168,7 @@ const StoryCard = ({
             {storyData.medium && (
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
+                src={storyData.medium.url.proxy}
                 sx={{
                   height: 'full',
                   width: 'full',
@@ -270,7 +270,7 @@ const StoryCard = ({
             {storyData.medium && (
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
+                src={storyData.medium.url.proxy}
                 sx={{
                   height: 'full',
                   width: 'full',
@@ -362,7 +362,7 @@ const StoryCard = ({
             {storyData.medium && (
               <img
                 alt={storyData.medium.alt_text}
-                src={storyData.medium.url.raw}
+                src={storyData.medium.url.proxy}
                 sx={{
                   height: 'full',
                   width: 'full',
@@ -424,7 +424,7 @@ const StoryCard = ({
                     height: '100%',
                     background: 'no-repeat center',
                     backgroundSize: ' cover',
-                    backgroundImage: `url(${storyData.medium.url.raw})`,
+                    backgroundImage: `url(${storyData.medium.url.proxy})`,
                     position: 'absolute',
                     textDecoration: 'none',
                     touchAction: 'manipulation',
@@ -497,7 +497,7 @@ const StoryCard = ({
                 height: '150px',
                 background: 'no-repeat center',
                 backgroundSize: ' cover',
-                backgroundImage: `url(${storyData.medium.url.raw})`,
+                backgroundImage: `url(${storyData.medium.url.proxy})`,
                 textDecoration: 'none',
                 touchAction: 'manipulation',
               }}

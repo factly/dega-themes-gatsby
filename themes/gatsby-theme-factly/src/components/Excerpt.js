@@ -20,7 +20,7 @@ const Excerpt = ({ excerpt, image }) => (
     {image && (
       <div sx={{ flex: '1 1 0%', width: 'full' }}>
         <img
-          src={image.url.raw}
+          src={image.url.proxy}
           alt={image.alt_text}
           sx={{
             width: 'full',
@@ -52,3 +52,4 @@ const Excerpt = ({ excerpt, image }) => (
 );
 
 export default Excerpt;
+;
