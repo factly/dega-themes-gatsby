@@ -6,7 +6,7 @@ import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
 
 const menuItems = [
-  { title: 'About the Fellowship', slug: '#fellowship' },
+  { title: 'About the Health Fellowship', slug: '#fellowship' },
   {
     title: 'About Factly',
     slug: '#about-factly',
@@ -156,11 +156,11 @@ const About = () => {
         >
           <section sx={{ pl: [2, null, null, 8] }} id="fellowship">
             <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading">About the Fellowship</h3>
+              <h3 className="heading">About the Health Fellowship</h3>
             </div>
             <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
               As part of their fact-checking program, social media giant Facebook has launched a
-              Global Fellowship to combat Health Misinformation. Factly Media & Research has been
+              Global Health Fellowship to combat Health Misinformation. Factly Media & Research has been
               shortlisted among the 10 fact-checking organizations across the globe to be offered
               this fellowship. The Fellowship announcement comes at a time when the world is reeling
               under the repercussions of misinformation owing to the ongoing COVID-19 pandemic.
