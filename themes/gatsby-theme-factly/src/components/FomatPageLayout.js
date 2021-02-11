@@ -5,7 +5,8 @@ import { jsx } from 'theme-ui';
 import Layout from './Layout';
 import StoryCard from './StoryCard';
 
-const FormatPageLayout = ({ type, posts, formats, item, header }) => {
+const FormatPageLayout = ({ type, posts, formats, item, header, useSlug=true }) => {
+  const slug = useSlug ? item.slug : item.id
   const defaultHeader = (item) => (
     <h1 sx={{ textAlign: 'center', fontSize: [5, 6], mb: 4, textTransform: 'capitalize' }}>
       {item.name}
@@ -72,13 +73,16 @@ const FormatPageLayout = ({ type, posts, formats, item, header }) => {
                 }}
               >
                 <li>
-                  <Link to={`/${type}/${item.id}`} activeClassName="active">
+                  <Link to={`/${type}/${slug}`} activeClassName="active">
                     All
                   </Link>
                 </li>
                 {formats.map((tab, index) => (
                   <li key={index}>
-                    <Link to={`/${type}/${item.id}/formats/${tab.slug}`} activeClassName="active">
+                    <Link
+                      to={`/${type}/${slug}/formats/${tab.slug}`}
+                      activeClassName="active"
+                    >
                       {tab.name}
                     </Link>
                   </li>

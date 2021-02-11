@@ -77,6 +77,7 @@ function UserDetailsFormat({ data }) {
       formats={dega.formats.nodes}
       item={dega.user}
       header={header}
+      useSlug={false}
     />
   );
 }
