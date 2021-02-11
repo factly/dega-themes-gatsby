@@ -22,11 +22,6 @@ const Post = ({ post, observer }) => {
     observer.observe(postSection.current);
     observer.observe(headerSocialIcon.current);
   }, [observer, postSection, headerSocialIcon]);
-  const title = encodeURIComponent(post.title);
-  let url;
-  if (isBrowser) {
-    url = encodeURIComponent(window.location.href);
-  }
 
   return (
     <>
@@ -67,8 +62,8 @@ const Post = ({ post, observer }) => {
             <ShareButtonGroup
               setRef={headerSocialIcon}
               data={{
-                url,
-                title: post.title,
+                url: encodeURIComponent(isBrowser ? window.location.href : null),
+                title: encodeURIComponent(post.title),
               }}
             />
           </div>
