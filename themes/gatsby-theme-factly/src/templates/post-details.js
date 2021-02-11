@@ -65,21 +65,16 @@ const PostDetails = ({ data }) => {
   };
 
   const createObserver = () => {
-    const o = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target.hasAttribute('social-icon')) {
-            handleShowSocialIcon(entry);
-          }
-          if (entry.target.hasAttribute('post')) {
-            handleSetActiveLink(entry);
-          }
-        });
-      },
-      {
-        rootMargin: '-300px',
-      },
-    );
+    const o = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target.hasAttribute('social-icon')) {
+          handleShowSocialIcon(entry);
+        }
+        if (entry.target.hasAttribute('post')) {
+          handleSetActiveLink(entry);
+        }
+      });
+    });
     setObserver(o);
   };
   React.useEffect(() => {
