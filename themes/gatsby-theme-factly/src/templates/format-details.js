@@ -11,7 +11,7 @@ function FormatDetails({ data }) {
     <Layout>
       <div sx={{ mx: 'auto', maxWidth: 1024 }}>
         <h1 sx={{ mt: '4.5rem', mb: 8, textAlign: 'center', fontSize: [5, 6] }}>
-          {dega.posts.nodes[0].format.name}
+          {dega.posts.nodes[0]?.format.name}
         </h1>
         <div sx={{ display: 'flex', flexDirection: 'column', pb: 6, pt: [null, null, null, 8] }}>
           {dega.posts.nodes.length > 0 ? (
