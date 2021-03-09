@@ -12,14 +12,14 @@ const Tag = ({ url, name }) => {
         color: (theme) => `${theme.colors.white}`,
         fontSize: [1, null, 2],
         borderWidth: '1px',
-        borderColor: (theme) => `${theme.colors.primary}`,
+        borderColor: (theme) => `${theme.colors.blue[5]}`,
         borderRadius: 'default',
         p: 2,
         m: 2,
-        bg: (theme) => `${theme.colors.primary}`,
+        bg: (theme) => `${theme.colors.blue[5]}`,
         transition: '0.3s',
         '&:hover': {
-          color: (theme) => `${theme.colors.primary}`,
+          color: (theme) => `${theme.colors.blue[5]}`,
           bg: (theme) => `${theme.colors.white}`,
         },
       }}
