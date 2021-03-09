@@ -41,7 +41,7 @@ function UserDetailsFormat({ data }) {
           <img
             src={item.medium?.url.proxy}
             alt=""
-            sx={{ borderRadius: '50%', width: 40, height: 40, mx: 'auto' }}
+            sx={{ borderRadius: '50%', width: 40, height: 40, mx: 'auto', padding: 10 }}
           />
         )}
         <h1 sx={{ textAlign: 'center', fontSize: 6, mb: 4, textTransform: 'capitalize' }}>
