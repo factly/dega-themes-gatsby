@@ -59,8 +59,8 @@ const StoryCard = ({
           >
             {storyData.medium && (
               <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.proxy}
+                alt={storyData.medium?.alt_text}
+                src={storyData.medium?.url.proxy}
                 sx={{
                   height: 'full',
                   width: 'full',
@@ -167,8 +167,8 @@ const StoryCard = ({
           >
             {storyData.medium && (
               <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.proxy}
+                alt={storyData.medium?.alt_text}
+                src={storyData.medium?.url.proxy}
                 sx={{
                   height: 'full',
                   width: 'full',
@@ -225,7 +225,7 @@ const StoryCard = ({
                   textTransform: 'none',
                 }}
               >
-                {`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}
+                {`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}
               </p>
             </div>
             <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, null, 1] }}>
@@ -269,8 +269,8 @@ const StoryCard = ({
           >
             {storyData.medium && (
               <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.proxy}
+                alt={storyData.medium?.alt_text}
+                src={storyData.medium?.url.proxy}
                 sx={{
                   height: 'full',
                   width: 'full',
@@ -328,7 +328,7 @@ const StoryCard = ({
                       textTransform: 'none',
                     }}
                   >
-                    {`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}
+                    {`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}
                   </p>
                 </div>
                 <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, null, 1] }}>
@@ -361,8 +361,8 @@ const StoryCard = ({
           >
             {storyData.medium && (
               <img
-                alt={storyData.medium.alt_text}
-                src={storyData.medium.url.proxy}
+                alt={storyData.medium?.alt_text}
+                src={storyData.medium?.url.proxy}
                 sx={{
                   height: 'full',
                   width: 'full',
@@ -389,7 +389,7 @@ const StoryCard = ({
               })}
             </p>
             <p sx={{ fontSize: 1, pt: 2, color: (theme) => `${theme.colors.gray[5]}` }}>
-              <span>{`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}</span>
+              <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}</span>
               {' | '}
               <span>{parseDate(storyData.created_at)}</span>
             </p>
@@ -424,7 +424,7 @@ const StoryCard = ({
                     height: '100%',
                     background: 'no-repeat center',
                     backgroundSize: ' cover',
-                    backgroundImage: `url(${storyData.medium.url.proxy})`,
+                    backgroundImage: `url(${storyData.medium?.url.proxy})`,
                     position: 'absolute',
                     textDecoration: 'none',
                     touchAction: 'manipulation',
@@ -466,10 +466,10 @@ const StoryCard = ({
                   <span>/</span>
                 </>
               )}
-              {storyData.users && (
+              {storyData.users[0]?.first_name && (
                 <>
                   {' '}
-                  <span>{`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}</span>
+                  <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}</span>
                   <span>/</span>
                 </>
               )}
@@ -497,7 +497,7 @@ const StoryCard = ({
                 height: '150px',
                 background: 'no-repeat center',
                 backgroundSize: ' cover',
-                backgroundImage: `url(${storyData.medium.url.proxy})`,
+                backgroundImage: `url(${storyData.medium?.url.proxy})`,
                 textDecoration: 'none',
                 touchAction: 'manipulation',
               }}
@@ -533,10 +533,10 @@ const StoryCard = ({
                   <span>/</span>
                 </>
               )}
-              {storyData.users && (
+              {storyData.users[0]?.first_name && (
                 <>
                   {' '}
-                  <span>{`${storyData.users[0].first_name} ${storyData.users[0].last_name}`}</span>
+                  <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}</span>
                   <span>/</span>
                 </>
               )}

@@ -144,12 +144,20 @@ function FactCheckWidget({ claims }) {
                     boxShadow: 'lg',
                   }}
                 >
-                  <div sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <div sx={{ display: 'flex', p: 4, alignItems: 'baseline' }}>
+                  <div
+                    sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                  >
+                    <div
+                      sx={{
+                        display: 'flex',
+                        p: 4,
+                        alignItems: 'baseline',
+                      }}
+                    >
                       <h2 sx={{ fontWeight: 'bold', mr: 2 }}>Claimant: </h2>
                       {claim.claimant.name}
                     </div>
-                    <div
+                    {/* <div
                       sx={{
                         display: 'flex',
                         flex: '1 1 0%',
@@ -197,7 +205,7 @@ function FactCheckWidget({ claims }) {
                           </g>
                         </svg>
                       </a>
-                    </div>
+                    </div> */}
                   </div>
                   <div
                     sx={{
@@ -213,8 +221,8 @@ function FactCheckWidget({ claims }) {
                       {claim.title}
                       {claim.rating.medium && (
                         <img
-                          src={claim.rating.medium.url.proxy}
-                          alt={claim.rating.medium.alt_text}
+                          src={claim.rating.medium?.url.proxy}
+                          alt={claim.rating.medium?.alt_text}
                           onError={addDefaultSrc}
                           sx={{
                             width: '1/6',

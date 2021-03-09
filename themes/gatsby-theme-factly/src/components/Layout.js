@@ -51,7 +51,7 @@ const Layout = (props) => (
                 property: 'og:image',
                 content:
                   space.logo &&
-                  `${space.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:20:150:20`,
+                  `${space.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`,
               },
               { property: 'og:title', content: space.name },
               {

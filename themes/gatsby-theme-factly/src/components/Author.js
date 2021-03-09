@@ -34,29 +34,33 @@ const Author = ({ users, categories, date }) => (
                   '&:first-of-type': { pl: 0 },
                 }}
               >
-                {`${user.first_name} ${user.last_name}`}
+                {`${user?.first_name} ${user?.last_name}`}
               </Link>
-              {arr.length - i > 1 && ','}
+              {arr.length - i > 1 && (user?.first_name || user?.last_name) && ','}
             </React.Fragment>
           ))}
-        <span sx={{ fontWeight: 'medium', fontSize: 3 }}>in</span>
-        {categories &&
-          categories.map((category, i, arr) => (
-            <React.Fragment key={i}>
-              <Link
-                to={`/categories/${category.slug}`}
-                sx={{
-                  px: 1,
-                  fontWeight: 'medium',
-                  color: (theme) => `${theme.colors.blue[5]}`,
-                  fontSize: 3,
-                }}
-              >
-                {category.name}
-              </Link>
-              {arr.length - i > 1 && ', '}
-            </React.Fragment>
-          ))}
+
+        {categories.length > 0 && (
+          <>
+            <span sx={{ fontWeight: 'medium', fontSize: 3 }}>in</span>
+            {categories.map((category, i, arr) => (
+              <React.Fragment key={i}>
+                <Link
+                  to={`/categories/${category.slug}`}
+                  sx={{
+                    px: 1,
+                    fontWeight: 'medium',
+                    color: (theme) => `${theme.colors.blue[5]}`,
+                    fontSize: 3,
+                  }}
+                >
+                  {category.name}
+                </Link>
+                {arr.length - i > 1 && ', '}
+              </React.Fragment>
+            ))}
+          </>
+        )}
       </div>
       <span sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 3 }}>
         {parseDate(date)}

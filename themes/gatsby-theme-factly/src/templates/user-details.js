@@ -36,9 +36,9 @@ function UserDetailsAll({ data }) {
       : `${item.first_name} ${item.last_name}`;
     return (
       <div sx={{ mb: 4 }}>
-        {item.medium && item.medium.url && (
+        {item.medium && (
           <img
-            src={item.medium.url.proxy}
+            src={item.medium?.url.proxy}
             alt=""
             sx={{ borderRadius: '50%', width: 40, height: 40, mx: 'auto' }}
           />
