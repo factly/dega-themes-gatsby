@@ -225,7 +225,7 @@ const StoryCard = ({
                   textTransform: 'none',
                 }}
               >
-                {`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}
+                {`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}
               </p>
             </div>
             <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, null, 1] }}>
@@ -328,7 +328,7 @@ const StoryCard = ({
                       textTransform: 'none',
                     }}
                   >
-                    {`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}
+                    {`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}
                   </p>
                 </div>
                 <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, null, 1] }}>
@@ -389,7 +389,7 @@ const StoryCard = ({
               })}
             </p>
             <p sx={{ fontSize: 1, pt: 2, color: (theme) => `${theme.colors.gray[5]}` }}>
-              <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}</span>
+              <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}</span>
               {' | '}
               <span>{parseDate(storyData.created_at)}</span>
             </p>
@@ -469,7 +469,7 @@ const StoryCard = ({
               {storyData.users[0]?.first_name && (
                 <>
                   {' '}
-                  <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}</span>
+                  <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}</span>
                   <span>/</span>
                 </>
               )}
@@ -536,7 +536,7 @@ const StoryCard = ({
               {storyData.users[0]?.first_name && (
                 <>
                   {' '}
-                  <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.late_name}`}</span>
+                  <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}</span>
                   <span>/</span>
                 </>
               )}
