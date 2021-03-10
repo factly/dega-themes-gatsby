@@ -164,8 +164,11 @@ const parseEditorJsData = (content, scripts = false, amp = false) => {
             style = data.style === 'unordered' ? 'ul' : 'ol';
             ListTag = `${style}`;
             list = data.items
-              .map((listItem, i) => <li key={i}> {listItem} </li>)
+              .map((listItem, i) => (
+                <li key={i} dangerouslySetInnerHTML={{ __html: listItem }}></li>
+              ))
               .reduce((a, c) => [a, '', c]);
+            console.log(list);
           }
 
           switch (block.type) {
@@ -199,7 +202,7 @@ const parseEditorJsData = (content, scripts = false, amp = false) => {
             case 'embed':
               // eslint-disable-next-line no-nested-ternary
               if (!scripts) {
-                return <div className="embeds" dangerouslySetInnerHTML={data.html} />;
+                return <div className="embeds" dangerouslySetInnerHTML={{ __html: data.html }} />;
               }
               return amp ? (
                 ampify(data, i)
