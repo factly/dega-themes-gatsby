@@ -117,7 +117,7 @@ export default function Navbar({ logo }) {
                       '&:focus': { outline: 'none' },
                     }}
                   >
-                    Podcasts
+                    Podcast
                   </Link>
                 </div>
                 <div sx={{ order: [1, null, null, 2] }}>
