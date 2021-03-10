@@ -50,7 +50,7 @@ const Post = ({ post, observer }) => {
             overflow: 'hidden',
           }}
         >
-          <h1 sx={{ fontWeight: 'medium', fontSize: 6, py: 2 }}>{post.title}</h1>
+          <h1 sx={{ fontWeight: 'bold', fontSize: 6, py: 2 }}>{post.title}</h1>
           <div
             sx={{
               display: 'flex',
@@ -70,7 +70,7 @@ const Post = ({ post, observer }) => {
         </div>
         <Excerpt excerpt={post.excerpt} image={post.medium} />
 
-        <div sx={{ width: ['full', null, null, '3/4'], mx: 'auto', fontSize: 4 }}>
+        <div sx={{ width: ['full'], mx: 'auto', fontSize: 4 }}>
           {post.claims && <FactCheckWidget claims={post.claims} />}
           <div className="parsed">{parseEditorJsData(post.description, true)}</div>
           {post.claims &&
