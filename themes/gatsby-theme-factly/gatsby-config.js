@@ -111,7 +111,14 @@ module.exports = ({
       resolve: `gatsby-plugin-advanced-sitemap`,
     },
     'gatsby-plugin-robots-txt',
-    // 'gatsby-plugin-manifest',
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        include_favicon: false,
+        icon: 'src/favicons/favicon.png',
+        cache_busting_mode: 'none',
+      },
+    },
     {
       resolve: 'gatsby-plugin-feed',
       options: {

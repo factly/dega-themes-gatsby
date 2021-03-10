@@ -13,7 +13,7 @@ const saveIcon = async (url) => {
     .then((res) => res.buffer())
     .then(
       (buffer) =>
-        fse.outputFile('static/icons/favicon.png', buffer, (err) => {
+        fse.outputFile('src/favicons/favicon.png', buffer, (err) => {
           console.log(err); // => null
           // file has now been created, including the directory it is to be placed in
         }),
@@ -236,24 +236,20 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   const state = store.getState();
   const plugin = state.flattenedPlugins.find((plugin) => plugin.name === 'gatsby-plugin-manifest');
 
-  // const resolveManifestOptions = (data) => ({
-  //   name: data.name,
-  //   short_name: data.name,
-  //   start_url: '/',
-  //   background_color: '#ffffff',
-  //   theme_color: `#ffffff`,
-  //   display: `minimal-ui`,
-  //   icon: 'icons/favicon.png',
-  //   // icon: 'static/Icons/favicon.png',
-  //   // icon: '/static/Icons/favicon.png',
-  //   // icon: '/src/static/Icons/favicon.png',
-  //   // icon: './src/static/Icons/favicon.png'
-  // });
-  // if (plugin) {
-  //   const manifestOptions = await resolveManifestOptions(result.data.dega.space);
-  //   plugin.pluginOptions = { ...plugin.pluginOptions, ...manifestOptions };
-  //   console.log(plugin.pluginOptions);
-  // }
+  const resolveManifestOptions = (data) => ({
+    name: data.name,
+    short_name: data.name,
+    start_url: '/',
+    background_color: '#ffffff',
+    theme_color: `#ffffff`,
+    display: `minimal-ui`,
+    icon: 'src/favicons/favicon.png',
+  });
+  if (plugin) {
+    const manifestOptions = await resolveManifestOptions(result.data.dega.space);
+    plugin.pluginOptions = { ...plugin.pluginOptions, ...manifestOptions };
+    console.log(plugin.pluginOptions);
+  }
 
   // homepage
 
