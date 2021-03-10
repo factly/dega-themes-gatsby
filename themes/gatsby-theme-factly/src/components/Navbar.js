@@ -65,6 +65,7 @@ export default function Navbar({ logo }) {
                   sx={{
                     display: 'flex',
                     flex: '1 1 0%',
+                    textAlign: 'center',
                     order: [2, null, null, 1],
                     // alignItems: 'center',
                     justifyContent: ['flex-end', null, null, 'flex-start'],
@@ -88,6 +89,21 @@ export default function Navbar({ logo }) {
                       {tab.name}
                     </Link>
                   ))}
+                  <Link
+                    to="/categories/weekly-update"
+                    sx={{
+                      display: 'flex',
+                      px: [2, null, null, 4],
+                      order: [3, null, null, 4],
+                      alignItems: 'center',
+                      textTransform: 'uppercase',
+                      fontWeight: 'semibold',
+                      fontSize: ['0.675rem', 1],
+                      '&:focus': { outline: 'none' },
+                    }}
+                  >
+                    Weekly Updates
+                  </Link>
                   <Link
                     to="/podcasts"
                     sx={{
