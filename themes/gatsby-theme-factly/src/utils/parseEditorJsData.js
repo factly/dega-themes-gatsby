@@ -174,20 +174,23 @@ const parseEditorJsData = (content, scripts = false, amp = false) => {
           switch (block.type) {
             case 'header':
               return (
-                <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ my: 3 }} />
+                <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ my: 4 }} />
               );
             case 'paragraph':
               return (
                 <p
                   key={i}
                   dangerouslySetInnerHTML={{ __html: data.text }}
-                  sx={{ my: 3, wordBreak: 'break-word' }}
+                  sx={{ my: 4, wordBreak: 'break-word' }}
                 />
               );
 
             case 'list':
               return (
-                <ListTag sx={{ listStylePosition: 'inside', listStyleType: 'disc', pl: 4 }} key={i}>
+                <ListTag
+                  sx={{ listStylePosition: 'outside', listStyleType: 'disc', pl: 10 }}
+                  key={i}
+                >
                   {list}
                 </ListTag>
               );
@@ -211,9 +214,9 @@ const parseEditorJsData = (content, scripts = false, amp = false) => {
               );
 
             case 'raw':
-              return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} sx={{ py: 3 }} />;
+              return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} sx={{ py: 4 }} />;
             case 'code':
-              return <code sx={{ py: 3 }}>{data.code}</code>;
+              return <code sx={{ py: 4 }}>{data.code}</code>;
             default:
               break;
           }
