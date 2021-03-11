@@ -404,7 +404,10 @@ const StoryCard = ({
           border: '1px solid rgb(222,222,222)',
         }}
       >
-        <div className="iframely-card" sx={{ display: 'flex', flexDirection: 'column' }}>
+        <div
+          className="iframely-card"
+          sx={{ display: 'flex', flexDirection: 'column', width: 'full', maxWidth: 'full' }}
+        >
           <div sx={{ maxWidth: '100%', width: '100%', display: 'flex', overflow: 'hidden' }}>
             <div
               sx={{
@@ -487,7 +490,10 @@ const StoryCard = ({
           border: '1px solid rgb(222,222,222)',
         }}
       >
-        <div className="iframely-small" sx={{ display: 'flex', alignItems: 'center' }}>
+        <div
+          className="iframely-small"
+          sx={{ display: 'flex', alignItems: 'center', width: 'full', maxWidth: 'full' }}
+        >
           <div sx={{ width: '150px', maxWidth: '150px', height: '150px' }}>
             <Link
               to={`/${storyData.slug}`}

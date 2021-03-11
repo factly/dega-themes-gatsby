@@ -168,7 +168,6 @@ const parseEditorJsData = (content, scripts = false, amp = false) => {
                 <li key={i} dangerouslySetInnerHTML={{ __html: listItem }}></li>
               ))
               .reduce((a, c) => [a, '', c]);
-            console.log(list);
           }
 
           switch (block.type) {
