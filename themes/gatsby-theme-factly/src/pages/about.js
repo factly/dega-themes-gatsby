@@ -156,24 +156,28 @@ const About = () => {
         >
           <section sx={{ pl: [2, null, null, 8] }} id="fellowship">
             <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading">About the Health Fellowship</h3>
+              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+                About the Health Fellowship
+              </h3>
             </div>
             <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
               As part of their fact-checking program, social media giant Facebook has launched a
-              Global Health Fellowship to combat Health Misinformation. Factly Media & Research has been
-              shortlisted among the 10 fact-checking organizations across the globe to be offered
-              this fellowship. The Fellowship announcement comes at a time when the world is reeling
-              under the repercussions of misinformation owing to the ongoing COVID-19 pandemic.
-              During the Fellowship, the selected Fellows will take part in virtual training
-              sessions by third-party experts and from CrowdTangle, a social analytics tool. On
-              account of being Facebook’s credible Fact-checking partner, Factly aims to map the
-              health misinformation landscape in India and accordingly develop methodologies and
-              strategies to combat health-related misinformation in the country
+              Global Health Fellowship to combat Health Misinformation. Factly Media & Research has
+              been shortlisted among the 10 fact-checking organizations across the globe to be
+              offered this fellowship. The Fellowship announcement comes at a time when the world is
+              reeling under the repercussions of misinformation owing to the ongoing COVID-19
+              pandemic. During the Fellowship, the selected Fellows will take part in virtual
+              training sessions by third-party experts and from CrowdTangle, a social analytics
+              tool. On account of being Facebook’s credible Fact-checking partner, Factly aims to
+              map the health misinformation landscape in India and accordingly develop methodologies
+              and strategies to combat health-related misinformation in the country
             </div>
           </section>
           <section sx={{ pl: [2, null, null, 8] }} id="about-factly">
             <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading">About Factly</h3>
+              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+                About Factly
+              </h3>
             </div>
             <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
               Started as an idea in 2014, it was in the mid-2010s that Factly moved into the Data
@@ -189,7 +193,9 @@ const About = () => {
           </section>
           <section sx={{ pl: [2, null, null, 8] }} id="background">
             <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading">Background</h3>
+              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+                Background
+              </h3>
             </div>
             <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
               In 2005, India legislated one of the best ‘Right to Information’ laws in the world
@@ -205,7 +211,9 @@ const About = () => {
           </section>
           <section sx={{ pl: [2, null, null, 8] }} id="mission">
             <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading">Mission</h3>
+              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+                Mission
+              </h3>
             </div>
             <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
               Factly strives to cultivate civic participation and engaging citizens in accessing,
@@ -214,7 +222,9 @@ const About = () => {
           </section>
           <section sx={{ pl: [2, null, null, 8] }} id="vision">
             <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading">Vision</h3>
+              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+                Vision
+              </h3>
             </div>
             <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
               Factly will strive to transform the public information landscape in India by improving
@@ -225,7 +235,9 @@ const About = () => {
           </section>
           <section sx={{ pl: [2, null, null, 8] }} id="what-we-do">
             <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading">What We Do</h3>
+              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+                What We Do
+              </h3>
             </div>
             <div
               sx={{
@@ -294,7 +306,9 @@ const About = () => {
           </section>
           <section sx={{ pl: [2, null, null, 8] }} id="contacts">
             <div className="mb-4 pb-4 border-b" sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h5 className="heading">Contact Us</h5>
+              <h5 className="heading" sx={{ fontSize: [5, null, 6] }}>
+                Contact Us
+              </h5>
             </div>
             <div sx={{ my: 6, pb: 6 }}>
               <div>
