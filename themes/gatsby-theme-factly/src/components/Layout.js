@@ -73,7 +73,7 @@ const Layout = (props) => (
               }}
             /> */}
           </Helmet>
-          <Navbar logo={space.logo.url.proxy}></Navbar>
+          <Navbar logo={space.logo.url.proxy} />
           <div
             style={{ maxWidth: '1920px' }}
             sx={{
