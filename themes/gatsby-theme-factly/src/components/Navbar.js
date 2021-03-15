@@ -63,9 +63,9 @@ export default function NavBar({ logo }) {
             to="/"
             sx={{
               position: ['relative', null, null, 'absolute'],
-              width: [null, null, null, '100%'],
-              left: 0,
-              textAlign: 'center',
+              transform: ['none', null, null, 'translate(-50%,-50%)'],
+              top: [null, null, null, '50%'],
+              left: [null, null, null, '50%'],
               zIndex: 999,
             }}
           >
