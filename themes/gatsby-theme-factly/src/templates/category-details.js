@@ -31,7 +31,7 @@ function CategoryDetailsAll({ data }) {
           id="category-description"
           sx={{
             maxHeight: (theme) =>
-              readMore ? `calc( 1rem + ${theme.lineHeights.normal}em * 8 )` : '100%',
+              readMore ? `calc( 1rem + ${theme.lineHeights.normal}em * 6 )` : '100%',
             overflow: 'hidden',
             px: 4,
           }}
