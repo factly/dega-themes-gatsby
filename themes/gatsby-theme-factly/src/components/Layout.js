@@ -61,7 +61,7 @@ const Layout = (props) => (
             ]}
           >
             <html lang="en" />
-            {space.fav_icon && <link rel="icon" href="icons/favicon.png" />}
+            {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
             {/* <body
               style={{
                 backgroundColor: theme.colors.white,
