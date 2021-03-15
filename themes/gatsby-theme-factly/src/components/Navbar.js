@@ -105,7 +105,7 @@ export default function NavBar({ logo }) {
               </li>
 
               {menu?.menu.map((menuItem, index) => (
-                <li>
+                <li key={menuItem.title}>
                   <Link
                     key={`navbar-${index}`}
                     to={menuItem.url}

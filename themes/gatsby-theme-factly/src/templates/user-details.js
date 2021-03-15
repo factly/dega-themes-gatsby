@@ -10,7 +10,7 @@ import {
   FaLink,
   FaEnvelope,
 } from 'react-icons/fa';
-import FormatPageLayout from '../components/FomatPageLayout';
+import FormatPageLayout from '../components/FormatPageLayout';
 
 function UserDetailsAll({ data }) {
   const { dega } = data;

@@ -52,4 +52,3 @@ const Excerpt = ({ excerpt, image }) => (
 );
 
 export default Excerpt;
-;

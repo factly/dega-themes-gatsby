@@ -55,7 +55,7 @@ exports.onPreBootstrap = ({ store }) => {
     };
     createShadowComponent();
   }
-};;;
+};
 
 exports.createPages = async ({ graphql, actions, store, reporter }, { client, homepage = 1 }) => {
   const { createPage } = actions;

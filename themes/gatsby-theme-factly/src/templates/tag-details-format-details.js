@@ -2,7 +2,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
-import FormatPageLayout from '../components/FomatPageLayout';
+import FormatPageLayout from '../components/FormatPageLayout';
 
 function TagDetailsFormat({ data }) {
   const { dega } = data;

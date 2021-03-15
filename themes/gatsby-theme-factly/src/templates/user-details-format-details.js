@@ -11,7 +11,7 @@ import {
   FaTwitterSquare,
 } from 'react-icons/fa';
 
-import FormatPageLayout from '../components/FomatPageLayout';
+import FormatPageLayout from '../components/FormatPageLayout';
 
 function UserDetailsFormat({ data }) {
   const { dega } = data;

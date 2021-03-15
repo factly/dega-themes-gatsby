@@ -192,6 +192,6 @@ const Layout = ({ children, baseUrl, logo }) => {
       </main>
     </>
   );
-};;;
+};
 
 export default Layout;
