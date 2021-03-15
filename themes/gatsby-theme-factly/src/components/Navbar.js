@@ -66,7 +66,7 @@ export default function NavBar({ logo }) {
               width: [null, null, null, '100%'],
               left: 0,
               textAlign: 'center',
-              zIndex: 100,
+              zIndex: 999,
             }}
           >
             <img sx={{ height: 8, mx: [null, null, null, 'auto'] }} src={logo} alt="factly" />
@@ -81,7 +81,7 @@ export default function NavBar({ logo }) {
           <div
             sx={{
               display: showMenu ? 'flex' : 'none',
-              zIndex: 999,
+              zIndex: 998,
               position: 'relative',
               flexDirection: ['column', null, null, 'row'],
               flexGrow: 1,
