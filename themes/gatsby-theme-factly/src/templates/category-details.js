@@ -1,8 +1,9 @@
 /** @jsx jsx */
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React, { useState, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
 import parseEditorJsData from '../utils/parseEditorJsData';
+import { isBrowser } from '../utils/isBrowser';
 import FormatPageLayout from '../components/FormatPageLayout';
 
 function CategoryDetailsAll({ data }) {
@@ -11,6 +12,15 @@ function CategoryDetailsAll({ data }) {
   // const filterPosts = dega.posts.nodes.filter((i) => i.format.slug !== formatType);
 
   const [readMore, setReadMore] = React.useState(true);
+  const [isReadMoreNeeded, setIsReadMoreNeeded] = useState(false);
+
+  useEffect(() => {
+    if (isBrowser) {
+      const el = document.getElementById('category-description');
+      setIsReadMoreNeeded(el?.clientHeight < el?.scrollHeight);
+    }
+  }, []);
+
   const header = (item) => {
     return (
       <div sx={{ mb: 6 }}>
@@ -21,14 +31,14 @@ function CategoryDetailsAll({ data }) {
           id="category-description"
           sx={{
             maxHeight: (theme) =>
-              readMore ? `calc( 1rem + ${theme.lineHeights.normal}em * 6 )` : '100%',
+              readMore ? `calc( 1rem + ${theme.lineHeights.normal}em * 8 )` : '100%',
             overflow: 'hidden',
             px: 4,
           }}
         >
           {parseEditorJsData(item.description)}
         </div>
-        {item.description && (
+        {item.description && isReadMoreNeeded && (
           <button
             type="button"
             onClick={() => setReadMore((prev) => !prev)}
