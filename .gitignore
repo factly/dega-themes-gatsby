@@ -110,3 +110,5 @@ temp/
 factly-dega/
 youtube-two/
 # End of https://www.gitignore.io/api/node
+
+.DS_STORE
