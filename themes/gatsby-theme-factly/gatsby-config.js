@@ -165,6 +165,9 @@ module.exports = ({
         ],
       },
     },
-    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-offline',
+      precachePages: ['/about/', '/podcasts/'],
+    },
   ].filter(Boolean),
 });
