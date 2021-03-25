@@ -3,7 +3,8 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 // import '../static/css/main.scss';
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
+import Seo from './Seo';
 
 const HomePageTwo = ({ data }) => {
   const { dega } = data;
@@ -20,9 +21,10 @@ const HomePageTwo = ({ data }) => {
     .sort((a, b) => a.meta_fields.order - b.meta_fields.order);
   return (
     <>
-      <Helmet>
-        <link rel="canonical" href={`${dega.space.site_address}`} />
-      </Helmet>
+      {/* <Helmet>
+        <link rel="canonical" href={`${}`} />
+      </Helmet> */}
+      {/* <Seo title={dega.space.name} canonical={dega.space.site_address}/> */}
       <header
         sx={{
           display: 'grid',

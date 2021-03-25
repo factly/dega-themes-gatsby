@@ -5,6 +5,7 @@ import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
 import Homepage from '../components/Homepage';
 import HomePageTwo from '../components/HomepageTwo';
+import Seo from '../components/Seo';
 
 function Indexpage({ data, pageContext }) {
   const { homepage } = pageContext;
@@ -27,6 +28,7 @@ export const query = graphql`
     dega {
       space {
         site_address
+        name
       }
       categories(spaces: $sid, limit: 20, page: 1) {
         nodes {

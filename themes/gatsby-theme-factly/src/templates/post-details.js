@@ -2,7 +2,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import InfiniteScroll from 'react-infinite-scroller';
-import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookSquare,
@@ -15,6 +14,7 @@ import Post from '../components/Post';
 import StoryLinks from '../components/StoryLinks';
 import Layout from '../components/Layout';
 import { isBrowser } from '../utils/isBrowser';
+import Seo from '../components/Seo';
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
@@ -90,15 +90,12 @@ const PostDetails = ({ data }) => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>{dega.post.title}</title>
-        {/* <link
-          rel="amphtml"
-          href={typeof window !== 'undefined' ? window.location.href.concat('amp') : ''}
-        /> */}
-
-        <link rel="canonical" href={`${dega.space.site_address}/${dega.post.slug}`} />
-      </Helmet>
+      <Seo
+        title={dega.post.title}
+        description={dega.post.excerpt ? dega.post.excerpt : ''}
+        image={`${dega.post.medium?.url?.proxy}`}
+        canonical={`${dega.space.site_address}/${dega.post.slug}`}
+      />
       <div sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         <div
           className="sidebar"

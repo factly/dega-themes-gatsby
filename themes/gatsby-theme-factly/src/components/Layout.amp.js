@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { Helmet } from 'react-helmet';
+import Seo from './Seo';
 
 const LayoutAmp = (props) => (
   <StaticQuery
@@ -28,27 +29,13 @@ const LayoutAmp = (props) => (
       const { children } = props;
       return (
         <>
-          <Helmet
+          <Seo
             title={`${space.name} ${space.tag_line}`}
-            meta={[
-              {
-                name: 'description',
-                content: space.description,
-              },
-              { property: 'og:url', content: space.site_address },
-              {
-                property: 'og:image',
-                content: space.logo_mobile.url,
-              },
-              { property: 'og:title', content: space.name },
-              {
-                property: 'og:description',
-                content: space.description,
-              },
-            ]}
-          >
-            <link rel="icon" href={space.fav_icon.url.proxy} />
-          </Helmet>
+            canonical={space.site_address}
+            image={`${space.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
+            description={space.description !== 'null' ? space.description : ''}
+            icon={space.fav_icon.url.proxy}
+          />
           <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>
             <div style={{ maxWidth: '702px', margin: '0 auto', textAlign: 'center' }}>
               <a style={{ textDecoration: 'none' }} href={space.site_address}>

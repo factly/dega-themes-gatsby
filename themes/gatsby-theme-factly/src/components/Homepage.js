@@ -1,18 +1,13 @@
 /** @jsx jsx */
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
-import Layout from './Layout';
 import StoryCard from './StoryCard';
 import CategoriesGroup from './CategoriesGroup';
-import { Helmet } from 'react-helmet';
 
 function Homepage({ data }) {
   const { dega } = data;
   return (
     <>
-      <Helmet>
-        <link rel="canonical" href={`${dega.space.site_address}`} />
-      </Helmet>
       <div
         sx={{
           display: 'flex',

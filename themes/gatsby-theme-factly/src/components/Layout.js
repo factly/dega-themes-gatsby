@@ -2,7 +2,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import Navbar from './Navbar';
 // import Footer from './Footer';
@@ -10,6 +9,7 @@ import Navbar from './Navbar';
 // import { useThemeUI } from 'theme-ui';
 import FooterTwo from './FooterTwo';
 import '../static/css/tailwind.css';
+import Seo from './Seo';
 
 const Layout = (props) => (
   <StaticQuery
@@ -39,40 +39,14 @@ const Layout = (props) => (
       // const { theme } = themeUIContext;
       return (
         <>
-          <Helmet
-            title={`${space.name} ${space.tag_line}`}
-            meta={[
-              {
-                name: 'description',
-                content: space.description,
-              },
-              { property: 'og:url', content: space.site_address },
-              {
-                property: 'og:image',
-                content:
-                  space.logo &&
-                  `${space.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`,
-              },
-              { property: 'og:title', content: space.name },
-              {
-                property: 'og:description',
-                content: space.description,
-              },
-            ]}
+          <Seo
+            title={`${space.name} - ${space.tag_line}`}
+            canonical={space.site_address}
+            image={`${space.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
+            description={space.description !== 'null' ? space.description : ''}
           >
-            <html lang="en" />
             {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
-            {/* <body
-              style={{
-                backgroundColor: theme.colors.white,
-                color: theme.colors.gray[9],
-                lineHeight: theme.lineHeights.normal,
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                letterSpacing: theme.letterSpacings.wider,
-              }}
-            /> */}
-          </Helmet>
+          </Seo>
           <Navbar logo={space.logo.url.proxy} />
           <div
             style={{ maxWidth: '1920px' }}
