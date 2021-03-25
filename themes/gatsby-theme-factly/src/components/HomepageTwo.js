@@ -20,9 +20,9 @@ const HomePageTwo = ({ data }) => {
     .sort((a, b) => a.meta_fields.order - b.meta_fields.order);
   return (
     <>
-     <Helmet>
-      <link rel="canonical" href={`${dega.space.site_address}`}/>
-    </Helmet>
+      <Helmet>
+        <link rel="canonical" href={`${dega.space.site_address}`} />
+      </Helmet>
       <header
         sx={{
           display: 'grid',
