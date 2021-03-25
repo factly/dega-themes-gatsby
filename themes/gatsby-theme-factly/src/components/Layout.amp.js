@@ -32,7 +32,10 @@ const LayoutAmp = (props) => (
           <Seo
             title={`${space.name} ${space.tag_line}`}
             canonical={space.site_address}
-            image={`${space.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
+            image={
+              space.logo?.url?.proxy &&
+              `${space.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`
+            }
             description={space.description !== 'null' ? space.description : ''}
             icon={space.fav_icon.url.proxy}
           />
