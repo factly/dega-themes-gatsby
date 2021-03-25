@@ -3,11 +3,13 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import StoryCard from './StoryCard';
 import CategoriesGroup from './CategoriesGroup';
+import Seo from './Seo';
 
 function Homepage({ data }) {
   const { dega } = data;
   return (
     <>
+      <Seo title={dega.space.name} canonical={dega.space.site_address} type="website" />
       <div
         sx={{
           display: 'flex',

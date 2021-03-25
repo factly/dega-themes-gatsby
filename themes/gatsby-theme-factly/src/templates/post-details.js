@@ -95,6 +95,7 @@ const PostDetails = ({ data }) => {
         description={dega.post.excerpt ? dega.post.excerpt : ''}
         image={`${dega.post.medium?.url?.proxy}`}
         canonical={`${dega.space.site_address}/${dega.post.slug}`}
+        type="article"
       />
       <div sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         <div

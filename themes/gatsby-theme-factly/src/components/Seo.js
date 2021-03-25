@@ -1,7 +1,16 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-const Seo = ({ children, title = 'Factly', description = '', image, canonical, icon }) => (
+const Seo = ({
+  children,
+  title = 'Factly',
+  description = '',
+  image,
+  canonical,
+  icon,
+  type,
+  fbAppId,
+}) => (
   <Helmet
     title={title}
     meta={[
@@ -18,6 +27,14 @@ const Seo = ({ children, title = 'Factly', description = '', image, canonical, i
       description && {
         property: 'og:description',
         content: description,
+      },
+      type && {
+        property: 'og:type',
+        content: type,
+      },
+      fbAppId && {
+        property: 'fb:app_id',
+        content: fbAppId,
       },
     ].filter(Boolean)}
   >
