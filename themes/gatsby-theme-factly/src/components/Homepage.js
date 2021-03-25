@@ -4,11 +4,15 @@ import { jsx } from 'theme-ui';
 import Layout from './Layout';
 import StoryCard from './StoryCard';
 import CategoriesGroup from './CategoriesGroup';
+import { Helmet } from 'react-helmet';
 
 function Homepage({ data }) {
   const { dega } = data;
   return (
-    <Layout>
+    <>
+      <Helmet>
+        <link rel="canonical" href={`${dega.space.site_address}`} />
+      </Helmet>
       <div
         sx={{
           display: 'flex',
@@ -90,7 +94,7 @@ function Homepage({ data }) {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 export default Homepage;

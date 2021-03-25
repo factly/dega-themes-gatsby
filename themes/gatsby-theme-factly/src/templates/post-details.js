@@ -96,6 +96,8 @@ const PostDetails = ({ data }) => {
           rel="amphtml"
           href={typeof window !== 'undefined' ? window.location.href.concat('amp') : ''}
         /> */}
+
+        <link rel="canonical" href={`${dega.space.site_address}/${dega.post.slug}`} />
       </Helmet>
       <div sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         <div
@@ -273,6 +275,9 @@ export default PostDetails;
 export const query = graphql`
   query($id: Int!, $sid: [Int!]) {
     dega {
+      space {
+        site_address
+      }
       posts(page: 1, limit: 20, sortBy: "created_at", sortOrder: "desc", spaces: $sid) {
         nodes {
           created_at

@@ -25,6 +25,9 @@ export default Indexpage;
 export const query = graphql`
   query($format_factcheck: [Int!], $format_without_factcheck: [Int!], $sid: [Int!]) {
     dega {
+      space {
+        site_address
+      }
       categories(spaces: $sid, limit: 20, page: 1) {
         nodes {
           id

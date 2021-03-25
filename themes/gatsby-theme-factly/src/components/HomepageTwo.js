@@ -2,8 +2,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-
 // import '../static/css/main.scss';
+import { Helmet } from 'react-helmet';
 
 const HomePageTwo = ({ data }) => {
   const { dega } = data;
@@ -20,6 +20,9 @@ const HomePageTwo = ({ data }) => {
     .sort((a, b) => a.meta_fields.order - b.meta_fields.order);
   return (
     <>
+     <Helmet>
+      <link rel="canonical" href={`${dega.space.site_address}`}/>
+    </Helmet>
       <header
         sx={{
           display: 'grid',
