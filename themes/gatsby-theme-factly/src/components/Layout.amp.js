@@ -36,7 +36,7 @@ const LayoutAmp = (props) => (
               space.logo?.url?.proxy &&
               `${space.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`
             }
-            description={space.description !== 'null' ? space.description : ''}
+            description={space.description !== 'null' ? space.description : space.name}
             icon={space.fav_icon.url.proxy}
           />
           <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>

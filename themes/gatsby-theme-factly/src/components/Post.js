@@ -26,8 +26,6 @@ const Post = ({ post, observer }) => {
   return (
     <>
       <Helmet>
-        <title>{post.title}</title>
-        <meta name="description" content={post.excerpt} />
         {post.schemas.map((schema, i) => (
           <script key={i} type="application/ld+json">
             {JSON.stringify(schema)}
