@@ -24,7 +24,7 @@ const HomePageTwo = ({ data }) => {
       {/* <Helmet>
         <link rel="canonical" href={`${}`} />
       </Helmet> */}
-      <Seo title={dega.space.name} canonical={dega.space.site_address} type="website" />
+      <Seo title={dega.space.site_title} canonical={dega.space.site_address} type="website" />
       <header
         sx={{
           display: 'grid',

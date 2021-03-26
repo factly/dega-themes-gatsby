@@ -28,6 +28,7 @@ export const query = graphql`
     dega {
       space {
         site_address
+        site_title
         name
       }
       categories(spaces: $sid, limit: 20, page: 1) {

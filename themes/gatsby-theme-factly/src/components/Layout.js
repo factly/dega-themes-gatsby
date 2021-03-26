@@ -40,10 +40,10 @@ const Layout = (props) => (
       return (
         <>
           <Seo
-            title={`${space.name} - ${space.tag_line}`}
+            title={`${space.site_title} - ${space.tag_line}`}
             canonical={space.site_address}
             image={`${space.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
-            description={space.description !== 'null' ? space.description : space.name}
+            description={space.description !== 'null' ? space.description : space.site_title}
             fbAppId="587617254726291"
             fbPages="1521487944736293"
           >

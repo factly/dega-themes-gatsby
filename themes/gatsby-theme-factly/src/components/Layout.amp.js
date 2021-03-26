@@ -30,13 +30,13 @@ const LayoutAmp = (props) => (
       return (
         <>
           <Seo
-            title={`${space.name} ${space.tag_line}`}
+            title={`${space.site_title} ${space.tag_line}`}
             canonical={space.site_address}
             image={
               space.logo?.url?.proxy &&
               `${space.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`
             }
-            description={space.description !== 'null' ? space.description : space.name}
+            description={space.description !== 'null' ? space.description : space.site_title}
             icon={space.fav_icon.url.proxy}
           />
           <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>
@@ -46,7 +46,7 @@ const LayoutAmp = (props) => (
                   src={space.logo_mobile.url.proxy}
                   width="97"
                   height="54"
-                  alt={space.name}
+                  alt={space.site_title}
                   layout="fixed"
                 />
               </a>
