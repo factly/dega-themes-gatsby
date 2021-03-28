@@ -65,7 +65,7 @@ export const query = graphql`
             name
             slug
           }
-          created_at
+          published_date
           id
           excerpt
           status

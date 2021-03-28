@@ -276,9 +276,9 @@ export const query = graphql`
       space {
         site_address
       }
-      posts(page: 1, limit: 20, sortBy: "created_at", sortOrder: "desc", spaces: $sid) {
+      posts(page: 1, limit: 20, sortBy: "published_date", sortOrder: "desc", spaces: $sid) {
         nodes {
-          created_at
+          published_date
           description
           excerpt
           id
@@ -358,7 +358,7 @@ export const query = graphql`
         }
       }
       post(id: $id) {
-        created_at
+        published_date
         description
         excerpt
         id

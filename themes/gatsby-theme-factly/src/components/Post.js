@@ -56,7 +56,7 @@ const Post = ({ post, observer }) => {
               justifyContent: 'space-between',
             }}
           >
-            <Author date={post.created_at} users={post.users} categories={post.categories} />
+            <Author date={post.published_date} users={post.users} categories={post.categories} />
             <ShareButtonGroup
               setRef={headerSocialIcon}
               data={{
@@ -70,7 +70,9 @@ const Post = ({ post, observer }) => {
 
         <div sx={{ width: ['full'], mx: 'auto', fontSize: 4 }}>
           {post.claims && <FactCheckWidget claims={post.claims} />}
-          <div className="parsed">{parseEditorJsData(post.description, true)}</div>
+          <div className="parsed">
+            {parseEditorJsData({ content: post.description, scripts: true })}
+          </div>
           {post.claims &&
             post.claims.map((claim, i) => (
               <React.Fragment key={i}>
@@ -82,12 +84,14 @@ const Post = ({ post, observer }) => {
                     </div>
                     <div>
                       <h4 sx={{ fontWeight: 'bold' }}>Fact:</h4>
-                      {parseEditorJsData(claim.review, true)}
+                      {parseEditorJsData({ content: claim.review, scripts: true })}
                     </div>
                   </div>
                 )}
 
-                <div className="parsed">{parseEditorJsData(claim.description, true)}</div>
+                <div className="parsed">
+                  {parseEditorJsData({ content: claim.description, scripts: true })}
+                </div>
               </React.Fragment>
             ))}
           <div sx={{ display: 'flex', flexWrap: 'wrap', pb: 6, borderBottomWidth: '1px' }}>

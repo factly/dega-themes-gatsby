@@ -3,7 +3,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import InnerHTML from 'dangerously-set-html-content';
 import { jsx } from 'theme-ui';
 
-const parseEditorJsData = (content, scripts = false, amp = false) => {
+const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
   //  console.log(scripts, amp);
   const patterns = {
     youtube: [

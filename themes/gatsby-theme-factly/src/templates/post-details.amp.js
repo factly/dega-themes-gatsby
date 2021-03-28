@@ -35,7 +35,9 @@ const PostDetails = ({ data }) => {
           <strong>Excerpt</strong>
           <p>{post.excerpt}</p>
           <strong>Description</strong>
-          <div className="parsed">{parseEditorJsData(post.description, true, true)}</div>
+          <div className="parsed">
+            {parseEditorJsData({ content: post.description, scripts: true, amp: true })}
+          </div>
         </div>
       </article>
     </LayoutAmp>
@@ -48,7 +50,7 @@ export const query = graphql`
   query($id: Int!) {
     dega {
       post(id: $id) {
-        created_at
+        published_date
         description
         excerpt
         id

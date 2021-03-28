@@ -245,7 +245,9 @@ function FactCheckWidget({ claims }) {
                   >
                     <h2 sx={{ fontWeight: 'bold' }}>Fact: </h2>
 
-                    <div className="parsed">{parseEditorJsData(claim.review, true)}</div>
+                    <div className="parsed">
+                      {parseEditorJsData({ content: claim.review, scripts: true })}
+                    </div>
                   </div>
                 </div>
               </div>

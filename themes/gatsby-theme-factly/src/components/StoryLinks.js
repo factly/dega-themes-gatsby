@@ -58,7 +58,7 @@ const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
             {post.title}
           </div>
           <div>
-            <span sx={{ fontSize: 1 }}>{parseDate(post.created_at)}</span>
+            <span sx={{ fontSize: 1 }}>{parseDate(post.published_date)}</span>
           </div>
         </div>
       </Link>

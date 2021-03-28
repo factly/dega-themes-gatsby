@@ -33,7 +33,7 @@ function CategoryDetailsFormat({ data }) {
             px: 4,
           }}
         >
-          {parseEditorJsData(item.description)}
+          {parseEditorJsData({ content: item.description })}
         </div>
         {item.description && isReadMoreNeeded && (
           <button
@@ -99,7 +99,7 @@ export const query = graphql`
             alt_text
             url
           }
-          created_at
+          published_date
           id
           excerpt
           status

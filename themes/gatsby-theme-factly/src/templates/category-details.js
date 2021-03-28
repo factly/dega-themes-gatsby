@@ -36,7 +36,7 @@ function CategoryDetailsAll({ data }) {
             px: 4,
           }}
         >
-          {parseEditorJsData(item.description)}
+          {parseEditorJsData({ content: item.description })}
         </div>
         {item.description && isReadMoreNeeded && (
           <button
@@ -102,7 +102,7 @@ export const query = graphql`
             name
             slug
           }
-          created_at
+          published_date
           id
           excerpt
           status

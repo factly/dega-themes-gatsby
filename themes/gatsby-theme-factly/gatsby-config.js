@@ -131,7 +131,7 @@ module.exports = ({
                   {
                     title: post.title,
                     description: post.excerpt,
-                    date: post.created_at,
+                    date: post.published_date,
                     url: `${siteUrl}/${post.slug}`,
                     guid: `${siteUrl}/${post.slug}`,
                     custom_elements: [
@@ -154,7 +154,7 @@ module.exports = ({
                     description
                     title
                     slug
-                    created_at
+                    published_date
                   }
                 }
               }

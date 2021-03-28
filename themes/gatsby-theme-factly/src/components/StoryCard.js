@@ -125,7 +125,7 @@ const StoryCard = ({
                   </p>
                 </div>
                 <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, null, 1] }}>
-                  {parseDate(storyData.created_at)}
+                  {parseDate(storyData.published_date)}
                 </p>
               </div>
             </div>
@@ -229,7 +229,7 @@ const StoryCard = ({
               </p>
             </div>
             <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, null, 1] }}>
-              {parseDate(storyData.created_at)}
+              {parseDate(storyData.published_date)}
             </p>
           </div>
         </div>
@@ -332,7 +332,7 @@ const StoryCard = ({
                   </p>
                 </div>
                 <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: [0, null, 1] }}>
-                  {parseDate(storyData.created_at)}
+                  {parseDate(storyData.published_date)}
                 </p>
               </div>
             </div>
@@ -391,7 +391,7 @@ const StoryCard = ({
             <p sx={{ fontSize: 1, pt: 2, color: (theme) => `${theme.colors.gray[5]}` }}>
               <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}</span>
               {' | '}
-              <span>{parseDate(storyData.created_at)}</span>
+              <span>{parseDate(storyData.published_date)}</span>
             </p>
           </div>
         </article>
@@ -476,7 +476,7 @@ const StoryCard = ({
                   <span>/</span>
                 </>
               )}
-              <span>{parseDate(storyData.created_at)}</span>
+              <span>{parseDate(storyData.published_date)}</span>
             </div>
           </Link>
         </div>
@@ -546,7 +546,7 @@ const StoryCard = ({
                   <span>/</span>
                 </>
               )}
-              <span>{parseDate(storyData.created_at)}</span>
+              <span>{parseDate(storyData.published_date)}</span>
             </div>
           </Link>
         </div>
