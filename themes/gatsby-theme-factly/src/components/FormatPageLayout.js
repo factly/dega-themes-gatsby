@@ -7,6 +7,7 @@ import StoryCard from './StoryCard';
 
 const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {
   const slug = useSlug ? item.slug : item.id;
+  const filteredPosts = posts.filter(post => post.published_date !== null)
   const defaultHeader = (item) => (
     <h1 sx={{ textAlign: 'center', fontSize: [5, 6], mb: 4, textTransform: 'capitalize' }}>
       {item.name}
@@ -87,7 +88,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
               </ul>
             </div>
             {/* <Tabs baseUrl={`/categories/${dega.category.slug}`} /> */}
-            {posts.length > 0 ? (
+            {filteredPosts.length > 0 ? (
               <div
                 sx={{
                   display: 'grid',
@@ -95,7 +96,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
                   gridGap: '0.5rem',
                 }}
               >
-                {posts.map((item, index) => (
+                {filteredPosts.map((item, index) => (
                   <StoryCard
                     key={index}
                     cardStyle="iframely"
