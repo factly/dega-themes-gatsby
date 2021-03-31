@@ -7,14 +7,15 @@ import StoryCard from '../components/StoryCard';
 
 function FormatDetails({ data }) {
   const { dega } = data;
+  const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
   return (
     <Layout>
       <div sx={{ mx: 'auto', maxWidth: 1024 }}>
         <h1 sx={{ mt: '4.5rem', mb: 8, textAlign: 'center', fontSize: [5, 6] }}>
-          {dega.posts.nodes[0]?.format.name}
+          {filteredPosts[0]?.format.name}
         </h1>
         <div sx={{ display: 'flex', flexDirection: 'column', pb: 6, pt: [null, null, null, 8] }}>
-          {dega.posts.nodes.length > 0 ? (
+          {filteredPosts.length > 0 ? (
             <div
               sx={{
                 display: 'grid',
@@ -22,7 +23,7 @@ function FormatDetails({ data }) {
                 gridGap: '0.5rem',
               }}
             >
-              {dega.posts.nodes.map((item, index) => (
+              {filteredPosts.map((item, index) => (
                 <StoryCard
                   key={index}
                   cardStyle="iframely"

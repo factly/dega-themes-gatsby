@@ -44,7 +44,7 @@ exports.onPreBootstrap = ({ store }) => {
           recursive: true,
         })
         .catch(console.error);
-      await fs.writeFile(
+      fs.writeFile(
         path.join(__dirname, 'src/@factly/gatsby-theme-youtube/components/Layout.js'),
         `import Layout from '../../../components/Layout';\n\nexport default Layout;`,
         function (err) {
@@ -301,7 +301,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   // create post details page
 
   posts.data.dega.posts.nodes.forEach((post) => {
-    createPage({
+    if(post.published_date) {
+       createPage({
       path: `/${post.slug}`,
       component: require.resolve('./src/templates/post-details.js'),
       context: {
@@ -309,6 +310,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
         sid: client,
       },
     });
+    }
+   
     // createPage({
     //   path: `/${post.slug}/amp/`,
     //   component: require.resolve('./src/templates/post-details.amp.js'),
