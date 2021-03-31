@@ -18,8 +18,8 @@ import Seo from '../components/Seo';
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
-
-  const posts = dega.posts.nodes.filter((post) => post.id !== dega.post.id);
+  const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
+  const posts = filteredPosts.filter((post) => post.id !== dega.post.id);
   posts.unshift(dega.post);
 
   const [postItems, setPostItems] = React.useState(posts.slice(0, 1));
