@@ -141,6 +141,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     dega {
       posts(spaces:[${client}],limit:20,page:1) {
        nodes { id
+        published_date
         slug}
       }
     }
@@ -301,17 +302,18 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   // create post details page
 
   posts.data.dega.posts.nodes.forEach((post) => {
-    if(post.published_date) {
-       createPage({
-      path: `/${post.slug}`,
-      component: require.resolve('./src/templates/post-details.js'),
-      context: {
-        id: parseInt(post.id),
-        sid: client,
-      },
-    });
+    console.log(post);
+    if (post.published_date) {
+      createPage({
+        path: `/${post.slug}`,
+        component: require.resolve('./src/templates/post-details.js'),
+        context: {
+          id: parseInt(post.id),
+          sid: client,
+        },
+      });
     }
-   
+
     // createPage({
     //   path: `/${post.slug}/amp/`,
     //   component: require.resolve('./src/templates/post-details.amp.js'),
