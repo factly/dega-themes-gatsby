@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@factly/gatsby-theme-factly": "^1.0.3",
-    "gatsby": "^2.30.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "gatsby": "^3.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

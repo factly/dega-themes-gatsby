@@ -302,7 +302,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   // create post details page
 
   posts.data.dega.posts.nodes.forEach((post) => {
-    console.log(post);
     if (post.published_date) {
       createPage({
         path: `/${post.slug}`,

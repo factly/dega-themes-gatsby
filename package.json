@@ -24,7 +24,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format:check": "prettier --check \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
-    "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
+    "health": "yarn workspace factly-health",
+    "vidcheck": "yarn workspace vidcheck",
+    "youtube": "yarn workspace factly-youtube"
   },
   "husky": {
     "hooks": {
