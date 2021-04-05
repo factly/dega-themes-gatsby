@@ -7,7 +7,6 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import { FaPlay } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroller';
-// import styled from '@emotion/styled';
 import { navigate } from '@reach/router';
 import { jsx } from 'theme-ui';
 import Youtube from 'react-youtube';
@@ -36,9 +35,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
 
   if (playlist.snippet.title !== 'Uploads') {
     sortedVideos = playlist.videos
-      .map((video, i) => {
-        return { ...video, pos: positionsArr[i].position };
-      })
+      .map((video, i) => ({ ...video, pos: positionsArr[i].position }))
       .sort((a, b) => a.pos - b.pos);
   }
 
@@ -103,9 +100,8 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       setVideoListHeight(`${document.getElementsByClassName('main-content')[0].clientHeight}px`);
     }
   };
-  const handleAutoplay = (event) => {
-    return event.target.checked ? setAutoplayStatus(true) : setAutoplayStatus(false);
-  };
+  const handleAutoplay = (event) =>
+    event.target.checked ? setAutoplayStatus(true) : setAutoplayStatus(false);
 
   const onVideoEnd = async () => {
     if (autoplayStatus === true) {
@@ -119,7 +115,6 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
         }
       });
     }
-    console.log('video ended');
   };
   useEffect(() => {
     const videoIndex = sortedVideos.findIndex((video) => video.contentDetails.videoId === videoId);
@@ -318,7 +313,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     display: 'block',
                     p: 2,
                     px: [null, null, null, 4],
-                    bg: 'blue',
+                    bg: 'Ytblue',
                     color: 'white',
                     textTransform: 'uppercase',
                     textAlign: 'center',
@@ -359,7 +354,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             mt: [16, 16, 16, 0],
             mx: [null, null, null, 4],
             height: 'screenHeight',
-            borderWidth: 'px',
+            borderWidth: '1px',
             boxShadow: [null, null, null, 'md'],
           }}
         >
@@ -382,7 +377,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
             </div>
             <div sx={{ display: 'flex', alignSelf: 'center' }}>
               <p sx={{ fontSize: 2, px: 2 }}>Autoplay</p>
-              <label className="switch">
+              <label className="switch" htmlFor="autoplayStatus">
                 <input
                   type="checkbox"
                   name="autoplayStatus"
@@ -426,84 +421,98 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                   </div>
                 }
               >
-                {postItems.map((playlistVideo, index) => (
-                  <Link
-                    key={index}
-                    id={playlistVideo.id}
-                    className={`${activeVideo.videoIndex === index && 'video-active'}`}
-                    sx={{
-                      position: 'relative',
-                      display: 'flex',
-                      flexDirection: 'row',
-                      width: 'full',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      mb: 2,
-                      py: 2,
-                      textDecoration: 'none',
-                      ':hover': { textDecoration: 'none' },
-                    }}
-                    to={`/playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
-                  >
-                    <span sx={{ px: 2, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}>
-                      {activeVideo.videoIndex === index ? (
-                        <FaPlay size="1rem" sx={{ width: 2, height: 2, fill: 'currentColor' }} />
-                      ) : (
-                        index + 1
-                      )}
-                    </span>
-                    {playlistVideo.local ? (
-                      <Img
-                        alt={playlistVideo.snippet.title}
-                        fluid={playlistVideo.local.childImageSharp.fluid}
-                        sx={{ width: 20, height: 'full' }}
-                      />
-                    ) : (
-                      <img
-                        alt={playlistVideo.snippet.title}
-                        src={placeholderImg}
-                        sx={{ width: 20, height: 'full' }}
-                      />
-                    )}
-                    <div
-                      className="hidden flex"
+                {postItems &&
+                  postItems.map((playlistVideo, index) => (
+                    <Link
+                      key={index}
+                      id={playlistVideo.id}
+                      className={`${activeVideo.videoIndex === index && 'video-active'}`}
                       sx={{
-                        opacity: '0',
-                        ':hover': { opacity: '0.75' },
-                        display: 'none',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        p: 6,
-                        bg: 'black',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
+                        position: 'relative',
+                        display: 'flex',
+                        flexDirection: 'row',
                         width: 'full',
-                        height: 'full',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        mb: 2,
+                        py: 2,
+                        textDecoration: 'none',
+                        ':hover': { textDecoration: 'none' },
                       }}
+                      to={`${baseUrl}/playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
                     >
-                      <span sx={{ color: 'white', fontSize: 2 }}>Play</span>
-                    </div>
-                    <div sx={{ width: '4/5', display: 'flex', flexDirection: 'column', px: 2 }}>
+                      <span
+                        sx={{ px: 2, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}
+                      >
+                        {activeVideo.videoIndex === index ? (
+                          <FaPlay size="1rem" sx={{ width: 2, height: 2, fill: 'currentColor' }} />
+                        ) : (
+                          index + 1
+                        )}
+                      </span>
+                      {playlistVideo.local ? (
+                        <Img
+                          alt={playlistVideo.snippet.title}
+                          fluid={playlistVideo.local.childImageSharp.fluid}
+                          sx={{ width: 20, height: 'full' }}
+                        />
+                      ) : (
+                        <img
+                          alt={playlistVideo.snippet.title}
+                          src={placeholderImg}
+                          sx={{ width: 20, height: 'full' }}
+                        />
+                      )}
                       <div
-                        id="nav-0"
                         sx={{
+                          opacity: '0',
+                          ':hover': { opacity: '0.3' },
+                          display: 'none',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          p: 6,
+                          bg: 'black',
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
                           width: 'full',
-                          mb: 2,
-                          color: (theme) => `${theme.colors.gray[8]}`,
-                          fontWeight: 'bold',
-                          fontSize: 1,
-                          letterSpacing: 'tight',
+                          height: 'full',
                         }}
                       >
-                        {playlistVideo.snippet.title}
+                        <span sx={{ color: 'white', fontSize: 2 }}>
+                          <FaPlay
+                            size="1rem"
+                            sx={{
+                              width: 2,
+                              height: 2,
+                              fill: 'currentColor',
+                              display: 'inline-block',
+                              mx: 2,
+                            }}
+                          />{' '}
+                          Play
+                        </span>
                       </div>
-                      <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0 }}>
-                        {playlistVideo.snippet.channelTitle} - {playlistVideo.snippet.publishedAt}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
+                      <div sx={{ width: '4/5', display: 'flex', flexDirection: 'column', px: 2 }}>
+                        <div
+                          id="nav-0"
+                          sx={{
+                            width: 'full',
+                            mb: 2,
+                            color: (theme) => `${theme.colors.gray[8]}`,
+                            fontWeight: 'bold',
+                            fontSize: 1,
+                            letterSpacing: 'tight',
+                          }}
+                        >
+                          {playlistVideo.snippet.title}
+                        </div>
+                        <p sx={{ color: (theme) => `${theme.colors.gray[6]}`, fontSize: 0 }}>
+                          {playlistVideo.snippet.channelTitle} - {playlistVideo.snippet.publishedAt}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
               </InfiniteScroll>
             </div>
           </div>

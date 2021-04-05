@@ -3,8 +3,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
-
-// import styled from '@emotion/styled'
 import { jsx } from 'theme-ui';
 // import ShareButtonGroup from './ShareButtonGroup';
 import placeholderLogo from '../static/images/logo.png';
@@ -192,6 +190,6 @@ const Layout = ({ children, baseUrl, logo }) => {
       </main>
     </>
   );
-};;;
+};
 
 export default Layout;

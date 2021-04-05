@@ -34,7 +34,7 @@ const ShareModal = ({ title, url }) => {
           url,
         })
         .then(() => {
-          console.log('Thanks for sharing!');
+          console.log('Thank you for sharing!');
         })
         .catch(console.error);
     } else {
@@ -57,7 +57,7 @@ const ShareModal = ({ title, url }) => {
           p: 2,
           mr: 4,
           px: [null, null, null, 4],
-          bg: 'blue',
+          bg: 'Ytblue',
           color: 'white',
           textTransform: 'uppercase',
           textAlign: 'center',

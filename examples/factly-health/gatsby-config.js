@@ -5,7 +5,6 @@ require('dotenv').config({
 module.exports = {
   flags: {
     LAZY_IMAGES: true,
-    FAST_DEV: true,
     FAST_REFRESH: true,
   },
   plugins: [
@@ -15,9 +14,10 @@ module.exports = {
       options: {
         client: 8,
         homepage: 2,
+        siteUrl: 'https://health.factly.in',
         api: 'http://dega-api.factly.org/query',
-        youtube_api_key: process.env.GOOGLE_PRIVATE_KEY,
-        channel_id: process.env.CHANNEL_ID,
+        // youtubeApiKey: process.env.GOOGLE_PRIVATE_KEY,
+        // channelId: process.env.CHANNEL_ID,
       },
     },
   ],

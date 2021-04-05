@@ -1,10 +1,12 @@
-import React from 'react';
+/** @jsx jsx */
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookSquare,
   faTwitterSquare,
   faWhatsappSquare,
 } from '@fortawesome/free-brands-svg-icons';
+import { jsx } from 'theme-ui';
 
 /**
  * TODO: Add other social links like pinterest, reddit, tumblr, email
@@ -23,14 +25,25 @@ const ShareButtonGroup = ({ data, setRef }) => {
     <div
       social-icon=""
       ref={setRef}
-      className="flex flex-1 items-center justify-start md:justify-end"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: ['flex-start', null, 'flex-end'],
+      }}
     >
       <a
         title="Share on Facebook"
         href={`https://www.facebook.com/sharer.php?u=${data.url}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+        sx={{
+          display: 'block',
+          mx: 1,
+          '&:first-of-type': { ml: 0 },
+          my: 1,
+          fontWeight: 'semibold',
+          borderRadius: 'default',
+        }}
       >
         <FontAwesomeIcon color={brandColors.facebook} size="lg" icon={faFacebookSquare} />
       </a>
@@ -39,7 +52,14 @@ const ShareButtonGroup = ({ data, setRef }) => {
         href={`https://twitter.com/share?text=${title}-&url=${data.url}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+        sx={{
+          display: 'block',
+          mx: 1,
+          '&:first-of-type': { mx: 0 },
+          my: 1,
+          fontWeight: 'semibold',
+          borderRadius: 'default',
+        }}
       >
         <FontAwesomeIcon color={brandColors.twitter} size="lg" icon={faTwitterSquare} />
       </a>
@@ -48,7 +68,14 @@ const ShareButtonGroup = ({ data, setRef }) => {
         href={`https://api.whatsapp.com/send?text=${title}-${data.url}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+        sx={{
+          display: 'block',
+          mx: 1,
+          '&:first-of-type': { mx: 0 },
+          my: 1,
+          fontWeight: 'semibold',
+          borderRadius: 'default',
+        }}
       >
         <FontAwesomeIcon color={brandColors.whatsapp} size="lg" icon={faWhatsappSquare} />
       </a>

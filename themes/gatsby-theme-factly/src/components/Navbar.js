@@ -1,76 +1,159 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /** @jsx jsx */
-import React from 'react';
-import { StaticQuery, graphql, Link } from 'gatsby';
-import addDefaultSrc from '../utils/addDefaultSrc';
+import React, { useState, useEffect } from 'react';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-export default function Navbar({ logo }) {
-  return (
-    <StaticQuery
-      query={graphql`
-        query NavsQuery {
-          dega {
-            formats(spaces: 8) {
-              nodes {
-                id
-                slug
-                name
-              }
-            }
+import { FaHome, FaBars } from 'react-icons/fa';
+
+export default function NavBar({ logo }) {
+  const data = useStaticQuery(graphql`
+    query NavTQuery {
+      dega {
+        menu {
+          nodes {
+            menu
+            id
+            slug
+            name
           }
         }
-      `}
-      render={(data) => (
-        <React.Fragment>
-          <div
-            className="fixed top-0 inset-x-0 bg-white border-b border-gray-300 z-10"
-            sx={{ zIndex: '9999' }}
+      }
+    }
+  `);
+
+  const menu = data.dega.menu.nodes.filter((i) => i.slug === 'main')[0];
+  const [showMenu, setShowMenu] = useState(false);
+  const [width, setWidth] = useState(0);
+
+  const updateWidth = () => {
+    const windowWidth = window.innerWidth;
+    setWidth(windowWidth);
+  };
+
+  useEffect(() => {
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    if (width >= 1024) {
+      setShowMenu(true);
+    } else {
+      setShowMenu(false);
+    }
+    return () => window.removeEventListener('resize', updateWidth);
+  }, [width]);
+
+  const handleClick = () => {
+    setShowMenu((prevState) => !prevState);
+  };
+  return (
+    <React.Fragment>
+      <div sx={{ position: 'fixed', zIndex: '9999', top: 0, left: 0, right: 0, bg: 'white' }}>
+        <nav
+          sx={{
+            position: 'sticky',
+            display: 'flex',
+            flexWrap: ['wrap', null, null, 'wrap'],
+            alignItems: 'center',
+            justifyContent: ['space-between', null, null, 'flex-start'],
+            px: 4,
+            py: 2,
+            borderBottomWidth: '1px',
+          }}
+        >
+          <Link
+            to="/"
+            sx={{
+              position: ['relative', null, null, 'absolute'],
+              transform: ['none', null, null, 'translate(-50%,-50%)'],
+              top: [null, null, null, '50%'],
+              left: [null, null, null, '50%'],
+              zIndex: 999,
+            }}
           >
-            <header className="flex item-center justify-between border-b  border-gray-100 p-2 text-sm font-semibold text-gray-800">
-              <nav className="flex flex-grow items-center justify-between px-0 lg:px-4 py-3 sm:p-0">
-                <div className="flex flex-1 order-2 lg:order-1 items-center justify-end lg:justify-start">
-                  {data.dega.formats.nodes.map((tab, index) => {
-                    return (
-                      <Link
-                        key={'navbar-' + index}
-                        to={`/formats/${tab.slug}`}
-                        className="block px-2 lg:px-4 order-3 lg:order-4 uppercase font-semibold focus:outline-none"
-                      >
-                        {tab.name}
-                      </Link>
-                    );
-                  })}
+            <img sx={{ height: 8, mx: [null, null, null, 'auto'] }} src={logo} alt="factly" />
+          </Link>
+          <button
+            type="button"
+            sx={{ display: [null, null, null, 'none'] }}
+            onClick={() => handleClick()}
+          >
+            <FaBars />
+          </button>
+          <div
+            sx={{
+              display: showMenu ? 'flex' : 'none',
+              zIndex: 998,
+              position: 'relative',
+              flexDirection: ['column', null, null, 'row'],
+              flexGrow: 1,
+              alignItems: 'center',
+              flexBasis: '100%',
+              overflow: 'hidden',
+            }}
+          >
+            <ul
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: ['column', null, null, 'row'],
+                listStyle: 'none',
+              }}
+            >
+              <li sx={{ display: ['none', null, null, 'block'] }}>
+                <Link to="/" sx={{ px: [2, null, null, null, 4], display: 'block', py: 2 }}>
+                  <FaHome />
+                </Link>
+              </li>
+
+              {menu?.menu.map((menuItem, index) => (
+                <li key={menuItem.title}>
                   <Link
-                    to="/videos"
-                    className="block px-2 lg:px-4 order-3 lg:order-4 uppercase font-semibold focus:outline-none"
+                    key={`navbar-${index}`}
+                    to={menuItem.url}
+                    titile={menuItem.title}
+                    sx={{
+                      px: [2, null, null, null, 4],
+                      display: 'block',
+                      py: 2,
+                      textTransform: 'uppercase',
+                      fontWeight: 'semibold',
+                      fontSize: ['0.675rem', 1],
+                      '&:focus': { outline: 'none' },
+                    }}
                   >
-                    Videos
+                    {menuItem.name}
                   </Link>
-                </div>
-                <div className="order-1 lg:order-2">
-                  <Link to="/">
-                    <img className="h-8" src={logo} alt="factly" onError={addDefaultSrc}></img>
-                  </Link>
-                </div>
-                <div className="hidden lg:order-3 lg:flex flex-1 items-center justify-end">
-                  <Link
-                    to="/about"
-                    className="block px-2 lg:px-4 uppercase font-semibold focus:outline-none"
-                  >
-                    About Us
-                  </Link>
-                  <button
-                    type="button"
-                    className="block lg:px-4 uppercase font-semibold focus:outline-none bg-gray-300 rounded p-2"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </nav>
-            </header>
+                </li>
+              ))}
+            </ul>
+            <ul
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: ['column', null, null, 'row'],
+                listStyle: 'none',
+                ml: [null, null, null, 'auto'],
+              }}
+            >
+              <li>
+                <Link
+                  to="/about"
+                  sx={{
+                    px: [2, null, null, null, 4],
+                    display: 'block',
+                    py: 2,
+                    textTransform: 'uppercase',
+                    fontWeight: 'semibold',
+                    fontSize: ['0.675rem', 1],
+                    '&:focus': { outline: 'none' },
+                  }}
+                >
+                  About Us
+                </Link>
+              </li>
+            </ul>
           </div>
-        </React.Fragment>
-      )}
-    />
+        </nav>
+      </div>
+    </React.Fragment>
   );
 }

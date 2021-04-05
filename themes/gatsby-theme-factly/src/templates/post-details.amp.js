@@ -1,6 +1,8 @@
-import React from 'react';
+/** @jsx jsx */
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
+import { jsx } from 'theme-ui';
 import parseEditorJsData from '../utils/parseEditorJsData';
 import LayoutAmp from '../components/Layout.amp';
 
@@ -20,7 +22,7 @@ const PostDetails = ({ data }) => {
         {/* <script async custom-element="amp-pinterest" src="https://cdn.ampproject.org/v0/amp-pinterest-0.1.js"></script> */}
       </Helmet>
       <article>
-        <h1 className="text-4xl">
+        <h1 sx={{ fontSize: 7 }}>
           <strong>{post.title}</strong>
         </h1>
         {post.users.map((user, i, arr) => (
@@ -33,7 +35,9 @@ const PostDetails = ({ data }) => {
           <strong>Excerpt</strong>
           <p>{post.excerpt}</p>
           <strong>Description</strong>
-          <div className="parsed">{parseEditorJsData(post.description, 'true')}</div>
+          <div className="parsed">
+            {parseEditorJsData({ content: post.description, scripts: true, amp: true })}
+          </div>
         </div>
       </article>
     </LayoutAmp>
@@ -46,7 +50,7 @@ export const query = graphql`
   query($id: Int!) {
     dega {
       post(id: $id) {
-        created_at
+        published_date
         description
         excerpt
         id

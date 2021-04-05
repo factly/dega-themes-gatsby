@@ -1,23 +1,40 @@
-import React from 'react';
+/** @jsx jsx */
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
+import { jsx } from 'theme-ui';
 
-const Categories = ({ categories }) => {
-  return (
-    categories &&
-    categories.map((category, index) => (
-      <div
-        key={'categories' + index}
-        className="flex flex-col leading-tight border-b last:border-b-0 py-2 border-gray-200"
+const Categories = ({ categories }) =>
+  categories &&
+  categories.map((category, index) => (
+    <div
+      key={`categories${index}`}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        lineHeight: 'tight',
+        py: 2,
+        borderBottomWidth: '1px',
+        '&:last-child': {
+          borderBottomWidth: 0,
+        },
+        borderColor: (theme) => `${theme.colors.gray[2]}`,
+      }}
+    >
+      <Link
+        to={`/categories/${category.slug}`}
+        sx={{
+          width: 'full',
+          display: 'flex',
+          textDecoration: 'none',
+          '&:hover': { textDecoration: 'none' },
+          fontWeight: 'bold',
+          fontSize: 2,
+          color: (theme) => `${theme.colors.gray[8]}`,
+        }}
       >
-        <Link
-          to={`/categories/${category.slug}`}
-          className="w-full flex no-underline hover:no-underline font-bold  text-base text-gray-800"
-        >
-          {category.name}
-        </Link>
-      </div>
-    ))
-  );
-};
+        {category.name}
+      </Link>
+    </div>
+  ));
 
 export default Categories;

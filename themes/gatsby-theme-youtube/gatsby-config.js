@@ -2,7 +2,6 @@ module.exports = ({ apiKey, channelId, trackingId, favicon }) => ({
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-theme-ui`,
-    `gatsby-plugin-emotion`,
     {
       resolve: `@factly/gatsby-source-youtube`,
       options: {

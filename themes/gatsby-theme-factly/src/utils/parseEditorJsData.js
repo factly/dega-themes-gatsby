@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import InnerHTML from 'dangerously-set-html-content';
 import { jsx } from 'theme-ui';
 
-const parseEditorJsData = (content, amp = false) => {
+const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
+  //  console.log(scripts, amp);
   const patterns = {
     youtube: [
       /^https?:\/\/(?:www\.)?youtube\.com\/(?:tv#\/)?watch\/?\?(?:[^&]+&)*v=([a-zA-Z0-9_-]+)/i,
@@ -163,39 +164,48 @@ const parseEditorJsData = (content, amp = false) => {
             style = data.style === 'unordered' ? 'ul' : 'ol';
             ListTag = `${style}`;
             list = data.items
-              .map((listItem, i) => <li key={i}> {listItem} </li>)
+              .map((listItem, i) => (
+                <li key={i} dangerouslySetInnerHTML={{ __html: listItem }}></li>
+              ))
               .reduce((a, c) => [a, '', c]);
           }
 
           switch (block.type) {
             case 'header':
               return (
-                <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ py: 3 }} />
+                <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ my: 4 }} />
               );
             case 'paragraph':
               return (
                 <p
                   key={i}
                   dangerouslySetInnerHTML={{ __html: data.text }}
-                  sx={{ py: 3, wordBreak: 'break-word' }}
+                  sx={{ my: 4, wordBreak: 'break-word' }}
                 />
               );
 
             case 'list':
               return (
-                <ListTag sx={{ listStylePosition: 'inside', listStyleType: 'disc', pl: 4 }} key={i}>
+                <ListTag
+                  sx={{ listStylePosition: 'outside', listStyleType: 'disc', pl: 10 }}
+                  key={i}
+                >
                   {list}
                 </ListTag>
               );
             case 'uppy':
               return (
-                <React.Fragment key={i}>
-                  <img sx={{ mx: 'auto', py: 4 }} src={data.url.raw} alt={data.alt_text} />
-                  {data.caption && <p className="img-caption">{data.caption}</p>}
-                </React.Fragment>
+                <figure key={i}>
+                  <img sx={{ mx: 'auto', py: 4 }} src={data.url.proxy} alt={data.alt_text} />
+                  {data.caption && <figcaption>{data.caption}</figcaption>}
+                </figure>
               );
 
             case 'embed':
+              // eslint-disable-next-line no-nested-ternary
+              if (!scripts) {
+                return <div className="embeds" dangerouslySetInnerHTML={{ __html: data.html }} />;
+              }
               return amp ? (
                 ampify(data, i)
               ) : (
@@ -203,9 +213,9 @@ const parseEditorJsData = (content, amp = false) => {
               );
 
             case 'raw':
-              return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} sx={{ py: 3 }} />;
+              return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} sx={{ py: 4 }} />;
             case 'code':
-              return <code sx={{ py: 3 }}>{data.code}</code>;
+              return <code sx={{ py: 4 }}>{data.code}</code>;
             default:
               break;
           }

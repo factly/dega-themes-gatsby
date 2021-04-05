@@ -69,7 +69,7 @@ function Footer({ className }) {
               <a href="/">
                 <img
                   sx={{ height: 8 }}
-                  src={logo.url.raw}
+                  src={logo.url.proxy}
                   alt="factly"
                   onError={addDefaultSrc}
                 ></img>

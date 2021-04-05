@@ -1,7 +1,7 @@
+/** @jsx jsx */
 import React from 'react';
 import { graphql } from 'gatsby';
 import InfiniteScroll from 'react-infinite-scroller';
-import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookSquare,
@@ -9,15 +9,17 @@ import {
   faWhatsappSquare,
 } from '@fortawesome/free-brands-svg-icons';
 
+import { jsx } from 'theme-ui';
 import Post from '../components/Post';
 import StoryLinks from '../components/StoryLinks';
 import Layout from '../components/Layout';
 import { isBrowser } from '../utils/isBrowser';
+import Seo from '../components/Seo';
 
 const PostDetails = ({ data }) => {
   const { dega } = data;
-
-  const posts = dega.posts.nodes.filter((post) => post.id !== dega.post.id);
+  const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
+  const posts = filteredPosts.filter((post) => post.id !== dega.post.id);
   posts.unshift(dega.post);
 
   const [postItems, setPostItems] = React.useState(posts.slice(0, 1));
@@ -81,20 +83,35 @@ const PostDetails = ({ data }) => {
   }, []);
   // for sharing links
   const title = encodeURIComponent(dega.post.title);
-  const url = isBrowser ? window.location.href : dega.post.slug;
+  let url;
+  if (isBrowser) {
+    url = encodeURIComponent(window.location.href);
+  }
+
   return (
     <Layout>
-      <Helmet>
-        <title>{dega.post.title}</title>
-        {/* <link
-          rel="amphtml"
-          href={typeof window !== 'undefined' ? window.location.href.concat('amp') : ''}
-        /> */}
-      </Helmet>
-      <div className="flex flex-row justify-between">
-        <div className="sidebar lg:flex lg:w-1/4 border-r border-l sticky">
-          <div className="mb-4 pb-4 border-b px-6">
-            <h5 className="heading">Recent Posts</h5>
+      <Seo
+        title={dega.post.title}
+        description={dega.post.excerpt ? dega.post.excerpt : ''}
+        image={`${dega.post.medium?.url?.proxy}`}
+        canonical={`${dega.space.site_address}/${dega.post.slug}`}
+        type="article"
+      />
+      <div sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <div
+          className="sidebar"
+          sx={{
+            display: [null, null, null, 'flex'],
+            width: [null, null, null, '1/4'],
+            borderRightWidth: 'px',
+            borderLeftWidth: 'px',
+            position: 'sticky',
+          }}
+        >
+          <div sx={{ pb: 4, borderBottomWidth: 'px', px: 6 }}>
+            <h5 className="heading" sx={{ m: 0 }}>
+              Recent Posts
+            </h5>
           </div>
           <InfiniteScroll
             pageStart={0}
@@ -109,7 +126,7 @@ const PostDetails = ({ data }) => {
           >
             {relatedPosts.map((post, index) => (
               <StoryLinks
-                key={'link' + post.id}
+                key={`link${post.id}`}
                 post={post}
                 postActiveIndex={postActiveIndex}
                 categories
@@ -118,7 +135,14 @@ const PostDetails = ({ data }) => {
             ))}
           </InfiniteScroll>
         </div>
-        <div className="flex flex-col w-full lg:w-3/4 p-2 lg:p-6">
+        <div
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: ['full', null, null, '3/4'],
+            p: [2, null, null, 6],
+          }}
+        >
           <InfiniteScroll
             pageStart={0}
             loadMore={handleLoadMore}
@@ -130,14 +154,23 @@ const PostDetails = ({ data }) => {
             }
           >
             {postItems.map((item) => (
-              <Post key={'details' + item.id} post={item} observer={observer} />
+              <Post key={`details${item.id}`} post={item} observer={observer} />
             ))}
           </InfiniteScroll>
           {showSocialIcon && (
             <>
               <div
-                className="hidden md:flex flex-col fixed right-0 top-auto items-center justify-start md:justify-end"
+                className="top-auto"
                 style={{
+                  top: '40vh',
+                }}
+                sx={{
+                  display: ['none', null, 'flex'],
+                  flexDirection: 'column',
+                  position: 'fixed',
+                  right: 0,
+                  alignItems: 'center',
+                  justifyContent: ['flex-start', null, 'flex-end'],
                   top: '40vh',
                 }}
               >
@@ -146,7 +179,14 @@ const PostDetails = ({ data }) => {
                   href={`https://www.facebook.com/sharer.php?u=${url}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+                  sx={{
+                    display: 'block',
+                    mx: 2,
+                    '&:first-of-type': { mx: 0 },
+                    my: 1,
+                    fontWeight: 'semibold',
+                    borderRadius: 'default',
+                  }}
                 >
                   <FontAwesomeIcon color="#3b5998" size="lg" icon={faFacebookSquare} />
                 </a>
@@ -155,7 +195,14 @@ const PostDetails = ({ data }) => {
                   href={`https://twitter.com/share?text=${title}-&url=${url}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+                  sx={{
+                    display: 'block',
+                    mx: 2,
+                    '&:first-of-type': { mx: 0 },
+                    my: 1,
+                    fontWeight: 'semibold',
+                    borderRadius: 'default',
+                  }}
                 >
                   <FontAwesomeIcon color="#1da1f2" size="lg" icon={faTwitterSquare} />
                 </a>
@@ -164,14 +211,33 @@ const PostDetails = ({ data }) => {
                   href={`https://api.whatsapp.com/send?text=${title}-${url}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block mx-2 first:mx-0 my-2 font-semibold rounded "
+                  sx={{
+                    display: 'block',
+                    mx: 2,
+                    '&:first-of-type': { mx: 0 },
+                    my: 1,
+                    fontWeight: 'semibold',
+                    borderRadius: 'default',
+                  }}
                 >
                   <FontAwesomeIcon color="#25d366" size="lg" icon={faWhatsappSquare} />
                 </a>
               </div>
-              <div className="lg:hidden fixed m-2 bottom-0 right-0">
+              <div
+                sx={{
+                  display: [null, null, null, 'none'],
+                  position: 'fixed',
+                  m: 2,
+                  bottom: 0,
+                  right: 0,
+                }}
+              >
                 <svg
-                  className="fill-current stroke-current text-gray-400"
+                  sx={{
+                    fill: 'currentColor',
+                    stroke: 'currentColor',
+                    color: (theme) => `${theme.colors.gray[4]}`,
+                  }}
                   xmlns="http://www.w3.org/2000/svg"
                   width="36"
                   height="36"
@@ -207,9 +273,12 @@ export default PostDetails;
 export const query = graphql`
   query($id: Int!, $sid: [Int!]) {
     dega {
-      posts(page: 1, limit: 20, sortBy: "created_at", sortOrder: "desc", spaces: $sid) {
+      space {
+        site_address
+      }
+      posts(page: 1, limit: 20, sortBy: "published_date", sortOrder: "desc", spaces: $sid) {
         nodes {
-          created_at
+          published_date
           description
           excerpt
           id
@@ -224,6 +293,7 @@ export const query = graphql`
             first_name
             last_name
             id
+            slug
           }
           tags {
             id
@@ -288,7 +358,7 @@ export const query = graphql`
         }
       }
       post(id: $id) {
-        created_at
+        published_date
         description
         excerpt
         id

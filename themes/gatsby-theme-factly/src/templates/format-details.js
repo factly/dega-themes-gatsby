@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
 import Layout from '../components/Layout';
@@ -7,14 +7,15 @@ import StoryCard from '../components/StoryCard';
 
 function FormatDetails({ data }) {
   const { dega } = data;
+  const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
   return (
     <Layout>
-      <div className="mx-auto" style={{ maxWidth: '1024px' }}>
-        <h1 sx={{ marginTop: '4.5rem', textAlign: 'center', fontSize: [5, 6] }}>
-          {dega.posts.nodes[0].format.name}
+      <div sx={{ mx: 'auto', maxWidth: 1024 }}>
+        <h1 sx={{ mt: '4.5rem', mb: 8, textAlign: 'center', fontSize: [5, 6] }}>
+          {filteredPosts[0]?.format.name}
         </h1>
-        <div className="flex flex-col pb-6 lg:pt-8">
-          {dega.posts.nodes.length > 0 ? (
+        <div sx={{ display: 'flex', flexDirection: 'column', pb: 6, pt: [null, null, null, 8] }}>
+          {filteredPosts.length > 0 ? (
             <div
               sx={{
                 display: 'grid',
@@ -22,12 +23,12 @@ function FormatDetails({ data }) {
                 gridGap: '0.5rem',
               }}
             >
-              {dega.posts.nodes.map((item, index) => (
+              {filteredPosts.map((item, index) => (
                 <StoryCard
                   key={index}
                   cardStyle="iframely"
                   storyData={item}
-                  excerpt
+                  excerpt={item.format.slug !== 'fact-check'}
                   imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-4"
                 />
               ))}
@@ -63,8 +64,9 @@ export const query = graphql`
           }
           format {
             name
+            slug
           }
-          created_at
+          published_date
           id
           excerpt
           status

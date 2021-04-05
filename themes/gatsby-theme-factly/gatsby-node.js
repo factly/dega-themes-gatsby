@@ -1,25 +1,59 @@
 const fs = require('fs');
+const fse = require('fs-extra');
+const path = require('path');
 const fetch = require('node-fetch');
 const mkdirp = require('mkdirp');
+
+const { createSchemaCustomization } = require('./utils/youtubeSourceSchema');
+
+exports.createSchemaCustomization = createSchemaCustomization;
 
 const saveIcon = async (url) => {
   await fetch(url)
     .then((res) => res.buffer())
-    .then((buffer) =>
-      fs.writeFile('../static/Icons/favicon.png', buffer, () =>
-        console.log('finished loading favicon to src icons'),
-      ),
+    .then(
+      (buffer) =>
+        fse.outputFile('src/favicons/favicon.png', buffer, (err) => {
+          console.log(err); // => null
+          // file has now been created, including the directory it is to be placed in
+        }),
+
+      // fse.writeFile('/src/static/Icons/favicon.png', buffer, (res) =>
+      //   console.log('Downloaded Favicon ', res),
+      // ),
     );
-  return;
 };
 
 exports.onPreBootstrap = ({ store }) => {
-  const { program } = store.getState();
-  const dir = `${program.directory}/src/Icons`;
-  console.log(`ensuring ${dir} exists`);
-  if (!fs.existsSync(dir)) {
-    console.log(`creating ${dir}`);
-    mkdirp.sync(dir);
+  const { flattenedPlugins } = store.getState();
+  // const dir = `${program.directory}/src/Icons`;
+  // console.log(`ensuring ${dir} exists`);
+  // if (!fs.existsSync(dir)) {
+  //   console.log(`creating ${dir}`);
+  //   mkdirp.sync(dir);
+  // }
+
+  const youtubePlugin = flattenedPlugins.find(
+    (plugin) => plugin.name === '@factly/gatsby-theme-youtube',
+  );
+  if (youtubePlugin) {
+    console.log('fount it');
+    const createShadowComponent = async () => {
+      await fs.promises
+        .mkdir(path.join(__dirname, '/src/@factly/gatsby-theme-youtube/components'), {
+          recursive: true,
+        })
+        .catch(console.error);
+      fs.writeFile(
+        path.join(__dirname, 'src/@factly/gatsby-theme-youtube/components/Layout.js'),
+        `import Layout from '../../../components/Layout';\n\nexport default Layout;`,
+        function (err) {
+          if (err) throw err;
+          console.log('Saved! youtube theme shoadowing');
+        },
+      );
+    };
+    createShadowComponent();
   }
 };
 
@@ -84,7 +118,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   const categories = await graphql(`
   query CategoriesQuery {
     dega {
-      categories(spaces:[${client}]) {
+      categories(spaces:[${client}], limit: 20, page: 1) {
        nodes { id
         slug}
       }
@@ -107,6 +141,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     dega {
       posts(spaces:[${client}],limit:20,page:1) {
        nodes { id
+        published_date
         slug}
       }
     }
@@ -151,6 +186,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
           }
           users {
             id
+            slug
           }
           posts {
             id
@@ -165,8 +201,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     }
   `);
 
-  var format_factcheck = [];
-  var format_without_factcheck = [];
+  const format_factcheck = [];
+  const format_without_factcheck = [];
 
   formats.data.dega.formats.nodes
     .filter((item) => item.slug === 'fact-check')
@@ -190,9 +226,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   //     format_without_factcheck.push(parseInt(item.id));
   //   });
   // manifest
-  let icon;
 
-  icon = result.data.dega.space.fav_icon.url.raw;
+  const icon = result.data.dega.space.fav_icon.url.proxy;
   if (icon) {
     saveIcon(icon);
   } else {
@@ -200,48 +235,47 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   }
 
   const state = store.getState();
-
   const plugin = state.flattenedPlugins.find((plugin) => plugin.name === 'gatsby-plugin-manifest');
 
-  const resolveManifestOptions = (data) => {
-    return {
-      name: data.name,
-      short_name: data.name,
-      start_url: '/',
-      background_color: '#ffffff',
-      theme_color: `#ffffff`,
-      display: `minimal-ui`,
-      icon: '/Icons/favicon.png',
-    };
-  };
+  const resolveManifestOptions = (data) => ({
+    name: data.name,
+    short_name: data.name,
+    start_url: '/',
+    background_color: '#ffffff',
+    theme_color: `#ffffff`,
+    display: `minimal-ui`,
+    icon: 'src/favicons/favicon.png',
+  });
   if (plugin) {
     const manifestOptions = await resolveManifestOptions(result.data.dega.space);
     plugin.pluginOptions = { ...plugin.pluginOptions, ...manifestOptions };
+    console.log(plugin.pluginOptions);
   }
+
   // homepage
-  if (homepage === 1) {
-    console.log('homepage v1');
-    createPage({
-      path: '/',
-      component: require.resolve('./src/templates/homepage.js'),
-      context: {
-        format_factcheck,
-        format_without_factcheck,
-        sid: client,
-      },
-    });
-  }
-  if (homepage === 2) {
-    console.log('homepage v2');
-    createPage({
-      path: '/',
-      component: require.resolve('./src/templates/homepageTwo.js'),
-      context: {
-        sid: [client],
-        homepage,
-      },
-    });
-  }
+
+  createPage({
+    path: '/',
+    component: require.resolve('./src/templates/homepage.js'),
+    context: {
+      format_factcheck,
+      format_without_factcheck,
+      sid: client,
+      homepage,
+    },
+  });
+
+  // if (homepage === 2) {
+  //   console.log('creating homepage v2');
+  //   createPage({
+  //     path: '/',
+  //     component: require.resolve('./src/templates/homepageTwo.js'),
+  //     context: {
+  //       sid: client,
+  //       homepage,
+  //     },
+  //   });
+  // }
 
   formats.data.dega.formats.nodes.forEach((format) => {
     createPage({
@@ -268,22 +302,25 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   // create post details page
 
   posts.data.dega.posts.nodes.forEach((post) => {
-    createPage({
-      path: `/${post.slug}`,
-      component: require.resolve('./src/templates/post-details.js'),
-      context: {
-        id: parseInt(post.id),
-        sid: client,
-      },
-    });
-    createPage({
-      path: `/${post.slug}/amp/`,
-      component: require.resolve('./src/templates/post-details.amp.js'),
-      context: {
-        id: parseInt(post.id),
-        sid: client,
-      },
-    });
+    if (post.published_date) {
+      createPage({
+        path: `/${post.slug}`,
+        component: require.resolve('./src/templates/post-details.js'),
+        context: {
+          id: parseInt(post.id),
+          sid: client,
+        },
+      });
+    }
+
+    // createPage({
+    //   path: `/${post.slug}/amp/`,
+    //   component: require.resolve('./src/templates/post-details.amp.js'),
+    //   context: {
+    //     id: parseInt(post.id),
+    //     sid: client,
+    //   },
+    // });
   });
 
   // create tag details page

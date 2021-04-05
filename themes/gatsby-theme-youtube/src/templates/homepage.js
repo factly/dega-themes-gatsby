@@ -68,6 +68,7 @@ const IndexPage = ({ data, pageContext }) => {
         <title>{channel.snippet.title}</title>
         <meta name="description" content={channel.snippet.description} />
         <meta name="image" content={channel.snippet.thumbnails.high.url} />
+        <meta name="og:image" content={channel.snippet.thumbnails.high.url} />
         <script type="application/ld+json">{JSON.stringify(schemaVideoList)}</script>
       </Helmet>
       <div
@@ -138,7 +139,7 @@ const IndexPage = ({ data, pageContext }) => {
                     color: 'white',
                     ':focus': { outline: 'none' },
                     ':hover': { color: 'white', bg: 'lightBlue' },
-                    bg: 'blue',
+                    bg: 'Ytblue',
                     borderRadius: 'default',
                   }}
                 >
@@ -179,7 +180,7 @@ const IndexPage = ({ data, pageContext }) => {
                     key={i}
                     className={`${activeTab[tab] && 'bg-white'}`}
                     sx={{
-                      borderWidth: 'px',
+                      borderWidth: '1px',
                       borderBottomWidth: '0',
                       display: 'inline-block',
                       py: 2,
@@ -201,6 +202,7 @@ const IndexPage = ({ data, pageContext }) => {
           </div>
           {activeTab.Home && (
             <div>
+              {/* console.log(allChannelSections) */}
               {allChannelSections.nodes.map((channelSection, i) => {
                 const playlistId =
                   channelSection.playlist.id === channel.contentDetails.relatedPlaylists.uploads
@@ -302,7 +304,12 @@ const IndexPage = ({ data, pageContext }) => {
                             </div>
                           </div>
                           <div
-                            sx={{ width: 'full', display: 'flex', flexDirection: 'column', py: 2 }}
+                            sx={{
+                              width: 'full',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              py: 2,
+                            }}
                           >
                             <div
                               id="nav-0"
@@ -590,7 +597,7 @@ export const query = graphql`
       local {
         childImageSharp {
           fluid(maxWidth: 300, quality: 100) {
-            ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -625,7 +632,7 @@ export const query = graphql`
           local {
             childImageSharp {
               fluid(maxWidth: 300, quality: 100) {
-                ...GatsbyImageSharpFluid_withWebp
+                ...GatsbyImageSharpFluid
               }
             }
           }
@@ -650,7 +657,7 @@ export const query = graphql`
         local {
           childImageSharp {
             fluid(maxWidth: 300, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
+              ...GatsbyImageSharpFluid
             }
           }
         }
@@ -689,7 +696,7 @@ export const query = graphql`
         local {
           childImageSharp {
             fluid(maxWidth: 300, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
+              ...GatsbyImageSharpFluid
             }
           }
         }
