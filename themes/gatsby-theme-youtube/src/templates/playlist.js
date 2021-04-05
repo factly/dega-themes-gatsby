@@ -7,7 +7,6 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import { FaPlay } from 'react-icons/fa';
 import InfiniteScroll from 'react-infinite-scroller';
-// import styled from '@emotion/styled';
 import { navigate } from '@reach/router';
 import { jsx } from 'theme-ui';
 import Youtube from 'react-youtube';
