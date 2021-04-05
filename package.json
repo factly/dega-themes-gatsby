@@ -27,7 +27,8 @@
     "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
     "health": "yarn workspace factly-health",
     "vidcheck": "yarn workspace vidcheck",
-    "youtube": "yarn workspace factly-youtube"
+    "youtube": "yarn workspace factly-youtube",
+    "source-vidcheck": "yarn workspace gatsby-source-vidcheck"
   },
   "husky": {
     "hooks": {
