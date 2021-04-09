@@ -36,18 +36,35 @@ function UserDetailsFormat({ data }) {
       ? `${item.display_name}`
       : `${item.first_name} ${item.last_name}`;
     return (
-      <div sx={{ mb: 4 }}>
+      <div sx={{ mb: (theme) => `${theme.space.spacing5}` }}>
         {item.medium && (
           <img
             src={item.medium?.url.proxy}
             alt=""
-            sx={{ borderRadius: '50%', width: 40, height: 40, mx: 'auto', padding: 10 }}
+            sx={{
+              borderRadius: '50%',
+              width: 40,
+              height: 40,
+              mx: 'auto',
+              padding: (theme) => `${theme.space.spacing8}`,
+            }}
           />
         )}
-        <h1 sx={{ textAlign: 'center', fontSize: 6, mb: 4, textTransform: 'capitalize' }}>
+        <h1
+          sx={{
+            textAlign: 'center',
+            fontSize: (theme) => `${theme.fontSizes.h4}`,
+            mb: (theme) => `${theme.space.spacing5}`,
+            textTransform: 'capitalize',
+          }}
+        >
           {name}
         </h1>
-        {item.description && <p sx={{ textAlign: 'center', pb: 4 }}>{item.description}</p>}
+        {item.description && (
+          <p sx={{ textAlign: 'center', pb: (theme) => `${theme.space.spacing5}` }}>
+            {item.description}
+          </p>
+        )}
 
         <div sx={{ display: 'flex', justifyContent: 'center' }}>
           {item.social_media_urls &&
@@ -58,7 +75,7 @@ function UserDetailsFormat({ data }) {
                 href={item.social_media_urls[name]}
                 target="_blank"
                 rel="noopener noreferrer"
-                sx={{ mr: 2 }}
+                sx={{ mr: (theme) => `${theme.space.spacing3}` }}
               >
                 {getIcon(name)}
               </a>

@@ -82,9 +82,8 @@ div {
   display: none;
   flex-direction: column;
   width: 100%;
-  padding-top: 5rem;
   position: sticky;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .sliderF {
@@ -94,7 +93,6 @@ div {
 .heading {
   font-family: Metropolis, Georgia, Cambria, 'Times New Roman', Times, serif;
   text-transform: uppercase;
-  font-size: 1.25rem;
   font-weight: bold;
 }
 
@@ -123,9 +121,9 @@ div {
   padding-top: 4rem;
 }
 
-a:hover {
+/* a:hover {
   color: #ea364a;
-}
+} */
 
 .fadeInUp {
   animation-name: fadeInUp;
@@ -258,4 +256,23 @@ input:focus + .sliderF {
 
 .nav-item ul.show {
   display: block;
+}
+
+/* EditorJS parsed styles for posts*/
+.parsed p,.parsed h1, .parsed h2, .parsed h3, .parsed h4, .parsed h5, .parsed h6 {
+ word-break: break-word;
+ margin-top: 1rem;
+ margin-bottom: 1rem;
+}
+.parsed ul {
+  padding-left: 2.5rem;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+.parsed figure img {
+  margin:auto;
+}
+ .ed-embeds, .ed-raw-html,.ed-code, .parsed figure img {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }

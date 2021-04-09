@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import { Helmet } from 'react-helmet';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/index';
 import unviralImg from '../static/unviral.jpg';
 import appleLogo from '../static/podcastBadges/apple.svg';
 import spotifyLogo from '../static/podcastBadges/spotify.svg';
@@ -69,8 +69,22 @@ const PodcastsPage = () => {
         {/* 
   <link rel="shortcut icon" href="/favicon.ico"> */}
       </Helmet>
-      <div sx={{ maxWidth: 1200, mx: 'auto', textAlign: 'center', px: 6 }}>
-        <div sx={{ display: 'grid', gridTemplateColumns: ['1fr', null, '1fr 1fr'], pt: 8, mb: 8 }}>
+      <div
+        sx={{
+          maxWidth: 1200,
+          mx: 'auto',
+          textAlign: 'center',
+          px: (theme) => `${theme.space.spacing6}`,
+        }}
+      >
+        <div
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: ['1fr', null, '1fr 1fr'],
+            pt: (theme) => `${theme.space.spacing7}`,
+            mb: (theme) => `${theme.space.spacing7}`,
+          }}
+        >
           <div>
             <img
               src={unviralImg}
@@ -86,9 +100,20 @@ const PodcastsPage = () => {
               }}
             />
           </div>
-          <div sx={{ alignSelf: 'center', mt: [6, null, 0] }}>
-            <h1 sx={{ textAlign: 'center', fontSize: [5, 6] }}>Un-Viral</h1>
-            <p sx={{ fontSize: [3, 4] }}>
+          <div sx={{ alignSelf: 'center', mt: [(theme) => `${theme.space.spacing6}`, null, 0] }}>
+            <h1
+              sx={{
+                textAlign: 'center',
+                fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
+              }}
+            >
+              Un-Viral
+            </h1>
+            <p
+              sx={{
+                fontSize: [(theme) => `${theme.fontSizes.h7}`, (theme) => `${theme.fontSizes.h6}`],
+              }}
+            >
               Un-Viral is a podcast from Factly where we tackle that dangerous combination of the
               two kinds of virality—misinformation about health. Tune in to discern the real from
               the fake, and remember to Un-Viral.{' '}
@@ -98,10 +123,10 @@ const PodcastsPage = () => {
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'center',
-                mt: 4,
+                mt: (theme) => `${theme.space.spacing5}`,
                 a: {
                   display: 'inline-block',
-                  p: 2,
+                  p: (theme) => `${theme.space.spacing3}`,
                 },
                 img: {
                   display: 'inline-block',
@@ -149,7 +174,7 @@ const PodcastsPage = () => {
           </div>
         </div>
 
-        <div sx={{ width: '100%', my: 6 }}>
+        <div sx={{ width: '100%', my: (theme) => `${theme.space.spacing6}` }}>
           <div id="buzzsprout-large-player-1663999"></div>
         </div>
       </div>

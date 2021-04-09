@@ -74,7 +74,6 @@ module.exports = ({
     `gatsby-plugin-sass`,
     `gatsby-plugin-theme-ui`,
     'gatsby-plugin-styled-components',
-    'gatsby-plugin-emotion',
     // {
     //   resolve: `gatsby-plugin-postcss`,
     //   options: {
@@ -109,6 +108,7 @@ module.exports = ({
     },
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
+      // add options to make sitemaps for other things
     },
     'gatsby-plugin-robots-txt',
     {
@@ -148,7 +148,7 @@ module.exports = ({
             query: `
             {
               dega {
-                posts {
+                posts(spaces:[${client}],limit:20,page:1) {
                   nodes {
                     excerpt
                     description

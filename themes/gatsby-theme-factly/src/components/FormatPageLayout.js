@@ -2,13 +2,20 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from './Layout';
-import StoryCard from './StoryCard';
+import Layout from './Layout/index';
+import StoryCard from './UI/StoryCard';
 
 const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {
   const slug = useSlug ? item.slug : item.id;
   const defaultHeader = (item) => (
-    <h1 sx={{ textAlign: 'center', fontSize: [5, 6], mb: 4, textTransform: 'capitalize' }}>
+    <h1
+      sx={{
+        textAlign: 'center',
+        fontSize: [(theme) => `${theme.fontSizes.h5}`, null, (theme) => `${theme.fontSizes.h4}`],
+        mb: (theme) => `${theme.space.spacing5}`,
+        textTransform: 'capitalize',
+      }}
+    >
       {item.name}
     </h1>
   );
@@ -26,7 +33,13 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
           className="main-content"
           sx={{ order: [2, null, null, null, 1], width: [null, null, null, '3/5'], mx: 'auto' }}
         >
-          <div sx={{ display: 'flex', flexDirection: 'column', pb: 6 }}>
+          <div
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              pb: (theme) => `${theme.space.spacing6}`,
+            }}
+          >
             {header ? header(item) : defaultHeader(item)}
             <div
               className="tabs"
@@ -39,7 +52,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
                 textRendering: 'optimizelegibility',
                 whiteSpace: 'nowrap',
                 borderBottom: '1px solid #919191',
-                marginBottom: '1rem',
+                marginBottom: (theme) => `${theme.space.spacing5}`,
               }}
             >
               <ul
@@ -54,18 +67,17 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
                   display: 'inline-flex',
                   maxWidth: '100vw',
                   li: {
-                    fontSize: '16px',
+                    fontSize: (theme) => `${theme.fontSizes.h7}`,
                     fontWeight: 700,
                     hyphens: 'auto',
                     lineHeight: '16.8px',
                     marginBottom: '0px',
-                    marginRight: '16px',
-                    marginLeft: '16px',
-                    marginTop: '0px',
-                    paddingBottom: '14px',
+                    mx: (theme) => `${theme.space.spacing5}`,
+                    marginTop: 0,
+                    paddingBottom: (theme) => `${theme.space.spacing4}`,
                     paddingLeft: '0px',
                     paddingRight: '0px',
-                    paddingTop: '16px',
+                    paddingTop: (theme) => `${theme.space.spacing5}`,
                     textAlign: 'center',
                     textTransform: 'uppercase',
                     whiteSpace: 'nowrap',
@@ -92,7 +104,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
                 sx={{
                   display: 'grid',
                   gridTemplateColumns: ['1fr', '1fr', 'repeat(2,1fr)'],
-                  gridGap: '0.5rem',
+                  gridGap: (theme) => `${theme.space.spacing3}`,
                 }}
               >
                 {posts.map((item, index) => (

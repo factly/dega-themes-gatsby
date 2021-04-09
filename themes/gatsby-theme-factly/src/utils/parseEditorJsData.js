@@ -173,21 +173,25 @@ const parseEditorJsData = (content, scripts = false, amp = false) => {
           switch (block.type) {
             case 'header':
               return (
-                <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} sx={{ my: 4 }} />
+                <HeaderTag
+                  key={i}
+                  dangerouslySetInnerHTML={{ __html: data.text }}
+                  //sx={{ my: 4 }}
+                />
               );
             case 'paragraph':
               return (
                 <p
                   key={i}
                   dangerouslySetInnerHTML={{ __html: data.text }}
-                  sx={{ my: 4, wordBreak: 'break-word' }}
+                  // sx={{ my: 4, wordBreak: 'break-word' }}
                 />
               );
 
             case 'list':
               return (
                 <ListTag
-                  sx={{ listStylePosition: 'outside', listStyleType: 'disc', pl: 10 }}
+                  //  sx={{ listStylePosition: 'outside', listStyleType: 'disc', pl: 10 }}
                   key={i}
                 >
                   {list}
@@ -196,7 +200,11 @@ const parseEditorJsData = (content, scripts = false, amp = false) => {
             case 'uppy':
               return (
                 <figure key={i}>
-                  <img sx={{ mx: 'auto', py: 4 }} src={data.url.proxy} alt={data.alt_text} />
+                  <img
+                    // sx={{ mx: 'auto', py: 4 }}
+                    src={data.url.proxy}
+                    alt={data.alt_text}
+                  />
                   {data.caption && <figcaption>{data.caption}</figcaption>}
                 </figure>
               );
@@ -204,18 +212,45 @@ const parseEditorJsData = (content, scripts = false, amp = false) => {
             case 'embed':
               // eslint-disable-next-line no-nested-ternary
               if (!scripts) {
-                return <div className="embeds" dangerouslySetInnerHTML={{ __html: data.html }} />;
+                return (
+                  <div className="ed-embeds" dangerouslySetInnerHTML={{ __html: data.html }} />
+                );
               }
               return amp ? (
                 ampify(data, i)
               ) : (
-                <InnerHTML className="embeds" key={i} html={data.html} sx={{ py: 4 }} />
+                <InnerHTML
+                  className="ed-embeds"
+                  key={i}
+                  html={data.html}
+                  // sx={{ py: 4 }}
+                />
               );
 
             case 'raw':
-              return <div key={i} dangerouslySetInnerHTML={{ __html: data.html }} sx={{ py: 4 }} />;
+              return (
+                <div
+                  className="ed-raw-html"
+                  key={i}
+                  dangerouslySetInnerHTML={{ __html: data.html }}
+                  //  sx={{ py: 4 }}
+                />
+              );
             case 'code':
-              return <code sx={{ py: 4 }}>{data.code}</code>;
+              return (
+                <code
+                  className="ed-code"
+                  //sx={{ py: 4 }}
+                >
+                  {data.code}
+                </code>
+              );
+
+            case 'delimiter':
+              return <hr />;
+
+            case 'quote':
+              return <blockquote>{data.quote}</blockquote>;
             default:
               break;
           }

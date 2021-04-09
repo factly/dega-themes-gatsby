@@ -2,7 +2,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/index';
 import StoryCard from '../components/StoryCard';
 
 function FormatDetails({ data }) {
@@ -10,16 +10,30 @@ function FormatDetails({ data }) {
   return (
     <Layout>
       <div sx={{ mx: 'auto', maxWidth: 1024 }}>
-        <h1 sx={{ mt: '4.5rem', mb: 8, textAlign: 'center', fontSize: [5, 6] }}>
+        <h1
+          sx={{
+            mt: (theme) => `${theme.space.layout5}`,
+            mb: (theme) => `${theme.space.layout3}`,
+            textAlign: 'center',
+            fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
+          }}
+        >
           {dega.posts.nodes[0]?.format.name}
         </h1>
-        <div sx={{ display: 'flex', flexDirection: 'column', pb: 6, pt: [null, null, null, 8] }}>
+        <div
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            pb: (theme) => `${theme.space.spacing6}`,
+            pt: [null, null, null, (theme) => `${theme.space.spacing7}`],
+          }}
+        >
           {dega.posts.nodes.length > 0 ? (
             <div
               sx={{
                 display: 'grid',
                 gridTemplateColumns: ['1fr', '1fr', 'repeat(2,1fr)'],
-                gridGap: '0.5rem',
+                gridGap: (theme) => `${theme.space.spacing3}`,
               }}
             >
               {dega.posts.nodes.map((item, index) => (
