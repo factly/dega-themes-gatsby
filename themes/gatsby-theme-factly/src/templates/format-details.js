@@ -3,7 +3,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
 import Layout from '../components/Layout/index';
-import StoryCard from '../components/StoryCard';
+import StoryCard from '../components/UI/StoryCard';
 
 function FormatDetails({ data }) {
   const { dega } = data;
