@@ -90,7 +90,7 @@ const PostDetails = ({ data }) => {
     <Layout>
       <Seo
         title={dega.post.title}
-        description={dega.post.excerpt ? dega.post.excerpt : ''}
+        description={dega.post.excerpt}
         image={`${dega.post.medium?.url?.proxy}`}
         canonical={`${dega.space.site_address}/${dega.post.slug}`}
         type="article"

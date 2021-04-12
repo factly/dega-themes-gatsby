@@ -9,6 +9,7 @@ import Tag from './Tag';
 import Excerpt from './Excerpt';
 import { isBrowser } from '../../utils/isBrowser';
 import parseEditorJsData from '../../utils/parseEditorJsData';
+import Seo from '../Seo';
 /**
  * TODO: URI encoding
  * TODO: borderradius in theme ui
@@ -26,9 +27,8 @@ const Post = ({ post, observer }) => {
 
   return (
     <>
+      <Seo title={post.title} description={post.excerpt} />
       <Helmet>
-        <title>{post.title}</title>
-        <meta name="description" content={post.excerpt} />
         {post.schemas.map((schema, i) => (
           <script key={i} type="application/ld+json">
             {JSON.stringify(schema)}
