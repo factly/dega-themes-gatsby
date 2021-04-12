@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet';
 // import '../static/css/main.scss';
 // import { Helmet } from 'react-helmet';
 import Seo from './Seo';
+import headerImg from '../static/health-site-header.png'
 
 const HomePageTwo = ({ data }) => {
   const { dega } = data;
@@ -60,7 +61,8 @@ const HomePageTwo = ({ data }) => {
 
         <div sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img
-            src="https://image.freepik.com/free-vector/group-medical-staff-carrying-health-related-icons_53876-43071.jpg"
+            // src="https://image.freepik.com/free-vector/group-medical-staff-carrying-health-related-icons_53876-43071.jpg"
+            src={headerImg}
             alt=""
             sx={{
               width: 'full',

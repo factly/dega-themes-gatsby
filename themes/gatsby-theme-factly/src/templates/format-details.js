@@ -13,8 +13,8 @@ function FormatDetails({ data }) {
       <div sx={{ mx: 'auto', maxWidth: 1024 }}>
         <h1
           sx={{
-            mt: (theme) => `${theme.space.layout5}`,
-            mb: (theme) => `${theme.space.layout3}`,
+            mt: (theme) => `${theme.space.layout4}`,
+            mb: (theme) => `${theme.space.layout2}`,
             textAlign: 'center',
             fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
           }}
@@ -33,8 +33,9 @@ function FormatDetails({ data }) {
             <div
               sx={{
                 display: 'grid',
-                gridTemplateColumns: ['1fr', '1fr', 'repeat(2,1fr)'],
-                gridGap: (theme) => `${theme.space.spacing3}`,
+                gridTemplateColumns: ['1fr', null, 'repeat(2, 1fr)', 'repeat(3,1fr)'],
+                gridGap: (theme) => `${theme.space.spacing6}`,
+                px: [null, null, (theme) => `${theme.space.spacing6}`],
               }}
             >
               {filteredPosts.map((item, index) => (

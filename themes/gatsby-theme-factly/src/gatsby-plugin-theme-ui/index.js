@@ -104,6 +104,7 @@ export default {
     bodyArticleSmall: '1rem', // 16
     bodyArticleLarge: '1.5rem', // 24
     bodySmall: '0.875rem', // 14
+    bodyExtraSmall: '0.675rem', // 12
     bodyLarge: '1.25rem',
     body: '1rem', // 16
     accent: '1rem', // 16

@@ -492,7 +492,7 @@ const StoryCard = ({
               flex: '1 0 auto',
             }}
           >
-            <h3>{storyData.title}</h3>
+            <h3 sx={{fontSize: theme=>`${theme.fontSizes.h6}`}}>{storyData.title}</h3>
             {excerpt && (
               <p sx={{ fontSize: (theme) => `${theme.fontSizes.bodySmall}` }}>
                 {_.truncate(storyData.excerpt, {
@@ -507,8 +507,8 @@ const StoryCard = ({
                 display: 'flex',
                 alignItems: 'center',
                 span: {
-                  mr: (theme) => `${theme.space.spacing3}`,
-                  fontSize: (theme) => `${theme.fontSizes.h8}`,
+                  mr: (theme) => `${theme.space.spacing2}`,
+                  fontSize: (theme) => `${theme.fontSizes.bodyExtraSmall}`,
                   color: '#919191',
                 },
               }}
@@ -521,7 +521,6 @@ const StoryCard = ({
               )}
               {storyData.users[0]?.first_name && (
                 <>
-                  {' '}
                   <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}</span>
                   <span>/</span>
                 </>

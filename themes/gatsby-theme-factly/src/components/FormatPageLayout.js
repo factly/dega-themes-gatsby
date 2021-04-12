@@ -32,7 +32,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
       >
         <div
           className="main-content"
-          sx={{ order: [2, null, null, null, 1], width: [null, null, null, '3/5'], mx: 'auto' }}
+          sx={{ order: [2, null, null, null, 1], maxWidth: 1024, width: '100%', mx: 'auto' }}
         >
           <div
             sx={{
@@ -104,8 +104,10 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
               <div
                 sx={{
                   display: 'grid',
-                  gridTemplateColumns: ['1fr', '1fr', 'repeat(2,1fr)'],
-                  gridGap: (theme) => `${theme.space.spacing3}`,
+                  gridTemplateColumns: ['1fr', null, 'repeat( 2, 1fr )', 'repeat( 3, 1fr)'],
+                  px: [null, null, (theme) => `${theme.space.spacing6}`],
+                  mt: (theme) => `${theme.space.spacing7}`,
+                  gridGap: (theme) => `${theme.space.spacing7}`,
                 }}
               >
                 {filteredPosts.map((item, index) => (

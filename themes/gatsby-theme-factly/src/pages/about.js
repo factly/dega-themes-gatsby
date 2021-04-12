@@ -484,7 +484,7 @@ const About = () => {
                       >
                         {tool.name}
                       </h3>
-                      <p sx={{ fontSize: (theme) => `${theme.fontSizes.h8}` }}>{tool.desc}</p>
+                      <p sx={{ fontSize: (theme) => `${theme.fontSizes.bodyArticleSmall}` }}>{tool.desc}</p>
                     </div>
                   ))}
                 </div>
