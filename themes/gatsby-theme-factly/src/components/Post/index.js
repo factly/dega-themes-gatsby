@@ -93,7 +93,9 @@ const Post = ({ post, observer }) => {
           }}
         >
           {post.claims && <FactCheckWidget claims={post.claims} />}
-          <div className="parsed">{parseEditorJsData(post.description, true)}</div>
+          <div className="parsed">
+            {parseEditorJsData({ content: post.description, scripts: true })}
+          </div>
           {post.claims &&
             post.claims.map((claim, i) => (
               <React.Fragment key={i}>
@@ -127,12 +129,14 @@ const Post = ({ post, observer }) => {
                       >
                         Fact:
                       </h4>
-                      {parseEditorJsData(claim.review, true)}
+                      {parseEditorJsData({ content: claim.review, scripts: true })}
                     </div>
                   </div>
                 )}
 
-                <div className="parsed">{parseEditorJsData(claim.description, true)}</div>
+                <div className="parsed">
+                  {parseEditorJsData({ content: claim.description, scripts: true })}
+                </div>
               </React.Fragment>
             ))}
           <div
