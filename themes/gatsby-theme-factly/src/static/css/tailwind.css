@@ -300,6 +300,10 @@ input:focus + .sliderF {
 .parsed figure img {
   margin: auto;
 }
+.parsed .ed-embeds {
+  background-color: #edf2f7;
+  padding: 1rem 2rem;
+}
 .ed-embeds,
 .ed-raw-html,
 .ed-code,
