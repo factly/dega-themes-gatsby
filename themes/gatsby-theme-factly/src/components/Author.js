@@ -20,7 +20,7 @@ const Author = ({ users, categories, date }) => (
     }}
   >
     <div sx={{ display: 'flex', flexDirection: 'column', py: 2 }}>
-      <div sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline' }}>
+      <div sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
         {users &&
           users.map((user, i, arr) => (
             <React.Fragment key={i}>
