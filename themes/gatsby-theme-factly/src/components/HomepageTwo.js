@@ -260,7 +260,7 @@ const HomePageTwo = ({ data }) => {
                         '&:hover': { color: 'inherit' },
                       }}
                     >
-                      More info
+                      View Posts
                     </Link>
                   </div>
                   <img
