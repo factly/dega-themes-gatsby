@@ -1,22 +1,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /** @jsx jsx */
 import React, { useEffect, useRef, useState } from 'react'; // eslint-disable-line no-unused-vars
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { jsx, useThemeUI } from 'theme-ui';
-import parseEditorJsData from '../utils/parseEditorJsData';
-import addDefaultSrc from '../utils/addDefaultSrc';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { jsx } from 'theme-ui';
+import parseEditorJsData from '../../utils/parseEditorJsData';
+import addDefaultSrc from '../../utils/addDefaultSrc';
 /**
  * TODO: Change PLaceholder Img to color
  * TODO: Add resize observer
+ * TODO: Add fontsizes to other elements
  * TODO: Disabling the buttons for first and last buttons
  * TODO: Fix the resize issue on canvas for basic widget
  */
 
 function FactCheckWidget({ claims }) {
-  const themeUIContext = useThemeUI();
-  const { theme } = themeUIContext;
   const sliderElement = useRef(null);
   const [scrollWidth, setScrollWidth] = useState(0);
 
@@ -63,7 +60,14 @@ function FactCheckWidget({ claims }) {
   },[sliderElement.current ]) */
 
   return (
-    <div sx={{ width: ['full', null, null, '3/4'], mx: 'auto', fontSize: 4, mb: 4 }}>
+    <div
+      sx={{
+        width: ['full', null, null, '3/4'],
+        mx: 'auto',
+        fontSize: (theme) => `${theme.fontSizes.body}`,
+        mb: (theme) => `${theme.space.spacing5}`,
+      }}
+    >
       {claims.length >= 1 && (
         <React.Fragment>
           <div
@@ -72,8 +76,8 @@ function FactCheckWidget({ claims }) {
               flexDirection: 'row',
               alignContent: 'center',
               justifyContent: 'space-between',
-              pt: 6,
-              pb: 2,
+              pt: (theme) => `${theme.space.spacing6}`,
+              pb: (theme) => `${theme.space.spacing3}`,
             }}
           >
             <button
@@ -83,22 +87,22 @@ function FactCheckWidget({ claims }) {
               disabled={disable.left}
               sx={{
                 borderWidth: '1px',
-                borderColor: (theme) => `${theme.colors.gray[2]}`,
+                borderColor: (theme) => `${theme.colors.borderPrimary}`,
                 borderRadius: 'default',
                 textAlign: 'left',
-                fontSize: 3,
-                p: 2,
+                fontSize: (theme) => `${theme.fontSizes.h6}`,
+                p: (theme) => `${theme.space.spacing3}`,
                 '&:focus': { outline: 'none' },
                 cursor: disable.left ? 'not-allowed' : 'pointer',
                 opacity: disable.left ? 0.5 : null,
               }}
             >
-              <FontAwesomeIcon
-                icon={faChevronLeft}
-                sx={{ fill: 'currentColor', width: 4, height: 4 }}
-              />
+              <FaChevronLeft sx={{ fill: 'currentColor', width: 4, height: 4 }} />
             </button>
-            <h2 className="heading" sx={{ width: 'full', py: 2, textAlign: 'center' }}>
+            <h2
+              className="heading"
+              sx={{ width: 'full', py: (theme) => `${theme.space.spacing3}`, textAlign: 'center' }}
+            >
               List of claims
             </h2>
             <button
@@ -108,32 +112,34 @@ function FactCheckWidget({ claims }) {
               disabled={disable.right}
               sx={{
                 borderWidth: '1px',
-                borderColor: (theme) => `${theme.colors.gray[2]}`,
+                borderColor: (theme) => `${theme.colors.borderPrimary}`,
                 borderRadius: 'default',
                 textAlign: 'left',
-                fontSize: 3,
-                p: 2,
+                fontSize: (theme) => `${theme.fontSizes.h6}`,
+                p: (theme) => `${theme.space.spacing3}`,
                 '&:focus': { outline: 'none' },
                 cursor: disable.right ? 'not-allowed' : 'pointer',
                 opacity: disable.right ? 0.5 : null,
               }}
             >
-              <FontAwesomeIcon
-                icon={faChevronRight}
-                sx={{ fill: 'currentColor', width: 4, height: 4 }}
-              />
+              <FaChevronRight sx={{ fill: 'currentColor', width: 4, height: 4 }} />
             </button>
           </div>
           <div
             ref={sliderElement}
             className="sliderF"
-            sx={{ display: 'flex', overflowX: 'auto', pb: 6 }}
+            sx={{ display: 'flex', overflowX: 'auto', pb: (theme) => `${theme.space.spacing6}` }}
           >
             {claims.map((claim, i) => (
               <div
                 id={`claim-${i}`}
                 key={i}
-                sx={{ display: 'inline-block', flex: 'none', width: 'full', mr: 6 }}
+                sx={{
+                  display: 'inline-block',
+                  flex: 'none',
+                  width: 'full',
+                  mr: (theme) => `${theme.space.spacing6}`,
+                }}
               >
                 <div
                   sx={{
@@ -150,11 +156,13 @@ function FactCheckWidget({ claims }) {
                     <div
                       sx={{
                         display: 'flex',
-                        p: 4,
+                        p: (theme) => `${theme.space.spacing5}`,
                         alignItems: 'baseline',
                       }}
                     >
-                      <h2 sx={{ fontWeight: 'bold', mr: 2 }}>Claimant: </h2>
+                      <h2 sx={{ fontWeight: 'bold', mr: (theme) => `${theme.space.spacing3}` }}>
+                        Claimant:{' '}
+                      </h2>
                       {claim.claimant.name}
                     </div>
                     {/* <div
@@ -211,12 +219,14 @@ function FactCheckWidget({ claims }) {
                     sx={{
                       display: 'flex',
                       flexDirection: 'column',
-                      p: 4,
-                      color: 'white',
+                      p: (theme) => `${theme.space.spacing5}`,
+                      color: (theme) => `${theme.colors.textLight}`,
                       bg: CLAIM_RATING[claim.rating.slug],
                     }}
                   >
-                    <h2 sx={{ fontWeight: 'bold', py: 2 }}>Claim: </h2>
+                    <h2 sx={{ fontWeight: 'bold', py: (theme) => `${theme.space.spacing3}` }}>
+                      Claim:{' '}
+                    </h2>
                     <div className="parsed" sx={{ display: 'flex' }}>
                       {claim.title}
                       {claim.rating.medium && (
@@ -227,7 +237,7 @@ function FactCheckWidget({ claims }) {
                           sx={{
                             width: '1/6',
                             height: 'full',
-                            m: 2,
+                            m: (theme) => `${theme.space.spacing3}`,
                             borderTopLeftRadius: 'default',
                             borderTopRightRadius: 'default',
                           }}
@@ -239,15 +249,13 @@ function FactCheckWidget({ claims }) {
                     sx={{
                       display: 'flex',
                       flexDirection: 'column',
-                      p: 4,
+                      p: (theme) => `${theme.space.spacing5}`,
                       borderBottomWidth: '1px',
                     }}
                   >
                     <h2 sx={{ fontWeight: 'bold' }}>Fact: </h2>
 
-                    <div className="parsed">
-                      {parseEditorJsData({ content: claim.review, scripts: true })}
-                    </div>
+                    <div className="parsed">{parseEditorJsData(claim.review, true)}</div>
                   </div>
                 </div>
               </div>

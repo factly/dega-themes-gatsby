@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/index';
 
 const menuItems = [
   { title: 'About the Health Fellowship', slug: '#fellowship' },
@@ -89,7 +89,7 @@ const About = () => {
   }, []);
 
   return (
-    <Layout maxWidth="1920px" style={{ background: '#f9f9f9' }}>
+    <Layout maxWidth="1920px" style={{ background: (theme) => `${theme.colors.bgLight}` }}>
       {/* <div sx={{my:[12,12,12,24],p:6,mx:'auto',maxWidth:'1280px'}}>
         <h1 sx={{fontWeight:'bold', fontSize:['1.75rem','2.5rem','2.5rem','3.5rem'],textAlign:'center',lineHeight:'tight'}}>
           Factly will transform the public information landscape and spearhead citizen engagement
@@ -102,9 +102,15 @@ const About = () => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
-          py: 8,
-          px: [4, null, null, 12],
-          mt: [12, null, 0],
+          // py: (theme) => `${theme.space.spacing7}`,
+          px: [
+            (theme) => `${theme.space.spacing5}`,
+            null,
+            null,
+            null,
+            (theme) => `${theme.space.spacing9}`,
+          ],
+          mt: [(theme) => `${theme.space.spacing9}`, null, 0],
         }}
       >
         <div
@@ -116,11 +122,17 @@ const About = () => {
             borderRightWidth: '1px',
           }}
         >
-          <div sx={{ display: 'block', position: 'sticky' }}>
+          <div sx={{ display: 'block', position: 'sticky', mt: '60px' }}>
             {menuItems.map((item, index) => (
               <article
                 key={index}
-                sx={{ display: 'flex', flexDirection: 'column', lineHeight: 'tight', py: 3, px: 6 }}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  lineHeight: 'tight',
+                  py: (theme) => `${theme.space.spacing4}`,
+                  px: (theme) => `${theme.space.spacing6}`,
+                }}
               >
                 <Link
                   to={item.slug}
@@ -133,8 +145,8 @@ const About = () => {
                       sx={{
                         width: 'full',
                         fontWeight: 'bold',
-                        fontSize: 3,
-                        color: (theme) => `${theme.colors.gray[8]}`,
+                        fontSize: (theme) => `${theme.fontSizes.h7}`,
+                        color: (theme) => `${theme.colors.textPrimary}`,
                       }}
                     >
                       {item.title}
@@ -151,16 +163,43 @@ const About = () => {
             display: 'flex',
             flexDirection: 'column',
             width: ['full', null, null, '5/6'],
-            p: [2, null, 6],
+            p: [(theme) => `${theme.space.spacing3}`, null, (theme) => `${theme.space.spacing6}`],
           }}
         >
-          <section sx={{ pl: [2, null, null, 8] }} id="fellowship">
-            <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+          <section
+            sx={{
+              pl: [
+                (theme) => `${theme.space.spacing3}`,
+                null,
+                null,
+                (theme) => `${theme.space.spacing7}`,
+              ],
+            }}
+            id="fellowship"
+          >
+            <div
+              sx={{
+                mb: [0, null, null, (theme) => `${theme.space.spacing5}`],
+                // pb: (theme) => `${theme.space.spacing5}`,
+              }}
+            >
+              <h3
+                className="heading"
+                sx={{
+                  fontSize: [(theme) => `${theme.fontSizes.h5}`],
+                }}
+              >
                 About the Health Fellowship
               </h3>
             </div>
-            <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
+            <div
+              sx={{
+                my: (theme) => `${theme.space.spacing6}`,
+                // pb: (theme) => `${theme.space.spacing6}`,
+                color: (theme) => `${theme.colors.textPrimary}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+              }}
+            >
               As part of their fact-checking program, social media giant Facebook has launched a
               Global Health Fellowship to combat Health Misinformation. Factly Media & Research has
               been shortlisted among the 10 fact-checking organizations across the globe to be
@@ -173,13 +212,41 @@ const About = () => {
               and strategies to combat health-related misinformation in the country
             </div>
           </section>
-          <section sx={{ pl: [2, null, null, 8] }} id="about-factly">
-            <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+          <section
+            sx={{
+              pl: [
+                (theme) => `${theme.space.spacing3}`,
+                null,
+                null,
+                (theme) => `${theme.space.spacing7}`,
+              ],
+            }}
+            id="about-factly"
+          >
+            <div
+              sx={{
+                mb: [0, null, null, (theme) => `${theme.space.spacing5}`],
+                //  pb: (theme) => `${theme.space.spacing5}`,
+              }}
+            >
+              <h3
+                className="heading"
+                sx={{
+                  fontSize: [(theme) => `${theme.fontSizes.h5}`],
+                }}
+              >
                 About Factly
               </h3>
             </div>
-            <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
+            <div
+              sx={{
+                my: (theme) => `${theme.space.spacing6}`,
+                // pb: (theme) => `${theme.space.spacing6}`,
+                color: (theme) => `${theme.colors.textPrimary}`,
+
+                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+              }}
+            >
               Started as an idea in 2014, it was in the mid-2010s that Factly moved into the Data
               journalism space, which was still in its nascent stages. By 2015, Factly had evolved
               from a blog to a company with an aim to transform the public information landscape by
@@ -191,13 +258,41 @@ const About = () => {
               training projects.
             </div>
           </section>
-          <section sx={{ pl: [2, null, null, 8] }} id="background">
-            <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+          <section
+            sx={{
+              pl: [
+                (theme) => `${theme.space.spacing3}`,
+                null,
+                null,
+                (theme) => `${theme.space.spacing7}`,
+              ],
+            }}
+            id="background"
+          >
+            <div
+              sx={{
+                mb: [0, null, null, (theme) => `${theme.space.spacing5}`],
+                // pb: (theme) => `${theme.space.spacing5}`,
+              }}
+            >
+              <h3
+                className="heading"
+                sx={{
+                  fontSize: [(theme) => `${theme.fontSizes.h5}`],
+                }}
+              >
                 Background
               </h3>
             </div>
-            <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
+            <div
+              sx={{
+                my: (theme) => `${theme.space.spacing6}`,
+                // pb: (theme) => `${theme.space.spacing6}`,
+                color: (theme) => `${theme.colors.textPrimary}`,
+
+                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+              }}
+            >
               In 2005, India legislated one of the best ‘Right to Information’ laws in the world
               which changed the public information landscape and accessibility in the country. It
               was the first step towards transparency and accountability of governance. In 2012,
@@ -209,48 +304,131 @@ const About = () => {
               infrastructure to bridge this gap and strengthen democracy through engagement.
             </div>
           </section>
-          <section sx={{ pl: [2, null, null, 8] }} id="mission">
-            <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+          <section
+            sx={{
+              pl: [
+                (theme) => `${theme.space.spacing3}`,
+                null,
+                null,
+                (theme) => `${theme.space.spacing7}`,
+              ],
+            }}
+            id="mission"
+          >
+            <div
+              sx={{
+                mb: [0, null, null, (theme) => `${theme.space.spacing5}`],
+                // pb: (theme) => `${theme.space.spacing5}`,
+              }}
+            >
+              <h3
+                className="heading"
+                sx={{
+                  fontSize: [(theme) => `${theme.fontSizes.h5}`],
+                }}
+              >
                 Mission
               </h3>
             </div>
-            <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
+            <div
+              sx={{
+                my: (theme) => `${theme.space.spacing6}`,
+                // pb: (theme) => `${theme.space.spacing6}`,
+                color: (theme) => `${theme.colors.textPrimary}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+              }}
+            >
               Factly strives to cultivate civic participation and engaging citizens in accessing,
               understanding and using important government data/information at various levels.
             </div>
           </section>
-          <section sx={{ pl: [2, null, null, 8] }} id="vision">
-            <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+          <section
+            sx={{
+              pl: [
+                (theme) => `${theme.space.spacing3}`,
+                null,
+                null,
+                (theme) => `${theme.space.spacing7}`,
+              ],
+            }}
+            id="vision"
+          >
+            <div
+              sx={{
+                mb: [0, null, null, (theme) => `${theme.space.spacing5}`],
+                // pb: (theme) => `${theme.space.spacing5}`,
+              }}
+            >
+              <h3
+                className="heading"
+                sx={{
+                  fontSize: [(theme) => `${theme.fontSizes.h5}`],
+                }}
+              >
                 Vision
               </h3>
             </div>
-            <div sx={{ my: 6, pb: 6, color: (theme) => `${theme.colors.gray[8]}` }}>
+            <div
+              sx={{
+                my: (theme) => `${theme.space.spacing6}`,
+                // pb: (theme) => `${theme.space.spacing6}`,
+                color: (theme) => `${theme.colors.textPrimary}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+              }}
+            >
               Factly will strive to transform the public information landscape in India by improving
               access & understanding of the common public about important government
               data/information and evolve into a reliable and significant resource in the context of
               public information & governance.
             </div>
           </section>
-          <section sx={{ pl: [2, null, null, 8] }} id="what-we-do">
-            <div sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h3 className="heading" sx={{ fontSize: [5, null, 6] }}>
+          <section
+            sx={{
+              pl: [
+                (theme) => `${theme.space.spacing3}`,
+                null,
+                null,
+                (theme) => `${theme.space.spacing7}`,
+              ],
+            }}
+            id="what-we-do"
+          >
+            <div
+              sx={{
+                mb: [0, null, null, (theme) => `${theme.space.spacing5}`],
+                // pb: (theme) => `${theme.space.spacing5}`,
+              }}
+            >
+              <h3
+                className="heading"
+                sx={{
+                  fontSize: [(theme) => `${theme.fontSizes.h5}`],
+                }}
+              >
                 What We Do
               </h3>
             </div>
             <div
               sx={{
-                my: 6,
-                pb: 6,
-                color: (theme) => `${theme.colors.gray[8]}`,
+                my: (theme) => `${theme.space.spacing6}`,
+                // pb: (theme) => `${theme.space.spacing6}`,
+                color: (theme) => `${theme.colors.textPrimary}`,
                 display: 'flex',
                 flexWrap: 'wrap',
+                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
               }}
             >
               <div sx={{ display: 'flex', flexDirection: 'column', flex: '1 1 auto' }}>
-                <h2 sx={{ fontWeight: 'bold', fontSize: 4, my: 4 }}>Data Journalism/Fact Check</h2>
-                <p sx={{ py: 4 }}>
+                <h2
+                  sx={{
+                    fontWeight: 'bold',
+                    fontSize: (theme) => `${theme.fontSizes.h6}`,
+                    my: (theme) => `${theme.space.spacing5}`,
+                  }}
+                >
+                  Data Journalism/Fact Check
+                </h2>
+                <p sx={{ py: (theme) => `${theme.space.spacing5}` }}>
                   Factly’s written and visual stories layout facts with evidence and help separate
                   the wheat from the chaff in times of hyper-connectivity and constant information
                   bombardment. The content aims to simplify public data & information that might
@@ -259,8 +437,16 @@ const About = () => {
                 </p>
               </div>
               <div sx={{ display: 'flex', flexDirection: 'column' }}>
-                <h2 sx={{ fontWeight: 'bold', fontSize: 4, my: 4 }}>Information Tools</h2>
-                <p sx={{ py: 4 }}>
+                <h2
+                  sx={{
+                    fontWeight: 'bold',
+                    fontSize: (theme) => `${theme.fontSizes.h6}`,
+                    my: (theme) => `${theme.space.spacing5}`,
+                  }}
+                >
+                  Information Tools
+                </h2>
+                <p sx={{ py: (theme) => `${theme.space.spacing5}` }}>
                   Creating and developing tools that will increase access to public data and
                   information by making it easy, interactive and intuitive. Counting India is
                   Factly’s first tool in its beta version that focuses on accessibility and data
@@ -268,7 +454,14 @@ const About = () => {
                   are in the development stage.
                 </p>
                 <div
-                  sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', my: 4 }}
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: ['1fr', null, null, null, '1fr 1fr'],
+                    gridGap: '1rem',
+                    // flexWrap: 'wrap',
+                    justifyContent: 'space-around',
+                    my: (theme) => `${theme.space.spacing5}`,
+                  }}
                 >
                   {informationTools.map((tool) => (
                     <div
@@ -277,21 +470,38 @@ const About = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         maxWidth: 500,
-                        my: 6,
-                        mx: 4,
+                        my: (theme) => `${theme.space.spacing6}`,
+                        mx: 'auto',
                         textAlign: 'center',
                       }}
                     >
-                      <h3 sx={{ fontSize: 3, mb: 4, textTransform: 'uppercase' }}>{tool.name}</h3>
-                      <p sx={{ fontSize: 3 }}>{tool.desc}</p>
+                      <h3
+                        sx={{
+                          fontSize: (theme) => `${theme.fontSizes.h6}`,
+                          mb: (theme) => `${theme.space.spacing5}`,
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {tool.name}
+                      </h3>
+                      <p sx={{ fontSize: (theme) => `${theme.fontSizes.h7}` }}>{tool.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div sx={{ display: 'flex', flexDirection: 'column' }}>
-                <h2 sx={{ fontWeight: 'bold', fontSize: 4, my: 4 }}>Advocating Open Data</h2>
-                <p sx={{ py: 4 }}>
+                <h2
+                  className="heading"
+                  sx={{
+                    fontWeight: 'bold',
+                    fontSize: [(theme) => `${theme.fontSizes.h5}`],
+                    my: (theme) => `${theme.space.spacing5}`,
+                  }}
+                >
+                  Advocating Open Data
+                </h2>
+                <p sx={{ py: (theme) => `${theme.space.spacing5}` }}>
                   Factly believes that for better public engagement with government data, the supply
                   side also has to be strengthened. Factly actively advocates ‘Open Data’ policy to
                   governments and agencies that house large amounts of public information. Factly
@@ -304,18 +514,50 @@ const About = () => {
               </div>
             </div>
           </section>
-          <section sx={{ pl: [2, null, null, 8] }} id="contacts">
-            <div className="mb-4 pb-4 border-b" sx={{ mb: [0, null, null, 4], pb: 4 }}>
-              <h5 className="heading" sx={{ fontSize: [5, null, 6] }}>
+          <section
+            sx={{
+              pl: [
+                (theme) => `${theme.space.spacing3}`,
+                null,
+                null,
+                (theme) => `${theme.space.spacing7}`,
+              ],
+            }}
+            id="contacts"
+          >
+            <div
+              className="mb-4 pb-4 border-b"
+              sx={{
+                mb: [0, null, null, (theme) => `${theme.space.spacing5}`],
+                // pb: (theme) => `${theme.space.spacing5}`,
+              }}
+            >
+              <h5
+                className="heading"
+                sx={{
+                  fontSize: [(theme) => `${theme.fontSizes.h5}`],
+                }}
+              >
                 Contact Us
               </h5>
             </div>
-            <div sx={{ my: 6, pb: 6 }}>
+            <div
+              sx={{
+                my: (theme) => `${theme.space.spacing6}`,
+                // pb: (theme) => `${theme.space.spacing6}`,
+              }}
+            >
               <div>
                 Email us at{' '}
                 <a
                   href="mailto:hi@factly.in"
-                  sx={{ fontSize: 2, color: (theme) => `${theme.colors.blue}` }}
+                  sx={{
+                    fontSize: (theme) => `${theme.fontSizes.h7}`,
+                    color: (theme) => `${theme.colors.textLinkPrimary}`,
+                    '&:hover': {
+                      color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
+                    },
+                  }}
                 >
                   hi@factly.in
                 </a>

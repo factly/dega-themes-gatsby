@@ -2,7 +2,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/index';
 import Homepage from '../components/Homepage';
 import HomePageTwo from '../components/HomepageTwo';
 import Seo from '../components/Seo';

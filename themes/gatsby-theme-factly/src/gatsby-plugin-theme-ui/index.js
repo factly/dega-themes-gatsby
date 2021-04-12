@@ -22,6 +22,29 @@ export default {
     px: '1px',
   },
   colors: {
+    textPrimary: '#2d3748', // gray8
+    textSecondary: '#718096', // gray 6
+    textLinkPrimary: '#3B82F6', // blue5
+    textLinkHoverPrimary: '#ea364a', // brand
+    textDark: '#1a202c', // gray9
+    bgPrimary: '#EDF2F7', // gray2
+    bgTag: '#3b82f6', // blue5
+    borderTag: '#3b82f6', // blue5
+    textTag: '#fff', // white
+    bgTagHover: '#fff', // white
+    textTagHover: '#3b82f6', // blue5
+    bgLight: '#fff',
+    textLight: '#fff',
+    bgDark: '#1e1e1e',
+    textFooterDark: '#bcbcbc',
+    borderPrimary: '#edf2f7', // gray2
+
+    socialFacebook: '#3b5998',
+    socialTwitter: '#1da1f2',
+    socialWhatsapp: '#25d366',
+    socialInstagram: '#fff',
+    socialLinkedin: '#fff',
+
     transparent: 'transparent',
     citrus: '#8EB307',
     black: '#000',
@@ -66,102 +89,25 @@ export default {
       '#2d3748',
       '#1a202c',
     ],
-    red: [
-      null,
-      '#fff5f5',
-      '#fed7d7',
-      '#feb2b2',
-      '#fc8181',
-      '#f56565',
-      '#e53e3e',
-      '#c53030',
-      '#9b2c2c',
-      '#742a2a',
-    ],
-    orange: [
-      null,
-      '#fffaf0',
-      '#feebc8',
-      '#fbd38d',
-      '#f6ad55',
-      '#ed8936',
-      '#dd6b20',
-      '#c05621',
-      '#9c4221',
-      '#7b341e',
-    ],
-    yellow: [
-      null,
-      '#fffff0',
-      '#fefcbf',
-      '#faf089',
-      '#f6e05e',
-      '#ecc94b',
-      '#d69e2e',
-      '#b7791f',
-      '#975a16',
-      '#744210',
-    ],
-    green: [
-      null,
-      '#f0fff4',
-      '#c6f6d5',
-      '#9ae6b4',
-      '#68d391',
-      '#48bb78',
-      '#38a169',
-      '#2f855a',
-      '#276749',
-      '#22543d',
-    ],
-    teal: [
-      null,
-      '#e6fffa',
-      '#b2f5ea',
-      '#81e6d9',
-      '#4fd1c5',
-      '#38b2ac',
-      '#319795',
-      '#2c7a7b',
-      '#285e61',
-      '#234e52',
-    ],
-    indigo: [
-      null,
-      '#ebf4ff',
-      '#c3dafe',
-      '#a3bffa',
-      '#7f9cf5',
-      '#667eea',
-      '#5a67d8',
-      '#4c51bf',
-      '#434190',
-      '#3c366b',
-    ],
-    purple: [
-      null,
-      '#faf5ff',
-      '#e9d8fd',
-      '#d6bcfa',
-      '#b794f4',
-      '#9f7aea',
-      '#805ad5',
-      '#6b46c1',
-      '#553c9a',
-      '#44337a',
-    ],
-    pink: [
-      null,
-      '#fff5f7',
-      '#fed7e2',
-      '#fbb6ce',
-      '#f687b3',
-      '#ed64a6',
-      '#d53f8c',
-      '#b83280',
-      '#97266d',
-      '#702459',
-    ],
+  },
+  fontSizes: {
+    super: '5.5rem', // 88
+    h1: '4rem', // 64
+    h2: '3rem', // 48
+    h3: '2.5rem', // 40,
+    h4: '2rem', // 32
+    h5: '1.5rem', // 24
+    h6: '1.25rem', // 20
+    h7: '1rem', // 16
+    h8: '0.75rem', // 12
+    bodyArticle: '1.25rem', // 20
+    bodyArticleSmall: '1rem', // 16
+    bodyArticleLarge: '1.5rem', // 24
+    bodySmall: '0.875rem', // 14
+    bodyLarge: '1.25rem',
+    body: '1rem', // 16
+    accent: '1rem', // 16
+    uppercase: '0.75rem', // 12
   },
   fonts: {
     heading: 'inherit',
@@ -176,19 +122,19 @@ export default {
     inter:
       'Inter, Roboto, "Helvetica Neue", Arial, "Noto Sans", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
   },
-  fontSizes: [
-    '0.75rem', // xs 0
-    '0.875rem', // sm 1
-    '1rem', // base 2
-    '1.125rem', // lg 3
-    '1.25rem', // xl 4
-    '1.5rem', // 2xl 5
-    '1.875rem', // 3xl 6
-    '2.25rem', // 4xl 7
-    '3rem', // 5xl 8
-    '4rem', // 6xl 9
-    '4.5rem',
-  ],
+  // fontSizes: [
+  //   '0.75rem', // xs 0
+  //   '0.875rem', // sm 1
+  //   '1rem', // base 2
+  //   '1.125rem', // lg 3
+  //   '1.25rem', // xl 4
+  //   '1.5rem', // 2xl 5
+  //   '1.875rem', // 3xl 6
+  //   '2.25rem', // 4xl 7
+  //   '3rem', // 5xl 8
+  //   '4rem', // 6xl 9
+  //   '4.5rem',
+  // ],
   fontWeights: {
     hairline: '100',
     thin: '200',
@@ -293,24 +239,40 @@ export default {
     none: 'none',
   },
   space: {
-    0: '0',
-    1: '0.25rem',
-    2: '0.5rem',
-    3: '0.75rem',
-    4: '1rem',
-    5: '1.25rem',
-    6: '1.5rem',
-    8: '2rem',
-    10: '2.5rem',
-    12: '3rem',
-    16: '4rem',
-    20: '5rem',
-    24: '6rem',
-    32: '8rem',
-    40: '10rem',
-    48: '12rem',
-    56: '14rem',
-    64: '16rem',
+    spacing1: '0.125rem', // 2
+    spacing2: '0.25rem', // 4
+    spacing3: '0.5rem', // 8
+    spacing4: '0.75rem', // 12
+    spacing5: '1rem', // 16
+    spacing6: '1.5rem', // 24
+    spacing7: '2rem', // 32
+    spacing8: '2.5rem', // 40
+    spacing9: '3rem', // 48
+    layout1: '1rem', // 16
+    layout2: '1.5rem', // 24
+    layout3: '2rem', // 32
+    layout4: '3rem', // 48
+    layout5: '4rem', // 64
+    layout6: '6rem', // 96
+    layout7: '10rem', // 160
+    // 0: '0',
+    // 1: '0.25rem',
+    // 2: '0.5rem',
+    // 3: '0.75rem',
+    // 4: '1rem',
+    // 5: '1.25rem',
+    // 6: '1.5rem',
+    // 8: '2rem',
+    // 10: '2.5rem',
+    // 12: '3rem',
+    // 16: '4rem',
+    // 20: '5rem',
+    // 24: '6rem',
+    // 32: '8rem',
+    // 40: '10rem',
+    // 48: '12rem',
+    // 56: '14rem',
+    // 64: '16rem',
   },
   opacities: {
     0: '0',
@@ -356,7 +318,7 @@ export default {
         textDecoration: 'none',
         ':hover': {
           textDecoration: 'none',
-          color: 'primary',
+          // color: 'primary',
         },
       },
       h1: {

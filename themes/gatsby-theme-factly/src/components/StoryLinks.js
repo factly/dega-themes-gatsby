@@ -5,6 +5,9 @@ import { jsx } from 'theme-ui';
 import parseDate from '../utils/parseDate';
 
 const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
+  /**
+   * TODO: Add post progress and active styles
+   */
   return (
     <article
       sx={{
@@ -13,10 +16,10 @@ const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
         lineHeight: 'tight',
         borderBottomWidth: '1px',
         '&:last-child': { borderBottomWidth: '1px' },
-        py: 2,
-        px: 6,
+        py: (theme) => `${theme.space.spacing3}`,
+        px: (theme) => `${theme.space.spacing6}`,
         cursor: 'pointer',
-        borderColor: (theme) => `${theme.colors.gray[2]}`,
+        borderColor: (theme) => `${theme.colors.borderPrimary}`,
       }}
     >
       <Link
@@ -51,14 +54,19 @@ const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
             sx={{
               width: 'full',
               fontWeight: 'bold',
-              fontSize: 3,
-              color: (theme) => `${theme.colors.gray[8]}`,
+              fontSize: (theme) => `${theme.fontSizes.h7}`,
+              color: (theme) => `${theme.colors.textPrimary}`,
+              '&.active': {
+                color: (theme) => `${theme.colors.textLinkPrimary}`,
+              },
             }}
           >
             {post.title}
           </div>
-          <div>
-            <span sx={{ fontSize: 1 }}>{parseDate(post.published_date)}</span>
+          <div sx={{ display: 'flex' }}>
+            <span sx={{ fontSize: (theme) => `${theme.fontSizes.h8}` }}>
+              {parseDate(post.published_date)}
+            </span>
           </div>
         </div>
       </Link>

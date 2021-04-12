@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
-import StoryCard from './StoryCard';
-import CategoriesGroup from './CategoriesGroup';
 import Seo from './Seo';
+import StoryCard from './UI/StoryCard';
+import CategoriesGroup from './CategoriesGroup';
 
 function Homepage({ data }) {
   const { dega } = data;
@@ -28,8 +28,15 @@ function Homepage({ data }) {
             position: 'sticky',
           }}
         >
-          <div sx={{ display: 'bblock' }}>
-            <div sx={{ mb: 4, pb: 4, px: 6, borderBottomWidth: 'px' }}>
+          <div sx={{ display: 'block' }}>
+            <div
+              sx={{
+                mb: (theme) => `${theme.space.spacing5}`,
+                py: (theme) => `${theme.space.spacing5}`,
+                px: (theme) => `${theme.space.spacing6}`,
+                borderBottomWidth: 'px',
+              }}
+            >
               <h5 className="heading">Categories</h5>
               <CategoriesGroup categories={dega.categories.nodes} />
             </div>
@@ -51,7 +58,13 @@ function Homepage({ data }) {
           ) : null}
 
           {/* Articles list */}
-          <div sx={{ display: 'flex', flexDirection: 'column', py: 6 }}>
+          <div
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              py: (theme) => `${theme.space.spacing6}`,
+            }}
+          >
             {dega.posts.nodes.slice(1, 20).map((item, index) => (
               <StoryCard
                 key={`homepage-post-${index}`}
@@ -60,7 +73,7 @@ function Homepage({ data }) {
                 imageSize={{
                   width: ['full', null, '1/3'],
                   height: [48, null, 'full'],
-                  py: [4, null, 0],
+                  py: [(theme) => `${theme.space.spacing6}`, null, 0],
                 }}
               />
             ))}
@@ -77,7 +90,14 @@ function Homepage({ data }) {
           }}
         >
           <div sx={{ display: 'block' }}>
-            <div sx={{ mb: 4, pb: 4, px: 6, borderBottomWidth: 'px' }}>
+            <div
+              sx={{
+                mb: (theme) => `${theme.space.spacing5}`,
+                py: (theme) => `${theme.space.spacing5}`,
+                px: (theme) => `${theme.space.spacing6}`,
+                borderBottomWidth: 'px',
+              }}
+            >
               <h5 className="heading">Recent In Factchecks</h5>
             </div>
             {dega.factchecks.nodes.map((item, index) => (

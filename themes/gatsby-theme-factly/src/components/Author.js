@@ -25,7 +25,7 @@ const Author = ({ users, categories, date }) => (
           users.map((user, i, arr) => (
             <React.Fragment key={i}>
               <Link
-                to={`/users/${user.slug || user.id}`}
+                to={`/users/${user.id}`}
                 sx={{
                   fontWeight: 'medium',
                   color: (theme) => `${theme.colors.blue[5]}`,

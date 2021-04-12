@@ -108,6 +108,7 @@ module.exports = ({
     // },
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
+      // add options to make sitemaps for other things
     },
     'gatsby-plugin-robots-txt',
     {
@@ -147,7 +148,7 @@ module.exports = ({
             query: `
             {
               dega {
-                posts {
+                posts(spaces:[${client}],limit:20,page:1) {
                   nodes {
                     excerpt
                     description
@@ -164,6 +165,9 @@ module.exports = ({
         ],
       },
     },
-    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-offline',
+      precachePages: ['/about/', '/podcasts/'],
+    },
   ].filter(Boolean),
 });

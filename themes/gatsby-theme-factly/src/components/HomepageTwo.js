@@ -2,6 +2,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
+import { Helmet } from 'react-helmet';
+
 // import '../static/css/main.scss';
 // import { Helmet } from 'react-helmet';
 import Seo from './Seo';
@@ -28,8 +30,8 @@ const HomePageTwo = ({ data }) => {
       <header
         sx={{
           display: 'grid',
-          gridTemplateColumns: ['1fr', null, null, null, '1fr 1fr'],
-          mb: 4,
+          gridTemplateColumns: ['1fr', null, null, '1fr 1fr'],
+          mb: (theme) => `${theme.space.spacing5}`,
           maxWidth: 1280,
           mx: 'auto',
         }}
@@ -37,8 +39,8 @@ const HomePageTwo = ({ data }) => {
         <div sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div
             sx={{
-              fontSize: [4, 5],
-              p: [4, 6],
+              fontSize: [(theme) => `${theme.fontSizes.h7}`, (theme) => `${theme.fontSizes.h6}`],
+              p: [(theme) => `${theme.space.spacing5}`, (theme) => `${theme.space.spacing6}`],
               textAlign: 'center',
               fontWeight: 'bold',
               maxWidth: 700,
@@ -60,7 +62,11 @@ const HomePageTwo = ({ data }) => {
           <img
             src="https://image.freepik.com/free-vector/group-medical-staff-carrying-health-related-icons_53876-43071.jpg"
             alt=""
-            sx={{ width: 'full', p: [4, 6], maxWidth: 500 }}
+            sx={{
+              width: 'full',
+              p: [(theme) => `${theme.space.spacing5}`, (theme) => `${theme.space.spacing6}`],
+              maxWidth: 500,
+            }}
           />
         </div>
       </header>
@@ -69,13 +75,17 @@ const HomePageTwo = ({ data }) => {
         sx={{
           fontFamily: 'Metropolis',
           color: '#3e3e3e',
-          fontSize: [4, 5, 6],
+          fontSize: [
+            (theme) => `${theme.fontSizes.h6}`,
+            (theme) => `${theme.fontSizes.h5}`,
+            (theme) => `${theme.fontSizes.h4}`,
+          ],
           textShadow: '1px 1px 1px rgba(240, 240, 240, .45)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           textAlign: 'center',
-          my: 4,
+          my: (theme) => `${theme.space.spacing5}`,
           '&::before': {
             content: "''",
             display: 'block',
@@ -101,11 +111,11 @@ const HomePageTwo = ({ data }) => {
         sx={{
           display: 'grid',
           gridTemplateColumns: ['1fr', '1fr 1fr', null, '1fr 1fr 1fr'],
-          gridGap: 2,
+          gridGap: (theme) => `${theme.space.spacing3}`,
           flexWrap: 'wrap',
           maxWidth: 1280,
-          mx: [4, null, null, null, 'auto'],
-          my: '1rem',
+          mx: [(theme) => `${theme.space.spacing5}`, null, null, null, 'auto'],
+          my: (theme) => `${theme.space.spacing5}`,
           // '@media (min-width: 550px)': {
           //   '.card': { flex: '0 0 48%', maxWidth: '48%' },
           // },
@@ -126,12 +136,12 @@ const HomePageTwo = ({ data }) => {
                   // flex: '0 0 100%',
                   // maxWidth: '100%',
                   width: '100%',
-                  color: 'white',
+                  color: (theme) => `${theme.colors.textLight}`,
                   display: 'flex',
                   flexDirection: 'column',
                   minWidth: 0,
                   wordWrap: 'break-word',
-                  backgroundColor: '#fff',
+                  backgroundColor: (theme) => `${theme.colors.bgLight}`,
                   backgroundClip: 'border-box',
                   borderRadius: 0,
                   border: '0 solid rgba(0, 0, 0, 0.125)',
@@ -153,7 +163,7 @@ const HomePageTwo = ({ data }) => {
                   }}
                   sx={{
                     height: '100%',
-                    color: 'white',
+                    color: (theme) => `${theme.colors.textLight}`,
                     fontFamily: 'Inter',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
@@ -168,10 +178,10 @@ const HomePageTwo = ({ data }) => {
                     sx={{
                       height: '100%',
                       width: '100%',
-                      padding: '20px',
-                      color: '#fff',
-                      margin: '0',
-                      border: '0',
+                      padding: (theme) => `${theme.space.spacing6}`,
+                      color: (theme) => `${theme.colors.textLight}`,
+                      margin: 0,
+                      border: 0,
                       boxSizing: 'border-box',
                       opacity: 0,
                       '&:hover': { opacity: 1 },
@@ -190,8 +200,8 @@ const HomePageTwo = ({ data }) => {
                       sx={{
                         display: 'flex',
                         flexWrap: 'wrap',
-                        marginBottom: '25px',
-                        marginTop: '1rem',
+                        marginBottom: (theme) => `${theme.space.spacing6}`,
+                        marginTop: (theme) => `${theme.space.spacing5}`,
                       }}
                     >
                       {item.meta_fields.stats.map((i, idx) => (
@@ -202,18 +212,18 @@ const HomePageTwo = ({ data }) => {
                             flexDirection: 'column',
                             flex: '0 0 50%',
                             maxWidth: '50%',
-                            paddingBottom: '0.5rem',
-                            paddingRight: '1rem',
+                            paddingBottom: (theme) => `${theme.space.spacing3}`,
+                            paddingRight: (theme) => `${theme.space.spacing5}`,
                           }}
                         >
                           <span
                             sx={{
                               fontFamily: 'Metropolis',
                               fontWeight: 700,
-                              fontSize: '25px',
+                              fontSize: (theme) => `${theme.fontSizes.h5}`,
                               display: 'inline-block',
                               lineHeight: 1.1,
-                              color: '#ffffff',
+                              color: (theme) => `${theme.colors.textLight}`,
                             }}
                           >
                             {i.value}
@@ -221,11 +231,11 @@ const HomePageTwo = ({ data }) => {
                           <p
                             sx={{
                               fontFamily: 'Inter',
-                              fontWeight: 500,
-                              fontSize: '12px',
-                              marginTop: '0',
-                              marginBottom: '0',
-                              color: '#fff',
+                              fontWeight: 'medium',
+                              fontSize: (theme) => `${theme.fontSizes.h8}`,
+                              marginTop: 0,
+                              marginBottom: 0,
+                              color: (theme) => `${theme.colors.textLight}`,
                             }}
                           >
                             {i.content}
@@ -243,10 +253,10 @@ const HomePageTwo = ({ data }) => {
                         alignItems: 'center',
                         borderRadius: '1px',
                         border: '1px solid #ffffff',
-                        color: '#ffffff',
+                        color: (theme) => `${theme.colors.textLight}`,
                         justifyContent: 'center',
                         backgroundColor: 'transparent',
-                        fontSize: '14px',
+                        fontSize: (theme) => `${theme.fontSizes.h8}`,
                         '&:hover': { color: 'inherit' },
                       }}
                     >

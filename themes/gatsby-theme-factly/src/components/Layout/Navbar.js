@@ -7,7 +7,7 @@ import { FaHome, FaBars } from 'react-icons/fa';
 
 export default function NavBar({ logo }) {
   const data = useStaticQuery(graphql`
-    query NavTQuery {
+    query NavQuery {
       dega {
         menu {
           nodes {
@@ -53,7 +53,7 @@ export default function NavBar({ logo }) {
           top: 0,
           left: 0,
           right: 0,
-          bg: 'white',
+          bg: (theme) => `${theme.colors.bgLight}`,
           borderBottomWidth: '1px',
         }}
       >
@@ -61,11 +61,17 @@ export default function NavBar({ logo }) {
           sx={{
             position: 'sticky',
             display: 'flex',
+            maxWidth: '1560px',
+            mx: 'auto',
             flexWrap: ['wrap', null, null, 'wrap'],
             alignItems: 'center',
             justifyContent: ['space-between', null, null, 'flex-start'],
-            px: 4,
-            py: 2,
+            px: (theme) => `${theme.space.spacing5}`,
+            py: (theme) => `${theme.space.spacing3}`,
+
+            '& a:hover': {
+              color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
+            },
           }}
         >
           <Link
@@ -108,7 +114,20 @@ export default function NavBar({ logo }) {
               }}
             >
               <li sx={{ display: ['none', null, null, 'block'] }}>
-                <Link to="/" sx={{ px: [2, null, null, null, 4], display: 'block', py: 2 }}>
+                <Link
+                  to="/"
+                  sx={{
+                    px: [
+                      (theme) => `${theme.space.spacing3}`,
+                      null,
+                      null,
+                      null,
+                      (theme) => `${theme.space.spacing5}`,
+                    ],
+                    display: 'block',
+                    py: (theme) => `${theme.space.spacing3}`,
+                  }}
+                >
                   <FaHome />
                 </Link>
               </li>
@@ -120,12 +139,18 @@ export default function NavBar({ logo }) {
                     to={menuItem.url}
                     titile={menuItem.title}
                     sx={{
-                      px: [2, null, null, null, 4],
+                      px: [
+                        (theme) => `${theme.space.spacing3}`,
+                        null,
+                        null,
+                        null,
+                        (theme) => `${theme.space.spacing5}`,
+                      ],
                       display: 'block',
-                      py: 2,
+                      py: (theme) => `${theme.space.spacing3}`,
                       textTransform: 'uppercase',
                       fontWeight: 'semibold',
-                      fontSize: ['0.675rem', 1],
+                      fontSize: [(theme) => `${theme.fontSizes.h8}`],
                       '&:focus': { outline: 'none' },
                     }}
                   >
@@ -147,12 +172,18 @@ export default function NavBar({ logo }) {
                 <Link
                   to="/about"
                   sx={{
-                    px: [2, null, null, null, 4],
+                    px: [
+                      (theme) => `${theme.space.spacing3}`,
+                      null,
+                      null,
+                      null,
+                      (theme) => `${theme.space.spacing5}`,
+                    ],
                     display: 'block',
-                    py: 2,
+                    py: (theme) => `${theme.space.spacing3}`,
                     textTransform: 'uppercase',
                     fontWeight: 'semibold',
-                    fontSize: ['0.675rem', 1],
+                    fontSize: [(theme) => `${theme.fontSizes.h8}`],
                     '&:focus': { outline: 'none' },
                   }}
                 >

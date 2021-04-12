@@ -12,12 +12,12 @@ const Categories = ({ categories }) =>
         display: 'flex',
         flexDirection: 'column',
         lineHeight: 'tight',
-        py: 2,
+        py: (theme) => `${theme.space.spacing3}`,
         borderBottomWidth: '1px',
         '&:last-child': {
           borderBottomWidth: 0,
         },
-        borderColor: (theme) => `${theme.colors.gray[2]}`,
+        borderColor: (theme) => `${theme.colors.borderPrimary}`,
       }}
     >
       <Link
@@ -28,8 +28,11 @@ const Categories = ({ categories }) =>
           textDecoration: 'none',
           '&:hover': { textDecoration: 'none' },
           fontWeight: 'bold',
-          fontSize: 2,
-          color: (theme) => `${theme.colors.gray[8]}`,
+          fontSize: (theme) => `${theme.fontSizes.h7}`,
+          color: (theme) => `${theme.colors.textPrimary}`,
+          '&:hover': {
+            color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
+          },
         }}
       >
         {category.name}

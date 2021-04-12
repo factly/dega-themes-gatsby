@@ -23,17 +23,28 @@ function CategoryDetailsAll({ data }) {
 
   const header = (item) => {
     return (
-      <div sx={{ mb: 6 }}>
-        <h1 sx={{ textAlign: 'center', fontSize: [5, 6], mb: 4, textTransform: 'capitalize' }}>
+      <div
+        sx={{
+          mb: (theme) => `${theme.space.spacing6}`,
+          fontSize: (theme) => `${theme.fontSizes.h6}`,
+        }}
+      >
+        <h1
+          sx={{
+            textAlign: 'center',
+            fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
+            mb: (theme) => `${theme.space.spacing5}`,
+            textTransform: 'capitalize',
+          }}
+        >
           {item.name} 
         </h1>
         <div
           id="category-description"
           sx={{
-            maxHeight: (theme) =>
-              readMore ? `calc( 1rem + ${theme.lineHeights.normal}em * 6 )` : '100%',
+            maxHeight: (theme) => (readMore ? `calc(${theme.lineHeights.normal}em * 6 )` : '100%'),
             overflow: 'hidden',
-            px: 4,
+            px: (theme) => `${theme.space.spacing5}`,
           }}
         >
           {parseEditorJsData({ content: item.description })}
@@ -42,7 +53,11 @@ function CategoryDetailsAll({ data }) {
           <button
             type="button"
             onClick={() => setReadMore((prev) => !prev)}
-            sx={{ px: 4, color: (theme) => `${theme.colors.blue[5]}` }}
+            sx={{
+              px: (theme) => `${theme.space.spacing5}`,
+              color: (theme) => `${theme.colors.textLinkPrimary}`,
+              fontSize: (theme) => `${theme.fontSizes.h6}`,
+            }}
           >
             {readMore ? 'Read more' : 'Read less'}
           </button>
