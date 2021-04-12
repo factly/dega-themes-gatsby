@@ -60,7 +60,7 @@ const Post = ({ post, observer }) => {
           <h1
             sx={{
               fontWeight: 'bold',
-              fontSize: (theme) => `${theme.fontSizes.h5}`,
+              fontSize: (theme) => [`${theme.fontSizes.h4}`, null, `${theme.fontSizes.h3}`],
               py: (theme) => `${theme.space.spacing3}`,
             }}
           >

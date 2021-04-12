@@ -65,7 +65,7 @@ const informationTools = [
     desc: 'Parlens is a tool for searching data that is indexed from Indian parliament datasets.',
   },
 ];
-
+const Heading = () => {};
 const About = () => {
   const [postActiveIndex, setPostActiveIndex] = useState('background');
 
@@ -197,7 +197,7 @@ const About = () => {
                 my: (theme) => `${theme.space.spacing6}`,
                 // pb: (theme) => `${theme.space.spacing6}`,
                 color: (theme) => `${theme.colors.textPrimary}`,
-                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticleSmall}`,
               }}
             >
               As part of their fact-checking program, social media giant Facebook has launched a
@@ -244,7 +244,7 @@ const About = () => {
                 // pb: (theme) => `${theme.space.spacing6}`,
                 color: (theme) => `${theme.colors.textPrimary}`,
 
-                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticleSmall}`,
               }}
             >
               Started as an idea in 2014, it was in the mid-2010s that Factly moved into the Data
@@ -290,7 +290,7 @@ const About = () => {
                 // pb: (theme) => `${theme.space.spacing6}`,
                 color: (theme) => `${theme.colors.textPrimary}`,
 
-                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticleSmall}`,
               }}
             >
               In 2005, India legislated one of the best ‘Right to Information’ laws in the world
@@ -335,7 +335,7 @@ const About = () => {
                 my: (theme) => `${theme.space.spacing6}`,
                 // pb: (theme) => `${theme.space.spacing6}`,
                 color: (theme) => `${theme.colors.textPrimary}`,
-                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticleSmall}`,
               }}
             >
               Factly strives to cultivate civic participation and engaging citizens in accessing,
@@ -373,7 +373,7 @@ const About = () => {
                 my: (theme) => `${theme.space.spacing6}`,
                 // pb: (theme) => `${theme.space.spacing6}`,
                 color: (theme) => `${theme.colors.textPrimary}`,
-                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticleSmall}`,
               }}
             >
               Factly will strive to transform the public information landscape in India by improving
@@ -415,7 +415,7 @@ const About = () => {
                 color: (theme) => `${theme.colors.textPrimary}`,
                 display: 'flex',
                 flexWrap: 'wrap',
-                fontSize: (theme) => `${theme.fontSizes.bodyArticle}`,
+                fontSize: (theme) => `${theme.fontSizes.bodyArticleSmall}`,
               }}
             >
               <div sx={{ display: 'flex', flexDirection: 'column', flex: '1 1 auto' }}>
@@ -477,14 +477,14 @@ const About = () => {
                     >
                       <h3
                         sx={{
-                          fontSize: (theme) => `${theme.fontSizes.h6}`,
+                          fontSize: (theme) => `${theme.fontSizes.h7}`,
                           mb: (theme) => `${theme.space.spacing5}`,
                           textTransform: 'uppercase',
                         }}
                       >
                         {tool.name}
                       </h3>
-                      <p sx={{ fontSize: (theme) => `${theme.fontSizes.h7}` }}>{tool.desc}</p>
+                      <p sx={{ fontSize: (theme) => `${theme.fontSizes.h8}` }}>{tool.desc}</p>
                     </div>
                   ))}
                 </div>

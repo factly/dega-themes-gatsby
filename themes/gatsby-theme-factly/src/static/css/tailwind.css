@@ -259,10 +259,38 @@ input:focus + .sliderF {
 }
 
 /* EditorJS parsed styles for posts*/
-.parsed p,.parsed h1, .parsed h2, .parsed h3, .parsed h4, .parsed h5, .parsed h6 {
- word-break: break-word;
- margin-top: 1rem;
- margin-bottom: 1rem;
+.parsed p,
+.parsed h1,
+.parsed h2,
+.parsed h3,
+.parsed h4,
+.parsed h5,
+.parsed h6 {
+  word-break: break-word;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.parsed p {
+  font-size: 1rem;
+}
+
+.parsed h1 {
+  font-size: 1.5rem;
+}
+.parsed h2 {
+  font-size: 1.375rem;
+}
+.parsed h3 {
+  font-size: 1.25rem;
+}
+.parsed h4 {
+  font-size: 1.125rem;
+}
+.parsed h5 {
+  font-size: 1rem;
+}
+.parsed h6 {
+  font-size: 0.875rem;
 }
 .parsed ul {
   padding-left: 2.5rem;
@@ -270,9 +298,12 @@ input:focus + .sliderF {
   list-style-position: outside;
 }
 .parsed figure img {
-  margin:auto;
+  margin: auto;
 }
- .ed-embeds, .ed-raw-html,.ed-code, .parsed figure img {
+.ed-embeds,
+.ed-raw-html,
+.ed-code,
+.parsed figure img {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
