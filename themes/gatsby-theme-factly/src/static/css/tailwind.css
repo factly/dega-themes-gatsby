@@ -302,7 +302,10 @@ input:focus + .sliderF {
 }
 .parsed .ed-embeds {
   background-color: #edf2f7;
+  border-left: 2px solid #ea364a;
   padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
 }
 .ed-embeds,
 .ed-raw-html,
