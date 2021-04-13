@@ -6,7 +6,6 @@ import { jsx } from 'theme-ui';
 import { FaHome, FaBars } from 'react-icons/fa';
 
 export default function NavBar({ logo, menu }) {
-
   const mainMenu = menu.nodes.filter((i) => i.slug === 'main')[0];
   const [showMenu, setShowMenu] = useState(false);
   const [width, setWidth] = useState(0);
@@ -48,6 +47,7 @@ export default function NavBar({ logo, menu }) {
             position: 'sticky',
             display: 'flex',
             maxWidth: '1560px',
+            minHeight: '60px',
             mx: 'auto',
             flexWrap: ['wrap', null, null, 'wrap'],
             alignItems: 'center',
