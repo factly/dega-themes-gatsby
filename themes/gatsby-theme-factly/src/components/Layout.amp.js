@@ -15,9 +15,11 @@ const LayoutAmp = (props) => {
         site_address
         fav_icon {
           url
+          dimensions
         }
         logo {
           url
+          dimensions
         }
       }
     }

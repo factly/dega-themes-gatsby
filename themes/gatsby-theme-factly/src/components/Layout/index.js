@@ -16,6 +16,14 @@ const Layout = (props) => {
   const data = useStaticQuery(graphql`
     query {
       dega {
+        menu {
+          nodes {
+            menu
+            id
+            slug
+            name
+          }
+        }
         space {
           description
           name
@@ -24,16 +32,18 @@ const Layout = (props) => {
           site_address
           fav_icon {
             url
+            dimensions
           }
           logo {
             url
+            dimensions
           }
         }
       }
     }
   `);
 
-  const { space } = data.dega;
+  const { space, menu } = data.dega;
   const { children } = props;
   return (
     <>
@@ -47,7 +57,7 @@ const Layout = (props) => {
       >
         {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
       </Seo>
-      <Navbar logo={space.logo.url.proxy} />
+      <Navbar logo={space.logo.url.proxy} menu={menu}/>
       <main
         style={{ maxWidth: '1560px' }}
         sx={{

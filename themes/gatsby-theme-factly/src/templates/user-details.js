@@ -111,6 +111,7 @@ export const query = graphql`
         email
         medium {
           url
+          dimensions
         }
         social_media_urls
         description
@@ -138,6 +139,7 @@ export const query = graphql`
           medium {
             alt_text
             url
+            dimensions
           }
           format {
             name
