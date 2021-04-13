@@ -1,31 +1,28 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import Seo from './Seo';
 
-const LayoutAmp = (props) => (
-  <StaticQuery
-    query={graphql`
-      query layoutsQuery {
-        dega {
-          space {
-            description
-            name
-            site_title
-            tag_line
-            site_address
-            fav_icon {
-              url
-            }
-            logo_mobile {
-              url
-            }
-          }
+const LayoutAmp = (props) => {
+  const data = useStaticQuery(graphql`
+  query {
+    dega {
+      space {
+        description
+        name
+        site_title
+        tag_line
+        site_address
+        fav_icon {
+          url
+        }
+        logo {
+          url
         }
       }
-    `}
-    render={({ dega }) => {
-      const { space } = dega;
+    }
+  }`)
+      const { space } = data.dega;
       const { children } = props;
       return (
         <>
@@ -74,8 +71,6 @@ const LayoutAmp = (props) => (
           </div>
         </>
       );
-    }}
-  />
-);
+};
 
 export default LayoutAmp;
