@@ -7,6 +7,8 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import _ from 'lodash';
 import parseDate from '../../utils/parseDate';
 import addDefaultSrc from '../../utils/addDefaultSrc';
+import Img from 'gatsby-image/withIEPolyfill';
+import generateFluidObject from '../../utils/generateFluidObject';
 
 /**
  * TODO: Change the data structure of props
@@ -471,14 +473,19 @@ const StoryCard = ({
                     display: 'block',
                     width: '100%',
                     height: '100%',
-                    background: 'no-repeat center',
-                    backgroundSize: ' cover',
-                    backgroundImage: `url(${storyData.medium?.url.proxy})`,
                     position: 'absolute',
                     textDecoration: 'none',
                     touchAction: 'manipulation',
                   }}
-                ></Link>
+                >
+                  <Img
+                    sx={{ height: '100%', objectFit: 'cover' }}
+                    fluid={generateFluidObject({
+                      url: storyData.medium?.url.proxy,
+                      dimensions: storyData.medium?.dimensions,
+                    })}
+                  />
+                </Link>
               </div>
             </div>
           </div>
@@ -492,7 +499,7 @@ const StoryCard = ({
               flex: '1 0 auto',
             }}
           >
-            <h3 sx={{fontSize: theme=>`${theme.fontSizes.h6}`}}>{storyData.title}</h3>
+            <h3 sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}>{storyData.title}</h3>
             {excerpt && (
               <p sx={{ fontSize: (theme) => `${theme.fontSizes.bodySmall}` }}>
                 {_.truncate(storyData.excerpt, {

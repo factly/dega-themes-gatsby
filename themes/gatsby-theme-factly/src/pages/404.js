@@ -5,6 +5,8 @@ import { graphql, Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import Layout from '../components/Layout/index';
 import addDefaultSrc from '../utils/addDefaultSrc';
+import Img from 'gatsby-image/withIEPolyfill';
+import generateFluidObject from '../utils/generateFluidObject';
 
 const PageNotFound = ({ data }) => (
   <Layout>
@@ -21,14 +23,20 @@ const PageNotFound = ({ data }) => (
         }}
       >
         Go to HomePage
-        <img
+        {/* <img
         sx={{ mx: 'auto', display: 'block', maxWidth: 300 }}
         src={data.dega.space.logo.url.proxy}
         alt="Logo"
         onError={addDefaultSrc}
-      />
+      /> */}
+        <Img
+          sx={{ mx: 'auto', display: 'block', maxWidth: 300 }}
+          fluid={generateFluidObject({
+            url: data.dega.space.logo.url.proxy,
+            dimensions: data.dega.space.logo.dimensions,
+          })}
+        />
       </Link>
-      
     </div>
   </Layout>
 );
@@ -40,6 +48,7 @@ export const query = graphql`
       space {
         logo {
           url
+          dimensions
         }
       }
     }
