@@ -51,6 +51,7 @@ export const query = graphql`
           medium {
             alt_text
             url
+            dimensions
           }
           format {
             name

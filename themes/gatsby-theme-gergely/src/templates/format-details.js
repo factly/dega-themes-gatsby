@@ -10,7 +10,7 @@ function FormatDetails({ data }) {
   const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
   return (
     <Layout>
-      <div sx={{ mx: 'auto', maxWidth: 1024 }}>
+      <div sx={{ mx: 'auto', maxWidth: 1560 }}>
         <h1
           sx={{
             mt: (theme) => `${theme.space.layout4}`,
@@ -76,6 +76,7 @@ export const query = graphql`
           medium {
             alt_text
             url
+            dimensions
           }
           format {
             name

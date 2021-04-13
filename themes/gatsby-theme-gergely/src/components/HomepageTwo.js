@@ -2,10 +2,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import { Helmet } from 'react-helmet';
 
 // import '../static/css/main.scss';
-// import { Helmet } from 'react-helmet';
 import Seo from './Seo';
 import headerImg from '../static/health-site-header.png'
 
@@ -161,7 +159,7 @@ const HomePageTwo = ({ data }) => {
                   key={i}
                   className="card-content"
                   style={{
-                    backgroundImage: `url(${item.medium && item.medium.url.proxy})`,
+                    backgroundImage: `url(${item.medium && item.medium.url.proxy}?rs:fill/w:500)`,
                   }}
                   sx={{
                     height: '100%',

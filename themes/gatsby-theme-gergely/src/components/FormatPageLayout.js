@@ -32,7 +32,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
       >
         <div
           className="main-content"
-          sx={{ order: [2, null, null, null, 1], maxWidth: 1024, width: '100%', mx: 'auto' }}
+          sx={{ order: [2, null, null, null, 1], maxWidth: 1560, width: '100%', mx: 'auto' }}
         >
           <div
             sx={{

@@ -1,27 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /** @jsx jsx */
 import React, { useState, useEffect } from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
+import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import { FaHome, FaBars } from 'react-icons/fa';
 
-export default function NavBar({ logo }) {
-  const data = useStaticQuery(graphql`
-    query NavQuery {
-      dega {
-        menu {
-          nodes {
-            menu
-            id
-            slug
-            name
-          }
-        }
-      }
-    }
-  `);
-
-  const menu = data.dega.menu.nodes.filter((i) => i.slug === 'main')[0];
+export default function NavBar({ logo, menu }) {
+  const mainMenu = menu.nodes.filter((i) => i.slug === 'main')[0];
   const [showMenu, setShowMenu] = useState(false);
   const [width, setWidth] = useState(0);
 
@@ -62,6 +47,7 @@ export default function NavBar({ logo }) {
             position: 'sticky',
             display: 'flex',
             maxWidth: '1560px',
+            minHeight: '60px',
             mx: 'auto',
             flexWrap: ['wrap', null, null, 'wrap'],
             alignItems: 'center',
@@ -132,7 +118,7 @@ export default function NavBar({ logo }) {
                 </Link>
               </li>
 
-              {menu?.menu.map((menuItem, index) => (
+              {mainMenu?.menu.map((menuItem, index) => (
                 <li key={menuItem.title}>
                   <Link
                     key={`navbar-${index}`}
