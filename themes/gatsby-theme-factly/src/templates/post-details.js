@@ -95,61 +95,28 @@ const PostDetails = ({ data }) => {
         canonical={`${dega.space.site_address}/${dega.post.slug}`}
         type="article"
       />
-      <div sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-        <div
-          className="sidebar"
-          sx={{
-            display: [null, null, null, 'flex'],
-            width: [null, null, null, '1/4'],
-            borderRightWidth: 'px',
-            borderLeftWidth: 'px',
-            position: 'sticky',
-          }}
-        >
-          <div
-            sx={{
-              py: (theme) => `${theme.space.spacing5}`,
-              borderBottomWidth: 'px',
-              px: (theme) => `${theme.space.spacing6}`,
-            }}
-          >
-            <h5 className="heading" sx={{ m: 0, fontSize: (theme) => `${theme.fontSizes.h7}` }}>
-              Recent Posts
-            </h5>
-          </div>
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={handleLoadMoreRelatedPosts}
-            hasMore={hasNextPageRelatedPost}
-            useWindow={false}
-            loader={
-              <div className="loader" key={0}>
-                Loading ...
-              </div>
-            }
-          >
-            {relatedPosts.map((post, index) => (
-              <StoryLinks
-                key={`link${post.id}`}
-                post={post}
-                postActiveIndex={postActiveIndex}
-                categories
-                index={index}
-              />
-            ))}
-          </InfiniteScroll>
-        </div>
+      <div
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          position: 'relative',
+        }}
+      >
         <div
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            width: ['full', null, null, '3/4'],
+            width: '100%',
+            maxWidth: 1024,
+            mx: 'auto',
             p: [
               (theme) => `${theme.space.spacing3}`,
               null,
               null,
-              (theme) => `${theme.space.spacing6}`,
+              (theme) => `${theme.space.spacing8}`,
             ],
+            pl: (theme) => [null, null, `${theme.space.spacing8}`],
           }}
         >
           <InfiniteScroll
@@ -177,7 +144,8 @@ const PostDetails = ({ data }) => {
                   display: ['none', null, 'flex'],
                   flexDirection: 'column',
                   position: 'fixed',
-                  right: 0,
+                  ml: (theme) => `-${theme.space.spacing8}`,
+                  // left: 0,
                   alignItems: 'center',
                   justifyContent: ['flex-start', null, 'flex-end'],
                   top: '40vh',
@@ -198,7 +166,7 @@ const PostDetails = ({ data }) => {
                   }}
                 >
                   <FaFacebookSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#3b5998"
                   />
                 </a>
@@ -217,7 +185,7 @@ const PostDetails = ({ data }) => {
                   }}
                 >
                   <FaTwitterSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#1da1f2"
                   />
                 </a>
@@ -236,7 +204,7 @@ const PostDetails = ({ data }) => {
                   }}
                 >
                   <FaWhatsappSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#25d366"
                   />
                 </a>
