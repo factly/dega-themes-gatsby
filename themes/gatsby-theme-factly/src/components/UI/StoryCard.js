@@ -152,7 +152,7 @@ const StoryCard = ({
                     ],
                   }}
                 >
-                  {parseDate(storyData.created_at)}
+                  {parseDate(storyData.published_date)}
                 </p>
               </div>
             </div>
@@ -260,7 +260,7 @@ const StoryCard = ({
                 fontSize: [0, null, (theme) => `${theme.fontSizes.h8}`],
               }}
             >
-              {parseDate(storyData.created_at)}
+              {parseDate(storyData.published_date)}
             </p>
           </div>
         </div>
@@ -374,7 +374,7 @@ const StoryCard = ({
                     fontSize: [0, null, (theme) => `${theme.fontSizes.h8}`],
                   }}
                 >
-                  {parseDate(storyData.created_at)}
+                  {parseDate(storyData.published_date)}
                 </p>
               </div>
             </div>
@@ -439,7 +439,7 @@ const StoryCard = ({
             >
               <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}</span>
               {' / '}
-              <span>{parseDate(storyData.created_at)}</span>
+              <span>{parseDate(storyData.published_date)}</span>
             </p>
           </div>
         </article>
@@ -532,7 +532,7 @@ const StoryCard = ({
                   <span>/</span>
                 </>
               )}
-              <span>{parseDate(storyData.created_at)}</span>
+              <span>{parseDate(storyData.published_date)}</span>
             </div>
           </Link>
         </div>
@@ -606,7 +606,7 @@ const StoryCard = ({
                   <span>/</span>
                 </>
               )}
-              <span>{parseDate(storyData.created_at)}</span>
+              <span>{parseDate(storyData.published_date)}</span>
             </div>
           </Link>
         </div>

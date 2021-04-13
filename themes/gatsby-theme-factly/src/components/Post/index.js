@@ -76,7 +76,7 @@ const Post = ({ post, observer }) => {
               justifyContent: 'space-between',
             }}
           >
-            <PostInfo date={post.created_at} users={post.users} categories={post.categories} />
+            <PostInfo date={post.published_date} users={post.users} categories={post.categories} />
             <ShareButtonGroup
               setRef={headerSocialIcon}
               data={{

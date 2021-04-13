@@ -90,7 +90,7 @@ const PostInfo = ({ users, categories, date }) => (
           color: (theme) => `${theme.colors.textSecondary}`,
           fontSize: (theme) => `${theme.fontSizes.h8}`,
           display: 'flex',
-          alignItems: 'baseline',
+          alignItems: 'center',
         }}
       >
         <FaRegClock sx={{ display: 'inline-block', mr: (theme) => `${theme.space.spacing2}` }} />{' '}
