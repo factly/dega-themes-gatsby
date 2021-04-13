@@ -45,6 +45,9 @@ const Post = ({ post, observer }) => {
           px: (theme) => `${theme.space.spacing6}`,
           my: (theme) => `${theme.space.spacing6}`,
           fontSize: (theme) => `${theme.fontSizes.body}`,
+          '&:first-of-type': {
+            mt: 0,
+          },
         }}
       >
         <div
