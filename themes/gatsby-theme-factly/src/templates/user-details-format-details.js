@@ -114,6 +114,7 @@ export const query = graphql`
         description
         medium {
           url
+          dimensions
         }
       }
       formats(spaces: $sid) {
@@ -141,6 +142,7 @@ export const query = graphql`
           medium {
             alt_text
             url
+            dimensions
           }
           published_date
           id

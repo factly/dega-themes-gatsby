@@ -76,6 +76,7 @@ export const query = graphql`
           alt_text
           id
           url
+          dimensions
         }
         format {
           name
@@ -111,6 +112,7 @@ export const query = graphql`
               alt_text
               id
               url
+              dimensions
             }
           }
         }
@@ -124,6 +126,7 @@ export const query = graphql`
             alt_text
             id
             url
+            dimensions
           }
         }
       }

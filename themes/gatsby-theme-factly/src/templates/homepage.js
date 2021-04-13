@@ -40,6 +40,7 @@ export const query = graphql`
           meta_fields
           medium {
             url
+            dimensions
           }
         }
       }
@@ -57,6 +58,7 @@ export const query = graphql`
           medium {
             alt_text
             url
+            dimensions
           }
           published_date
           id
@@ -81,6 +83,7 @@ export const query = graphql`
           medium {
             alt_text
             url
+            dimensions
           }
           published_date
           id
