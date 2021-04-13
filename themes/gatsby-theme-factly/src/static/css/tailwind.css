@@ -54,7 +54,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: '#e2e8f0';
+  background-color: #e2e8f0;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -69,7 +69,7 @@ div::-webkit-scrollbar-track {
 }
 
 div::-webkit-scrollbar-thumb {
-  background-color: '#e2e8f0';
+  background-color: #e2e8f0;
   outline: none;
 }
 div {
@@ -100,11 +100,6 @@ div {
   flex-direction: column;
 }
 
-@screen md {
-  .horizontal {
-    flex-direction: row;
-  }
-}
 
 .active {
   color: #3b82f6;

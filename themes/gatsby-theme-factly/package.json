@@ -51,6 +51,7 @@
     "gatsby-plugin-amp": "^0.2.2",
     "gatsby-plugin-feed": "^3.2.0",
     "gatsby-plugin-google-analytics": "^3.2.0",
+    "gatsby-plugin-image": "^1.2.1",
     "gatsby-plugin-manifest": "^3.2.0",
     "gatsby-plugin-offline": "^4.2.0",
     "gatsby-plugin-postcss": "^4.2.0",
