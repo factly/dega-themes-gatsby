@@ -7,7 +7,7 @@ const FooterTwo = () => (
     sx={{
       bg: (theme) => `${theme.colors.bgDark}`,
       color: (theme) => `${theme.colors.textFooterDark}`,
-      width: '100vw',
+      width: '100%',
     }}
   >
     <div
