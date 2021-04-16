@@ -1,0 +1,190 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1440px;
+  margin: 1rem auto;
+  .card {
+    position: relative;
+    margin: 0.25rem;
+    padding: 0;
+    border: 0;
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0;
+    border: 0 solid rgba(0, 0, 0, 0.125);
+    .card-content {
+      height: 100%;
+      color: white;
+      font-family: 'Inter';
+      background-size: cover;
+      background-repeat: no-repeat;
+      text-decoration: none;
+      box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.33);
+    }
+    .card-body {
+      height: 100%;
+      width: 100%;
+      padding: 20px;
+      color: #fff;
+      margin: 0;
+      border: 0;
+      box-sizing: border-box;
+      opacity: 0;
+      &:hover {
+        opacity: 1;
+      }
+      .card-count {
+        opacity: 0.28;
+        font-family: 'Metropolis';
+        font-size: 32px;
+        margin-bottom: 15px;
+        display: inline-block;
+        line-height: 1.11;
+      }
+      .card-goal {
+        font-family: 'Metropolis';
+        font-size: 20px;
+        line-height: 1.11;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .card-desc {
+        font-family: 'Inter';
+        font-size: 14px;
+        font-weight: 500;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        color: #ffffff;
+      }
+      .info {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        margin-top: 1rem;
+        div {
+          display: flex;
+          flex-direction: column;
+          flex: 0 0 50%;
+          max-width: 50%;
+          padding-bottom: 0.5rem;
+          padding-right: 1rem;
+          span {
+            font-family: 'Metropolis';
+            font-size: 25px;
+            display: inline-block;
+            line-height: 1.1;
+            color: #ffffff;
+          }
+          p {
+            font-family: 'Inter';
+            font-weight: 500;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 0;
+            color: #ffffff;
+          }
+        }
+      }
+      a[type='button'] {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border-radius: 1px;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        justify-content: center;
+        background-color: transparent;
+        font-size: 14px;
+      }
+    }
+    img {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      max-width: calc(100% - 32px);
+    }
+    #view-more {
+      color: black;
+    }
+    &:hover {
+      img {
+        visibility: hidden;
+      }
+      #view-more {
+        text-decoration: underline;
+      }
+    }
+    @media (max-width: 550px) {
+      img {
+        visibility: hidden;
+      }
+      .card-body {
+        opacity: 1;
+      }
+    }
+    @media (hover: none) {
+      img {
+        visibility: hidden;
+      }
+      .card-body {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @media (min-width: 550px) {
+    .card {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  @media (min-width: 768px) {
+    .card {
+      flex: 0 0 32%;
+      max-width: 32%;
+    }
+  }
+  /* @media (min-width: 992px) {
+    .card {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+  }
+  @media (min-width: 1200px) {
+    .card {
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+  }*/
+}
+.info {
+  h3 {
+    font-family: 'Metropolis';
+    font-size: 20px;
+    line-height: 1.11;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  // ul {
+  //   list-style-type: disc;
+  //   padding-left: 1rem;
+  //   li {
+  //     font-family: 'Inter';
+  //     font-size: 14px;
+  //     font-weight: 500;
+
+  //     color: #ffffff;
+  //   }
+  // }
+}

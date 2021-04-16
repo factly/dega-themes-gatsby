@@ -18,7 +18,7 @@
   "dependencies": {
     "@factly/gatsby-theme-factly": "^1.0.5",
     "gatsby": "^3.1.2",
-    "gatsby-plugin-sass": "^3.0.0",
+    "gatsby-plugin-sass": "^4.1.0",
     "gatsby-plugin-theme-ui": "^0.3.5",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",

@@ -2,20 +2,18 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import InfiniteScroll from 'react-infinite-scroller';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faFacebookSquare,
-  faTwitterSquare,
-  faWhatsappSquare,
-} from '@fortawesome/free-brands-svg-icons';
 
 import { jsx } from 'theme-ui';
-import Post from '../components/Post';
+import Post from '../components/Post/index.js';
 import StoryLinks from '../components/StoryLinks';
-import Layout from '../components/Layout';
+import Layout from '../components/Layout/index';
 import { isBrowser } from '../utils/isBrowser';
 import Seo from '../components/Seo';
+import { FaTwitterSquare, FaFacebookSquare, FaWhatsappSquare } from 'react-icons/fa';
 
+/**
+ * TODO: Add loader for infinite-scroller
+ */
 const PostDetails = ({ data }) => {
   const { dega } = data;
   const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
@@ -92,55 +90,33 @@ const PostDetails = ({ data }) => {
     <Layout>
       <Seo
         title={dega.post.title}
-        description={dega.post.excerpt ? dega.post.excerpt : ''}
+        description={dega.post.excerpt}
         image={`${dega.post.medium?.url?.proxy}`}
         canonical={`${dega.space.site_address}/${dega.post.slug}`}
         type="article"
       />
-      <div sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-        <div
-          className="sidebar"
-          sx={{
-            display: [null, null, null, 'flex'],
-            width: [null, null, null, '1/4'],
-            borderRightWidth: 'px',
-            borderLeftWidth: 'px',
-            position: 'sticky',
-          }}
-        >
-          <div sx={{ pb: 4, borderBottomWidth: 'px', px: 6 }}>
-            <h5 className="heading" sx={{ m: 0 }}>
-              Recent Posts
-            </h5>
-          </div>
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={handleLoadMoreRelatedPosts}
-            hasMore={hasNextPageRelatedPost}
-            useWindow={false}
-            loader={
-              <div className="loader" key={0}>
-                Loading ...
-              </div>
-            }
-          >
-            {relatedPosts.map((post, index) => (
-              <StoryLinks
-                key={`link${post.id}`}
-                post={post}
-                postActiveIndex={postActiveIndex}
-                categories
-                index={index}
-              />
-            ))}
-          </InfiniteScroll>
-        </div>
+      <div
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          position: 'relative',
+        }}
+      >
         <div
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            width: ['full', null, null, '3/4'],
-            p: [2, null, null, 6],
+            width: '100%',
+            maxWidth: 1024,
+            mx: 'auto',
+            p: [
+              (theme) => `${theme.space.spacing3}`,
+              null,
+              null,
+              (theme) => `${theme.space.spacing8}`,
+            ],
+            pl: (theme) => [null, null, `${theme.space.spacing8}`],
           }}
         >
           <InfiniteScroll
@@ -168,7 +144,8 @@ const PostDetails = ({ data }) => {
                   display: ['none', null, 'flex'],
                   flexDirection: 'column',
                   position: 'fixed',
-                  right: 0,
+                  ml: (theme) => `-${theme.space.spacing8}`,
+                  // left: 0,
                   alignItems: 'center',
                   justifyContent: ['flex-start', null, 'flex-end'],
                   top: '40vh',
@@ -181,14 +158,17 @@ const PostDetails = ({ data }) => {
                   rel="noopener noreferrer"
                   sx={{
                     display: 'block',
-                    mx: 2,
+                    mx: (theme) => `${theme.space.spacing3}`,
                     '&:first-of-type': { mx: 0 },
-                    my: 1,
+                    my: (theme) => `${theme.space.spacing2}`,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
                 >
-                  <FontAwesomeIcon color="#3b5998" size="lg" icon={faFacebookSquare} />
+                  <FaFacebookSquare
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
+                    color="#3b5998"
+                  />
                 </a>
                 <a
                   title="Tweet it"
@@ -197,14 +177,17 @@ const PostDetails = ({ data }) => {
                   rel="noopener noreferrer"
                   sx={{
                     display: 'block',
-                    mx: 2,
+                    mx: (theme) => `${theme.space.spacing3}`,
                     '&:first-of-type': { mx: 0 },
-                    my: 1,
+                    my: (theme) => `${theme.space.spacing2}`,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
                 >
-                  <FontAwesomeIcon color="#1da1f2" size="lg" icon={faTwitterSquare} />
+                  <FaTwitterSquare
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
+                    color="#1da1f2"
+                  />
                 </a>
                 <a
                   title="Share on WhatsApp"
@@ -213,17 +196,20 @@ const PostDetails = ({ data }) => {
                   rel="noopener noreferrer"
                   sx={{
                     display: 'block',
-                    mx: 2,
+                    mx: (theme) => `${theme.space.spacing3}`,
                     '&:first-of-type': { mx: 0 },
-                    my: 1,
+                    my: (theme) => `${theme.space.spacing2}`,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
                 >
-                  <FontAwesomeIcon color="#25d366" size="lg" icon={faWhatsappSquare} />
+                  <FaWhatsappSquare
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
+                    color="#25d366"
+                  />
                 </a>
               </div>
-              <div
+              {/* <div
                 sx={{
                   display: [null, null, null, 'none'],
                   position: 'fixed',
@@ -259,7 +245,7 @@ const PostDetails = ({ data }) => {
                     />
                   </g>
                 </svg>
-              </div>
+              </div> */}
             </>
           )}
         </div>
@@ -305,6 +291,7 @@ export const query = graphql`
             alt_text
             id
             url
+            dimensions
           }
           format {
             name
@@ -340,6 +327,7 @@ export const query = graphql`
                 alt_text
                 id
                 url
+                dimensions
               }
             }
           }
@@ -353,6 +341,7 @@ export const query = graphql`
               alt_text
               id
               url
+              dimensions
             }
           }
         }
@@ -384,6 +373,7 @@ export const query = graphql`
           alt_text
           id
           url
+          dimensions
         }
         format {
           name
@@ -419,6 +409,7 @@ export const query = graphql`
               alt_text
               id
               url
+              dimensions
             }
           }
         }
@@ -432,6 +423,7 @@ export const query = graphql`
             alt_text
             id
             url
+            dimensions
           }
         }
       }
