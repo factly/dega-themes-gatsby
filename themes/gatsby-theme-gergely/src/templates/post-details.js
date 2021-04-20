@@ -294,7 +294,7 @@ export const query = graphql`
       space {
         site_address
       }
-      posts(page: 1, limit: 20, sortBy: "published_date", sortOrder: "desc", spaces: $sid) {
+      posts(page: 1, limit: 100, sortBy: "published_date", sortOrder: "desc", spaces: $sid) {
         nodes {
           published_date
           description
@@ -344,11 +344,10 @@ export const query = graphql`
             }
             description
             id
-            review
+            fact
             review_sources
-            review_tag_line
             slug
-            title
+            claim
             rating {
               description
               id
@@ -426,11 +425,10 @@ export const query = graphql`
           }
           description
           id
-          review
+          fact
           review_sources
-          review_tag_line
           slug
-          title
+          claim
           rating {
             description
             id

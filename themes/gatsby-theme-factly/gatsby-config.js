@@ -148,7 +148,7 @@ module.exports = ({
             query: `
             {
               dega {
-                posts(spaces:[${client}],limit:20,page:1) {
+                posts(spaces:[${client}],limit:100,page:1) {
                   nodes {
                     excerpt
                     description

@@ -122,7 +122,7 @@ const Post = ({ post, observer }) => {
                       >
                         Claim:{' '}
                       </h4>
-                      {claim.title}
+                      {claim.claim}
                     </div>
                     <div>
                       <h4
@@ -132,7 +132,7 @@ const Post = ({ post, observer }) => {
                       >
                         Fact:
                       </h4>
-                      {parseEditorJsData({ content: claim.review, scripts: true })}
+                      <p dangerouslySetInnerHTML={{ __html: claim.fact }} />
                     </div>
                   </div>
                 )}
