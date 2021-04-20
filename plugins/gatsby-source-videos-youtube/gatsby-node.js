@@ -2,7 +2,7 @@ const fetch = require('isomorphic-unfetch');
 const _ = require('lodash');
 const { createRemoteFileNode } = require('gatsby-source-filesystem');
 
-exports.onPreInit = () => console.log('Loaded source-plugin');
+exports.onPreInit = () => console.log('Loaded youtube source plugin');
 
 const createNodeFromData = (item, nodeType, helpers) => {
   const nodeMetadata = {
@@ -40,9 +40,9 @@ exports.sourceNodes = async (
     actions: { createNode, createTypes, touchNode },
     createContentDigest,
     createNodeId,
+    getNode,
     cache,
     getNodesByType,
-    getNode,
     reporter,
   },
   { apiKey, channelId },
@@ -51,10 +51,10 @@ exports.sourceNodes = async (
   if (!channelId) return reporter.panic('gatssby-source-youtube: You must provide your channel id');
   const helpers = { createNode, createContentDigest, createNodeId };
 
-  getNodesByType('Channel').forEach((node) => touchNode({ nodeId: node.id }));
-  getNodesByType('ChannelSections').forEach((node) => touchNode({ nodeId: node.id }));
-  getNodesByType('Playlist').forEach((node) => touchNode({ nodeId: node.id }));
-  getNodesByType('Video').forEach((node) => touchNode({ nodeId: node.id }));
+  getNodesByType('Channel').forEach((node) => touchNode(getNode(node.id)));
+  getNodesByType('ChannelSections').forEach((node) => touchNode(getNode(node.id)));
+  getNodesByType('Playlist').forEach((node) => touchNode(getNode(node.id)));
+  getNodesByType('Video').forEach((node) => touchNode(getNode(node.id)));
 
   let playlistData = await cache.get(`playlists`);
   let channelsData = await cache.get(`channels`);
@@ -184,14 +184,15 @@ exports.sourceNodes = async (
   });
   //build channelsection data
   channelSections.forEach((section) => {
-    if (section.snippet.type === 'recentUploads') {
+    // ?different types of section: 'recentuploads', 'popularuploads', 'singleplaylist','allplaylists', 'multiplechannels',
+    if (section.snippet.type === 'recentuploads') {
       section.videos = _.reverse(
         videoNodeId[channelsData[0].contentDetails.relatedPlaylists.uploads],
       ).slice(0, 5);
       section.playlist = _.find(playlistData, {
         id: channelsData[0].contentDetails.relatedPlaylists.uploads,
       });
-    } else if (section.snippet.type === 'singlePlaylist') {
+    } else if (section.snippet.type === 'singleplaylist') {
       section.videos = _.reverse(videoNodeId[section.contentDetails.playlists[0]]).slice(0, 5);
       section.playlist = _.find(playlistData, {
         id: section.contentDetails.playlists[0],
@@ -208,57 +209,202 @@ exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
   type Channel implements Node {
     id: ID!
-    local: File @link
+    image: File @link(from: "image___NODE")
+    kind: String
+    etag: String
+    snippet: ChannelSnippet
+    contentDetails: ChannelContentDetails
+    statistics: ChannelStatistics
+    channelId: String
+    parent: Node
+    children: [Node!]!
+    internal: Internal!
   }
   type Playlist implements Node {
     id: ID!
-    local: File @link
+    image: File @link(from: "image___NODE")
     videos: [Video] @link
+    kind: String
+    etag: String
+    snippet: PlaylistSnippet
+    contentDetails: ContentDetails
+    playlistId: String
+    list: Boolean
+    parent: Node
+    children: [Node!]!
+    internal: Internal!
+  }
+  type PlaylistSnippet {
+    publishedAt: Date @dateformat
+    channelId: String
+    title: String
+    description: String
+    thumbnails: SnippetThumbnails
+    channelTitle: String
+    localized: Localized
+  }
+  type ChannelSectionsPlaylist {
+    id: String
+    list: Boolean
+    snippet: ChannelSectionsPlaylistSnippet
+    contentDetails: ContentDetails
+    videos: [String]
+    playlistId: String
+    kind: String
+    etag: String
+  }
+  type ChannelSectionsPlaylistSnippet {
+    title: String
+    channelTitle: String
+    publishedAt: Date @dateformat
+    channelId: String
+    description: String
+    thumbnails: Thumbnails
+    localized: Localized
+  }
+  type ContentDetails {
+    itemCount: Int
   }
   type Video implements Node {
     id: ID!
-    local: File @link
+    image: File @link(from: "image___NODE")
+    playlistIds: [String]
+    positions: [VideoPositions]
+    kind: String
+    etag: String
+    snippet: VideoSnippet
+    contentDetails: VideoContentDetails
+    parent: Node
+    children: [Node!]!
+    internal: Internal!
   }
 
   type ChannelSections implements Node {
     id: ID!
     videos: [Video] @link
+    kind: String
+    etag: String
+    snippet: ChannelSectionsSnippet
+    playlist: ChannelSectionsPlaylist
+    contentDetails: ContentDetails
+    parent: Node
+    children: [Node!]!
+    internal: Internal!
+  }
+  type ChannelSectionsSnippet {
+    type: String
+    style: String
+    channelId: String
+    position: Int
+  }
+  type ChannelSnippet {
+    title: String
+    description: String
+    customUrl: String
+    publishedAt: Date @dateformat
+    thumbnails: ChannelSnippetThumbnails
+    localized: Localized
+    country: String
+  }
+  type ChannelSnippetThumbnails {
+    default: Thumbnails
+    medium: Thumbnails
+    high: Thumbnails
+  }
+  type Localized {
+    title: String
+    description: String
+  }
+  type ChannelContentDetails {
+    relatedPlaylists: ChannelContentDetailsRelatedPlaylists
+  }
+  type ChannelContentDetailsRelatedPlaylists {
+    likes: String
+    favorites: String
+    uploads: String
+  }
+  type ChannelStatistics {
+    viewCount: String
+    subscriberCount: String
+    hiddenSubscriberCount: Boolean
+    videoCount: String
+  }
+  type VideoPositions {
+    position: Int
+    playlist: String
+  }
+  type VideoSnippet {
+    publishedAt: Date @dateformat
+    channelId: String
+    title: String
+    description: String
+    thumbnails: SnippetThumbnails
+    channelTitle: String
+    playlistId: String
+    position: Int
+    resourceId: VideoSnippetResourceId
+  }
+  type VideoContentDetails {
+    videoId: String
+    videoPublishedAt: Date @dateformat
+  }
+  type SnippetThumbnails {
+    default: Thumbnails
+    medium: Thumbnails
+    high: Thumbnails
+    standard: Thumbnails
+    maxres: Thumbnails
+  }
+  type Thumbnails {
+    url: String
+    width: Int
+    height: Int
+  }
+  type VideoSnippetResourceId {
+    kind: String
+    videoId: String
   }
 `;
   createTypes(typeDefs);
 };
 
 exports.onCreateNode = async ({
-  actions: { createNode },
+  actions: { createNode, touchNode },
   node,
   store,
+  getNode,
   cache,
   createNodeId,
   reporter,
 }) => {
   if (
-    node.internal.type === 'Channel' ||
-    node.internal.type === 'Playlist' ||
-    (node.internal.type === 'Video' && node.snippet.thumbnails && node.snippet.thumbnails.high)
+    (node.internal.type === 'Channel' ||
+      node.internal.type === 'Playlist' ||
+      node.internal.type === 'Video') &&
+    node.snippet.thumbnails &&
+    node.snippet.thumbnails.high
   ) {
     let fileNode;
     let imageCacheKey = null;
     if (node.snippet.title !== 'Uploads') {
       const imageName = node.snippet.thumbnails.high.url.match(/([^/]*)\/*$/)[1];
-      imageCacheKey = `local-image-${imageName}-${node.id}`;
+      imageCacheKey = `image-${imageName}-${node.id}`;
       const cachedImage = await cache.get(imageCacheKey);
+      // console.log({ cachedImage });
       if (cachedImage) {
         const { fileNodeID } = cachedImage;
-        touchNode({ nodeId: fileNodeID });
+        //  console.log({ fileNodeID });
+        touchNode(getNode(fileNodeID));
         console.log(`Image from Cache: ${imageName}`);
-        node.local = fileNodeID;
+        node.image = fileNodeID;
+        // console.log({ NodeImage: node.image });
         return;
       }
     }
 
     try {
       if (node.snippet.title !== 'Uploads') {
-        const { id } = await createRemoteFileNode({
+        fileNode = await createRemoteFileNode({
           url: node.snippet.thumbnails.high.url,
           cache,
           store,
@@ -266,20 +412,21 @@ exports.onCreateNode = async ({
           createNodeId,
           parentNodeId: node.id,
         });
-        fileNode = id;
+        // fileNode = id;
       }
     } catch (err) {
       reporter.log(`gatsby-source-youtube: Error occured handling file at ${node.snippet.title}. Skipping!
 Error: ${err}`);
     }
 
-    node.file___NODE = fileNode;
-
-    if (fileNode && imageCacheKey) {
+    if (
+      fileNode
+      && imageCacheKey
+    ) {
       await cache.set(imageCacheKey, {
         fileNodeID: fileNode,
       });
-      node.local = fileNode;
+      node.image___NODE = fileNode.id;
     }
     return node;
   }

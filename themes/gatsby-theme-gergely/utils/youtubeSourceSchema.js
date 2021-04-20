@@ -3,28 +3,26 @@ exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
   type Channel implements Node {
     id: ID!
-    local: File @link
+    image: File @link(from: "image___NODE")
     kind: String
     etag: String
     snippet: ChannelSnippet
     contentDetails: ChannelContentDetails
     statistics: ChannelStatistics
     channelId: String
-    file: File
     parent: Node
     children: [Node!]!
     internal: Internal!
   }
   type Playlist implements Node {
     id: ID!
-    local: File @link
+    image: File @link(from: "image___NODE")
     videos: [Video] @link
     kind: String
     etag: String
     snippet: PlaylistSnippet
     contentDetails: ContentDetails
     playlistId: String
-    file: File
     list: Boolean
     parent: Node
     children: [Node!]!
@@ -63,14 +61,13 @@ exports.createSchemaCustomization = ({ actions }) => {
   }
   type Video implements Node {
     id: ID!
-    local: File @link
+    image: File @link(from: "image___NODE")
     playlistIds: [String]
     positions: [VideoPositions]
     kind: String
     etag: String
     snippet: VideoSnippet
     contentDetails: VideoContentDetails
-    file: File
     parent: Node
     children: [Node!]!
     internal: Internal!
@@ -160,7 +157,6 @@ exports.createSchemaCustomization = ({ actions }) => {
   type VideoSnippetResourceId {
     kind: String
     videoId: String
-  }
-`;
+  }`;
   createTypes(typeDefs);
 };
