@@ -16,14 +16,17 @@ module.exports = ({ apiKey, channelId, trackingId, favicon }) => ({
         path: `${__dirname}/src/static/images`,
       },
     },
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId,
-      },
-    },
+    trackingId
+      ? {
+          resolve: `gatsby-plugin-google-analytics`,
+          options: {
+            trackingId,
+          },
+        }
+      : null,
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
@@ -36,5 +39,5 @@ module.exports = ({ apiKey, channelId, trackingId, favicon }) => ({
     //     icon: favicon, // This path is relative to the root of the site.
     //   },
     // },
-  ],
+  ].filter(Boolean),
 });

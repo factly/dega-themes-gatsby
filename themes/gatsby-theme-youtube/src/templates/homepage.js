@@ -5,7 +5,7 @@ import React, { useState, useMemo } from 'react';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import InfiniteScroll from 'react-infinite-scroller';
-
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { FaPlay } from 'react-icons/fa';
 import _ from 'lodash';
 import { Helmet } from 'react-helmet';
@@ -45,8 +45,8 @@ const IndexPage = ({ data, pageContext }) => {
         name: videoItem.snippet.title,
         description: videoItem.snippet.description,
         position: videoItem.snippet.position,
-        url: `${baseUrl}/playlist/${videoItem.snippet.playlistId}?v=${videoItem.contentDetails.videoId}`,
-        thumbnailUrl: [videoItem.local ? videoItem.local.childImageSharp.fluid.src : ''],
+        url: `${baseUrl}/playlist/${videoItem.snippet.playlistId}/?v=${videoItem.contentDetails.videoId}`,
+        thumbnailUrl: [videoItem.image ? videoItem.image.childImageSharp.original.src : ''],
         uploadDate: videoItem.snippet.publishedAt,
         embedUrl: `https://www.youtube.com/embed/${videoItem.contentDetails.videoId}`,
         interactionStatistic: {
@@ -90,7 +90,7 @@ const IndexPage = ({ data, pageContext }) => {
                 bg: (theme) => `${theme.colors.gray[3]}`,
               }}
             >
-              {/* <Img alt={channel.snippet.title} fluid={channel.local.childImageSharp.fluid} className="h-24" /> */}
+              {/* <Img alt={channel.snippet.title} fluid={channel.image.childImageSharp.fluid} className="h-24" /> */}
               <a
                 rel="noopener noreferrer"
                 target="_blank"
@@ -202,7 +202,6 @@ const IndexPage = ({ data, pageContext }) => {
           </div>
           {activeTab.Home && (
             <div>
-              {/* console.log(allChannelSections) */}
               {allChannelSections.nodes.map((channelSection, i) => {
                 const playlistId =
                   channelSection.playlist.id === channel.contentDetails.relatedPlaylists.uploads
@@ -260,13 +259,13 @@ const IndexPage = ({ data, pageContext }) => {
                             pb: 4,
                             mb: 6,
                           }}
-                          to={`${baseUrl}/playlist/${playlistId}?v=${video.contentDetails.videoId}`}
+                          to={`${baseUrl}/playlist/${playlistId}/?v=${video.contentDetails.videoId}`}
                         >
                           <div sx={{ position: 'relative' }}>
-                            {video.local ? (
-                              <Img
+                            {video.image ? (
+                              <GatsbyImage
+                                image={video.image.childImageSharp.gatsbyImageData}
                                 alt={video.snippet.title}
-                                fluid={video.local.childImageSharp.fluid}
                                 sx={{ height: 'full', width: 'full' }}
                               />
                             ) : (
@@ -377,14 +376,14 @@ const IndexPage = ({ data, pageContext }) => {
                         pb: 4,
                         mb: 6,
                       }}
-                      to={`${baseUrl}/playlist/${channel.contentDetails.relatedPlaylists.uploads}?v=${video.contentDetails.videoId}`}
+                      to={`${baseUrl}/playlist/${channel.contentDetails.relatedPlaylists.uploads}/?v=${video.contentDetails.videoId}`}
                     >
                       <div sx={{ position: 'relative' }}>
-                        {video.local ? (
-                          <Img
+                        {video.image ? (
+                          <GatsbyImage
+                            image={video.image.childImageSharp.gatsbyImageData}
                             alt={video.snippet.title}
-                            fluid={video.local.childImageSharp.fluid}
-                            sx={{ width: 'full', height: 'full' }}
+                            sx={{ height: 'full', width: 'full' }}
                           />
                         ) : (
                           <img
@@ -478,14 +477,14 @@ const IndexPage = ({ data, pageContext }) => {
                       pb: 4,
                       mb: 6,
                     }}
-                    to={`${baseUrl}/playlist/${playlist.playlistId}?v=${sortedVideos[0].contentDetails.videoId}`}
+                    to={`${baseUrl}/playlist/${playlist.playlistId}/?v=${sortedVideos[0].contentDetails.videoId}`}
                   >
                     <div sx={{ position: 'relative' }}>
-                      {playlist.local ? (
-                        <Img
+                      {playlist.image ? (
+                        <GatsbyImage
+                          image={playlist.image.childImageSharp.gatsbyImageData}
                           alt={playlist.snippet.title}
-                          fluid={playlist.local.childImageSharp.fluid}
-                          sx={{ width: 'full', height: 'full' }}
+                          sx={{ height: 'full', width: 'full' }}
                         />
                       ) : (
                         <img
@@ -594,11 +593,9 @@ export const query = graphql`
           uploads
         }
       }
-      local {
+      image {
         childImageSharp {
-          fluid(maxWidth: 300, quality: 100) {
-            ...GatsbyImageSharpFluid
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }
       }
       snippet {
@@ -629,11 +626,9 @@ export const query = graphql`
           contentDetails {
             videoId
           }
-          local {
+          image {
             childImageSharp {
-              fluid(maxWidth: 300, quality: 100) {
-                ...GatsbyImageSharpFluid
-              }
+              gatsbyImageData(layout: FULL_WIDTH)
             }
           }
           snippet {
@@ -654,10 +649,11 @@ export const query = graphql`
         contentDetails {
           videoId
         }
-        local {
+        image {
           childImageSharp {
-            fluid(maxWidth: 300, quality: 100) {
-              ...GatsbyImageSharpFluid
+            gatsbyImageData(layout: FULL_WIDTH)
+            original {
+              src
             }
           }
         }
@@ -693,11 +689,9 @@ export const query = graphql`
           publishedAt(formatString: "MMM DD, YYYY")
           title
         }
-        local {
+        image {
           childImageSharp {
-            fluid(maxWidth: 300, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
+            gatsbyImageData(layout: FULL_WIDTH)
           }
         }
       }

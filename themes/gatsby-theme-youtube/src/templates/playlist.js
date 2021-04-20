@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useMemo, useRef, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { Helmet } from 'react-helmet';
+import { GatsbyImage } from 'gatsby-plugin-image';
 // import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
@@ -49,6 +50,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       return {
         videoIndex,
         video: sortedVideos[videoIndex],
+        id: sortedVideos[videoIndex].id,
       };
     }
     return {
@@ -64,9 +66,9 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       name: activeVideo.video.snippet.title,
       description: activeVideo.video.snippet.description,
       position: activeVideo.video.snippet.position,
-      url: `/playlist/${playlist.playlistId}?v=${activeVideo.video.contentDetails.videoId}`,
+      url: `/playlist/${playlist.playlistId}/?v=${activeVideo.video.contentDetails.videoId}`,
       thumbnailUrl: [
-        activeVideo.video.local ? activeVideo.video.local.childImageSharp.fluid.src : '',
+        activeVideo.video.image ? activeVideo.video.image.childImageSharp.original.src : '',
       ],
       uploadDate: activeVideo.video.snippet.publishedAt,
       embedUrl: `https://www.youtube.com/embed/${activeVideo.video.contentDetails.videoId}`,
@@ -100,16 +102,18 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       setVideoListHeight(`${document.getElementsByClassName('main-content')[0].clientHeight}px`);
     }
   };
-  const handleAutoplay = (event) =>
-    event.target.checked ? setAutoplayStatus(true) : setAutoplayStatus(false);
+  const handleAutoplay = () => {
+    setAutoplayStatus((prev) => !prev);
+  };
 
   const onVideoEnd = async () => {
     if (autoplayStatus === true) {
       await setActiveVideo((prev) => {
         if (prev.videoIndex < sortedVideos.length) {
-          navigate(`?v=${sortedVideos[prev.videoIndex + 1].contentDetails.videoId}`);
+          navigate(`/?v=${sortedVideos[prev.videoIndex + 1].contentDetails.videoId}`);
           return {
             video: sortedVideos[prev.videoIndex + 1],
+            id: sortedVideos[prev.videoIndex + 1].id,
             videoIndex: prev.videoIndex + 1,
           };
         }
@@ -123,6 +127,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       setActiveVideo({
         video: sortedVideos[videoIndex],
         videoIndex,
+        id: sortedVideos[videoIndex].id,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -381,10 +386,11 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                 <input
                   type="checkbox"
                   name="autoplayStatus"
-                  defaultChecked="true"
-                  onChange={handleAutoplay}
+                  // defaultChecked="true"
+                  checked={autoplayStatus}
+                  onChange={() => handleAutoplay()}
                 />
-                <span className="slider" />
+                <span className="slider" onClick={() => handleAutoplay()} />
               </label>
             </div>
           </div>
@@ -426,7 +432,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                     <Link
                       key={index}
                       id={playlistVideo.id}
-                      className={`${activeVideo.videoIndex === index && 'video-active'}`}
+                      className={`${activeVideo.id === playlistVideo.id && 'video-active'}`}
                       sx={{
                         position: 'relative',
                         display: 'flex',
@@ -439,7 +445,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                         textDecoration: 'none',
                         ':hover': { textDecoration: 'none' },
                       }}
-                      to={`${baseUrl}/playlist/${playlist.playlistId}?v=${playlistVideo.contentDetails.videoId}`}
+                      to={`${baseUrl}/playlist/${playlist.playlistId}/?v=${playlistVideo.contentDetails.videoId}`}
                     >
                       <span
                         sx={{ px: 2, fontSize: 1, color: (theme) => `${theme.colors.gray[6]}` }}
@@ -450,11 +456,11 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                           index + 1
                         )}
                       </span>
-                      {playlistVideo.local ? (
-                        <Img
+                      {playlistVideo.image ? (
+                        <GatsbyImage
+                          image={playlistVideo.image.childImageSharp.gatsbyImageData}
                           alt={playlistVideo.snippet.title}
-                          fluid={playlistVideo.local.childImageSharp.fluid}
-                          sx={{ width: 20, height: 'full' }}
+                          sx={{ height: 'full', width: 20 }}
                         />
                       ) : (
                         <img
@@ -547,7 +553,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
       },
       videos: {
         id: PropTypes.string,
-        local: {
+        image: {
           childImageSharp: {
             fluid: PropTypes.string,
           },
@@ -583,10 +589,11 @@ export const query = graphql`
       }
       videos {
         id
-        local {
+        image {
           childImageSharp {
-            fluid(maxWidth: 100, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
+            gatsbyImageData(layout: FULL_WIDTH)
+            original {
+              src
             }
           }
         }
@@ -634,11 +641,9 @@ export const query = graphql`
           uploads
         }
       }
-      local {
+      image {
         childImageSharp {
-          fluid(maxWidth: 300, quality: 100) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }
       }
       snippet {

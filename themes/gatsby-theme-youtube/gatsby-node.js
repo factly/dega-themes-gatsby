@@ -2,6 +2,8 @@ const { urlResolve } = require('gatsby-core-utils');
 // const path = require('path');
 // const mkdirp = require('mkdirp');
 // const fs = require('fs');
+// const { createSchemaCustomization } = require('./utils/youtubeSourceSchema');
+// exports.createSchemaCustomization = createSchemaCustomization;
 
 let basePath;
 let bannerData;
