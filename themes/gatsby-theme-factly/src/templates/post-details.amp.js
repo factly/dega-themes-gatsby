@@ -97,11 +97,10 @@ export const query = graphql`
           }
           description
           id
-          review
+          fact
           review_sources
-          review_tag_line
           slug
-          title
+          claim
           rating {
             description
             id
