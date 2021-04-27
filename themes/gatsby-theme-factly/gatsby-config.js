@@ -6,13 +6,13 @@ const editorjsHTML = require('editorjs-html');
 // const cssnano = require(`cssnano`);
 const workboxOptions = {
   importWorkboxFrom: `local`,
-  globDirectory: rootDir,
-  globPatterns,
-  modifyURLPrefix: {
-    // If `pathPrefix` is configured by user, we should replace
-    // the default prefix with `pathPrefix`.
-    '/': `${pathPrefix}/`,
-  },
+  // globDirectory: rootDir,
+  // globPatterns,
+  // modifyURLPrefix: {
+  //   // If `pathPrefix` is configured by user, we should replace
+  //   // the default prefix with `pathPrefix`.
+  //   '/': `${pathPrefix}/`,
+  // },
   cacheId: `gatsby-plugin-offline`,
   // Don't cache-bust JS or CSS files, and anything in the static directory,
   // since these files have unique URLs and their contents will never change
@@ -61,16 +61,16 @@ module.exports = ({
   // flags: { QUERY_ON_DEMAND: true },
   plugins: [
     'gatsby-plugin-react-helmet',
-    {
-      resolve: 'gatsby-source-dega',
-      options: {
-        url: api,
-        spaceId: client,
-        headers: {
-          space: client,
-        },
-      },
-    },
+    // {
+    //   resolve: 'gatsby-source-dega',
+    //   options: {
+    //     url: api,
+    //     spaceId: client,
+    //     headers: {
+    //       space: client,
+    //     },
+    //   },
+    // },
     /* {
         resolve: 'gatsby-source-filesystem',
         options: {
