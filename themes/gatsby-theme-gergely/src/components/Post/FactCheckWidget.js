@@ -229,7 +229,7 @@ function FactCheckWidget({ claims }) {
                       Claim:{' '}
                     </h2>
                     <div className="parsed" sx={{ display: 'flex' }}>
-                      {claim.title}
+                      {claim.claim}
                       {claim.rating.medium && (
                         <img
                           src={claim.rating.medium?.url.proxy}
@@ -257,7 +257,7 @@ function FactCheckWidget({ claims }) {
                     <h2 sx={{ fontWeight: 'bold' }}>Fact: </h2>
 
                     <div className="parsed">
-                      {parseEditorJsData({ content: claim.review, scripts: true })}
+                      <p dangerouslySetInnerHTML={{ __html: claim.fact }} />
                     </div>
                   </div>
                 </div>

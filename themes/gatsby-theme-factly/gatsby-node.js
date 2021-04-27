@@ -118,7 +118,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   const categories = await graphql(`
   query CategoriesQuery {
     dega {
-      categories(spaces:[${client}], limit: 20, page: 1) {
+      categories(spaces:[${client}], limit: 100, page: 1) {
        nodes { id
         slug}
       }
@@ -139,7 +139,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   const posts = await graphql(`
   query PostsQuery {
     dega {
-      posts(spaces:[${client}],limit:20,page:1) {
+      posts(spaces:[${client}],limit:100,page:1) {
        nodes { id
         published_date
         slug}
