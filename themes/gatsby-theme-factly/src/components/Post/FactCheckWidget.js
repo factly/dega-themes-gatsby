@@ -138,6 +138,7 @@ function FactCheckWidget({ claims }) {
                   display: 'inline-block',
                   flex: 'none',
                   width: 'full',
+                  scrollSnapAlign: 'start',
                   mr: (theme) => `${theme.space.spacing6}`,
                 }}
               >
