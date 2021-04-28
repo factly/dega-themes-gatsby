@@ -12,6 +12,9 @@ const WebSocket = require('ws');
 exports.onPreInit = () => console.log('loaded vidcheck plugin');
 
 const VIDCHECK_NODE_TYPE = 'VidCheck';
+const VIDCHECK_VIDEO_NODE_TYPE = 'VidCheckVideo';
+const VIDCHECK_ANALYSIS_NODE_TYPE = 'VidCheckAnalysis';
+const VIDCHECK_RATING_NODE_TYPE = 'VidCheckRating';
 
 // const client = new ApolloClient({
 //   link: split(
@@ -100,7 +103,9 @@ exports.sourceNodes = async (
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
+
   data.nodes.forEach((vidcheck) => {
+    // console.log(JSON.stringify(vidcheck));
     createNode({
       ...vidcheck,
       id: createNodeId(`${VIDCHECK_NODE_TYPE}-${vidcheck.video.id}`),
@@ -112,18 +117,62 @@ exports.sourceNodes = async (
         contentDigest: createContentDigest(vidcheck),
       },
     });
+    // console.log(vidcheck.video);
+    createNode({
+      ...vidcheck.video,
+      id: createNodeId(`${VIDCHECK_VIDEO_NODE_TYPE}-${vidcheck.video.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: VIDCHECK_VIDEO_NODE_TYPE,
+        content: JSON.stringify(vidcheck.video),
+        contentDigest: createContentDigest(vidcheck.video),
+      },
+    });
+    vidcheck.analysis.forEach((analysis) => {
+      createNode({
+        ...analysis,
+        id: createNodeId(`${VIDCHECK_ANALYSIS_NODE_TYPE}-${analysis.id}`),
+        parent: null,
+        children: [],
+        internal: {
+          type: VIDCHECK_ANALYSIS_NODE_TYPE,
+          content: JSON.stringify(analysis),
+          contentDigest: createContentDigest(analysis),
+        },
+      });
+    });
+  });
+  const ratings = await fetch('http://127.0.0.1:4455/.factly/vidcheck/server/ratings/embed', {
+    headers: { 'X-Space': spaceId },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+
+  ratings.nodes.forEach((rating) => {
+    createNode({
+      ...rating,
+      id: createNodeId(`${VIDCHECK_RATING_NODE_TYPE}-${rating.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: VIDCHECK_RATING_NODE_TYPE,
+        content: JSON.stringify(rating),
+        contentDigest: createContentDigest(rating),
+      },
+    });
   });
 };
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   createTypes(`
-  type VidCheck implements Node @infer{
+  type VidCheck implements Node {
     id: ID
-    video: VidCheckVideo!
-    analysis: [VidCheckAnalysis]
+    video: VidCheckVideo! 
+    analysis: [VidCheckAnalysis] 
   }
-  type VidCheckVideo implements Node @dontInfer {
+  type VidCheckVideo implements Node {
     id: ID!
     created_at : Date @dateformat
     space_id : String
@@ -136,16 +185,16 @@ exports.createSchemaCustomization = ({ actions }) => {
     video_type : String
     deleted_at: Date @dateformat
   }
-  type VidCheckAnalysis implements Node @dontInfer {
+  type VidCheckAnalysis implements Node {
     id: ID!
     checked_date: Date @dateformat
     claim: String
     claim_date: Date @dateformat
     video_id: String
-    updated_at: String
+    updated_at: Date @dateformat
     start_time: String
     review_sources: String
-    rating: Rating
+    rating: VidCheckRating
     rating_id: String
     is_claim: String
     fact: String
@@ -153,14 +202,14 @@ exports.createSchemaCustomization = ({ actions }) => {
     created_at: Date @dateformat
     claimant_id: String
     description: JSON
-    claimant: Claimant
+    claimant: Claimant 
     deleted_at: Date @dateformat
     video: JSON
     HTML: String
     claim_sources: String
     end_time_fraction: String
   }
-  type Claimant implements Node @childOf(type: "VidCheckAnalysis") @dontInfer {
+  type Claimant implements Node {
     created_at: Date @dateformat
     id: ID
     name: String
@@ -171,7 +220,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     description: String
     deleted_at: String
   }
-  type Rating implements Node @childOf(type: "VidCheckAnalysis") @dontInfer {
+  type VidCheckRating implements Node {
     id: ID,
     created_at: Date @dateformat
     updated_at: Date @dateformat
@@ -185,21 +234,4 @@ exports.createSchemaCustomization = ({ actions }) => {
   }
   `);
 };
-
-// exports.createResolvers = ({ createResolvers }) => {
-//   const resolvers = {
-//     VidCheck: {
-//       video: {
-//         args: { videoId: 'String' },
-//         resolve: (source, args, context, info) => {
-//           console.log({ args, source, context, info });
-//           const allVidChecks = info.originalResolver(source, args, context, info) || [];
-//           // return args.videoId
-//           //   ? allVidChecks.filter((vidcheck) => vidcheck.video.id === args.videoId)
-//           //   : allVidChecks;
-//         },
-//       },
-//     },
-//   };
-//   createResolvers(resolvers);
-// };
+// ? Create filters on vidcheck for videos and analysis

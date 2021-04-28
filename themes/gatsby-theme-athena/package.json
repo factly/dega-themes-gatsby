@@ -1,0 +1,31 @@
+{
+  "name": "@factly/gatsby-theme-athena",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "gatsby develop",
+    "build": "gatsby build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gatsby": "^3.1.2",
+    "gatsby-plugin-theme-ui": "^0.6.0",
+    "gatsby-source-vidcheck": "1.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-player": "^2.9.0",
+    "theme-ui": "^0.6.0",
+    "underscore": "^1.12.1"
+  },
+  "peerDependencies": {
+    "gatsby": "^3.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

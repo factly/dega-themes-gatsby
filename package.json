@@ -28,7 +28,8 @@
     "health": "yarn workspace factly-health",
     "vidcheck": "yarn workspace vidcheck",
     "youtube": "yarn workspace factly-youtube",
-    "source-vidcheck": "yarn workspace gatsby-source-vidcheck"
+    "source-vidcheck": "yarn workspace gatsby-source-vidcheck",
+    "athena": "yarn workspace athena"
   },
   "husky": {
     "hooks": {

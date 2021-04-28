@@ -1,0 +1,432 @@
+[
+  {
+    "video": {
+      "id": 5,
+      "created_at": "2021-03-30T23:36:15.218943Z",
+      "updated_at": "2021-03-30T23:36:15.218943Z",
+      "deleted_at": null,
+      "url": "https://www.youtube.com/watch?v=rFEnRLRbZJw",
+      "title": "Finance Minister Budget Speech",
+      "summary": "Budget speech delivered by finance minister Nirmala Sitharaman, while presenting the Union Budget for the year 2020-21 presents a summary of major achievements and future plans of the government. Here's a deep dive into some of the claims in her speech.",
+      "video_type": "www.youtube.com",
+      "space_id": 1,
+      "status": "published",
+      "total_duration": 9190
+    },
+    "analysis": [
+      {
+        "id": 8,
+        "created_at": "2021-03-30T23:36:15.23424Z",
+        "updated_at": "2021-03-30T23:36:15.23424Z",
+        "deleted_at": null,
+        "video_id": 5,
+        "video": null,
+        "rating_id": 5,
+        "rating": {
+          "id": 5,
+          "created_at": "2021-03-24T09:30:09.864919Z",
+          "updated_at": "2021-03-24T09:30:09.864919Z",
+          "deleted_at": null,
+          "name": "False",
+          "slug": "false",
+          "description": "False",
+          "numeric_value": 1,
+          "colour": {
+            "hex": "#e82728",
+            "hsl": {
+              "h": 359.68911917098444,
+              "s": 0.8075000000000001,
+              "l": 0.5313,
+              "a": 0.01
+            },
+            "hsv": {
+              "h": 359.68911917098444,
+              "s": 0.8320192267266009,
+              "v": 0.90977525,
+              "a": 0.01
+            },
+            "oldHue": 359.68911917098444,
+            "rgb": {
+              "r": 232,
+              "g": 39,
+              "b": 40,
+              "a": 0.01
+            },
+            "source": "rgb"
+          },
+          "space_id": 1
+        },
+        "HTML": "",
+        "claim": "Gross Enrollment Ratio across levels",
+        "description": {
+          "time": 1617147141046,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "data": {
+                "text": "Detailed Explanation of the claim<br>"
+              }
+            }
+          ],
+          "version": "2.19.3"
+        },
+        "claim_date": "2021-03-01T23:31:45.051Z",
+        "checked_date": "2021-03-03T23:31:48.597Z",
+        "is_claim": false,
+        "fact": "lorem",
+        "claimant_id": 1,
+        "claimant": {
+          "id": 1,
+          "created_at": "2021-03-24T09:30:24.19746Z",
+          "updated_at": "2021-03-24T09:30:24.19746Z",
+          "deleted_at": null,
+          "name": "Facebook",
+          "slug": "facebook",
+          "description": null,
+          "tag_line": "",
+          "space_id": 1
+        },
+        "review_sources": null,
+        "claim_sources": null,
+        "end_time": 1000,
+        "start_time": 0,
+        "end_time_fraction": 0
+      },
+      {
+        "id": 9,
+        "created_at": "2021-03-30T23:36:15.23424Z",
+        "updated_at": "2021-03-30T23:36:15.23424Z",
+        "deleted_at": null,
+        "video_id": 5,
+        "video": null,
+        "rating_id": 6,
+        "rating": {
+          "id": 6,
+          "created_at": "2021-03-24T09:30:09.864919Z",
+          "updated_at": "2021-03-24T09:30:09.864919Z",
+          "deleted_at": null,
+          "name": "Not a Claim",
+          "slug": "not-a-claim",
+          "description": "Not a Claim",
+          "numeric_value": 0,
+          "colour": {
+            "hex": "#f9f9fa",
+            "hsl": {
+              "h": 240,
+              "s": 0.0945170115208253,
+              "l": 0.9792376,
+              "a": 1
+            },
+            "hsv": {
+              "h": 240,
+              "s": 0.003999999999999949,
+              "v": 0.9812000000000001,
+              "a": 1
+            },
+            "oldHue": 240,
+            "rgb": {
+              "r": 249,
+              "g": 249,
+              "b": 250,
+              "a": 1
+            },
+            "source": "hsv"
+          },
+          "space_id": 1
+        },
+        "HTML": "",
+        "claim": "",
+        "description": null,
+        "claim_date": "0001-01-01T00:00:00Z",
+        "checked_date": "0001-01-01T00:00:00Z",
+        "is_claim": false,
+        "fact": null,
+        "claimant_id": 1,
+        "claimant": {
+          "id": 1,
+          "created_at": "2021-03-24T09:30:24.19746Z",
+          "updated_at": "2021-03-24T09:30:24.19746Z",
+          "deleted_at": null,
+          "name": "Facebook",
+          "slug": "facebook",
+          "description": null,
+          "tag_line": "",
+          "space_id": 1
+        },
+        "review_sources": null,
+        "claim_sources": null,
+        "end_time": 2461,
+        "start_time": 1000,
+        "end_time_fraction": 0
+      },
+      {
+        "id": 10,
+        "created_at": "2021-03-30T23:36:15.23424Z",
+        "updated_at": "2021-03-30T23:36:15.23424Z",
+        "deleted_at": null,
+        "video_id": 5,
+        "video": null,
+        "rating_id": 5,
+        "rating": {
+          "id": 5,
+          "created_at": "2021-03-24T09:30:09.864919Z",
+          "updated_at": "2021-03-24T09:30:09.864919Z",
+          "deleted_at": null,
+          "name": "False",
+          "slug": "false",
+          "description": "False",
+          "numeric_value": 1,
+          "colour": {
+            "hex": "#e82728",
+            "hsl": {
+              "h": 359.68911917098444,
+              "s": 0.8075000000000001,
+              "l": 0.5313,
+              "a": 0.01
+            },
+            "hsv": {
+              "h": 359.68911917098444,
+              "s": 0.8320192267266009,
+              "v": 0.90977525,
+              "a": 0.01
+            },
+            "oldHue": 359.68911917098444,
+            "rgb": {
+              "r": 232,
+              "g": 39,
+              "b": 40,
+              "a": 0.01
+            },
+            "source": "rgb"
+          },
+          "space_id": 1
+        },
+        "HTML": "",
+        "claim": "LCaim 3",
+        "description": null,
+        "claim_date": "2021-03-01T23:33:34.934Z",
+        "checked_date": "2021-03-02T23:33:36.881Z",
+        "is_claim": false,
+        "fact": "Fact 3",
+        "claimant_id": 1,
+        "claimant": {
+          "id": 1,
+          "created_at": "2021-03-24T09:30:24.19746Z",
+          "updated_at": "2021-03-24T09:30:24.19746Z",
+          "deleted_at": null,
+          "name": "Facebook",
+          "slug": "facebook",
+          "description": null,
+          "tag_line": "",
+          "space_id": 1
+        },
+        "review_sources": null,
+        "claim_sources": null,
+        "end_time": 3028,
+        "start_time": 2461,
+        "end_time_fraction": 0
+      },
+      {
+        "id": 11,
+        "created_at": "2021-03-30T23:36:15.23424Z",
+        "updated_at": "2021-03-30T23:36:15.23424Z",
+        "deleted_at": null,
+        "video_id": 5,
+        "video": null,
+        "rating_id": 4,
+        "rating": {
+          "id": 4,
+          "created_at": "2021-03-24T09:30:09.864919Z",
+          "updated_at": "2021-03-24T09:30:09.864919Z",
+          "deleted_at": null,
+          "name": "Misleading",
+          "slug": "misleading",
+          "description": "Misleading",
+          "numeric_value": 2,
+          "colour": {
+            "hex": "#749990",
+            "hsl": {
+              "h": 165.40540540540542,
+              "s": 0.15352697095435683,
+              "l": 0.5274509803921569,
+              "a": 1
+            },
+            "hsv": {
+              "h": 165.40540540540542,
+              "s": 0.2418300653594771,
+              "v": 0.6,
+              "a": 1
+            },
+            "oldHue": 250,
+            "rgb": {
+              "r": 116,
+              "g": 153,
+              "b": 144,
+              "a": 1
+            },
+            "source": "hex"
+          },
+          "space_id": 1
+        },
+        "HTML": "",
+        "claim": "Misleading",
+        "description": null,
+        "claim_date": "2021-03-01T23:34:37.73Z",
+        "checked_date": "2021-03-02T23:34:40.047Z",
+        "is_claim": false,
+        "fact": "Misleading",
+        "claimant_id": 1,
+        "claimant": {
+          "id": 1,
+          "created_at": "2021-03-24T09:30:24.19746Z",
+          "updated_at": "2021-03-24T09:30:24.19746Z",
+          "deleted_at": null,
+          "name": "Facebook",
+          "slug": "facebook",
+          "description": null,
+          "tag_line": "",
+          "space_id": 1
+        },
+        "review_sources": null,
+        "claim_sources": null,
+        "end_time": 4356,
+        "start_time": 3028,
+        "end_time_fraction": 0
+      },
+      {
+        "id": 12,
+        "created_at": "2021-03-30T23:36:15.23424Z",
+        "updated_at": "2021-03-30T23:36:15.23424Z",
+        "deleted_at": null,
+        "video_id": 5,
+        "video": null,
+        "rating_id": 1,
+        "rating": {
+          "id": 1,
+          "created_at": "2021-03-24T09:30:09.864919Z",
+          "updated_at": "2021-03-24T09:30:09.864919Z",
+          "deleted_at": null,
+          "name": "True",
+          "slug": "true",
+          "description": "True",
+          "numeric_value": 5,
+          "colour": {
+            "hex": "#108040",
+            "hsl": {
+              "h": 145.7142857142857,
+              "s": 0.7777777777777778,
+              "l": 0.2823529411764706,
+              "a": 1
+            },
+            "hsv": {
+              "h": 145.7142857142857,
+              "s": 0.875,
+              "v": 0.5019607843137255,
+              "a": 1
+            },
+            "oldHue": 250,
+            "rgb": {
+              "r": 16,
+              "g": 128,
+              "b": 64,
+              "a": 1
+            },
+            "source": "hex"
+          },
+          "space_id": 1
+        },
+        "HTML": "",
+        "claim": "C;ao, 5",
+        "description": null,
+        "claim_date": "2021-03-01T23:35:14.313Z",
+        "checked_date": "2021-03-02T23:35:16.446Z",
+        "is_claim": false,
+        "fact": "Fact 5",
+        "claimant_id": 1,
+        "claimant": {
+          "id": 1,
+          "created_at": "2021-03-24T09:30:24.19746Z",
+          "updated_at": "2021-03-24T09:30:24.19746Z",
+          "deleted_at": null,
+          "name": "Facebook",
+          "slug": "facebook",
+          "description": null,
+          "tag_line": "",
+          "space_id": 1
+        },
+        "review_sources": null,
+        "claim_sources": null,
+        "end_time": 7088,
+        "start_time": 4356,
+        "end_time_fraction": 0
+      },
+      {
+        "id": 13,
+        "created_at": "2021-03-30T23:36:15.23424Z",
+        "updated_at": "2021-03-30T23:36:15.23424Z",
+        "deleted_at": null,
+        "video_id": 5,
+        "video": null,
+        "rating_id": 5,
+        "rating": {
+          "id": 5,
+          "created_at": "2021-03-24T09:30:09.864919Z",
+          "updated_at": "2021-03-24T09:30:09.864919Z",
+          "deleted_at": null,
+          "name": "False",
+          "slug": "false",
+          "description": "False",
+          "numeric_value": 1,
+          "colour": {
+            "hex": "#e82728",
+            "hsl": {
+              "h": 359.68911917098444,
+              "s": 0.8075000000000001,
+              "l": 0.5313,
+              "a": 0.01
+            },
+            "hsv": {
+              "h": 359.68911917098444,
+              "s": 0.8320192267266009,
+              "v": 0.90977525,
+              "a": 0.01
+            },
+            "oldHue": 359.68911917098444,
+            "rgb": {
+              "r": 232,
+              "g": 39,
+              "b": 40,
+              "a": 0.01
+            },
+            "source": "rgb"
+          },
+          "space_id": 1
+        },
+        "HTML": "",
+        "claim": "Claim 6",
+        "description": null,
+        "claim_date": "2021-03-02T23:36:04.362Z",
+        "checked_date": "2021-03-03T23:36:07.195Z",
+        "is_claim": false,
+        "fact": "Fact 6",
+        "claimant_id": 1,
+        "claimant": {
+          "id": 1,
+          "created_at": "2021-03-24T09:30:24.19746Z",
+          "updated_at": "2021-03-24T09:30:24.19746Z",
+          "deleted_at": null,
+          "name": "Facebook",
+          "slug": "facebook",
+          "description": null,
+          "tag_line": "",
+          "space_id": 1
+        },
+        "review_sources": null,
+        "claim_sources": null,
+        "end_time": 9189,
+        "start_time": 7088,
+        "end_time_fraction": 0
+      }
+    ]
+  }
+]
