@@ -102,7 +102,7 @@ function UserDetailsFormat({ data }) {
 export default UserDetailsFormat;
 
 export const query = graphql`
-  query($id: Int!, $format_id: Int!, $sid: [Int!]) {
+  query($id: Int!, $format_id: Int!) {
     dega {
       user(id: $id) {
         id
@@ -117,14 +117,14 @@ export const query = graphql`
           dimensions
         }
       }
-      formats(spaces: $sid) {
+      formats {
         nodes {
           id
           slug
           name
         }
       }
-      posts(users: [$id], formats: [$format_id], spaces: $sid) {
+      posts(users: [$id], formats: [$format_id]) {
         nodes {
           users {
             id

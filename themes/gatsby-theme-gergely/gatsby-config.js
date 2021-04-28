@@ -4,8 +4,10 @@ const editorjsHTML = require('editorjs-html');
 
 // const autoprefixer = require(`autoprefixer`);
 // const cssnano = require(`cssnano`);
+
 module.exports = ({
-  client,
+  spaceId,
+  accessToken,
   api,
   siteUrl = 'https://localhost:9002',
   youtubeApiKey,
@@ -21,16 +23,14 @@ module.exports = ({
   // flags: { QUERY_ON_DEMAND: true },
   plugins: [
     'gatsby-plugin-react-helmet',
-    // {
-    //   resolve: 'gatsby-source-dega',
-    //   options: {
-    //     url: api,
-    //     spaceId: client,
-    //     headers: {
-    //       space: client,
-    //     },
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-dega`,
+      options: {
+        spaceId: 8,
+        accessToken,
+        url: api,
+      },
+    },
     /* {
         resolve: 'gatsby-source-filesystem',
         options: {
@@ -73,7 +73,8 @@ module.exports = ({
         fieldName: 'dega',
         url: api,
         headers: {
-          space: client,
+          'X-Space': spaceId,
+          Authorization: accessToken,
         },
       },
     },
@@ -157,7 +158,7 @@ module.exports = ({
             query: `
             {
               dega {
-                posts(spaces:[${client}],limit:100,page:1) {
+                posts(limit:100,page:1) {
                   nodes {
                     excerpt
                     description
@@ -186,13 +187,14 @@ module.exports = ({
             handler: `NetworkFirst`,
           },
           {
-            // page-data.json files are not content hashed
-            urlPattern: /^https?:.*\page-data\/.*\/page-data\.json/,
+            // page-data.json files, static query results and app-data.json
+            // are not content hashed
+            urlPattern: /^https?:.*\/page-data\/.*\.json/,
             handler: `NetworkFirst`,
           },
           {
             // Add runtime caching of various other page resources
-            urlPattern: /^https?:.*\.(png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2|json|css)$/,
+            urlPattern: /^https?:.*\.(png|jpg|jpeg|webp|avif|svg|gif|tiff|js|woff|woff2|json|css)$/,
             handler: `NetworkFirst`,
           },
           {

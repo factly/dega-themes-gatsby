@@ -257,12 +257,12 @@ const PostDetails = ({ data }) => {
 export default PostDetails;
 
 export const query = graphql`
-  query($id: Int!, $sid: [Int!]) {
+  query($id: Int!) {
     dega {
       space {
         site_address
       }
-      posts(page: 1, limit: 100, sortBy: "published_date", sortOrder: "desc", spaces: $sid) {
+      posts(page: 1, limit: 100, sortBy: "published_date", sortOrder: "desc") {
         nodes {
           published_date
           description

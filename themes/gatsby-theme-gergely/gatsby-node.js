@@ -94,7 +94,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   const formats = await graphql(`
   query FormatsQuery {
     dega {
-      formats(spaces:[${client}]) {
+      formats {
        nodes{ id
         slug}
       }
@@ -105,7 +105,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   const tags = await graphql(`
   query TagsQuery {
     dega {
-      tags(spaces:[${client}]) {
+      tags {
        nodes{ id
         slug
 
@@ -118,7 +118,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   const categories = await graphql(`
   query CategoriesQuery {
     dega {
-      categories(spaces:[${client}], limit: 20, page: 1) {
+      categories(limit: 100, page: 1) {
        nodes { id
         slug}
       }
@@ -139,7 +139,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   const posts = await graphql(`
   query PostsQuery {
     dega {
-      posts(spaces:[${client}],limit:100,page:1) {
+      posts(limit:100, page:1) {
        nodes { id
         published_date
         slug}
@@ -260,7 +260,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     context: {
       format_factcheck,
       format_without_factcheck,
-      sid: client,
       homepage,
     },
   });
@@ -283,7 +282,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       component: require.resolve('./src/templates/format-details.js'),
       context: {
         id: parseInt(format.id),
-        sid: client,
       },
     });
   });
@@ -308,7 +306,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
         component: require.resolve('./src/templates/post-details.js'),
         context: {
           id: parseInt(post.id),
-          sid: client,
         },
       });
     }
@@ -331,7 +328,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       component: require.resolve('./src/templates/tag-details.js'),
       context: {
         id: parseInt(tag.id),
-        sid: client,
       },
     });
 
@@ -344,7 +340,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
         context: {
           id: parseInt(tag.id),
           format_id: parseInt(format.id),
-          sid: client,
         },
       });
     });
@@ -384,7 +379,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       component: require.resolve('./src/templates/category-details.js'),
       context: {
         id: parseInt(category.id),
-        sid: client,
       },
     });
 
@@ -396,7 +390,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
         context: {
           id: parseInt(category.id),
           format_id: parseInt(format.id),
-          sid: client,
         },
       });
     });
@@ -434,7 +427,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       component: require.resolve('./src/templates/user-details.js'),
       context: {
         id: parseInt(user.id),
-        sid: client,
       },
     });
 
@@ -447,7 +439,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
         context: {
           id: parseInt(user.id),
           format_id: parseInt(format.id),
-          sid: client,
         },
       });
     });

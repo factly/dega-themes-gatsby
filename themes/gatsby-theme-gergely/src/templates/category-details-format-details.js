@@ -76,7 +76,7 @@ function CategoryDetailsFormat({ data }) {
 export default CategoryDetailsFormat;
 
 export const query = graphql`
-  query($id: Int!, $format_id: Int!, $sid: [Int!]) {
+  query($id: Int!, $format_id: Int!) {
     dega {
       category(id: $id) {
         description
@@ -89,14 +89,14 @@ export const query = graphql`
         name
         slug
       }
-      formats(spaces: $sid) {
+      formats {
         nodes {
           id
           slug
           name
         }
       }
-      posts(categories: [$id], formats: [$format_id], spaces: $sid) {
+      posts(categories: [$id], formats: [$format_id]) {
         nodes {
           users {
             id
