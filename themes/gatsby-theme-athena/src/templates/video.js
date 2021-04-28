@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /** @jsx jsx */
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React, { useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import { graphql, Link } from 'gatsby';
 import ReactPlayer from 'react-player';
 import Layout from '../components/Layout';
 import HorizontalTimelineBar from '../components/horizontalTimelineBar';
-import VideoSummary from '../components/videoSummary';
+import VideoSummaryCard from '../components/videoSummaryCard';
 import parseDate from '../utils/parseDate';
+import Slider from '../components/Slider';
 
 const PreviewPage = ({ data }) => {
   const colors = {
@@ -44,8 +45,9 @@ const PreviewPage = ({ data }) => {
   const factCheckReview = analysis;
   const currentClaim = analysis[currentClaimIndex];
   const handleProgress = () => {
+    // console.log(player.current);
     const currentPlayedTime = player.current.getCurrentTime();
-    const currentPlayed = currentPlayedTime / totalDuration;
+    const currentPlayed = Math.currentPlayedTime / totalDuration;
     if (
       loopDetails.loopEnabled &&
       (currentPlayed < loopDetails.startFraction || currentPlayed > loopDetails.endFraction)
@@ -71,9 +73,12 @@ const PreviewPage = ({ data }) => {
     setCurrentStartTime(currentFormStartTime);
     setPlayed(currentPlayed);
   };
+  useEffect(() => {
+    updateFormState(analysis[currentClaimIndex]);
+  }, [currentClaimIndex]);
   return (
     <Layout>
-      <div>
+      {/* <div sx={{ mb: '2rem' }}>
         <Link
           to="/"
           sx={{
@@ -87,14 +92,100 @@ const PreviewPage = ({ data }) => {
           <FaArrowLeft sx={{ mx: '0.5rem', fontSize: '0.875em' }} />
           Back to FactCheck Videos
         </Link>
-      </div>
+      </div> */}
 
       <div>
-        <div sx={{ mb: 4 }}>
-          <h2 sx={{ mt: 2, fontSize: (theme) => `${theme.fontSizes.h6}` }}>{video.title}</h2>
-          <p>{parseDate(video.created_at)}</p>
+        <div sx={{ my: '1rem' }}>
+          <h2 sx={{ mt: '.5rem', fontSize: (theme) => `${theme.fontSizes.h4}` }}>{video.title}</h2>
+          <p sx={{ fontSize: (theme) => `${theme.fontSizes.h8}` }}>{parseDate(video.created_at)}</p>
         </div>
+
         <div
+          className="video-summary"
+          sx={{
+            // p: '1rem',
+            // ml: '1rem',
+            my: '2rem',
+            borderRadius: '0.25rem',
+            boxShadow: 'rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px',
+            background: 'white',
+            maxWidth: ['100%'],
+            '& .summary-description': {
+              fontSize: '1.125rem',
+            },
+          }}
+        >
+          <VideoSummaryCard video={video} analysis={analysis} preview />
+        </div>
+        <div sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            className="main-container"
+            sx={{
+              display: 'flex',
+              flex: '0 0 50%',
+              mx: '1%',
+              flexDirection: ['column', null, null, 'row'],
+              justifyContent: 'center',
+            }}
+          >
+            <div
+              className="video-card"
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexGrow: 1,
+                minWidth: '350px',
+                mb: 8,
+              }}
+            >
+              <div className="video-player">
+                <ReactPlayer
+                  className="react-player"
+                  url={video.url}
+                  playing={playing}
+                  controls={true}
+                  ref={player}
+                  volume={0}
+                  progressInterval={1000}
+                  onProgress={handleProgress}
+                  onDuration={setTotalDuration}
+                  width="100%"
+                  height="100%"
+                />
+              </div>
+              <div className="interactive-timeline" sx={{ mt: '2rem' }}>
+                <HorizontalTimelineBar
+                  claims={analysis}
+                  total={video.total_duration}
+                  currentIndex={currentClaimIndex}
+                  setCurrentIndex={setCurrentClaimIndex}
+                  //   updateFormState={updateFormState}
+                />
+              </div>
+            </div>
+          </div>
+          <div sx={{ flex: '0 0 48%', maxWidth: '48%', mx: '1%' }}>
+            <Slider
+              claims={analysis}
+              currentIndex={currentClaimIndex}
+              setCurrentIndex={setCurrentClaimIndex}
+              currentClaim={currentClaim}
+              //  updateFormState={updateFormState}
+            />
+          </div>
+        </div>
+        <div sx={{ display: 'flex' }}>
+          <div sx={{ flex: '0 0 48%', maxWidth: '50%' }}>
+            {/* <Slider
+              claims={analysis}
+              currentIndex={currentClaimIndex}
+              setCurrentIndex={setCurrentClaimIndex}
+              updateFormState={updateFormState}
+            /> */}
+          </div>
+        </div>
+
+        {/* <div
           className="main-container"
           sx={{
             display: 'flex',
@@ -130,24 +221,9 @@ const PreviewPage = ({ data }) => {
               />
             </div>
           </div>
-          <div
-            className="video-summary"
-            sx={{
-              p: '1rem',
-              ml: '1rem',
-              borderRadius: '0.25rem',
-              boxShadow: 'rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px',
-              background: 'white',
-              maxWidth: ['100%', null, null, null, '350px'],
-              '& .summary-description': {
-                fontSize: '1.125rem',
-              },
-            }}
-          >
-            <VideoSummary video={video} analysis={analysis} preview />
-          </div>
         </div>
-        <section className="slider-test">
+   */}
+        {/* <section className="slider-test">
           <div
             style={{
               alignItems: 'center',
@@ -257,7 +333,7 @@ const PreviewPage = ({ data }) => {
               </div>
             )}
           </div>
-        </section>
+        </section> */}
         <section className="description" sx={{ mt: '2rem' }}>
           <div
             style={{
