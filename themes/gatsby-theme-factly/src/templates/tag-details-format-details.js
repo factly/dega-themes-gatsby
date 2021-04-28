@@ -20,7 +20,7 @@ function TagDetailsFormat({ data }) {
 export default TagDetailsFormat;
 
 export const query = graphql`
-  query($id: Int!, $format_id: Int!, $sid: [Int!]) {
+  query($id: Int!, $format_id: Int!) {
     dega {
       tag(id: $id) {
         description
@@ -28,14 +28,14 @@ export const query = graphql`
         name
         slug
       }
-      formats(spaces: $sid) {
+      formats {
         nodes {
           id
           slug
           name
         }
       }
-      posts(tags: [$id], formats: [$format_id], spaces: $sid) {
+      posts(tags: [$id], formats: [$format_id]) {
         nodes {
           users {
             id

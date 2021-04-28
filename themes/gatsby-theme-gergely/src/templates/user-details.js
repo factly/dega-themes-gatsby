@@ -102,7 +102,7 @@ function UserDetailsAll({ data }) {
 export default UserDetailsAll;
 
 export const query = graphql`
-  query($id: Int!, $sid: [Int!]) {
+  query($id: Int!) {
     dega {
       user(id: $id) {
         id
@@ -118,14 +118,14 @@ export const query = graphql`
         slug
         display_name
       }
-      formats(spaces: $sid) {
+      formats {
         nodes {
           id
           slug
           name
         }
       }
-      posts(users: [$id], spaces: $sid) {
+      posts(users: [$id]) {
         nodes {
           users {
             id

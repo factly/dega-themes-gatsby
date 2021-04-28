@@ -4,8 +4,10 @@ const editorjsHTML = require('editorjs-html');
 
 // const autoprefixer = require(`autoprefixer`);
 // const cssnano = require(`cssnano`);
+
 module.exports = ({
-  client,
+  spaceId,
+  accessToken,
   api,
   siteUrl = 'https://localhost:9002',
   youtubeApiKey,
@@ -22,13 +24,11 @@ module.exports = ({
   plugins: [
     'gatsby-plugin-react-helmet',
     // {
-    //   resolve: 'gatsby-source-dega',
+    //   resolve: `gatsby-source-dega`,
     //   options: {
+    //     spaceId: 8,
+    //     accessToken,
     //     url: api,
-    //     spaceId: client,
-    //     headers: {
-    //       space: client,
-    //     },
     //   },
     // },
     /* {
@@ -73,7 +73,8 @@ module.exports = ({
         fieldName: 'dega',
         url: api,
         headers: {
-          space: client,
+          'X-Space': spaceId,
+          Authorization: accessToken,
         },
       },
     },
@@ -157,7 +158,7 @@ module.exports = ({
             query: `
             {
               dega {
-                posts(spaces:[${client}],limit:100,page:1) {
+                posts(limit:100,page:1) {
                   nodes {
                     excerpt
                     description

@@ -24,14 +24,14 @@ function Indexpage({ data, pageContext }) {
 export default Indexpage;
 
 export const query = graphql`
-  query($format_factcheck: [Int!], $format_without_factcheck: [Int!], $sid: [Int!]) {
+  query($format_factcheck: [Int!], $format_without_factcheck: [Int!]) {
     dega {
       space {
         site_address
         site_title
         name
       }
-      categories(spaces: $sid, limit: 20, page: 1) {
+      categories( limit: 100, page: 1) {
         nodes {
           id
           slug

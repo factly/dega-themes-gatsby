@@ -5,14 +5,15 @@ require('dotenv').config({
 module.exports = {
   flags: {
     LAZY_IMAGES: true,
-    FAST_REFRESH: true,
+    // FAST_REFRESH: true,
   },
   plugins: [
     `gatsby-plugin-sass`,
     {
       resolve: '@factly/gatsby-theme-factly',
       options: {
-        client: 8,
+        spaceId: process.env.SPACE_ID,
+        accessToken: process.env.ACCESS_TOKEN,
         homepage: 2,
         siteUrl: 'https://health.factly.in',
         api: 'http://dega-api.factly.org/query',
