@@ -32,9 +32,12 @@ const PostDetails = ({ data }) => {
           </div>
         ))}
         <div>
-          <strong>Excerpt</strong>
-          <p>{post.excerpt}</p>
-          <strong>Description</strong>
+          {post.excerpt && (
+            <>
+              <strong>Excerpt</strong>
+              <p>{post.excerpt}</p>
+            </>
+          )}
           <div className="parsed">
             {parseEditorJsData({ content: post.description, scripts: true, amp: true })}
           </div>
