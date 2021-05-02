@@ -2,7 +2,7 @@ export default {
   // useLocalStorage: false,
   // useCustomProperties: false,
   // useColorSchemeMediaQuery: false,
-  // useBodyStyles: false,
+  // useRootStyles: true,
   useBorderBox: true,
   breakpoints: ['640px', '768px', '1024px', '1280px', '1536px'],
   // sm, md, lg, xl
