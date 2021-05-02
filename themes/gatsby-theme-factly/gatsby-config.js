@@ -80,7 +80,12 @@ module.exports = ({
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-theme-ui',
+    {
+      resolve: 'gatsby-plugin-theme-ui',
+      options: {
+        injectColorFlashScript: false,
+      },
+    },
     `gatsby-plugin-sass`,
     `gatsby-plugin-theme-ui`,
     'gatsby-plugin-styled-components',
@@ -97,25 +102,25 @@ module.exports = ({
     //     ],
     //   },
     // },
-    // {
-    //   resolve: `gatsby-plugin-amp`,
-    //   options: {
-    //     canonicalBaseUrl: `${siteUrl}/`,
-    //     components: [
-    //       'amp-social-share',
-    //       'amp-pinterest',
-    //       'amp-twitter',
-    //       'amp-instagram',
-    //       'amp-youtube',
-    //       'amp-facebook',
-    //       'amp-iframe',
-    //     ],
-    //     excludedPaths: ['/404*', '/'],
-    //     pathIdentifier: '/amp/',
-    //     relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
-    //     relCanonicalPattern: '{{canonicalBaseUrl}}{{pathname}}',
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-amp`,
+      options: {
+        canonicalBaseUrl: `${siteUrl}/`,
+        components: [
+          'amp-social-share',
+          'amp-pinterest',
+          'amp-twitter',
+          'amp-instagram',
+          'amp-youtube',
+          'amp-facebook',
+          'amp-iframe',
+        ],
+        excludedPaths: ['/404*', '/'],
+        pathIdentifier: '/amp/',
+        relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
+        relCanonicalPattern: '{{canonicalBaseUrl}}{{pathname}}',
+      },
+    },
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
       // add options to make sitemaps for other things

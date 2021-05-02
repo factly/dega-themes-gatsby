@@ -61,7 +61,7 @@
     "gatsby-plugin-sharp": "^3.2.1",
     "gatsby-plugin-sitemap": "^3.2.0",
     "gatsby-plugin-styled-components": "^4.2.0",
-    "gatsby-plugin-theme-ui": "^0.3.5",
+    "gatsby-plugin-theme-ui": "^0.7.5",
     "gatsby-source-filesystem": "^3.2.0",
     "gatsby-source-graphql": "^3.2.0",
     "gatsby-transformer-sharp": "^3.2.0",
@@ -76,7 +76,7 @@
     "react-infinite-scroller": "^1.2.4",
     "styled-components": "^5.2.3",
     "tailwindcss": "^1.8.11",
-    "theme-ui": "0.3.5"
+    "theme-ui": "0.7.5"
   },
   "gitHead": "a01dd05b1968ef811e35f95f34fb3cd96d3fa7c6",
   "devDependencies": {

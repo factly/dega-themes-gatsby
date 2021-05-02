@@ -21,6 +21,10 @@ const LayoutAmp = (props) => {
           url
           dimensions
         }
+        logo_mobile {
+          url
+          dimensions
+        }
       }
     }
   }`)
@@ -41,7 +45,7 @@ const LayoutAmp = (props) => {
             <div style={{ maxWidth: '702px', margin: '0 auto', textAlign: 'center' }}>
               <a style={{ textDecoration: 'none' }} href={space.site_address}>
                 <amp-img
-                  src={space.logo_mobile.url.proxy}
+                  src={space.logo_mobile?.url?.proxy}
                   width="97"
                   height="54"
                   alt={space.site_title}

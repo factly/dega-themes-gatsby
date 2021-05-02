@@ -319,14 +319,14 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       });
     }
 
-    // createPage({
-    //   path: `/${post.slug}/amp/`,
-    //   component: require.resolve('./src/templates/post-details.amp.js'),
-    //   context: {
-    //     id: parseInt(post.id),
-    //     sid: client,
-    //   },
-    // });
+    createPage({
+      path: `/${post.slug}/amp/`,
+      component: require.resolve('./src/templates/post-details.amp.js'),
+      context: {
+        id: parseInt(post.id),
+        sid: client,
+      },
+    });
   });
 
   // create tag details page

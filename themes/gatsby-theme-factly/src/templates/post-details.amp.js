@@ -22,7 +22,7 @@ const PostDetails = ({ data }) => {
         {/* <script async custom-element="amp-pinterest" src="https://cdn.ampproject.org/v0/amp-pinterest-0.1.js"></script> */}
       </Helmet>
       <article>
-        <h1 sx={{ fontSize: (theme) => `${theme.fontSizes.h3}` }}>
+        <h1 className="amp-title">
           <strong>{post.title}</strong>
         </h1>
         {post.users.map((user, i, arr) => (

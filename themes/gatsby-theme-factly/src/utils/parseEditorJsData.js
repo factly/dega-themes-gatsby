@@ -203,7 +203,7 @@ const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
                   <img
                     // sx={{ mx: 'auto', py: 4 }}
                     src={data.url.proxy}
-                    alt={data.alt_text}
+                    alt={data.alt_text ? data.alt_text : ''}
                   />
                   {data.caption && <figcaption>{data.caption}</figcaption>}
                 </figure>

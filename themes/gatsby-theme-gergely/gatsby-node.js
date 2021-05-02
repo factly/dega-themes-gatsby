@@ -92,38 +92,42 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     }
   `);
   const formats = await graphql(`
-  query FormatsQuery {
-    dega {
-      formats {
-       nodes{ id
-        slug}
+    query FormatsQuery {
+      dega {
+        formats {
+          nodes {
+            id
+            slug
+          }
+        }
       }
     }
-  }
   `);
 
   const tags = await graphql(`
-  query TagsQuery {
-    dega {
-      tags {
-       nodes{ id
-        slug
-
-      }
+    query TagsQuery {
+      dega {
+        tags {
+          nodes {
+            id
+            slug
+          }
+        }
       }
     }
-  }
   `);
 
   const categories = await graphql(`
-  query CategoriesQuery {
-    dega {
-      categories(limit: 100, page: 1) {
-       nodes { id
-        slug}
+    query CategoriesQuery {
+      dega {
+        categories(limit: 100, page: 1) {
+          nodes {
+            id
+            slug
+          }
+        }
       }
     }
-  }
   `);
   const users = await graphql(`
     query UsersQuery {
@@ -137,15 +141,17 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     }
   `);
   const posts = await graphql(`
-  query PostsQuery {
-    dega {
-      posts(limit:100, page:1) {
-       nodes { id
-        published_date
-        slug}
+    query PostsQuery {
+      dega {
+        posts(limit: 100, page: 1) {
+          nodes {
+            id
+            published_date
+            slug
+          }
+        }
       }
     }
-  }
   `);
 
   const result = await graphql(`
@@ -310,14 +316,14 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       });
     }
 
-    // createPage({
-    //   path: `/${post.slug}/amp/`,
-    //   component: require.resolve('./src/templates/post-details.amp.js'),
-    //   context: {
-    //     id: parseInt(post.id),
-    //     sid: client,
-    //   },
-    // });
+    createPage({
+      path: `/${post.slug}/amp/`,
+      component: require.resolve('./src/templates/post-details.amp.js'),
+      context: {
+        id: parseInt(post.id),
+        sid: client,
+      },
+    });
   });
 
   // create tag details page
