@@ -18,7 +18,7 @@ const Layout = ({ children, baseUrl, logo }) => {
   const addDefaultSrc = (e) => (e.target.src = placeholderLogo);
   const products = [
     { name: 'Factly Stories', link: 'https://factly.in' },
-    { name: 'Factly Videos', link: 'https://videos.factly.in' },
+    { name: 'Data Dashboards', link: 'https://dashboards.factly.in' },
     { name: 'Counting India', link: 'https://countingindia.com' },
   ];
   const leftNavItems = [];
