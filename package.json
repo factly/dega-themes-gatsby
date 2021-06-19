@@ -26,15 +26,11 @@
     "format:check": "prettier --check \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
     "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
     "health": "yarn workspace factly-health",
+    "english": "yarn workspace factly-english",
     "vidcheck": "yarn workspace vidcheck",
     "youtube": "yarn workspace factly-youtube",
     "source-vidcheck": "yarn workspace gatsby-source-vidcheck",
     "athena": "yarn workspace athena"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn format"
-    }
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

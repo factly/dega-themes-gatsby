@@ -8,16 +8,16 @@
   },
   "dependencies": {
     "@factly/gatsby-source-youtube": "^0.0.1",
-    "dotenv": "^8.2.0",
-    "gatsby": "^3.1.2",
-    "gatsby-image": "^3.2.0",
-    "gatsby-plugin-google-analytics": "^3.2.0",
-    "gatsby-plugin-image": "^1.3.0",
-    "gatsby-plugin-manifest": "^3.2.0",
-    "gatsby-plugin-react-helmet": "^4.2.0",
-    "gatsby-plugin-sharp": "^3.2.0",
-    "gatsby-plugin-theme-ui": "^0.7.5",
-    "gatsby-transformer-sharp": "^3.1.0",
+    "dotenv": "^10.0.0",
+    "gatsby": "^3.7.2",
+    "gatsby-image": "^3.7.1",
+    "gatsby-plugin-google-analytics": "^3.7.1",
+    "gatsby-plugin-image": "^1.7.1",
+    "gatsby-plugin-manifest": "^3.7.1",
+    "gatsby-plugin-react-helmet": "^4.7.1",
+    "gatsby-plugin-sharp": "^3.7.1",
+    "gatsby-plugin-theme-ui": "^0.9.1",
+    "gatsby-transformer-sharp": "^3.7.1",
     "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -27,7 +27,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-modal": "^3.12.1",
     "react-youtube": "^7.13.1",
-    "theme-ui": "^0.7.5"
+    "theme-ui": "^0.9.1"
   },
   "scripts": {
     "build": "gatsby build GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true",
@@ -35,7 +35,7 @@
     "develop": "gatsby develop"
   },
   "peerDependencies": {
-    "gatsby": "^3.1.2",
+    "gatsby": "^3.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }
