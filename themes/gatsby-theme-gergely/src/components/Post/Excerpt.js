@@ -33,7 +33,7 @@ const Excerpt = ({ excerpt, image }) => (
           }}
           // onError={addDefaultSrc}
         /> */}
-        
+
         <Img fluid={generateFluidObject({ url: image.url.proxy, dimensions: image.dimensions })} />
       </div>
     )}

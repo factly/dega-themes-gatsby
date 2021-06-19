@@ -1,9 +1,6 @@
-// const path = require('path');
-// const tailwindConfig = require('./tailwind.config.js');
+
 const editorjsHTML = require('editorjs-html');
 
-// const autoprefixer = require(`autoprefixer`);
-// const cssnano = require(`cssnano`);
 
 module.exports = ({
   spaceId,
@@ -12,13 +9,12 @@ module.exports = ({
   siteUrl = 'https://localhost:9002',
   youtubeApiKey,
   channelId,
-  tailwindCustomConfig = {},
 }) => ({
   siteMetadata: {
     title: 'epage',
     siteUrl: siteUrl,
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta veritatis corporis repudiandae dolor aperiam molestias autem perspiciatis similique quibusdam, eius adipisci debitis quam amet, unde rerum minus nulla atque quidem!',
+      'Gatsby Site built using DegaCMS',
   },
   // flags: { QUERY_ON_DEMAND: true },
   plugins: [
@@ -26,18 +22,11 @@ module.exports = ({
     // {
     //   resolve: `gatsby-source-dega`,
     //   options: {
-    //     spaceId: 8,
+    //     spaceId,
     //     accessToken,
-    //     url: api,
+    //     uri: api,
     //   },
     // },
-    /* {
-        resolve: 'gatsby-source-filesystem',
-        options: {
-          name: 'images',
-          path: path.join(__dirname, `src`, `static/images`),
-        },
-      }, */
     youtubeApiKey && channelId
       ? {
           resolve: '@factly/gatsby-theme-youtube',
@@ -87,21 +76,7 @@ module.exports = ({
       },
     },
     `gatsby-plugin-sass`,
-    
     'gatsby-plugin-styled-components',
-    // {
-    //   resolve: `gatsby-plugin-postcss`,
-    //   options: {
-    //     postCssPlugins: [
-    //       require(`tailwindcss`)({
-    //         ...tailwindConfig,
-    //         ...tailwindCustomConfig,
-    //       }),
-    //       autoprefixer,
-    //       cssnano,
-    //     ],
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-amp`,
       options: {

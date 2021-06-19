@@ -5,7 +5,7 @@ import { jsx } from 'theme-ui';
 
 // import '../static/css/main.scss';
 import Seo from './Seo';
-import headerImg from '../static/health-site-header.png'
+import headerImg from '../static/health-site-header.png';
 
 const HomePageTwo = ({ data }) => {
   const { dega } = data;
@@ -244,7 +244,7 @@ const HomePageTwo = ({ data }) => {
                       ))}
                     </div>
                     <Link
-                      to={`/categories/${item.slug}`}
+                      to={`/category/${item.slug}`}
                       type="button"
                       sx={{
                         width: '100%',

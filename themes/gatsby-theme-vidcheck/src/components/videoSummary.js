@@ -103,9 +103,7 @@ const VideoSummary = ({ video, claims, preview = false }) => {
             mb: '0.25rem',
           }}
         >
-          <p sx={{ p: 0, m: 0, fontWeight: 'bold' }}>
-            {claims.length} claims in total
-          </p>
+          <p sx={{ p: 0, m: 0, fontWeight: 'bold' }}>{claims.length} claims in total</p>
           <p sx={{ p: 0, m: 0, display: 'flex', alignItems: 'baseline' }}>
             <FaRegClock />
             <span sx={{ pl: '0.25rem' }}>

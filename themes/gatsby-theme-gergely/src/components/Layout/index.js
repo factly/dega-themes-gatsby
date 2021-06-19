@@ -57,7 +57,7 @@ const Layout = (props) => {
       >
         {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
       </Seo>
-      <Navbar logo={`${space.logo.url.proxy}?h:60`} menu={menu}/>
+      <Navbar logo={`${space.logo.url.proxy}?h:60`} menu={menu} />
       <main
         style={{ maxWidth: '1560px' }}
         sx={{

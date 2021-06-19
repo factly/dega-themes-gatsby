@@ -67,7 +67,7 @@ function CategoryDetailsAll({ data }) {
   };
   return (
     <FormatPageLayout
-      type="categories"
+      type="category"
       posts={dega.posts.nodes}
       formats={dega.formats.nodes}
       item={dega.category}
@@ -79,7 +79,7 @@ function CategoryDetailsAll({ data }) {
 export default CategoryDetailsAll;
 
 export const query = graphql`
-  query($id: Int!) {
+  query ($id: Int!) {
     dega {
       category(id: $id) {
         description

@@ -289,7 +289,7 @@ const PostDetails = ({ data }) => {
 export default PostDetails;
 
 export const query = graphql`
-  query($id: Int!) {
+  query ($id: Int!) {
     dega {
       space {
         site_address

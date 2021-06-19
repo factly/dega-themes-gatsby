@@ -284,7 +284,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
 
   formats.data.dega.formats.nodes.forEach((format) => {
     createPage({
-      path: `/formats/${format.slug}`,
+      path: `/format/${format.slug}`,
       component: require.resolve('./src/templates/format-details.js'),
       context: {
         id: parseInt(format.id),
@@ -330,7 +330,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
 
   tags.data.dega.tags.nodes.forEach((tag) => {
     createPage({
-      path: `/tags/${tag.slug}`,
+      path: `/tag/${tag.slug}`,
       component: require.resolve('./src/templates/tag-details.js'),
       context: {
         id: parseInt(tag.id),
@@ -341,7 +341,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
 
     formats.data.dega.formats.nodes.forEach((format) => {
       createPage({
-        path: `/tags/${tag.slug}/formats/${format.slug}`,
+        path: `/tag/${tag.slug}/format/${format.slug}`,
         component: require.resolve('./src/templates/tag-details-format-details.js'),
         context: {
           id: parseInt(tag.id),
@@ -381,7 +381,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
 
   categories.data.dega.categories.nodes.forEach((category) => {
     createPage({
-      path: `/categories/${category.slug}`,
+      path: `/category/${category.slug}`,
       component: require.resolve('./src/templates/category-details.js'),
       context: {
         id: parseInt(category.id),
@@ -391,7 +391,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
     // create category details page with each format
     formats.data.dega.formats.nodes.forEach((format) => {
       createPage({
-        path: `/categories/${category.slug}/formats/${format.slug}`,
+        path: `/category/${category.slug}/format/${format.slug}`,
         component: require.resolve('./src/templates/category-details-format-details.js'),
         context: {
           id: parseInt(category.id),
@@ -429,8 +429,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
   // create user details page
   users.data.dega.users.nodes.forEach((user) => {
     createPage({
-      path: `/users/${user.id}`,
-      component: require.resolve('./src/templates/user-details.js'),
+      path: `/author/${user.id}`,
+      component: require.resolve('./src/templates/author-details.js'),
       context: {
         id: parseInt(user.id),
       },
@@ -440,8 +440,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
 
     formats.data.dega.formats.nodes.forEach((format) => {
       createPage({
-        path: `/users/${user.id}/formats/${format.slug}`,
-        component: require.resolve('./src/templates/user-details-format-details.js'),
+        path: `/author/${user.id}/format/${format.slug}`,
+        component: require.resolve('./src/templates/author-details-format-details.js'),
         context: {
           id: parseInt(user.id),
           format_id: parseInt(format.id),

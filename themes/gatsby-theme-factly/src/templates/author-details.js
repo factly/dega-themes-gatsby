@@ -89,7 +89,7 @@ function UserDetailsAll({ data }) {
 
   return (
     <FormatPageLayout
-      type="users"
+      type="author"
       posts={dega.posts.nodes}
       formats={dega.formats.nodes}
       item={dega.user}
@@ -102,7 +102,7 @@ function UserDetailsAll({ data }) {
 export default UserDetailsAll;
 
 export const query = graphql`
-  query($id: Int!) {
+  query ($id: Int!) {
     dega {
       user(id: $id) {
         id

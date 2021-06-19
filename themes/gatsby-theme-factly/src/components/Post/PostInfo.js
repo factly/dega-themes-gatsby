@@ -2,9 +2,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import parseDate from '../../utils/parseDate';
 import { FaRegClock } from 'react-icons/fa';
-import { flex } from 'styled-system';
+import parseDate from '../../utils/parseDate';
 
 /* 
  TODO 1. Add Author image above their names
@@ -35,7 +34,7 @@ const PostInfo = ({ users, categories, date }) => (
           users.map((user, i, arr) => (
             <React.Fragment key={i}>
               <Link
-                to={`/users/${user.id}`}
+                to={`/author/${user.id}`}
                 sx={{
                   fontWeight: 'medium',
                   color: (theme) => `${theme.colors.textLinkPrimary}`,
@@ -66,7 +65,7 @@ const PostInfo = ({ users, categories, date }) => (
             {categories.map((category, i, arr) => (
               <React.Fragment key={i}>
                 <Link
-                  to={`/categories/${category.slug}`}
+                  to={`/category/${category.slug}`}
                   sx={{
                     px: (theme) => `${theme.space.spacing2}`,
                     fontWeight: 'medium',

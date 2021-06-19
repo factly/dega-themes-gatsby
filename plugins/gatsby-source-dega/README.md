@@ -19,7 +19,6 @@ First, you need a way to pass environment variables to the build process, so sec
 
 You'll need an `API Key` and `Space Id` from dega
 
-
 Save both to your environment variable file
 
 It should look something like this:

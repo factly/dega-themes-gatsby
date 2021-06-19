@@ -11,7 +11,7 @@ function TagDetailsAll({ data }) {
    */
   return (
     <FormatPageLayout
-      type="tags"
+      type="tag"
       posts={dega.posts.nodes}
       formats={dega.formats.nodes}
       item={dega.tag}
@@ -22,7 +22,7 @@ function TagDetailsAll({ data }) {
 export default TagDetailsAll;
 
 export const query = graphql`
-  query($id: Int!) {
+  query ($id: Int!) {
     dega {
       tag(id: $id) {
         description

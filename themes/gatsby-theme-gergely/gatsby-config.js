@@ -17,27 +17,19 @@ module.exports = ({
   siteMetadata: {
     title: 'epage',
     siteUrl: siteUrl,
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta veritatis corporis repudiandae dolor aperiam molestias autem perspiciatis similique quibusdam, eius adipisci debitis quam amet, unde rerum minus nulla atque quidem!',
+    description: 'Gatsby site built using Dega CMS',
   },
   // flags: { QUERY_ON_DEMAND: true },
   plugins: [
     'gatsby-plugin-react-helmet',
-    {
-      resolve: `gatsby-source-dega`,
-      options: {
-        spaceId: 8,
-        accessToken,
-        url: api,
-      },
-    },
-    /* {
-        resolve: 'gatsby-source-filesystem',
-        options: {
-          name: 'images',
-          path: path.join(__dirname, `src`, `static/images`),
-        },
-      }, */
+    // {
+    //   resolve: `gatsby-source-dega`,
+    //   options: {
+    //     spaceId,
+    //     accessToken,
+    //     url: api,
+    //   },
+    // },
     youtubeApiKey && channelId
       ? {
           resolve: '@factly/gatsby-theme-youtube',
@@ -88,19 +80,6 @@ module.exports = ({
     },
     `gatsby-plugin-sass`,
     'gatsby-plugin-styled-components',
-    // {
-    //   resolve: `gatsby-plugin-postcss`,
-    //   options: {
-    //     postCssPlugins: [
-    //       require(`tailwindcss`)({
-    //         ...tailwindConfig,
-    //         ...tailwindCustomConfig,
-    //       }),
-    //       autoprefixer,
-    //       cssnano,
-    //     ],
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-amp`,
       options: {
@@ -148,13 +127,13 @@ module.exports = ({
                     date: post.published_date,
                     url: `${siteUrl}/${post.slug}`,
                     guid: `${siteUrl}/${post.slug}`,
-                    custom_elements: [
-                      {
-                        'content:encoded': `${JSON.stringify(
-                          editorjsHTML().parse(post.description),
-                        )}`,
-                      },
-                    ],
+                    // custom_elements: [
+                    //   {
+                    //     'content:encoded': `${JSON.stringify(
+                    //       editorjsHTML().parse(post.description),
+                    //     )}`,
+                    //   },
+                    // ],
                     // add post medium
                   },
                 ),

@@ -7,7 +7,7 @@ const Categories = ({ categories }) =>
   categories &&
   categories.map((category, index) => (
     <div
-      key={`categories${index}`}
+      key={`category${index}`}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -21,16 +21,16 @@ const Categories = ({ categories }) =>
       }}
     >
       <Link
-        to={`/categories/${category.slug}`}
+        to={`/category/${category.slug}`}
         sx={{
           width: 'full',
           display: 'flex',
           textDecoration: 'none',
-          '&:hover': { textDecoration: 'none' },
           fontWeight: 'bold',
           fontSize: (theme) => `${theme.fontSizes.h7}`,
           color: (theme) => `${theme.colors.textPrimary}`,
           '&:hover': {
+            textDecoration: 'none',
             color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
           },
         }}

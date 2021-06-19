@@ -123,7 +123,7 @@ export default function NavBar({ logo, menu }) {
                   <Link
                     key={`navbar-${index}`}
                     to={menuItem.url}
-                    titile={menuItem.title}
+                    title={menuItem.title}
                     sx={{
                       px: [
                         (theme) => `${theme.space.spacing3}`,
