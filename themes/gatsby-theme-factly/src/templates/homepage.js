@@ -24,7 +24,7 @@ function Indexpage({ data, pageContext }) {
 export default Indexpage;
 
 export const query = graphql`
-  query($format_factcheck: [Int!], $format_without_factcheck: [Int!]) {
+  query ($format_factcheck: [Int!], $format_without_factcheck: [Int!]) {
     dega {
       space {
         site_address

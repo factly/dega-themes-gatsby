@@ -27,7 +27,7 @@ const PostDetails = ({ data }) => {
         </h1>
         {post.users.map((user, i, arr) => (
           <div key={i}>
-            By <a href={`/users/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
+            By <a href={`/author/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
             {arr.length - i > 1 && ','}
           </div>
         ))}
@@ -50,7 +50,7 @@ const PostDetails = ({ data }) => {
 export default PostDetails;
 
 export const query = graphql`
-  query($id: Int!) {
+  query ($id: Int!) {
     dega {
       post(id: $id) {
         published_date

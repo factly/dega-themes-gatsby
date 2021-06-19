@@ -9,7 +9,7 @@ import { jsx } from 'theme-ui';
 const Tag = ({ url, name }) => {
   return (
     <Link
-      to={`/tags/${url}`}
+      to={`/tag/${url}`}
       sx={{
         textAlign: 'center',
         color: (theme) => `${theme.colors.textTag}`,

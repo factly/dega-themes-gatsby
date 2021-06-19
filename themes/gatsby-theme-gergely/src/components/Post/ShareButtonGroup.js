@@ -13,7 +13,8 @@ import { useThemeUI } from 'theme-ui';
 
 const ShareButtonGroup = ({ data, setRef }) => {
   const { theme } = useThemeUI();
-  const { socialFacebook, socialTwitter, socialWhatsapp } = theme.colors;
+  const { rawColors: colors } = theme;
+  const { socialFacebook, socialTwitter, socialWhatsapp } = colors;
   const { h6 } = theme.fontSizes;
   let title = encodeURIComponent(data.title);
   // let url = encodeURIComponent(data.url)
@@ -43,7 +44,7 @@ const ShareButtonGroup = ({ data, setRef }) => {
       >
         <FaFacebookSquare color={socialFacebook} fontSize={h6} />
       </a>
-      {/* titile uri ====> href={`https://twitter.com/share?text=${title}-&url=${data.url}`} */}
+      {/* title uri ====> href={`https://twitter.com/share?text=${title}-&url=${data.url}`} */}
       <a
         title="Tweet it"
         href={`https://twitter.com/share?url=${data.url}`}
