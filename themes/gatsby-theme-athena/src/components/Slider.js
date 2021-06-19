@@ -285,11 +285,17 @@ function Slider({
                     <div
                       sx={{
                         display: 'flex',
-                        p: (theme) => `${theme.space.spacing5}`,
+                        p: (theme) => `0.25rem 1rem`, //${theme.space.spacing5}`,
                         alignItems: 'baseline',
                       }}
                     >
-                      <h2 sx={{ fontWeight: 'bold', mr: (theme) => `${theme.space.spacing3}` }}>
+                      <h2
+                        sx={{
+                          fontWeight: 'bold',
+                          mr: (theme) => `${theme.space.spacing3}`,
+                          fontSize: '1.125rem',
+                        }}
+                      >
                         Claimant:{' '}
                       </h2>
                       {claim.claimant.name}
@@ -353,7 +359,13 @@ function Slider({
                       bg: CLAIM_RATING[claim.rating.slug],
                     }}
                   >
-                    <h2 sx={{ fontWeight: 'bold', py: (theme) => `${theme.space.spacing3}` }}>
+                    <h2
+                      sx={{
+                        fontWeight: 'bold',
+                        py: (theme) => `${theme.space.spacing3}`,
+                        fontSize: '1.25rem',
+                      }}
+                    >
                       Claim:{' '}
                     </h2>
                     <div className="parsed" sx={{ display: 'flex' }}>
@@ -382,7 +394,7 @@ function Slider({
                       borderBottomWidth: '1px',
                     }}
                   >
-                    <h2 sx={{ fontWeight: 'bold' }}>Fact: </h2>
+                    <h2 sx={{ fontWeight: 'bold', fontSize: '1.25rem' }}>Fact: </h2>
 
                     <div className="parsed">
                       <p>{claim.fact}</p>

@@ -21,7 +21,7 @@ const PreviewPage = ({ data }) => {
     5: '#E82728',
     6: '#f9f9fa',
   };
-  const { video, analysis } = data.vidCheck;
+  const { video, claims } = data.vidCheck;
 
   const [currentStartTime, setCurrentStartTime] = React.useState(null);
   const player = React.useRef(null);
@@ -39,11 +39,11 @@ const PreviewPage = ({ data }) => {
     setPlayed(data.end_time_fraction);
     player.current.seekTo(data.start_time, 'seconds');
     setCurrentFormData(data);
-    const claimIndex = analysis.findIndex((item) => item.id === data.id);
+    const claimIndex = claims.findIndex((item) => item.id === data.id);
     setCurrentClaimIndex(claimIndex);
   };
-  const factCheckReview = analysis;
-  const currentClaim = analysis[currentClaimIndex];
+  const factCheckReview = claims;
+  const currentClaim = claims[currentClaimIndex];
   const handleProgress = () => {
     // console.log(player.current);
     const currentPlayedTime = player.current.getCurrentTime();
@@ -74,7 +74,7 @@ const PreviewPage = ({ data }) => {
     setPlayed(currentPlayed);
   };
   useEffect(() => {
-    updateFormState(analysis[currentClaimIndex]);
+    updateFormState(claims[currentClaimIndex]);
   }, [currentClaimIndex]);
   return (
     <Layout>
@@ -95,8 +95,15 @@ const PreviewPage = ({ data }) => {
       </div> */}
 
       <div>
-        <div sx={{ my: '1rem' }}>
-          <h2 sx={{ mt: '.5rem', fontSize: (theme) => `${theme.fontSizes.h4}` }}>{video.title}</h2>
+        <div sx={{ m: '1.5rem 1rem' }}>
+          <h2
+            sx={{
+              mt: '.5rem',
+              fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
+            }}
+          >
+            {video.title}
+          </h2>
           <p sx={{ fontSize: (theme) => `${theme.fontSizes.h8}` }}>{parseDate(video.created_at)}</p>
         </div>
 
@@ -105,7 +112,7 @@ const PreviewPage = ({ data }) => {
           sx={{
             // p: '1rem',
             // ml: '1rem',
-            my: '2rem',
+            m: '2rem 1rem',
             borderRadius: '0.25rem',
             boxShadow: 'rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px',
             background: 'white',
@@ -115,14 +122,20 @@ const PreviewPage = ({ data }) => {
             },
           }}
         >
-          <VideoSummaryCard video={video} analysis={analysis} preview />
+          <VideoSummaryCard
+            video={video}
+            claims={claims}
+            ratings={data.allVidCheckRating.nodes}
+            preview
+          />
         </div>
-        <div sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div sx={{ display: 'flex', justifyContent: 'space-between', m: '0 1rem' }}>
           <div
             className="main-container"
             sx={{
               display: 'flex',
               flex: '0 0 50%',
+              maxWidth: '50%',
               mx: '1%',
               flexDirection: ['column', null, null, 'row'],
               justifyContent: 'center',
@@ -155,7 +168,7 @@ const PreviewPage = ({ data }) => {
               </div>
               <div className="interactive-timeline" sx={{ mt: '2rem' }}>
                 <HorizontalTimelineBar
-                  claims={analysis}
+                  claims={claims}
                   total={video.total_duration}
                   currentIndex={currentClaimIndex}
                   setCurrentIndex={setCurrentClaimIndex}
@@ -166,7 +179,7 @@ const PreviewPage = ({ data }) => {
           </div>
           <div sx={{ flex: '0 0 48%', maxWidth: '48%', mx: '1%' }}>
             <Slider
-              claims={analysis}
+              claims={claims}
               currentIndex={currentClaimIndex}
               setCurrentIndex={setCurrentClaimIndex}
               currentClaim={currentClaim}
@@ -343,12 +356,12 @@ const PreviewPage = ({ data }) => {
               marginTop: '60px',
             }}
             dangerouslySetInnerHTML={{
-              __html: analysis[currentClaimIndex].html,
+              __html: claims[currentClaimIndex].html,
             }}
           />
         </section>
         <section className="sources" sx={{ mt: '2rem' }}>
-          {analysis[currentClaimIndex].review_sources ? (
+          {claims[currentClaimIndex].review_sources ? (
             <div
               style={{
                 width: '70%',
@@ -359,8 +372,23 @@ const PreviewPage = ({ data }) => {
                 padding: 12,
               }}
             >
-              <h4>Review sources</h4>
-              {analysis[currentClaimIndex].review_sources}
+              <h3 sx={{ mb: '1rem' }}>Review sources</h3>
+              {claims[currentClaimIndex].review_sources.map((source) => (
+                <p>
+                  <strong>{source.description}: </strong>
+                  <a
+                    href={source.url}
+                    sx={{
+                      color: (theme) => theme.colors.textLinkPrimary,
+                      '&:hover': {
+                        color: (theme) => theme.colors.textLinkHoverPrimary,
+                      },
+                    }}
+                  >
+                    {source.url}
+                  </a>
+                </p>
+              ))}
             </div>
           ) : null}
         </section>
@@ -371,7 +399,7 @@ const PreviewPage = ({ data }) => {
 
 export default PreviewPage;
 export const query = graphql`
-  query($id: String!) {
+  query ($id: String!) {
     vidCheck(video: { id: { regex: $id } }) {
       video {
         created_at
@@ -385,7 +413,7 @@ export const query = graphql`
         url
         video_type
       }
-      analysis {
+      claims {
         checked_date
         claim
         claim_date
@@ -400,6 +428,8 @@ export const query = graphql`
         rating {
           id
           colour
+          background_colour
+          text_colour
           created_at
           name
           deleted_at
@@ -422,6 +452,13 @@ export const query = graphql`
           tag_line
           updated_at
         }
+      }
+    }
+    allVidCheckRating {
+      nodes {
+        background_colour
+        name
+        text_colour
       }
     }
   }

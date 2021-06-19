@@ -10,14 +10,14 @@ const HorizontalTimelineBar = ({
   setCurrentIndex,
   // updateFormState,
 }) => {
-  const colors = {
-    False: '#e82728',
-    True: '#108040',
-    'Not a Claim': 'transparent',
-    Misleading: '#749990',
-    Unverified: '#eca124',
-    'Partly True': '#A5C239',
-  };
+  // const colors = {
+  //   False: '#e82728',
+  //   True: '#108040',
+  //   'Not a Claim': 'transparent',
+  //   Misleading: '#749990',
+  //   Unverified: '#eca124',
+  //   'Partly True': '#A5C239',
+  // };
 
   // TODO: Add colors from API
   //! Add colors from API
@@ -48,6 +48,14 @@ const HorizontalTimelineBar = ({
   const sortedClaims = claims.sort((a, b) => {
     return a.start_time - b.start_time;
   });
+  const getStartingPercent = (start, total) => {
+    // console.log({ startingPoint: `${(start / total) * 100}%` });
+    return `${(start / total) * 100}%`;
+  };
+  const getClaimWidth = (start, end, total) => {
+    //  console.log({ claimWidth: `${(parseInt(end - start) / total) * 100}%` });
+    return `${(parseInt(end - start) / total) * 100}%`;
+  };
   const calculated = sortedClaims.map((claim) => {
     const start = claim.start_time;
     const end = claim.end_time;
@@ -73,9 +81,41 @@ const HorizontalTimelineBar = ({
           display: 'flex',
           flexWrap: 'nowrap',
           boxShadow: 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
+          position: 'relative',
+          height: '32px',
         }}
       >
-        {Object.entries(percentMap).map(([key, value], i) => {
+        {sortedClaims.map((claim, i) => {
+          const ml = getStartingPercent(claim.start_time, total);
+          const w = getClaimWidth(claim.start_time, claim.end_time, total);
+          return (
+            <button
+              type="button"
+              className="claimBar"
+              key={claim.id}
+              onClick={() => handleClick(i)}
+              sx={{
+                border: 'none',
+                outline: 'none',
+                py: '16px',
+                position: 'absolute',
+                width: w,
+                ml,
+                boxShadow: currentIndex === i ? `inset 0px 0px 0px 4px #002b5a` : 'none',
+                background:
+                  currentIndex === i
+                    ? `repeating-linear-gradient( 135deg,
+                        rgba(0, 0, 0, 0.2),
+                        rgba(0, 0, 0, 0.2) 5px,
+                        rgba(0, 0, 0, 0.3) 5px,
+                        rgba(0, 0, 0, 0.3) 10px
+                      ),${claim.rating.background_colour.hex}`
+                    : claim.rating.background_colour.hex,
+              }}
+            />
+          );
+        })}
+        {/* {Object.entries(percentMap).map(([key, value], i) => {
           return (
             <button
               type="button"
@@ -102,7 +142,7 @@ const HorizontalTimelineBar = ({
               disabled={value.rating === 'Not a Claim'}
             />
           );
-        })}
+        })} */}
       </div>
     </div>
   );
