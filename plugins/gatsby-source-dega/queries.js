@@ -5,37 +5,37 @@ const { gql } = require('@apollo/client');
 // Total query
 exports.getTotalQuery = () => {
   return gql`
-  query {
-    posts {
-      total
+    query {
+      posts {
+        total
+      }
+      # check for space specific users
+      users {
+        total
+      }
+      ratings {
+        total
+      }
+      tags {
+        total
+      }
+      formats {
+        total
+      }
+      categories {
+        total
+      }
+      claims {
+        total
+      }
+      claimants {
+        total
+      }
+      # check for other spaces data
+      menu {
+        total
+      }
     }
-    # check for space specific users
-    users {
-      total
-    }
-    ratings {
-      total
-    }
-    tags {
-      total
-    }
-    formats {
-      total
-    }
-    categories {
-      total
-    }
-    claims {
-      total
-    }
-    claimants {
-      total
-    }
-    # check for other spaces data
-    menu {
-      total
-    }
-  }
   `;
 };
 // Posts Query
@@ -230,7 +230,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
   `;
 };
 // Categories Query
-exports.getCategoriesQuery = ({  limit, page = 1 }) => {
+exports.getCategoriesQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
     categories( limit:${limit}, page:${page}) {
@@ -268,7 +268,7 @@ exports.getCategoriesQuery = ({  limit, page = 1 }) => {
 };
 
 // Tags Query
-exports.getTagsQuery = ({  limit, page = 1 }) => {
+exports.getTagsQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
     tags( limit:${limit}, page:${page}) {
@@ -290,19 +290,19 @@ exports.getTagsQuery = ({  limit, page = 1 }) => {
 // Formats Query
 exports.getFormatsQuery = () => {
   return gql`
-  query {
-    formats {
-      nodes {
-        id
-        created_at
-        updated_at
-        name
-        slug
-        description
-        space_id
+    query {
+      formats {
+        nodes {
+          id
+          created_at
+          updated_at
+          name
+          slug
+          description
+          space_id
+        }
       }
     }
-  }
   `;
 };
 
@@ -520,7 +520,7 @@ exports.getRatingsQuery = ({ limit, page = 1 }) => {
   `;
 };
 // Claims Query
-exports.getClaimsQuery = ({  limit, page = 1 }) => {
+exports.getClaimsQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
     claims(limit:${limit}, page:${page}) {
@@ -601,7 +601,7 @@ exports.getClaimsQuery = ({  limit, page = 1 }) => {
 };
 
 //Claimants Query
-exports.getClaimantsQuery = ({limit, page = 1 }) => {
+exports.getClaimantsQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
     claimants( limit:${limit}, page:${page}) {

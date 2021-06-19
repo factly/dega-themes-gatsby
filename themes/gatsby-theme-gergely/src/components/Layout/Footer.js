@@ -37,7 +37,7 @@ const FooterTwo = () => (
       </div>
       <div>
         <h3 sx={{ fontSize: (theme) => `${theme.fontSizes.h5}` }}>About Factly</h3>
-        <hr sx={{my: theme=> `${theme.space.spacing4}`}}/>
+        <hr sx={{ my: (theme) => `${theme.space.spacing4}` }} />
         <p
           sx={{
             fontSize: [

@@ -1,9 +1,12 @@
 export default {
-  // useLocalStorage: false,
-  // useCustomProperties: false,
-  // useColorSchemeMediaQuery: false,
-  // useRootStyles: true,
-  useBorderBox: true,
+  config: {
+    useBorderBox: true,
+    // useLocalStorage: false,
+    // useCustomProperties: false,
+    // useColorSchemeMediaQuery: false,
+    // useRootStyles: true,
+  },
+
   breakpoints: ['640px', '768px', '1024px', '1280px', '1536px'],
   // sm, md, lg, xl
   // mediaQueries: ({breakpoints = this.breakpoints})=> ({
@@ -113,12 +116,10 @@ export default {
   fonts: {
     heading: 'inherit',
     metropolis: 'Metropolis, Georgia, Cambria, "Times New Roman", Times, serif',
-    sans:
-      'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+    sans: 'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
     serif: 'Georgia,Cambria,"Times New Roman",Times,serif',
     mono: 'Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
-    body:
-      'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+    body: 'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
     monospace: 'Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
     inter:
       'Inter, Roboto, "Helvetica Neue", Arial, "Noto Sans", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',

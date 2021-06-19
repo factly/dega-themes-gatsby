@@ -104,7 +104,6 @@ exports.sourceNodes = async (
   const data = await fetch('http://vidcheck-server.factly.org/videos/embed', {
     headers: { 'X-Space': spaceId },
   })
-  
     .then((res) => res.json())
     .catch((err) => console.log(err));
 

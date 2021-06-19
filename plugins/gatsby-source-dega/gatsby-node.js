@@ -44,11 +44,9 @@ const SPACE_NODE_TYPE = `DegaSpace`;
 const RATING_NODE_TYPE = `DegaRating`;
 const MENU_NODE_TYPE = `DegaMenu`;
 
-
-
 exports.sourceNodes = async (
   { actions, createContentDigest, createNodeId, getNodesByType, reporter },
-  { spaceId, accessToken },
+  { spaceId, accessToken, uri },
 ) => {
   if (!spaceId) {
     reporter.panic('space id is not provided. please provide space id');
@@ -67,26 +65,26 @@ exports.sourceNodes = async (
       retryIf: (error, _operation) => !!error,
     },
   });
-  
+
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
       graphQLErrors.forEach(({ message, locations, path }) =>
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
       );
-  
+
     if (networkError) console.log(`[Network error]: ${networkError}`);
   });
-  
+
   const httpLink = new HttpLink({
-    // uri: 'http://127.0.0.1:9001/query',
-    uri: 'http://dega-api.factly.org/query',
+    uri,
+    // uri: 'http://dega-api.factly.org/query',
     fetch: fetchWrapper,
     headers: {
       'X-Space': spaceId,
       Authorization: accessToken,
     },
   });
-  
+
   const cache = new InMemoryCache({
     typePolicies: {
       FormatsPaging: {
@@ -111,7 +109,7 @@ exports.sourceNodes = async (
       },
     },
   });
-  
+
   const client = new ApolloClient({
     // Provide required constructor fields
     cache: cache,
@@ -325,13 +323,13 @@ exports.sourceNodes = async (
     });
     return menus;
   };
-  const menus = await getMenus();
+  const { data: menus } = await getMenus();
   // const menus = await getData({
   //   query: getMenuQuery(),
   //   total: totalCount.menu.total,
   //   type: 'menu',
   // });
-  menus.forEach((menu) => {
+  menus.menu.nodes.forEach((menu) => {
     // console.log({ menu });
     createNode({
       ...menu,

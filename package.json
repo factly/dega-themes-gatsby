@@ -32,6 +32,11 @@
     "source-vidcheck": "yarn workspace gatsby-source-vidcheck",
     "athena": "yarn workspace athena"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format"
+    }
+  },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.23.0",

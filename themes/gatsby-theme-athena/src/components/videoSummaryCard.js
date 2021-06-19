@@ -294,6 +294,6 @@ const VideoSummaryCard = ({ video, claims, preview = false, ratings }) => {
       }
     </>
   );
-};;;
+};
 
 export default VideoSummaryCard;

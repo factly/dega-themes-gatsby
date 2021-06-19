@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import Navbar from './Navbar';
-// import Footer from './Footer';
-
-// import { useThemeUI } from 'theme-ui';
 import Footer from './Footer';
 import '../../static/css/tailwind.css';
 import Seo from '../Seo';
@@ -57,7 +54,7 @@ const Layout = (props) => {
       >
         {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
       </Seo>
-      <Navbar logo={`${space.logo.url.proxy}?h:60`} menu={menu}/>
+      <Navbar logo={`${space.logo.url.proxy}?h:60`} menu={menu} />
       <main
         style={{ maxWidth: '1560px' }}
         sx={{

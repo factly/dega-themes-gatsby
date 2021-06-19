@@ -570,7 +570,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
 };
  */
 export const query = graphql`
-  query($playlistId: String!) {
+  query ($playlistId: String!) {
     playlist(playlistId: { eq: $playlistId }) {
       playlistId
       id

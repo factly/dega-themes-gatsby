@@ -26,7 +26,7 @@ module.exports = ({
     {
       resolve: `gatsby-source-dega`,
       options: {
-        spaceId: 8,
+        spaceId,
         accessToken,
         url: api,
       },
@@ -148,13 +148,13 @@ module.exports = ({
                     date: post.published_date,
                     url: `${siteUrl}/${post.slug}`,
                     guid: `${siteUrl}/${post.slug}`,
-                    custom_elements: [
-                      {
-                        'content:encoded': `${JSON.stringify(
-                          editorjsHTML().parse(post.description),
-                        )}`,
-                      },
-                    ],
+                    // custom_elements: [
+                    //   {
+                    //     'content:encoded': `${JSON.stringify(
+                    //       editorjsHTML().parse(post.description),
+                    //     )}`,
+                    //   },
+                    // ],
                     // add post medium
                   },
                 ),

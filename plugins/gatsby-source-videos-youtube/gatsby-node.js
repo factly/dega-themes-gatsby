@@ -419,10 +419,7 @@ exports.onCreateNode = async ({
 Error: ${err}`);
     }
 
-    if (
-      fileNode
-      && imageCacheKey
-    ) {
+    if (fileNode && imageCacheKey) {
       await cache.set(imageCacheKey, {
         fileNodeID: fileNode,
       });
