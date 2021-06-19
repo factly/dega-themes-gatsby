@@ -5,7 +5,7 @@ import _ from 'underscore';
 import { FaRegClock } from 'react-icons/fa';
 import parseDate from '../utils/parseDate';
 
-const VideoSummary = ({ video, analysis, preview = false }) => {
+const VideoSummary = ({ video, claims, preview = false }) => {
   const colors = {
     1: '#108040',
     2: '#A5C239',
@@ -57,7 +57,7 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
       })
       .value();
   };
-  const sortedClaims = analysis.sort((a, b) => {
+  const sortedClaims = claims.sort((a, b) => {
     return a.start_time - b.start_time;
   });
   const calculated = sortedClaims.map((claim) => {
@@ -73,8 +73,7 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
     return { claim: claim.rating.id, percent: roundedPercent[i] };
   });
 
-  const ratingsCount = getRatingsCount(getRatings(analysis));
-  const filteredAnalysis = analysis.filter((claim) => claim.rating.name === 'Not a Claim');
+  const ratingsCount = getRatingsCount(getRatings(claims));
   return (
     <div
       className="summary"
@@ -105,7 +104,7 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
           }}
         >
           <p sx={{ p: 0, m: 0, fontWeight: 'bold' }}>
-            {analysis.length - filteredAnalysis.length} claims in total
+            {claims.length} claims in total
           </p>
           <p sx={{ p: 0, m: 0, display: 'flex', alignItems: 'baseline' }}>
             <FaRegClock />

@@ -5,7 +5,7 @@ import _ from 'underscore';
 import { FaRegClock } from 'react-icons/fa';
 import parseDate from '../utils/parseDate';
 
-const VideoSummary = ({ video, analysis, preview = false }) => {
+const VideoSummary = ({ video, claims, preview = false }) => {
   // TODO: Add colors from API
   //! Add colors from API
   //!
@@ -24,6 +24,14 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
     Misleading: '#749990',
     Unverified: '#eca124',
     'Partly True': '',
+  };
+  const getStartingPercent = (start, total) => {
+    // console.log({ startingPoint: `${(start / total) * 100}%` });
+    return `${(start / total) * 100}%`;
+  };
+  const getClaimWidth = (start, end, total) => {
+    //  console.log({ claimWidth: `${(parseInt(end - start) / total) * 100}%` });
+    return `${(parseInt(end - start) / total) * 100}%`;
   };
   const getRatingsCount = (ratings = []) => {
     const uniqueCount = ratings.reduce(function (prev, cur) {
@@ -60,7 +68,7 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
       })
       .value();
   };
-  const sortedClaims = analysis.sort((a, b) => {
+  const sortedClaims = claims.sort((a, b) => {
     return a.start_time - b.start_time;
   });
   const calculated = sortedClaims.map((claim) => {
@@ -76,8 +84,7 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
     return { claim: claim.rating.id, percent: roundedPercent[i] };
   });
 
-  const ratingsCount = getRatingsCount(getRatings(analysis));
-  const filteredAnalysis = analysis.filter((claim) => claim.rating.name === 'Not a Claim');
+  const ratingsCount = getRatingsCount(getRatings(claims));
   return (
     <div
       className="summary"
@@ -107,9 +114,7 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
             mb: '0.25rem',
           }}
         >
-          <p sx={{ p: 0, m: 0, fontWeight: 'bold' }}>
-            {analysis.length - filteredAnalysis.length} claims in total
-          </p>
+          <p sx={{ p: 0, m: 0, fontWeight: 'bold' }}>{claims.length} claims in total</p>
           <p sx={{ p: 0, m: 0, display: 'flex', alignItems: 'baseline' }}>
             <FaRegClock />
             <span sx={{ pl: '0.25rem' }}>
@@ -118,18 +123,19 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
           </p>
         </div>
 
-        <div
+        {/* <div
           className="bar"
           sx={{
             backgroundImage:
               'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)',
             display: 'flex',
             flexWrap: 'nowrap',
+            position: 'relative',
             mb: '0.5rem',
             maxWidth: '300px',
           }}
         >
-          {Object.entries(percentMap).map(([key, value]) => {
+           {Object.entries(percentMap).map(([key, value]) => {
             return (
               <div
                 className="claimBar"
@@ -140,6 +146,40 @@ const VideoSummary = ({ video, analysis, preview = false }) => {
                   background: colors[value.claim],
                 }}
               />
+            );
+          })} 
+        </div>*/}
+        <div
+          className="bar sorted"
+          sx={{
+            backgroundImage:
+              'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)',
+            display: 'flex',
+            flexWrap: 'nowrap',
+            position: 'relative',
+            mb: '0.5rem',
+            maxWidth: '300px',
+            height: '8px',
+          }}
+        >
+          {sortedClaims.map((claim) => {
+            const ml = getStartingPercent(claim.start_time, video.total_duration);
+            const w = getClaimWidth(claim.start_time, claim.end_time, video.total_duration);
+            {
+              //     console.log({ claim, w, ml });
+            }
+            return (
+              <div
+                className="claimBar"
+                key={claim.id}
+                sx={{
+                  position: 'absolute',
+                  py: '4px',
+                  width: w,
+                  ml,
+                  background: claim.rating.background_colour.hex,
+                }}
+              ></div>
             );
           })}
         </div>

@@ -20,7 +20,7 @@ const PreviewPage = ({ data }) => {
     5: '#E82728',
     6: '#f9f9fa',
   };
-  const { video, analysis } = data.vidCheck;
+  const { video, claims } = data.vidCheck;
 
   const [currentStartTime, setCurrentStartTime] = React.useState(null);
   const player = React.useRef(null);
@@ -38,11 +38,11 @@ const PreviewPage = ({ data }) => {
     setPlayed(data.end_time_fraction);
     player.current.seekTo(data.start_time, 'seconds');
     setCurrentFormData(data);
-    const claimIndex = analysis.findIndex((item) => item.id === data.id);
+    const claimIndex = claims.findIndex((item) => item.id === data.id);
     setCurrentClaimIndex(claimIndex);
   };
-  const factCheckReview = analysis;
-  const currentClaim = analysis[currentClaimIndex];
+  const factCheckReview = claims;
+  const currentClaim = claims[currentClaimIndex];
   const handleProgress = () => {
     const currentPlayedTime = player.current.getCurrentTime();
     const currentPlayed = currentPlayedTime / totalDuration;
@@ -122,7 +122,7 @@ const PreviewPage = ({ data }) => {
             </div>
             <div className="interactive-timeline" sx={{ mt: '2rem' }}>
               <HorizontalTimelineBar
-                claims={analysis}
+                claims={claims}
                 total={video.total_duration}
                 currentIndex={currentClaimIndex}
                 setCurrentIndex={setCurrentClaimIndex}
@@ -144,7 +144,7 @@ const PreviewPage = ({ data }) => {
               },
             }}
           >
-            <VideoSummary video={video} analysis={analysis} preview />
+            <VideoSummary video={video} claims={claims} preview />
           </div>
         </div>
         <section className="slider-test">
@@ -211,7 +211,7 @@ const PreviewPage = ({ data }) => {
                     }}
                   >
                     <div style={{ fontSize: '12px', textTransform: 'uppercase' }}>
-                      {currentClaimIndex + 1} of {analysis.length} claims
+                      {currentClaimIndex + 1} of {claims.length} claims
                     </div>
                     <div
                       style={{
@@ -242,7 +242,7 @@ const PreviewPage = ({ data }) => {
                 <div
                   style={{ padding: 20 }}
                   onClick={() =>
-                    currentClaimIndex === analysis.length - 1
+                    currentClaimIndex === claims.length - 1
                       ? null
                       : updateFormState(factCheckReview[currentClaimIndex + 1])
                   }
@@ -250,7 +250,7 @@ const PreviewPage = ({ data }) => {
                   <FaArrowRight
                     style={{
                       fontSize: 30,
-                      color: currentClaimIndex === analysis.length - 1 ? '#ddd' : '#222',
+                      color: currentClaimIndex === claims.length - 1 ? '#ddd' : '#222',
                     }}
                   />
                 </div>
@@ -267,12 +267,12 @@ const PreviewPage = ({ data }) => {
               marginTop: '60px',
             }}
             dangerouslySetInnerHTML={{
-              __html: analysis[currentClaimIndex].html,
+              __html: claims[currentClaimIndex].html,
             }}
           />
         </section>
         <section className="sources" sx={{ mt: '2rem' }}>
-          {analysis[currentClaimIndex].review_sources ? (
+          {claims[currentClaimIndex].review_sources ? (
             <div
               style={{
                 width: '70%',
@@ -284,7 +284,22 @@ const PreviewPage = ({ data }) => {
               }}
             >
               <h4>Review sources</h4>
-              {analysis[currentClaimIndex].review_sources}
+              {claims[currentClaimIndex].review_sources.map((source) => (
+                <p>
+                  <strong>{source.description}: </strong>
+                  <a
+                    href={source.url}
+                    sx={{
+                      color: (theme) => theme.colors.textLinkPrimary,
+                      '&:hover': {
+                        color: (theme) => theme.colors.textLinkHoverPrimary,
+                      },
+                    }}
+                  >
+                    {source.url}
+                  </a>
+                </p>
+              ))}
             </div>
           ) : null}
         </section>
@@ -295,7 +310,7 @@ const PreviewPage = ({ data }) => {
 
 export default PreviewPage;
 export const query = graphql`
-  query($id: String!) {
+  query ($id: String!) {
     vidCheck(video: { id: { regex: $id } }) {
       video {
         created_at
@@ -309,7 +324,7 @@ export const query = graphql`
         url
         video_type
       }
-      analysis {
+      claims {
         checked_date
         claim
         claim_date
@@ -324,6 +339,8 @@ export const query = graphql`
         rating {
           id
           colour
+          background_colour
+          text_colour
           created_at
           name
           deleted_at

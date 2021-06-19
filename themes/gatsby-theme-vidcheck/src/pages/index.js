@@ -22,7 +22,7 @@ const IndexPage = ({ data }) => {
         </h2>
         <div sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
           {data.allVidCheck.nodes.map((videoItem) => {
-            const { video, analysis } = videoItem;
+            const { video, claims } = videoItem;
             return (
               <Link
                 to={`/video/${video.id}`}
@@ -85,7 +85,7 @@ const IndexPage = ({ data }) => {
                       maxHeight: '236px',
                     }}
                   >
-                    <VideoSummary video={video} analysis={analysis} />
+                    <VideoSummary video={video} claims={claims} />
                   </div>
                 </div>
               </Link>
@@ -114,7 +114,7 @@ export const query = graphql`
           url
           video_type
         }
-        analysis {
+        claims {
           checked_date
           claim
           claim_date
@@ -129,6 +129,8 @@ export const query = graphql`
           rating {
             id
             colour
+            background_colour
+            text_colour
             created_at
             name
             deleted_at

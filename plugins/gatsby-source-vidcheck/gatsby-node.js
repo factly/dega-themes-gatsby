@@ -13,7 +13,7 @@ exports.onPreInit = () => console.log('loaded vidcheck plugin');
 
 const VIDCHECK_NODE_TYPE = 'VidCheck';
 const VIDCHECK_VIDEO_NODE_TYPE = 'VidCheckVideo';
-const VIDCHECK_ANALYSIS_NODE_TYPE = 'VidCheckAnalysis';
+const VIDCHECK_CLAIM_NODE_TYPE = 'VidCheckClaim';
 const VIDCHECK_RATING_NODE_TYPE = 'VidCheckRating';
 
 // const client = new ApolloClient({
@@ -98,9 +98,13 @@ exports.sourceNodes = async (
   //   `,
   // });
 
-  const data = await fetch('http://127.0.0.1:4455/.factly/vidcheck/server/videos/embed', {
+  // const data = await fetch('http://127.0.0.1:4455/.factly/vidcheck/server/videos/embed', {
+  //   headers: { 'X-Space': spaceId },
+  // })
+  const data = await fetch('http://vidcheck-server.factly.org/videos/embed', {
     headers: { 'X-Space': spaceId },
   })
+  
     .then((res) => res.json())
     .catch((err) => console.log(err));
 
@@ -117,7 +121,6 @@ exports.sourceNodes = async (
         contentDigest: createContentDigest(vidcheck),
       },
     });
-    // console.log(vidcheck.video);
     createNode({
       ...vidcheck.video,
       id: createNodeId(`${VIDCHECK_VIDEO_NODE_TYPE}-${vidcheck.video.id}`),
@@ -129,21 +132,24 @@ exports.sourceNodes = async (
         contentDigest: createContentDigest(vidcheck.video),
       },
     });
-    vidcheck.analysis.forEach((analysis) => {
+    vidcheck.claims.forEach((claim) => {
       createNode({
-        ...analysis,
-        id: createNodeId(`${VIDCHECK_ANALYSIS_NODE_TYPE}-${analysis.id}`),
+        ...claim,
+        id: createNodeId(`${VIDCHECK_CLAIM_NODE_TYPE}-${claim.id}`),
         parent: null,
         children: [],
         internal: {
-          type: VIDCHECK_ANALYSIS_NODE_TYPE,
-          content: JSON.stringify(analysis),
-          contentDigest: createContentDigest(analysis),
+          type: VIDCHECK_CLAIM_NODE_TYPE,
+          content: JSON.stringify(claim),
+          contentDigest: createContentDigest(claim),
         },
       });
     });
   });
-  const ratings = await fetch('http://127.0.0.1:4455/.factly/vidcheck/server/ratings/embed', {
+  // const ratings = await fetch('http://127.0.0.1:4455/.factly/vidcheck/server/ratings/embed', {
+  //   headers: { 'X-Space': spaceId },
+  // })
+  const ratings = await fetch('http://vidcheck-server.factly.org/ratings/embed', {
     headers: { 'X-Space': spaceId },
   })
     .then((res) => res.json())
@@ -167,10 +173,10 @@ exports.sourceNodes = async (
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   createTypes(`
-  type VidCheck implements Node {
-    id: ID
-    video: VidCheckVideo! 
-    analysis: [VidCheckAnalysis] 
+  type VidCheck implements Node @dontInfer {
+    id: ID!
+    video: VidCheckVideo!
+    claims: [VidCheckClaim]
   }
   type VidCheckVideo implements Node {
     id: ID!
@@ -185,15 +191,15 @@ exports.createSchemaCustomization = ({ actions }) => {
     video_type : String
     deleted_at: Date @dateformat
   }
-  type VidCheckAnalysis implements Node {
-    id: ID!
+  type VidCheckClaim implements Node {
+    id: String
     checked_date: Date @dateformat
     claim: String
     claim_date: Date @dateformat
     video_id: String
     updated_at: Date @dateformat
     start_time: String
-    review_sources: String
+    review_sources: JSON
     rating: VidCheckRating
     rating_id: String
     is_claim: String
@@ -202,36 +208,40 @@ exports.createSchemaCustomization = ({ actions }) => {
     created_at: Date @dateformat
     claimant_id: String
     description: JSON
-    claimant: Claimant 
+    claimant: VidcheckClaimant 
     deleted_at: Date @dateformat
     video: JSON
     HTML: String
     claim_sources: String
     end_time_fraction: String
   }
-  type Claimant implements Node {
+  type VidcheckClaimant implements Node {
     created_at: Date @dateformat
-    id: ID
+    id: ID!
     name: String
     slug: String
     space_id: String
     tag_line: String
     updated_at: Date @dateformat
-    description: String
+    description: JSON
     deleted_at: String
   }
-  type VidCheckRating implements Node {
-    id: ID,
+  type VidCheckRating implements Node @dontInfer {
+    id: ID!
     created_at: Date @dateformat
     updated_at: Date @dateformat
     deleted_at: Date @dateformat
     name: String
     slug: String
-    description: String
+    description: JSON
     numeric_value: Int
     colour: JSON
+    background_colour: JSON
+    text_colour: JSON
     space_id: String
   }
   `);
 };
+
+// ! remove color from rating schema
 // ? Create filters on vidcheck for videos and analysis
