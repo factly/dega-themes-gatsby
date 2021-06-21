@@ -44,7 +44,7 @@ export const query = graphql`
           }
         }
       }
-      posts: posts(formats: $format_without_factcheck) {
+      posts: posts(formats: { ids: $format_without_factcheck }) {
         nodes {
           users {
             id
@@ -69,7 +69,7 @@ export const query = graphql`
           excerpt
         }
       }
-      factchecks: posts(formats: $format_factcheck) {
+      factchecks: posts(formats: { ids: $format_factcheck }) {
         nodes {
           users {
             id

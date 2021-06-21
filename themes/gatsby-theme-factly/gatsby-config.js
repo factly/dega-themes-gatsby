@@ -13,8 +13,7 @@ module.exports = ({
   siteMetadata: {
     title: 'epage',
     siteUrl: siteUrl,
-    description:
-      'Gatsby Site built using DegaCMS',
+    description: 'Gatsby Site built using DegaCMS',
   },
   // flags: { QUERY_ON_DEMAND: true },
   plugins: [

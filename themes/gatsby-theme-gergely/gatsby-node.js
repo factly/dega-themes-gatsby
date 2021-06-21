@@ -57,7 +57,7 @@ exports.onPreBootstrap = ({ store }) => {
   }
 };
 
-exports.createPages = async ({ graphql, actions, store, reporter }, { client, homepage = 1 }) => {
+exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, homepage = 1 }) => {
   const { createPage } = actions;
   // const total = await grapql(`
   // `);
@@ -321,7 +321,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { client, ho
       component: require.resolve('./src/templates/post-details.amp.js'),
       context: {
         id: parseInt(post.id),
-        sid: client,
+        sid: spaceId,
       },
     });
   });

@@ -37,7 +37,7 @@ export const query = graphql`
           name
         }
       }
-      posts(tags: [$id]) {
+      posts(tags: { ids: [$id] }) {
         nodes {
           users {
             id

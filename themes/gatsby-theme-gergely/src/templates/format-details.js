@@ -62,7 +62,7 @@ export default FormatDetails;
 export const query = graphql`
   query ($id: Int!) {
     dega {
-      posts(formats: [$id]) {
+      posts(formats: { ids: [$id] }) {
         nodes {
           users {
             id
