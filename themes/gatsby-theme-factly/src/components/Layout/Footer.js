@@ -21,7 +21,16 @@ const FooterTwo = () => (
         alignItems: 'center',
       }}
     >
-      <div sx={{ mx: 'auto' }}>
+      <div
+        sx={{
+          mx: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          '& a': {
+            mr: '1rem',
+          },
+        }}
+      >
         <a
           href="https://ifcncodeofprinciples.poynter.org/profile/factly-media-research"
           title="IFCN signatory"
@@ -32,6 +41,18 @@ const FooterTwo = () => (
             src="https://cdn.ifcncodeofprinciples.poynter.org/storage/badges/37D3E89D-68BC-1EAA-5AD8-B1BC397BB9B6.png"
             style={{ height: 'auto', width: '140px' }}
             alt=""
+          />
+        </a>
+        <a
+          href="https://www.facebook.com/journalismproject/programs/third-party-fact-checking?content_id=Ez92MVl4asoxvNL"
+          title="Facebook Third Party Fact-Checker"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://factly.in/wp-content/uploads//2021/06/Factly-Facebook-Third-Party-Fact-Checker-dark-background-logo.png"
+            style={{ height: '50%', width: '25%' }}
+            class="no-display appear"
           />
         </a>
       </div>
