@@ -156,14 +156,14 @@ exports.sourceNodes = async (
     let allData = [];
     if (total <= LIMIT) {
       const resp = await client.query({
-        query,
+        query: query(),
       });
       allData = [...allData, ...resp.data[type].nodes];
     } else if (total > LIMIT) {
       const pageCount = Math.ceil(total / LIMIT);
       for (let page = 1; page <= pageCount; page++) {
         const resp = await client.query({
-          query,
+          query: query(page),
         });
         allData = [...allData, ...resp.data[type].nodes];
       }
@@ -194,7 +194,7 @@ exports.sourceNodes = async (
 
   // categories
   const categories = await getData({
-    query: getCategoriesQuery({ limit: LIMIT, page: 1 }),
+    query: (page = 1) => getCategoriesQuery({ limit: LIMIT, page }),
     total: totalCount.categories.total,
     type: 'categories',
   });
@@ -216,7 +216,7 @@ exports.sourceNodes = async (
 
   // tags
   const tags = await getData({
-    query: getTagsQuery({ limit: LIMIT, page: 1 }),
+    query: (page = 1) => getTagsQuery({ limit: LIMIT, page }),
     total: totalCount.tags.total,
     type: 'tags',
   });
@@ -238,7 +238,7 @@ exports.sourceNodes = async (
 
   // formats
   const formats = await getData({
-    query: getFormatsQuery(),
+    query: () => getFormatsQuery(),
     total: totalCount.formats.total,
     type: 'formats',
   });
@@ -259,7 +259,7 @@ exports.sourceNodes = async (
   });
   // ratings
   const ratings = await getData({
-    query: getRatingsQuery({ limit: LIMIT, page: 1 }),
+    query: () => getRatingsQuery({ limit: LIMIT, page: 1 }),
     total: totalCount.ratings.total,
     type: 'ratings',
   });
@@ -374,7 +374,7 @@ exports.sourceNodes = async (
 
   // users
   const users = await getData({
-    query: getUsersQuery({ limit: LIMIT, page: 1 }),
+    query: () => getUsersQuery({ limit: LIMIT, page: 1 }),
     total: totalCount.users.total,
     type: 'users',
   });
