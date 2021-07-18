@@ -159,7 +159,7 @@ exports.sourceNodes = async (
   };
 
   const posts = await getData({
-    query: getPostsQuery({ limit: LIMIT, page: 1 }),
+    query: (page = 1) => getPostsQuery({ limit: LIMIT, page }),
     total: totalCount.posts.total,
     type: 'posts',
   });
