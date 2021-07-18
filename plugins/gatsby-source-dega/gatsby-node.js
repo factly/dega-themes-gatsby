@@ -78,7 +78,7 @@ exports.sourceNodes = async (
     fetch: fetchWrapper,
     headers: {
       'X-Space': spaceId,
-      Authorization: accessToken,
+      'X-Dega-API-Key': accessToken,
     },
   });
 
