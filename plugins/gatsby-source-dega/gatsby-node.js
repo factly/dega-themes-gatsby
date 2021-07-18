@@ -84,23 +84,13 @@ exports.sourceNodes = async (
 
   const cache = new InMemoryCache({
     typePolicies: {
-      FormatsPaging: {
-        fields: {
-          formats: {
-            merge(existing, incoming) {
-              // Better, but not quite correct.
-              return { ...existing, ...incoming };
-            },
-          },
-        },
-      },
-      MenusPaging: {
+      Query: {
         fields: {
           menu: {
-            merge(existing, incoming) {
-              // Better, but not quite correct.
-              return { ...existing, ...incoming };
-            },
+            merge: true,
+          },
+          formats: {
+            merge: true,
           },
         },
       },
