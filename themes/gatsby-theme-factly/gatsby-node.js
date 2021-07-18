@@ -7,18 +7,35 @@ const mkdirp = require('mkdirp');
 const { createSchemaCustomization } = require('./utils/youtubeSourceSchema');
 
 exports.createSchemaCustomization = createSchemaCustomization;
-//! add plugin validation
-// exports.pluginOptionsSchema = ({ Joi }) => {
-//   return Joi.object({
-//     optionA: Joi.boolean().required().description(`Enables optionA.`),
-//     message: Joi.string()
-//       .required()
-//       .description(`The message logged to the console.`),
-//     optionB: Joi.boolean().description(`Enables optionB.`),
-//   })
-// }
-const saveIcon = async (url) => {
-  await fetch(url)
+/**
+ *  adding import alias for most used modules
+ */
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '@components': path.resolve(__dirname, 'src/components'),
+        '@utils': path.resolve(__dirname, 'src/utils'),
+        '@static': path.resolve(__dirname, 'src/static'),
+      },
+    },
+  });
+};
+/**
+ * adds Plugin validation
+ */
+exports.pluginOptionsSchema = ({ Joi }) => {
+  return Joi.object({
+    spaceId: Joi.string().required().description(`Gets Space Id.`),
+    homepage: Joi.number().description(`Specifies layout of homepage`),
+    accessToken: Joi.string().required().description(`Specifies access Token`),
+    apiUrl: Joi.string().required().description('api url'),
+    youtubeApiKey: Joi.string().description('Google Private Key for youtube data'),
+    channelId: Joi.string().description(`Specifies youtube channel id`),
+  });
+};
+const saveIcon = (url) => {
+  fetch(url)
     .then((res) => res.buffer())
     .then(
       (buffer) =>
