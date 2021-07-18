@@ -22,16 +22,13 @@ const { createSchemaCustomization } = require('./createSchemaCustomization');
 exports.createSchemaCustomization = createSchemaCustomization;
 exports.onPreInit = () => console.log('loaded dega plugin');
 
-//! add plugin validation
-// exports.pluginOptionsSchema = ({ Joi }) => {
-//   return Joi.object({
-//     optionA: Joi.boolean().required().description(`Enables optionA.`),
-//     message: Joi.string()
-//       .required()
-//       .description(`The message logged to the console.`),
-//     optionB: Joi.boolean().description(`Enables optionB.`),
-//   })
-// }
+exports.pluginOptionsSchema = ({ Joi }) => {
+  return Joi.object({
+    uri: Joi.string().required().description(`api url`),
+    spaceId: Joi.string().required().description(`Space Id`),
+    accessToken: Joi.string().required().description(`Access Token.`),
+  });
+};
 const POST_NODE_TYPE = `DegaPost`;
 const CATEGORY_NODE_TYPE = `DegaCategory`;
 const TAG_NODE_TYPE = `DegaTag`;
