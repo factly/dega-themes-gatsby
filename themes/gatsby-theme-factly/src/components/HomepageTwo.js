@@ -2,10 +2,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-
-// import '../static/css/main.scss';
-import Seo from './Seo';
-import headerImg from '../static/health-site-header.png';
+import Seo from '@components/Seo';
+import headerImg from '@static/health-site-header.png';
 
 const HomePageTwo = ({ data }) => {
   const { degaSpace, allDegaCategory } = data;

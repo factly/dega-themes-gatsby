@@ -4,10 +4,10 @@ import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import '../../static/css/tailwind.css';
-import Seo from '../Seo';
+import Navbar from '@components/Layout/Navbar';
+import Footer from '@components/Layout/Footer';
+import '@static/css/tailwind.css';
+import Seo from '@components/Seo';
 
 const Layout = (props) => {
   const data = useStaticQuery(graphql`

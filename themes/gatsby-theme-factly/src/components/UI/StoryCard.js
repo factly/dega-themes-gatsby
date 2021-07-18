@@ -5,10 +5,10 @@ import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import React from 'react'; // eslint-disable-line no-unused-vars
 import _ from 'lodash';
-import parseDate from '../../utils/parseDate';
-import addDefaultSrc from '../../utils/addDefaultSrc';
+import parseDate from '@utils/parseDate';
+import addDefaultSrc from '@utils/addDefaultSrc';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '../../utils/generateFluidObject';
+import generateFluidObject from '@utils/generateFluidObject';
 
 /**
  * TODO: Change the data structure of props
@@ -470,7 +470,7 @@ const StoryCard = ({
                 >
                   {storyData.medium && (
                     <Img
-                      sx={{ height: '100%', objectFit: 'cover' }}
+                      sx={{ height: '100%', objectFit: 'cover', width: '100%' }}
                       fluid={generateFluidObject({
                         url: storyData.medium?.url.proxy,
                         dimensions: storyData.medium?.dimensions,

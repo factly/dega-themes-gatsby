@@ -3,10 +3,10 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql, Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from '../components/Layout/index';
-import addDefaultSrc from '../utils/addDefaultSrc';
+import Layout from '@components/Layout';
+import addDefaultSrc from '@utils/addDefaultSrc';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '../utils/generateFluidObject';
+import generateFluidObject from '@utils/generateFluidObject';
 
 const PageNotFound = ({ data }) => {
   const space = data.degaSpace;
@@ -31,9 +31,9 @@ const PageNotFound = ({ data }) => {
         alt="Logo"
         onError={addDefaultSrc}
       /> */}
-        <Img
-          sx={{ mx: 'auto', display: 'block', maxWidth: 300 }}
-          fluid={generateFluidObject({
+          <Img
+            sx={{ mx: 'auto', display: 'block', maxWidth: 300 }}
+            fluid={generateFluidObject({
               url: space.logo.url.proxy,
               dimensions: space.logo.dimensions,
             })}
@@ -42,6 +42,7 @@ const PageNotFound = ({ data }) => {
       </div>
     </Layout>
   );
+};
 
 export default PageNotFound;
 export const query = graphql`

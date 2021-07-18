@@ -3,12 +3,12 @@
 import React, { useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import { Helmet } from 'react-helmet';
-import Layout from '../components/Layout/index';
-import unviralImg from '../static/unviral.jpg';
-import appleLogo from '../static/podcastBadges/apple.svg';
-import spotifyLogo from '../static/podcastBadges/spotify.svg';
-import googleLogo from '../static/podcastBadges/google.svg';
-import amazonLogo from '../static/podcastBadges/amazon.png';
+import Layout from '@components/Layout/index';
+import unviralImg from '@static/unviral.jpg';
+import appleLogo from '@static/podcastBadges/apple.svg';
+import spotifyLogo from '@static/podcastBadges/spotify.svg';
+import googleLogo from '@static/podcastBadges/google.svg';
+import amazonLogo from '@static/podcastBadges/amazon.png';
 
 const PodcastsPage = () => {
   useEffect(() => {

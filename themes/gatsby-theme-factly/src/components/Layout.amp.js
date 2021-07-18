@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import Seo from './Seo';
+import Seo from '@components/Seo';
 
 const LayoutAmp = (props) => {
   const data = useStaticQuery(graphql`
