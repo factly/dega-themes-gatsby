@@ -4,12 +4,23 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import { FaHome, FaBars } from 'react-icons/fa';
-
-export default function NavBar({ logo, menu }) {
+/**
+ * @component Navbar
+ * @typedef Props
+ * @prop {string} logo - url for logo
+ * @param {Props} props - arguments for Navbar with logo and menu properties
+ * @param {string} props.logo - url for logo 
+ * @param {Object} props.menu - menu item
+ * @returns 
+ */
+const Navbar=({ logo, menu })=> {
   const mainMenu = menu.nodes.filter((i) => i.slug === 'main')[0];
   const [showMenu, setShowMenu] = useState(false);
   const [width, setWidth] = useState(0);
 
+  /**
+   * Updates width when resized for responsiveness of menu item
+   */
   const updateWidth = () => {
     const windowWidth = window.innerWidth;
     setWidth(windowWidth);
@@ -183,3 +194,5 @@ export default function NavBar({ logo, menu }) {
     </React.Fragment>
   );
 }
+
+export default Navbar

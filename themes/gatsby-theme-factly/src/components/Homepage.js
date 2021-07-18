@@ -5,11 +5,11 @@ import Seo from './Seo';
 import StoryCard from './UI/StoryCard';
 import CategoriesGroup from './CategoriesGroup';
 
-function Homepage({ data }) {
-  const { dega } = data;
+const Homepage = ({ data })=> {
+  const { degaSpace, allDegaCategory, factchecks, posts } = data;
   return (
     <>
-      <Seo title={dega.space.site_title} canonical={dega.space.site_address} type="website" />
+      <Seo title={degaSpace.site_title} canonical={degaSpace.site_address} type="website" />
       <div
         sx={{
           display: 'flex',
@@ -38,7 +38,7 @@ function Homepage({ data }) {
               }}
             >
               <h5 className="heading">Categories</h5>
-              <CategoriesGroup categories={dega.categories.nodes} />
+              <CategoriesGroup categories={allDegaCategory.nodes} />
             </div>
           </div>
         </div>
@@ -48,10 +48,10 @@ function Homepage({ data }) {
           sx={{ width: ['full', null, '3/4', null, '2/4'], mx: 'auto' }}
         >
           {/* Featured Card */}
-          {dega.posts.nodes.length > 0 ? (
+          {posts.nodes.length > 0 ? (
             <StoryCard
               cardStyle="featured"
-              storyData={dega.posts.nodes[0]}
+              storyData={posts.nodes[0]}
               // imageSize="w-full h-64"
               imageSize={{ width: 'full', height: 64 }}
             />
@@ -65,7 +65,7 @@ function Homepage({ data }) {
               py: (theme) => `${theme.space.spacing6}`,
             }}
           >
-            {dega.posts.nodes.slice(1, 20).map((item, index) => (
+            {posts.nodes.slice(1, 20).map((item, index) => (
               <StoryCard
                 key={`homepage-post-${index}`}
                 cardStyle="card"
@@ -100,7 +100,7 @@ function Homepage({ data }) {
             >
               <h5 className="heading">Recent In Factchecks</h5>
             </div>
-            {dega.factchecks.nodes.map((item, index) => (
+            {factchecks.nodes.map((item, index) => (
               <StoryCard
                 key={`homepage-factcheck-${index}`}
                 cardStyle="vertical"

@@ -6,30 +6,28 @@ import Seo from './Seo';
 const LayoutAmp = (props) => {
   const data = useStaticQuery(graphql`
     query {
-      dega {
-        space {
-          description
-          name
-          site_title
-          tag_line
-          site_address
-          fav_icon {
-            url
-            dimensions
-          }
-          logo {
-            url
-            dimensions
-          }
-          logo_mobile {
-            url
-            dimensions
-          }
+      degaSpace {
+        description
+        name
+        site_title
+        tag_line
+        site_address
+        fav_icon {
+          url
+          dimensions
+        }
+        logo {
+          url
+          dimensions
+        }
+        logo_mobile {
+          url
+          dimensions
         }
       }
     }
   `);
-  const { space } = data.dega;
+  const space = data.degaSpace;
   const { children } = props;
   return (
     <>

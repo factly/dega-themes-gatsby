@@ -2,12 +2,12 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from '../components/Layout/index';
-import StoryCard from '../components/UI/StoryCard';
+import Layout from '@components/Layout/index';
+import StoryCard from '@components/UI/StoryCard';
 
-function FormatDetails({ data }) {
-  const { dega } = data;
-  const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
+const FormatDetails=({ data })=> {
+  const { allDegaPost } = data;
+  //const filteredPosts = allDegaPost.nodes.filter((post) => post.published_date !== null);
   return (
     <Layout>
       <div sx={{ mx: 'auto', maxWidth: 1560 }}>
@@ -19,7 +19,7 @@ function FormatDetails({ data }) {
             fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
           }}
         >
-          {filteredPosts[0]?.format.name}
+          {allDegaPost[0]?.format.name}
         </h1>
         <div
           sx={{
@@ -29,7 +29,7 @@ function FormatDetails({ data }) {
             pt: [null, null, null, (theme) => `${theme.space.spacing7}`],
           }}
         >
-          {filteredPosts.length > 0 ? (
+          {allDegaPost.nodes.length > 0 ? (
             <div
               sx={{
                 display: 'grid',
@@ -38,7 +38,7 @@ function FormatDetails({ data }) {
                 px: [null, null, (theme) => `${theme.space.spacing6}`],
               }}
             >
-              {filteredPosts.map((item, index) => (
+              {allDegaPost.nodes.map((item, index) => (
                 <StoryCard
                   key={index}
                   cardStyle="iframely"
@@ -60,36 +60,34 @@ function FormatDetails({ data }) {
 export default FormatDetails;
 
 export const query = graphql`
-  query ($id: Int!) {
-    dega {
-      posts(formats: { ids: [$id] }) {
-        nodes {
-          users {
-            id
-            first_name
-            last_name
-          }
-          categories {
-            slug
-            name
-          }
-          medium {
-            alt_text
-            url
-            dimensions
-          }
-          format {
-            name
-            slug
-          }
-          published_date
+  query ($id: String!) {
+    allDegaPost(filter: { format: { id: { eq: $id } } }) {
+      nodes {
+        users {
           id
-          excerpt
-          status
-          subtitle
-          title
+          first_name
+          last_name
+        }
+        categories {
+          slug
+          name
+        }
+        medium {
+          alt_text
+          url
+          dimensions
+        }
+        format {
+          name
           slug
         }
+        published_date
+        id
+        excerpt
+        status
+        subtitle
+        title
+        slug
       }
     }
   }

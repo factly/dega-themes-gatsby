@@ -11,10 +11,10 @@ import {
   FaTwitterSquare,
 } from 'react-icons/fa';
 
-import FormatPageLayout from '../components/FormatPageLayout';
+import FormatPageLayout from '@components/FormatPageLayout';
 
-function UserDetailsFormat({ data }) {
-  const { dega } = data;
+const UserDetailsFormat=({ data })=> {
+  const { allDegaPost, allDegaFormat, degaUser } = data;
   const getIcon = (name) => {
     switch (name) {
       case 'twitter':
@@ -90,9 +90,9 @@ function UserDetailsFormat({ data }) {
   return (
     <FormatPageLayout
       type="author"
-      posts={dega.posts.nodes}
-      formats={dega.formats.nodes}
-      item={dega.user}
+      posts={allDegaPost.nodes}
+      formats={allDegaFormat.nodes}
+      item={degaUser}
       header={header}
       useSlug={false}
     />
@@ -102,56 +102,56 @@ function UserDetailsFormat({ data }) {
 export default UserDetailsFormat;
 
 export const query = graphql`
-  query ($id: Int!, $format_id: Int!) {
-    dega {
-      user(id: $id) {
-        id
-        first_name
-        last_name
-        email
-        display_name
-        social_media_urls
-        description
-        medium {
-          url
-          dimensions
-        }
+  query ($id: String!, $format_id: String!) {
+    degaUser(id: { eq: $id }) {
+      id
+      first_name
+      last_name
+      email
+      display_name
+      social_media_urls
+      description
+      medium {
+        url
+        dimensions
       }
-      formats {
-        nodes {
+    }
+    allDegaFormat {
+      nodes {
+        id
+        slug
+        name
+      }
+    }
+    allDegaPost(
+      filter: { users: { elemMatch: { id: { eq: $id } } }, format: { id: { eq: $format_id } } }
+    ) {
+      nodes {
+        users {
           id
+          first_name
+          last_name
+        }
+        categories {
           slug
           name
         }
-      }
-      posts(users: { ids: [$id] }, formats: { ids: [$format_id] }) {
-        nodes {
-          users {
-            id
-            first_name
-            last_name
-          }
-          categories {
-            slug
-            name
-          }
-          format {
-            name
-            slug
-          }
-          medium {
-            alt_text
-            url
-            dimensions
-          }
-          published_date
-          id
-          status
-          subtitle
-          title
-          excerpt
+        format {
+          name
           slug
         }
+        medium {
+          alt_text
+          url
+          dimensions
+        }
+        published_date
+        id
+        status
+        subtitle
+        title
+        excerpt
+        slug
       }
     }
   }

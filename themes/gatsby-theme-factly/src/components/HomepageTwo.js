@@ -8,12 +8,9 @@ import Seo from './Seo';
 import headerImg from '../static/health-site-header.png';
 
 const HomePageTwo = ({ data }) => {
-  const { dega } = data;
+  const { degaSpace, allDegaCategory } = data;
 
-  const {
-    categories: { nodes },
-  } = dega;
-  const categories = nodes.map((item) => {
+  const categories = allDegaCategory.nodes.map((item) => {
     return { meta_fields: item.meta_fields, slug: item.slug, name: item.name, medium: item.medium };
   });
 
@@ -25,7 +22,7 @@ const HomePageTwo = ({ data }) => {
       {/* <Helmet>
         <link rel="canonical" href={`${}`} />
       </Helmet> */}
-      <Seo title={dega.space.site_title} canonical={dega.space.site_address} type="website" />
+      <Seo title={degaSpace.site_title} canonical={degaSpace.site_address} type="website" />
       <header
         sx={{
           display: 'grid',
@@ -306,21 +303,3 @@ const HomePageTwo = ({ data }) => {
 };
 
 export default HomePageTwo;
-
-// export const query = graphql`
-//   query($sid: [Int!]) {
-//     dega {
-//       categories(spaces: $sid) {
-//         nodes {
-//           slug
-//           name
-//           description
-//           meta_fields
-//           medium {
-//             url
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
