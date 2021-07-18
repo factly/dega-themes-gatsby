@@ -3,8 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react'; // eslint-disable-line no-unused-vars
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '../../utils/parseEditorJsData';
-import addDefaultSrc from '../../utils/addDefaultSrc';
+import parseEditorJsData from '@utils/parseEditorJsData';
+import addDefaultSrc from '@utils/addDefaultSrc';
 /**
  * TODO: Change PLaceholder Img to color
  * TODO: Add resize observer
@@ -12,8 +12,20 @@ import addDefaultSrc from '../../utils/addDefaultSrc';
  * TODO: Disabling the buttons for first and last buttons
  * TODO: Fix the resize issue on canvas for basic widget
  */
-
-function FactCheckWidget({ claims }) {
+/**
+ * Component for showing FactCheck widget
+ * 
+ * @component
+ * @example
+ * const claims = [{id:1,title:'claim 1',fact:'fact 1',review:'false'}]
+ * return (<FactCheckWidget claims={claims} />)
+ * @typeDef Props
+ * @prop {Array<Object>} claims
+ * @param {Object} props
+ * @param {Array<Object>} props.claims
+ * @returns 
+ */
+const FactCheckWidget=({ claims })=> {
   const sliderElement = useRef(null);
   const [scrollWidth, setScrollWidth] = useState(0);
 
@@ -139,7 +151,6 @@ function FactCheckWidget({ claims }) {
                   flex: 'none',
                   width: 'full',
                   scrollSnapAlign: 'start',
-                  mr: (theme) => `${theme.space.spacing6}`,
                 }}
               >
                 <div

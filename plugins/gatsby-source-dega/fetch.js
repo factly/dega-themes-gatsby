@@ -1,8 +1,11 @@
 const nodeFetch = require(`isomorphic-fetch`);
 
-// this is passed to the Apollo Link
-// https://www.apollographql.com/docs/link/links/http/#fetch-polyfill
-
+/**
+ * Wrapper/Polyfill for fetch function for Apollo Client
+ * @param {string} uri - uri of the api
+ * @param {Object} options - options for nodeFetch
+ * @returns {Object}
+ */
 exports.fetchWrapper = async (uri, options) => {
   const response = await nodeFetch(uri, options);
 

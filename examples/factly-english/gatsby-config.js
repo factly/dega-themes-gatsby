@@ -11,7 +11,7 @@ module.exports = {
       options: {
         accessToken: process.env.ACCESS_TOKEN,
         spaceId: process.env.SPACE_ID,
-        api: 'http://127.0.0.1:9001/query',
+        apiUrl: 'http://127.0.0.1:9001/query',
         // youtube_api_key: process.env.GOOGLE_PRIVATE_KEY,
         // channel_id: process.env.CHANNEL_ID,
       },

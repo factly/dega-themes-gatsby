@@ -5,10 +5,10 @@ import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import React from 'react'; // eslint-disable-line no-unused-vars
 import _ from 'lodash';
-import parseDate from '../../utils/parseDate';
-import addDefaultSrc from '../../utils/addDefaultSrc';
+import parseDate from '@utils/parseDate';
+import addDefaultSrc from '@utils/addDefaultSrc';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '../../utils/generateFluidObject';
+import generateFluidObject from '@utils/generateFluidObject';
 
 /**
  * TODO: Change the data structure of props
@@ -313,16 +313,6 @@ const StoryCard = ({
             )}
           </div>
           <div sx={{ width: 'full', display: 'flex', flexDirection: 'column' }}>
-            <p
-              sx={{
-                width: 'full',
-                color: (theme) => `${theme.colors.textSecondary}`,
-                fontSize: [0, null, (theme) => `${theme.fontSizes.h8}`],
-                pb: (theme) => `${theme.space.spacing2}`,
-              }}
-            >
-              {storyData.categories[0].name}
-            </p>
             <div
               id="nav-0"
               className="active"
@@ -478,13 +468,15 @@ const StoryCard = ({
                     touchAction: 'manipulation',
                   }}
                 >
-                  <Img
-                    sx={{ height: '100%', objectFit: 'cover' }}
-                    fluid={generateFluidObject({
-                      url: storyData.medium?.url.proxy,
-                      dimensions: storyData.medium?.dimensions,
-                    })}
-                  />
+                  {storyData.medium && (
+                    <Img
+                      sx={{ height: '100%', objectFit: 'cover', width: '100%' }}
+                      fluid={generateFluidObject({
+                        url: storyData.medium?.url.proxy,
+                        dimensions: storyData.medium?.dimensions,
+                      })}
+                    />
+                  )}
                 </Link>
               </div>
             </div>
@@ -551,19 +543,21 @@ const StoryCard = ({
           sx={{ display: 'flex', alignItems: 'center', width: 'full', maxWidth: 'full' }}
         >
           <div sx={{ width: '150px', maxWidth: '150px', height: '150px' }}>
-            <Link
-              to={`/${storyData.slug}`}
-              sx={{
-                display: 'block',
-                width: '150px',
-                height: '150px',
-                background: 'no-repeat center',
-                backgroundSize: ' cover',
-                backgroundImage: `url(${storyData.medium?.url.proxy})`,
-                textDecoration: 'none',
-                touchAction: 'manipulation',
-              }}
-            ></Link>
+            {storyData.medium && (
+              <Link
+                to={`/${storyData.slug}`}
+                sx={{
+                  display: 'block',
+                  width: '150px',
+                  height: '150px',
+                  background: 'no-repeat center',
+                  backgroundSize: ' cover',
+                  backgroundImage: `url(${storyData.medium?.url.proxy})`,
+                  textDecoration: 'none',
+                  touchAction: 'manipulation',
+                }}
+              ></Link>
+            )}
           </div>
           <Link
             to={`/${storyData.slug}`}

@@ -2,8 +2,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from './Layout/index';
-import StoryCard from './UI/StoryCard';
+import Layout from '@components/Layout';
+import StoryCard from '@components/UI/StoryCard';
 
 const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {
   const slug = useSlug ? item.slug : item.id;

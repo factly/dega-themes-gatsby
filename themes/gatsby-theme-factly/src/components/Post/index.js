@@ -2,14 +2,14 @@
 import React, { useRef, useEffect, createRef } from 'react'; // eslint-disable-line no-unused-vars
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
-import PostInfo from './PostInfo';
-import ShareButtonGroup from './ShareButtonGroup';
-import FactCheckWidget from './FactCheckWidget';
-import Tag from './Tag';
-import Excerpt from './Excerpt';
-import { isBrowser } from '../../utils/isBrowser';
-import parseEditorJsData from '../../utils/parseEditorJsData';
-import Seo from '../Seo';
+import PostInfo from '@components/Post/PostInfo';
+import ShareButtonGroup from '@components/Post/ShareButtonGroup';
+import FactCheckWidget from '@components/Post/FactCheckWidget';
+import Tag from '@components/Post/Tag';
+import Excerpt from '@components/Post/Excerpt';
+import { isBrowser } from '@utils/isBrowser';
+import parseEditorJsData from '@utils/parseEditorJsData';
+import Seo from '@components/Seo';
 /**
  * TODO: URI encoding
  * TODO: borderradius in theme ui
@@ -29,11 +29,12 @@ const Post = ({ post, observer }) => {
     <>
       <Seo title={post.title} description={post.excerpt} />
       <Helmet>
-        {post.schemas.map((schema, i) => (
-          <script key={i} type="application/ld+json">
-            {JSON.stringify(schema)}
-          </script>
-        ))}
+        {post.schemas &&
+          post.schemas.map((schema, i) => (
+            <script key={i} type="application/ld+json">
+              {JSON.stringify(schema)}
+            </script>
+          ))}
       </Helmet>
       <article
         post={post.id}

@@ -99,7 +99,7 @@ export const query = graphql`
           name
         }
       }
-      posts(categories: [$id]) {
+      posts(categories: { ids: [$id] }) {
         nodes {
           users {
             id

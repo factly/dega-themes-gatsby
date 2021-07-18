@@ -124,7 +124,7 @@ export const query = graphql`
           name
         }
       }
-      posts(users: [$id], formats: [$format_id]) {
+      posts(users: { ids: [$id] }, formats: { ids: [$format_id] }) {
         nodes {
           users {
             id

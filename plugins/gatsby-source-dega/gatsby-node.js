@@ -19,26 +19,25 @@ const {
 } = require('./queries');
 const { createSchemaCustomization } = require('./createSchemaCustomization');
 
+// Add customized Schema for data from dega-api
 exports.createSchemaCustomization = createSchemaCustomization;
+
 exports.onPreInit = () => console.log('loaded dega plugin');
 
-//! add plugin validation
-// exports.pluginOptionsSchema = ({ Joi }) => {
-//   return Joi.object({
-//     optionA: Joi.boolean().required().description(`Enables optionA.`),
-//     message: Joi.string()
-//       .required()
-//       .description(`The message logged to the console.`),
-//     optionB: Joi.boolean().description(`Enables optionB.`),
-//   })
-// }
+exports.pluginOptionsSchema = ({ Joi }) => {
+  return Joi.object({
+    uri: Joi.string().required().description(`api url`),
+    spaceId: Joi.string().required().description(`Space Id`),
+    accessToken: Joi.string().required().description(`Access Token.`),
+  });
+};
 const POST_NODE_TYPE = `DegaPost`;
 const CATEGORY_NODE_TYPE = `DegaCategory`;
 const TAG_NODE_TYPE = `DegaTag`;
 const FORMAT_NODE_TYPE = `DegaFormat`;
 const USER_NODE_TYPE = `DegaUser`;
-const CLAIM_NODE_TYPE = `DegaClaim`;
-const CLAIMANT_NODE_TYPE = `DegaClaimant`;
+// const CLAIM_NODE_TYPE = `DegaClaim`;
+// const CLAIMANT_NODE_TYPE = `DegaClaimant`;
 // const SITEMAP_NODE_TYPE = `DegaSitemap`;
 const SPACE_NODE_TYPE = `DegaSpace`;
 const RATING_NODE_TYPE = `DegaRating`;
@@ -81,29 +80,19 @@ exports.sourceNodes = async (
     fetch: fetchWrapper,
     headers: {
       'X-Space': spaceId,
-      Authorization: accessToken,
+      'X-Dega-API-Key': accessToken,
     },
   });
 
   const cache = new InMemoryCache({
     typePolicies: {
-      FormatsPaging: {
-        fields: {
-          formats: {
-            merge(existing, incoming) {
-              // Better, but not quite correct.
-              return { ...existing, ...incoming };
-            },
-          },
-        },
-      },
-      MenusPaging: {
+      Query: {
         fields: {
           menu: {
-            merge(existing, incoming) {
-              // Better, but not quite correct.
-              return { ...existing, ...incoming };
-            },
+            merge: true,
+          },
+          formats: {
+            merge: true,
           },
         },
       },
@@ -117,7 +106,9 @@ exports.sourceNodes = async (
     link: from([retryLink, errorLink, httpLink]),
   });
   const { createNode } = actions;
-
+  /**
+   * @const {number} - default limit for entities
+   */
   const LIMIT = 100;
   // total
   const getTotal = async () => {
@@ -127,43 +118,27 @@ exports.sourceNodes = async (
     return totalResp;
   };
   const { data: totalCount } = await getTotal();
-  console.log({ totalCount });
-
-  // posts
-  // const getPosts = async ({ total = LIMIT }) => {
-  //   let allPosts = [];
-  //   if (total <= LIMIT) {
-  //     const postsResp = await client.query({
-  //       query: getPostsQuery({ spaceId, limit: LIMIT, page: 1 }),
-  //     });
-  //     allPosts = [...allPosts, ...postsResp.data.posts.nodes];
-  //   } else if (total > LIMIT) {
-  //     const pageCount = Math.ceil(total / LIMIT);
-  //     for (let page = 1; page <= pageCount; page++) {
-  //       const postsResp = await client.query({
-  //         query: getPostsQuery({ spaceId, limit: LIMIT, page }),
-  //       });
-  //       allPosts = [...allPosts, ...postsResp.data.posts.nodes];
-  //       // allPosts = [...allPosts, ...(await postsResp)];
-  //     }
-  //   }
-  //   return allPosts;
-  // };
-  // const posts = await getPosts({ total: totalCount.posts.total });
 
   //! add page param to query when limit is reached
+  /**
+   *
+   * @param {function} query - query function
+   * @param {number} total - total count of the data entity
+   * @param {string} type - name of the entity
+   * @returns {Array}
+   */
   const getData = async ({ query, total = LIMIT, type }) => {
     let allData = [];
     if (total <= LIMIT) {
       const resp = await client.query({
-        query,
+        query: query(),
       });
       allData = [...allData, ...resp.data[type].nodes];
     } else if (total > LIMIT) {
       const pageCount = Math.ceil(total / LIMIT);
       for (let page = 1; page <= pageCount; page++) {
         const resp = await client.query({
-          query,
+          query: query(page),
         });
         allData = [...allData, ...resp.data[type].nodes];
       }
@@ -172,15 +147,15 @@ exports.sourceNodes = async (
   };
 
   const posts = await getData({
-    query: getPostsQuery({ limit: LIMIT, page: 1 }),
+    query: (page = 1) => getPostsQuery({ limit: LIMIT, page }),
     total: totalCount.posts.total,
     type: 'posts',
   });
   posts.forEach((post) => {
-    // console.log({ post });
     createNode({
       ...post,
-      id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
+      id: post.id,
+      gid: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
       parent: null,
       children: [],
       internal: {
@@ -193,15 +168,15 @@ exports.sourceNodes = async (
 
   // categories
   const categories = await getData({
-    query: getCategoriesQuery({ limit: LIMIT, page: 1 }),
+    query: (page = 1) => getCategoriesQuery({ limit: LIMIT, page }),
     total: totalCount.categories.total,
     type: 'categories',
   });
   categories.forEach((category) => {
-    // console.log({ category });
     createNode({
       ...category,
-      id: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
+      id: category.id,
+      gid: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
       parent: null,
       children: [],
       internal: {
@@ -214,15 +189,15 @@ exports.sourceNodes = async (
 
   // tags
   const tags = await getData({
-    query: getTagsQuery({ limit: LIMIT, page: 1 }),
+    query: (page = 1) => getTagsQuery({ limit: LIMIT, page }),
     total: totalCount.tags.total,
     type: 'tags',
   });
   tags.forEach((tag) => {
-    // console.log({ tag });
     createNode({
       ...tag,
-      id: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
+      id: tag.id,
+      gid: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
       parent: null,
       children: [],
       internal: {
@@ -235,15 +210,15 @@ exports.sourceNodes = async (
 
   // formats
   const formats = await getData({
-    query: getFormatsQuery(),
+    query: () => getFormatsQuery(),
     total: totalCount.formats.total,
     type: 'formats',
   });
   formats.forEach((format) => {
-    // console.log({ format });
     createNode({
       ...format,
-      id: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
+      id: format.id,
+      gid: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
       parent: null,
       children: [],
       internal: {
@@ -255,63 +230,21 @@ exports.sourceNodes = async (
   });
   // ratings
   const ratings = await getData({
-    query: getRatingsQuery({ limit: LIMIT, page: 1 }),
+    query: () => getRatingsQuery({ limit: LIMIT, page: 1 }),
     total: totalCount.ratings.total,
     type: 'ratings',
   });
   ratings.forEach((rating) => {
-    //  console.log({ rating });
     createNode({
       ...rating,
-      id: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
+      id: rating.id,
+      gid: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
       parent: null,
       children: [],
       internal: {
         type: RATING_NODE_TYPE,
         content: JSON.stringify(rating),
         contentDigest: createContentDigest(rating),
-      },
-    });
-  });
-
-  // claims
-  const claims = await getData({
-    query: getClaimsQuery({ limit: LIMIT, page: 1 }),
-    total: totalCount.claims.total,
-    type: 'claims',
-  });
-  claims.forEach((claim) => {
-    // console.log({ claim });
-    createNode({
-      ...claim,
-      id: createNodeId(`${CLAIM_NODE_TYPE}-${claim.id}`),
-      parent: null,
-      children: [],
-      internal: {
-        type: CLAIM_NODE_TYPE,
-        content: JSON.stringify(claim),
-        contentDigest: createContentDigest(claim),
-      },
-    });
-  });
-
-  // claimants
-  const claimants = await getData({
-    query: getClaimantsQuery({ limit: LIMIT, page: 1 }),
-    total: totalCount.claimants.total,
-    type: 'claimants',
-  });
-  claimants.forEach((claimant) => {
-    // console.log({ claimant });
-    createNode({
-      ...claimant,
-      id: createNodeId(`${CLAIMANT_NODE_TYPE}-${claimant.id}`),
-      parent: null,
-      children: [],
-      internal: {
-        type: CLAIMANT_NODE_TYPE,
-        content: JSON.stringify(claimant),
-        contentDigest: createContentDigest(claimant),
       },
     });
   });
@@ -324,16 +257,11 @@ exports.sourceNodes = async (
     return menus;
   };
   const { data: menus } = await getMenus();
-  // const menus = await getData({
-  //   query: getMenuQuery(),
-  //   total: totalCount.menu.total,
-  //   type: 'menu',
-  // });
   menus.menu.nodes.forEach((menu) => {
-    // console.log({ menu });
     createNode({
       ...menu,
-      id: createNodeId(`${MENU_NODE_TYPE}-${menu.id}`),
+      id: menu.id,
+      gid: createNodeId(`${MENU_NODE_TYPE}-${menu.id}`),
       parent: null,
       children: [],
       internal: {
@@ -344,6 +272,7 @@ exports.sourceNodes = async (
     });
   });
 
+  // space
   const getSpace = async () => {
     const space = await client.query({
       query: getSpaceQuery(),
@@ -352,10 +281,10 @@ exports.sourceNodes = async (
   };
   const spaceData = await getSpace();
   const space = spaceData.data.space;
-  // console.log({ space });
   createNode({
     ...space,
-    id: createNodeId(`${SPACE_NODE_TYPE}-${space.id}`),
+    id: space.id,
+    gid: createNodeId(`${SPACE_NODE_TYPE}-${space.id}`),
     parent: null,
     children: [],
     internal: {
@@ -367,15 +296,15 @@ exports.sourceNodes = async (
 
   // users
   const users = await getData({
-    query: getUsersQuery({ limit: LIMIT, page: 1 }),
+    query: () => getUsersQuery({ limit: LIMIT, page: 1 }),
     total: totalCount.users.total,
     type: 'users',
   });
   users.forEach((user) => {
-    // console.log({ user });
     createNode({
       ...user,
-      id: createNodeId(`${USER_NODE_TYPE}-${user.id}`),
+      id: user.id,
+      gid: createNodeId(`${USER_NODE_TYPE}-${user.id}`),
       parent: null,
       children: [],
       internal: {
@@ -385,207 +314,5 @@ exports.sourceNodes = async (
       },
     });
   });
-  // console.log(JSON.stringify(posts));
-  // console.log(posts);
-  // space
-  // const {
-  //   data: { space },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       space {
-  //         id
-  //         created_at
-  //         updated_at
-  //         name
-  //         slug
-  //         site_title
-  //         tag_line
-  //         description
-  //         site_address
-  //         logo {
-  //           id
-  //         }
-  //         logo_mobile {
-  //           id
-  //         }
-  //         fav_icon {
-  //           id
-  //         }
-  //         mobile_icon {
-  //           id
-  //         }
-  //         verification_codes
-  //         social_media_urls
-  //         contact_info
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // menu
-  // const {
-  //   data: { menu },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       menu {
-  //         nodes {
-  //           id
-  //           created_at
-  //           updated_at
-  //           name
-  //           slug
-  //           menu
-  //           space_id
-  //         }
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // formats
-  // const {
-  //   data: { formats },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       formats {
-
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // tags
-  // const {
-  //   data: { tags },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       tags {
-
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // categories
-  // const {
-  //   data: { categories },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       categories {
-
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // users
-  // const {
-  //   data: { users },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       users {
-
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // sitemap
-
-  // const {
-  //   data: { sitemap },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       sitemap {
-  //         users {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         tags {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         ratings {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         posts {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         formats {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         claims {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         claimants {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         categories {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //       }
-  //     }
-  //   `,
-  // });
-
-  //   const data = await fetch('http://127.0.0.1:4455/.factly/vidcheck/server/videos/embed', {
-  //     headers: { 'X-Space': spaceId },
-  //   })
-  //     .then((res) => res.json())
-  //     .catch((err) => console.log(err));
-
-  //! drsfgdfgfggg rgfsgrgafgragrga rgrgrgrsgrga g
-  //   posts.nodes.forEach((post) => {
-  //     createNode({
-  //       ...post,
-  //       id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
-  //       parent: null,
-  //       children: [],
-  //       internal: {
-  //         type: POST_NODE_TYPE,
-  //         content: JSON.stringify(post),
-  //         contentDigest: createContentDigest(post),
-  //       },
-  //     });
-  //   });
   return;
 };
-
-// exports.createResolvers = ({ createResolvers }) => {
-//   const resolvers = {
-//     VidCheck: {
-//       video: {
-//         args: { videoId: 'String' },
-//         resolve: (source, args, context, info) => {
-//           console.log({ args, source, context, info });
-//           const allVidChecks = info.originalResolver(source, args, context, info) || [];
-//           // return args.videoId
-//           //   ? allVidChecks.filter((vidcheck) => vidcheck.video.id === args.videoId)
-//           //   : allVidChecks;
-//         },
-//       },
-//     },
-//   };
-//   createResolvers(resolvers);
-// };

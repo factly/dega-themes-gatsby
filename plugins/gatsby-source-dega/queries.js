@@ -3,6 +3,11 @@ const { gql } = require('@apollo/client');
 // const defaultOptions = { spaceId: null, limit: 100, page: 1 };
 
 // Total query
+/**
+ * Gets Total count for all entities
+ * @todo filtering users based on space
+ * @returns {function}
+ */
 exports.getTotalQuery = () => {
   return gql`
     query {
@@ -39,6 +44,13 @@ exports.getTotalQuery = () => {
   `;
 };
 // Posts Query
+/**
+ * Gets data for posts based on limit and page props
+ * @param {Object} args - Arguments for getting posts
+ * @param {number} args.limit - Total number of posts per page
+ * @param {number} args.page - Page number
+ * @returns {function}
+ */
 exports.getPostsQuery = ({ limit, page = 1 }) => {
   return gql`
     query {
@@ -230,6 +242,13 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
   `;
 };
 // Categories Query
+/**
+ * Gets data for categories based on limit and page props
+ * @param {Object} args - Arguments for getting categories
+ * @param {number} args.limit - Total number of categories per page
+ * @param {number} args.page - Page number
+ * @returns {function}
+ */
 exports.getCategoriesQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
@@ -268,6 +287,13 @@ exports.getCategoriesQuery = ({ limit, page = 1 }) => {
 };
 
 // Tags Query
+/**
+ * Gets data for tags based on limit and page props
+ * @param {Object} args - Arguments for getting tags
+ * @param {number} args.limit - Total number of tags per page
+ * @param {number} args.page - Page number
+ * @returns {function}
+ */
 exports.getTagsQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
@@ -288,6 +314,10 @@ exports.getTagsQuery = ({ limit, page = 1 }) => {
 };
 
 // Formats Query
+/**
+ * Gets data for formats
+ * @returns {function}
+ */
 exports.getFormatsQuery = () => {
   return gql`
     query {
@@ -308,6 +338,13 @@ exports.getFormatsQuery = () => {
 
 // Users Query
 // !no spacename only limit and page arguments are defined
+/**
+ * Gets data for users based on limit and page props
+ * @param {Object} args - Arguments for getting users
+ * @param {number} args.limit - Total number of users per page
+ * @param {number} args.page - Page number
+ * @returns {function}
+ */
 exports.getUsersQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
@@ -347,6 +384,10 @@ exports.getUsersQuery = ({ limit, page = 1 }) => {
   `;
 };
 // Space Query
+/**
+ * Gets data for space details
+ * @returns {function}
+ */
 exports.getSpaceQuery = () => {
   return gql`
     query {
@@ -433,6 +474,10 @@ exports.getSpaceQuery = () => {
 };
 
 // Sitemap
+/**
+ * Gets data for sitemap
+ * @returns {function}
+ */
 exports.getSitemapQuery = () => {
   return gql`
     query {
@@ -482,6 +527,13 @@ exports.getSitemapQuery = () => {
   `;
 };
 // Ratings Query
+/**
+ * Gets data for ratings based on limit and page props
+ * @param {Object} args - Arguments for getting ratings
+ * @param {number} args.limit - Total number of ratings per page
+ * @param {number} args.page - Page number
+ * @returns {function}
+ */
 exports.getRatingsQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
@@ -520,6 +572,13 @@ exports.getRatingsQuery = ({ limit, page = 1 }) => {
   `;
 };
 // Claims Query
+/**
+ * Gets data for claims based on limit and page props
+ * @param {Object} args - Arguments for getting claims
+ * @param {number} args.limit - Total number of claims per page
+ * @param {number} args.page - Page number
+ * @returns {function}
+ */
 exports.getClaimsQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
@@ -601,6 +660,13 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
 };
 
 //Claimants Query
+/**
+ * Gets data for claimants based on limit and page props
+ * @param {Object} args - Arguments for getting claimants
+ * @param {number} args.limit - Total number of claimants on per page
+ * @param {number} args.page - Page number
+ * @returns {function}
+ */
 exports.getClaimantsQuery = ({ limit, page = 1 }) => {
   return gql`
   query {
@@ -638,6 +704,10 @@ exports.getClaimantsQuery = ({ limit, page = 1 }) => {
 };
 
 // Menu Query
+/**
+ * Gets data for menu
+ * @returns {function}
+ */
 exports.getMenuQuery = () => {
   return gql`
     query {

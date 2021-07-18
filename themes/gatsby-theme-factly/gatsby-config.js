@@ -1,11 +1,9 @@
-
 const editorjsHTML = require('editorjs-html');
-
 
 module.exports = ({
   spaceId,
   accessToken,
-  api,
+  apiUrl,
   siteUrl = 'https://localhost:9002',
   youtubeApiKey,
   channelId,
@@ -13,20 +11,19 @@ module.exports = ({
   siteMetadata: {
     title: 'epage',
     siteUrl: siteUrl,
-    description:
-      'Gatsby Site built using DegaCMS',
+    description: 'Gatsby Site built using DegaCMS',
   },
   // flags: { QUERY_ON_DEMAND: true },
   plugins: [
     'gatsby-plugin-react-helmet',
-    // {
-    //   resolve: `gatsby-source-dega`,
-    //   options: {
-    //     spaceId,
-    //     accessToken,
-    //     uri: api,
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-dega`,
+      options: {
+        spaceId,
+        accessToken,
+        uri: apiUrl,
+      },
+    },
     youtubeApiKey && channelId
       ? {
           resolve: '@factly/gatsby-theme-youtube',
@@ -55,18 +52,6 @@ module.exports = ({
           },
         }
       : null,
-    {
-      resolve: 'gatsby-source-graphql',
-      options: {
-        typeName: 'dega',
-        fieldName: 'dega',
-        url: api,
-        headers: {
-          'X-Space': spaceId,
-          Authorization: accessToken,
-        },
-      },
-    },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
@@ -109,52 +94,52 @@ module.exports = ({
         cache_busting_mode: 'none',
       },
     },
-    {
-      resolve: 'gatsby-plugin-feed',
-      options: {
-        feeds: [
-          {
-            serialize: ({ query: { site, dega } }) =>
-              dega.posts.nodes.map((post) =>
-                Object.assign(
-                  {},
-                  {
-                    title: post.title,
-                    description: post.excerpt,
-                    date: post.published_date,
-                    url: `${siteUrl}/${post.slug}`,
-                    guid: `${siteUrl}/${post.slug}`,
-                    // custom_elements: [
-                    //   {
-                    //     'content:encoded': `${JSON.stringify(
-                    //       editorjsHTML().parse(post.description),
-                    //     )}`,
-                    //   },
-                    // ],
-                    // add post medium
-                  },
-                ),
-              ),
-            query: `
-            {
-              dega {
-                posts(limit:100,page:1) {
-                  nodes {
-                    excerpt
-                    description
-                    title
-                    slug
-                    published_date
-                  }
-                }
-              }
-            }`,
-            output: '/rss.xml',
-            title: "Factly's RSS Feed",
-          },
-        ],
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-feed',
+    //   options: {
+    //     feeds: [
+    //       {
+    //         serialize: ({ query: { site, dega } }) =>
+    //           dega.posts.nodes.map((post) =>
+    //             Object.assign(
+    //               {},
+    //               {
+    //                 title: post.title,
+    //                 description: post.excerpt,
+    //                 date: post.published_date,
+    //                 url: `${siteUrl}/${post.slug}`,
+    //                 guid: `${siteUrl}/${post.slug}`,
+    //                 // custom_elements: [
+    //                 //   {
+    //                 //     'content:encoded': `${JSON.stringify(
+    //                 //       editorjsHTML().parse(post.description),
+    //                 //     )}`,
+    //                 //   },
+    //                 // ],
+    //                 // add post medium
+    //               },
+    //             ),
+    //           ),
+    //         query: `
+    //         {
+    //           dega {
+    //             posts(limit:100,page:1) {
+    //               nodes {
+    //                 excerpt
+    //                 description
+    //                 title
+    //                 slug
+    //                 published_date
+    //               }
+    //             }
+    //           }
+    //         }`,
+    //         output: '/rss.xml',
+    //         title: "Factly's RSS Feed",
+    //       },
+    //     ],
+    //   },
+    // },
     {
       resolve: 'gatsby-plugin-offline',
       precachePages: ['/about/', '/podcasts/'],

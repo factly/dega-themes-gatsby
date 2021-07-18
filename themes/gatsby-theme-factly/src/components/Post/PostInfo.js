@@ -3,7 +3,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import { FaRegClock } from 'react-icons/fa';
-import parseDate from '../../utils/parseDate';
+import parseDate from '@utils/parseDate';
 
 /* 
  TODO 1. Add Author image above their names

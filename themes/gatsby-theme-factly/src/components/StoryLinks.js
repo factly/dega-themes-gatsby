@@ -2,7 +2,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import parseDate from '../utils/parseDate';
+import parseDate from '@utils/parseDate';
 
 const StoryLinks = ({ post, postActiveIndex, categories = true, index }) => {
   /**
