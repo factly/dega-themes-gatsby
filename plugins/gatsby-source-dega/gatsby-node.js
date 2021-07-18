@@ -19,7 +19,9 @@ const {
 } = require('./queries');
 const { createSchemaCustomization } = require('./createSchemaCustomization');
 
+// Add customized Schema for data from dega-api
 exports.createSchemaCustomization = createSchemaCustomization;
+
 exports.onPreInit = () => console.log('loaded dega plugin');
 
 exports.pluginOptionsSchema = ({ Joi }) => {
@@ -34,8 +36,8 @@ const CATEGORY_NODE_TYPE = `DegaCategory`;
 const TAG_NODE_TYPE = `DegaTag`;
 const FORMAT_NODE_TYPE = `DegaFormat`;
 const USER_NODE_TYPE = `DegaUser`;
-const CLAIM_NODE_TYPE = `DegaClaim`;
-const CLAIMANT_NODE_TYPE = `DegaClaimant`;
+// const CLAIM_NODE_TYPE = `DegaClaim`;
+// const CLAIMANT_NODE_TYPE = `DegaClaimant`;
 // const SITEMAP_NODE_TYPE = `DegaSitemap`;
 const SPACE_NODE_TYPE = `DegaSpace`;
 const RATING_NODE_TYPE = `DegaRating`;
@@ -104,7 +106,9 @@ exports.sourceNodes = async (
     link: from([retryLink, errorLink, httpLink]),
   });
   const { createNode } = actions;
-
+  /**
+   * @const {number} - default limit for entities
+   */
   const LIMIT = 100;
   // total
   const getTotal = async () => {
@@ -114,31 +118,15 @@ exports.sourceNodes = async (
     return totalResp;
   };
   const { data: totalCount } = await getTotal();
-  console.log({ totalCount });
-
-  // posts
-  // const getPosts = async ({ total = LIMIT }) => {
-  //   let allPosts = [];
-  //   if (total <= LIMIT) {
-  //     const postsResp = await client.query({
-  //       query: getPostsQuery({ spaceId, limit: LIMIT, page: 1 }),
-  //     });
-  //     allPosts = [...allPosts, ...postsResp.data.posts.nodes];
-  //   } else if (total > LIMIT) {
-  //     const pageCount = Math.ceil(total / LIMIT);
-  //     for (let page = 1; page <= pageCount; page++) {
-  //       const postsResp = await client.query({
-  //         query: getPostsQuery({ spaceId, limit: LIMIT, page }),
-  //       });
-  //       allPosts = [...allPosts, ...postsResp.data.posts.nodes];
-  //       // allPosts = [...allPosts, ...(await postsResp)];
-  //     }
-  //   }
-  //   return allPosts;
-  // };
-  // const posts = await getPosts({ total: totalCount.posts.total });
 
   //! add page param to query when limit is reached
+  /**
+   *
+   * @param {function} query - query function
+   * @param {number} total - total count of the data entity
+   * @param {string} type - name of the entity
+   * @returns {Array}
+   */
   const getData = async ({ query, total = LIMIT, type }) => {
     let allData = [];
     if (total <= LIMIT) {
@@ -164,7 +152,6 @@ exports.sourceNodes = async (
     type: 'posts',
   });
   posts.forEach((post) => {
-    // console.log({ post });
     createNode({
       ...post,
       id: post.id,
@@ -186,7 +173,6 @@ exports.sourceNodes = async (
     type: 'categories',
   });
   categories.forEach((category) => {
-    // console.log({ category });
     createNode({
       ...category,
       id: category.id,
@@ -208,7 +194,6 @@ exports.sourceNodes = async (
     type: 'tags',
   });
   tags.forEach((tag) => {
-    // console.log({ tag });
     createNode({
       ...tag,
       id: tag.id,
@@ -230,7 +215,6 @@ exports.sourceNodes = async (
     type: 'formats',
   });
   formats.forEach((format) => {
-    // console.log({ format });
     createNode({
       ...format,
       id: format.id,
@@ -251,7 +235,6 @@ exports.sourceNodes = async (
     type: 'ratings',
   });
   ratings.forEach((rating) => {
-    //  console.log({ rating });
     createNode({
       ...rating,
       id: rating.id,
@@ -266,48 +249,6 @@ exports.sourceNodes = async (
     });
   });
 
-  // claims
-  const claims = await getData({
-    query: getClaimsQuery({ limit: LIMIT, page: 1 }),
-    total: totalCount.claims.total,
-    type: 'claims',
-  });
-  claims.forEach((claim) => {
-    // console.log({ claim });
-    createNode({
-      ...claim,
-      id: createNodeId(`${CLAIM_NODE_TYPE}-${claim.id}`),
-      parent: null,
-      children: [],
-      internal: {
-        type: CLAIM_NODE_TYPE,
-        content: JSON.stringify(claim),
-        contentDigest: createContentDigest(claim),
-      },
-    });
-  });
-
-  // claimants
-  const claimants = await getData({
-    query: getClaimantsQuery({ limit: LIMIT, page: 1 }),
-    total: totalCount.claimants.total,
-    type: 'claimants',
-  });
-  claimants.forEach((claimant) => {
-    // console.log({ claimant });
-    createNode({
-      ...claimant,
-      id: createNodeId(`${CLAIMANT_NODE_TYPE}-${claimant.id}`),
-      parent: null,
-      children: [],
-      internal: {
-        type: CLAIMANT_NODE_TYPE,
-        content: JSON.stringify(claimant),
-        contentDigest: createContentDigest(claimant),
-      },
-    });
-  });
-
   // menu
   const getMenus = async () => {
     const menus = await client.query({
@@ -316,13 +257,7 @@ exports.sourceNodes = async (
     return menus;
   };
   const { data: menus } = await getMenus();
-  // const menus = await getData({
-  //   query: getMenuQuery(),
-  //   total: totalCount.menu.total,
-  //   type: 'menu',
-  // });
   menus.menu.nodes.forEach((menu) => {
-    // console.log({ menu });
     createNode({
       ...menu,
       id: menu.id,
@@ -337,6 +272,7 @@ exports.sourceNodes = async (
     });
   });
 
+  // space
   const getSpace = async () => {
     const space = await client.query({
       query: getSpaceQuery(),
@@ -345,7 +281,6 @@ exports.sourceNodes = async (
   };
   const spaceData = await getSpace();
   const space = spaceData.data.space;
-  // console.log({ space });
   createNode({
     ...space,
     id: space.id,
@@ -379,207 +314,5 @@ exports.sourceNodes = async (
       },
     });
   });
-  // console.log(JSON.stringify(posts));
-  // console.log(posts);
-  // space
-  // const {
-  //   data: { space },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       space {
-  //         id
-  //         created_at
-  //         updated_at
-  //         name
-  //         slug
-  //         site_title
-  //         tag_line
-  //         description
-  //         site_address
-  //         logo {
-  //           id
-  //         }
-  //         logo_mobile {
-  //           id
-  //         }
-  //         fav_icon {
-  //           id
-  //         }
-  //         mobile_icon {
-  //           id
-  //         }
-  //         verification_codes
-  //         social_media_urls
-  //         contact_info
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // menu
-  // const {
-  //   data: { menu },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       menu {
-  //         nodes {
-  //           id
-  //           created_at
-  //           updated_at
-  //           name
-  //           slug
-  //           menu
-  //           space_id
-  //         }
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // formats
-  // const {
-  //   data: { formats },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       formats {
-
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // tags
-  // const {
-  //   data: { tags },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       tags {
-
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // categories
-  // const {
-  //   data: { categories },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       categories {
-
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // users
-  // const {
-  //   data: { users },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       users {
-
-  //       }
-  //     }
-  //   `,
-  // });
-
-  // sitemap
-
-  // const {
-  //   data: { sitemap },
-  // } = await client.query({
-  //   query: gql`
-  //     query {
-  //       sitemap {
-  //         users {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         tags {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         ratings {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         posts {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         formats {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         claims {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         claimants {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //         categories {
-  //           created_at
-  //           id
-  //           slug
-  //         }
-  //       }
-  //     }
-  //   `,
-  // });
-
-  //   const data = await fetch('http://127.0.0.1:4455/.factly/vidcheck/server/videos/embed', {
-  //     headers: { 'X-Space': spaceId },
-  //   })
-  //     .then((res) => res.json())
-  //     .catch((err) => console.log(err));
-
-  //! drsfgdfgfggg rgfsgrgafgragrga rgrgrgrsgrga g
-  //   posts.nodes.forEach((post) => {
-  //     createNode({
-  //       ...post,
-  //       id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
-  //       parent: null,
-  //       children: [],
-  //       internal: {
-  //         type: POST_NODE_TYPE,
-  //         content: JSON.stringify(post),
-  //         contentDigest: createContentDigest(post),
-  //       },
-  //     });
-  //   });
   return;
 };
-
-// exports.createResolvers = ({ createResolvers }) => {
-//   const resolvers = {
-//     VidCheck: {
-//       video: {
-//         args: { videoId: 'String' },
-//         resolve: (source, args, context, info) => {
-//           console.log({ args, source, context, info });
-//           const allVidChecks = info.originalResolver(source, args, context, info) || [];
-//           // return args.videoId
-//           //   ? allVidChecks.filter((vidcheck) => vidcheck.video.id === args.videoId)
-//           //   : allVidChecks;
-//         },
-//       },
-//     },
-//   };
-//   createResolvers(resolvers);
-// };
