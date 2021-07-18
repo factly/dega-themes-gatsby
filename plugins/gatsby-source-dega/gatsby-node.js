@@ -180,7 +180,8 @@ exports.sourceNodes = async (
     // console.log({ post });
     createNode({
       ...post,
-      id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
+      id: post.id,
+      gid: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
       parent: null,
       children: [],
       internal: {
@@ -201,7 +202,8 @@ exports.sourceNodes = async (
     // console.log({ category });
     createNode({
       ...category,
-      id: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
+      id: category.id,
+      gid: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
       parent: null,
       children: [],
       internal: {
@@ -222,7 +224,8 @@ exports.sourceNodes = async (
     // console.log({ tag });
     createNode({
       ...tag,
-      id: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
+      id: tag.id,
+      gid: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
       parent: null,
       children: [],
       internal: {
@@ -243,7 +246,8 @@ exports.sourceNodes = async (
     // console.log({ format });
     createNode({
       ...format,
-      id: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
+      id: format.id,
+      gid: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
       parent: null,
       children: [],
       internal: {
@@ -263,7 +267,8 @@ exports.sourceNodes = async (
     //  console.log({ rating });
     createNode({
       ...rating,
-      id: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
+      id: rating.id,
+      gid: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
       parent: null,
       children: [],
       internal: {
@@ -333,7 +338,8 @@ exports.sourceNodes = async (
     // console.log({ menu });
     createNode({
       ...menu,
-      id: createNodeId(`${MENU_NODE_TYPE}-${menu.id}`),
+      id: menu.id,
+      gid: createNodeId(`${MENU_NODE_TYPE}-${menu.id}`),
       parent: null,
       children: [],
       internal: {
@@ -355,7 +361,8 @@ exports.sourceNodes = async (
   // console.log({ space });
   createNode({
     ...space,
-    id: createNodeId(`${SPACE_NODE_TYPE}-${space.id}`),
+    id: space.id,
+    gid: createNodeId(`${SPACE_NODE_TYPE}-${space.id}`),
     parent: null,
     children: [],
     internal: {
@@ -372,10 +379,10 @@ exports.sourceNodes = async (
     type: 'users',
   });
   users.forEach((user) => {
-    // console.log({ user });
     createNode({
       ...user,
-      id: createNodeId(`${USER_NODE_TYPE}-${user.id}`),
+      id: user.id,
+      gid: createNodeId(`${USER_NODE_TYPE}-${user.id}`),
       parent: null,
       children: [],
       internal: {

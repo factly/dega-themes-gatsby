@@ -2,7 +2,8 @@ exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   const typeDefs = `
   type DegaPost implements Node @dontInfer {
-    id: ID!
+    id: Int!
+    gid: ID!
     categories: [DegaCategory]
     claims: [DegaClaim]
     created_at: Date @dateformat
@@ -26,7 +27,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     users: [DegaUser]
   }
   type DegaMedium {
-    id: ID!
+    id: Int!
+    gid: ID!
     alt_text: String
     caption: String
     created_at: Date @dateformat
@@ -42,7 +44,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     url: JSON
   }
   type DegaCategory implements Node {
-    id: ID!
+    id: Int!
+    gid: ID!
     created_at: Date @dateformat
     description: JSON
     html_description: String
@@ -55,7 +58,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     updated_at: Date @dateformat
   }
   type DegaTag implements Node @dontInfer{
-    id: ID!
+    id: Int!
+    gid: ID!
     created_at: Date @dateformat
     description: String
     html_description: String
@@ -65,7 +69,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     updated_at: Date @dateformat
   }
   type DegaUser implements Node @dontInfer{
-    id: ID!
+    id: Int!
+    gid: ID!
     updated_at: Date @dateformat
     social_media_urls: JSON
     slug: String
@@ -80,7 +85,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     birth_date: String
   }
   type DegaSpace implements Node @dontInfer{
-    id: ID!
+    id: Int!
+    gid: ID!
     contact_info: JSON
     created_at: Date @dateformat
     description: String
@@ -109,11 +115,13 @@ exports.createSchemaCustomization = ({ actions }) => {
   }
   type DegaSitemapField {
     id: Int
+    gid: ID
     created_at: Date @dateformat
     slug: String
   }
   type DegaRating implements Node @dontInfer {
-    id: ID!
+    id: Int!
+    gid: ID!
     background_colour: JSON
     created_at: Date @dateformat
     description: JSON
@@ -127,7 +135,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     updated_at: Date @dateformat
   }
   type DegaMenu implements Node @dontInfer {
-    id: ID!
+    id: Int!
+    gid: ID!
     created_at: Date @dateformat
     menu: JSON
     name: String
@@ -136,7 +145,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     updated_at: Date @dateformat
   }
   type DegaFormat implements Node @dontInfer {
-    id: ID!
+    id: Int!
+    gid: ID!
     created_at: Date @dateformat
     description: String
     name: String
@@ -145,7 +155,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     updated_at: Date @dateformat
   }
   type DegaClaim implements Node @dontInfer {
-    id: ID!
+    id: Int!
+    gid: ID!
     checked_date: Date @dateformat
     claim: String
     claim_date: Date @dateformat
@@ -162,7 +173,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     updated_at: Date @dateformat
   }
   type DegaClaimant implements Node @dontInfer{
-    id: ID!
+    id: Int!
+    gid: ID!
     created_at: Date @dateformat
     description: JSON
     html_description: String
