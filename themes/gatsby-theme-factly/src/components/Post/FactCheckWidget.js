@@ -139,7 +139,6 @@ function FactCheckWidget({ claims }) {
                   flex: 'none',
                   width: 'full',
                   scrollSnapAlign: 'start',
-                  mr: (theme) => `${theme.space.spacing6}`,
                 }}
               >
                 <div
