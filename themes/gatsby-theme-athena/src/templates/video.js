@@ -389,6 +389,8 @@ const PreviewPage = ({ data }) => {
                 marginRight: 'auto',
                 backgroundColor: '#e9ecec',
                 padding: '1rem',
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word',
               }}
             >
               <h3 sx={{ mb: '1rem', fontSize: (theme) => theme.fontSizes.h5 }}>Review sources</h3>
@@ -423,6 +425,8 @@ const PreviewPage = ({ data }) => {
                 marginTop: '60px',
                 backgroundColor: '#e9ecec',
                 padding: '1rem',
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word',
               }}
             >
               <h3 sx={{ mb: '1rem', fontSize: (theme) => theme.fontSizes.h5 }}>Claim sources</h3>

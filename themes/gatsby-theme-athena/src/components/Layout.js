@@ -102,7 +102,8 @@ const Layout = ({ children }) => {
                 to="/about"
                 sx={{
                   display: 'block',
-                  p: (theme) => [theme.space.spacing2, null, null, theme.space.spacing5],
+                  py: (theme) => [theme.space.spacing2, null, null, theme.space.spacing5],
+                  px: (theme) => [theme.space.spacing5, null, null, theme.space.spacing7],
                   textTransform: 'uppercase',
                   fontWeight: 'semibold',
                   color: 'inherit',
@@ -132,7 +133,7 @@ const Layout = ({ children }) => {
                   sx={{
                     display: 'none',
                     position: 'absolute',
-                    top: '2.25rem',
+                    top: ['1rem', null, '2.25rem'],
                     right: 0,
                     padding: '0.75rem 1rem',
                     zIndex: 1,
