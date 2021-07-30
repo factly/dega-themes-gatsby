@@ -4,6 +4,7 @@ import { jsx } from 'theme-ui';
 import { graphql, Link } from 'gatsby';
 import Layout from '../components/Layout';
 import VideoSummary from '../components/videoSummary';
+import { Helmet } from 'react-helmet';
 
 const IndexPage = ({ data }) => {
   const addDefaultSrc = (e, id) => {
@@ -16,8 +17,11 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Athena Home</title>
+      </Helmet>
       <div>
-        <h2 sx={{ textAlign: 'center', fontSize: '1.75rem', my: 8 }}>
+        <h2 sx={{ textAlign: 'center', fontSize: '1.75rem', my: (theme) => theme.space.spacing7 }}>
           Fact Check and Video Analysis
         </h2>
         <div sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>

@@ -1,3 +1,10 @@
 module.exports = {
-  plugins: [`@factly/gatsby-theme-athena`],
+  plugins: [
+    {
+      resolve: `@factly/gatsby-theme-athena`,
+      options: {
+        spaceId: 8,
+      },
+    },
+  ],
 };

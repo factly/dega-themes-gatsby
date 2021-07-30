@@ -1,11 +1,12 @@
-module.exports = {
+module.exports = ({ spaceId }) => ({
   plugins: [
     `gatsby-plugin-theme-ui`,
     {
       resolve: `gatsby-source-vidcheck`,
       options: {
-        spaceId: 1,
+        spaceId,
       },
     },
+    'gatsby-plugin-react-helmet',
   ],
-};
+});
