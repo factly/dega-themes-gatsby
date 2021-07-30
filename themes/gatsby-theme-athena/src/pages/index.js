@@ -50,8 +50,8 @@ const IndexPage = ({ data }) => {
                   className="summary-card"
                   sx={{
                     display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    alignItems: 'flex-start',
+                    gridTemplateColumns: ['1fr', null, '1fr 1fr'],
+                    alignItems: ['center', null, 'flex-start'],
                     width: '100%',
                     maxWidth: '900px',
                     boxShadow:
@@ -61,8 +61,8 @@ const IndexPage = ({ data }) => {
                   <div
                     className="thumbnailContainer"
                     sx={{
-                      maxWidth: '420px',
-                      maxHeight: '236px',
+                      maxWidth: ['100%', null, '420px'],
+                      maxHeight: ['auto', null, '236px'],
                       width: '100%',
                       height: '100%',
                       flex: 1,

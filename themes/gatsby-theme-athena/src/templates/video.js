@@ -152,6 +152,7 @@ const PreviewPage = ({ data }) => {
               width: '100%',
               flexDirection: ['column', null, null, 'row'],
               justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             <div
@@ -367,15 +368,13 @@ const PreviewPage = ({ data }) => {
           </div>
         </section> */}
         {claims[currentClaimIndex].description && (
-          <section className="description" sx={{ mt: '2rem' }}>
-            <div />
+          <section className="description" sx={{ mt: '0.75rem' }}>
             <div
               className="parsed"
               sx={{
-                width: '70%',
+                px: '1rem',
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                marginTop: '60px',
               }}
             >
               {parseEditorJsData({ content: claims[currentClaimIndex].description, scripts: true })}
@@ -386,12 +385,10 @@ const PreviewPage = ({ data }) => {
           {claims[currentClaimIndex].review_sources ? (
             <div
               style={{
-                width: '70%',
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                marginTop: '60px',
                 backgroundColor: '#e9ecec',
-                padding: '3rem',
+                padding: '1rem',
               }}
             >
               <h3 sx={{ mb: '1rem', fontSize: (theme) => theme.fontSizes.h5 }}>Review sources</h3>
@@ -421,12 +418,11 @@ const PreviewPage = ({ data }) => {
           {claims[currentClaimIndex].claim_sources ? (
             <div
               style={{
-                width: '70%',
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 marginTop: '60px',
                 backgroundColor: '#e9ecec',
-                padding: '3rem',
+                padding: '1rem',
               }}
             >
               <h3 sx={{ mb: '1rem', fontSize: (theme) => theme.fontSizes.h5 }}>Claim sources</h3>
