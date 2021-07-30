@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
             justifyContent: 'space-between',
             borderBottomWidth: '1px',
             borderColor: `#f7fafc`,
-            fontSize: 1,
+            fontSize: (theme) => theme.fontSizes.bodySmall,
             fontWeight: 'semibold',
             color: `#2d3748`,
             boxShadow: `rgba(17, 17, 26, 0.1) 0px 4px 16px,rgba(17, 17, 26, 0.05) 0px 8px 32px`,
@@ -47,8 +47,8 @@ const Layout = ({ children }) => {
               flexGrow: '1',
               alignItems: 'center',
               justifyContent: 'space-between',
-              px: [0, 0, 0, 4],
-              height: ['55px', '55px', '55px', '70px'],
+              px: [0, null, null, (theme) => theme.space.spacing5],
+              height: ['55px', null, null, '70px'],
               whiteSpace: 'nowrap',
             }}
           >
@@ -79,10 +79,10 @@ const Layout = ({ children }) => {
                   </Link>
                 ))}
             </div> */}
-            <div sx={{ order: [1, 1, 1, 2], p: 2 }}>
+            <div sx={{ order: [1, 1, 1, 2], p: (theme) => theme.space.spacing2 }}>
               <Link to="/" sx={{ display: 'inline-block' }}>
                 <img
-                  sx={{ height: [6, 6, 6, 8] }}
+                  sx={{ height: (theme) => [theme.sizes[6], null, null, theme.sizes[8]] }}
                   src={imgSrc}
                   alt="factly"
                   //onError={addDefaultSrc}
@@ -102,10 +102,13 @@ const Layout = ({ children }) => {
                 to="/about"
                 sx={{
                   display: 'block',
-                  p: [2, 2, 2, 4],
+                  p: (theme) => [theme.space.spacing2, null, null, theme.space.spacing5],
                   textTransform: 'uppercase',
                   fontWeight: 'semibold',
                   color: 'inherit',
+                  '&:hover': {
+                    color: (theme) => theme.colors.textLinkPrimary,
+                  },
                   '&:focus': { outline: 'none' },
                 }}
               >
@@ -116,7 +119,7 @@ const Layout = ({ children }) => {
                 sx={{
                   position: 'relative',
                   cursor: 'pointer',
-                  p: [2, 2, 2, 4],
+                  p: (theme) => [theme.space.spacing2, null, null, theme.space.spacing5],
                   textTransform: 'uppercase',
                   fontWeight: 'semibold',
                   color: 'inherit',
@@ -129,7 +132,7 @@ const Layout = ({ children }) => {
                   sx={{
                     display: 'none',
                     position: 'absolute',
-                    top: '2.5rem',
+                    top: '2.25rem',
                     right: 0,
                     padding: '0.75rem 1rem',
                     zIndex: 1,
@@ -141,7 +144,15 @@ const Layout = ({ children }) => {
                   {products.map((item, i) => (
                     <li key={i} sx={{ textAlign: 'center' }}>
                       <a
-                        sx={{ padding: '1rem', display: 'inline-block', color: 'inherit' }}
+                        sx={{
+                          padding: '1rem',
+                          display: 'inline-block',
+                          color: 'inherit',
+                          '&:hover': {
+                            background: '#fff',
+                            color: (theme) => theme.colors.textLinkPrimary,
+                          },
+                        }}
                         href={item.link}
                         target="_blank"
                         rel="noreferrer"
@@ -157,13 +168,21 @@ const Layout = ({ children }) => {
         </header>
       </div>
 
-      <main sx={{ maxWidth: 1280, mx: [4, null, null, null, 'auto'], pt: '90px' }}>{children}</main>
+      <main
+        sx={{
+          maxWidth: 1280,
+          mx: (theme) => [theme.space.spacing5, null, null, null, 'auto'],
+          pt: '90px',
+        }}
+      >
+        {children}
+      </main>
       <footer
         sx={{
-          fontSize: 1,
+          fontSize: (theme) => theme.fontSizes.bodySmall,
           textAlign: 'right',
-          my: 8,
-          pr: 4,
+          my: (theme) => theme.space.spacing7,
+          pr: (theme) => theme.space.spacing5,
           color: (theme) => `${theme.colors.gray[6]}`,
         }}
       >

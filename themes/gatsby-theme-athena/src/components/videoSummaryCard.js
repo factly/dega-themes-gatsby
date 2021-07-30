@@ -137,7 +137,7 @@ const VideoSummaryCard = ({ video, claims, preview = false, ratings }) => {
                   {Math.ceil(parseInt(video.total_duration) / 60)} mins
                 </span>
               </p>
-              <a href="#" sx={{ fontSize: '.75rem' }}>
+              <a href={video.url} target="_blank" sx={{ fontSize: '.75rem' }}>
                 <FaShareSquare />{' '}
                 <span sx={{ color: (theme) => `${theme.colors.textLinkPrimary}` }}>
                   View Original Source
@@ -192,27 +192,29 @@ const VideoSummaryCard = ({ video, claims, preview = false, ratings }) => {
             </div>
           </div>
         </div>
-        <div
-          className="summary-body"
-          sx={{ display: 'flex', justifyContent: 'space-between', p: ['1rem', '1.5rem'] }}
-        >
-          <div sx={{ flex: '0 0 100%', maxWidth: '100%' }}>
-            <p
-              className="summary-description-card"
-              sx={{
-                // textOverflow: 'ellipsis',
-                // overflow: 'hidden',
-                margin: 0,
-                marginTop: !preview ? '0' : '0.5rem',
-                // maxHeight: !preview ? 'calc( 0.875rem * 1.15 * 3 )' : 'auto',
-                lineHeight: '1.15',
-                fontSize: '1rem',
-              }}
-            >
-              {video.summary}
-            </p>
+        {video.excerpt && (
+          <div
+            className="summary-body"
+            sx={{ display: 'flex', justifyContent: 'space-between', p: ['1rem', '1.5rem'] }}
+          >
+            <div sx={{ flex: '0 0 100%', maxWidth: '100%' }}>
+              <p
+                className="summary-description-card"
+                sx={{
+                  // textOverflow: 'ellipsis',
+                  // overflow: 'hidden',
+                  margin: 0,
+                  marginTop: !preview ? '0' : '0.5rem',
+                  // maxHeight: !preview ? 'calc( 0.875rem * 1.15 * 3 )' : 'auto',
+                  lineHeight: '1.15',
+                  fontSize: '1rem',
+                }}
+              >
+                {video.excerpt}
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       {
         // <div

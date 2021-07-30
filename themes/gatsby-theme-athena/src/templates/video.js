@@ -11,6 +11,8 @@ import HorizontalTimelineBar from '../components/horizontalTimelineBar';
 import VideoSummaryCard from '../components/videoSummaryCard';
 import parseDate from '../utils/parseDate';
 import Slider from '../components/Slider';
+import parseEditorJsData from '../utils/parseEditorJsData';
+import { Helmet } from 'react-helmet';
 
 const PreviewPage = ({ data }) => {
   const colors = {
@@ -78,6 +80,9 @@ const PreviewPage = ({ data }) => {
   }, [currentClaimIndex]);
   return (
     <Layout>
+      <Helmet>
+        <title>{video.title}</title>
+      </Helmet>
       {/* <div sx={{ mb: '2rem' }}>
         <Link
           to="/"
@@ -129,14 +134,22 @@ const PreviewPage = ({ data }) => {
             preview
           />
         </div>
-        <div sx={{ display: 'flex', justifyContent: 'space-between', m: '0 1rem' }}>
+        <div
+          sx={{
+            display: 'flex',
+            justifyContent: ['center', null, 'space-between'],
+            flexWrap: ['wrap', null, 'nowrap'],
+            m: '0 1rem',
+          }}
+        >
           <div
             className="main-container"
             sx={{
               display: 'flex',
-              flex: '0 0 50%',
-              maxWidth: '50%',
+              // flex: '0 0 50%',
+              maxWidth: ['100%', null, '50%'],
               mx: '1%',
+              width: '100%',
               flexDirection: ['column', null, null, 'row'],
               justifyContent: 'center',
             }}
@@ -148,7 +161,7 @@ const PreviewPage = ({ data }) => {
                 flexDirection: 'column',
                 flexGrow: 1,
                 minWidth: '350px',
-                mb: 8,
+                mb: '2rem',
               }}
             >
               <div className="video-player">
@@ -177,7 +190,13 @@ const PreviewPage = ({ data }) => {
               </div>
             </div>
           </div>
-          <div sx={{ flex: '0 0 48%', maxWidth: '48%', mx: '1%' }}>
+          <div
+            sx={{
+              //flex: '0 0 48%',
+              maxWidth: ['100%', null, '48%'],
+              mx: '1%',
+            }}
+          >
             <Slider
               claims={claims}
               currentIndex={currentClaimIndex}
@@ -347,19 +366,22 @@ const PreviewPage = ({ data }) => {
             )}
           </div>
         </section> */}
-        <section className="description" sx={{ mt: '2rem' }}>
-          <div
-            style={{
-              width: '70%',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              marginTop: '60px',
-            }}
-            dangerouslySetInnerHTML={{
-              __html: claims[currentClaimIndex].html,
-            }}
-          />
-        </section>
+        {claims[currentClaimIndex].description && (
+          <section className="description" sx={{ mt: '2rem' }}>
+            <div />
+            <div
+              className="parsed"
+              sx={{
+                width: '70%',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                marginTop: '60px',
+              }}
+            >
+              {parseEditorJsData({ content: claims[currentClaimIndex].description, scripts: true })}
+            </div>
+          </section>
+        )}
         <section className="sources" sx={{ mt: '2rem' }}>
           {claims[currentClaimIndex].review_sources ? (
             <div
@@ -369,26 +391,65 @@ const PreviewPage = ({ data }) => {
                 marginRight: 'auto',
                 marginTop: '60px',
                 backgroundColor: '#e9ecec',
-                padding: 12,
+                padding: '3rem',
               }}
             >
-              <h3 sx={{ mb: '1rem' }}>Review sources</h3>
-              {claims[currentClaimIndex].review_sources.map((source) => (
-                <p>
-                  <strong>{source.description}: </strong>
-                  <a
-                    href={source.url}
-                    sx={{
-                      color: (theme) => theme.colors.textLinkPrimary,
-                      '&:hover': {
-                        color: (theme) => theme.colors.textLinkHoverPrimary,
-                      },
-                    }}
-                  >
-                    {source.url}
-                  </a>
-                </p>
-              ))}
+              <h3 sx={{ mb: '1rem', fontSize: (theme) => theme.fontSizes.h5 }}>Review sources</h3>
+              <ul sx={{ pl: '1.25rem' }}>
+                {claims[currentClaimIndex].review_sources.map((review) => (
+                  <li>
+                    {' '}
+                    <p>
+                      <strong>{review.description}: </strong>
+                      <a
+                        href={review.url}
+                        sx={{
+                          color: (theme) => theme.colors.textLinkPrimary,
+                          '&:hover': {
+                            color: (theme) => theme.colors.textLinkHoverPrimary,
+                          },
+                        }}
+                      >
+                        {review.url}
+                      </a>
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {claims[currentClaimIndex].claim_sources ? (
+            <div
+              style={{
+                width: '70%',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                marginTop: '60px',
+                backgroundColor: '#e9ecec',
+                padding: '3rem',
+              }}
+            >
+              <h3 sx={{ mb: '1rem', fontSize: (theme) => theme.fontSizes.h5 }}>Claim sources</h3>
+              <ul sx={{ pl: '1.25rem' }}>
+                {claims[currentClaimIndex].claim_sources.map((claim) => (
+                  <li>
+                    <p>
+                      <strong>{claim.description}: </strong>
+                      <a
+                        href={claim.url}
+                        sx={{
+                          color: (theme) => theme.colors.textLinkPrimary,
+                          '&:hover': {
+                            color: (theme) => theme.colors.textLinkHoverPrimary,
+                          },
+                        }}
+                      >
+                        {claim.url}
+                      </a>
+                    </p>
+                  </li>
+                ))}{' '}
+              </ul>
             </div>
           ) : null}
         </section>

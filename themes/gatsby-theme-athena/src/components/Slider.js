@@ -188,7 +188,7 @@ function Slider({
   return (
     <div
       sx={{
-        width: ['full'],
+        width: '100%',
         mx: 'auto',
         fontSize: (theme) => `${theme.fontSizes.body}`,
         mb: (theme) => `${theme.space.spacing5}`,
@@ -223,7 +223,13 @@ function Slider({
                 opacity: disable.left ? 0.5 : null,
               }}
             >
-              <FaChevronLeft sx={{ fill: 'currentColor', width: 4, height: 4 }} />
+              <FaChevronLeft
+                sx={{
+                  fill: 'currentColor',
+                  width: (theme) => theme.sizes[4],
+                  height: (theme) => theme.sizes[4],
+                }}
+              />
             </button>
             <h2
               className="heading"
@@ -248,13 +254,19 @@ function Slider({
                 opacity: disable.right ? 0.5 : null,
               }}
             >
-              <FaChevronRight sx={{ fill: 'currentColor', width: 4, height: 4 }} />
+              <FaChevronRight
+                sx={{
+                  fill: 'currentColor',
+                  width: (theme) => theme.sizes[4],
+                  height: (theme) => theme.sizes[4],
+                }}
+              />
             </button>
           </div>
           <div
             ref={sliderElement}
             className="sliderF"
-            sx={{ display: 'flex', overflowX: 'auto', pb: (theme) => `${theme.space.spacing6}` }}
+            sx={{ display: 'flex', overflowX: 'hidden', pb: (theme) => `${theme.space.spacing6}` }}
           >
             {claims.map((claim, i) => (
               <div
