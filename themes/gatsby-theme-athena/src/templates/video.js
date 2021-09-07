@@ -82,6 +82,11 @@ const PreviewPage = ({ data }) => {
     <Layout>
       <Helmet>
         <title>{video.title}</title>
+        {video.schemas?.map((schema, i) => (
+          <script key={i} type="application/ld+json">
+            {JSON.stringify(schema)}
+          </script>
+        ))}
       </Helmet>
       {/* <div sx={{ mb: '2rem' }}>
         <Link
@@ -396,7 +401,7 @@ const PreviewPage = ({ data }) => {
               <h3 sx={{ mb: '1rem', fontSize: (theme) => theme.fontSizes.h5 }}>Review sources</h3>
               <ul sx={{ pl: '1.25rem' }}>
                 {claims[currentClaimIndex].review_sources.map((review) => (
-                  <li>
+                  <li key={review.url}>
                     {' '}
                     <p>
                       <strong>{review.description}: </strong>
@@ -473,6 +478,7 @@ export const query = graphql`
         updated_at
         url
         video_type
+        schemas
       }
       claims {
         checked_date

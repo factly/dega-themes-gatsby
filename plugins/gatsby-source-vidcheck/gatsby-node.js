@@ -189,6 +189,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     url : String
     video_type : String
     deleted_at: Date @dateformat
+    schemas: [JSON]
   }
   type VidCheckClaim implements Node {
     id: String
