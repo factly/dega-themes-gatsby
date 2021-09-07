@@ -117,6 +117,7 @@ export const query = graphql`
           updated_at
           url
           video_type
+          schemas
         }
         claims {
           checked_date

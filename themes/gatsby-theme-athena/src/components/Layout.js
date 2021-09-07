@@ -47,7 +47,8 @@ const Layout = ({ children }) => {
               flexGrow: '1',
               alignItems: 'center',
               justifyContent: 'space-between',
-              px: [0, null, null, (theme) => theme.space.spacing5],
+              px: (theme) => [theme.space.spacing4, null, null, theme.space.spacing5],
+
               height: ['55px', null, null, '70px'],
               whiteSpace: 'nowrap',
             }}
