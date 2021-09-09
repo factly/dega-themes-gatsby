@@ -47,6 +47,7 @@ const FooterTwo = () => (
             src="https://factly.in/wp-content/uploads//2021/06/Factly-Facebook-Third-Party-Fact-Checker-dark-background-logo.png"
             style={{ height: '50%', width: '25%' }}
             class="no-display appear"
+            alt="Facebook Third Party Fact-Checker Badge"
           />
         </a>
       </div>
