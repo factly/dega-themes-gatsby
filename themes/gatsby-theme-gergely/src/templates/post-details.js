@@ -190,9 +190,9 @@ const PostDetails = ({ data }) => {
                   rel="noopener noreferrer"
                   sx={{
                     display: 'block',
-                    mx: (theme) => `${theme.space.spacing3}`,
+                    m: (theme) => `${theme.space.spacing1}`,
                     '&:first-of-type': { mx: 0 },
-                    my: (theme) => `${theme.space.spacing2}`,
+                    p: (theme) => `${theme.space.spacing3}`,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
@@ -209,9 +209,9 @@ const PostDetails = ({ data }) => {
                   rel="noopener noreferrer"
                   sx={{
                     display: 'block',
-                    mx: (theme) => `${theme.space.spacing3}`,
+                    m: (theme) => `${theme.space.spacing1}`,
                     '&:first-of-type': { mx: 0 },
-                    my: (theme) => `${theme.space.spacing2}`,
+                    p: (theme) => `${theme.space.spacing3}`,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
@@ -228,9 +228,9 @@ const PostDetails = ({ data }) => {
                   rel="noopener noreferrer"
                   sx={{
                     display: 'block',
-                    mx: (theme) => `${theme.space.spacing3}`,
+                    m: (theme) => `${theme.space.spacing1}`,
                     '&:first-of-type': { mx: 0 },
-                    my: (theme) => `${theme.space.spacing2}`,
+                    p: (theme) => `${theme.space.spacing3}`,
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}

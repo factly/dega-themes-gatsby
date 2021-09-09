@@ -15,7 +15,7 @@ const ShareButtonGroup = ({ data, setRef }) => {
   const { theme } = useThemeUI();
   const { rawColors: colors } = theme;
   const { socialFacebook, socialTwitter, socialWhatsapp } = colors;
-  const { h6 } = theme.fontSizes;
+  const { h4 } = theme.fontSizes;
   let title = encodeURIComponent(data.title);
   // let url = encodeURIComponent(data.url)
   return (
@@ -37,12 +37,13 @@ const ShareButtonGroup = ({ data, setRef }) => {
         rel="noopener noreferrer"
         sx={{
           display: 'block',
-          m: (theme) => `${theme.space.spacing2}`,
+          m: (theme) => `${theme.space.spacing1}`,
+          p: (theme) => `${theme.space.spacing3}`,
           fontWeight: 'semibold',
           borderRadius: 'default',
         }}
       >
-        <FaFacebookSquare color={socialFacebook} fontSize={h6} />
+        <FaFacebookSquare color={socialFacebook} fontSize={h4} />
       </a>
       {/* title uri ====> href={`https://twitter.com/share?text=${title}-&url=${data.url}`} */}
       <a
@@ -52,12 +53,13 @@ const ShareButtonGroup = ({ data, setRef }) => {
         rel="noopener noreferrer"
         sx={{
           display: 'block',
-          m: (theme) => `${theme.space.spacing2}`,
+          m: (theme) => `${theme.space.spacing1}`,
+          p: (theme) => `${theme.space.spacing3}`,
           fontWeight: 'semibold',
           borderRadius: 'default',
         }}
       >
-        <FaTwitterSquare color={socialTwitter} fontSize={h6} />
+        <FaTwitterSquare color={socialTwitter} fontSize={h4} />
       </a>
       {/* title uri ===> href={`https://api.whatsapp.com/send?text=${title}-${data.url}`} */}
       <a
@@ -67,12 +69,13 @@ const ShareButtonGroup = ({ data, setRef }) => {
         rel="noopener noreferrer"
         sx={{
           display: 'block',
-          m: (theme) => `${theme.space.spacing2}`,
+          m: (theme) => `${theme.space.spacing1}`,
+          p: (theme) => `${theme.space.spacing3}`,
           fontWeight: 'semibold',
           borderRadius: 'default',
         }}
       >
-        <FaWhatsappSquare color={socialWhatsapp} fontSize={h6} />
+        <FaWhatsappSquare color={socialWhatsapp} fontSize={h4} />
       </a>
     </div>
   );
