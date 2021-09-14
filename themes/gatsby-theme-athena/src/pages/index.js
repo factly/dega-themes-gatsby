@@ -104,7 +104,7 @@ export default IndexPage;
 
 export const query = graphql`
   query {
-    allVidCheck {
+    allVidCheck(sort: { fields: video___created_at, order: DESC }) {
       nodes {
         video {
           created_at
