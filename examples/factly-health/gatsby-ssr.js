@@ -9,5 +9,6 @@ export const onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
       data-domain="health.factly.in"
       src="https://plausible.factly.in/js/index.js"
     ></script>,
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>,
   ]);
 };
