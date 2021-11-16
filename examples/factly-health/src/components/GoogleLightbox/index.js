@@ -108,7 +108,11 @@ const GoogleLightBox = ({ id = 1, isOpen, closeModal }) => {
           onClose={closeModal}
           contentLabel="G-Drive Modal"
           styles={{
-            modal: { marginTop: '3.5rem', width: '100%', maxHeight: 'calc(100vh - 3.5rem)' },
+            modal: {
+              marginTop: '3.5rem',
+              width: 'calc(100% - 1.2rem)',
+              maxHeight: 'calc(100vh - 3.5rem)',
+            },
             closeButton: { color: '#000', background: '#fff', border: '1px solid #000' },
           }}
           center
