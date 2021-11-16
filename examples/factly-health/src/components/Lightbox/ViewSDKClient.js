@@ -16,7 +16,7 @@ class ViewSDKClient {
   }
   previewFile(divId, viewerConfig, url, title) {
     const config = {
-      clientId: process.env.ADOBE_CLIENT_ID, //Enter your Client ID here
+      clientId: process.env.GATSBY_ADOBE_CLIENT_ID, //Enter your Client ID here
     };
     if (divId) {
       config.divId = divId;
@@ -39,7 +39,7 @@ class ViewSDKClient {
   }
   previewFileUsingFilePromise(divId, filePromise, fileName) {
     this.adobeDCView = new window.AdobeDC.View({
-      clientId: process.env.ADOBE_CLIENT_ID, //Enter your Client ID here
+      clientId: process.env.GATSBY_ADOBE_CLIENT_ID, //Enter your Client ID here
       divId,
     });
     this.adobeDCView.previewFile(
