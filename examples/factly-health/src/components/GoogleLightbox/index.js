@@ -110,7 +110,7 @@ const GoogleLightBox = ({ id = 1, isOpen, closeModal }) => {
           styles={{
             modal: {
               marginTop: '3.5rem',
-              width: 'calc(100% - 1.2rem)',
+              width: 'calc(100% - 2.4rem)',
               maxHeight: 'calc(100vh - 3.5rem)',
             },
             closeButton: { color: '#000', background: '#fff', border: '1px solid #000' },
