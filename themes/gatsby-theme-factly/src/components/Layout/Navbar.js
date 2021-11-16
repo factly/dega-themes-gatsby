@@ -189,7 +189,7 @@ const Navbar = ({ logo, menu }) => {
               </li> */}
               <li>
                 <Link
-                  to="/report"
+                  to="/health-misinformation-report"
                   sx={{
                     px: [
                       (theme) => `${theme.space.spacing3}`,
