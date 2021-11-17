@@ -4,6 +4,7 @@ import Layout from '@factly/gatsby-theme-factly/src/components/Layout';
 import * as styles from './report.module.css';
 import reportCover from '../../../static/reportCover.png';
 import GoogleLightbox from '../../components/GoogleLightbox';
+import { Helmet } from 'react-helmet';
 const ReportPageV2 = () => {
   const CHAPTERS = [
     { title: '1. Immunisation', pdfLink: '1. Immunisation.pdf' },
@@ -45,6 +46,13 @@ const ReportPageV2 = () => {
   };
   return (
     <Layout>
+      <Helmet>
+        <title>Health Misinformation Report - Factly</title>
+        <meta
+          name="description"
+          content="The Health Misinformation Report has been authored in the hope to become a seed or a starting point for understanding and combating health-related misinformation in the Indian context across the 10 prioritised sectors. "
+        />
+      </Helmet>
       <main className={styles.main}>
         <header className={styles.header}>
           <div className={styles.coverContainer}>
