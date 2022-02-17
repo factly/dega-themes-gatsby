@@ -11,7 +11,7 @@
     "dotenv": "^10.0.0",
     "gatsby": "^3.7.2",
     "gatsby-image": "^3.7.1",
-    "gatsby-plugin-google-analytics": "^3.7.1",
+    "gatsby-plugin-google-gtag": "^4.7.0",
     "gatsby-plugin-image": "^1.7.1",
     "gatsby-plugin-manifest": "^3.7.1",
     "gatsby-plugin-react-helmet": "^4.7.1",
