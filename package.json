@@ -30,7 +30,8 @@
     "vidcheck": "yarn workspace vidcheck",
     "youtube": "yarn workspace factly-youtube",
     "source-vidcheck": "yarn workspace gatsby-source-vidcheck",
-    "athena": "yarn workspace athena"
+    "athena": "yarn workspace athena",
+    "harpy": "yarn workspace factly-harpy"
   },
   "husky": {
     "hooks": {
