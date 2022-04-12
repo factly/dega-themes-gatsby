@@ -80,7 +80,7 @@ const ShareButtonGroup = ({
       },
       {
         title: 'Share on Whatsapp',
-        link: `https://api.whatsapp.com/send?text=${title}-${url}`,
+        link: `https://api.whatsapp.com/send?text=${encodeURIComponent(`${title} - ${url}`)}`,
         icon: icons.whatsapp,
       },
     ];

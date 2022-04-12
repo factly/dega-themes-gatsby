@@ -151,7 +151,7 @@ const ShareModal = ({ title, url }) => {
               <span>Twitter</span>
             </a>
             <a
-              href={`https://api.whatsapp.com/send?text=${title}-${encodeURIComponent(url)}`}
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${title} - ${url}`)}`}
               title="Share on Whatsapp"
               target="_blank"
               rel="noopener noreferrer"
