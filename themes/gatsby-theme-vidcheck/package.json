@@ -11,21 +11,23 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "gatsby": "^3.7.0",
-    "gatsby-plugin-theme-ui": "^0.9.1",
+    "@emotion/react": "^11.8.2",
+    "@mdx-js/react": "v1",
+    "gatsby": "^4.11.1",
+    "gatsby-plugin-theme-ui": "^0.14.2",
     "gatsby-source-vidcheck": "1.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-icons": "^4.2.0",
     "react-player": "^2.9.0",
-    "theme-ui": "^0.9.1",
+    "theme-ui": "^0.14.2",
     "underscore": "^1.12.1"
   },
   "peerDependencies": {
-    "gatsby": "^3.7.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "gatsby": "^4.11.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
