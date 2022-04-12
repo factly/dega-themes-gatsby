@@ -3,7 +3,7 @@ import React, { useRef, useEffect, createRef } from 'react'; // eslint-disable-l
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import FactCheckWidget from '@components/Post/FactCheckWidget';
-import Tag from '@components/Post/Tag';
+import Badge from '@components/Post/Badge';
 import parseEditorJsData from '@utils/parseEditorJsData';
 import Seo from '@components/Seo';
 import { Link } from 'gatsby';
@@ -65,8 +65,8 @@ const Post = ({ post, observer }) => {
           }}
         >
           <div>
-            {post.tags.map((tag, i) => (
-              <Tag key={i} url={tag.slug} name={tag.name} />
+            {post.categories.map((category, i) => (
+              <Badge key={i} url={category.slug} name={category.name} />
             ))}
           </div>
 
