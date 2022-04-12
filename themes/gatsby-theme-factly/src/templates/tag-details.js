@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
 import FormatPageLayout from '@components/FormatPageLayout';
 
-const TagDetailsAll=({ data })=> {
+const TagDetailsAll = ({ data }) => {
   const { allDegaPost, degaTag, allDegaFormat } = data;
   /**
    * TODO: add description under category name
@@ -23,7 +23,7 @@ export default TagDetailsAll;
 
 export const query = graphql`
   query ($id: String!) {
-    degaTag(id: { eq: $id }) {
+    degaTag(degaId: { eq: $id }) {
       description
       id
       name

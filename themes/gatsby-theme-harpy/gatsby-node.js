@@ -83,7 +83,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   const space = await graphql(`
     query SpaceQuery {
       degaSpace {
-        id
+        degaId
         name
         slug
         site_title
@@ -112,7 +112,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     query FormatsQuery {
       allDegaFormat {
         nodes {
-          id
+          degaId
           slug
         }
       }
@@ -123,7 +123,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     query TagsQuery {
       allDegaTag {
         nodes {
-          id
+          degaId
           slug
         }
       }
@@ -134,7 +134,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     query CategoriesQuery {
       allDegaCategory {
         nodes {
-          id
+          degaId
           slug
         }
       }
@@ -144,7 +144,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     query UsersQuery {
       allDegaUser {
         nodes {
-          id
+          degaId
         }
       }
     }
@@ -153,7 +153,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     query PostsQuery {
       allDegaPost {
         nodes {
-          id
+          degaId
           published_date
           slug
         }
@@ -167,13 +167,13 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   formats.data.allDegaFormat.nodes
     .filter((item) => item.slug === 'fact-check')
     .forEach((item) => {
-      format_factcheck.push(item.id);
+      format_factcheck.push(item.degaId);
     });
 
   formats.data.allDegaFormat.nodes
     .filter((item) => item.slug !== 'fact-check')
     .forEach((item) => {
-      format_without_factcheck.push(item.id);
+      format_without_factcheck.push(item.degaId);
     });
 
 
@@ -192,7 +192,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       path: `/format/${format.slug}`,
       component: require.resolve('./src/templates/format-details.js'),
       context: {
-        id: format.id,
+        id: format.degaId,
       },
     });
   });
@@ -205,7 +205,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
         path: `/${post.slug}`,
         component: require.resolve('./src/templates/post-details.js'),
         context: {
-          id: post.id,
+          id: post.degaId,
         },
       });
     }
@@ -213,7 +213,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       path: `/${post.slug}/amp/`,
       component: require.resolve('./src/templates/post-details.amp.js'),
       context: {
-        id: post.id,
+        id: post.degaId,
         sid: spaceId,
       },
     });
@@ -226,7 +226,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       path: `/tag/${tag.slug}`,
       component: require.resolve('./src/templates/tag-details.js'),
       context: {
-        id: tag.id,
+        id: tag.degaId,
       },
     });
 
@@ -237,8 +237,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
         path: `/tag/${tag.slug}/format/${format.slug}`,
         component: require.resolve('./src/templates/tag-details-format-details.js'),
         context: {
-          id: tag.id,
-          format_id: format.id,
+          id: tag.degaId,
+          format_id: format.degaId,
         },
       });
     });
@@ -251,7 +251,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       path: `/category/${category.slug}`,
       component: require.resolve('./src/templates/category-details.js'),
       context: {
-        id: category.id,
+        id: category.degaId,
       },
     });
 
@@ -261,8 +261,8 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
         path: `/category/${category.slug}/format/${format.slug}`,
         component: require.resolve('./src/templates/category-details-format-details.js'),
         context: {
-          id: category.id,
-          format_id: format.id,
+          id: category.degaId,
+          format_id: format.degaId,
         },
       });
     });
@@ -271,10 +271,10 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   // create user details page
   users.data.allDegaUser.nodes.forEach((user) => {
     createPage({
-      path: `/author/${user.id}`,
+      path: `/author/${user.degaId}`,
       component: require.resolve('./src/templates/author-details.js'),
       context: {
-        id: user.id,
+        id: user.degaId,
       },
     });
 
@@ -282,11 +282,11 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
 
     formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
-        path: `/author/${user.id}/format/${format.slug}`,
+        path: `/author/${user.degaId}/format/${format.slug}`,
         component: require.resolve('./src/templates/author-details-format-details.js'),
         context: {
-          id: user.id,
-          format_id: format.id,
+          id: user.degaId,
+          format_id: format.degaId,
         },
       });
     });

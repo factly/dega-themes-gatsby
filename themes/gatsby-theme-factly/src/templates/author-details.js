@@ -12,7 +12,7 @@ import {
 } from 'react-icons/fa';
 import FormatPageLayout from '@components/FormatPageLayout';
 
-const UserDetailsAll=({ data }) =>{
+const UserDetailsAll = ({ data }) => {
   const { degaUser, allDegaPost, allDegaFormat } = data;
   const getIcon = (name) => {
     switch (name) {
@@ -103,8 +103,8 @@ export default UserDetailsAll;
 
 export const query = graphql`
   query ($id: String!) {
-    degaUser(id: { eq: $id }) {
-      id
+    degaUser(degaId: { eq: $id }) {
+      degaId
       first_name
       last_name
       email

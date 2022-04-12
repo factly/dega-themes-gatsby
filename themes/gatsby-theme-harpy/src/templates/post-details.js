@@ -190,7 +190,7 @@ const PostDetails = ({ data }) => {
                 </a>
                 <a
                   title="Share on WhatsApp"
-                  href={`https://api.whatsapp.com/send?text=${title} - ${url}`}
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${title} - ${url}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{
@@ -307,7 +307,7 @@ export const query = graphql`
         }
       }
     }
-    degaPost(id: { eq: $id }) {
+    degaPost(degaId: { eq: $id }) {
       published_date
       description
       excerpt

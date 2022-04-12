@@ -7,7 +7,7 @@ import parseEditorJsData from '@utils/parseEditorJsData';
 import BlogCard from './UI/BlogCard';
 
 const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {
-  const slug = useSlug ? item.slug : item.id;
+  const slug = useSlug ? item?.slug : item?.degaId;
   const filteredPosts = posts.filter((post) => post.published_date !== null);
   const defaultHeader = (item) => (
     <>
@@ -19,7 +19,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
           textTransform: 'capitalize',
         }}
       >
-        {item.name}
+        {item?.name}
       </h1>
 
       <div
@@ -30,7 +30,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
           px: (theme) => `${theme.space.spacing5}`,
         }}
       >
-        {parseEditorJsData({ content: item.description })}
+        {parseEditorJsData({ content: item?.description })}
       </div>
     </>
   );

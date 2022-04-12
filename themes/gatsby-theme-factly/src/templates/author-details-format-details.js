@@ -13,7 +13,7 @@ import {
 
 import FormatPageLayout from '@components/FormatPageLayout';
 
-const UserDetailsFormat=({ data })=> {
+const UserDetailsFormat = ({ data }) => {
   const { allDegaPost, allDegaFormat, degaUser } = data;
   const getIcon = (name) => {
     switch (name) {
@@ -103,8 +103,8 @@ export default UserDetailsFormat;
 
 export const query = graphql`
   query ($id: String!, $format_id: String!) {
-    degaUser(id: { eq: $id }) {
-      id
+    degaUser(degaId: { eq: $id }) {
+      degaId
       first_name
       last_name
       email

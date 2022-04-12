@@ -131,8 +131,8 @@ export default UserDetailsAll;
 
 export const query = graphql`
   query ($id: String!) {
-    degaUser(id: { eq: $id }) {
-      id
+    degaUser(degaId: { eq: $id }) {
+      degaId
       first_name
       last_name
       email

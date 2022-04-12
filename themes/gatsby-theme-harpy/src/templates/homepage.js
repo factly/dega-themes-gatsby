@@ -68,7 +68,7 @@ export const query = graphql`
         excerpt
       }
     }
-    factchecks: allDegaPost(filter: { format: { id: { in: $format_factcheck } } },sort: {fields: created_at, order: DESC}, limit: 5) {
+    factchecks: allDegaPost(filter: { format: { id: { in: $format_factcheck } } }, sort: {fields: created_at, order: DESC}, limit: 5) {
       nodes {
         users {
           id

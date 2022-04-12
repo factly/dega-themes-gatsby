@@ -56,7 +56,7 @@ export default CategoryDetailsFormat;
 
 export const query = graphql`
   query ($id: String!, $format_id: String!) {
-    degaCategory(id: { eq: $id }) {
+    degaCategory(degaId: { eq: $id }) {
       description
       id
       medium {

@@ -23,7 +23,7 @@ export default TagDetailsAll;
 
 export const query = graphql`
   query ($id: String!) {
-    degaTag(id: { eq: $id }) {
+    degaTag(degaId: { eq: $id }) {
       description
       id
       name

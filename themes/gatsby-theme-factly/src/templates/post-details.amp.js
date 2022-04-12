@@ -50,7 +50,7 @@ export default PostDetails;
 
 export const query = graphql`
   query ($id: String!) {
-    degaPost(id: { eq: $id }) {
+    degaPost(degaId: { eq: $id }) {
       published_date
       description
       excerpt

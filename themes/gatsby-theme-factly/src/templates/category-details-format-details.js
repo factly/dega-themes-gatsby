@@ -6,8 +6,9 @@ import parseEditorJsData from '@utils/parseEditorJsData';
 import FormatPageLayout from '@components/FormatPageLayout';
 import { isBrowser } from '@utils/isBrowser';
 
-const CategoryDetailsFormat= ({ data }) =>{
+const CategoryDetailsFormat = ({ data }) => {
   const { degaCategory, allDegaFormat, allDegaPost } = data;
+
 
   const [readMore, setReadMore] = React.useState(true);
   const [isReadMoreNeeded, setIsReadMoreNeeded] = useState(false);
@@ -34,7 +35,7 @@ const CategoryDetailsFormat= ({ data }) =>{
             textTransform: 'capitalize',
           }}
         >
-          {item.name} 
+          {item.name}
         </h1>
         <div
           id="category-description"
@@ -77,7 +78,7 @@ export default CategoryDetailsFormat;
 
 export const query = graphql`
   query ($id: String!, $format_id: String!) {
-    degaCategory(id: { eq: $id }) {
+    degaCategory(degaId: { eq: $id }) {
       description
       id
       medium {

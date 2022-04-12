@@ -6,7 +6,7 @@ import parseEditorJsData from '@utils/parseEditorJsData';
 import { isBrowser } from '@utils/isBrowser';
 import FormatPageLayout from '@components/FormatPageLayout';
 
-const CategoryDetailsAll=({ data }) =>{
+const CategoryDetailsAll = ({ data }) => {
   const { degaCategory, allDegaFormat, allDegaPost } = data;
   // const formatType = 'fact-check';
   // const filterPosts = dega.posts.nodes.filter((i) => i.format.slug !== formatType);
@@ -37,7 +37,7 @@ const CategoryDetailsAll=({ data }) =>{
             textTransform: 'capitalize',
           }}
         >
-          {item.name} 
+          {item.name}
         </h1>
         <div
           id="category-description"
@@ -80,7 +80,7 @@ export default CategoryDetailsAll;
 
 export const query = graphql`
   query ($id: String!) {
-    degaCategory(id: { eq: $id }) {
+    degaCategory(degaId: { eq: $id }) {
       description
       id
       medium {
