@@ -10,10 +10,10 @@ import {
   FaLink,
   FaEnvelope,
 } from 'react-icons/fa';
-import FormatPageLayout from '../components/FormatPageLayout';
+import FormatPageLayout from '@components/FormatPageLayout';
 
-function UserDetailsAll({ data }) {
-  const { dega } = data;
+const UserDetailsAll = ({ data }) => {
+  const { degaUser, allDegaPost, allDegaFormat } = data;
   const getIcon = (name) => {
     switch (name) {
       case 'twitter':
@@ -90,9 +90,9 @@ function UserDetailsAll({ data }) {
   return (
     <FormatPageLayout
       type="author"
-      posts={dega.posts.nodes}
-      formats={dega.formats.nodes}
-      item={dega.user}
+      posts={allDegaPost.nodes}
+      formats={allDegaFormat.nodes}
+      item={degaUser}
       header={header}
       useSlug={false}
     />
@@ -102,58 +102,56 @@ function UserDetailsAll({ data }) {
 export default UserDetailsAll;
 
 export const query = graphql`
-  query ($id: Int!) {
-    dega {
-      user(id: $id) {
-        id
-        first_name
-        last_name
-        email
-        medium {
-          url
-          dimensions
-        }
-        social_media_urls
-        description
-        slug
-        display_name
+  query ($id: String!) {
+    degaUser(degaId: { eq: $id }) {
+      degaId
+      first_name
+      last_name
+      email
+      medium {
+        url
+        dimensions
       }
-      formats {
-        nodes {
+      social_media_urls
+      description
+      slug
+      display_name
+    }
+    allDegaFormat {
+      nodes {
+        id
+        slug
+        name
+      }
+    }
+    allDegaPost(filter: { users: { elemMatch: { id: { eq: $id } } } }) {
+      nodes {
+        users {
           id
+          first_name
+          last_name
+        }
+        categories {
           slug
           name
         }
-      }
-      posts(users: { ids: [$id] }) {
-        nodes {
-          users {
-            id
-            first_name
-            last_name
-          }
-          categories {
-            slug
-            name
-          }
-          medium {
-            alt_text
-            url
-            dimensions
-          }
-          format {
-            name
-            id
-            slug
-          }
-          published_date
+        medium {
+          alt_text
+          url
+          dimensions
+        }
+        format {
+          name
           id
-          excerpt
-          status
-          subtitle
-          title
           slug
         }
+        published_date
+        id
+        excerpt
+        status
+        subtitle
+        title
+        slug
       }
     }
   }

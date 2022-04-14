@@ -8,7 +8,7 @@ const editorjsHTML = require('editorjs-html');
 module.exports = ({
   spaceId,
   accessToken,
-  api,
+  apiUrl,
   siteUrl = 'https://localhost:9002',
   youtubeApiKey,
   channelId,
@@ -22,54 +22,54 @@ module.exports = ({
   // flags: { QUERY_ON_DEMAND: true },
   plugins: [
     'gatsby-plugin-react-helmet',
-    // {
-    //   resolve: `gatsby-source-dega`,
-    //   options: {
-    //     spaceId,
-    //     accessToken,
-    //     url: api,
-    //   },
-    // },
-    youtubeApiKey && channelId
-      ? {
-          resolve: '@factly/gatsby-theme-youtube',
-          options: {
-            apiKey: youtubeApiKey,
-            channelId,
-            basePath: '/videos',
-            logo: 'logo.png',
-            bannerData: [
-              {
-                name: 'Decode',
-                icon: 'decode.png',
-                playlistId: 'PLEQcsVYyf3IA_pPC8LR81vpEPkDl1czou',
-              },
-              {
-                name: 'Decode Lite',
-                icon: 'decode-lite.png',
-                playlistId: 'PLEQcsVYyf3IBlzW5qPaozJZRKeS-aFpfv',
-              },
-              {
-                name: 'Pause',
-                icon: 'pause.png',
-                playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
-              },
-            ],
-          },
-        }
-      : null,
     {
-      resolve: 'gatsby-source-graphql',
+      resolve: `gatsby-source-dega`,
       options: {
-        typeName: 'dega',
-        fieldName: 'dega',
-        url: api,
-        headers: {
-          'X-Space': spaceId,
-          Authorization: accessToken,
-        },
+        spaceId,
+        accessToken,
+        uri: apiUrl,
       },
     },
+    youtubeApiKey && channelId
+      ? {
+        resolve: '@factly/gatsby-theme-youtube',
+        options: {
+          apiKey: youtubeApiKey,
+          channelId,
+          basePath: '/videos',
+          logo: 'logo.png',
+          bannerData: [
+            {
+              name: 'Decode',
+              icon: 'decode.png',
+              playlistId: 'PLEQcsVYyf3IA_pPC8LR81vpEPkDl1czou',
+            },
+            {
+              name: 'Decode Lite',
+              icon: 'decode-lite.png',
+              playlistId: 'PLEQcsVYyf3IBlzW5qPaozJZRKeS-aFpfv',
+            },
+            {
+              name: 'Pause',
+              icon: 'pause.png',
+              playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
+            },
+          ],
+        },
+      }
+      : null,
+    // {
+    //   resolve: 'gatsby-source-graphql',
+    //   options: {
+    //     typeName: 'dega',
+    //     fieldName: 'dega',
+    //     url: apiUrl,
+    //     headers: {
+    //       'X-Space': spaceId,
+    //       'X-Dega-API-Key': accessToken,
+    //     },
+    //   },
+    // },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
@@ -104,14 +104,14 @@ module.exports = ({
       // add options to make sitemaps for other things
     },
     'gatsby-plugin-robots-txt',
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        include_favicon: false,
-        icon: 'src/favicons/favicon.png',
-        cache_busting_mode: 'none',
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-manifest',
+    //   options: {
+    //     include_favicon: false,
+    //     icon: 'src/favicons/favicon.png',
+    //     cache_busting_mode: 'none',
+    //   },
+    // },
     {
       resolve: 'gatsby-plugin-feed',
       options: {
@@ -140,15 +140,13 @@ module.exports = ({
               ),
             query: `
             {
-              dega {
-                posts(limit:100,page:1) {
-                  nodes {
-                    excerpt
-                    description
-                    title
-                    slug
-                    published_date
-                  }
+              allDegaPost {
+                nodes {
+                  excerpt
+                  description
+                  title
+                  slug
+                  published_date
                 }
               }
             }`,

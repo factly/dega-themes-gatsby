@@ -3,18 +3,17 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '../utils/parseEditorJsData';
-import LayoutAmp from '../components/Layout.amp';
+import parseEditorJsData from '@utils/parseEditorJsData';
+import LayoutAmp from '@components/Layout.amp';
 
 const PostDetails = ({ data }) => {
-  const {
-    dega: { post },
-  } = data;
+  const { degaPost } = data;
+  // console.log({ data, degaPost });
   return (
     <LayoutAmp>
       <Helmet>
         <html lang="en" amp />
-        <title>{post.title}</title>
+        <title>{degaPost.title}</title>
         {/* <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
         <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
         <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
@@ -23,106 +22,91 @@ const PostDetails = ({ data }) => {
       </Helmet>
       <article>
         <h1 className="amp-title">
-          <strong>{post.title}</strong>
+          <strong>{degaPost.title}</strong>
         </h1>
-        {post.users.map((user, i, arr) => (
+        {degaPost.users.map((user, i, arr) => (
           <div key={i}>
             By <a href={`/author/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
             {arr.length - i > 1 && ','}
           </div>
         ))}
         <div>
-          {post.excerpt && (
+          {degaPost.excerpt && (
             <>
               <strong>Excerpt</strong>
-              <p>{post.excerpt}</p>
+              <p>{degaPost.excerpt}</p>
             </>
           )}
           <div className="parsed">
-            {parseEditorJsData({ content: post.description, scripts: true, amp: true })}
+            {parseEditorJsData({ content: degaPost.description, scripts: true, amp: true })}
           </div>
         </div>
       </article>
     </LayoutAmp>
   );
-};
+};;
 
 export default PostDetails;
 
 export const query = graphql`
-  query ($id: Int!) {
-    dega {
-      post(id: $id) {
-        published_date
-        description
-        excerpt
+  query ($id: String!) {
+    degaPost(degaId: { eq: $id }) {
+      published_date
+      description
+      excerpt
+      id
+      schemas
+      slug
+      status
+      subtitle
+      title
+      updated_at
+      users {
+        email
+        first_name
+        last_name
         id
-        schemas
+      }
+      tags {
+        id
+        name
         slug
-        status
-        subtitle
-        title
-        updated_at
-        users {
-          email
-          first_name
-          last_name
-          id
-        }
-        tags {
+        description
+      }
+      medium {
+        alt_text
+        id
+        url
+        dimensions
+      }
+      format {
+        name
+        slug
+        id
+        description
+      }
+      claims {
+        checked_date
+        claim_date
+        claim_sources
+        claimant {
+          description
           id
           name
           slug
-          description
+          tag_line
         }
-        medium {
-          alt_text
-          id
-          url
-          dimensions
-        }
-        format {
-          name
-          slug
-          id
+        description
+        id
+        fact
+        review_sources
+        slug
+        claim
+        rating {
           description
-        }
-        claims {
-          checked_date
-          claim_date
-          claim_sources
-          claimant {
-            description
-            id
-            name
-            slug
-            tag_line
-          }
-          description
-          id
-          fact
-          review_sources
-          slug
-          claim
-          rating {
-            description
-            id
-            name
-            numeric_value
-            slug
-            medium {
-              alt_text
-              id
-              url
-              dimensions
-            }
-          }
-        }
-        categories {
-          description
-          created_at
           id
           name
+          numeric_value
           slug
           medium {
             alt_text
@@ -130,6 +114,19 @@ export const query = graphql`
             url
             dimensions
           }
+        }
+      }
+      categories {
+        description
+        created_at
+        id
+        name
+        slug
+        medium {
+          alt_text
+          id
+          url
+          dimensions
         }
       }
     }

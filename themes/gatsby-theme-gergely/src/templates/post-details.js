@@ -4,30 +4,30 @@ import { graphql } from 'gatsby';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { jsx } from 'theme-ui';
-import Post from '../components/Post/index.js';
-import StoryLinks from '../components/StoryLinks';
-import Layout from '../components/Layout/index';
-import { isBrowser } from '../utils/isBrowser';
-import Seo from '../components/Seo';
+import Post from '@components/Post/index.js';
+import StoryLinks from '@components/StoryLinks';
+import Layout from '@components/Layout/index';
+import { isBrowser } from '@utils/isBrowser';
+import Seo from '@components/Seo';
 import { FaTwitterSquare, FaFacebookSquare, FaWhatsappSquare } from 'react-icons/fa';
 
 /**
  * TODO: Add loader for infinite-scroller
  */
 const PostDetails = ({ data }) => {
-  const { dega } = data;
-  const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
-  const posts = filteredPosts.filter((post) => post.id !== dega.post.id);
-  posts.unshift(dega.post);
+  const { allDegaPost, degaSpace, degaPost } = data;
+  const filteredPosts = allDegaPost.nodes.filter((post) => post.published_date !== null);
+  const posts = filteredPosts.filter((post) => post.id !== degaPost.id);
+  posts.unshift(degaPost);
 
   const [postItems, setPostItems] = React.useState(posts.slice(0, 1));
   const [hasNextPage, setHasNextPage] = React.useState(true);
   const [showSocialIcon, setShowSocialIcon] = React.useState(false);
-  const [postActiveIndex, setPostActiveIndex] = React.useState(parseInt(dega.post.id));
+  const [postActiveIndex, setPostActiveIndex] = React.useState(parseInt(degaPost.id));
   const [relatedPosts, setRelatedPosts] = React.useState(posts.slice(0, 10));
   const [hasNextPageRelatedPost, setHasNextPageRelatedPost] = React.useState(true);
   const [observer, setObserver] = React.useState({
-    observe: () => {},
+    observe: () => { },
   });
   const handleLoadMore = () => {
     if (!hasNextPage) return false;
@@ -80,7 +80,7 @@ const PostDetails = ({ data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // for sharing links
-  const title = encodeURIComponent(dega.post.title);
+  const title = encodeURIComponent(degaPost.title);
   let url;
   if (isBrowser) {
     url = encodeURIComponent(window.location.href);
@@ -89,67 +89,34 @@ const PostDetails = ({ data }) => {
   return (
     <Layout>
       <Seo
-        title={dega.post.title}
-        description={dega.post.excerpt}
-        image={`${dega.post.medium?.url?.proxy}`}
-        canonical={`${dega.space.site_address}/${dega.post.slug}`}
+        title={degaPost.title}
+        description={degaPost.excerpt}
+        image={`${degaPost.medium?.url?.proxy}`}
+        canonical={`${degaSpace.site_address}/${degaPost.slug}`}
         type="article"
       />
-      <div sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-        <div
-          className="sidebar"
-          sx={{
-            display: [null, null, null, 'flex'],
-            width: [null, null, null, '1/4'],
-            borderRightWidth: 'px',
-            borderLeftWidth: 'px',
-            position: 'sticky',
-          }}
-        >
-          <div
-            sx={{
-              py: (theme) => `${theme.space.spacing5}`,
-              borderBottomWidth: 'px',
-              px: (theme) => `${theme.space.spacing6}`,
-            }}
-          >
-            <h5 className="heading" sx={{ m: 0, fontSize: (theme) => `${theme.fontSizes.h7}` }}>
-              Recent Posts
-            </h5>
-          </div>
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={handleLoadMoreRelatedPosts}
-            hasMore={hasNextPageRelatedPost}
-            useWindow={false}
-            loader={
-              <div className="loader" key={0}>
-                Loading ...
-              </div>
-            }
-          >
-            {relatedPosts.map((post, index) => (
-              <StoryLinks
-                key={`link${post.id}`}
-                post={post}
-                postActiveIndex={postActiveIndex}
-                categories
-                index={index}
-              />
-            ))}
-          </InfiniteScroll>
-        </div>
+      <div
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          position: 'relative',
+        }}
+      >
         <div
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            width: ['full', null, null, '3/4'],
+            width: '100%',
+            maxWidth: 1024,
+            mx: 'auto',
             p: [
               (theme) => `${theme.space.spacing3}`,
               null,
               null,
-              (theme) => `${theme.space.spacing6}`,
+              (theme) => `${theme.space.spacing8}`,
             ],
+            pl: (theme) => [null, null, `${theme.space.spacing8}`],
           }}
         >
           <InfiniteScroll
@@ -158,7 +125,7 @@ const PostDetails = ({ data }) => {
             hasMore={hasNextPage}
             loader={
               <div className="loader" key={0}>
-                Loading ...
+                Loading...
               </div>
             }
           >
@@ -177,7 +144,8 @@ const PostDetails = ({ data }) => {
                   display: ['none', null, 'flex'],
                   flexDirection: 'column',
                   position: 'fixed',
-                  right: 0,
+                  ml: (theme) => `-${theme.space.spacing8}`,
+                  // left: 0,
                   alignItems: 'center',
                   justifyContent: ['flex-start', null, 'flex-end'],
                   top: '40vh',
@@ -191,14 +159,14 @@ const PostDetails = ({ data }) => {
                   sx={{
                     display: 'block',
                     m: (theme) => `${theme.space.spacing1}`,
-                    '&:first-of-type': { mx: 0 },
                     p: (theme) => `${theme.space.spacing3}`,
+                    '&:first-of-type': { mx: 0 },
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
                 >
                   <FaFacebookSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#3b5998"
                   />
                 </a>
@@ -217,13 +185,13 @@ const PostDetails = ({ data }) => {
                   }}
                 >
                   <FaTwitterSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#1da1f2"
                   />
                 </a>
                 <a
                   title="Share on WhatsApp"
-                  href={`https://api.whatsapp.com/send?text=${title}-${url}`}
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${title} - ${url}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{
@@ -236,11 +204,12 @@ const PostDetails = ({ data }) => {
                   }}
                 >
                   <FaWhatsappSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#25d366"
                   />
                 </a>
               </div>
+              {/* Mobile share icon at the bottom */}
               {/* <div
                 sx={{
                   display: [null, null, null, 'none'],
@@ -287,97 +256,13 @@ const PostDetails = ({ data }) => {
 };
 
 export default PostDetails;
-
 export const query = graphql`
-  query ($id: Int!) {
-    dega {
-      space {
-        site_address
-      }
-      posts(page: 1, limit: 100, sortBy: "published_date", sortOrder: "desc") {
-        nodes {
-          published_date
-          description
-          excerpt
-          id
-          schemas
-          slug
-          status
-          subtitle
-          title
-          updated_at
-          users {
-            email
-            first_name
-            last_name
-            id
-            slug
-          }
-          tags {
-            id
-            name
-            slug
-            description
-          }
-          medium {
-            alt_text
-            id
-            url
-            dimensions
-          }
-          format {
-            name
-            slug
-            id
-            description
-          }
-          claims {
-            checked_date
-            claim_date
-            claim_sources
-            claimant {
-              description
-              id
-              name
-              slug
-              tag_line
-            }
-            description
-            id
-            fact
-            review_sources
-            slug
-            claim
-            rating {
-              description
-              id
-              name
-              numeric_value
-              slug
-              medium {
-                alt_text
-                id
-                url
-                dimensions
-              }
-            }
-          }
-          categories {
-            description
-            created_at
-            id
-            name
-            slug
-            medium {
-              alt_text
-              id
-              url
-              dimensions
-            }
-          }
-        }
-      }
-      post(id: $id) {
+  query ($id: String!) {
+    degaSpace {
+      site_address
+    }
+    allDegaPost {
+      nodes {
         published_date
         description
         excerpt
@@ -393,6 +278,7 @@ export const query = graphql`
           first_name
           last_name
           id
+          slug
         }
         tags {
           id
@@ -455,6 +341,86 @@ export const query = graphql`
             url
             dimensions
           }
+        }
+      }
+    }
+    degaPost(degaId: { eq: $id }) {
+      published_date
+      description
+      excerpt
+      id
+      schemas
+      slug
+      status
+      subtitle
+      title
+      updated_at
+      users {
+        email
+        first_name
+        last_name
+        id
+      }
+      tags {
+        id
+        name
+        slug
+        description
+      }
+      medium {
+        alt_text
+        id
+        url
+        dimensions
+      }
+      format {
+        name
+        slug
+        id
+        description
+      }
+      claims {
+        checked_date
+        claim_date
+        claim_sources
+        claimant {
+          description
+          id
+          name
+          slug
+          tag_line
+        }
+        description
+        id
+        fact
+        review_sources
+        slug
+        claim
+        rating {
+          description
+          id
+          name
+          numeric_value
+          slug
+          medium {
+            alt_text
+            id
+            url
+            dimensions
+          }
+        }
+      }
+      categories {
+        description
+        created_at
+        id
+        name
+        slug
+        medium {
+          alt_text
+          id
+          url
+          dimensions
         }
       }
     }
