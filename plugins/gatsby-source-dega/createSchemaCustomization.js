@@ -146,7 +146,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   }
   type DegaFormat implements Node @dontInfer {
     id: ID!
-    degaId: String!
+    degaId: String
     created_at: Date @dateformat
     description: String
     name: String
