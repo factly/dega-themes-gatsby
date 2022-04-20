@@ -8,10 +8,19 @@ import parseEditorJsData from '@utils/parseEditorJsData';
 import Seo from '@components/Seo';
 import { Link } from 'gatsby';
 import parseDate from '@utils/parseDate';
-import { FaRegClock } from 'react-icons/fa';
+import {
+  FaRegClock,
+  FaFacebookF,
+  FaTwitter,
+  FaWhatsapp,
+  FaPinterestSquare,
+  FaLinkedinIn,
+  FaEnvelope,
+  FaLink,
+} from 'react-icons/fa';
 import Img from 'gatsby-image/withIEPolyfill';
 import generateFluidObject from '@utils/generateFluidObject';
-
+import { isBrowser } from '@utils/isBrowser';
 
 /**
  * TODO: URI encoding
@@ -27,6 +36,11 @@ const Post = ({ post, observer }) => {
   //   observer.observe(postSection.current);
   //   observer.observe(headerSocialIcon.current);
   // }, [observer, postSection, headerSocialIcon]);
+  const title = encodeURIComponent(post.title);
+  let url;
+  if (isBrowser) {
+    url = encodeURIComponent(window.location.href);
+  }
 
   return (
     <>
@@ -72,38 +86,40 @@ const Post = ({ post, observer }) => {
 
           <h1
             sx={{
-              fontSize: "4rem",
+              fontSize: '4rem',
               fontWeight: 400,
-              my: "1.5rem",
-              lineHeight: 1.3
+              my: '1.5rem',
+              lineHeight: 1.3,
             }}
           >
             {post.title}
           </h1>
           <p
             sx={{
-              mb: "3rem",
-              fontSize: "1.5rem",
-              maxWidth: "780px",
-              lineHeight: "1.6"
+              mb: '3rem',
+              fontSize: '1.5rem',
+              maxWidth: '780px',
+              lineHeight: '1.6',
             }}
-          >{post.excerpt}</p>
-          <div sx={{
-            display: "flex",
-            position: "relative"
-          }}>
+          >
+            {post.excerpt}
+          </p>
+          <div
+            sx={{
+              display: 'flex',
+              position: 'relative',
+            }}
+          >
             <div
               sx={{
-                width: "48px",
-                height: "48px",
-                borderRadius: "50%",
-                bg: "gray",
-                mr: "8px"
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                bg: 'gray',
+                mr: '8px',
               }}
-            >
-            </div>
+            ></div>
             <div>
-
               {post.users &&
                 post.users.map((user, i, arr) => (
                   <React.Fragment key={i}>
@@ -127,17 +143,18 @@ const Post = ({ post, observer }) => {
                 ))}
               <span
                 sx={{
-                  color: "#575861",
-                  fontSize: ".875rem",
+                  color: '#575861',
+                  fontSize: '.875rem',
                   display: 'flex',
                   alignItems: 'center',
-                  lineHeight: 1.6
+                  lineHeight: 1.6,
                 }}
               >
-                <FaRegClock sx={{ display: 'inline-block', mr: (theme) => `${theme.space.spacing2}` }} />{' '}
+                <FaRegClock
+                  sx={{ display: 'inline-block', mr: (theme) => `${theme.space.spacing2}` }}
+                />{' '}
                 {parseDate(post.published_date)}
               </span>
-
             </div>
           </div>
 
@@ -146,19 +163,21 @@ const Post = ({ post, observer }) => {
               display: 'flex',
               flexDirection: ['column', null, 'row'],
               justifyContent: 'space-between',
-              mt: "4rem"
+              mt: '4rem',
             }}
           >
-
-
             {post.medium && (
               <div sx={{ flex: '1 1 0%', width: 'full' }}>
-                <Img fluid={generateFluidObject({ url: post.medium.url.proxy, dimensions: post.medium.dimensions })} />
+                <Img
+                  fluid={generateFluidObject({
+                    url: post.medium.url.proxy,
+                    dimensions: post.medium.dimensions,
+                  })}
+                />
               </div>
             )}
           </div>
         </div>
-
 
         <div
           sx={{
@@ -214,16 +233,85 @@ const Post = ({ post, observer }) => {
                 </div>
               </React.Fragment>
             ))}
-          <div
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              mt: (theme) => `${theme.space.spacing6}`,
-              pb: (theme) => `${theme.space.spacing6}`,
-              borderBottomWidth: '1px',
-            }}
-          >
-
+          <div sx={{ textAlign: 'center', mt: '3rem' }}>
+            <h4>Share this article:</h4>
+            <div
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                gap: '2.25rem',
+                mt: (theme) => `${theme.space.spacing6}`,
+                pb: (theme) => `${theme.space.spacing6}`,
+                borderBottomWidth: '1px',
+                a: {
+                  background: '#f9f9f9',
+                  padding: '12px',
+                  borderRadius: '50%',
+                  width: '40px',
+                  height: '40px',
+                },
+                'a:hover': {
+                  bg: '#0066FF',
+                  color: '#ffffff',
+                },
+                button: {
+                  background: '#f9f9f9',
+                  padding: '12px',
+                  borderRadius: '50%',
+                  width: '40px',
+                  height: '40px',
+                },
+                'button:hover': {
+                  bg: '#0066FF',
+                  color: '#ffffff',
+                },
+              }}
+            >
+              <a href={`https://www.facebook.com/sharer.php?u=${url}`} title="Share by Facebook">
+                <FaFacebookF />
+              </a>
+              <a
+                href={`https://twitter.com/share?text=${title}-&url=${url}`}
+                title="Share by Twitter"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                  `${title} - ${url}`,
+                )}`}
+                title="Share by Whatsapp"
+              >
+                <FaWhatsapp />
+              </a>
+              <a
+                href={`https://pinterest.com/pin/create/bookmarklet/?url=${url}&description=${title}`}
+                title="Share by Pinterest"
+              >
+                <FaPinterestSquare />
+              </a>
+              <a
+                href={`https://www.linkedin.com/shareArticle?url=${url}-&title=${title}`}
+                title="Share by Linkedin"
+              >
+                <FaLinkedinIn />
+              </a>
+              <a
+                href={`mailto:?subject=${title}&body=Check out this site: ${url}`}
+                title="Share by Email"
+              >
+                <FaEnvelope />
+              </a>
+              <button
+                onClick={() => {
+                  console.log({ url: decodeURIComponent(url) });
+                  navigator.clipboard.writeText(decodeURIComponent(url));
+                }}
+              >
+                <FaLink />
+              </button>
+            </div>
           </div>
         </div>
       </article>
