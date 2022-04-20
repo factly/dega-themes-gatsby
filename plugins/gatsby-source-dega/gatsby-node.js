@@ -160,8 +160,16 @@ exports.sourceNodes = async (
       children: [],
       internal: {
         type: POST_NODE_TYPE,
-        content: JSON.stringify(post),
-        contentDigest: createContentDigest(post),
+        content: JSON.stringify({
+          ...post,
+          degaId: post.id,
+          id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...post,
+          degaId: post.id,
+          id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
+        }),
       },
     });
   });
@@ -181,8 +189,16 @@ exports.sourceNodes = async (
       children: [],
       internal: {
         type: CATEGORY_NODE_TYPE,
-        content: JSON.stringify(category),
-        contentDigest: createContentDigest(category),
+        content: JSON.stringify({
+          ...category,
+          degaId: category.id,
+          id: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...category,
+          degaId: category.id,
+          id: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
+        }),
       },
     });
   });
@@ -202,8 +218,16 @@ exports.sourceNodes = async (
       children: [],
       internal: {
         type: TAG_NODE_TYPE,
-        content: JSON.stringify(tag),
-        contentDigest: createContentDigest(tag),
+        content: JSON.stringify({
+          ...tag,
+          degaId: tag.id,
+          id: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...tag,
+          degaId: tag.id,
+          id: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
+        }),
       },
     });
   });
@@ -214,6 +238,7 @@ exports.sourceNodes = async (
     total: totalCount.formats.total,
     type: 'formats',
   });
+
   formats.forEach((format) => {
     createNode({
       ...format,
@@ -223,8 +248,16 @@ exports.sourceNodes = async (
       children: [],
       internal: {
         type: FORMAT_NODE_TYPE,
-        content: JSON.stringify(format),
-        contentDigest: createContentDigest(format),
+        content: JSON.stringify({
+          ...format,
+          degaId: format.id,
+          id: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...format,
+          degaId: format.id,
+          id: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
+        }),
       },
     });
   });
@@ -243,8 +276,16 @@ exports.sourceNodes = async (
       children: [],
       internal: {
         type: RATING_NODE_TYPE,
-        content: JSON.stringify(rating),
-        contentDigest: createContentDigest(rating),
+        content: JSON.stringify({
+          ...rating,
+          degaId: rating.id,
+          id: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...rating,
+          degaId: rating.id,
+          id: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
+        }),
       },
     });
   });
