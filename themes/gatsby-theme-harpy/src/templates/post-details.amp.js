@@ -14,7 +14,6 @@ const PostDetails = ({ data }) => {
       <Helmet>
         <html lang="en" amp />
         <title>{degaPost?.title}</title>
-
       </Helmet>
       <article>
         <h1 className="amp-title">
@@ -40,7 +39,7 @@ const PostDetails = ({ data }) => {
       </article>
     </LayoutAmp>
   );
-};;
+};
 
 export default PostDetails;
 

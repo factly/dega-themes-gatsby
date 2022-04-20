@@ -25,7 +25,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
       <div
         id="category-description"
         sx={{
-          maxHeight: (theme) => ('100%'),
+          maxHeight: '100%',
           overflow: 'hidden',
           px: (theme) => `${theme.space.spacing5}`,
         }}
@@ -125,11 +125,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
                 }}
               >
                 {filteredPosts.map((item, index) => (
-                  <BlogCard
-                    key={index}
-                    type="basic"
-                    post={item}
-                  />
+                  <BlogCard key={index} type="basic" post={item} />
                 ))}
               </div>
             ) : (

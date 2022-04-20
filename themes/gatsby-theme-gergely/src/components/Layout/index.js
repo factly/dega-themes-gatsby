@@ -49,7 +49,9 @@ const Layout = (props) => {
         title={`${degaSpace.site_title} - ${degaSpace.tag_line}`}
         // canonical={degaSpace.site_address}
         image={`${degaSpace.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
-        description={degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title}
+        description={
+          degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title
+        }
         fbAppId="587617254726291"
         fbPages="1521487944736293"
       >

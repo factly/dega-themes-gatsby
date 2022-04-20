@@ -81,7 +81,7 @@ export default {
       '#1E3A8A',
     ],
     gray: [
-      "#f7f7fc",
+      '#f7f7fc',
       '#f7fafc',
       '#edf2f7',
       '#e2e8f0',

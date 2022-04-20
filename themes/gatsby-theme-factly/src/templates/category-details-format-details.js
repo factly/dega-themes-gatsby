@@ -9,7 +9,6 @@ import { isBrowser } from '@utils/isBrowser';
 const CategoryDetailsFormat = ({ data }) => {
   const { degaCategory, allDegaFormat, allDegaPost } = data;
 
-
   const [readMore, setReadMore] = React.useState(true);
   const [isReadMoreNeeded, setIsReadMoreNeeded] = useState(false);
 
@@ -72,7 +71,7 @@ const CategoryDetailsFormat = ({ data }) => {
       header={header}
     />
   );
-}
+};
 
 export default CategoryDetailsFormat;
 
@@ -97,10 +96,7 @@ export const query = graphql`
       }
     }
     allDegaPost(
-      filter: {
-        categories: { elemMatch: { id: { eq: $id } } }
-        format: { id: { eq: $format_id } }
-      }
+      filter: { categories: { elemMatch: { id: { eq: $id } } }, format: { id: { eq: $format_id } } }
     ) {
       nodes {
         users {

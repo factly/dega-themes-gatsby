@@ -44,7 +44,7 @@ const PostDetails = ({ data }) => {
       </article>
     </LayoutAmp>
   );
-};;
+};
 
 export default PostDetails;
 

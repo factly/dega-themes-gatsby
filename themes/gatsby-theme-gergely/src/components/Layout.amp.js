@@ -37,7 +37,9 @@ const LayoutAmp = (props) => {
           degaSpace.logo?.url?.proxy &&
           `${degaSpace.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`
         }
-        description={degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title}
+        description={
+          degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title
+        }
         icon={degaSpace.fav_icon.url.proxy}
       />
       <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>

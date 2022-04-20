@@ -17,7 +17,7 @@ const TagDetailsAll = ({ data }) => {
       item={degaTag}
     />
   );
-}
+};
 
 export default TagDetailsAll;
 

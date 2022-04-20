@@ -19,7 +19,7 @@ const Indexpage = ({ data, pageContext }) => {
   };
 
   return <Layout>{getHomePageComponent(homepage, data)}</Layout>;
-}
+};
 
 export default Indexpage;
 

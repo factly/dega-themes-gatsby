@@ -7,7 +7,7 @@ import Homepage from '@components/Homepage';
 import HomePageTwo from '@components/HomepageTwo';
 import Seo from '@components/Seo';
 
-const Indexpage=({ data, pageContext }) =>{
+const Indexpage = ({ data, pageContext }) => {
   const { homepage } = pageContext;
 
   const getHomePageComponent = (homepageType, content) => {
@@ -19,7 +19,7 @@ const Indexpage=({ data, pageContext }) =>{
   };
 
   return <Layout>{getHomePageComponent(homepage, data)}</Layout>;
-}
+};
 
 export default Indexpage;
 

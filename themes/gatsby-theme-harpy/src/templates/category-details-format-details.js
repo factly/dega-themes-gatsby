@@ -9,7 +9,6 @@ import { isBrowser } from '@utils/isBrowser';
 const CategoryDetailsFormat = ({ data }) => {
   const { degaCategory, allDegaFormat, allDegaPost } = data;
 
-
   const header = (item) => {
     return (
       <div
@@ -31,7 +30,7 @@ const CategoryDetailsFormat = ({ data }) => {
         <div
           id="category-description"
           sx={{
-            maxHeight: (theme) => ('100%'),
+            maxHeight: '100%',
             overflow: 'hidden',
             px: (theme) => `${theme.space.spacing5}`,
           }}
@@ -50,7 +49,7 @@ const CategoryDetailsFormat = ({ data }) => {
       header={header}
     />
   );
-}
+};
 
 export default CategoryDetailsFormat;
 
@@ -75,10 +74,7 @@ export const query = graphql`
       }
     }
     allDegaPost(
-      filter: {
-        categories: { elemMatch: { id: { eq: $id } } }
-        format: { id: { eq: $format_id } }
-      }
+      filter: { categories: { elemMatch: { id: { eq: $id } } }, format: { id: { eq: $format_id } } }
     ) {
       nodes {
         users {

@@ -5,7 +5,7 @@ import { jsx } from 'theme-ui';
 import Layout from '@components/Layout/index';
 import StoryCard from '@components/UI/StoryCard';
 
-const FormatDetails=({ data })=> {
+const FormatDetails = ({ data }) => {
   const { allDegaPost } = data;
   //const filteredPosts = allDegaPost.nodes.filter((post) => post.published_date !== null);
   return (
@@ -55,7 +55,7 @@ const FormatDetails=({ data })=> {
       </div>
     </Layout>
   );
-}
+};
 
 export default FormatDetails;
 

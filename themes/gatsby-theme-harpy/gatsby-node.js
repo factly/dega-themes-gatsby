@@ -53,7 +53,6 @@ exports.pluginOptionsSchema = ({ Joi }) => {
 exports.onPreBootstrap = ({ store }) => {
   const { flattenedPlugins } = store.getState();
 
-
   const youtubePlugin = flattenedPlugins.find(
     (plugin) => plugin.name === '@factly/gatsby-theme-youtube',
   );
@@ -175,7 +174,6 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     .forEach((item) => {
       format_without_factcheck.push(item.degaId);
     });
-
 
   createPage({
     path: '/',

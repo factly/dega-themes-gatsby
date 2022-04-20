@@ -97,7 +97,7 @@ const UserDetailsAll = ({ data }) => {
       useSlug={false}
     />
   );
-}
+};
 
 export default UserDetailsAll;
 

@@ -12,13 +12,12 @@ const Indexpage = ({ data, pageContext }) => {
   const getHomePageComponent = (homepageType, content) => {
     const metaData = data.allDegaCategory.nodes.filter((i) => i.meta_fields !== null);
 
-
     if (homepageType === 2 && metaData.length > 0) return <HomePageTwo data={content} />;
     return <Homepage data={content} />;
   };
 
   return <Layout>{getHomePageComponent(homepage, data)}</Layout>;
-}
+};
 
 export default Indexpage;
 
@@ -42,7 +41,10 @@ export const query = graphql`
         }
       }
     }
-    posts: allDegaPost(filter: { format: { id: { in: $format_without_factcheck } } },sort: {fields: created_at, order: DESC}) {
+    posts: allDegaPost(
+      filter: { format: { id: { in: $format_without_factcheck } } }
+      sort: { fields: created_at, order: DESC }
+    ) {
       nodes {
         users {
           id
@@ -68,7 +70,11 @@ export const query = graphql`
         excerpt
       }
     }
-    factchecks: allDegaPost(filter: { format: { id: { in: $format_factcheck } } }, sort: {fields: created_at, order: DESC}, limit: 5) {
+    factchecks: allDegaPost(
+      filter: { format: { id: { in: $format_factcheck } } }
+      sort: { fields: created_at, order: DESC }
+      limit: 5
+    ) {
       nodes {
         users {
           id

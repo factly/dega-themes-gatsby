@@ -37,7 +37,8 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.coverOptions button, .coverOptions a {
+.coverOptions button,
+.coverOptions a {
   display: flex;
   width: 180px;
   align-items: center;
@@ -45,7 +46,7 @@
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
-  font-size: 0.75rem; 
+  font-size: 0.75rem;
   transition: all 0.4s;
   text-decoration: none;
   color: #fff;
@@ -156,8 +157,8 @@
   color: #3b82f6;
 }
 
-
-.coverLinks, .tabPanel {
+.coverLinks,
+.tabPanel {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -177,9 +178,10 @@
 }
 /*  Scroll Icon */
 
-.iconScroll, .iconScroll:before {
-    position: absolute;
-    left: 50%;
+.iconScroll,
+.iconScroll:before {
+  position: absolute;
+  left: 50%;
 }
 .iconScroll {
   position: fixed;
@@ -187,37 +189,37 @@
   right: 8px;
 }
 .iconScroll {
-    width: 30px;
-    height: 50px;
-    margin-left: -20px;
-    bottom: 10px;
-    margin-top: -35px;
-    border: 2px solid rgb(68, 68, 68);
-    border-radius: 25px
+  width: 30px;
+  height: 50px;
+  margin-left: -20px;
+  bottom: 10px;
+  margin-top: -35px;
+  border: 2px solid rgb(68, 68, 68);
+  border-radius: 25px;
 }
 @media (max-width: 1024px) {
-    .iconScroll {
-        position: relative
-    }
+  .iconScroll {
+    position: relative;
+  }
 }
 .iconScroll:before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: rgb(68, 68, 68);
-    margin-left: -4px;
-    top: 8px;
-    border-radius: 4px;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-    animation-name: scroll
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: rgb(68, 68, 68);
+  margin-left: -4px;
+  top: 8px;
+  border-radius: 4px;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: scroll;
 }
 @keyframes scroll {
-    0% {
-        opacity: 1
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(26px)
-    }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(26px);
+  }
 }

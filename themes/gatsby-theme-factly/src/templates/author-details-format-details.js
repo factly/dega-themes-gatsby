@@ -97,7 +97,7 @@ const UserDetailsFormat = ({ data }) => {
       useSlug={false}
     />
   );
-}
+};
 
 export default UserDetailsFormat;
 

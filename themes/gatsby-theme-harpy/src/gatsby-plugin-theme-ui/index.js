@@ -238,7 +238,6 @@ export default {
     layout5: '4rem', // 64
     layout6: '6rem', // 96
     layout7: '10rem', // 160
-
   },
   opacities: {
     0: '0',
@@ -284,7 +283,6 @@ export default {
         textDecoration: 'none',
         ':hover': {
           textDecoration: 'none',
-
         },
       },
       h1: {
@@ -305,7 +303,6 @@ export default {
       h6: {
         variant: 'text.metropolis',
       },
-
 
       code: {},
       pre: {},

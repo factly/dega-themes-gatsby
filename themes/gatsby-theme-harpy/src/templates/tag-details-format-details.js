@@ -15,7 +15,7 @@ const TagDetailsFormat = ({ data }) => {
       item={degaTag}
     />
   );
-}
+};
 
 export default TagDetailsFormat;
 

@@ -75,7 +75,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   // const total = await grapql(`
   // `);
   // const space = {
-  //   data: { 
+  //   data: {
   //     dega: {
   //       space: {
   //         id: 2,
@@ -95,90 +95,84 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   // }
   const space = await graphql(`
     query SpaceQuery {
-        degaSpace {
-          degaId
-          name
-          slug
-          site_title
-          tag_line
-          description
-          site_address
-          logo {
-            url
-          }
-          logo_mobile {
-            url
-          }
-          fav_icon {
-            url
-          }
-          mobile_icon {
-            url
-          }
-          verification_codes
-          social_media_urls
-          contact_info
+      degaSpace {
+        degaId
+        name
+        slug
+        site_title
+        tag_line
+        description
+        site_address
+        logo {
+          url
         }
+        logo_mobile {
+          url
+        }
+        fav_icon {
+          url
+        }
+        mobile_icon {
+          url
+        }
+        verification_codes
+        social_media_urls
+        contact_info
+      }
     }
   `);
   const formats = await graphql(`
     query FormatsQuery {
       allDegaFormat {
-          nodes {
-            degaId
-            slug
-          }
+        nodes {
+          degaId
+          slug
         }
       }
-    
+    }
   `);
 
   const tags = await graphql(`
     query TagsQuery {
       allDegaTag {
-          nodes {
-            degaId
-            slug
-          }
+        nodes {
+          degaId
+          slug
         }
       }
-    
+    }
   `);
 
   const categories = await graphql(`
     query CategoriesQuery {
       allDegaCategory {
-          nodes {
-            degaId
-            slug
-          }
+        nodes {
+          degaId
+          slug
         }
       }
-    
+    }
   `);
   const users = await graphql(`
     query UsersQuery {
       allDegaUser {
-          nodes {
-            degaId
-          }
+        nodes {
+          degaId
         }
       }
-    
+    }
   `);
   const posts = await graphql(`
     query PostsQuery {
       allDegaPost {
-          nodes {
-            degaId
-            published_date
-            slug
-          }
+        nodes {
+          degaId
+          published_date
+          slug
         }
       }
-    
+    }
   `);
-
 
   const format_factcheck = [];
   const format_without_factcheck = [];
@@ -405,7 +399,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       path: `/author/${user.degaId}`,
       component: require.resolve('./src/templates/author-details.js'),
       context: {
-        id: (user.degaId),
+        id: user.degaId,
       },
     });
 

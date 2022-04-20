@@ -55,7 +55,7 @@ const FormatDetails = ({ data }) => {
       </div>
     </Layout>
   );
-}
+};
 
 export default FormatDetails;
 

@@ -74,7 +74,7 @@ const CategoryDetailsAll = ({ data }) => {
       header={header}
     />
   );
-}
+};
 
 export default CategoryDetailsAll;
 

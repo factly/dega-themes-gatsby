@@ -17,7 +17,7 @@ const TagDetailsAll = ({ data }) => {
       item={degaTag}
     />
   );
-}
+};
 
 export default TagDetailsAll;
 
@@ -66,4 +66,4 @@ export const query = graphql`
       }
     }
   }
-  `;
+`;
