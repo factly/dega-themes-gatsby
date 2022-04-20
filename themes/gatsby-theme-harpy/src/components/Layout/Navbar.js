@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import { FaHome, FaBars } from 'react-icons/fa';
+import isBrowser from '@utils/isBrowser';
 /**
  * @component Navbar
  * @typedef Props
@@ -11,10 +12,9 @@ import { FaHome, FaBars } from 'react-icons/fa';
  * @param {Props} props - arguments for Navbar with logo and menu properties
  * @param {string} props.logo - url for logo
  * @param {Object} props.menu - menu item
- * @returns
  */
+
 const Navbar = ({ logo, menu }) => {
-  const mainMenu = menu.nodes.filter((i) => i.slug === 'main')[0];
   const [showMenu, setShowMenu] = useState(false);
   const [width, setWidth] = useState(0);
 
@@ -22,19 +22,19 @@ const Navbar = ({ logo, menu }) => {
    * Updates width when resized for responsiveness of menu item
    */
   const updateWidth = () => {
-    const windowWidth = window.innerWidth;
+    const windowWidth = isBrowser && window.innerWidth;
     setWidth(windowWidth);
   };
 
   useEffect(() => {
     updateWidth();
-    window.addEventListener('resize', updateWidth);
+    isBrowser && window.addEventListener('resize', updateWidth);
     if (width >= 1080) {
       setShowMenu(true);
     } else {
       setShowMenu(false);
     }
-    return () => window.removeEventListener('resize', updateWidth);
+    return () => isBrowser && window.removeEventListener('resize', updateWidth);
   }, [width]);
 
   const handleClick = () => {
@@ -129,7 +129,7 @@ const Navbar = ({ logo, menu }) => {
                 </Link>
               </li>
 
-              {mainMenu?.menu.map((menuItem, index) => (
+              {/* {mainMenu?.menu.map((menuItem, index) => (
                 <li key={menuItem.title}>
                   <Link
                     key={`navbar-${index}`}
@@ -154,7 +154,7 @@ const Navbar = ({ logo, menu }) => {
                     {menuItem.name}
                   </Link>
                 </li>
-              ))}
+              ))} */}
             </ul>
             <ul
               sx={{
@@ -164,8 +164,7 @@ const Navbar = ({ logo, menu }) => {
                 listStyle: 'none',
                 ml: [null, null, null, 'auto'],
               }}
-            >
-            </ul>
+            ></ul>
           </div>
         </nav>
       </div>

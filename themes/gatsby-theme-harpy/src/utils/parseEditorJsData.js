@@ -23,7 +23,6 @@ const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
     ],
   };
 
-
   const ampify = (data, i) => {
     const getId = (url, site) => {
       for (let i = 0; i < patterns[site].length; ++i) {
@@ -160,19 +159,13 @@ const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
 
           switch (block.type) {
             case 'header':
-              return (
-                <HeaderTag
-                  key={i}
-                  dangerouslySetInnerHTML={{ __html: data.text }}
-
-                />
-              );
+              return <HeaderTag key={i} dangerouslySetInnerHTML={{ __html: data.text }} />;
             case 'paragraph':
               return (
                 <p
                   key={i}
                   dangerouslySetInnerHTML={{ __html: data.text }}
-                // sx={{ my: 4, wordBreak: 'break-word' }}
+                  // sx={{ my: 4, wordBreak: 'break-word' }}
                 />
               );
 
@@ -211,7 +204,7 @@ const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
                   className="ed-embeds"
                   key={i}
                   html={data.html}
-                // sx={{ py: 4 }}
+                  // sx={{ py: 4 }}
                 />
               );
 
@@ -221,14 +214,14 @@ const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
                   className="ed-raw-html"
                   key={i}
                   dangerouslySetInnerHTML={{ __html: data.html }}
-                //  sx={{ py: 4 }}
+                  //  sx={{ py: 4 }}
                 />
               );
             case 'code':
               return (
                 <code
                   className="ed-code"
-                //sx={{ py: 4 }}
+                  //sx={{ py: 4 }}
                 >
                   {data.code}
                 </code>
