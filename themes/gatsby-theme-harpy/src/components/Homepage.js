@@ -20,8 +20,7 @@ const Homepage = ({ data }) => {
         {/* featured post */}
 
         <div sx={{ pt: '1rem' }}>
-          {' '}
-          <h2 sx={{ px: '2rem' }}>Featured Posts</h2>{' '}
+          <h2 sx={{ px: '2rem' }}>Featured Posts</h2>
           <BlogCard post={posts.nodes[0]} type="featured" />
         </div>
 
@@ -47,7 +46,6 @@ const Homepage = ({ data }) => {
       <div>
         <h2 sx={{ px: '2rem' }}>Most Recent Posts</h2>
         <div sx={{ display: 'flex', flexWrap: 'wrap' }}>
-          {' '}
           {posts.nodes.map((post) => {
             return <BlogCard post={post} type="basic" key={post.id} />;
           })}

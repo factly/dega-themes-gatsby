@@ -30,7 +30,6 @@ const iframeStyles = {
 
 const GoogleLightBox = ({ id = 1, isOpen, closeModal }) => {
   const [view, setView] = useState(false);
-  console.log({ id, isOpen, closeModal, view });
 
   const DRIVE_LINKS = [
     {
@@ -95,8 +94,7 @@ const GoogleLightBox = ({ id = 1, isOpen, closeModal }) => {
   useEffect(() => {
     setView(false);
   }, [view]);
-  const item = DRIVE_LINKS.find((item) => id == item.id);
-  console.log({ item, id });
+  const item = DRIVE_LINKS.find((item) => parseInt(id) === parseInt(item.id));
 
   //Modal.setAppElement('#gdrive-lightbox');
   return (

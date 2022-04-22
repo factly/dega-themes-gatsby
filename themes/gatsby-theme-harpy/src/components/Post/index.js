@@ -305,7 +305,6 @@ const Post = ({ post, observer }) => {
               </a>
               <button
                 onClick={() => {
-                  console.log({ url: decodeURIComponent(url) });
                   navigator.clipboard.writeText(decodeURIComponent(url));
                 }}
               >

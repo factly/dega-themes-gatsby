@@ -83,7 +83,7 @@ const BlogCard = ({ post, type = 'basic' }) => {
                   sx={{ height: type === 'basic' ? '2.5em' : 'auto', overflow: 'hidden' }}
                   title={post.title}
                 >
-                  {post.title.length < 50 ? post.title : post.title.slice(0, 50) + '...'}{' '}
+                  {post.title.length < 50 ? post.title : post.title.slice(0, 50) + '...'}
                 </h2>
               </Link>
             </div>

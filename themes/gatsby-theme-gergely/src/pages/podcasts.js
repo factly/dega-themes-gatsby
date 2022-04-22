@@ -116,7 +116,7 @@ const PodcastsPage = () => {
             >
               Un-Viral is a podcast from Factly where we tackle that dangerous combination of the
               two kinds of virality—misinformation about health. Tune in to discern the real from
-              the fake, and remember to Un-Viral.{' '}
+              the fake, and remember to Un-Viral.
             </p>
             <div
               sx={{

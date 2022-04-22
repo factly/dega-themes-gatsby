@@ -402,7 +402,6 @@ const PreviewPage = ({ data }) => {
               <ul sx={{ pl: '1.25rem' }}>
                 {claims[currentClaimIndex].review_sources.map((review) => (
                   <li key={review.url}>
-                    {' '}
                     <p>
                       <strong>{review.description}: </strong>
                       <a
@@ -453,7 +452,7 @@ const PreviewPage = ({ data }) => {
                       </a>
                     </p>
                   </li>
-                ))}{' '}
+                ))}
               </ul>
             </div>
           ) : null}

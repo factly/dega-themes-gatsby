@@ -94,7 +94,6 @@ const About = () => {
         </h1>
       </div> */}
       <Helmet>
-        {' '}
         <title>About Us</title>
       </Helmet>
       <div
