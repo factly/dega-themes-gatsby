@@ -105,7 +105,14 @@ const PostDetails = ({ data }) => {
                 borderBottomWidth: '1px',
               }}
             >
-              <div sx={{ flex: [null, null, '0 0 50%'], maxWidth: [null, null, '50%'], p: '1.5rem', textAlign: 'left' }}>
+              <div
+                sx={{
+                  flex: [null, null, '0 0 50%'],
+                  maxWidth: [null, null, '50%'],
+                  p: '1.5rem',
+                  textAlign: 'left',
+                }}
+              >
                 {previousPost && (
                   <>
                     <Link
@@ -125,7 +132,15 @@ const PostDetails = ({ data }) => {
                   </>
                 )}
               </div>
-              <div sx={{ flex: [null, null, '0 0 50%'], maxWidth: [null, null, '50%'], ml: 'auto', p: '1.5rem', textAlign: 'right' }}>
+              <div
+                sx={{
+                  flex: [null, null, '0 0 50%'],
+                  maxWidth: [null, null, '50%'],
+                  ml: 'auto',
+                  p: '1.5rem',
+                  textAlign: 'right',
+                }}
+              >
                 {nextPost && (
                   <>
                     <Link
