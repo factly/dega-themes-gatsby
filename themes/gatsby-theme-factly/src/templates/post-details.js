@@ -26,7 +26,6 @@ const PostDetails = ({ data }) => {
   const { edges: posts } = allDegaPost;
   const post = posts.filter(({ node }) => node.id === degaPost.id)[0];
   const { previous: previousPost, next: nextPost } = post;
-  console.log({ previousPost, nextPost });
 
   const [showSocialIcon, setShowSocialIcon] = React.useState(false);
 
@@ -102,12 +101,11 @@ const PostDetails = ({ data }) => {
               sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                mt: (theme) => `${theme.space.spacing6}`,
                 pb: (theme) => `${theme.space.spacing6}`,
                 borderBottomWidth: '1px',
               }}
             >
-              <div sx={{ flex: '0 0 50%', maxWidth: '50%', p: '1.5rem', textAlign: 'left' }}>
+              <div sx={{ flex: [null, null, '0 0 50%'], maxWidth: [null, null, '50%'], p: '1.5rem', textAlign: 'left' }}>
                 {previousPost && (
                   <>
                     <Link
@@ -127,7 +125,7 @@ const PostDetails = ({ data }) => {
                   </>
                 )}
               </div>
-              <div sx={{ flex: '0 0 50%', maxWidth: '50%', p: '1.5rem', textAlign: 'right' }}>
+              <div sx={{ flex: [null, null, '0 0 50%'], maxWidth: [null, null, '50%'], ml: 'auto', p: '1.5rem', textAlign: 'right' }}>
                 {nextPost && (
                   <>
                     <Link
@@ -186,8 +184,8 @@ const PostDetails = ({ data }) => {
                     <div
                       key={post.id}
                       sx={{
-                        flex: '0 0 50%',
-                        maxWidth: '50%',
+                        flex: [null, null, '0 0 50%'],
+                        maxWidth: [null, null, '50%'],
                         p: '1.5rem',
                         textAlign: 'left',
                       }}
@@ -197,9 +195,8 @@ const PostDetails = ({ data }) => {
                           <img src={post.medium.url.proxy} alt="" />
                         </div>
                         <div sx={{ flex: '0 0 67%', pl: '1rem' }}>
-                          {' '}
-                          <h5>{post.title}</h5>{' '}
-                          <p sx={{ fontSize: '0.75rem' }}>{parseDate(post.published_date)}</p>{' '}
+                          <h5>{post.title}</h5>
+                          <p sx={{ fontSize: '0.75rem' }}>{parseDate(post.published_date)}</p>
                         </div>
                       </Link>
                     </div>
