@@ -35,7 +35,7 @@ const UserDetailsAll = ({ data }) => {
       ? `${item.display_name}`
       : `${item.first_name} ${item.last_name}`;
     return (
-      <div sx={{ mb: (theme) => `${theme.space.spacing5}`, maxWidth: "700px", mx: "auto" }}>
+      <div sx={{ mb: (theme) => `${theme.space.spacing5}`, maxWidth: '700px', mx: 'auto' }}>
         {item.medium && (
           <img
             src={item.medium?.url.proxy}
@@ -49,15 +49,17 @@ const UserDetailsAll = ({ data }) => {
             }}
           />
         )}
-        <div sx={{
-          height: "136px",
-          width: "136px",
-          bg: "gray",
-          borderRadius: "50%",
-          mr: "auto",
-          mb: "1rem",
-          ml: "auto"
-        }}></div>
+        <div
+          sx={{
+            height: '136px',
+            width: '136px',
+            bg: 'gray',
+            borderRadius: '50%',
+            mr: 'auto',
+            mb: '1rem',
+            ml: 'auto',
+          }}
+        ></div>
 
         <h1
           sx={{
@@ -69,31 +71,38 @@ const UserDetailsAll = ({ data }) => {
         >
           {name}
         </h1>
-        <p sx={{
-          textAlign: "center",
-          mb: "1rem"
-        }}
-        >{allDegaPost.totalCount} posts</p>
+        <p
+          sx={{
+            textAlign: 'center',
+            mb: '1rem',
+          }}
+        >
+          {allDegaPost.totalCount} posts
+        </p>
 
         {item.description && (
-          <p sx={{
-            textAlign: 'center',
-            fontSize: " 1.125rem",
-            lineHeight: 1.6,
-            mb: "1rem"
-          }}>
+          <p
+            sx={{
+              textAlign: 'center',
+              fontSize: ' 1.125rem',
+              lineHeight: 1.6,
+              mb: '1rem',
+            }}
+          >
             {item.description}
           </p>
         )}
 
-        <div sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          fontSze: "16px",
-          lineHeight: "25.6px",
-          textAlign: "center",
-          gap: "8px"
-        }}>
+        <div
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            fontSze: '16px',
+            lineHeight: '25.6px',
+            textAlign: 'center',
+            gap: '8px',
+          }}
+        >
           {item.social_media_urls &&
             Object.keys(item.social_media_urls).map((name) => (
               <a
@@ -125,14 +134,14 @@ const UserDetailsAll = ({ data }) => {
       useSlug={false}
     />
   );
-}
+};
 
 export default UserDetailsAll;
 
 export const query = graphql`
   query ($id: String!) {
-    degaUser(id: { eq: $id }) {
-      id
+    degaUser(degaId: { eq: $id }) {
+      degaId
       first_name
       last_name
       email

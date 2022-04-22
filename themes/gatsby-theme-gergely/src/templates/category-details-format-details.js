@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '../utils/parseEditorJsData';
-import FormatPageLayout from '../components/FormatPageLayout';
-import { isBrowser } from '../utils/isBrowser';
+import parseEditorJsData from '@utils/parseEditorJsData';
+import FormatPageLayout from '@components/FormatPageLayout';
+import { isBrowser } from '@utils/isBrowser';
 
-function CategoryDetailsFormat({ data }) {
-  const { dega } = data;
+const CategoryDetailsFormat = ({ data }) => {
+  const { degaCategory, allDegaFormat, allDegaPost } = data;
 
   const [readMore, setReadMore] = React.useState(true);
   const [isReadMoreNeeded, setIsReadMoreNeeded] = useState(false);
@@ -34,7 +34,7 @@ function CategoryDetailsFormat({ data }) {
             textTransform: 'capitalize',
           }}
         >
-          {item.name} 
+          {item.name}
         </h1>
         <div
           id="category-description"
@@ -65,65 +65,65 @@ function CategoryDetailsFormat({ data }) {
   return (
     <FormatPageLayout
       type="category"
-      posts={dega.posts.nodes}
-      formats={dega.formats.nodes}
-      item={dega.category}
+      posts={allDegaPost.nodes}
+      formats={allDegaFormat.nodes}
+      item={degaCategory}
       header={header}
     />
   );
-}
+};
 
 export default CategoryDetailsFormat;
 
 export const query = graphql`
-  query ($id: Int!, $format_id: Int!) {
-    dega {
-      category(id: $id) {
-        description
+  query ($id: String!, $format_id: String!) {
+    degaCategory(degaId: { eq: $id }) {
+      description
+      id
+      medium {
+        alt_text
+        url
+        dimensions
+      }
+      name
+      slug
+    }
+    allDegaFormat {
+      nodes {
         id
+        slug
+        name
+      }
+    }
+    allDegaPost(
+      filter: { categories: { elemMatch: { id: { eq: $id } } }, format: { id: { eq: $format_id } } }
+    ) {
+      nodes {
+        users {
+          id
+          first_name
+          last_name
+        }
+        categories {
+          slug
+          name
+        }
+        format {
+          name
+          slug
+        }
         medium {
           alt_text
           url
           dimensions
         }
-        name
+        published_date
+        id
+        excerpt
+        status
+        subtitle
+        title
         slug
-      }
-      formats {
-        nodes {
-          id
-          slug
-          name
-        }
-      }
-      posts(categories: { ids: [$id] }, formats: { ids: [$format_id] }) {
-        nodes {
-          users {
-            id
-            first_name
-            last_name
-          }
-          categories {
-            slug
-            name
-          }
-          format {
-            name
-            slug
-          }
-          medium {
-            alt_text
-            url
-            dimensions
-          }
-          published_date
-          id
-          excerpt
-          status
-          subtitle
-          title
-          slug
-        }
       }
     }
   }

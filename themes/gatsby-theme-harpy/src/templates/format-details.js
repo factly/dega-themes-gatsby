@@ -39,11 +39,7 @@ const FormatDetails = ({ data }) => {
               }}
             >
               {allDegaPost.nodes.map((item, index) => (
-                <BlogCard
-                  post={item}
-                  key={index}
-                  type="basic"
-                />
+                <BlogCard post={item} key={index} type="basic" />
               ))}
             </div>
           ) : (
@@ -53,7 +49,7 @@ const FormatDetails = ({ data }) => {
       </div>
     </Layout>
   );
-}
+};
 
 export default FormatDetails;
 

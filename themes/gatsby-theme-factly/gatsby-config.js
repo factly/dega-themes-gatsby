@@ -86,14 +86,14 @@ module.exports = ({
       // add options to make sitemaps for other things
     },
     'gatsby-plugin-robots-txt',
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        include_favicon: false,
-        icon: 'src/favicons/favicon.png',
-        cache_busting_mode: 'none',
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-manifest',
+    //   options: {
+    //     include_favicon: false,
+    //     icon: 'src/favicons/favicon.png',
+    //     cache_busting_mode: 'none',
+    //   },
+    // },
     // {
     //   resolve: 'gatsby-plugin-feed',
     //   options: {

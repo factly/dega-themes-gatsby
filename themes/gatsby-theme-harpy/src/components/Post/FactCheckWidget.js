@@ -14,7 +14,7 @@ import addDefaultSrc from '@utils/addDefaultSrc';
  */
 /**
  * Component for showing FactCheck widget
- * 
+ *
  * @component
  * @example
  * const claims = [{id:1,title:'claim 1',fact:'fact 1',review:'false'}]
@@ -23,7 +23,7 @@ import addDefaultSrc from '@utils/addDefaultSrc';
  * @prop {Array<Object>} claims
  * @param {Object} props
  * @param {Array<Object>} props.claims
- * @returns 
+ * @returns
  */
 const FactCheckWidget = ({ claims }) => {
   const sliderElement = useRef(null);
@@ -56,11 +56,10 @@ const FactCheckWidget = ({ claims }) => {
 
     const maxScroll = Math.round(
       sliderElement.current.children[1].getBoundingClientRect().x -
-      sliderElement.current.firstElementChild.getBoundingClientRect().x,
+        sliderElement.current.firstElementChild.getBoundingClientRect().x,
     );
     setScrollWidth(maxScroll);
   }, []);
-
 
   return (
     <div
@@ -168,7 +167,6 @@ const FactCheckWidget = ({ claims }) => {
                       </h2>
                       {claim.claimant.name}
                     </div>
-
                   </div>
                   <div
                     sx={{
@@ -221,6 +219,6 @@ const FactCheckWidget = ({ claims }) => {
       )}
     </div>
   );
-}
+};
 
 export default FactCheckWidget;

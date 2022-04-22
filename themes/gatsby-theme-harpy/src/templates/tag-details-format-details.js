@@ -15,13 +15,13 @@ const TagDetailsFormat = ({ data }) => {
       item={degaTag}
     />
   );
-}
+};
 
 export default TagDetailsFormat;
 
 export const query = graphql`
   query ($id: String!, $format_id: String!) {
-    degaTag(id: { eq: $id }) {
+    degaTag(degaId: { eq: $id }) {
       description
       id
       name

@@ -7,7 +7,20 @@ const mkdirp = require('mkdirp');
 const { createSchemaCustomization } = require('./utils/youtubeSourceSchema');
 
 exports.createSchemaCustomization = createSchemaCustomization;
-
+/**
+ *  adding import alias for most used modules
+ */
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '@components': path.resolve(__dirname, 'src/components'),
+        '@utils': path.resolve(__dirname, 'src/utils'),
+        '@static': path.resolve(__dirname, 'src/static'),
+      },
+    },
+  });
+};
 const saveIcon = async (url) => {
   await fetch(url)
     .then((res) => res.buffer())
@@ -61,44 +74,59 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   const { createPage } = actions;
   // const total = await grapql(`
   // `);
+  // const space = {
+  //   data: {
+  //     dega: {
+  //       space: {
+  //         id: 2,
+  //         nmae: 'sdfvps'
+  //       }
+  //     }
+  //   }
+  // }
+
+  // const space = {
+  //   data: {
+  //     degaSpace: {
+  //       degaId: '1',
+  //       name: 'gbdsfb'
+  //     }
+  //   }
+  // }
   const space = await graphql(`
     query SpaceQuery {
-      dega {
-        space {
-          id
-          name
-          slug
-          site_title
-          tag_line
-          description
-          site_address
-          logo {
-            url
-          }
-          logo_mobile {
-            url
-          }
-          fav_icon {
-            url
-          }
-          mobile_icon {
-            url
-          }
-          verification_codes
-          social_media_urls
-          contact_info
+      degaSpace {
+        degaId
+        name
+        slug
+        site_title
+        tag_line
+        description
+        site_address
+        logo {
+          url
         }
+        logo_mobile {
+          url
+        }
+        fav_icon {
+          url
+        }
+        mobile_icon {
+          url
+        }
+        verification_codes
+        social_media_urls
+        contact_info
       }
     }
   `);
   const formats = await graphql(`
     query FormatsQuery {
-      dega {
-        formats {
-          nodes {
-            id
-            slug
-          }
+      allDegaFormat {
+        nodes {
+          degaId
+          slug
         }
       }
     }
@@ -106,12 +134,10 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
 
   const tags = await graphql(`
     query TagsQuery {
-      dega {
-        tags {
-          nodes {
-            id
-            slug
-          }
+      allDegaTag {
+        nodes {
+          degaId
+          slug
         }
       }
     }
@@ -119,89 +145,30 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
 
   const categories = await graphql(`
     query CategoriesQuery {
-      dega {
-        categories(limit: 100, page: 1) {
-          nodes {
-            id
-            slug
-          }
+      allDegaCategory {
+        nodes {
+          degaId
+          slug
         }
       }
     }
   `);
   const users = await graphql(`
     query UsersQuery {
-      dega {
-        users {
-          nodes {
-            id
-          }
+      allDegaUser {
+        nodes {
+          degaId
         }
       }
     }
   `);
   const posts = await graphql(`
     query PostsQuery {
-      dega {
-        posts(limit: 100, page: 1) {
-          nodes {
-            id
-            published_date
-            slug
-          }
-        }
-      }
-    }
-  `);
-
-  const result = await graphql(`
-    query NodeQuery {
-      dega {
-        space {
-          id
-          name
+      allDegaPost {
+        nodes {
+          degaId
+          published_date
           slug
-          site_title
-          tag_line
-          description
-          site_address
-          logo {
-            url
-          }
-          logo_mobile {
-            url
-          }
-          fav_icon {
-            url
-          }
-          mobile_icon {
-            url
-          }
-          verification_codes
-          social_media_urls
-          contact_info
-        }
-        sitemap {
-          tags {
-            id
-            slug
-          }
-          categories {
-            id
-            slug
-          }
-          users {
-            id
-            slug
-          }
-          posts {
-            id
-            slug
-          }
-          formats {
-            id
-            slug
-          }
         }
       }
     }
@@ -210,10 +177,10 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   const format_factcheck = [];
   const format_without_factcheck = [];
 
-  formats.data.dega.formats.nodes
+  formats.data.allDegaFormat.nodes
     .filter((item) => item.slug === 'fact-check')
     .forEach((item) => {
-      format_factcheck.push(parseInt(item.id));
+      format_factcheck.push(item.degaId);
     });
   // result.data.dega.sitemap.formats
   //   .filter((item) => item.slug === 'fact-check')
@@ -221,10 +188,10 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   //     format_factcheck.push(parseInt(item.id));
   //   });
 
-  formats.data.dega.formats.nodes
+  formats.data.allDegaFormat.nodes
     .filter((item) => item.slug !== 'fact-check')
     .forEach((item) => {
-      format_without_factcheck.push(parseInt(item.id));
+      format_without_factcheck.push(item.degaId);
     });
   // result.data.dega.sitemap.formats
   //   .filter((item) => item.slug !== 'fact-check')
@@ -233,7 +200,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   //   });
   // manifest
 
-  const icon = result.data.dega.space.fav_icon.url.proxy;
+  const icon = space.data.degaSpace?.fav_icon?.url.proxy;
   if (icon) {
     saveIcon(icon);
   } else {
@@ -253,7 +220,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     icon: 'src/favicons/favicon.png',
   });
   if (plugin) {
-    const manifestOptions = await resolveManifestOptions(result.data.dega.space);
+    const manifestOptions = await resolveManifestOptions(space.data.degaSpace);
     plugin.pluginOptions = { ...plugin.pluginOptions, ...manifestOptions };
     console.log(plugin.pluginOptions);
   }
@@ -282,18 +249,18 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   //   });
   // }
 
-  formats.data.dega.formats.nodes.forEach((format) => {
+  formats.data.allDegaFormat.nodes.forEach((format) => {
     createPage({
       path: `/format/${format.slug}`,
       component: require.resolve('./src/templates/format-details.js'),
       context: {
-        id: parseInt(format.id),
+        id: format.degaId,
       },
     });
   });
 
   // result.data.dega.sitemap.formats.forEach((format) => {
-  //   createPage({
+  //   createPage({.
   //     path: `/formats/${format.slug}`,
   //     component: require.resolve('./src/templates/format-details.js'),
   //     context: {
@@ -305,13 +272,13 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
 
   // create post details page
 
-  posts.data.dega.posts.nodes.forEach((post) => {
+  posts.data.allDegaPost.nodes.forEach((post) => {
     if (post.published_date) {
       createPage({
         path: `/${post.slug}`,
         component: require.resolve('./src/templates/post-details.js'),
         context: {
-          id: parseInt(post.id),
+          id: post.degaId,
         },
       });
     }
@@ -320,7 +287,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       path: `/${post.slug}/amp/`,
       component: require.resolve('./src/templates/post-details.amp.js'),
       context: {
-        id: parseInt(post.id),
+        id: post.degaId,
         sid: spaceId,
       },
     });
@@ -328,24 +295,24 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
 
   // create tag details page
 
-  tags.data.dega.tags.nodes.forEach((tag) => {
+  tags.data.allDegaTag.nodes.forEach((tag) => {
     createPage({
       path: `/tag/${tag.slug}`,
       component: require.resolve('./src/templates/tag-details.js'),
       context: {
-        id: parseInt(tag.id),
+        id: tag.degaId,
       },
     });
 
     // create tag details page with each format
 
-    formats.data.dega.formats.nodes.forEach((format) => {
+    formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
         path: `/tag/${tag.slug}/format/${format.slug}`,
         component: require.resolve('./src/templates/tag-details-format-details.js'),
         context: {
-          id: parseInt(tag.id),
-          format_id: parseInt(format.id),
+          id: tag.degaId,
+          format_id: format.degaId,
         },
       });
     });
@@ -379,23 +346,23 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
 
   // create category details page
 
-  categories.data.dega.categories.nodes.forEach((category) => {
+  categories.data.allDegaCategory.nodes.forEach((category) => {
     createPage({
       path: `/category/${category.slug}`,
       component: require.resolve('./src/templates/category-details.js'),
       context: {
-        id: parseInt(category.id),
+        id: category.degaId,
       },
     });
 
     // create category details page with each format
-    formats.data.dega.formats.nodes.forEach((format) => {
+    formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
         path: `/category/${category.slug}/format/${format.slug}`,
         component: require.resolve('./src/templates/category-details-format-details.js'),
         context: {
-          id: parseInt(category.id),
-          format_id: parseInt(format.id),
+          id: category.degaId,
+          format_id: format.degaId,
         },
       });
     });
@@ -427,24 +394,24 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   // });
 
   // create user details page
-  users.data.dega.users.nodes.forEach((user) => {
+  users.data.allDegaUser.nodes.forEach((user) => {
     createPage({
-      path: `/author/${user.id}`,
+      path: `/author/${user.degaId}`,
       component: require.resolve('./src/templates/author-details.js'),
       context: {
-        id: parseInt(user.id),
+        id: user.degaId,
       },
     });
 
     // create user details page with each format
 
-    formats.data.dega.formats.nodes.forEach((format) => {
+    formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
-        path: `/author/${user.id}/format/${format.slug}`,
+        path: `/author/${user.degaId}/format/${format.slug}`,
         component: require.resolve('./src/templates/author-details-format-details.js'),
         context: {
-          id: parseInt(user.id),
-          format_id: parseInt(format.id),
+          id: user.degaId,
+          format_id: format.degaId,
         },
       });
     });

@@ -23,7 +23,7 @@ module.exports = ({ apiKey, channelId, trackingId, favicon }) => ({
       ? {
           resolve: `gatsby-plugin-google-gtag`,
           options: {
-            trackingIds:[trackingId],
+            trackingIds: [trackingId],
           },
         }
       : null,

@@ -1,8 +1,8 @@
 {
   "private": true,
   "version": "1.0.0",
-  "name": "factly-harpy",
-  "description": "factly-harpy gatsby theme example",
+  "name": "factly-gergely",
+  "description": "factly default gatsby theme example",
   "author": "Mahipat <mahipat@factly.in>",
   "license": "MIT",
   "scripts": {
@@ -12,7 +12,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@factly/gatsby-theme-harpy": "^1.0.0",
+    "@factly/gatsby-theme-gergely": "^1.0.3",
     "gatsby": "^4.11.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

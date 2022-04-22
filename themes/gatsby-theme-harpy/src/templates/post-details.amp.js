@@ -13,40 +13,39 @@ const PostDetails = ({ data }) => {
     <LayoutAmp>
       <Helmet>
         <html lang="en" amp />
-        <title>{degaPost.title}</title>
-
+        <title>{degaPost?.title}</title>
       </Helmet>
       <article>
         <h1 className="amp-title">
-          <strong>{degaPost.title}</strong>
+          <strong>{degaPost?.title}</strong>
         </h1>
-        {degaPost.users.map((user, i, arr) => (
+        {degaPost?.users.map((user, i, arr) => (
           <div key={i}>
             By <a href={`/author/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
             {arr.length - i > 1 && ','}
           </div>
         ))}
         <div>
-          {degaPost.excerpt && (
+          {degaPost?.excerpt && (
             <>
               <strong>Excerpt</strong>
-              <p>{degaPost.excerpt}</p>
+              <p>{degaPost?.excerpt}</p>
             </>
           )}
           <div className="parsed">
-            {parseEditorJsData({ content: degaPost.description, scripts: true, amp: true })}
+            {parseEditorJsData({ content: degaPost?.description, scripts: true, amp: true })}
           </div>
         </div>
       </article>
     </LayoutAmp>
   );
-};;
+};
 
 export default PostDetails;
 
 export const query = graphql`
   query ($id: String!) {
-    degaPost(id: { eq: $id }) {
+    degaPost(degaId: { eq: $id }) {
       published_date
       description
       excerpt

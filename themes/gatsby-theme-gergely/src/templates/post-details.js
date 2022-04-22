@@ -1,48 +1,37 @@
 /** @jsx jsx */
 import React from 'react';
 import { graphql } from 'gatsby';
-import InfiniteScroll from 'react-infinite-scroller';
 
 import { jsx } from 'theme-ui';
-import Post from '../components/Post/index.js';
-import StoryLinks from '../components/StoryLinks';
-import Layout from '../components/Layout/index';
-import { isBrowser } from '../utils/isBrowser';
-import Seo from '../components/Seo';
-import { FaTwitterSquare, FaFacebookSquare, FaWhatsappSquare } from 'react-icons/fa';
+import Post from '@components/Post/index.js';
+import StoryLinks from '@components/StoryLinks';
+import Layout from '@components/Layout/index';
+import { isBrowser } from '@utils/isBrowser';
+import Seo from '@components/Seo';
+import {
+  FaTwitterSquare,
+  FaFacebookSquare,
+  FaWhatsappSquare,
+  FaChevronLeft,
+  FaChevronRight,
+} from 'react-icons/fa';
+import { Link } from 'gatsby';
+import parseDate from '@utils/parseDate';
 
 /**
  * TODO: Add loader for infinite-scroller
  */
 const PostDetails = ({ data }) => {
-  const { dega } = data;
-  const filteredPosts = dega.posts.nodes.filter((post) => post.published_date !== null);
-  const posts = filteredPosts.filter((post) => post.id !== dega.post.id);
-  posts.unshift(dega.post);
+  const { allDegaPost, degaSpace, degaPost, recentPosts } = data;
+  const { edges: posts } = allDegaPost;
+  const post = posts.filter(({ node }) => node.id === degaPost.id)[0];
+  const { previous: previousPost, next: nextPost } = post;
 
-  const [postItems, setPostItems] = React.useState(posts.slice(0, 1));
-  const [hasNextPage, setHasNextPage] = React.useState(true);
   const [showSocialIcon, setShowSocialIcon] = React.useState(false);
-  const [postActiveIndex, setPostActiveIndex] = React.useState(parseInt(dega.post.id));
-  const [relatedPosts, setRelatedPosts] = React.useState(posts.slice(0, 10));
-  const [hasNextPageRelatedPost, setHasNextPageRelatedPost] = React.useState(true);
+
   const [observer, setObserver] = React.useState({
     observe: () => {},
   });
-  const handleLoadMore = () => {
-    if (!hasNextPage) return false;
-    const nextPageItems = posts.slice(postItems.length, postItems.length + 1);
-    setPostItems([...postItems, ...nextPageItems]);
-    setHasNextPage(postItems.length < posts.length);
-  };
-
-  const handleLoadMoreRelatedPosts = () => {
-    if (!hasNextPageRelatedPost) return false;
-
-    const nextPageItems = posts.slice(relatedPosts.length, relatedPosts.length + 10);
-    setRelatedPosts([...relatedPosts, ...nextPageItems]);
-    setHasNextPageRelatedPost(relatedPosts.length < posts.length);
-  };
 
   const handleShowSocialIcon = (entry) => {
     if (entry.intersectionRatio > 0) {
@@ -52,24 +41,11 @@ const PostDetails = ({ data }) => {
     }
   };
 
-  const handleSetActiveLink = (entry) => {
-    const id = entry.target.getAttribute('slug');
-    if (entry.intersectionRatio > 0) {
-      setPostActiveIndex(id);
-      if (isBrowser) {
-        window.history.pushState('page2', 'Title', `/${id}`);
-      }
-    }
-  };
-
   const createObserver = () => {
     const o = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.target.hasAttribute('social-icon')) {
           handleShowSocialIcon(entry);
-        }
-        if (entry.target.hasAttribute('post')) {
-          handleSetActiveLink(entry);
         }
       });
     });
@@ -80,7 +56,7 @@ const PostDetails = ({ data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // for sharing links
-  const title = encodeURIComponent(dega.post.title);
+  const title = encodeURIComponent(degaPost.title);
   let url;
   if (isBrowser) {
     url = encodeURIComponent(window.location.href);
@@ -89,83 +65,160 @@ const PostDetails = ({ data }) => {
   return (
     <Layout>
       <Seo
-        title={dega.post.title}
-        description={dega.post.excerpt}
-        image={`${dega.post.medium?.url?.proxy}`}
-        canonical={`${dega.space.site_address}/${dega.post.slug}`}
+        title={degaPost.title}
+        description={degaPost.excerpt}
+        image={`${degaPost.medium?.url?.proxy}`}
+        canonical={`${degaSpace.site_address}/${degaPost.slug}`}
         type="article"
       />
-      <div sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-        <div
-          className="sidebar"
-          sx={{
-            display: [null, null, null, 'flex'],
-            width: [null, null, null, '1/4'],
-            borderRightWidth: 'px',
-            borderLeftWidth: 'px',
-            position: 'sticky',
-          }}
-        >
-          <div
-            sx={{
-              py: (theme) => `${theme.space.spacing5}`,
-              borderBottomWidth: 'px',
-              px: (theme) => `${theme.space.spacing6}`,
-            }}
-          >
-            <h5 className="heading" sx={{ m: 0, fontSize: (theme) => `${theme.fontSizes.h7}` }}>
-              Recent Posts
-            </h5>
-          </div>
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={handleLoadMoreRelatedPosts}
-            hasMore={hasNextPageRelatedPost}
-            useWindow={false}
-            loader={
-              <div className="loader" key={0}>
-                Loading ...
-              </div>
-            }
-          >
-            {relatedPosts.map((post, index) => (
-              <StoryLinks
-                key={`link${post.id}`}
-                post={post}
-                postActiveIndex={postActiveIndex}
-                categories
-                index={index}
-              />
-            ))}
-          </InfiniteScroll>
-        </div>
+      <div
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          position: 'relative',
+        }}
+      >
         <div
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            width: ['full', null, null, '3/4'],
+            width: '100%',
+            maxWidth: 1024,
+            mx: 'auto',
             p: [
               (theme) => `${theme.space.spacing3}`,
               null,
               null,
-              (theme) => `${theme.space.spacing6}`,
+              (theme) => `${theme.space.spacing8}`,
             ],
+            pl: (theme) => [null, null, `${theme.space.spacing8}`],
           }}
         >
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={handleLoadMore}
-            hasMore={hasNextPage}
-            loader={
-              <div className="loader" key={0}>
-                Loading ...
+          <Post key={`details${degaPost.id}`} post={degaPost} observer={observer} />
+          <div>
+            <div
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                pb: (theme) => `${theme.space.spacing6}`,
+                borderBottomWidth: '1px',
+              }}
+            >
+              <div
+                sx={{
+                  flex: [null, null, '0 0 50%'],
+                  maxWidth: [null, null, '50%'],
+                  p: '1.5rem',
+                  textAlign: 'left',
+                }}
+              >
+                {previousPost && (
+                  <>
+                    <Link
+                      to={`/${previousPost.slug}`}
+                      sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+                    >
+                      <span>
+                        <FaChevronLeft />
+                      </span>
+                      <div>
+                        <span sx={{ fontSize: '0.75rem', textTransform: 'uppercase' }}>
+                          Previous Post
+                        </span>
+                        <h3>{previousPost.title}</h3>
+                      </div>
+                    </Link>
+                  </>
+                )}
               </div>
-            }
-          >
-            {postItems.map((item) => (
-              <Post key={`details${item.id}`} post={item} observer={observer} />
-            ))}
-          </InfiniteScroll>
+              <div
+                sx={{
+                  flex: [null, null, '0 0 50%'],
+                  maxWidth: [null, null, '50%'],
+                  ml: 'auto',
+                  p: '1.5rem',
+                  textAlign: 'right',
+                }}
+              >
+                {nextPost && (
+                  <>
+                    <Link
+                      to={`/${nextPost.slug}`}
+                      sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+                    >
+                      <div>
+                        <span sx={{ fontSize: '0.75rem', textTransform: 'uppercase' }}>
+                          Next Post
+                        </span>
+                        <h3>{nextPost.title}</h3>
+                      </div>
+                      <span>
+                        <FaChevronRight />
+                      </span>
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+            <div
+              sx={{
+                mt: (theme) => `${theme.space.spacing6}`,
+                pb: (theme) => `${theme.space.spacing6}`,
+                borderBottomWidth: '1px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <h5
+                sx={{
+                  textAlign: 'center',
+                  position: 'relative',
+                  alignSelf: 'center',
+                  mb: '1.5rem',
+                  '&:after': {
+                    position: 'absolute',
+                    content: '""',
+                    width: '50%',
+                    height: '1px',
+                    borderBottom: '2px solid #3BB2F6',
+                    bottom: '-2px',
+                    left: '50%',
+                    marginLeft: '-25%',
+                  },
+                }}
+              >
+                Recent Posts
+              </h5>
+              <div sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                {recentPosts.nodes
+                  .filter((post) => post.id !== degaPost.id)
+                  .splice(0, 6)
+                  .map((post) => (
+                    <div
+                      key={post.id}
+                      sx={{
+                        flex: [null, null, '0 0 50%'],
+                        maxWidth: [null, null, '50%'],
+                        p: '1.5rem',
+                        textAlign: 'left',
+                      }}
+                    >
+                      <Link to={`/${post.slug}`} sx={{ display: 'flex' }}>
+                        <div sx={{ flex: '0 0 33%' }}>
+                          <img src={post.medium.url.proxy} alt="" />
+                        </div>
+                        <div sx={{ flex: '0 0 67%', pl: '1rem' }}>
+                          <h5>{post.title}</h5>
+                          <p sx={{ fontSize: '0.75rem' }}>{parseDate(post.published_date)}</p>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
           {showSocialIcon && (
             <>
               <div
@@ -177,7 +230,8 @@ const PostDetails = ({ data }) => {
                   display: ['none', null, 'flex'],
                   flexDirection: 'column',
                   position: 'fixed',
-                  right: 0,
+                  ml: (theme) => `-${theme.space.spacing8}`,
+                  // left: 0,
                   alignItems: 'center',
                   justifyContent: ['flex-start', null, 'flex-end'],
                   top: '40vh',
@@ -191,14 +245,14 @@ const PostDetails = ({ data }) => {
                   sx={{
                     display: 'block',
                     m: (theme) => `${theme.space.spacing1}`,
-                    '&:first-of-type': { mx: 0 },
                     p: (theme) => `${theme.space.spacing3}`,
+                    '&:first-of-type': { mx: 0 },
                     fontWeight: 'semibold',
                     borderRadius: 'default',
                   }}
                 >
                   <FaFacebookSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#3b5998"
                   />
                 </a>
@@ -217,13 +271,15 @@ const PostDetails = ({ data }) => {
                   }}
                 >
                   <FaTwitterSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#1da1f2"
                   />
                 </a>
                 <a
                   title="Share on WhatsApp"
-                  href={`https://api.whatsapp.com/send?text=${title}-${url}`}
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                    `${title} - ${url}`,
+                  )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{
@@ -236,11 +292,12 @@ const PostDetails = ({ data }) => {
                   }}
                 >
                   <FaWhatsappSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h6}` }}
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
                     color="#25d366"
                   />
                 </a>
               </div>
+              {/* Mobile share icon at the bottom */}
               {/* <div
                 sx={{
                   display: [null, null, null, 'none'],
@@ -287,15 +344,14 @@ const PostDetails = ({ data }) => {
 };
 
 export default PostDetails;
-
 export const query = graphql`
-  query ($id: Int!) {
-    dega {
-      space {
-        site_address
-      }
-      posts(page: 1, limit: 100, sortBy: "published_date", sortOrder: "desc") {
-        nodes {
+  query ($id: String!) {
+    degaSpace {
+      site_address
+    }
+    allDegaPost {
+      edges {
+        node {
           published_date
           description
           excerpt
@@ -376,78 +432,88 @@ export const query = graphql`
             }
           }
         }
+        next {
+          slug
+          title
+          published_date
+          medium {
+            alt_text
+            id
+            url
+            dimensions
+          }
+        }
+        previous {
+          slug
+          title
+          published_date
+          medium {
+            alt_text
+            id
+            url
+            dimensions
+          }
+        }
       }
-      post(id: $id) {
-        published_date
-        description
-        excerpt
+    }
+    degaPost(degaId: { eq: $id }) {
+      published_date
+      description
+      excerpt
+      id
+      schemas
+      slug
+      status
+      subtitle
+      title
+      updated_at
+      users {
+        email
+        first_name
+        last_name
+        display_name
         id
-        schemas
+      }
+      tags {
+        id
+        name
         slug
-        status
-        subtitle
-        title
-        updated_at
-        users {
-          email
-          first_name
-          last_name
-          id
-        }
-        tags {
+        description
+      }
+      medium {
+        alt_text
+        id
+        url
+        dimensions
+      }
+      format {
+        name
+        slug
+        id
+        description
+      }
+      claims {
+        checked_date
+        claim_date
+        claim_sources
+        claimant {
+          description
           id
           name
           slug
-          description
+          tag_line
         }
-        medium {
-          alt_text
-          id
-          url
-          dimensions
-        }
-        format {
-          name
-          slug
-          id
+        description
+        id
+        fact
+        review_sources
+        slug
+        claim
+        rating {
           description
-        }
-        claims {
-          checked_date
-          claim_date
-          claim_sources
-          claimant {
-            description
-            id
-            name
-            slug
-            tag_line
-          }
-          description
-          id
-          fact
-          review_sources
-          slug
-          claim
-          rating {
-            description
-            id
-            name
-            numeric_value
-            slug
-            medium {
-              alt_text
-              id
-              url
-              dimensions
-            }
-          }
-        }
-        categories {
-          description
-          created_at
           id
           name
+          numeric_value
           slug
           medium {
             alt_text
@@ -455,6 +521,73 @@ export const query = graphql`
             url
             dimensions
           }
+        }
+      }
+      categories {
+        description
+        created_at
+        id
+        name
+        slug
+        medium {
+          alt_text
+          id
+          url
+          dimensions
+        }
+      }
+    }
+    recentPosts: allDegaPost(
+      sort: { fields: created_at, order: DESC }
+      filter: { format: { slug: { eq: "article" } } }
+      limit: 6
+    ) {
+      nodes {
+        created_at
+        title
+        excerpt
+        slug
+        users {
+          display_name
+          slug
+          id
+        }
+        published_date
+        categories {
+          name
+          slug
+        }
+        medium {
+          dimensions
+          alt_text
+          url
+        }
+      }
+    }
+    recentFactChecks: allDegaPost(
+      sort: { fields: created_at, order: DESC }
+      filter: { format: { slug: { eq: "fact-check" } } }
+      limit: 6
+    ) {
+      nodes {
+        created_at
+        title
+        excerpt
+        slug
+        users {
+          display_name
+          slug
+          id
+        }
+        published_date
+        categories {
+          name
+          slug
+        }
+        medium {
+          dimensions
+          alt_text
+          url
         }
       }
     }

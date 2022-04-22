@@ -64,7 +64,9 @@ const ShareButtonGroup = ({ data, setRef }) => {
       {/* title uri ===> href={`https://api.whatsapp.com/send?text=${title}-${data.url}`} */}
       <a
         title="Share on WhatsApp"
-        href={`https://api.whatsapp.com/send?text=${data.title} - text=${data.url}`}
+        href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+          `${data.title} - ${data.url}`,
+        )}`}
         target="_blank"
         rel="noopener noreferrer"
         sx={{

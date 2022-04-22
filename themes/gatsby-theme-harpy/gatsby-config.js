@@ -26,31 +26,31 @@ module.exports = ({
     },
     youtubeApiKey && channelId
       ? {
-        resolve: '@factly/gatsby-theme-youtube',
-        options: {
-          apiKey: youtubeApiKey,
-          channelId,
-          basePath: '/videos',
-          logo: 'logo.png',
-          bannerData: [
-            {
-              name: 'Decode',
-              icon: 'decode.png',
-              playlistId: 'PLEQcsVYyf3IA_pPC8LR81vpEPkDl1czou',
-            },
-            {
-              name: 'Decode Lite',
-              icon: 'decode-lite.png',
-              playlistId: 'PLEQcsVYyf3IBlzW5qPaozJZRKeS-aFpfv',
-            },
-            {
-              name: 'Pause',
-              icon: 'pause.png',
-              playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
-            },
-          ],
-        },
-      }
+          resolve: '@factly/gatsby-theme-youtube',
+          options: {
+            apiKey: youtubeApiKey,
+            channelId,
+            basePath: '/videos',
+            logo: 'logo.png',
+            bannerData: [
+              {
+                name: 'Decode',
+                icon: 'decode.png',
+                playlistId: 'PLEQcsVYyf3IA_pPC8LR81vpEPkDl1czou',
+              },
+              {
+                name: 'Decode Lite',
+                icon: 'decode-lite.png',
+                playlistId: 'PLEQcsVYyf3IBlzW5qPaozJZRKeS-aFpfv',
+              },
+              {
+                name: 'Pause',
+                icon: 'pause.png',
+                playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
+              },
+            ],
+          },
+        }
       : null,
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',

@@ -16,8 +16,7 @@ const ShareButtonGroup = ({ data, setRef }) => {
   const { rawColors: colors } = theme;
   const { socialFacebook, socialTwitter, socialWhatsapp } = colors;
   const { h4 } = theme.fontSizes;
-  let title = encodeURIComponent(data.title);
-  // let url = encodeURIComponent(data.url)
+
   return (
     <div
       social-icon=""
@@ -64,7 +63,9 @@ const ShareButtonGroup = ({ data, setRef }) => {
       {/* title uri ===> href={`https://api.whatsapp.com/send?text=${title}-${data.url}`} */}
       <a
         title="Share on WhatsApp"
-        href={`https://api.whatsapp.com/send?text=${data.url}`}
+        href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+          `${data.title} - ${data.url}`,
+        )}`}
         target="_blank"
         rel="noopener noreferrer"
         sx={{

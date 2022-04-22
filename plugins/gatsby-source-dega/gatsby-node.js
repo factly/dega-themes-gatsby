@@ -154,14 +154,22 @@ exports.sourceNodes = async (
   posts.forEach((post) => {
     createNode({
       ...post,
-      id: post.id,
-      gid: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
+      id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
+      degaId: post.id,
       parent: null,
       children: [],
       internal: {
         type: POST_NODE_TYPE,
-        content: JSON.stringify(post),
-        contentDigest: createContentDigest(post),
+        content: JSON.stringify({
+          ...post,
+          degaId: post.id,
+          id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...post,
+          degaId: post.id,
+          id: createNodeId(`${POST_NODE_TYPE}-${post.id}`),
+        }),
       },
     });
   });
@@ -175,14 +183,22 @@ exports.sourceNodes = async (
   categories.forEach((category) => {
     createNode({
       ...category,
-      id: category.id,
-      gid: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
+      degaId: category.id,
+      id: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
       parent: null,
       children: [],
       internal: {
         type: CATEGORY_NODE_TYPE,
-        content: JSON.stringify(category),
-        contentDigest: createContentDigest(category),
+        content: JSON.stringify({
+          ...category,
+          degaId: category.id,
+          id: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...category,
+          degaId: category.id,
+          id: createNodeId(`${CATEGORY_NODE_TYPE}-${category.id}`),
+        }),
       },
     });
   });
@@ -196,14 +212,22 @@ exports.sourceNodes = async (
   tags.forEach((tag) => {
     createNode({
       ...tag,
-      id: tag.id,
-      gid: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
+      degaId: tag.id,
+      id: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
       parent: null,
       children: [],
       internal: {
         type: TAG_NODE_TYPE,
-        content: JSON.stringify(tag),
-        contentDigest: createContentDigest(tag),
+        content: JSON.stringify({
+          ...tag,
+          degaId: tag.id,
+          id: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...tag,
+          degaId: tag.id,
+          id: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
+        }),
       },
     });
   });
@@ -214,17 +238,26 @@ exports.sourceNodes = async (
     total: totalCount.formats.total,
     type: 'formats',
   });
+
   formats.forEach((format) => {
     createNode({
       ...format,
-      id: format.id,
-      gid: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
+      degaId: format.id,
+      id: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
       parent: null,
       children: [],
       internal: {
         type: FORMAT_NODE_TYPE,
-        content: JSON.stringify(format),
-        contentDigest: createContentDigest(format),
+        content: JSON.stringify({
+          ...format,
+          degaId: format.id,
+          id: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...format,
+          degaId: format.id,
+          id: createNodeId(`${FORMAT_NODE_TYPE}-${format.id}`),
+        }),
       },
     });
   });
@@ -237,14 +270,22 @@ exports.sourceNodes = async (
   ratings.forEach((rating) => {
     createNode({
       ...rating,
-      id: rating.id,
-      gid: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
+      degaId: rating.id,
+      id: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
       parent: null,
       children: [],
       internal: {
         type: RATING_NODE_TYPE,
-        content: JSON.stringify(rating),
-        contentDigest: createContentDigest(rating),
+        content: JSON.stringify({
+          ...rating,
+          degaId: rating.id,
+          id: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...rating,
+          degaId: rating.id,
+          id: createNodeId(`${RATING_NODE_TYPE}-${rating.id}`),
+        }),
       },
     });
   });
@@ -260,8 +301,8 @@ exports.sourceNodes = async (
   menus.menu.nodes.forEach((menu) => {
     createNode({
       ...menu,
-      id: menu.id,
-      gid: createNodeId(`${MENU_NODE_TYPE}-${menu.id}`),
+      degaId: menu.id,
+      id: createNodeId(`${MENU_NODE_TYPE}-${menu.id}`),
       parent: null,
       children: [],
       internal: {
@@ -283,8 +324,8 @@ exports.sourceNodes = async (
   const space = spaceData.data.space;
   createNode({
     ...space,
-    id: space.id,
-    gid: createNodeId(`${SPACE_NODE_TYPE}-${space.id}`),
+    degaId: space.id,
+    id: createNodeId(`${SPACE_NODE_TYPE}-${space.id}`),
     parent: null,
     children: [],
     internal: {
@@ -303,8 +344,8 @@ exports.sourceNodes = async (
   users.forEach((user) => {
     createNode({
       ...user,
-      id: user.id,
-      gid: createNodeId(`${USER_NODE_TYPE}-${user.id}`),
+      degaId: user.id,
+      id: createNodeId(`${USER_NODE_TYPE}-${user.id}`),
       parent: null,
       children: [],
       internal: {

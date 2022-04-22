@@ -5,7 +5,7 @@ import Seo from '@components/Seo';
 import StoryCard from '@components/UI/StoryCard';
 import CategoriesGroup from '@components/CategoriesGroup';
 
-const Homepage = ({ data })=> {
+const Homepage = ({ data }) => {
   const { degaSpace, allDegaCategory, factchecks, posts } = data;
   return (
     <>
@@ -113,5 +113,5 @@ const Homepage = ({ data })=> {
       </div>
     </>
   );
-}
+};
 export default Homepage;

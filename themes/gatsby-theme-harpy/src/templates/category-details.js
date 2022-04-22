@@ -9,7 +9,6 @@ import FormatPageLayout from '@components/FormatPageLayout';
 const CategoryDetailsAll = ({ data }) => {
   const { degaCategory, allDegaFormat, allDegaPost } = data;
 
-
   const header = (item) => {
     return (
       <div
@@ -28,7 +27,6 @@ const CategoryDetailsAll = ({ data }) => {
         >
           {item.name}
         </h1>
-
       </div>
     );
   };
@@ -41,13 +39,13 @@ const CategoryDetailsAll = ({ data }) => {
       header={header}
     />
   );
-}
+};
 
 export default CategoryDetailsAll;
 
 export const query = graphql`
   query ($id: String!) {
-    degaCategory(id: { eq: $id }) {
+    degaCategory(degaId: { eq: $id }) {
       description
       id
       medium {

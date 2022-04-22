@@ -295,7 +295,7 @@ const HomePageTwo = ({ data }) => {
             </div>
           </div>
         </div> */}
-      </div>{' '}
+      </div>
     </>
   );
 };

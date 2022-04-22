@@ -24,7 +24,6 @@ const PageNotFound = ({ data }) => {
           }}
         >
           Go to HomePage
-
           <Img
             sx={{ mx: 'auto', display: 'block', maxWidth: 300 }}
             fluid={generateFluidObject({

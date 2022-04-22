@@ -40,7 +40,7 @@ export default {
       '#1E3A8A',
     ],
     gray: [
-      null,
+      '#f7f7fc',
       '#f7fafc',
       '#edf2f7',
       '#e2e8f0',
@@ -52,7 +52,7 @@ export default {
       '#1a202c',
     ],
     red: [
-      null,
+      '#f7f7fc',
       '#fff5f5',
       '#fed7d7',
       '#feb2b2',
@@ -64,7 +64,7 @@ export default {
       '#742a2a',
     ],
     orange: [
-      null,
+      '#f7f7fc',
       '#fffaf0',
       '#feebc8',
       '#fbd38d',
@@ -76,7 +76,7 @@ export default {
       '#7b341e',
     ],
     yellow: [
-      null,
+      '#f7f7fc',
       '#fffff0',
       '#fefcbf',
       '#faf089',
@@ -88,7 +88,7 @@ export default {
       '#744210',
     ],
     green: [
-      null,
+      '#f7f7fc',
       '#f0fff4',
       '#c6f6d5',
       '#9ae6b4',
@@ -100,7 +100,7 @@ export default {
       '#22543d',
     ],
     teal: [
-      null,
+      '#f7f7fc',
       '#e6fffa',
       '#b2f5ea',
       '#81e6d9',
@@ -112,7 +112,7 @@ export default {
       '#234e52',
     ],
     indigo: [
-      null,
+      '#f7f7fc',
       '#ebf4ff',
       '#c3dafe',
       '#a3bffa',
@@ -124,7 +124,7 @@ export default {
       '#3c366b',
     ],
     purple: [
-      null,
+      '#f7f7fc',
       '#faf5ff',
       '#e9d8fd',
       '#d6bcfa',
@@ -136,7 +136,7 @@ export default {
       '#44337a',
     ],
     pink: [
-      null,
+      '#f7f7fc',
       '#fff5f7',
       '#fed7e2',
       '#fbb6ce',

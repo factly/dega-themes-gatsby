@@ -1,13 +1,13 @@
-/** @jsx jsx */
+//** @jsx jsx */
 import React, { useState, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '../utils/parseEditorJsData';
-import { isBrowser } from '../utils/isBrowser';
-import FormatPageLayout from '../components/FormatPageLayout';
+import parseEditorJsData from '@utils/parseEditorJsData';
+import { isBrowser } from '@utils/isBrowser';
+import FormatPageLayout from '@components/FormatPageLayout';
 
-function CategoryDetailsAll({ data }) {
-  const { dega } = data;
+const CategoryDetailsAll = ({ data }) => {
+  const { degaCategory, allDegaFormat, allDegaPost } = data;
   // const formatType = 'fact-check';
   // const filterPosts = dega.posts.nodes.filter((i) => i.format.slug !== formatType);
 
@@ -37,7 +37,7 @@ function CategoryDetailsAll({ data }) {
             textTransform: 'capitalize',
           }}
         >
-          {item.name} 
+          {item.name}
         </h1>
         <div
           id="category-description"
@@ -68,65 +68,63 @@ function CategoryDetailsAll({ data }) {
   return (
     <FormatPageLayout
       type="category"
-      posts={dega.posts.nodes}
-      formats={dega.formats.nodes}
-      item={dega.category}
+      posts={allDegaPost.nodes}
+      formats={allDegaFormat.nodes}
+      item={degaCategory}
       header={header}
     />
   );
-}
+};
 
 export default CategoryDetailsAll;
 
 export const query = graphql`
-  query ($id: Int!) {
-    dega {
-      category(id: $id) {
-        description
+  query ($id: String!) {
+    degaCategory(degaId: { eq: $id }) {
+      description
+      id
+      medium {
+        alt_text
+        url
+        dimensions
+      }
+      name
+      slug
+    }
+    allDegaFormat {
+      nodes {
         id
+        slug
+        name
+      }
+    }
+    allDegaPost(filter: { categories: { elemMatch: { id: { eq: $id } } } }) {
+      nodes {
+        users {
+          id
+          first_name
+          last_name
+        }
+        categories {
+          slug
+          name
+        }
         medium {
           alt_text
           url
           dimensions
         }
-        name
-        slug
-      }
-      formats {
-        nodes {
-          id
-          slug
+        format {
           name
-        }
-      }
-      posts(categories: { ids: [$id] }) {
-        nodes {
-          users {
-            id
-            first_name
-            last_name
-          }
-          categories {
-            slug
-            name
-          }
-          medium {
-            alt_text
-            url
-            dimensions
-          }
-          format {
-            name
-            slug
-          }
-          published_date
-          id
-          excerpt
-          status
-          subtitle
-          title
           slug
         }
+        published_date
+        id
+        excerpt
+        status
+        subtitle
+        title
+        slug
       }
     }
   }
