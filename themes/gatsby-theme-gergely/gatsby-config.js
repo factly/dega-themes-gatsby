@@ -93,7 +93,7 @@ module.exports = ({
           'amp-facebook',
           'amp-iframe',
         ],
-        excludedPaths: ['/404*', '/'],
+        excludedPaths: ['/404*', '/', '/tag/*', '/user/*', '/format/*', '/category/*', '/about', '/podcasts'],
         pathIdentifier: '/amp/',
         relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
         relCanonicalPattern: '{{canonicalBaseUrl}}{{pathname}}',
