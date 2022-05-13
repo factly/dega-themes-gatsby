@@ -53,7 +53,7 @@ module.exports = {
 ## Install packages
 
 ```
-yarn add gatsby react '@factly/gatsby-theme-factlyreact-dom
+yarn add gatsby react react-dom '@factly/gatsby-theme-factly'
 ```
 
 ## Run site
