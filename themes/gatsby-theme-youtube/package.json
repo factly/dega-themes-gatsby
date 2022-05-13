@@ -32,7 +32,7 @@
     "theme-ui": "^0.14.2"
   },
   "scripts": {
-    "build": "gatsby build GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true",
+    "build": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop"
   },
