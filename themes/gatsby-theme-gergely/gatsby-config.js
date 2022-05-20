@@ -16,7 +16,7 @@ module.exports = ({
 }) => ({
   siteMetadata: {
     title: 'epage',
-    siteUrl: siteUrl,
+    siteUrl,
     description: 'Gatsby site built using Dega CMS',
   },
   // flags: { QUERY_ON_DEMAND: true },
@@ -93,7 +93,16 @@ module.exports = ({
           'amp-facebook',
           'amp-iframe',
         ],
-        excludedPaths: ['/404*', '/', '/tag/*', '/user/*', '/format/*', '/category/*', '/about', '/podcasts'],
+        excludedPaths: [
+          '/404*',
+          '/',
+          '/tag/*',
+          '/user/*',
+          '/format/*',
+          '/category/*',
+          '/about',
+          '/podcasts',
+        ],
         pathIdentifier: '/amp/',
         relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
         relCanonicalPattern: '{{canonicalBaseUrl}}{{pathname}}',

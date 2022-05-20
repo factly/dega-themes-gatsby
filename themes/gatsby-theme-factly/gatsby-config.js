@@ -8,7 +8,7 @@ module.exports = ({
 }) => ({
   siteMetadata: {
     title: 'epage',
-    siteUrl: siteUrl,
+    siteUrl,
     description: 'Gatsby Site built using DegaCMS',
   },
   plugins: [

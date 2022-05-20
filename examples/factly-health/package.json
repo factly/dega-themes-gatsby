@@ -17,7 +17,7 @@
   "license": "0BSD",
   "dependencies": {
     "@emotion/react": "^11.8.2",
-    "@factly/gatsby-theme-factly": "^1.0.5",
+    "@factly/gatsby-theme-factly": "^0.0.1",
     "@mdx-js/react": "v1",
     "gatsby": "^4.11.1",
     "gatsby-plugin-sass": "^5.11.1",

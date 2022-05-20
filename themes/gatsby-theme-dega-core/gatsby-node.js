@@ -27,6 +27,7 @@ exports.pluginOptionsSchema = ({ Joi }) => {
     homepage: Joi.number().description(`Specifies layout of homepage`),
     accessToken: Joi.string().required().description(`Specifies access Token`),
     apiUrl: Joi.string().required().description('api url'),
+    siteUrl: Joi.string().description("Site url: used for generating, sitemaps and amp pages")
   });
 };
 

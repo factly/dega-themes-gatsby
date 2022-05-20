@@ -2,15 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-responsive-modal';
 
 import 'react-responsive-modal/styles.css';
-const customStyles = {
-  content: {
-    position: 'relative',
-    overflow: 'hidden',
-    marginTop: '3.5rem',
-    paddingTop: '141.42%',
-    maxHeight: 'calc(100vh - 3.5rem)',
-  },
-};
 
 const containerStyles = {
   position: 'relative',
@@ -118,6 +109,7 @@ const GoogleLightBox = ({ id = 1, isOpen, closeModal }) => {
           <div style={containerStyles}>
             {item && (
               <iframe
+                title={item.title}
                 src={item.pdfLink}
                 width="640"
                 height="800"
