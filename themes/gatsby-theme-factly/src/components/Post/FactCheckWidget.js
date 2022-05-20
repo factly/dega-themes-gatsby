@@ -3,8 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react'; // eslint-disable-line no-unused-vars
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '@utils/parseEditorJsData';
-import addDefaultSrc from '@utils/addDefaultSrc';
+import parseEditorJsData from '@helpers/parseEditorJsData';
+import addDefaultSrc from '@helpers/addDefaultSrc';
 /**
  * TODO: Change PLaceholder Img to color
  * TODO: Add resize observer

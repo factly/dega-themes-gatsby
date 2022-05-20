@@ -1,10 +1,9 @@
 /** @jsx jsx */
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '@utils/parseEditorJsData';
-import LayoutAmp from '@components/Layout.amp';
+import parseEditorJsData from '@helpers/parseEditorJsData';
+import LayoutAmp from '@components/LayoutAmp';
 
 const PostDetails = ({ data }) => {
   const { degaPost } = data;
@@ -47,88 +46,3 @@ const PostDetails = ({ data }) => {
 };
 
 export default PostDetails;
-
-export const query = graphql`
-  query ($id: String!) {
-    degaPost(degaId: { eq: $id }) {
-      published_date
-      description
-      excerpt
-      id
-      schemas
-      slug
-      status
-      subtitle
-      title
-      updated_at
-      users {
-        email
-        first_name
-        last_name
-        id
-      }
-      tags {
-        id
-        name
-        slug
-        description
-      }
-      medium {
-        alt_text
-        id
-        url
-        dimensions
-      }
-      format {
-        name
-        slug
-        id
-        description
-      }
-      claims {
-        checked_date
-        claim_date
-        claim_sources
-        claimant {
-          description
-          id
-          name
-          slug
-          tag_line
-        }
-        description
-        id
-        fact
-        review_sources
-        slug
-        claim
-        rating {
-          description
-          id
-          name
-          numeric_value
-          slug
-          medium {
-            alt_text
-            id
-            url
-            dimensions
-          }
-        }
-      }
-      categories {
-        description
-        created_at
-        id
-        name
-        slug
-        medium {
-          alt_text
-          id
-          url
-          dimensions
-        }
-      }
-    }
-  }
-`;

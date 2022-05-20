@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import Navbar from '@components/Layout/Navbar';
 import Footer from '@components/Layout/Footer';
-import '@static/css/tailwind.css';
 import Seo from '@components/Seo';
 
 const Layout = (props) => {

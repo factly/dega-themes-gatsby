@@ -3,12 +3,12 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import Seo from '@components/Seo';
 import StoryCard from '@components/UI/StoryCard';
-import CategoriesGroup from '@components/CategoriesGroup';
+import Layout from '@components/Layout';
 
-const Homepage = ({ data }) => {
+function Homepage({ data }) {
   const { degaSpace, allDegaCategory, factchecks, posts } = data;
   return (
-    <>
+    <Layout>
       <Seo title={degaSpace.site_title} canonical={degaSpace.site_address} type="website" />
       <div
         sx={{
@@ -18,30 +18,6 @@ const Homepage = ({ data }) => {
           borderBottomWidth: [null, null, null, 'px'],
         }}
       >
-        {/* Left sidebar */}
-        <div
-          className="sidebar"
-          sx={{
-            display: [null, null, null, null, 'flex'],
-            width: [null, null, null, null, '1/4'],
-            borderRightWidth: 'px',
-            position: 'sticky',
-          }}
-        >
-          <div sx={{ display: 'block' }}>
-            <div
-              sx={{
-                mb: (theme) => `${theme.space.spacing5}`,
-                py: (theme) => `${theme.space.spacing5}`,
-                px: (theme) => `${theme.space.spacing6}`,
-                borderBottomWidth: 'px',
-              }}
-            >
-              <h5 className="heading">Categories</h5>
-              <CategoriesGroup categories={allDegaCategory.nodes} />
-            </div>
-          </div>
-        </div>
         {/* Main/ Middle part of the homepage */}
         <div
           className="main-content"
@@ -111,7 +87,7 @@ const Homepage = ({ data }) => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
-};
+}
 export default Homepage;

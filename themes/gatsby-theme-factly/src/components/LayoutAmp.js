@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import Seo from '@components/Seo';
+import Seo from './Seo';
 
 const LayoutAmp = (props) => {
   const data = useStaticQuery(graphql`
@@ -27,27 +27,29 @@ const LayoutAmp = (props) => {
       }
     }
   `);
-  const space = data.degaSpace;
+  const { degaSpace } = data;
   const { children } = props;
   return (
     <>
       <Seo
-        title={`${space.site_title} ${space.tag_line}`}
+        title={`${degaSpace.site_title} ${degaSpace.tag_line}`}
         image={
-          space.logo?.url?.proxy &&
-          `${space.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`
+          degaSpace.logo?.url?.proxy &&
+          `${degaSpace.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`
         }
-        description={space.description !== 'null' ? space.description : space.site_title}
-        icon={space.fav_icon.url.proxy}
+        description={
+          degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title
+        }
+        icon={degaSpace.fav_icon.url.proxy}
       />
       <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>
         <div style={{ maxWidth: '702px', margin: '0 auto', textAlign: 'center' }}>
-          <a style={{ textDecoration: 'none' }} href={space.site_address}>
+          <a style={{ textDecoration: 'none' }} href={degaSpace.site_address}>
             <amp-img
-              src={space.logo_mobile?.url?.proxy}
+              src={degaSpace.logo_mobile?.url?.proxy}
               width="97"
               height="54"
-              alt={space.site_title}
+              alt={degaSpace.site_title}
               layout="fixed"
             />
           </a>

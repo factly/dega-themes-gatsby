@@ -1,9 +1,8 @@
-/** @jsx jsx */
+//** @jsx jsx */
 import React, { useState, useEffect } from 'react'; // eslint-disable-line no-unused-vars
-import { graphql } from 'gatsby';
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '@utils/parseEditorJsData';
-import { isBrowser } from '@utils/isBrowser';
+import parseEditorJsData from '@helpers/parseEditorJsData';
+import { isBrowser } from '@helpers/isBrowser';
 import FormatPageLayout from '@components/FormatPageLayout';
 
 const CategoryDetailsAll = ({ data }) => {
@@ -77,55 +76,3 @@ const CategoryDetailsAll = ({ data }) => {
 };
 
 export default CategoryDetailsAll;
-
-export const query = graphql`
-  query ($id: String!) {
-    degaCategory(degaId: { eq: $id }) {
-      description
-      id
-      medium {
-        alt_text
-        url
-        dimensions
-      }
-      name
-      slug
-    }
-    allDegaFormat {
-      nodes {
-        id
-        slug
-        name
-      }
-    }
-    allDegaPost(filter: { categories: { elemMatch: { id: { eq: $id } } } }) {
-      nodes {
-        users {
-          id
-          first_name
-          last_name
-        }
-        categories {
-          slug
-          name
-        }
-        medium {
-          alt_text
-          url
-          dimensions
-        }
-        format {
-          name
-          slug
-        }
-        published_date
-        id
-        excerpt
-        status
-        subtitle
-        title
-        slug
-      }
-    }
-  }
-`;

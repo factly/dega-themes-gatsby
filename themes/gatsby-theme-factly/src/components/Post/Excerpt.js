@@ -3,7 +3,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '@utils/generateFluidObject';
+import generateFluidObject from '@helpers/generateFluidObject';
 
 /**
  * TODO: Add Maxwidth in theme ui

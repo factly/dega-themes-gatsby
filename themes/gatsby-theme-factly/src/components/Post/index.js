@@ -7,8 +7,8 @@ import ShareButtonGroup from '@components/Post/ShareButtonGroup';
 import FactCheckWidget from '@components/Post/FactCheckWidget';
 import Tag from '@components/Post/Tag';
 import Excerpt from '@components/Post/Excerpt';
-import { isBrowser } from '@utils/isBrowser';
-import parseEditorJsData from '@utils/parseEditorJsData';
+import { isBrowser } from '@helpers/isBrowser';
+import parseEditorJsData from '@helpers/parseEditorJsData';
 import Seo from '@components/Seo';
 /**
  * TODO: URI encoding
