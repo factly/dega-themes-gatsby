@@ -32,7 +32,12 @@ exports.onPreBootstrap = (
   bannerTitle = bt;
   logo = lg;
 };
-
+exports.pluginOptionsSchema = ({ Joi }) => {
+  return Joi.object({
+    apiKey: Joi.string().description('Google Private Key for youtube data'),
+    channelId: Joi.string().description(`Specifies youtube channel id`),
+  });
+};
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
