@@ -1,27 +1,8 @@
-/** @jsx jsx */
-import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql } from 'gatsby';
-import { jsx } from 'theme-ui';
-import Layout from '@components/Layout/index';
-import Homepage from '@components/Homepage';
-import HomePageTwo from '@components/HomepageTwo';
-import Seo from '@components/Seo';
 
-const Indexpage = ({ data, pageContext }) => {
-  const { homepage } = pageContext;
+import Homepage from '@components/Pages/Homepage';
 
-  const getHomePageComponent = (homepageType, content) => {
-    const metaData = data.allDegaCategory.nodes.filter((i) => i.meta_fields !== null);
-
-    // if (homepageType === 1) return <Homepage data={content} />;
-    if (homepageType === 2 && metaData.length > 0) return <HomePageTwo data={content} />;
-    return <Homepage data={content} />;
-  };
-
-  return <Layout>{getHomePageComponent(homepage, data)}</Layout>;
-};
-
-export default Indexpage;
+export default Homepage;
 
 export const query = graphql`
   query ($format_factcheck: [String!], $format_without_factcheck: [String!]) {

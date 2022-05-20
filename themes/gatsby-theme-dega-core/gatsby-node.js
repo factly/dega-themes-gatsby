@@ -1,89 +1,51 @@
-const fs = require('fs');
-const fse = require('fs-extra');
 const path = require('path');
-const fetch = require('node-fetch');
-const mkdirp = require('mkdirp');
+const withDefaults = require(`./utils/default-options`);
 
-const { createSchemaCustomization } = require('./utils/youtubeSourceSchema');
-
-exports.createSchemaCustomization = createSchemaCustomization;
 /**
  *  adding import alias for most used modules
  */
+
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
         '@components': path.resolve(__dirname, 'src/components'),
-        '@utils': path.resolve(__dirname, 'src/utils'),
+        '@helpers': path.resolve(__dirname, 'src/helpers'),
         '@static': path.resolve(__dirname, 'src/static'),
       },
     },
   });
 };
+
 /**
  * adds Plugin validation
  */
+
 exports.pluginOptionsSchema = ({ Joi }) => {
   return Joi.object({
     spaceId: Joi.string().required().description(`Gets Space Id.`),
     homepage: Joi.number().description(`Specifies layout of homepage`),
     accessToken: Joi.string().required().description(`Specifies access Token`),
     apiUrl: Joi.string().required().description('api url'),
-    youtubeApiKey: Joi.string().description('Google Private Key for youtube data'),
-    channelId: Joi.string().description(`Specifies youtube channel id`),
   });
 };
-// const saveIcon = (url) => {
-//   fetch(url)
-//     .then((res) => res.buffer())
-//     .then(
-//       (buffer) =>
-//         fse.outputFile('src/favicons/favicon.png', buffer, (err) =>
-//           console.log(`error while creating favicon: ${err}`),
-//         ), // should return null
-//       // file has now been created, including the directory it is to be placed in
 
-//       // fse.writeFile('/src/static/Icons/favicon.png', buffer, (res) =>
-//       //   console.log('Downloaded Favicon ', res),
-//       // ),
-//     );
-// };
+// These templates are only data-fetching wrappers that import components
 
-exports.onPreBootstrap = ({ store }) => {
-  const { flattenedPlugins } = store.getState();
-  // const dir = `${program.directory}/src/Icons`;
-  // console.log(`ensuring ${dir} exists`);
-  // if (!fs.existsSync(dir)) {
-  //   console.log(`creating ${dir}`);
-  //   mkdirp.sync(dir);
-  // }
+const homepageTemplate = require.resolve('./src/templates/homepage-query.js');
+const formatTemplate = require.resolve('./src/templates/format-query.js')
+const postTemplate = require.resolve('./src/templates/post-query.js');
+const postAmpTemplate = require.resolve('./src/templates/post-amp-query.js');
+const tagTemplate = require.resolve('./src/templates/tag-query.js');
+const tagFormatTemplate = require.resolve('./src/templates/tag-format-query.js')
+const categoryTemplate = require.resolve('./src/templates/category-query.js');
+const categoryFormatTemplate = require.resolve('./src/templates/category-format-query.js');
+const authorTemplate = require.resolve('./src/templates/author-query.js');
+const authorFormatTemplate = require.resolve('./src/templates/author-format-query.js');
 
-  const youtubePlugin = flattenedPlugins.find(
-    (plugin) => plugin.name === '@factly/gatsby-theme-youtube',
-  );
-  if (youtubePlugin) {
-    console.log('creating youtube site');
-    const createShadowComponent = async () => {
-      await fs.promises
-        .mkdir(path.join(__dirname, '/src/@factly/gatsby-theme-youtube/components'), {
-          recursive: true,
-        })
-        .catch(console.error);
-      fs.writeFile(
-        path.join(__dirname, 'src/@factly/gatsby-theme-youtube/components/Layout.js'),
-        `import Layout from '../../../components/Layout';\n\nexport default Layout;`,
-        function (err) {
-          if (err) throw err;
-          console.log('Saved! youtube theme shadowing');
-        },
-      );
-    };
-    createShadowComponent();
-  }
-};
 
-exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, homepage = 1 }) => {
+
+exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId }) => {
   const { createPage } = actions;
   const space = await graphql(`
     query SpaceQuery {
@@ -145,6 +107,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       }
     }
   `);
+
   const users = await graphql(`
     query UsersQuery {
       allDegaUser {
@@ -154,6 +117,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       }
     }
   `);
+
   const posts = await graphql(`
     query PostsQuery {
       allDegaPost {
@@ -181,48 +145,20 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
       format_without_factcheck.push(item.degaId);
     });
 
-  // manifest
-  const icon = space.data.degaSpace?.fav_icon?.url.proxy;
-
-  const state = store.getState();
-  const plugin = state.flattenedPlugins.find((plugin) => plugin.name === 'gatsby-plugin-manifest');
-
-  // const resolveManifestOptions = (data) => {
-  //   if (icon) {
-  //     saveIcon(icon);
-  //   } else {
-  //     reporter.log('no favicon found on your space!!');
-  //   }
-  //   return {
-  //     name: data.name,
-  //     short_name: data.name,
-  //     start_url: '/',
-  //     background_color: '#ffffff',
-  //     theme_color: `#ffffff`,
-  //     display: `minimal-ui`,
-  //     icon: 'src/favicons/favicon.png',
-  //   };
-  // };
-  // if (plugin) {
-  //   const manifestOptions = await resolveManifestOptions(space.data.degaSpace);
-  //   plugin.pluginOptions = { ...plugin.pluginOptions, ...manifestOptions };
-  // }
-
   // homepage
   createPage({
     path: '/',
-    component: require.resolve('./src/templates/homepage.js'),
+    component: homepageTemplate,
     context: {
       format_factcheck,
       format_without_factcheck,
-      homepage,
     },
   });
 
   formats.data.allDegaFormat.nodes.forEach((format) => {
     createPage({
       path: `/format/${format.slug}`,
-      component: require.resolve('./src/templates/format-details.js'),
+      component: formatTemplate,
       context: {
         id: format.degaId,
       },
@@ -235,7 +171,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     if (post.published_date) {
       createPage({
         path: `/${post.slug}`,
-        component: require.resolve('./src/templates/post-details.js'),
+        component: postTemplate,
         context: {
           id: post.degaId,
         },
@@ -243,7 +179,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     }
     createPage({
       path: `/${post.slug}/amp/`,
-      component: require.resolve('./src/templates/post-details.amp.js'),
+      component: postAmpTemplate,
       context: {
         id: post.degaId,
         sid: spaceId,
@@ -256,7 +192,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   tags.data.allDegaTag.nodes.forEach((tag) => {
     createPage({
       path: `/tag/${tag.slug}`,
-      component: require.resolve('./src/templates/tag-details.js'),
+      component: tagTemplate,
       context: {
         id: tag.degaId,
       },
@@ -267,7 +203,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
         path: `/tag/${tag.slug}/format/${format.slug}`,
-        component: require.resolve('./src/templates/tag-details-format-details.js'),
+        component: tagFormatTemplate,
         context: {
           id: tag.degaId,
           format_id: format.degaId,
@@ -281,7 +217,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   categories.data.allDegaCategory.nodes.forEach((category) => {
     createPage({
       path: `/category/${category.slug}`,
-      component: require.resolve('./src/templates/category-details.js'),
+      component: categoryTemplate,
       context: {
         id: category.degaId,
       },
@@ -291,7 +227,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
         path: `/category/${category.slug}/format/${format.slug}`,
-        component: require.resolve('./src/templates/category-details-format-details.js'),
+        component: categoryFormatTemplate,
         context: {
           id: category.degaId,
           format_id: format.degaId,
@@ -304,7 +240,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
   users.data.allDegaUser.nodes.forEach((user) => {
     createPage({
       path: `/author/${user.degaId}`,
-      component: require.resolve('./src/templates/author-details.js'),
+      component: authorTemplate,
       context: {
         id: user.degaId,
       },
@@ -315,7 +251,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId, h
     formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
         path: `/author/${user.degaId}/format/${format.slug}`,
-        component: require.resolve('./src/templates/author-details-format-details.js'),
+        component: authorFormatTemplate,
         context: {
           id: user.degaId,
           format_id: format.degaId,
