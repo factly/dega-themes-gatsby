@@ -4,13 +4,9 @@ import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
-import Navbar from './Navbar';
-// import Footer from './Footer';
-
-// import { useThemeUI } from 'theme-ui';
-import Footer from './Footer';
-import '../../static/css/tailwind.css';
-import Seo from '../Seo';
+import Navbar from '@components/Layout/Navbar';
+import Footer from '@components/Layout/Footer';
+import Seo from '@components/Seo';
 
 const Layout = (props) => {
   const data = useStaticQuery(graphql`
@@ -48,7 +44,7 @@ const Layout = (props) => {
       <Seo
         title={`${degaSpace.site_title} - ${degaSpace.tag_line}`}
         // canonical={degaSpace.site_address}
-        image={`${degaSpace.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
+        image={`${degaSpace?.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
         description={
           degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title
         }
@@ -57,7 +53,7 @@ const Layout = (props) => {
       >
         {degaSpace.fav_icon && <link rel="icon" href={`${degaSpace.fav_icon?.url?.proxy}`} />}
       </Seo>
-      <Navbar logo={`${degaSpace.logo.url.proxy}?h:60`} menu={allDegaMenu} />
+      <Navbar logo={`${degaSpace?.logo?.url.proxy}?h:60`} menu={allDegaMenu} />
       <main
         style={{ maxWidth: '1560px' }}
         sx={{
@@ -75,7 +71,6 @@ const Layout = (props) => {
         }}
       >
         {children}
-        {/* <Footer /> */}
       </main>
       <Footer />
     </>
