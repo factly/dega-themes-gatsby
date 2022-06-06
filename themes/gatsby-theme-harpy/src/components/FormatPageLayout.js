@@ -3,7 +3,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import Layout from '@components/Layout';
-import parseEditorJsData from '@utils/parseEditorJsData';
+import parseEditorJsData from '@helpers/parseEditorJsData';
 import BlogCard from './UI/BlogCard';
 
 const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {

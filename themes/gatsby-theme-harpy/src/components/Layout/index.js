@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import Navbar from '@components/Layout/Navbar';
 import Footer from '@components/Layout/Footer';
-import '@static/css/tailwind.css';
+import '@static/css/styles.css';
 import Seo from '@components/Seo';
 
 const Layout = (props) => {
@@ -45,7 +45,7 @@ const Layout = (props) => {
       <Seo
         title={`${degaSpace.site_title} - ${degaSpace.tag_line}`}
         // canonical={degaSpace.site_address}
-        image={`${degaSpace.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
+        image={`${degaSpace?.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
         description={
           degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title
         }
@@ -54,7 +54,7 @@ const Layout = (props) => {
       >
         {degaSpace.fav_icon && <link rel="icon" href={`${degaSpace.fav_icon?.url?.proxy}`} />}
       </Seo>
-      <Navbar logo={`${degaSpace.logo.url.proxy}?h:60`} menu={allDegaMenu} />
+      <Navbar logo={`${degaSpace?.logo.url.proxy}?h:60`} menu={allDegaMenu} />
       <main
         style={{ maxWidth: '1560px' }}
         sx={{

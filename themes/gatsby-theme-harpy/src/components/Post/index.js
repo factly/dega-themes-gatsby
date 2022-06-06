@@ -4,10 +4,10 @@ import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import FactCheckWidget from '@components/Post/FactCheckWidget';
 import Badge from '@components/Post/Badge';
-import parseEditorJsData from '@utils/parseEditorJsData';
+import parseEditorJsData from '@helpers/parseEditorJsData';
 import Seo from '@components/Seo';
 import { Link } from 'gatsby';
-import parseDate from '@utils/parseDate';
+import parseDate from '@helpers/parseDate';
 import {
   FaRegClock,
   FaFacebookF,
@@ -19,8 +19,8 @@ import {
   FaLink,
 } from 'react-icons/fa';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '@utils/generateFluidObject';
-import { isBrowser } from '@utils/isBrowser';
+import generateFluidObject from '@helpers/generateFluidObject';
+import { isBrowser } from '@helpers/isBrowser';
 
 /**
  * TODO: URI encoding
@@ -78,12 +78,6 @@ const Post = ({ post, observer }) => {
             overflow: 'hidden',
           }}
         >
-          <div>
-            {post.categories.map((category, i) => (
-              <Badge key={i} url={category.slug} name={category.name} />
-            ))}
-          </div>
-
           <h1
             sx={{
               fontSize: '4rem',
@@ -233,6 +227,11 @@ const Post = ({ post, observer }) => {
                 </div>
               </React.Fragment>
             ))}
+          <div>
+            {post.categories.map((category, i) => (
+              <Badge key={i} url={category.slug} name={category.name} />
+            ))}
+          </div>
           <div sx={{ textAlign: 'center', mt: '3rem' }}>
             <h4>Share this article:</h4>
             <div

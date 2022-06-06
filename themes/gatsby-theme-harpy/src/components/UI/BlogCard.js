@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import React from 'react';
-import parseDate from '@utils/parseDate';
+import parseDate from '@helpers/parseDate';
 import { jsx } from 'theme-ui';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '@utils/generateFluidObject';
+import generateFluidObject from '@helpers/generateFluidObject';
 
 const BlogCard = ({ post, type = 'basic' }) => {
   return (

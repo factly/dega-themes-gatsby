@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import { FaHome, FaBars } from 'react-icons/fa';
-import isBrowser from '@utils/isBrowser';
+import isBrowser from '@helpers/isBrowser';
 /**
  * @component Navbar
  * @typedef Props
