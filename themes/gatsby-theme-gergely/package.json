@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",
-    "@factly/gatsby-theme-youtube": "^0.0.1",
+    "@factly/gatsby-theme-dega-core": "*",
     "@mdx-js/react": "v1",
     "axios": "^0.26.1",
     "babel-plugin-styled-components": "^2.0.6",

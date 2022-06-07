@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
-import parseDate from '@utils/parseDate';
+import parseDate from '@helpers/parseDate';
 import BlogCard from './UI/BlogCard';
 
 const Homepage = ({ data }) => {
@@ -19,7 +19,7 @@ const Homepage = ({ data }) => {
       >
         {/* featured post */}
 
-        <div sx={{ pt: '1rem' }}>
+        <div sx={{ pt: '1rem', flex: '1 0 auto' }}>
           <h2 sx={{ px: '2rem' }}>Featured Posts</h2>
           <BlogCard post={posts.nodes[0]} type="featured" />
         </div>
@@ -35,7 +35,7 @@ const Homepage = ({ data }) => {
           }}
         >
           <h2 sx={{ pb: '1.25rem', px: '1.5rem' }}>Factchecks</h2>
-          {factchecks.nodes.map((factcheck) => {
+          {factchecks.nodes.slice(0, 5).map((factcheck) => {
             return <BlogCard post={factcheck} type="sidebar" key={factcheck.id} />;
           })}
         </div>
