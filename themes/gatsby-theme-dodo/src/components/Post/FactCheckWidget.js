@@ -56,10 +56,20 @@ const FactCheckWidget = ({ claims }) => {
 
     const maxScroll = Math.round(
       sliderElement.current.children[1].getBoundingClientRect().x -
-      sliderElement.current.firstElementChild.getBoundingClientRect().x,
+        sliderElement.current.firstElementChild.getBoundingClientRect().x,
     );
     setScrollWidth(maxScroll);
   }, []);
+  /* 
+  useEffect(()=>{
+    if(!sliderElement.current) return;
+    if(sliderElement.current.firstElementChild.getBoundingClientRect().x-num>=0) {
+      setDisable({left:true})
+    }
+    if(sliderElement.current.lastElementChild.getBoundingClientRect().x-num<=0) {
+      setDisable({right:true})
+    }
+  },[sliderElement.current ]) */
 
   return (
     <div
@@ -167,6 +177,55 @@ const FactCheckWidget = ({ claims }) => {
                       </h2>
                       {claim.claimant.name}
                     </div>
+                    {/* <div
+                      sx={{
+                        display: 'flex',
+                        flex: '1 1 0%',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                      }}
+                    >
+                      <a
+                        sx={{
+                          display: 'block',
+                          px: 2,
+                          py: 1,
+                          fontWeight: 'semibold',
+                          borderRadius: 'default',
+                          // '&:first-child': { px: 0 },
+                          '&:hover': { bg: (theme) => `${theme.colors.gray[8]}` },
+                        }}
+                        href="/"
+                      >
+                        <svg
+                          sx={{
+                            fill: 'currentColor',
+                            stroke: 'currentColor',
+                            width: 5,
+                            height: 5,
+                            color: (theme) => `${theme.colors.gray[4]}`,
+                          }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 36 36"
+                        >
+                          <g transform="translate(-807 -2277)">
+                            <ellipse
+                              cx="18"
+                              cy="18"
+                              rx="18"
+                              ry="18"
+                              transform="translate(807 2277)"
+                              stroke="#fff"
+                            />
+                            <path
+                              d="M18,0A18,18,0,1,0,36,18,18,18,0,0,0,18,0ZM16,18a3.158,3.158,0,0,1-.188,1.068l5.024,2.417a3.225,3.225,0,1,1-.789,1.64L14.7,20.552a3.162,3.162,0,1,1,0-5.1l5.349-2.572a3.165,3.165,0,1,1,.788,1.64L15.81,16.932A3.153,3.153,0,0,1,16,18Z"
+                              transform="translate(806.999 2277)"
+                              fill="#fff"
+                            />
+                          </g>
+                        </svg>
+                      </a>
+                    </div> */}
                   </div>
                   <div
                     sx={{
@@ -186,6 +245,7 @@ const FactCheckWidget = ({ claims }) => {
                         <img
                           src={claim.rating.medium?.url.proxy}
                           alt={claim.rating.medium?.alt_text}
+                          onError={addDefaultSrc}
                           sx={{
                             width: '1/6',
                             height: 'full',

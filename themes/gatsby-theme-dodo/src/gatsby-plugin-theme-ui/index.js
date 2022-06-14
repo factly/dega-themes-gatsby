@@ -17,6 +17,14 @@ export default {
     8: '8px',
     px: '1px',
   },
+  borderRadius: {
+    default: '0.25rem',
+    sm: '0.25rem',
+    md: '0.5rem',
+    lg: '0.5rem',
+    xl: '0.75rem',
+    full: '9999px',
+  },
   colors: {
     textPrimary: '#2d3748', // gray8
     textSecondary: '#718096', // gray 6

@@ -165,7 +165,7 @@ const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
                 <p
                   key={i}
                   dangerouslySetInnerHTML={{ __html: data.text }}
-                // sx={{ my: 4, wordBreak: 'break-word' }}
+                  // sx={{ my: 4, wordBreak: 'break-word' }}
                 />
               );
 
@@ -204,7 +204,7 @@ const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
                   className="ed-embeds"
                   key={i}
                   html={data.html}
-                // sx={{ py: 4 }}
+                  // sx={{ py: 4 }}
                 />
               );
 
@@ -214,14 +214,14 @@ const parseEditorJsData = ({ content, scripts = false, amp = false }) => {
                   className="ed-raw-html"
                   key={i}
                   dangerouslySetInnerHTML={{ __html: data.html }}
-                //  sx={{ py: 4 }}
+                  //  sx={{ py: 4 }}
                 />
               );
             case 'code':
               return (
                 <code
                   className="ed-code"
-                //sx={{ py: 4 }}
+                  //sx={{ py: 4 }}
                 >
                   {data.code}
                 </code>

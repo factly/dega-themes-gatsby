@@ -54,7 +54,7 @@ const Layout = (props) => {
       >
         {degaSpace.fav_icon && <link rel="icon" href={`${degaSpace.fav_icon?.url?.proxy}`} />}
       </Seo>
-      {data && data.menu && <Navbar data={data} />}
+      {data && data.allDegaMenu && <Navbar data={data} />}
       <main
         style={{ maxWidth: '1560px' }}
         sx={{
