@@ -6,7 +6,7 @@ import Seo from './Seo';
 const LayoutAmp = (props) => {
   const data = useStaticQuery(graphql`
     query {
-      degaSpace {
+      space:degaSpace {
         description
         name
         site_title
@@ -27,29 +27,29 @@ const LayoutAmp = (props) => {
       }
     }
   `);
-  const { degaSpace } = data;
+  const { space } = data;
   const { children } = props;
   return (
     <>
       <Seo
-        title={`${degaSpace.site_title} ${degaSpace.tag_line}`}
+        title={`${space.site_title} ${space.tag_line}`}
         image={
-          degaSpace.logo?.url?.proxy &&
-          `${degaSpace.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`
+          space.logo?.url?.proxy &&
+          `${space.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`
         }
         description={
-          degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title
+          space.description !== 'null' ? space.description : space.site_title
         }
-        icon={degaSpace.fav_icon.url.proxy}
+        icon={space.fav_icon.url.proxy}
       />
       <nav style={{ background: '#e63743', padding: '0 16px', height: '54px' }}>
         <div style={{ maxWidth: '702px', margin: '0 auto', textAlign: 'center' }}>
-          <a style={{ textDecoration: 'none' }} href={degaSpace.site_address}>
+          <a style={{ textDecoration: 'none' }} href={space.site_address}>
             <amp-img
-              src={degaSpace.logo_mobile?.url?.proxy}
+              src={space.logo_mobile?.url?.proxy}
               width="97"
               height="54"
-              alt={degaSpace.site_title}
+              alt={space.site_title}
               layout="fixed"
             />
           </a>

@@ -6,13 +6,13 @@ import parseEditorJsData from '@helpers/parseEditorJsData';
 import LayoutAmp from '@components/LayoutAmp';
 
 const PostDetails = ({ data }) => {
-  const { degaPost } = data;
-  // console.log({ data, degaPost });
+  const { post } = data;
+  // console.log({ data, post });
   return (
     <LayoutAmp>
       <Helmet>
         <html lang="en" amp />
-        <title>{degaPost.title}</title>
+        <title>{post.title}</title>
         {/* <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
         <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
         <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
@@ -21,23 +21,23 @@ const PostDetails = ({ data }) => {
       </Helmet>
       <article>
         <h1 className="amp-title">
-          <strong>{degaPost.title}</strong>
+          <strong>{post.title}</strong>
         </h1>
-        {degaPost.users.map((user, i, arr) => (
+        {post.users.map((user, i, arr) => (
           <div key={i}>
             By <a href={`/author/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
             {arr.length - i > 1 && ','}
           </div>
         ))}
         <div>
-          {degaPost.excerpt && (
+          {post.excerpt && (
             <>
               <strong>Excerpt</strong>
-              <p>{degaPost.excerpt}</p>
+              <p>{post.excerpt}</p>
             </>
           )}
           <div className="parsed">
-            {parseEditorJsData({ content: degaPost.description, scripts: true, amp: true })}
+            {parseEditorJsData({ content: post.description, scripts: true, amp: true })}
           </div>
         </div>
       </article>

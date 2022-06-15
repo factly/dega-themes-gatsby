@@ -5,10 +5,10 @@ export default PostPage;
 
 export const query = graphql`
   query ($id: String!) {
-    degaSpace {
+    space:degaSpace {
       site_address
     }
-    allDegaPost {
+    posts:allDegaPost {
       edges {
         node {
           published_date
@@ -115,7 +115,7 @@ export const query = graphql`
         }
       }
     }
-    degaPost(degaId: { eq: $id }) {
+    post:degaPost(degaId: { eq: $id }) {
       published_date
       description
       excerpt

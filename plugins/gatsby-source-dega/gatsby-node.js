@@ -16,6 +16,8 @@ const {
   getMenuQuery,
   getSpaceQuery,
   getUsersQuery,
+  getFeaturedCategoriesQuery,
+  getFeaturedTagsQuery,
 } = require('./queries');
 const { createSchemaCustomization } = require('./createSchemaCustomization');
 
@@ -42,6 +44,8 @@ const USER_NODE_TYPE = `DegaUser`;
 const SPACE_NODE_TYPE = `DegaSpace`;
 const RATING_NODE_TYPE = `DegaRating`;
 const MENU_NODE_TYPE = `DegaMenu`;
+const FEATURED_CATEGORY_NODE_TYPE = `DegaFeaturedCategory`;
+const FEATURED_TAG_NODE_TYPE = `DegaFeaturedTag`;
 
 exports.sourceNodes = async (
   { actions, createContentDigest, createNodeId, getNodesByType, reporter },
@@ -76,7 +80,7 @@ exports.sourceNodes = async (
 
   const httpLink = new HttpLink({
     uri,
-    // uri: 'http://dega-api.factly.org/query',
+    // uri: 'http://dega-api.factly.in/query',
     fetch: fetchWrapper,
     headers: {
       'X-Space': spaceId,
@@ -100,9 +104,10 @@ exports.sourceNodes = async (
   });
 
   const client = new ApolloClient({
+
     // Provide required constructor fields
     cache: cache,
-    //  uri: 'http://dega-api.factly.org/query',
+    //  uri: 'http://dega-api.factly.in/query',
     link: from([retryLink, errorLink, httpLink]),
   });
   const { createNode } = actions;
@@ -227,6 +232,68 @@ exports.sourceNodes = async (
           ...tag,
           degaId: tag.id,
           id: createNodeId(`${TAG_NODE_TYPE}-${tag.id}`),
+        }),
+      },
+    });
+  });
+
+  //featuredCategories
+  const getFeaturedCategories = async () => {
+    const featuredCategories = await client.query({
+      query: getFeaturedCategoriesQuery({ total: 5, postCount: 20 }),
+    });
+    return featuredCategories;
+  };
+  const { data: featuredCategoriesData } = await getFeaturedCategories();
+  featuredCategoriesData.featuredCategories && featuredCategoriesData.featuredCategories.nodes.forEach((category) => {
+    createNode({
+      ...category,
+      degaId: category.id,
+      id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: FEATURED_CATEGORY_NODE_TYPE,
+        content: JSON.stringify({
+          ...category,
+          degaId: category.id,
+          id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...category,
+          degaId: category.id,
+          id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+        }),
+      },
+    });
+  });
+
+  // featuredTags
+  const getFeaturedTags = async () => {
+    const featuredTags = await client.query({
+      query: getFeaturedTagsQuery({ total: 5, postCount: 20 }),
+    });
+    return featuredTags;
+  };
+  const { data: featuredTagsData } = await getFeaturedTags();
+  featuredTagsData.featuredTags && featuredTagsData.featuredTags.nodes.forEach((tag) => {
+    createNode({
+      ...tag,
+      degaId: tag.id,
+      id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: FEATURED_TAG_NODE_TYPE,
+        content: JSON.stringify({
+          ...tag,
+          degaId: tag.id,
+          id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
+        }),
+        contentDigest: createContentDigest({
+          ...tag,
+          degaId: tag.id,
+          id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
         }),
       },
     });

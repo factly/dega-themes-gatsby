@@ -22,29 +22,17 @@ module.exports = ({
       }
     },
     'gatsby-plugin-react-helmet',
-    {
-      resolve: `gatsby-source-dega`,
-      options: {
-        spaceId,
-        accessToken,
-        uri: apiUrl,
-      },
-    },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-theme-ui',
       options: {
+        // injects a script tag which causes error in AMP pages can be removed if we're not using AMP pages 
         injectColorFlashScript: false,
       },
     },
     `gatsby-plugin-sass`,
     'gatsby-plugin-styled-components',
-    {
-      resolve: `gatsby-plugin-advanced-sitemap`,
-      // add options to make sitemaps for other things
-    },
-    'gatsby-plugin-robots-txt',
     // {
     //   resolve: 'gatsby-plugin-manifest',
     //   options: {

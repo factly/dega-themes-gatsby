@@ -30,7 +30,7 @@ SPACE_ID=you-space-id-here
 
 ### gatsby-config
 
-The plugin sets some defaults for the endpoints and options. Hence you can use it only with the two **mandatory** entries `apiKey` and `chanspaceId`.
+The plugin sets some defaults for the endpoints and options. Hence you can use it only with the two **mandatory** entries `apiKey` and `spaceId`.
 
 ```JS
 module.exports = {

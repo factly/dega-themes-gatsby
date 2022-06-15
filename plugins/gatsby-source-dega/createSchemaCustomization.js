@@ -185,6 +185,36 @@ exports.createSchemaCustomization = ({ actions }) => {
     tag_line: String
     updated_at: Date @dateformat
   }
+  type DegaFeaturedCategory implements Node {
+    id: ID!
+    degaId: String!
+    created_at: Date @dateformat
+    description: JSON
+    html_description: String
+    medium: DegaMedium
+    meta_fields: JSON
+    name: String
+    parent_id: Int
+    slug: String
+    space_id: Int!
+    updated_at: Date @dateformat
+    posts: DegaFeaturedPost
+  }
+  type DegaFeaturedTag implements Node @dontInfer{
+    id: ID!
+    degaId: String!
+    created_at: Date @dateformat
+    description: String
+    html_description: String
+    name: String
+    slug: String
+    space_id: Int!
+    updated_at: Date @dateformat
+    posts: DegaFeaturedPost
+  }
+  type DegaFeaturedPost implements Node @dontInfer{
+    nodes: [DegaPost]
+  }
   `;
   createTypes(typeDefs);
 };

@@ -5,7 +5,7 @@ export default PostAmpPage;
 
 export const query = graphql`
   query ($id: String!) {
-    degaPost(degaId: { eq: $id }) {
+    post:degaPost(degaId: { eq: $id }) {
       published_date
       description
       excerpt

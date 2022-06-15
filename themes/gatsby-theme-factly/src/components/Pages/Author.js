@@ -12,7 +12,7 @@ import {
 import FormatPageLayout from '@components/FormatPageLayout';
 
 const UserDetailsAll = ({ data }) => {
-  const { degaUser, allDegaPost, allDegaFormat } = data;
+  const { author, posts, formats } = data;
   const getIcon = (name) => {
     switch (name) {
       case 'twitter':
@@ -89,9 +89,9 @@ const UserDetailsAll = ({ data }) => {
   return (
     <FormatPageLayout
       type="author"
-      posts={allDegaPost.nodes}
-      formats={allDegaFormat.nodes}
-      item={degaUser}
+      posts={posts.nodes}
+      formats={formats.nodes}
+      item={author}
       header={header}
       useSlug={false}
     />

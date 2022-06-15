@@ -9,7 +9,7 @@ import Img from 'gatsby-image/withIEPolyfill';
 import generateFluidObject from '@helpers/generateFluidObject';
 
 const PageNotFound = ({ data }) => {
-  const space = data.degaSpace;
+  const { space } = data;
   return (
     <Layout>
       <div sx={{ textAlign: 'center' }}>
@@ -47,7 +47,7 @@ const PageNotFound = ({ data }) => {
 export default PageNotFound;
 export const query = graphql`
   query {
-    degaSpace {
+    space: degaSpace {
       logo {
         url
         dimensions

@@ -5,7 +5,7 @@ export default CategoryPage
 
 export const query = graphql`
   query ($id: String!) {
-    degaCategory(degaId: { eq: $id }) {
+    category:degaCategory(degaId: { eq: $id }) {
       description
       id
       medium {
@@ -16,14 +16,14 @@ export const query = graphql`
       name
       slug
     }
-    allDegaFormat {
+    formats:allDegaFormat {
       nodes {
         id
         slug
         name
       }
     }
-    allDegaPost(filter: { categories: { elemMatch: { id: { eq: $id } } } }) {
+    posts:allDegaPost(filter: { categories: { elemMatch: { id: { eq: $id } } } }) {
       nodes {
         users {
           id

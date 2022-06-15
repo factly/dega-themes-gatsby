@@ -6,7 +6,7 @@ import { isBrowser } from '@helpers/isBrowser';
 import FormatPageLayout from '@components/FormatPageLayout';
 
 const CategoryDetailsAll = ({ data }) => {
-  const { degaCategory, allDegaFormat, allDegaPost } = data;
+  const { category, formats, posts } = data;
   // const formatType = 'fact-check';
   // const filterPosts = dega.posts.nodes.filter((i) => i.format.slug !== formatType);
 
@@ -67,9 +67,9 @@ const CategoryDetailsAll = ({ data }) => {
   return (
     <FormatPageLayout
       type="category"
-      posts={allDegaPost.nodes}
-      formats={allDegaFormat.nodes}
-      item={degaCategory}
+      posts={posts.nodes}
+      formats={formats.nodes}
+      item={category}
       header={header}
     />
   );
