@@ -1,11 +1,13 @@
 /** @jsx jsx */
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
-import StoryCard from "./UI/StoryCard";
+import StoryCard from './UI/StoryCard';
 
 const PostGrid = ({ type, posts, formats, item, header, useSlug = true }) => {
+  console.log({ posts });
   const slug = useSlug ? item.slug : item.id;
   const filteredPosts = posts.filter((post) => post.published_date !== null);
+
   const defaultHeader = (item) => (
     <header>
       <h1

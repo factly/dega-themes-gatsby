@@ -18,4 +18,3 @@ const FooterTwo = () => (
 );
 
 export default FooterTwo;
-
