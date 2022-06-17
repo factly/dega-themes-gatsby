@@ -72,9 +72,9 @@ const BlogCard = ({ post, type = 'basic' }) => {
                   marginBottom: '24px',
                   color: 'white',
                 }}
-                to={`/category/${post.categories[0].slug}`}
+                to={`/category/${post.categories[0]?.slug}`}
               >
-                {post.categories[0].name}
+                {post.categories[0]?.name}
               </Link>
             </div>
             <div sx={{ marginBottom: '24px' }}>
@@ -101,7 +101,9 @@ const BlogCard = ({ post, type = 'basic' }) => {
               ></div>
               <div sx={{ display: 'flex', flexDirection: 'column' }}>
                 <div sx={{ fontWeight: 500, fontSize: '1rem' }}>
-                  <Link to={`/author/${post.users[0].id}`}>{post.users[0].display_name}</Link>
+
+
+                  <Link to={`/author/${post.users[0]?.id}`}>{post.users[0]?.display_name}</Link>
                 </div>
                 <div sx={{ fontSize: '.875rem' }}>
                   {parseDate(post.published_date)} . <span> 3 min read</span>

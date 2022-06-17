@@ -4,14 +4,14 @@ import { jsx } from 'theme-ui';
 import FormatPageLayout from '@components/FormatPageLayout';
 
 const TagDetailsFormat = ({ data }) => {
-    const { allDegaPost, degaTag, allDegaFormat } = data;
+    const { posts, tag, formats } = data;
 
     return (
         <FormatPageLayout
             type="tag"
-            posts={allDegaPost.nodes}
-            formats={allDegaFormat.nodes}
-            item={degaTag}
+            posts={posts.nodes}
+            formats={formats.nodes}
+            item={tag}
         />
     );
 };
