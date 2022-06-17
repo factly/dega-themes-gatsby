@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import CategoryPage from '@components/Pages/Category';
 
-export default CategoryPage
+export default CategoryPage;
 
 export const query = graphql`
   query ($id: String!, $format_id: String!) {
@@ -31,6 +31,8 @@ export const query = graphql`
           id
           first_name
           last_name
+          display_name
+          slug
         }
         categories {
           slug
