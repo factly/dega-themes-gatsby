@@ -6,10 +6,10 @@ import StoryCard from '@components/UI/StoryCard';
 import Layout from '@components/Layout';
 
 function Homepage({ data }) {
-    const { degaSpace, allDegaCategory, factchecks, posts } = data;
+    const { space, categories, factchecks, posts } = data;
     return (
         <Layout>
-            <Seo title={degaSpace.site_title} canonical={degaSpace.site_address} type="website" />
+            <Seo title={space.site_title} canonical={space.site_address} type="website" />
             <div
                 sx={{
                     display: 'flex',
