@@ -135,6 +135,8 @@ exports.sourceNodes = async (
   const getData = async ({ query, total = LIMIT, type }) => {
     let allData = [];
     if (total <= LIMIT) {
+      reporter.log(`Fetching ${type} ${total}`);
+
       const resp = await client.query({
         query: query(),
       });
@@ -142,12 +144,14 @@ exports.sourceNodes = async (
     } else if (total > LIMIT) {
       const pageCount = Math.ceil(total / LIMIT);
       for (let page = 1; page <= pageCount; page++) {
+        reporter.log(`Fetching ${type} ${total > LIMIT ? page * LIMIT : total} of ${total}`);
         const resp = await client.query({
           query: query(page),
         });
         allData = [...allData, ...resp.data[type].nodes];
       }
     }
+
     return allData;
   };
 
