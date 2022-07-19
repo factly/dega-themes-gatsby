@@ -15,9 +15,8 @@ module.exports = (themeOptions) => {
       description: 'Gatsby Site built using DegaCMS',
     },
     plugins: [
-
       {
-        resolve: `gatsby-source-dega`,
+        resolve: `@factly/gatsby-source-dega`,
         options: {
           spaceId,
           accessToken,

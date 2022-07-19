@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-source-dega",
+  "name": "@factly/gatsby-source-dega",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
