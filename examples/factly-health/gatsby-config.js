@@ -16,7 +16,7 @@ module.exports = {
         accessToken: process.env.ACCESS_TOKEN,
         homepage: 2,
         siteUrl: process.env.SITE_URL,
-        apiUrl: 'http://dega-api.factly.org/query',
+        apiUrl: 'https://dega-api.factly.in/query',
         // youtubeApiKey: process.env.GOOGLE_PRIVATE_KEY,
         // channelId: process.env.CHANNEL_ID,
       },
