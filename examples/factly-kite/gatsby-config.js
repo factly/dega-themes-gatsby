@@ -12,6 +12,8 @@ module.exports = {
     {
       resolve: '@factly/gatsby-theme-kite',
       options: {
+        // spaceId: process.env.HEALTH_SPACE_ID,
+        // accessToken: process.env.HEALTH_ACCESS_TOKEN,
         spaceId: process.env.SPACE_ID,
         accessToken: process.env.ACCESS_TOKEN,
         homepage: 2,

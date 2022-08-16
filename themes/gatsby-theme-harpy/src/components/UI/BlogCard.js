@@ -58,7 +58,8 @@ const BlogCard = ({ post, type = 'basic' }) => {
           </div>
           <div>
             <div>
-              <Link
+              {post.categories.length > 0 && <Link
+                to={`/category/${post.categories[0].slug}`}
                 sx={{
                   display: 'inline-flex',
                   padding: '0 20px',
@@ -71,11 +72,15 @@ const BlogCard = ({ post, type = 'basic' }) => {
                   background: 'gray',
                   marginBottom: '24px',
                   color: 'white',
+                  '&:hover': {
+                    color: '#000',
+                    bg: '#feb2b2'
+                  }
                 }}
-                to={`/category/${post.categories[0]?.slug}`}
+
               >
                 {post.categories[0]?.name}
-              </Link>
+              </Link>}
             </div>
             <div sx={{ marginBottom: '24px' }}>
               <Link sx={{ fontSize: type === 'basic' ? '1.5rem' : '2.25rem' }} to={`/${post.slug}`}>
@@ -100,9 +105,12 @@ const BlogCard = ({ post, type = 'basic' }) => {
                 }}
               ></div>
               <div sx={{ display: 'flex', flexDirection: 'column' }}>
-                <div sx={{ fontWeight: 500, fontSize: '1rem' }}>
-
-
+                <div sx={{
+                  fontWeight: 500, fontSize: '1rem', color: '#3B82F6',
+                  '&:hover': {
+                    color: '#ea364a'
+                  }
+                }}>
                   <Link to={`/author/${post.users[0]?.id}`}>{post.users[0]?.display_name}</Link>
                 </div>
                 <div sx={{ fontSize: '.875rem' }}>
@@ -172,6 +180,10 @@ const BlogCard = ({ post, type = 'basic' }) => {
                 textAlign: 'center',
                 marginBottom: '16px',
                 color: 'white',
+                '&:hover': {
+                  color: '#000',
+                  bg: '#feb2b2'
+                }
               }}
             >
               <Link to={`/category/${post.categories[0].slug}`}>{post.categories[0].name}</Link>
@@ -191,3 +203,17 @@ const BlogCard = ({ post, type = 'basic' }) => {
 };
 
 export default BlogCard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+//post.categories[0].name

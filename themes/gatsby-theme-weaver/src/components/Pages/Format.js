@@ -38,7 +38,7 @@ const FormatDetails = ({ data }) => {
                             }}
                         >
                             {posts.nodes.map((item, index) => (
-                                <StoryCard
+                                <BlogCard
                                     key={index}
                                     cardStyle="iframely"
                                     storyData={item}

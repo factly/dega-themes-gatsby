@@ -15,8 +15,8 @@ const Badge = ({ url, name }) => {
         bg: '#000',
         transition: '0.3s',
         '&:hover': {
-          color: 'white',
-          bg: 'violet',
+          //color: 'white',
+          bg: 'green',
         },
         display: 'inline-flex',
         px: '20px',

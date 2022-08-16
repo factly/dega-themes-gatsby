@@ -42,8 +42,10 @@ module.exports = {
     {
       resolve: '@factly/gatsby-theme-factly',
       options: {
-        client: 'factly',
-        metaData: siteMetadata
+        spaceId,
+        accessToken,
+        apiUrl,
+        siteUrl
       }
     }
   ]

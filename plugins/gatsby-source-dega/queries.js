@@ -953,7 +953,7 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
 exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
   return gql`
   query {
-    featuredTags(featuredCount: ${limit}, tagLimit: ${postLimit}) {
+    featuredTags(featuredCount: ${limit}, postLimit: ${postLimit}) {
       nodes {
         id
         created_at
