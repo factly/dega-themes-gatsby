@@ -65,7 +65,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
           status
           excerpt
           description
-          html_description
+          description_html
           is_featured
           is_sticky
           is_highlighted
@@ -104,7 +104,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
             name
             slug
             description
-            html_description
+            description_html
             meta_fields
             parent_id
             medium {
@@ -132,7 +132,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
             name
             slug
             description
-            html_description
+            description_html
             space_id
           }
           users {
@@ -175,7 +175,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
             checked_date
             claim_sources
             description
-            html_description
+            description_html
             fact
             review_sources
             rating {
@@ -187,7 +187,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
               description
               background_colour
               text_colour
-              html_description
+              description_html
               numeric_value
               medium {
                 id
@@ -214,7 +214,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
               name
               slug
               description
-              html_description
+              description_html
               tag_line
               medium {
                 id
@@ -260,7 +260,7 @@ exports.getCategoriesQuery = ({ limit, page = 1 }) => {
         name
         slug
         description
-        html_description
+        description_html
         meta_fields
         parent_id
         space_id
@@ -305,7 +305,7 @@ exports.getTagsQuery = ({ limit, page = 1 }) => {
         name
         slug
         description
-        html_description
+        description_html
         space_id
       }
     }
@@ -401,6 +401,7 @@ exports.getSpaceQuery = () => {
         tag_line
         description
         site_address
+        meta_fields
         logo {
           id
           created_at
@@ -545,7 +546,7 @@ exports.getRatingsQuery = ({ limit, page = 1 }) => {
         name
         slug
         description
-        html_description
+        description_html
         background_colour
         text_colour
         numeric_value
@@ -593,7 +594,7 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
         checked_date
         claim_sources
         description
-        html_description
+        description_html
         fact
         review_sources
         space_id
@@ -604,7 +605,7 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
           name
           slug
           description
-          html_description
+          description_html
           background_colour
           text_colour
           numeric_value
@@ -633,7 +634,7 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
           name
           slug
           description
-          html_description
+          description_html
           tag_line
           space_id
           medium {
@@ -678,7 +679,7 @@ exports.getClaimantsQuery = ({ limit, page = 1 }) => {
         name
         slug
         description
-        html_description
+        description_html
         tag_line
         space_id
         medium {
@@ -739,7 +740,7 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
         name
         slug
         description
-        html_description
+        description_html
         meta_fields
         parent_id
         space_id
@@ -770,7 +771,7 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
             status
             excerpt
             description
-            html_description
+            description_html
             is_featured
             is_sticky
             is_highlighted
@@ -809,7 +810,7 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
               name
               slug
               description
-              html_description
+              description_html
               meta_fields
               parent_id
               medium {
@@ -837,7 +838,7 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
               name
               slug
               description
-              html_description
+              description_html
               space_id
             }
             users {
@@ -880,7 +881,7 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
               checked_date
               claim_sources
               description
-              html_description
+              description_html
               fact
               review_sources
               rating {
@@ -892,7 +893,7 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
                 description
                 background_colour
                 text_colour
-                html_description
+                description_html
                 numeric_value
                 medium {
                   id
@@ -919,7 +920,7 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
                 name
                 slug
                 description
-                html_description
+                description_html
                 tag_line
                 medium {
                   id
@@ -961,7 +962,7 @@ exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
         name
         slug
         description
-        html_description
+        description_html
         meta_fields
         space_id
         medium {
@@ -991,7 +992,7 @@ exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
             status
             excerpt
             description
-            html_description
+            description_html
             is_featured
             is_sticky
             is_highlighted
@@ -1030,7 +1031,7 @@ exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
               name
               slug
               description
-              html_description
+              description_html
               meta_fields
               parent_id
               medium {
@@ -1058,7 +1059,7 @@ exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
               name
               slug
               description
-              html_description
+              description_html
               space_id
             }
             users {
@@ -1101,7 +1102,7 @@ exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
               checked_date
               claim_sources
               description
-              html_description
+              description_html
               fact
               review_sources
               rating {
@@ -1113,7 +1114,7 @@ exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
                 description
                 background_colour
                 text_colour
-                html_description
+                description_html
                 numeric_value
                 medium {
                   id
@@ -1140,7 +1141,7 @@ exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
                 name
                 slug
                 description
-                html_description
+                description_html
                 tag_line
                 medium {
                   id

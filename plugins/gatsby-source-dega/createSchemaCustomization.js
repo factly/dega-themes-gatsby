@@ -10,7 +10,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     description: JSON
     excerpt: String
     format: DegaFormat
-    html_description: String
+    description_html: String
     is_featured: Boolean
     is_highlighted: Boolean
     is_sticky: Boolean
@@ -48,7 +48,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     degaId: String!
     created_at: Date @dateformat
     description: JSON
-    html_description: String
+    description_html: String
     medium: DegaMedium
     meta_fields: JSON
     name: String
@@ -62,7 +62,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     degaId: String!
     created_at: Date @dateformat
     description: String
-    html_description: String
+    description_html: String
     name: String
     slug: String
     space_id: Int!
@@ -94,6 +94,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     logo: DegaMedium
     logo_mobile: DegaMedium
     mobile_icon: DegaMedium
+    meta_fields: JSON
     name: String
     site_address: String
     site_title: String
@@ -125,7 +126,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     background_colour: JSON
     created_at: Date @dateformat
     description: JSON
-    html_description: String
+    description_html: String
     medium: DegaMedium
     name: String
     numeric_value: Int
@@ -165,7 +166,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     created_at: Date @dateformat
     description: JSON
     fact: String
-    html_description: String
+    description_html: String
     rating: DegaRating
     review_sources: JSON
     slug: String
@@ -177,7 +178,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     degaId: String!
     created_at: Date @dateformat
     description: JSON
-    html_description: String
+    description_html: String
     medium: DegaMedium
     name: String
     slug: String
@@ -190,7 +191,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     degaId: String!
     created_at: Date @dateformat
     description: JSON
-    html_description: String
+    description_html: String
     medium: DegaMedium
     meta_fields: JSON
     name: String
@@ -205,7 +206,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     degaId: String!
     created_at: Date @dateformat
     description: String
-    html_description: String
+    description_html: String
     name: String
     slug: String
     space_id: Int!
