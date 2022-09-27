@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import AuthorPage from '@components/Pages/Author';
 
-export default AuthorPage
+export default AuthorPage;
 
 export const query = graphql`
   query ($id: String!, $format_id: String!) {
@@ -33,6 +33,8 @@ export const query = graphql`
           id
           first_name
           last_name
+          display_name
+          slug
         }
         categories {
           slug

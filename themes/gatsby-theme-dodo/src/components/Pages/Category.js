@@ -9,7 +9,7 @@ import { isBrowser } from '@helpers/isBrowser';
 import Layout from '../Layout';
 
 function CategoryDetailsAll({ data }) {
-  const { degaCategory, allDegaFormat, allDegaPost } = data;
+  const { category, formats, posts } = data;
   const [readMore, setReadMore] = React.useState(true);
   const [isReadMoreNeeded, setIsReadMoreNeeded] = useState(false);
 
@@ -67,14 +67,14 @@ function CategoryDetailsAll({ data }) {
   return (
     <Layout>
       <Helmet>
-        <title> {degaCategory.name} </title>
+        <title> {category.name} </title>
       </Helmet>
-      {console.log({ posts: allDegaPost.nodes })}
+      {console.log({ posts: posts.nodes })}
       <PostGrid
         type="category"
-        posts={allDegaPost.nodes}
-        formats={allDegaFormat.nodes}
-        item={degaCategory}
+        posts={posts.nodes}
+        formats={formats.nodes}
+        item={category}
         header={header}
       />
     </Layout>

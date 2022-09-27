@@ -16,7 +16,7 @@ import Helmet from 'react-helmet';
 import Layout from '../Layout';
 
 function UserDetailsAll({ data }) {
-  const { degaUser, allDegaPost, allDegaFormat } = data;
+  const { user, posts, formats } = data;
   const getIcon = (name) => {
     switch (name) {
       case 'twitter':
@@ -34,9 +34,9 @@ function UserDetailsAll({ data }) {
     }
   };
 
-  const name = degaUser.display_name
-    ? `${degaUser.display_name}`
-    : `${degaUser.first_name} ${degaUser.last_name}`;
+  const name = user.display_name
+    ? `${user.display_name}`
+    : `${user.first_name} ${user.last_name}`;
 
   const header = (item) => {
     return (
@@ -95,9 +95,9 @@ function UserDetailsAll({ data }) {
       </Helmet>
       <PostGrid
         type="author"
-        posts={allDegaPost.nodes}
-        formats={allDegaFormat.nodes}
-        item={degaUser}
+        posts={posts.nodes}
+        formats={formats.nodes}
+        item={user}
         header={header}
         useSlug={false}
       />

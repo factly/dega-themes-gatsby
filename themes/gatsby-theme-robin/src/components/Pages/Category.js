@@ -6,7 +6,7 @@ import FormatPageLayout from '@components/FormatPageLayout';
 import { isBrowser } from '@helpers/isBrowser';
 
 const CategoryDetailsFormat = ({ data }) => {
-    const { degaCategory, allDegaFormat, allDegaPost } = data;
+    const { category, formats, posts } = data;
 
     const [readMore, setReadMore] = React.useState(true);
     const [isReadMoreNeeded, setIsReadMoreNeeded] = useState(false);
@@ -64,9 +64,9 @@ const CategoryDetailsFormat = ({ data }) => {
     return (
         <FormatPageLayout
             type="category"
-            posts={allDegaPost.nodes}
-            formats={allDegaFormat.nodes}
-            item={degaCategory}
+            posts={posts.nodes}
+            formats={formats.nodes}
+            item={category}
             header={header}
         />
     );

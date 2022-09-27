@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 import Layout from '../Layout';
 
 function TagDetailsAll({ data }) {
-  const { allDegaPost, degaTag, allDegaFormat } = data;
+  const { posts, tag, formats } = data;
   const header = (item) => {
     return (
       <div
@@ -33,13 +33,13 @@ function TagDetailsAll({ data }) {
   return (
     <Layout>
       <Helmet>
-        <title> {degaTag.name} </title>
+        <title> {tag.name} </title>
       </Helmet>
       <PostGrid
         type="tag"
-        posts={allDegaPost.nodes}
-        formats={allDegaFormat.nodes}
-        item={degaTag}
+        posts={posts.nodes}
+        formats={formats.nodes}
+        item={tag}
         header={header}
       />
     </Layout>

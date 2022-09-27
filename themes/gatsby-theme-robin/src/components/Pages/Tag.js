@@ -4,16 +4,16 @@ import { jsx } from 'theme-ui';
 import FormatPageLayout from '@components/FormatPageLayout';
 
 const TagDetailsAll = ({ data }) => {
-    const { allDegaPost, degaTag, allDegaFormat } = data;
+    const { posts, tag, formats } = data;
     /**
      * TODO: add description under category name
      */
     return (
         <FormatPageLayout
             type="tag"
-            posts={allDegaPost.nodes}
-            formats={allDegaFormat.nodes}
-            item={degaTag}
+            posts={posts.nodes}
+            formats={formats.nodes}
+            item={tag}
         />
     );
 };

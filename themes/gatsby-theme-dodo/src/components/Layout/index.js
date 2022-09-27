@@ -20,7 +20,7 @@ const Layout = (props) => {
           name
         }
       }
-      degaSpace {
+       space: degaSpace {
         description
         name
         site_title
@@ -38,21 +38,21 @@ const Layout = (props) => {
     }
   `);
 
-  const { degaSpace, allDegaMenu } = data;
+  const { space, allDegaMenu } = data;
   const { children } = props;
   return (
     <>
       <Seo
-        title={`${degaSpace.site_title} - ${degaSpace.tag_line}`}
+        title={`${space.site_title} - ${space.tag_line}`}
         // canonical={degaSpace.site_address}
-        image={`${degaSpace?.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
+        image={`${space?.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
         description={
-          degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title
+          space.description !== 'null' ? space.description : degaSpace.site_title
         }
         fbAppId="587617254726291"
         fbPages="1521487944736293"
       >
-        {degaSpace.fav_icon && <link rel="icon" href={`${degaSpace.fav_icon?.url?.proxy}`} />}
+        {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
       </Seo>
       {data && data.allDegaMenu && <Navbar data={data} />}
       <main

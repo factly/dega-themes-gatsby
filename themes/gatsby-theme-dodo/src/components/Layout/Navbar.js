@@ -6,7 +6,7 @@ import { FaHome, FaBars } from 'react-icons/fa';
 import { Link } from 'gatsby';
 
 export default function NavBar({ logo, data }) {
-  const { allDegaMenu, categories, degaSpace } = data;
+  const { allDegaMenu, categories, space } = data;
   const mainMenu = allDegaMenu.nodes.filter((i) => i.slug === 'main')[0];
   const [showMenu, setShowMenu] = useState(false);
   const [width, setWidth] = useState(0);
@@ -44,8 +44,8 @@ export default function NavBar({ logo, data }) {
         >
           <Link to="/" sx={{ mx: 'auto' }}>
             <img
-              src={degaSpace?.logo?.url?.proxy || `/logo.png`}
-              alt={degaSpace.site_title}
+              src={space?.logo?.url?.proxy || `/logo.png`}
+              alt={space.site_title}
               sx={{ maxWidth: '10rem', display: 'block', mx: 'auto' }}
             />
           </Link>
