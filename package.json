@@ -19,7 +19,7 @@
     "themes/*",
     "examples/*",
     "plugins/*",
-    "...www/*"
+    "www"
   ],
   "scripts": {
     "lint": "eslint .",
