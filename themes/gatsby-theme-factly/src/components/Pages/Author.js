@@ -12,7 +12,7 @@ import {
 import FormatPageLayout from '@components/FormatPageLayout';
 
 const UserDetailsAll = ({ data }) => {
-  const { author, posts, formats } = data;
+  const { user, posts, formats } = data;
   const getIcon = (name) => {
     switch (name) {
       case 'twitter':
@@ -91,7 +91,7 @@ const UserDetailsAll = ({ data }) => {
       type="author"
       posts={posts.nodes}
       formats={formats.nodes}
-      item={author}
+      item={user}
       header={header}
       useSlug={false}
     />

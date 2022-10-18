@@ -18,11 +18,11 @@ import parseDate from '@helpers/parseDate';
 /**
  * TODO: Add loader for infinite-scroller
  */
+
 const PostDetails = ({ data }) => {
-    const { allDegaPost, degaSpace, degaPost, recentPosts } = data;
-    const { edges: posts } = allDegaPost;
-    const post = posts.filter(({ node }) => node.id === degaPost.id)[0];
-    const { previous: previousPost, next: nextPost } = post;
+    const { posts, space, post, recentPosts } = data;
+    const postEdge = posts.edges.filter(({ node }) => node.id === post.id)[0];
+    const { previous: previousPost, next: nextPost } = postEdge;
 
     const [showSocialIcon, setShowSocialIcon] = React.useState(false);
 
@@ -53,7 +53,7 @@ const PostDetails = ({ data }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // for sharing links
-    const title = encodeURIComponent(degaPost.title);
+    const title = encodeURIComponent(post.title);
     let url;
     if (isBrowser) {
         url = encodeURIComponent(window.location.href);
@@ -62,10 +62,10 @@ const PostDetails = ({ data }) => {
     return (
         <Layout>
             <Seo
-                title={degaPost.title}
-                description={degaPost.excerpt}
-                image={`${degaPost.medium?.url?.proxy}`}
-                canonical={`${degaSpace.site_address}/${degaPost.slug}`}
+                title={post.title}
+                description={post.excerpt}
+                image={`${post.medium?.url?.proxy}`}
+                canonical={`${space.site_address}/${post.slug}`}
                 type="article"
             />
             <div
@@ -92,7 +92,7 @@ const PostDetails = ({ data }) => {
                         pl: (theme) => [null, null, `${theme.space.spacing8}`],
                     }}
                 >
-                    <Post key={`details${degaPost.id}`} post={degaPost} observer={observer} />
+                    <Post key={`details${post.id}`} post={post} observer={observer} />
                     <div>
                         <div
                             sx={{
@@ -190,7 +190,7 @@ const PostDetails = ({ data }) => {
                             </h5>
                             <div sx={{ display: 'flex', flexWrap: 'wrap' }}>
                                 {recentPosts.nodes
-                                    .filter((post) => post.id !== degaPost.id)
+                                    .filter((post) => post.id !== post.id)
                                     .splice(0, 6)
                                     .map((post) => (
                                         <div

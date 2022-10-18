@@ -20,6 +20,7 @@ import generateFluidObject from '@helpers/generateFluidObject';
  */
 
 const StoryCard = ({
+    item,
     storyData,
     cardStyle = 'basic',
     excerpt = false,
@@ -122,7 +123,7 @@ const StoryCard = ({
                                     alignItems: 'flex-start',
                                 }}
                             >
-                                <div sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                                {/* <div sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                                     <p
                                         sx={{
                                             color: (theme) => `${theme.colors.textSecondary}`,
@@ -137,11 +138,13 @@ const StoryCard = ({
                                     >
                                         {storyData.users.map((user, i, arr) => (
                                             <span key={i}>
+
                                                 {`${user.first_name} ${user.last_name}`} {arr.length - i > 1 && ','}
+
                                             </span>
                                         ))}
                                     </p>
-                                </div>
+                                </div> */}
                                 <p
                                     sx={{
                                         color: (theme) => `${theme.colors.textSecondary}`,
@@ -242,7 +245,7 @@ const StoryCard = ({
                 </Link>
                 <div sx={{ flex: 'none', mt: 'auto', py: (theme) => `${theme.space.spacing5}` }}>
                     <div sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        {/* <div sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <p
                                 sx={{
                                     color: (theme) => `${theme.colors.gray[6]}`,
@@ -253,6 +256,24 @@ const StoryCard = ({
                             >
                                 {`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}
                             </p>
+
+                        </div> */}
+                        <div>
+                            <Link
+                                to={`/author/${storyData.users[0].id}`}
+                                sx={{
+                                    fontWeight: 'medium',
+                                    color: (theme) => `${theme.colors.textLinkPrimary}`,
+                                    fontSize: (theme) => `${theme.fontSizes.h7}`,
+                                    px: (theme) => `${theme.space.spacing2}`,
+                                    '&:first-of-type': { pl: 0 },
+                                    '&:hover': {
+                                        color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
+                                    },
+                                }}
+                            >
+                                {`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}
+                            </Link>
                         </div>
                         <p
                             sx={{
@@ -347,17 +368,40 @@ const StoryCard = ({
                                 }}
                             >
                                 <div sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                                    <p
+                                    <Link
+                                        to={`/author/${storyData.users.id}`}
                                         sx={{
-                                            color: (theme) => `${theme.colors.textSecondary}`,
-                                            fontSize: [0, null, (theme) => `${theme.fontSizes.h8}`],
-                                            mr: (theme) => `${theme.space.spacing3}`,
-                                            textTransform: 'none',
+                                            fontWeight: 'medium',
+                                            color: (theme) => `${theme.colors.textLinkPrimary}`,
+                                            fontSize: (theme) => `${theme.fontSizes.h8}`,
+                                            px: (theme) => `${theme.space.spacing2}`,
+                                            '&:first-of-type': { pl: 0 },
+                                            '&:hover': {
+                                                color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
+                                            },
+                                        }}
+                                    >
+
+                                        {`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}
+                                    </Link>
+                                </div>
+                                {/* <div>
+                                    <Link
+                                        to={`/author/${storyData.users[0].id}`}
+                                        sx={{
+                                            fontWeight: 'medium',
+                                            color: (theme) => `${theme.colors.textLinkPrimary}`,
+                                            fontSize: (theme) => `${theme.fontSizes.h7}`,
+                                            px: (theme) => `${theme.space.spacing2}`,
+                                            '&:first-of-type': { pl: 0 },
+                                            '&:hover': {
+                                                color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
+                                            },
                                         }}
                                     >
                                         {`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}
-                                    </p>
-                                </div>
+                                    </Link>
+                                </div> */}
                                 <p
                                     sx={{
                                         color: (theme) => `${theme.colors.textSecondary}`,
@@ -428,7 +472,9 @@ const StoryCard = ({
                             }}
                         >
                             <span>{`${storyData.users[0]?.first_name} ${storyData.users[0]?.last_name}`}</span>
+
                             {' / '}
+
                             <span>{parseDate(storyData.published_date)}</span>
                         </p>
                     </div>

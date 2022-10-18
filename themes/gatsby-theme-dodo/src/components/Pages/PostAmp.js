@@ -9,14 +9,14 @@ import parseDate from '@helpers/parseDate';
 import StoryCard from '../UI/StoryCard';
 import Layout from '../Layout';
 
-export default function PostDetails({ post, posts }) {
-  const { degaPost } = data;
+export default function PostDetails({ posts }) {
+  const { post } = data;
   const filteredPosts = posts.nodes.filter((p) => p.id !== post.id).slice(0, 6);
 
   const [showSocialIcon, setShowSocialIcon] = React.useState(false);
   const [postActiveIndex, setPostActiveIndex] = React.useState(parseInt(post.id));
   const [observer, setObserver] = React.useState({
-    observe: () => {},
+    observe: () => { },
   });
 
   const handleShowSocialIcon = (entry) => {
@@ -60,11 +60,11 @@ export default function PostDetails({ post, posts }) {
   return (
     <Layout>
       <Helmet>
-        <title> {degaPost.title} </title>
-        <meta name="description" content={degaPost.excerpt} />
-        <meta property="og:title" content={degaPostt.title} />
+        <title> {post.title} </title>
+        <meta name="description" content={post.excerpt} />
+        <meta property="og:title" content={post.title} />
         <meta property="og:description" content={degaPost.excerpt} />
-        {degaPost.medium && <meta property="og:image" content={degaPost.medium?.url.proxy} />}
+        {post.medium && <meta property="og:image" content={post.medium?.url.proxy} />}
         <meta property="og:url" content={url} />
         <meta property="og:type" content="article" />
         {post.schemas &&

@@ -7,12 +7,12 @@ import Helmet from 'react-helmet';
 import Layout from '../Layout';
 
 function FormatPage({ data }) {
-  const { allDegaPost } = data;
-  const filteredPosts = data.allDegaPost.nodes.filter((post) => post.published_date !== null);
+  const { posts } = data;
+  const filteredPosts = data.posts.nodes.filter((post) => post.published_date !== null);
   return (
     <Layout>
       <Helmet>
-        <title> {allDegaPost.nodes[0]?.format.name} </title>
+        <title> {posts.nodes[0]?.format.name} </title>
       </Helmet>
 
       <div sx={{ mx: 'auto', maxWidth: 1560 }}>
@@ -24,7 +24,7 @@ function FormatPage({ data }) {
             fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
           }}
         >
-          {allDegaPost.nodes[0]?.format.name}
+          {posts.nodes[0]?.format.name}
         </h1>
         <div
           sx={{
@@ -34,7 +34,7 @@ function FormatPage({ data }) {
             pt: [null, null, null, (theme) => `${theme.space.spacing7}`],
           }}
         >
-          {allDegaPost.nodes.length > 0 ? (
+          {posts.nodes.length > 0 ? (
             <div
               sx={{
                 display: 'grid',
@@ -44,7 +44,7 @@ function FormatPage({ data }) {
                 gridGap: (theme) => `${theme.space.spacing7}`,
               }}
             >
-              {allDegaPost.nodes.map((item, index) => (
+              {posts.nodes.map((item, index) => (
                 <StoryCard
                   key={index}
                   cardStyle="tulip"

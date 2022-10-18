@@ -7,8 +7,9 @@ import parseDate from '@helpers/parseDate';
 import StoryCard from '../UI/StoryCard';
 
 const Homepage = ({ data }) => {
-  const { posts, featuredCategories, degaSpace, allDegaCategory, factchecks } = data;
+  const { posts, featuredCategories, space, categories, factchecks } = data;
   const featuredPost = posts.nodes[0];
+  console.log({ data })
   return (
     <Layout>
       <>

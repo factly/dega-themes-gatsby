@@ -25,6 +25,7 @@ export const query = graphql`
             email
             first_name
             last_name
+            display_name
             id
             slug
           }
