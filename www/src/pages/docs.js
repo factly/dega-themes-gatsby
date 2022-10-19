@@ -1,6 +1,6 @@
-import React from 'react'
-import Layout from '../components/Layout';
-import Documentation from '../components/Documentation';
+import React from "react"
+import Layout from "../components/Layout"
+import Documentation from "../components/Documentation"
 
 const DocumentationPage = () => {
   return (

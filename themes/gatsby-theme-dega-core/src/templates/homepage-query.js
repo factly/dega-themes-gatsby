@@ -6,12 +6,12 @@ export default Homepage;
 
 export const query = graphql`
   query ($format_factcheck: [String!], $format_without_factcheck: [String!]) {
-    space:degaSpace {
+    space: degaSpace {
       site_address
       site_title
       name
     }
-    featuredCategories:allDegaFeaturedCategory {
+    featuredCategories: allDegaFeaturedCategory {
       nodes {
         id
         slug

@@ -9,10 +9,9 @@ import Img from 'gatsby-image/withIEPolyfill';
 import generateFluidObject from '@helpers/generateFluidObject';
 
 const PageNotFound = ({ data }) => {
-  const { degaSpace } = data
+  const { degaSpace } = data;
 
   return (
-
     <Layout>
       <div sx={{ textAlign: 'center' }}>
         <h1 sx={{ py: (theme) => `${theme.space.spacing7}` }}>Page Not Found</h1>
@@ -43,7 +42,7 @@ const PageNotFound = ({ data }) => {
         </Link>
       </div>
     </Layout>
-  )
+  );
 };
 
 export default PageNotFound;

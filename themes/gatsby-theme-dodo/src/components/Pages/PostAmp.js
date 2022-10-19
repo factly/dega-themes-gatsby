@@ -16,7 +16,7 @@ export default function PostDetails({ posts }) {
   const [showSocialIcon, setShowSocialIcon] = React.useState(false);
   const [postActiveIndex, setPostActiveIndex] = React.useState(parseInt(post.id));
   const [observer, setObserver] = React.useState({
-    observe: () => { },
+    observe: () => {},
   });
 
   const handleShowSocialIcon = (entry) => {

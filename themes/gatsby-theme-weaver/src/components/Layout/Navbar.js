@@ -42,25 +42,28 @@ const Navbar = ({ logo, menu }) => {
     setShowMenu((prevState) => !prevState);
   };
 
-
-  // 
+  //
 
   return (
     <React.Fragment>
-      <div sx={{
-        display: 'flex',
-        gap: '48px',
-        justifyContent: 'space-Between',
-        ml: '3rem',
-        mr: '3rem',
-        paddingTop: '12px'
-        //borderBottom: '1px solid'
-      }}>
-        <div sx={{
+      <div
+        sx={{
           display: 'flex',
-          alignItems: 'center',
-          gap: '24px',
-        }}>
+          gap: '48px',
+          justifyContent: 'space-Between',
+          ml: '3rem',
+          mr: '3rem',
+          paddingTop: '12px',
+          //borderBottom: '1px solid'
+        }}
+      >
+        <div
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '24px',
+          }}
+        >
           <div>
             {/* <Link href="/" passHref>
               <a sx={{ mx: 'auto' }}>
@@ -71,72 +74,70 @@ const Navbar = ({ logo, menu }) => {
                 />
               </a>
             </Link> */}
-            <Link
-              to="/"
-            >
+            <Link to="/">
               <img sx={{ height: 8, mx: [null, null, null, 'auto'] }} src={logo} alt="factly" />
             </Link>
           </div>
           <Link href="/" passHref>
-            <a sx={{
-              display: 'flex',
-              gap: '24px',
-            }}>
+            <a
+              sx={{
+                display: 'flex',
+                gap: '24px',
+              }}
+            >
               <p>Home</p>
               <p>Products</p>
               <p>Resources</p>
               <p>Pricing</p>
             </a>
-
           </Link>
         </div>
-        <div sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '24px'
-        }}>
-          <div sx={{
+        <div
+          sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: '16px',
-          }}>
-            <a
-              title="Share on Facebook"
-              href={``}
-              target="_blank"
-              rel="noopener noreferrer">
-              <FaFacebook /></a>
-
-            <a
-              title="Share on Twitter"
-              href={``}
-              target="_blank"
-              rel="noopener noreferrer">
-              <FaTwitter /></a>
-
-          </div>
-          <p sx={{
-            display: 'flex',
-            alignItems: 'center',
-            border: '1px solid',
-            padding: '12px',
-            borderRadius: '10px',
-            bg: '#F55353',
-            color: 'white',
-            fontSize: '16px',
-            fontWeight: '500'
+            gap: '24px',
           }}
+        >
+          <div
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '16px',
+            }}
           >
-            <a href="">
-              Subscribe</a>
+            <a title="Share on Facebook" href={``} target="_blank" rel="noopener noreferrer">
+              <FaFacebook />
+            </a>
+
+            <a title="Share on Twitter" href={``} target="_blank" rel="noopener noreferrer">
+              <FaTwitter />
+            </a>
+          </div>
+          <p
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              border: '1px solid',
+              padding: '12px',
+              borderRadius: '10px',
+              bg: '#F55353',
+              color: 'white',
+              fontSize: '16px',
+              fontWeight: '500',
+            }}
+          >
+            <a href="">Subscribe</a>
           </p>
         </div>
       </div>
-      <hr sx={{
-        mt: '0.75rem'
-      }} />
-    </React.Fragment >
-  )
+      <hr
+        sx={{
+          mt: '0.75rem',
+        }}
+      />
+    </React.Fragment>
+  );
 };
 
 export default Navbar;

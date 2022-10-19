@@ -56,7 +56,7 @@ const FactCheckWidget = ({ claims }) => {
 
     const maxScroll = Math.round(
       sliderElement.current.children[1].getBoundingClientRect().x -
-      sliderElement.current.firstElementChild.getBoundingClientRect().x,
+        sliderElement.current.firstElementChild.getBoundingClientRect().x,
     );
     setScrollWidth(maxScroll);
   }, []);

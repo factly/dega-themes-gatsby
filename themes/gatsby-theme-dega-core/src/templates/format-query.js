@@ -5,7 +5,7 @@ export default FormatPage;
 
 export const query = graphql`
   query ($id: String!) {
-    posts:allDegaPost(filter: { format: { id: { eq: $id } } }) {
+    posts: allDegaPost(filter: { format: { id: { eq: $id } } }) {
       nodes {
         users {
           id

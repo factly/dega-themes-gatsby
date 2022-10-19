@@ -12,7 +12,7 @@ import Seo from '@components/Seo';
 const Layout = (props) => {
   const data = useStaticQuery(graphql`
     query {
-      menu:allDegaMenu {
+      menu: allDegaMenu {
         nodes {
           menu
           id
@@ -20,7 +20,7 @@ const Layout = (props) => {
           name
         }
       }
-      space:degaSpace {
+      space: degaSpace {
         description
         name
         site_title
@@ -46,9 +46,7 @@ const Layout = (props) => {
         title={`${space.site_title} - ${space.tag_line}`}
         // canonical={degaSpace.site_address}
         image={`${space?.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
-        description={
-          space.description !== 'null' ? space.description : space.site_title
-        }
+        description={space.description !== 'null' ? space.description : space.site_title}
         fbAppId="587617254726291"
         fbPages="1521487944736293"
       >

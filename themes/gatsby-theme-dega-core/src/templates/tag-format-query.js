@@ -5,20 +5,20 @@ export default TagPage;
 
 export const query = graphql`
   query ($id: String!, $format_id: String!) {
-    tag:degaTag(degaId: { eq: $id }) {
+    tag: degaTag(degaId: { eq: $id }) {
       description
       id
       name
       slug
     }
-    formats:allDegaFormat {
+    formats: allDegaFormat {
       nodes {
         id
         slug
         name
       }
     }
-    posts:allDegaPost(
+    posts: allDegaPost(
       filter: { tags: { elemMatch: { id: { eq: $id } } }, format: { id: { eq: $format_id } } }
     ) {
       nodes {

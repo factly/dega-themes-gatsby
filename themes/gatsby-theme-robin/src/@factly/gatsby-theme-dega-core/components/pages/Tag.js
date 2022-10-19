@@ -1,6 +1,6 @@
-import * as React from "react"
-import TagPage from "@components/Pages/Category"
+import * as React from 'react';
+import TagPage from '@components/Pages/Category';
 
 export default function DegaCoreCategoryPage({ ...props }) {
-    return <TagPage {...props} />
+  return <TagPage {...props} />;
 }

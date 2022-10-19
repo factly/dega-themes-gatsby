@@ -3,21 +3,15 @@ require('dotenv').config({
 });
 
 module.exports = {
-  flags: {
-    LAZY_IMAGES: true,
-    // FAST_REFRESH: true,
-  },
   plugins: [
     `gatsby-plugin-sass`,
     {
       resolve: '@factly/gatsby-theme-factly',
       options: {
-        spaceId: process.env.SPACE_ID,
-        accessToken: process.env.ACCESS_TOKEN,
+        spaceId: process.env.H_SPACE_ID,
+        accessToken: process.env.H_ACCESS_TOKEN,
         siteUrl: process.env.SITE_URL,
-        apiUrl: 'http://dega-api.factly.org/query',
-        // youtubeApiKey: process.env.GOOGLE_PRIVATE_KEY,
-        // channelId: process.env.CHANNEL_ID,
+        apiUrl: process.env.DEGA_API_URL,
       },
     },
   ],

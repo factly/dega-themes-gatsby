@@ -25,24 +25,22 @@ exports.pluginOptionsSchema = ({ Joi }) => {
     homepage: Joi.number().description(`Specifies layout of homepage`),
     accessToken: Joi.string().required().description(`Specifies access Token`),
     apiUrl: Joi.string().required().description('api url'),
-    siteUrl: Joi.string().description("Site url: used for generating, sitemaps and amp pages")
+    siteUrl: Joi.string().description('Site url: used for generating, sitemaps and amp pages'),
   });
 };
 
 // These templates are only data-fetching wrappers that import components
 
 const homepageTemplate = require.resolve('./src/templates/homepage-query.js');
-const formatTemplate = require.resolve('./src/templates/format-query.js')
+const formatTemplate = require.resolve('./src/templates/format-query.js');
 const postTemplate = require.resolve('./src/templates/post-query.js');
 const postAmpTemplate = require.resolve('./src/templates/post-amp-query.js');
 const tagTemplate = require.resolve('./src/templates/tag-query.js');
-const tagFormatTemplate = require.resolve('./src/templates/tag-format-query.js')
+const tagFormatTemplate = require.resolve('./src/templates/tag-format-query.js');
 const categoryTemplate = require.resolve('./src/templates/category-query.js');
 const categoryFormatTemplate = require.resolve('./src/templates/category-format-query.js');
 const authorTemplate = require.resolve('./src/templates/author-query.js');
 const authorFormatTemplate = require.resolve('./src/templates/author-format-query.js');
-
-
 
 exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId }) => {
   const { createPage } = actions;

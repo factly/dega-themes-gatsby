@@ -32,7 +32,12 @@
     "youtube": "yarn workspace factly-youtube",
     "source-vidcheck": "yarn workspace gatsby-source-vidcheck",
     "athena": "yarn workspace athena",
-    "harpy": "yarn workspace factly-harpy"
+    "harpy": "yarn workspace factly-harpy",
+    "dodo": "yarn workspace factly-dodo",
+    "kite": "yarn workspace factly-kite",
+    "quail": "yarn workspace factly-quail",
+    "robin": "yarn workspace factly-robin",
+    "weaver": "yarn workspace factly-weaver"
   },
   "husky": {
     "hooks": {

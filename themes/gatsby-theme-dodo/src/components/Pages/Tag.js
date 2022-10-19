@@ -35,13 +35,7 @@ function TagDetailsAll({ data }) {
       <Helmet>
         <title> {tag.name} </title>
       </Helmet>
-      <PostGrid
-        type="tag"
-        posts={posts.nodes}
-        formats={formats.nodes}
-        item={tag}
-        header={header}
-      />
+      <PostGrid type="tag" posts={posts.nodes} formats={formats.nodes} item={tag} header={header} />
     </Layout>
   );
 }

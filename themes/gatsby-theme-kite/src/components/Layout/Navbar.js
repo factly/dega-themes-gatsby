@@ -41,7 +41,7 @@ const Navbar = ({ logo, menu }) => {
   const handleClick = () => {
     setShowMenu((prevState) => !prevState);
   };
-  // 
+  //
   // return (
   //   <React.Fragment>
   //     <div
@@ -173,22 +173,25 @@ const Navbar = ({ logo, menu }) => {
   //   </React.Fragment>
   // );
 
-
   return (
     <React.Fragment>
-      <div sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '7rem',
-        ml: '12rem',
-        mr: '10rem',
-        mt: '2rem'
-      }}>
-        <div sx={{
+      <div
+        sx={{
           display: 'flex',
           alignItems: 'center',
-          gap: '20px'
-        }}>
+          gap: '7rem',
+          ml: '12rem',
+          mr: '10rem',
+          mt: '2rem',
+        }}
+      >
+        <div
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '20px',
+          }}
+        >
           <div>
             {/* <Link href="/" passHref>
               <a sx={{ mx: 'auto' }}>
@@ -199,9 +202,7 @@ const Navbar = ({ logo, menu }) => {
                 />
               </a>
             </Link> */}
-            <Link
-              to="/"
-            >
+            <Link to="/">
               <img sx={{ height: 8, mx: [null, null, null, 'auto'] }} src={logo} alt="factly" />
             </Link>
           </div>
@@ -209,52 +210,65 @@ const Navbar = ({ logo, menu }) => {
             <FaBars />
           </p>
         </div>
-        <div sx={{
-
-          border: '1px solid',
-          width: '320px',
-          height: '48px',
-          borderRadius: '8px'
-        }}>
-          <div sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            marginTop: '12px',
-            paddingLeft: '12px'
-          }}>
+        <div
+          sx={{
+            border: '1px solid',
+            width: '320px',
+            height: '48px',
+            borderRadius: '8px',
+          }}
+        >
+          <div
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              marginTop: '12px',
+              paddingLeft: '12px',
+            }}
+          >
             <FaSistrix />
             <p>search</p>
           </div>
         </div>
-        <div sx={{
-          display: 'flex',
-          gap: '32px',
-          height: '48px',
-          width: '200px',
-          alignItems: 'center',
-          ml: '25rem'
-        }}>
+        <div
+          sx={{
+            display: 'flex',
+            gap: '32px',
+            height: '48px',
+            width: '200px',
+            alignItems: 'center',
+            ml: '25rem',
+          }}
+        >
           <Link href="/" passHref>
             <a>
-              <p sx={{
-                fontSize: '16px',
-                lineHeight: '24px',
-                color: '#667085',
-              }}>Sign in</p>
+              <p
+                sx={{
+                  fontSize: '16px',
+                  lineHeight: '24px',
+                  color: '#667085',
+                }}
+              >
+                Sign in
+              </p>
             </a>
           </Link>
           <Link href="/" passHref>
             <a>
-              <p sx={{
-                border: '1px solid',
-                padding: '10px',
-                borderRadius: '8px',
-                fontSize: '16px',
-                lineHeight: '24px',
-                color: '#FFFFFF',
-                bg: '#7855F7',
-              }}>Sign up</p>
+              <p
+                sx={{
+                  border: '1px solid',
+                  padding: '10px',
+                  borderRadius: '8px',
+                  fontSize: '16px',
+                  lineHeight: '24px',
+                  color: '#FFFFFF',
+                  bg: '#7855F7',
+                }}
+              >
+                Sign up
+              </p>
             </a>
           </Link>
         </div>
@@ -296,11 +310,13 @@ const Navbar = ({ logo, menu }) => {
         ))}
       </div> */}
       </div>
-      <hr sx={{
-        mt: '0.75rem'
-      }} />
-    </React.Fragment >
-  )
+      <hr
+        sx={{
+          mt: '0.75rem',
+        }}
+      />
+    </React.Fragment>
+  );
 };
 
 export default Navbar;

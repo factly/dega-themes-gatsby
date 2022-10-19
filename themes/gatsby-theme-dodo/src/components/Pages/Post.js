@@ -26,7 +26,7 @@ const PostDetails = ({ data }) => {
   const [showSocialIcon, setShowSocialIcon] = React.useState(false);
 
   const [observer, setObserver] = React.useState({
-    observe: () => { },
+    observe: () => {},
   });
 
   const handleShowSocialIcon = (entry) => {

@@ -1,11 +1,6 @@
 const editorjsHTML = require('editorjs-html');
 
-module.exports = ({
-  spaceId,
-  accessToken,
-  apiUrl,
-  siteUrl = 'https://localhost:9002',
-}) => ({
+module.exports = ({ spaceId, accessToken, apiUrl, siteUrl = 'https://localhost:9002' }) => ({
   siteMetadata: {
     title: 'epage',
     siteUrl,
@@ -19,7 +14,7 @@ module.exports = ({
         accessToken,
         apiUrl,
         siteUrl,
-      }
+      },
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
@@ -27,7 +22,7 @@ module.exports = ({
     {
       resolve: 'gatsby-plugin-theme-ui',
       options: {
-        // injects a script tag which causes error in AMP pages can be removed if we're not using AMP pages 
+        // injects a script tag which causes error in AMP pages can be removed if we're not using AMP pages
         injectColorFlashScript: false,
       },
     },

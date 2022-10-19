@@ -95,6 +95,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     logo_mobile: DegaMedium
     mobile_icon: DegaMedium
     meta_fields: JSON
+    header_code: String
+    footer_code: String
     name: String
     site_address: String
     site_title: String

@@ -1,6 +1,6 @@
-import * as React from "react"
-import Homepage from "@components/Pages/Homepage"
+import * as React from 'react';
+import Homepage from '@components/Pages/Homepage';
 
 export default function DegaCoreCategoryPage({ ...props }) {
-    return <Homepage {...props} />
+  return <Homepage {...props} />;
 }

@@ -69,7 +69,6 @@ function CategoryDetailsAll({ data }) {
       <Helmet>
         <title> {category.name} </title>
       </Helmet>
-      {console.log({ posts: posts.nodes })}
       <PostGrid
         type="category"
         posts={posts.nodes}

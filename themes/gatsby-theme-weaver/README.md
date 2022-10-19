@@ -20,6 +20,7 @@ Read the [Source Code](https://github.com/factly/dega-themes).
 To run example site
 
 ```
+
 yarn workspace [sitename] start
 
 ```
@@ -27,6 +28,7 @@ yarn workspace [sitename] start
 ex -
 
 ```
+
 yarn workspace factly-english start
 
 ```
@@ -34,19 +36,23 @@ yarn workspace factly-english start
 # To build new site
 
 ```
+
 mkdir project-name && cd project-name
+
 ```
 
 ## Add package.json file
 
 ```
+
 yarn init -y -p
-```
+
+````
 ## Add dependencies
 
 ```sh
 yarn add gatsby react react-dom '@factly/gatsby-theme-weaver'
-```
+````
 
 ## Add gatsby-config.js file
 
@@ -68,12 +74,11 @@ module.exports = {
         spaceId: 'YOUR_SPACE_ID',
         ampPages: true,
         ampPagesPath: '/amp',
-        basePath: '/',      
+        basePath: '/',
     },
   ],
 };
 ```
-
 
 ## Run site
 
@@ -87,20 +92,18 @@ gatsby develop
 gatsby build
 ```
 
-
 ## Usage
 
 ### Theme options
 
-| Key        | Default Value | Description                                                                                              | Required |
-| ---------- | ------------- | ------------------------------------------------------------------------------------------------------- | ---------- | 
-| `accessToken`      | null        | Access Token for the Dega API | true |
-| `spaceId` | null | Space Id for the site       | true |
-| `apiUrl` | `https://dega-api.factly.in`           | Dega API url for the theme     | false |
-| `basePath` | `/` | Root url for the theme        | false |
-| `ampPages` | true | Configure your site to have amp pages    | false |
-| `ampPagesPath` | `/amp` | Path for amp pages        | false |
-
+| Key            | Default Value                | Description                           | Required |
+| -------------- | ---------------------------- | ------------------------------------- | -------- |
+| `accessToken`  | null                         | Access Token for the Dega API         | true     |
+| `spaceId`      | null                         | Space Id for the site                 | true     |
+| `apiUrl`       | `https://dega-api.factly.in` | Dega API url for the theme            | false    |
+| `basePath`     | `/`                          | Root url for the theme                | false    |
+| `ampPages`     | true                         | Configure your site to have amp pages | false    |
+| `ampPagesPath` | `/amp`                       | Path for amp pages                    | false    |
 
 #### Example usage
 
@@ -116,12 +119,11 @@ module.exports = {
         spaceId: 'YOUR_SPACE_ID',
         ampPages: true,
         ampPagesPath: '/amp',
-        basePath: '/',      
+        basePath: '/',
     },
   ],
 };
 ```
-
 
 ### Shadowing
 
@@ -139,6 +141,6 @@ You can find the extensive [changelog of changes on GitHub](https://github.com/f
 
 If you have general questions or need help with Gatsby, please go to one of the [support platforms](https://www.gatsbyjs.com/contributing/community/#where-to-get-support) mentioned in Gatsby's documentation. If you have a specific question about this theme, you can head to the [GitHub Discussions](https://github.com/LekoArts/gatsby-themes/discussions) of the repository.
 
-
+```
 
 ```

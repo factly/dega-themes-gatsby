@@ -29,7 +29,7 @@ import { isBrowser } from '@helpers/isBrowser';
  * TODO: Add backgroudn to embeds if failed like factly.in
  */
 
-const Post = ({ post, }) => {
+const Post = ({ post }) => {
   const postSection = useRef(null);
 
   // const headerSocialIcon = createRef();
@@ -45,7 +45,6 @@ const Post = ({ post, }) => {
   }
 
   return (
-
     <>
       <Seo title={post.title} description={post.excerpt} />
       <Helmet>
@@ -81,11 +80,13 @@ const Post = ({ post, }) => {
             overflow: 'hidden',
           }}
         >
-          <div sx={{
-            display: 'flex',
-            gap: '12px',
-            mb: '0.5rem'
-          }}>
+          <div
+            sx={{
+              display: 'flex',
+              gap: '12px',
+              mb: '0.5rem',
+            }}
+          >
             {post.categories.map((category, i) => (
               <Badge key={i} url={category.slug} name={category.name} />
             ))}
@@ -234,8 +235,6 @@ const Post = ({ post, }) => {
               </React.Fragment>
             ))}
         </div>
-
-
       </article>
     </>
   );

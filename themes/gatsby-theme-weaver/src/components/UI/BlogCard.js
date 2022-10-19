@@ -7,10 +7,10 @@ import Img from 'gatsby-image/withIEPolyfill';
 import generateFluidObject from '@helpers/generateFluidObject';
 import Badge from '@components/Post/Badge';
 
-const BlogCard = ({ post, type = 'basic', }) => {
+const BlogCard = ({ post, type = 'basic' }) => {
   return (
     <>
-      {(type === 'basic') && (
+      {type === 'basic' && (
         <div
           sx={{
             maxWidth: type === 'basic' ? [null, null, '480px'] : [null, null, null, '800px'],
@@ -58,9 +58,13 @@ const BlogCard = ({ post, type = 'basic', }) => {
             </div>
           </div>
           <div sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <div sx={{
-              fontWeight: 500, fontSize: '1rem', color: '#ea364a'
-            }}>
+            <div
+              sx={{
+                fontWeight: 500,
+                fontSize: '1rem',
+                color: '#ea364a',
+              }}
+            >
               <Link to={`/author/${post.users[0]?.id}`}>{post.users[0]?.display_name} .</Link>
             </div>
             <div sx={{ fontSize: '.75rem', color: '#ea364a' }}>
@@ -82,33 +86,32 @@ const BlogCard = ({ post, type = 'basic', }) => {
           </div>
           <div>
             <div>
-              {post.categories.length > 0 && <Link
-                to={`/category/${post.categories[0].slug}`}
-                sx={{
-                  display: 'inline-flex',
-                  padding: '0 20px',
-                  height: '32px',
-                  lineHeight: '32px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  position: 'relative',
-                  borderRadius: '16px',
-                  background: '#F9F5FF',
-                  color: '#6941C6',
-                  fontFamily: 'inter',
-                }}
-
-              >
-                {post.categories[0]?.name}
-              </Link>}
+              {post.categories.length > 0 && (
+                <Link
+                  to={`/category/${post.categories[0].slug}`}
+                  sx={{
+                    display: 'inline-flex',
+                    padding: '0 20px',
+                    height: '32px',
+                    lineHeight: '32px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    position: 'relative',
+                    borderRadius: '16px',
+                    background: '#F9F5FF',
+                    color: '#6941C6',
+                    fontFamily: 'inter',
+                  }}
+                >
+                  {post.categories[0]?.name}
+                </Link>
+              )}
             </div>
           </div>
         </div>
       )}
 
-
       {/* featured post */}
-
 
       {type === 'featured' && (
         <div
@@ -125,7 +128,6 @@ const BlogCard = ({ post, type = 'basic', }) => {
               backgroundColor: (theme) => `${theme.colors.background.hover}`,
               color: (theme) => `${theme.colors.text.hover}`,
               textDecoration: 'underline',
-
             },
           }}
         >
@@ -136,11 +138,13 @@ const BlogCard = ({ post, type = 'basic', }) => {
           >
             <div
               className="featured"
-              sx={{ display: 'flex', flexDirection: 'column', width: '100%', maxWidth: 'full', }}
+              sx={{ display: 'flex', flexDirection: 'column', width: '100%', maxWidth: 'full' }}
             >
               <Link passHref href={`/${post.slug}`}>
                 <a>
-                  <div sx={{ maxWidth: '100%', width: '100%', display: 'flex', overflow: 'hidden' }}>
+                  <div
+                    sx={{ maxWidth: '100%', width: '100%', display: 'flex', overflow: 'hidden' }}
+                  >
                     <div
                       sx={{
                         paddingBottom: '56.24999999%',
@@ -167,18 +171,27 @@ const BlogCard = ({ post, type = 'basic', }) => {
                 </a>
               </Link>
 
-
               <div
                 key={post.id}
-                sx={{ borderTop: '1px solid #d9d9d9', display: 'block', py: '1rem', px: ['1rem', 0] }}
+                sx={{
+                  borderTop: '1px solid #d9d9d9',
+                  display: 'block',
+                  py: '1rem',
+                  px: ['1rem', 0],
+                }}
               >
-                <div sx={{
-                  display: 'flex', gap: '6px', alignItems: 'center', fontWeight: 600,
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  color: '#F55353',
-                  mb: '8px'
-                }}>
+                <div
+                  sx={{
+                    display: 'flex',
+                    gap: '6px',
+                    alignItems: 'center',
+                    fontWeight: 600,
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    color: '#F55353',
+                    mb: '8px',
+                  }}
+                >
                   <Link key={post.id} href={`/author/${post?.users[0]?.slug}`} passHref>
                     <a sx={{ fontSize: '0.75rem', textTransform: 'uppercase' }}>
                       {post?.users[0]?.display_name}.
@@ -212,14 +225,13 @@ const BlogCard = ({ post, type = 'basic', }) => {
                         border: '1px',
                         padding: '6px 12px',
                         borderRadius: '16px',
-                        background: '#F9F5FF'
+                        background: '#F9F5FF',
                       }}
                     >
                       {post.categories[0].name}
                     </a>
                   </Link>
                 )}
-
               </div>
             </div>
           </div>
@@ -227,8 +239,6 @@ const BlogCard = ({ post, type = 'basic', }) => {
       )}
 
       {/* featuredSmall post */}
-
-
 
       {type === 'featuredSmall' && (
         <div
@@ -255,14 +265,24 @@ const BlogCard = ({ post, type = 'basic', }) => {
           >
             <div
               className="featuredSmall"
-              sx={{ display: 'flex', gap: '20px', width: '100%', maxWidth: 'full', }}
+              sx={{ display: 'flex', gap: '20px', width: '100%', maxWidth: 'full' }}
             >
               <Link passHref href={`/${post.slug}`}>
-                <a sx={{
-                  flex: '1 0 50%',
-                  maxWidth: '50%'
-                }}>
-                  <div sx={{ maxWidth: '100%', width: '100%', height: '100%', display: 'flex', overflow: 'hidden' }}>
+                <a
+                  sx={{
+                    flex: '1 0 50%',
+                    maxWidth: '50%',
+                  }}
+                >
+                  <div
+                    sx={{
+                      maxWidth: '100%',
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      overflow: 'hidden',
+                    }}
+                  >
                     <div
                       sx={{
                         paddingBottom: '56.24999999%',
@@ -291,23 +311,31 @@ const BlogCard = ({ post, type = 'basic', }) => {
               <div
                 key={post.id}
                 sx={{
-                  borderTop: '1px solid #d9d9d9', display: 'block', py: '1rem', px: ['1rem', 0], flex: '1 0 50%',
-                  maxWidth: '50%'
+                  borderTop: '1px solid #d9d9d9',
+                  display: 'block',
+                  py: '1rem',
+                  px: ['1rem', 0],
+                  flex: '1 0 50%',
+                  maxWidth: '50%',
                 }}
               >
-                <div sx={{
-                  display: 'flex', gap: '6px', alignItems: 'center', fontWeight: 600,
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  color: '#F55353',
-                  mb: '8px'
-                }}>
+                <div
+                  sx={{
+                    display: 'flex',
+                    gap: '6px',
+                    alignItems: 'center',
+                    fontWeight: 600,
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    color: '#F55353',
+                    mb: '8px',
+                  }}
+                >
                   <Link key={post.id} href={`/author/${post?.users[0]?.slug}`} passHref>
                     <a sx={{ fontSize: '0.75rem', textTransform: 'uppercase' }}>
                       {post?.users[0]?.display_name}.
                     </a>
                   </Link>
-
 
                   <p sx={{ fontSize: '0.675rem' }}>{parseDate(post.published_date)}</p>
                 </div>
@@ -337,7 +365,7 @@ const BlogCard = ({ post, type = 'basic', }) => {
                         border: '1px',
                         padding: '6px 12px',
                         borderRadius: '16px',
-                        background: '#F9F5FF'
+                        background: '#F9F5FF',
                       }}
                     >
                       {post.categories[0].name}
@@ -354,17 +382,3 @@ const BlogCard = ({ post, type = 'basic', }) => {
 };
 
 export default BlogCard;
-
-
-
-
-
-
-
-
-
-
-
-
-
-//post.categories[0].name

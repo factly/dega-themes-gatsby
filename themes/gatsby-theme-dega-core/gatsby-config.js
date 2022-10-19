@@ -1,6 +1,6 @@
 const withDefaults = require('./utils/default-options.js');
 module.exports = (themeOptions) => {
-  const { spaceId, accessToken, apiUrl, siteUrl, basePath, } = withDefaults(themeOptions);
+  const { spaceId, accessToken, apiUrl, siteUrl, basePath } = withDefaults(themeOptions);
   return {
     siteMetadata: {
       title: 'Dega',
@@ -23,8 +23,7 @@ module.exports = (themeOptions) => {
           uri: apiUrl,
         },
       },
-
-
+      //`gatsby-plugin-extract-schema`,
 
       {
         resolve: `gatsby-plugin-amp`,

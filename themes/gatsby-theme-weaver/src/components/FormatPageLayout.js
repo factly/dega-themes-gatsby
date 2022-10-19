@@ -49,15 +49,18 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
           sx={{ order: [2, null, null, null, 1], maxWidth: 1560, width: '100%', mx: 'auto' }}
         >
           <div
-            sx={{
-              // display: 'flex',
-              // flexDirection: 'column',
-
-            }}
+            sx={
+              {
+                // display: 'flex',
+                // flexDirection: 'column',
+              }
+            }
           >
-            <p sx={{
-              ml: '1.25rem'
-            }}>
+            <p
+              sx={{
+                ml: '1.25rem',
+              }}
+            >
               {header ? header(item) : defaultHeader(item)}
             </p>
             {/* <div
@@ -130,7 +133,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
                 }}
               >
                 {filteredPosts.map((item, index) => (
-                  <BlogCard key={index} type='basic' post={item} />
+                  <BlogCard key={index} type="basic" post={item} />
                 ))}
               </div>
             ) : (

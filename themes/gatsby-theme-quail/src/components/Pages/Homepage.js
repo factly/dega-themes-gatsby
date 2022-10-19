@@ -6,27 +6,27 @@ import BlogCard from '../UI/BlogCard';
 import Seo from '@components/Seo';
 
 const Homepage = ({ data }) => {
-    const { post, posts } = data;
+  const { post, posts } = data;
 
-    return <Layout>
+  return (
+    <Layout>
+      {/* bottom post */}
 
-
-        {/* bottom post */}
-
-        <div sx={{
-            ml: '3.5rem',
-
-        }}>
-            <h2 sx={{ px: '2rem' }}></h2>
-            <div sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                {posts.nodes.slice(0, 6).map((post) => {
-                    return <BlogCard post={post} type="basic" key={post.id} />;
-                })}
-            </div>
-            <hr />
+      <div
+        sx={{
+          ml: '3.5rem',
+        }}
+      >
+        <h2 sx={{ px: '2rem' }}></h2>
+        <div sx={{ display: 'flex', flexWrap: 'wrap' }}>
+          {posts.nodes.slice(0, 6).map((post) => {
+            return <BlogCard post={post} type="basic" key={post.id} />;
+          })}
         </div>
+        <hr />
+      </div>
 
-        {/* <div>
+      {/* <div>
             <section>
                 <div sx={{
                     display: 'flex',
@@ -60,7 +60,8 @@ const Homepage = ({ data }) => {
             </section>
         </div>
         <hr /> */}
-    </Layout>;
+    </Layout>
+  );
 };
 
 export default Homepage;

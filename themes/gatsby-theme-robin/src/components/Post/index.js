@@ -227,10 +227,9 @@ const Post = ({ post, observer }) => {
                     </div>
                   </div>
                 )}
-
                 <div className="parsed">
                   {parseEditorJsData({ content: claim.description, scripts: true })}
-                </div>yarn workspace factly-
+                </div>
               </React.Fragment>
             ))}
           <div sx={{ textAlign: 'center', mt: '3rem' }}>
@@ -248,10 +247,10 @@ const Post = ({ post, observer }) => {
                   borderRadius: '4px',
                   width: '40px',
                   height: '40px',
-                  fontSize: "1.5rem",
-                  justifyContent: "center",
-                  padding: "0.5rem",
-                  lineHeight: "1"
+                  fontSize: '1.5rem',
+                  justifyContent: 'center',
+                  padding: '0.5rem',
+                  lineHeight: '1',
                 },
                 'a:hover': {
                   color: '#0066FF',
@@ -260,11 +259,11 @@ const Post = ({ post, observer }) => {
                   borderRadius: '4px',
                   width: '40px',
                   height: '40px',
-                  fontSize: "1.5rem",
-                  background: "none",
-                  cursor: "pointer",
-                  padding: "0.5rem",
-                  lineHeight: "1"
+                  fontSize: '1.5rem',
+                  background: 'none',
+                  cursor: 'pointer',
+                  padding: '0.5rem',
+                  lineHeight: '1',
                 },
                 'button:hover': {
                   color: '#0066FF',

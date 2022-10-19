@@ -6,11 +6,11 @@ import Layout from '@components/Layout/index';
 import { isBrowser } from '@helpers/isBrowser';
 import Seo from '@components/Seo';
 import {
-    FaTwitterSquare,
-    FaFacebookSquare,
-    FaWhatsappSquare,
-    FaChevronLeft,
-    FaChevronRight,
+  FaTwitterSquare,
+  FaFacebookSquare,
+  FaWhatsappSquare,
+  FaChevronLeft,
+  FaChevronRight,
 } from 'react-icons/fa';
 import { Link } from 'gatsby';
 import parseDate from '@helpers/parseDate';
@@ -19,90 +19,89 @@ import parseDate from '@helpers/parseDate';
  * TODO: Add loader for infinite-scroller
  */
 const PostDetails = ({ data }) => {
-    const { posts, space, post, recentPosts } = data;
-    const postEdge = posts.edges.filter(({ node }) => node.id === post.id)[0];
-    const { previous: previousPost, next: nextPost } = postEdge;
+  const { posts, space, post, recentPosts } = data;
+  const postEdge = posts.edges.filter(({ node }) => node.id === post.id)[0];
+  const { previous: previousPost, next: nextPost } = postEdge;
 
+  const [showSocialIcon, setShowSocialIcon] = React.useState(false);
 
-    const [showSocialIcon, setShowSocialIcon] = React.useState(false);
+  const [observer, setObserver] = React.useState({
+    observe: () => {},
+  });
 
-    const [observer, setObserver] = React.useState({
-        observe: () => { },
-    });
-
-    const handleShowSocialIcon = (entry) => {
-        if (entry.intersectionRatio > 0) {
-            setShowSocialIcon(false);
-        } else {
-            setShowSocialIcon(true);
-        }
-    };
-
-    const createObserver = () => {
-        const o = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.target.hasAttribute('social-icon')) {
-                    handleShowSocialIcon(entry);
-                }
-            });
-        });
-        setObserver(o);
-    };
-    React.useEffect(() => {
-        createObserver();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    // for sharing links
-    const title = encodeURIComponent(post.title);
-    let url;
-    if (isBrowser) {
-        url = encodeURIComponent(window.location.href);
+  const handleShowSocialIcon = (entry) => {
+    if (entry.intersectionRatio > 0) {
+      setShowSocialIcon(false);
+    } else {
+      setShowSocialIcon(true);
     }
+  };
 
-    return (
-        <Layout>
-            <Seo
-                title={post.title}
-                description={post.excerpt}
-                image={`${post.medium?.url?.proxy}`}
-                canonical={`${space.site_address}/${post.slug}`}
-                type="article"
-            />
+  const createObserver = () => {
+    const o = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target.hasAttribute('social-icon')) {
+          handleShowSocialIcon(entry);
+        }
+      });
+    });
+    setObserver(o);
+  };
+  React.useEffect(() => {
+    createObserver();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // for sharing links
+  const title = encodeURIComponent(post.title);
+  let url;
+  if (isBrowser) {
+    url = encodeURIComponent(window.location.href);
+  }
+
+  return (
+    <Layout>
+      <Seo
+        title={post.title}
+        description={post.excerpt}
+        image={`${post.medium?.url?.proxy}`}
+        canonical={`${space.site_address}/${post.slug}`}
+        type="article"
+      />
+      <div
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          position: 'relative',
+        }}
+      >
+        <div
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            maxWidth: 1024,
+            mx: 'auto',
+            p: [
+              (theme) => `${theme.space.spacing3}`,
+              null,
+              null,
+              (theme) => `${theme.space.spacing8}`,
+            ],
+            pl: (theme) => [null, null, `${theme.space.spacing8}`],
+          }}
+        >
+          <Post key={`details${post.id}`} post={post} observer={observer} />
+          <div>
             <div
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    position: 'relative',
-                }}
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                pb: (theme) => `${theme.space.spacing6}`,
+                borderBottomWidth: '1px',
+              }}
             >
-                <div
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        width: '100%',
-                        maxWidth: 1024,
-                        mx: 'auto',
-                        p: [
-                            (theme) => `${theme.space.spacing3}`,
-                            null,
-                            null,
-                            (theme) => `${theme.space.spacing8}`,
-                        ],
-                        pl: (theme) => [null, null, `${theme.space.spacing8}`],
-                    }}
-                >
-                    <Post key={`details${post.id}`} post={post} observer={observer} />
-                    <div>
-                        <div
-                            sx={{
-                                display: 'flex',
-                                flexWrap: 'wrap',
-                                pb: (theme) => `${theme.space.spacing6}`,
-                                borderBottomWidth: '1px',
-                            }}
-                        >
-                            {/* <div
+              {/* <div
                                 sx={{
                                     flex: [null, null, '0 0 50%'],
                                     maxWidth: [null, null, '50%'],
@@ -129,7 +128,7 @@ const PostDetails = ({ data }) => {
                                     </>
                                 )}
                             </div> */}
-                            {/* <div
+              {/* <div
                                 sx={{
                                     flex: [null, null, '0 0 50%'],
                                     maxWidth: [null, null, '50%'],
@@ -157,8 +156,8 @@ const PostDetails = ({ data }) => {
                                     </>
                                 )}
                             </div> */}
-                        </div>
-                        {/* <div
+            </div>
+            {/* <div
                             sx={{
                                 mt: (theme) => `${theme.space.spacing6}`,
                                 pb: (theme) => `${theme.space.spacing6}`,
@@ -215,87 +214,87 @@ const PostDetails = ({ data }) => {
                                     ))}
                             </div>
                         </div> */}
-                    </div>
-                    {showSocialIcon && (
-                        <>
-                            <div
-                                className="top-auto"
-                                style={{
-                                    top: '40vh',
-                                }}
-                                sx={{
-                                    display: ['none', null, 'flex'],
-                                    flexDirection: 'column',
-                                    position: 'fixed',
-                                    ml: (theme) => `-${theme.space.spacing8}`,
-                                    // left: 0,
-                                    alignItems: 'center',
-                                    justifyContent: ['flex-start', null, 'flex-end'],
-                                    top: '40vh',
-                                }}
-                            >
-                                <a
-                                    title="Share on Facebook"
-                                    href={`https://www.facebook.com/sharer.php?u=${url}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    sx={{
-                                        display: 'block',
-                                        m: (theme) => `${theme.space.spacing1}`,
-                                        p: (theme) => `${theme.space.spacing3}`,
-                                        '&:first-of-type': { mx: 0 },
-                                        fontWeight: 'semibold',
-                                        borderRadius: 'default',
-                                    }}
-                                >
-                                    <FaFacebookSquare
-                                        sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
-                                        color="#3b5998"
-                                    />
-                                </a>
-                                <a
-                                    title="Tweet it"
-                                    href={`https://twitter.com/share?text=${title}-&url=${url}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    sx={{
-                                        display: 'block',
-                                        m: (theme) => `${theme.space.spacing1}`,
-                                        '&:first-of-type': { mx: 0 },
-                                        p: (theme) => `${theme.space.spacing3}`,
-                                        fontWeight: 'semibold',
-                                        borderRadius: 'default',
-                                    }}
-                                >
-                                    <FaTwitterSquare
-                                        sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
-                                        color="#1da1f2"
-                                    />
-                                </a>
-                                <a
-                                    title="Share on WhatsApp"
-                                    href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                                        `${title} - ${url}`,
-                                    )}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    sx={{
-                                        display: 'block',
-                                        m: (theme) => `${theme.space.spacing1}`,
-                                        '&:first-of-type': { mx: 0 },
-                                        p: (theme) => `${theme.space.spacing3}`,
-                                        fontWeight: 'semibold',
-                                        borderRadius: 'default',
-                                    }}
-                                >
-                                    <FaWhatsappSquare
-                                        sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
-                                        color="#25d366"
-                                    />
-                                </a>
-                            </div>
-                            {/* Mobile share icon at the bottom */}
-                            {/* <div
+          </div>
+          {showSocialIcon && (
+            <>
+              <div
+                className="top-auto"
+                style={{
+                  top: '40vh',
+                }}
+                sx={{
+                  display: ['none', null, 'flex'],
+                  flexDirection: 'column',
+                  position: 'fixed',
+                  ml: (theme) => `-${theme.space.spacing8}`,
+                  // left: 0,
+                  alignItems: 'center',
+                  justifyContent: ['flex-start', null, 'flex-end'],
+                  top: '40vh',
+                }}
+              >
+                <a
+                  title="Share on Facebook"
+                  href={`https://www.facebook.com/sharer.php?u=${url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    display: 'block',
+                    m: (theme) => `${theme.space.spacing1}`,
+                    p: (theme) => `${theme.space.spacing3}`,
+                    '&:first-of-type': { mx: 0 },
+                    fontWeight: 'semibold',
+                    borderRadius: 'default',
+                  }}
+                >
+                  <FaFacebookSquare
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
+                    color="#3b5998"
+                  />
+                </a>
+                <a
+                  title="Tweet it"
+                  href={`https://twitter.com/share?text=${title}-&url=${url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    display: 'block',
+                    m: (theme) => `${theme.space.spacing1}`,
+                    '&:first-of-type': { mx: 0 },
+                    p: (theme) => `${theme.space.spacing3}`,
+                    fontWeight: 'semibold',
+                    borderRadius: 'default',
+                  }}
+                >
+                  <FaTwitterSquare
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
+                    color="#1da1f2"
+                  />
+                </a>
+                <a
+                  title="Share on WhatsApp"
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                    `${title} - ${url}`,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    display: 'block',
+                    m: (theme) => `${theme.space.spacing1}`,
+                    '&:first-of-type': { mx: 0 },
+                    p: (theme) => `${theme.space.spacing3}`,
+                    fontWeight: 'semibold',
+                    borderRadius: 'default',
+                  }}
+                >
+                  <FaWhatsappSquare
+                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
+                    color="#25d366"
+                  />
+                </a>
+              </div>
+              {/* Mobile share icon at the bottom */}
+              {/* <div
                 sx={{
                   display: [null, null, null, 'none'],
                   position: 'fixed',
@@ -332,12 +331,12 @@ const PostDetails = ({ data }) => {
                   </g>
                 </svg>
               </div> */}
-                        </>
-                    )}
-                </div>
-            </div>
-        </Layout>
-    );
+            </>
+          )}
+        </div>
+      </div>
+    </Layout>
+  );
 };
 
 export default PostDetails;

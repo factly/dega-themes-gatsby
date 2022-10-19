@@ -8,14 +8,7 @@ const TagDetailsAll = ({ data }) => {
   /**
    * TODO: add description under category name
    */
-  return (
-    <FormatPageLayout
-      type="tag"
-      posts={posts.nodes}
-      formats={formats.nodes}
-      item={tag}
-    />
-  );
+  return <FormatPageLayout type="tag" posts={posts.nodes} formats={formats.nodes} item={tag} />;
 };
 
 export default TagDetailsAll;

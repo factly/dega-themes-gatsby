@@ -402,6 +402,8 @@ exports.getSpaceQuery = () => {
         description
         site_address
         meta_fields
+        header_code
+        footer_code
         logo {
           id
           created_at
@@ -726,7 +728,6 @@ exports.getMenuQuery = () => {
     }
   `;
 };
-
 
 // Featured Categories Query
 exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {

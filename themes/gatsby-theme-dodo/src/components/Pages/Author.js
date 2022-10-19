@@ -34,9 +34,7 @@ function UserDetailsAll({ data }) {
     }
   };
 
-  const name = user.display_name
-    ? `${user.display_name}`
-    : `${user.first_name} ${user.last_name}`;
+  const name = user.display_name ? `${user.display_name}` : `${user.first_name} ${user.last_name}`;
 
   const header = (item) => {
     return (

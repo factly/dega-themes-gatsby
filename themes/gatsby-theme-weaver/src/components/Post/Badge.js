@@ -36,7 +36,6 @@ const Badge = ({ url, name }) => {
         color: '#ea364a',
         alignItems: 'center',
         padding: '2px 10px',
-
       }}
     >
       {name}

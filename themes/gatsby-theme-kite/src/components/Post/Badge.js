@@ -38,7 +38,6 @@ const Badge = ({ url, name }) => {
         borderRadius: '16px',
         alignItems: 'center',
         padding: '2px 10px',
-
       }}
     >
       {name}

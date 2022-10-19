@@ -85,7 +85,7 @@ const Post = ({ post, observer }) => {
               fontWeight: 400,
               // my: '1.5rem',
               lineHeight: 1.3,
-              textAlign: 'center'
+              textAlign: 'center',
             }}
           >
             {post.title}
@@ -104,7 +104,7 @@ const Post = ({ post, observer }) => {
             sx={{
               display: 'flex',
               position: 'relative',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}
           >
             {/* <div
@@ -154,11 +154,13 @@ const Post = ({ post, observer }) => {
               </div>
             </div>
           </div>
-          <div sx={{
-            display: 'flex',
-            gap: '12px',
-            justifyContent: 'center'
-          }}>
+          <div
+            sx={{
+              display: 'flex',
+              gap: '12px',
+              justifyContent: 'center',
+            }}
+          >
             {post.categories.map((category, i) => (
               <Badge key={i} url={category.slug} name={category.name} />
             ))}
@@ -239,16 +241,20 @@ const Post = ({ post, observer }) => {
               </React.Fragment>
             ))}
 
-          <div sx={{
-            display: 'flex',
-            mt: '2rem',
-            justifyContent: 'space-between'
-          }}>
-            <div sx={{
+          <div
+            sx={{
               display: 'flex',
-              alignItems: 'center',
-              gap: '4px'
-            }}>
+              mt: '2rem',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+            >
               <div
                 sx={{
                   width: '40px',
@@ -256,20 +262,26 @@ const Post = ({ post, observer }) => {
                   borderRadius: '50%',
                   bg: 'gray',
                   mr: '8px',
-                }}>
-              </div>
-              <div sx={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}>
+                }}
+              ></div>
+              <div
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
                 {post.users[0]?.display_name}
-                <p>{parseDate(post.published_date)} . <span> 3 min read</span></p>
+                <p>
+                  {parseDate(post.published_date)} . <span> 3 min read</span>
+                </p>
               </div>
             </div>
 
-            <div sx={{
-              display: 'flex',
-            }}>
+            <div
+              sx={{
+                display: 'flex',
+              }}
+            >
               <a
                 sx={{
                   padding: '10px',
@@ -287,7 +299,7 @@ const Post = ({ post, observer }) => {
                 href={`https://twitter.com/share?text=${title}-&url=${url}`}
                 title="Share by Twitter"
               >
-                <FaTwitter color="#98A2B3" fontSize='22px' />
+                <FaTwitter color="#98A2B3" fontSize="22px" />
               </a>
 
               <a
@@ -304,8 +316,10 @@ const Post = ({ post, observer }) => {
                   margin: '0.25rem',
                   fontWeight: 600,
                 }}
-                href={`https://www.facebook.com/sharer.php?u=${url}`} title="Share by Facebook">
-                <FaFacebook color="#98A2B3" fontSize='22px' />
+                href={`https://www.facebook.com/sharer.php?u=${url}`}
+                title="Share by Facebook"
+              >
+                <FaFacebook color="#98A2B3" fontSize="22px" />
               </a>
               <a
                 sx={{
@@ -326,7 +340,7 @@ const Post = ({ post, observer }) => {
                 )}`}
                 title="Share by Whatsapp"
               >
-                <FaWhatsapp color="#98A2B3" fontSize='22px' />
+                <FaWhatsapp color="#98A2B3" fontSize="22px" />
               </a>
             </div>
           </div>

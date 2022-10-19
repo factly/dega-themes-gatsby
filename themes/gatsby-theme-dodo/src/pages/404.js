@@ -40,7 +40,7 @@ const PageNotFound = ({ data }) => {
 export default PageNotFound;
 export const query = graphql`
   query {
-   space: degaSpace {
+    space: degaSpace {
       logo {
         url
         dimensions

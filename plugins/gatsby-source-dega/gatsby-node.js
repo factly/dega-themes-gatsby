@@ -104,7 +104,6 @@ exports.sourceNodes = async (
   });
 
   const client = new ApolloClient({
-
     // Provide required constructor fields
     cache: cache,
     //  uri: 'http://dega-api.factly.in/query',
@@ -249,28 +248,29 @@ exports.sourceNodes = async (
     return featuredCategories;
   };
   const { data: featuredCategoriesData } = await getFeaturedCategories();
-  featuredCategoriesData.featuredCategories && featuredCategoriesData.featuredCategories.nodes.forEach((category) => {
-    createNode({
-      ...category,
-      degaId: category.id,
-      id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
-      parent: null,
-      children: [],
-      internal: {
-        type: FEATURED_CATEGORY_NODE_TYPE,
-        content: JSON.stringify({
-          ...category,
-          degaId: category.id,
-          id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
-        }),
-        contentDigest: createContentDigest({
-          ...category,
-          degaId: category.id,
-          id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
-        }),
-      },
+  featuredCategoriesData.featuredCategories &&
+    featuredCategoriesData.featuredCategories.nodes.forEach((category) => {
+      createNode({
+        ...category,
+        degaId: category.id,
+        id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+        parent: null,
+        children: [],
+        internal: {
+          type: FEATURED_CATEGORY_NODE_TYPE,
+          content: JSON.stringify({
+            ...category,
+            degaId: category.id,
+            id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+          }),
+          contentDigest: createContentDigest({
+            ...category,
+            degaId: category.id,
+            id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+          }),
+        },
+      });
     });
-  });
 
   // featuredTags
   const getFeaturedTags = async () => {
@@ -280,28 +280,29 @@ exports.sourceNodes = async (
     return featuredTags;
   };
   const { data: featuredTagsData } = await getFeaturedTags();
-  featuredTagsData.featuredTags && featuredTagsData.featuredTags.nodes.forEach((tag) => {
-    createNode({
-      ...tag,
-      degaId: tag.id,
-      id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
-      parent: null,
-      children: [],
-      internal: {
-        type: FEATURED_TAG_NODE_TYPE,
-        content: JSON.stringify({
-          ...tag,
-          degaId: tag.id,
-          id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
-        }),
-        contentDigest: createContentDigest({
-          ...tag,
-          degaId: tag.id,
-          id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
-        }),
-      },
+  featuredTagsData.featuredTags &&
+    featuredTagsData.featuredTags.nodes.forEach((tag) => {
+      createNode({
+        ...tag,
+        degaId: tag.id,
+        id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
+        parent: null,
+        children: [],
+        internal: {
+          type: FEATURED_TAG_NODE_TYPE,
+          content: JSON.stringify({
+            ...tag,
+            degaId: tag.id,
+            id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
+          }),
+          contentDigest: createContentDigest({
+            ...tag,
+            degaId: tag.id,
+            id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
+          }),
+        },
+      });
     });
-  });
 
   // formats
   const formats = await getData({
