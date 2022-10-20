@@ -47,8 +47,6 @@ const Layout = (props) => {
         // canonical={degaSpace.site_address}
         image={`${space?.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
         description={space.description !== 'null' ? space.description : degaSpace.site_title}
-        fbAppId="587617254726291"
-        fbPages="1521487944736293"
       >
         {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
       </Seo>
