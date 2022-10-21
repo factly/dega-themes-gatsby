@@ -462,6 +462,12 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                           alt={playlistVideo.snippet.title}
                           sx={{ height: 'full', width: 20 }}
                         />
+                      ) : playlistVideo.snippet.thumbnails.high ? (
+                        <img
+                          src={playlistVideo.snippet.thumbnails.high.url}
+                          alt={playlistVideo.snippet.title}
+                          sx={{ width: 20, height: 'full' }}
+                        />
                       ) : (
                         <img
                           alt={playlistVideo.snippet.title}

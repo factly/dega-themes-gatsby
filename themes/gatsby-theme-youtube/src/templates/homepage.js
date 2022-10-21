@@ -268,6 +268,12 @@ const IndexPage = ({ data, pageContext }) => {
                                 alt={video.snippet.title}
                                 sx={{ height: 'full', width: 'full' }}
                               />
+                            ) : video.snippet.thumbnails.high ? (
+                              <img
+                                src={video.snippet.thumbnails.high.url}
+                                alt={video.snippet.title}
+                                sx={{ width: 'full', height: 'full' }}
+                              />
                             ) : (
                               <img
                                 src={placeholderImg}
@@ -385,6 +391,12 @@ const IndexPage = ({ data, pageContext }) => {
                             alt={video.snippet.title}
                             sx={{ height: 'full', width: 'full' }}
                           />
+                        ) : video.snippet.thumbnails.high ? (
+                          <img
+                            src={video.snippet.thumbnails.high.url}
+                            alt={video.snippet.title}
+                            sx={{ width: 'full', height: 'full' }}
+                          />
                         ) : (
                           <img
                             src={placeholderImg}
@@ -485,6 +497,12 @@ const IndexPage = ({ data, pageContext }) => {
                           image={playlist.image.childImageSharp.gatsbyImageData}
                           alt={playlist.snippet.title}
                           sx={{ height: 'full', width: 'full' }}
+                        />
+                      ) : playlist.snippet.thumbnails.high ? (
+                        <img
+                          src={playlist.snippet.thumbnails.high.url}
+                          alt={playlist.snippet.title}
+                          sx={{ width: 'full', height: 'full' }}
                         />
                       ) : (
                         <img
@@ -636,6 +654,11 @@ export const query = graphql`
             channelTitle
             publishedAt(formatString: "MMM DD, YYYY")
             title
+            thumbnails {
+              high {
+                url
+              }
+            }
           }
         }
       }
@@ -664,6 +687,11 @@ export const query = graphql`
           description
           publishedAt(formatString: "MMM DD, YYYY")
           title
+          thumbnails {
+            high {
+              url
+            }
+          }
         }
       }
     }
@@ -688,6 +716,11 @@ export const query = graphql`
           channelId
           publishedAt(formatString: "MMM DD, YYYY")
           title
+          thumbnails {
+            high {
+              url
+            }
+          }
         }
         image {
           childImageSharp {
