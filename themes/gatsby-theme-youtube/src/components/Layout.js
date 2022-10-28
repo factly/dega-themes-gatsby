@@ -4,8 +4,76 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
+import { graphql, useStaticQuery } from 'gatsby';
 // import ShareButtonGroup from './ShareButtonGroup';
 import placeholderLogo from '../static/images/logo.png';
+
+const DisplayNavItems = ({ navItems = [] }) => {
+  return navItems.map((item) => {
+    if (item.link) {
+      return (
+        <Link
+          to={item.link}
+          sx={{
+            display: 'block',
+            p: [2, 2, 2, 4],
+            textTransform: 'uppercase',
+            fontWeight: 'semibold',
+            color: 'inherit',
+            '&:focus': { outline: 'none' },
+          }}
+        >
+          {item.name}
+        </Link>
+      );
+    }
+    if (item.dropDown) {
+      return (
+        <div
+          className="dropdown"
+          sx={{
+            position: 'relative',
+            cursor: 'pointer',
+            p: [2, 2, 2, 4],
+            textTransform: 'uppercase',
+            fontWeight: 'semibold',
+            color: 'inherit',
+            '&:hover ul': { display: 'block' },
+          }}
+        >
+          {item.name}
+          <ul
+            className="dropdown-content"
+            sx={{
+              display: 'none',
+              position: 'absolute',
+              top: '2.5rem',
+              right: 0,
+              padding: '0.75rem 1rem',
+              zIndex: 1,
+              listStyleType: 'none',
+              bg: '#f9f9f9',
+              boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+            }}
+          >
+            {item.dropDown.map((item, i) => (
+              <li key={i} sx={{ textAlign: 'center' }}>
+                <a
+                  sx={{ padding: '1rem', display: 'inline-block', color: 'inherit' }}
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+  });
+};
 
 const Layout = ({ children, baseUrl, logo }) => {
   const url = baseUrl === '' ? '/' : baseUrl;
@@ -15,13 +83,24 @@ const Layout = ({ children, baseUrl, logo }) => {
   //   url = baseUrl;
   // }
   const imgSrc = logo ? `/${logo}` : placeholderLogo;
+  const data = useStaticQuery(graphql`
+    query {
+      navData {
+        internal {
+          content
+        }
+      }
+      footer {
+        internal {
+          content
+        }
+      }
+    }
+  `);
+  const navData = JSON.parse(data.navData.internal.content);
+  const footer = data.footer.internal.content;
   const addDefaultSrc = (e) => (e.target.src = placeholderLogo);
-  const products = [
-    { name: 'Factly Stories', link: 'https://factly.in' },
-    { name: 'Data Dashboards', link: 'https://dashboards.factly.in' },
-    { name: 'Counting India', link: 'https://countingindia.com' },
-  ];
-  const leftNavItems = [];
+  const { leftNavItems, rightNavItems } = navData;
   return (
     <>
       <div
@@ -68,23 +147,7 @@ const Layout = ({ children, baseUrl, logo }) => {
                 justifyContent: ['flex-end', 'flex-end', 'flex-end', 'justify-start'],
               }}
             >
-              {leftNavItems.length > 0 &&
-                leftNavItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    sx={{
-                      display: 'block',
-                      p: [2, 2, 2, 4],
-                      textTransform: 'uppercase',
-                      fontWeight: 'semibold',
-                      color: 'inherit',
-                      '&:focus': { outline: 'none' },
-                    }}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+              <DisplayNavItems navItems={leftNavItems} />
             </div>
             <div sx={{ order: [1, 1, 1, 2], p: 2 }}>
               <Link to={url} sx={{ display: 'inline-block' }}>
@@ -105,60 +168,7 @@ const Layout = ({ children, baseUrl, logo }) => {
                 justifyContent: 'flex-end',
               }}
             >
-              <Link
-                to="/about"
-                sx={{
-                  display: 'block',
-                  p: [2, 2, 2, 4],
-                  textTransform: 'uppercase',
-                  fontWeight: 'semibold',
-                  color: 'inherit',
-                  '&:focus': { outline: 'none' },
-                }}
-              >
-                About
-              </Link>
-              <div
-                className="dropdown"
-                sx={{
-                  position: 'relative',
-                  cursor: 'pointer',
-                  p: [2, 2, 2, 4],
-                  textTransform: 'uppercase',
-                  fontWeight: 'semibold',
-                  color: 'inherit',
-                  '&:hover ul': { display: 'block' },
-                }}
-              >
-                More from Us
-                <ul
-                  className="dropdown-content"
-                  sx={{
-                    display: 'none',
-                    position: 'absolute',
-                    top: '2.5rem',
-                    right: 0,
-                    padding: '0.75rem 1rem',
-                    zIndex: 1,
-                    listStyleType: 'none',
-                    bg: '#f9f9f9',
-                    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-                  }}
-                >
-                  {products.map((item, i) => (
-                    <li key={i} sx={{ textAlign: 'center' }}>
-                      <a
-                        sx={{ padding: '1rem', display: 'inline-block', color: 'inherit' }}
-                        href={item.link}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <DisplayNavItems navItems={rightNavItems} />
             </div>
           </nav>
         </header>
@@ -185,7 +195,7 @@ const Layout = ({ children, baseUrl, logo }) => {
             color: (theme) => `${theme.colors.gray[6]}`,
           }}
         >
-          &copy; Factly {new Date().getFullYear()}. All rights reserved
+          &copy; {footer} {new Date().getFullYear()}. All rights reserved
         </footer>
       </main>
     </>

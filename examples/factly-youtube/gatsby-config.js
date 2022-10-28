@@ -14,6 +14,23 @@ module.exports = {
         basePath: '/',
         logo: 'logo.png',
         favicon: 'static/favicon.png',
+        navData: {
+          leftNavItems: [],
+          rightNavItems: [
+            {
+              name: 'About',
+              link: '/about',
+            },
+            {
+              name: 'More from Us',
+              dropDown: [
+                { name: 'Factly Stories', link: 'https://factly.in' },
+                { name: 'Data Dashboards', link: 'https://dashboards.factly.in' },
+                { name: 'Counting India', link: 'https://countingindia.com' },
+              ],
+            },
+          ],
+        },
         bannerData: [
           {
             name: 'Decode Season 1',
@@ -31,6 +48,7 @@ module.exports = {
             playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
           },
         ],
+        footer: 'Factly',
       },
     },
   ],
