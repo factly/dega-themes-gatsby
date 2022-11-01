@@ -34,7 +34,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
 
   let sortedVideos = playlist.videos;
 
-  if (playlist.snippet.title !== 'Uploads') {
+  if (playlist.snippet.title === 'Uploads') {
     sortedVideos = playlist.videos
       .map((video, i) => ({ ...video, pos: positionsArr[i].position }))
       .sort((a, b) => a.pos - b.pos);
