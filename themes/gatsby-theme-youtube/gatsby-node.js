@@ -9,10 +9,19 @@ let basePath;
 let bannerData;
 let bannerTitle;
 let logo;
+let navData;
+let footer;
 
 exports.onPreBootstrap = (
-  { store, reporter },
-  { basePath: bp = '/', bannerData: bd = [], bannerTitle: bt = 'Featured Shows', logo: lg = '' },
+  { store, reporter, actions },
+  {
+    basePath: bp = '/',
+    bannerData: bd = [],
+    bannerTitle: bt = 'Featured Shows',
+    logo: lg = '',
+    navData: nd = {},
+    footer: ft = '',
+  },
 ) => {
   // const { program } = store.getState();
   // const dirs = [
@@ -26,16 +35,44 @@ exports.onPreBootstrap = (
   //     mkdirp.sync(dir);
   //   }
   // });
-
+  navData = nd;
   basePath = bp;
   bannerData = bd;
   bannerTitle = bt;
   logo = lg;
+  footer = ft;
 };
 
+exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
+  const { createNode } = actions;
+  const nodeContent = JSON.stringify(navData);
+  const nodeMeta = {
+    id: createNodeId(`nav-data-1`),
+    parent: null,
+    children: [],
+    internal: {
+      type: `NavData`,
+      mediaType: `text/html`,
+      content: nodeContent,
+      contentDigest: createContentDigest(navData),
+    },
+  };
+  const node = Object.assign({}, navData, nodeMeta);
+  createNode(node);
+  createNode({
+    id: createNodeId(`ft-data-1`),
+    parent: null,
+    children: [],
+    internal: {
+      type: 'footer',
+      content: footer,
+      mediaType: `text/html`,
+      contentDigest: createContentDigest(footer),
+    },
+  });
+};
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-
   const result = await graphql(`
     query VideosQuery {
       allPlaylist {

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from '../components/Layout';
+import Layout from '@factly/gatsby-theme-youtube/src/components/Layout';
 
 const menuItems = [
   {
