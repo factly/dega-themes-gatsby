@@ -19,14 +19,15 @@ module.exports = {
           rightNavItems: [
             {
               name: 'About',
+              type: 'internal',
               link: '/about',
             },
             {
               name: 'More from Us',
               dropDown: [
-                { name: 'Factly Stories', link: 'https://factly.in' },
-                { name: 'Data Dashboards', link: 'https://dashboards.factly.in' },
-                { name: 'Counting India', link: 'https://countingindia.com' },
+                { name: 'Factly Stories', link: 'https://factly.in', type: 'external' },
+                { name: 'Data Dashboards', link: 'https://dashboards.factly.in', type: 'external' },
+                { name: 'Counting India', link: 'https://countingindia.com', type: 'external' },
               ],
             },
           ],

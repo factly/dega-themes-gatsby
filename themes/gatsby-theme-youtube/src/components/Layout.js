@@ -11,6 +11,25 @@ import placeholderLogo from '../static/images/logo.png';
 const DisplayNavItems = ({ navItems = [] }) => {
   return navItems.map((item) => {
     if (item.link) {
+      if (item.type === 'external') {
+        return (
+          <a
+            sx={{
+              display: 'block',
+              p: [2, 2, 2, 4],
+              textTransform: 'uppercase',
+              fontWeight: 'semibold',
+              color: 'inherit',
+              '&:focus': { outline: 'none' },
+            }}
+            href={item.link}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {item.name}
+          </a>
+        );
+      }
       return (
         <Link
           to={item.link}
@@ -56,18 +75,31 @@ const DisplayNavItems = ({ navItems = [] }) => {
               boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
             }}
           >
-            {item.dropDown.map((item, i) => (
-              <li key={i} sx={{ textAlign: 'center' }}>
-                <a
-                  sx={{ padding: '1rem', display: 'inline-block', color: 'inherit' }}
-                  href={item.link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
+            {item.dropDown.map((item, i) => {
+              if (item.type === 'internal')
+                return (
+                  <li key={i} sx={{ textAlign: 'center' }}>
+                    <Link
+                      to={item.link}
+                      sx={{ padding: '1rem', display: 'inline-block', color: 'inherit' }}
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                );
+              return (
+                <li key={i} sx={{ textAlign: 'center' }}>
+                  <a
+                    sx={{ padding: '1rem', display: 'inline-block', color: 'inherit' }}
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
       );
