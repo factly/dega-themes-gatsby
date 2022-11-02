@@ -79,13 +79,18 @@ exports.createPages = async ({ graphql, actions }) => {
         totalCount
         nodes {
           playlistId
+          snippet {
+            title
+          }
         }
       }
     }
   `);
 
   const baseUrl = basePath === '/' ? '' : urlResolve(basePath);
-
+  const uploadsPlaylistId = result.data.allPlaylist.nodes?.filter(
+    (playlist) => playlist?.snippet?.title === 'Uploads',
+  )[0]?.playlistId;
   createPage({
     path: `${baseUrl}/`,
     component: require.resolve('./src/templates/homepage.js'),
@@ -94,6 +99,7 @@ exports.createPages = async ({ graphql, actions }) => {
       bannerData,
       bannerTitle,
       logo,
+      uploadsPlaylistId,
     },
   });
   // create playlist page for each video
