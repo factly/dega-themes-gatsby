@@ -5,15 +5,14 @@ import StoryCard from '../UI/StoryCard';
 import { jsx } from 'theme-ui';
 import Helmet from 'react-helmet';
 import Layout from '../Layout';
+import Seo from '@components/Seo';
 
 function FormatPage({ data }) {
   const { posts } = data;
   const filteredPosts = data.posts.nodes.filter((post) => post.published_date !== null);
   return (
     <Layout>
-      <Helmet>
-        <title> {posts.nodes[0]?.format.name} </title>
-      </Helmet>
+      <Seo title={posts.nodes[0]?.format.name} />
 
       <div sx={{ mx: 'auto', maxWidth: 1560 }}>
         <h1
@@ -47,7 +46,6 @@ function FormatPage({ data }) {
               {posts.nodes.map((item, index) => (
                 <StoryCard
                   key={index}
-                  cardStyle="tulip"
                   storyData={item}
                   excerpt={item.format.slug !== 'fact-check'}
                 />

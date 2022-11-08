@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '@helpers/parseEditorJsData';
 import PostGrid from '../PostGrid';
 import Helmet from 'react-helmet';
 import Layout from '../Layout';
@@ -13,7 +12,6 @@ function TagDetailsAll({ data }) {
       <div
         sx={{
           mb: (theme) => `${theme.space.spacing6}`,
-
           fontSize: (theme) => `${theme.fontSizes.h6}`,
         }}
       >

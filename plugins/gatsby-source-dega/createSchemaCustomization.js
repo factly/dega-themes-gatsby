@@ -8,9 +8,9 @@ exports.createSchemaCustomization = ({ actions }) => {
     claims: [DegaClaim]
     created_at: Date @dateformat
     description: JSON
+    description_html: String
     excerpt: String
     format: DegaFormat
-    description_html: String
     is_featured: Boolean
     is_highlighted: Boolean
     is_sticky: Boolean
@@ -61,7 +61,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     id: ID!
     degaId: String!
     created_at: Date @dateformat
-    description: String
+    description: JSON
     description_html: String
     name: String
     slug: String
@@ -207,7 +207,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     id: ID!
     degaId: String!
     created_at: Date @dateformat
-    description: String
+    description: JSON
     description_html: String
     name: String
     slug: String

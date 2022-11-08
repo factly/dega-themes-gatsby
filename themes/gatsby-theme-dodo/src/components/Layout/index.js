@@ -50,25 +50,17 @@ const Layout = (props) => {
       >
         {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
       </Seo>
-      {data && data.allDegaMenu && <Navbar data={data} />}
+      <Navbar data={data} />
       <main
-        style={{ maxWidth: '1560px' }}
+        id="main"
         sx={{
-          width: 'full',
-          fontSize: [(theme) => `${theme.fontSizes.h6}`, null, (theme) => `${theme.fontSizes.h5}`],
-          color: (theme) => `${theme.colors.textPrimary}`,
-          lineHeight: 'normal',
-          pt: [(theme) => `${theme.space.spacing5}`, 0, 0],
-          minHeight: 'calc(100vh - 60px)',
+          maxWidth: '1560px',
           mx: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
         }}
       >
         {children}
       </main>
-      <Footer />
+      <Footer space={space} />
     </>
   );
 };

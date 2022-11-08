@@ -19,95 +19,142 @@ import generateFluidObject from '@helpers/generateFluidObject';
  * TODO: Refactor to decrease repetition of code
  */
 
-const StoryCard = ({
-  storyData,
-  cardStyle = 'tulip',
-  excerpt = false,
-  imageSize = { width: 'full', height: 40 },
-}) => (
+export const StoryCard = ({ storyData, cardStyle = 'default' }) => (
   <>
-    {cardStyle === 'tulip' && (
-      <div
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          // pt: (theme) => `${theme.space.spacing6}`,
-          borderRadius: (theme) => `${theme.borderRadius.default}`,
-          // boxShadow: (theme) => `${theme.boxShadow.default}`,
-          backgroundColor: (theme) => `${theme.colors.background.default}`,
-          color: (theme) => `${theme.colors.text.default}`,
-          '& a:hover': {
-            backgroundColor: (theme) => `${theme.colors.background.hover}`,
-            color: (theme) => `${theme.colors.text.hover}`,
-            textDecoration: 'underline',
-          },
-        }}
-      >
-        <div
-          sx={{
-            display: 'flex',
-          }}
-        >
-          <div
-            className="tulip"
-            sx={{ display: 'flex', flexDirection: 'column', width: 'full', maxWidth: 'full' }}
-          >
-            <Link to={`/${storyData.slug}`}>
-              <div sx={{ maxWidth: '100%', width: '100%', display: 'flex', overflow: 'hidden' }}>
-                <div
-                  sx={{
-                    paddingBottom: '56.24999999%',
-                    overflow: 'hidden',
-                    position: 'relative',
-                    width: '100%',
-                  }}
-                >
-                  <div
-                    sx={{
-                      position: 'absolute',
-                      width: '100%',
-                      height: ' 100%',
-                      background: '#eff8fa',
-                    }}
-                  >
-                    <img
-                      sx={{ height: '100%', objectFit: 'cover', width: '100%' }}
-                      src={storyData.medium?.url.proxy}
-                    />
-                  </div>
-                </div>
-              </div>
+    {cardStyle === 'default' && (
+      <article className="js-card c-card c-card-- c-card-- post featured">
+        <Link to={`/${storyData.slug}/`} className="c-card__media">
+          <img
+            className="c-card__image"
+            alt={storyData.title}
+            data-src={storyData.medium?.url?.proxy}
+            src={storyData.medium?.url?.proxy}
+          />
+        </Link>
+
+        <div className="c-card__content">
+          <div className="c-card__tag c-tag">
+            {storyData.categories.length > 0 && (
+              <Link to={`/category/${storyData.categories[0].slug}/`}>
+                {storyData.categories[0].name}
+              </Link>
+            )}
+          </div>
+
+          <h3 className="c-card__headline">
+            <Link to={`/${storyData.slug}/`} className="c-card__link">
+              {storyData.title}
             </Link>
-            <div
-              sx={{ borderTop: '1px solid #d9d9d9', display: 'block', py: '1rem', px: ['1rem', 0] }}
-            >
-              {storyData?.categories?.length > 0 && (
-                <Link
-                  to={`/category/${storyData.categories[0].slug}`}
-                  sx={{
-                    fontSize: '0.75rem',
-                    textTransform: 'uppercase',
-                    color: '#df1c22',
-                    display: 'block',
-                  }}
-                >
-                  {storyData.categories[0].name}
-                </Link>
+          </h3>
+
+          <div className="c-card__meta">
+            <div className="c-byline c-card__byline">
+              {storyData.users?.length > 0 && (
+                <>
+                  <Link key={storyData.id} to={`/author/${storyData.users[0].slug}`}>
+                    {storyData.users[0].display_name}
+                  </Link>
+                  <span className="u-hidden u-hidden">,&nbsp;</span>
+                  <span className="u-hidden ">&nbsp;and&nbsp;</span>
+                </>
               )}
-              <Link to={`/${storyData.slug}`} sx={{ display: 'block' }}>
-                <h3 sx={{ fontSize: '1rem' }}>{storyData.title}</h3>
-              </Link>
-              <Link
-                to={`/author/${storyData?.users[0]?.slug}`}
-                sx={{ fontSize: '0.75rem', textTransform: 'uppercase' }}
-              >
-                {storyData?.users[0]?.display_name}
-              </Link>
-              <p sx={{ fontSize: '0.675rem' }}>{parseDate(storyData.published_date)}</p>
             </div>
+            <time className="c-timestamp c-card__timestamp" dateTime={storyData.published_at}>
+              {parseDate(storyData.published_at)}
+            </time>
           </div>
         </div>
-      </div>
+      </article>
+    )}
+    {cardStyle === 'large' && (
+      <article className="js-card c-card c-card--large c-card--center post  featured">
+        <Link to={`/${storyData.slug}/`} className="c-card__media">
+          <img
+            className="c-card__image"
+            alt={storyData.title}
+            data-src={storyData.medium?.url?.proxy}
+            src={storyData.medium?.url?.proxy}
+          />
+        </Link>
+
+        <div className="c-card__content">
+          <div className="c-card__tag c-tag">
+            {storyData.categories.length > 0 && (
+              <Link to={`/category/${storyData.categories[0].slug}/`}>
+                {storyData.categories[0].name}
+              </Link>
+            )}
+          </div>
+
+          <h3 className="c-card__headline">
+            <Link to={`/${storyData.slug}/`} className="c-card__link">
+              {storyData.title}
+            </Link>
+          </h3>
+
+          <p className="c-card__standfirst">{storyData.excerpt}</p>
+
+          <div className="c-card__meta">
+            <div className="c-byline c-card__byline">
+              <span className="u-hidden ">,&nbsp;</span>
+              <span className="u-hidden ">&nbsp;and&nbsp;</span>
+              <span className=" u-hidden">,&nbsp;</span>
+              {/* <span className="u-hidden u-block">&nbsp;and&nbsp;</span> */}
+
+              {storyData.users.length > 0 && (
+                <Link to={`/author/${storyData.users[0].slug}/`}>
+                  {storyData.users[0].display_name}
+                </Link>
+              )}
+            </div>
+            <time className="c-timestamp c-card__timestamp" dateTime={storyData.published_at}>
+              {parseDate(storyData.published_at)}
+            </time>
+          </div>
+        </div>
+      </article>
+    )}
+    {cardStyle === 'small' && (
+      <article className="c-teaser c-teaser--small post tag-opinion tag-hash-editors-picks">
+        <div className="c-teaser__content">
+          <div className="c-teaser__tag c-tag">
+            <Link to={`/category/${storyData.categories[0].slug}/`}>
+              {storyData.categories[0].name}
+            </Link>
+          </div>
+
+          <h3 className="c-teaser__headline">
+            <Link to={`/${storyData.slug}/`} className="c-teaser__link">
+              {storyData.title}
+            </Link>
+          </h3>
+
+          <div className="c-teaser__meta">
+            <div className="c-byline c-teaser__byline">
+              <span className="u-hidden u-hidden">,&nbsp;</span>
+              <span className="u-hidden ">&nbsp;and&nbsp;</span>
+
+              {storyData.users.length > 0 && (
+                <Link to={`/author/${storyData.users[0].slug}/`}>
+                  {storyData.users[0].display_name}
+                </Link>
+              )}
+            </div>
+            <time className="c-timestamp c-teaser__timestamp" dateTime={storyData.published_at}>
+              {parseDate(storyData.published_at)}
+            </time>{' '}
+          </div>
+        </div>
+
+        <Link to={`/${storyData.slug}/`} className="c-teaser__media">
+          <img
+            className="c-teaser__image"
+            alt={storyData.title}
+            data-src={storyData.medium?.url?.proxy}
+            src={storyData.medium?.url?.proxy}
+          />
+        </Link>
+      </article>
     )}
   </>
 );

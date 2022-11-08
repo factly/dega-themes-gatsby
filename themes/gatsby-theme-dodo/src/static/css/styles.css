@@ -256,7 +256,7 @@ input:focus + .sliderF {
 }
 
 /* EditorJS parsed styles for posts*/
-.parsed p,
+/* .parsed p,
 .parsed h1,
 .parsed h2,
 .parsed h3,
@@ -308,4 +308,4 @@ input:focus + .sliderF {
 .parsed figure img {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
+} */

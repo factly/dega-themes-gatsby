@@ -24,13 +24,13 @@ const PageNotFound = ({ data }) => {
           }}
         >
           Go to HomePage
-          <Img
+          {/* <Img
             sx={{ mx: 'auto', display: 'block', maxWidth: 300 }}
             fluid={generateFluidObject({
-              url: space.logo.url.proxy,
-              dimensions: space.logo.dimensions,
+              url: space?.logo?.url?.proxy,
+              dimensions: space?.logo?.dimensions,
             })}
-          />
+          /> */}
         </Link>
       </div>
     </Layout>

@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '@helpers/parseEditorJsData';
 import PostGrid from '../PostGrid';
 import Helmet from 'react-helmet';
 import { isBrowser } from '@helpers/isBrowser';
 import Layout from '../Layout';
+import InnerHTML from 'dangerously-set-html-content';
+import Seo from '@components/Seo';
 
 function CategoryDetailsAll({ data }) {
   const { category, formats, posts } = data;
@@ -22,53 +23,36 @@ function CategoryDetailsAll({ data }) {
 
   const header = (item) => {
     return (
-      <div
-        sx={{
-          mb: (theme) => `${theme.space.spacing6}`,
-          fontSize: (theme) => `${theme.fontSizes.h6}`,
-        }}
-      >
-        <h1
-          sx={{
-            fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
-            mb: (theme) => `${theme.space.spacing5}`,
-            textTransform: 'capitalize',
-            px: (theme) => theme.space.layout2,
-          }}
-        >
-          {item.name}
-        </h1>
-        <div
-          id="category-description"
-          sx={{
-            maxHeight: (theme) => (readMore ? `calc(${theme.lineHeights.normal}em * 6 )` : '100%'),
-            overflow: 'hidden',
-            px: (theme) => `${theme.space.spacing5}`,
-          }}
-        >
-          {parseEditorJsData({ content: item.description })}
+      <header className="c-page-header">
+        <div className="l-grid l-grid--2-columns">
+          <div>
+            <h1 className="c-topper__headline u-font-headline u-font-family-sansSerif">
+              {item.name}
+            </h1>
+            <p className="c-topper__standfirst u-font-standfirst u-mt-8 u-font-family-sansSerif">
+              <InnerHTML className="parsed" html={item.description_html} />{' '}
+              {item.description && isReadMoreNeeded && (
+                <button
+                  type="button"
+                  onClick={() => setReadMore((prev) => !prev)}
+                  sx={{
+                    px: (theme) => `${theme.space.spacing5}`,
+                    color: (theme) => `${theme.colors.textLinkPrimary}`,
+                    fontSize: (theme) => `${theme.fontSizes.h6}`,
+                  }}
+                >
+                  {readMore ? 'Read more' : 'Read less'}
+                </button>
+              )}
+            </p>
+          </div>
         </div>
-        {item.description && isReadMoreNeeded && (
-          <button
-            type="button"
-            onClick={() => setReadMore((prev) => !prev)}
-            sx={{
-              px: (theme) => `${theme.space.spacing5}`,
-              color: (theme) => `${theme.colors.textLinkPrimary}`,
-              fontSize: (theme) => `${theme.fontSizes.h6}`,
-            }}
-          >
-            {readMore ? 'Read more' : 'Read less'}
-          </button>
-        )}
-      </div>
+      </header>
     );
   };
   return (
     <Layout>
-      <Helmet>
-        <title> {category.name} </title>
-      </Helmet>
+      <Seo title={category.name} />
       <PostGrid
         type="category"
         posts={posts.nodes}

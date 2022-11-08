@@ -8,12 +8,22 @@ import FactCheckWidget from '@components/Post/FactCheckWidget';
 import Tag from '@components/Post/Tag';
 import Excerpt from '@components/Post/Excerpt';
 import { isBrowser } from '@helpers/isBrowser';
-import parseEditorJsData from '@helpers/parseEditorJsData';
 import Seo from '@components/Seo';
+import InnerHTML from 'dangerously-set-html-content';
+import { Link } from 'gatsby';
+import { FaEnvelope, FaFacebook, FaFacebookF, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { parseDate } from '@helpers/parseDate';
+import { parseTiptapContent } from '@helpers/parseTiptapContent';
+
 /**
  * TODO: URI encoding
  * TODO: borderradius in theme ui
- * TODO: Add backgroudn to embeds if failed like factly.in
+ * TODO: Add background to embeds if failed like factly.in
+ * TODO: Show multiple authors and categories
+ * TODO: Add Reading Time
+ * TODO: Configurable social sharing site links defaults to facebook, twitter, whatsapp and linkedin
+ * TODO: Add Lightbox for images, ex: fslightbox.js
+ * TODO: Check Claim fact data type on dega studio
  */
 
 const Post = ({ post, observer }) => {
@@ -21,8 +31,8 @@ const Post = ({ post, observer }) => {
   const headerSocialIcon = createRef();
 
   useEffect(() => {
-    observer.observe(postSection.current);
-    observer.observe(headerSocialIcon.current);
+    // observer.observe(postSection.current);
+    // observer.observe(headerSocialIcon.current);
   }, [observer, postSection, headerSocialIcon]);
 
   return (
@@ -36,70 +46,132 @@ const Post = ({ post, observer }) => {
             </script>
           ))}
       </Helmet>
-      <article
-        post={post.id}
-        ref={postSection}
-        slug={post.slug}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          px: (theme) => `${theme.space.spacing6}`,
-          my: (theme) => `${theme.space.spacing6}`,
-          fontSize: (theme) => `${theme.fontSizes.body}`,
-          '&:first-of-type': {
-            mt: 0,
-          },
-        }}
-      >
-        <div
-          sx={{
-            bg: (theme) => `${theme.colors.bgLight}`,
-            borderTopLeftRadius: 'default',
-            borderTopRightRadius: 'default',
-            borderBottomLeftRadius: 'none',
-            borderBottomRightRadius: 'none',
-            overflow: 'hidden',
-          }}
-        >
-          <h1
-            sx={{
-              fontWeight: 'bold',
-              fontSize: (theme) => [`${theme.fontSizes.h4}`, null, `${theme.fontSizes.h3}`],
-              py: (theme) => `${theme.space.spacing3}`,
-            }}
-          >
-            {post.title}
-          </h1>
-          <div
-            sx={{
-              display: 'flex',
-              flexDirection: ['column', null, 'row'],
-              justifyContent: 'space-between',
-            }}
-          >
-            <PostInfo date={post.published_date} users={post.users} categories={post.categories} />
-            <ShareButtonGroup
-              setRef={headerSocialIcon}
-              data={{
-                url: encodeURIComponent(isBrowser ? window.location.href : null),
-                title: encodeURIComponent(post.title),
-              }}
-            />
+      <div className="c-topper">
+        <div className="c-topper__content">
+          <div className="c-topper__tag c-tag">
+            {post.categories.length > 0 && (
+              <Link to={`/category/${post.categories[0].slug}`}>{post.categories[0].name}</Link>
+            )}
+          </div>
+
+          <h1 className="c-topper__headline">{post.title}</h1>
+
+          <p className="c-topper__standfirst">{post.excerpt}</p>
+
+          <div className="c-topper__meta">
+            <div>
+              <div className="c-byline c-topper__byline">
+                {post.users.length > 0 && (
+                  <>
+                    <Link key={post.id} to={`/author/${post.users[0].slug}`}>
+                      {post.users[0].display_name}
+                    </Link>
+                    <span className="u-hidden u-hidden">,&nbsp;</span>
+                    <span className="u-hidden ">&nbsp;and&nbsp;</span>
+                  </>
+                )}
+              </div>{' '}
+              <time
+                className="c-timestamp c-topper__timestamp"
+                dateTime={parseDate(post.published_at)}
+              >
+                {parseDate(post.published_at)}
+                {/* <span className="c-timestamp__detail"> . 12:00 AM</span> */}
+              </time>{' '}
+              {/* <div className="c-reading-time c-topper__reading-time">2 min read</div>{' '} */}
+            </div>
+            <ul className="c-share u-plain-list">
+              <li className="c-share__item">
+                <a
+                  className="c-share__link"
+                  href={`https://twitter.com/share?text=${post.title}}&amp;url=${post.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  // onClick={() => {
+                  //   window.open(this.href, 'twitter-share', 'width=550, height=235');
+                  //   return false;
+                  // }}
+                >
+                  <div className="icon icon--ei-sc-twitter icon--s c-share__icon">
+                    <FaTwitter className="icon__cnt" />
+                  </div>
+                  <span className="u-screenreader">Share on Twitter</span>
+                </a>
+              </li>
+
+              <li className="c-share__item">
+                <a
+                  className="c-share__link"
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${post.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  // onClick={() => {
+                  //   window.open(this.href, 'facebook-share', 'width=580, height=296');
+                  //   return false;
+                  // }}
+                >
+                  <div className="icon icon--ei-sc-facebook icon--s c-share__icon">
+                    <FaFacebookF className="icon__cnt" />
+                  </div>
+                  <span className="u-screenreader">Share on Facebook</span>
+                </a>
+              </li>
+
+              <li className="c-share__item">
+                <a
+                  className="c-share__link"
+                  href={`https://www.linkedin.com/shareArticle?mini=true&amp;url=${post.slug}&amp;title=${post.title}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  // onClick={() => {
+                  //   window.open(this.href, 'linkedin-share', 'width=580, height=296');
+                  //   return false;
+                  // }}
+                >
+                  <div className="icon icon--ei-sc-linkedin icon--s c-share__icon">
+                    <FaLinkedin className="icon__cnt" />
+                  </div>
+                  <span className="u-screenreader">Share on LinkedIn</span>
+                </a>
+              </li>
+
+              <li className="c-share__item">
+                <a
+                  className="c-share__link"
+                  href={`mailto:?subject=${post.title}&amp;body=@{post.url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="icon icon--ei-envelope icon--s c-share__icon">
+                    <FaEnvelope className="icon__cnt" />
+                  </div>
+                  <span className="u-screenreader">Share via Email</span>
+                </a>
+              </li>
+            </ul>{' '}
           </div>
         </div>
-        <Excerpt excerpt={post.excerpt} image={post.medium} />
 
+        <figure className="c-feature-image-figure">
+          <div className="c-feature-image-wrap">
+            <img
+              alt=""
+              className="c-feature-image lazyloaded"
+              data-src={post.medium?.url?.proxy}
+              src={post.medium?.url?.proxy}
+            />
+          </div>
+        </figure>
+      </div>
+      <article className="c-post post tag-opinion tag-hash-editors-picks">
+        {post.claims && <FactCheckWidget claims={post.claims} />}
+        {parseTiptapContent(post.description_html)}
         <div
           sx={{
             width: ['full'],
             mx: 'auto',
-            fontSize: (theme) => `${theme.fontSizes.body}`,
           }}
         >
-          {post.claims && <FactCheckWidget claims={post.claims} />}
-          <div className="parsed">
-            {parseEditorJsData({ content: post.description, scripts: true })}
-          </div>
           {post.claims &&
             post.claims.map((claim, i) => (
               <React.Fragment key={i}>
@@ -138,34 +210,12 @@ const Post = ({ post, observer }) => {
                   </div>
                 )}
 
-                <div className="parsed">
-                  {parseEditorJsData({ content: claim.description, scripts: true })}
-                </div>
+                <div
+                  className="parsed"
+                  dangerouslySetInnerHTML={{ __html: claim.description_html }}
+                />
               </React.Fragment>
             ))}
-          <div
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              mt: (theme) => `${theme.space.spacing6}`,
-              pb: (theme) => `${theme.space.spacing6}`,
-              borderBottomWidth: '1px',
-            }}
-          >
-            <div
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                '& a:first-of-type': {
-                  ml: 0,
-                },
-              }}
-            >
-              {post.tags.map((tag, i) => (
-                <Tag key={i} url={tag.slug} name={tag.name} />
-              ))}
-            </div>
-          </div>
         </div>
       </article>
     </>

@@ -9,9 +9,12 @@ import parseDate from '@helpers/parseDate';
 import StoryCard from '../UI/StoryCard';
 import Layout from '../Layout';
 
-export default function PostDetails({ posts }) {
-  const { post } = data;
-  const filteredPosts = posts.nodes.filter((p) => p.id !== post.id).slice(0, 6);
+import { isBrowser } from '@helpers/isBrowser';
+import Post from '@components/Post/index.js';
+
+export default function PostDetailsAmp({ data }) {
+  const { posts, space, post, recentPosts } = data;
+  const filteredPosts = posts.edges.filter(({ node: p }) => p.id !== post.id).slice(0, 6);
 
   const [showSocialIcon, setShowSocialIcon] = React.useState(false);
   const [postActiveIndex, setPostActiveIndex] = React.useState(parseInt(post.id));
@@ -54,7 +57,7 @@ export default function PostDetails({ posts }) {
   // for sharing links
   const title = encodeURIComponent(post.title);
   let url;
-  if (process.browser) {
+  if (isBrowser) {
     url = encodeURIComponent(window.location.href);
   }
   return (
@@ -63,7 +66,7 @@ export default function PostDetails({ posts }) {
         <title> {post.title} </title>
         <meta name="description" content={post.excerpt} />
         <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={degaPost.excerpt} />
+        <meta property="og:description" content={post.excerpt} />
         {post.medium && <meta property="og:image" content={post.medium?.url.proxy} />}
         <meta property="og:url" content={url} />
         <meta property="og:type" content="article" />
@@ -195,7 +198,7 @@ export default function PostDetails({ posts }) {
                     }}
                   >
                     <Link to={`/${p.slug}`} sx={{ display: 'flex', cursor: 'pointer' }}>
-                      <StoryCard cardStyle="tulip" storyData={p} />
+                      <StoryCard storyData={p} />
                     </Link>
                   </div>
                 ))}

@@ -12,8 +12,8 @@ import {
 } from 'react-icons/fa';
 
 import PostGrid from '../PostGrid';
-import Helmet from 'react-helmet';
 import Layout from '../Layout';
+import Seo from '@components/Seo';
 
 function UserDetailsAll({ data }) {
   const { user, posts, formats } = data;
@@ -88,9 +88,7 @@ function UserDetailsAll({ data }) {
   };
   return (
     <Layout>
-      <Helmet>
-        <title>{name}</title>
-      </Helmet>
+      <Seo title={name} />
       <PostGrid
         type="author"
         posts={posts.nodes}
