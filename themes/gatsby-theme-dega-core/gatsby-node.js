@@ -1,6 +1,9 @@
 const path = require('path');
 const withDefaults = require(`./utils/default-options`);
 
+// TODO: Remove format pages for entities
+// TODO: Customize Theme
+// TODO: Add Pagination
 /**
  *  adding import alias for most used modules
  */
@@ -41,6 +44,9 @@ const categoryTemplate = require.resolve('./src/templates/category-query.js');
 const categoryFormatTemplate = require.resolve('./src/templates/category-format-query.js');
 const authorTemplate = require.resolve('./src/templates/author-query.js');
 const authorFormatTemplate = require.resolve('./src/templates/author-format-query.js');
+const tagsTemplate = require.resolve('./src/templates/tags-query.js');
+const categoriesTemplate = require.resolve('./src/templates/categories-query.js');
+const authorsTemplate = require.resolve('./src/templates/authors-query.js');
 
 exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId }) => {
   const { createPage } = actions;
@@ -110,6 +116,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId })
       allDegaUser {
         nodes {
           degaId
+          slug
         }
       }
     }
@@ -154,7 +161,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId })
 
   formats.data.allDegaFormat.nodes.forEach((format) => {
     createPage({
-      path: `/format/${format.slug}`,
+      path: `/format/${format.slug}/`,
       component: formatTemplate,
       context: {
         id: format.degaId,
@@ -167,7 +174,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId })
   posts.data.allDegaPost.nodes.forEach((post) => {
     if (post.published_date) {
       createPage({
-        path: `/${post.slug}`,
+        path: `/${post.slug}/`,
         component: postTemplate,
         context: {
           id: post.degaId,
@@ -188,7 +195,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId })
 
   tags.data.allDegaTag.nodes.forEach((tag) => {
     createPage({
-      path: `/tag/${tag.slug}`,
+      path: `/tag/${tag.slug}/`,
       component: tagTemplate,
       context: {
         id: tag.degaId,
@@ -199,7 +206,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId })
 
     formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
-        path: `/tag/${tag.slug}/format/${format.slug}`,
+        path: `/tag/${tag.slug}/format/${format.slug}/`,
         component: tagFormatTemplate,
         context: {
           id: tag.degaId,
@@ -223,7 +230,7 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId })
     // create category details page with each format
     formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
-        path: `/category/${category.slug}/format/${format.slug}`,
+        path: `/category/${category.slug}/format/${format.slug}/`,
         component: categoryFormatTemplate,
         context: {
           id: category.degaId,
@@ -236,10 +243,11 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId })
   // create user details page
   users.data.allDegaUser.nodes.forEach((user) => {
     createPage({
-      path: `/author/${user.degaId}`,
+      path: `/author/${user.slug}/`,
       component: authorTemplate,
       context: {
         id: user.degaId,
+        slug: user.slug,
       },
     });
 
@@ -247,13 +255,28 @@ exports.createPages = async ({ graphql, actions, store, reporter }, { spaceId })
 
     formats.data.allDegaFormat.nodes.forEach((format) => {
       createPage({
-        path: `/author/${user.degaId}/format/${format.slug}`,
+        path: `/author/${user.slug}/format/${format.slug}/`,
         component: authorFormatTemplate,
         context: {
           id: user.degaId,
           format_id: format.degaId,
+          slug: user.slug,
         },
       });
     });
+  });
+
+  // list pages for entities
+  createPage({
+    path: `/authors/`,
+    component: authorsTemplate,
+  });
+  createPage({
+    path: `/categories/`,
+    component: categoriesTemplate,
+  });
+  createPage({
+    path: `/tags/`,
+    component: tagsTemplate,
   });
 };

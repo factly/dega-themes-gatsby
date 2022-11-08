@@ -4,8 +4,8 @@ import AuthorPage from '@components/Pages/Author';
 export default AuthorPage;
 
 export const query = graphql`
-  query ($id: String!, $format_id: String!) {
-    user: degaUser(degaId: { eq: $id }) {
+  query ($slug: String!, $format_id: String!) {
+    user: degaUser(slug: { eq: $slug }) {
       degaId
       first_name
       last_name
@@ -26,7 +26,7 @@ export const query = graphql`
       }
     }
     posts: allDegaPost(
-      filter: { users: { elemMatch: { id: { eq: $id } } }, format: { id: { eq: $format_id } } }
+      filter: { users: { elemMatch: { slug: { eq: $slug } } }, format: { id: { eq: $format_id } } }
     ) {
       nodes {
         users {

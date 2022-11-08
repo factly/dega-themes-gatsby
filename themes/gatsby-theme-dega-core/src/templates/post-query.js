@@ -13,6 +13,7 @@ export const query = graphql`
         node {
           published_date
           description
+          description_html
           excerpt
           id
           schemas
@@ -34,6 +35,7 @@ export const query = graphql`
             name
             slug
             description
+            description_html
           }
           medium {
             alt_text
@@ -53,12 +55,14 @@ export const query = graphql`
             claim_sources
             claimant {
               description
+              description_html
               id
               name
               slug
               tag_line
             }
             description
+            description_html
             id
             fact
             review_sources
@@ -66,6 +70,7 @@ export const query = graphql`
             claim
             rating {
               description
+              description_html
               id
               name
               numeric_value
@@ -80,6 +85,7 @@ export const query = graphql`
           }
           categories {
             description
+            description_html
             created_at
             id
             name
@@ -119,6 +125,7 @@ export const query = graphql`
     post: degaPost(degaId: { eq: $id }) {
       published_date
       description
+      description_html
       excerpt
       id
       schemas
@@ -133,12 +140,14 @@ export const query = graphql`
         last_name
         display_name
         id
+        slug
       }
       tags {
         id
         name
         slug
         description
+        description_html
       }
       medium {
         alt_text
@@ -158,12 +167,14 @@ export const query = graphql`
         claim_sources
         claimant {
           description
+          description_html
           id
           name
           slug
           tag_line
         }
         description
+        description_html
         id
         fact
         review_sources
@@ -171,6 +182,7 @@ export const query = graphql`
         claim
         rating {
           description
+          description_html
           id
           name
           numeric_value
@@ -185,6 +197,7 @@ export const query = graphql`
       }
       categories {
         description
+        description_html
         created_at
         id
         name
@@ -211,6 +224,7 @@ export const query = graphql`
           display_name
           slug
           id
+          slug
         }
         published_date
         categories {

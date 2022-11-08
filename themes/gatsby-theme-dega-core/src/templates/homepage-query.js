@@ -17,6 +17,7 @@ export const query = graphql`
         slug
         name
         description
+        description_html
         meta_fields
         medium {
           url
@@ -28,6 +29,7 @@ export const query = graphql`
               id
               first_name
               last_name
+              slug
             }
             categories {
               slug
@@ -82,6 +84,7 @@ export const query = graphql`
           id
           first_name
           last_name
+          slug
         }
         categories {
           slug

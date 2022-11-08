@@ -7,6 +7,7 @@ export const query = graphql`
   query ($id: String!) {
     category: degaCategory(degaId: { eq: $id }) {
       description
+      description_html
       id
       medium {
         alt_text

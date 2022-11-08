@@ -7,6 +7,7 @@ export const query = graphql`
   query ($id: String!, $format_id: String!) {
     tag: degaTag(degaId: { eq: $id }) {
       description
+      description_html
       id
       name
       slug
