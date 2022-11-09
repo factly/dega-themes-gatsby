@@ -12,15 +12,10 @@ module.exports = {
     {
       resolve: '@factly/gatsby-theme-kite',
       options: {
-        // spaceId: process.env.HEALTH_SPACE_ID,
-        // accessToken: process.env.HEALTH_ACCESS_TOKEN,
         spaceId: process.env.SPACE_ID,
         accessToken: process.env.ACCESS_TOKEN,
-        homepage: 2,
         siteUrl: process.env.SITE_URL,
-        apiUrl: 'https://dega-api.factly.in/query',
-        // youtubeApiKey: process.env.GOOGLE_PRIVATE_KEY,
-        // channelId: process.env.CHANNEL_ID,
+        apiUrl: process.env.DEGA_API_URL,
       },
     },
   ],
