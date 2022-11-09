@@ -26,9 +26,15 @@ export const StoryCard = ({ storyData, cardStyle = 'default' }) => (
         <Link to={`/${storyData.slug}/`} className="c-card__media">
           <img
             className="c-card__image"
-            alt={storyData.title}
             data-src={storyData.medium?.url?.proxy}
-            src={storyData.medium?.url?.proxy}
+            srcset={`${storyData.medium?.url?.proxy}?rs:fill/w:320 300w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:640 720w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:720 960w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:960 1200w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:1200 2000w`}
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            src={`${storyData.medium?.url?.proxy}?rs:fill/w:1200`}
+            alt={storyData.title}
           />
         </Link>
 
@@ -71,9 +77,15 @@ export const StoryCard = ({ storyData, cardStyle = 'default' }) => (
         <Link to={`/${storyData.slug}/`} className="c-card__media">
           <img
             className="c-card__image"
-            alt={storyData.title}
             data-src={storyData.medium?.url?.proxy}
-            src={storyData.medium?.url?.proxy}
+            srcset={`${storyData.medium?.url?.proxy}?rs:fill/w:320 300w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:640 720w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:720 960w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:960 1200w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:1200 2000w`}
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            src={`${storyData.medium?.url?.proxy}?rs:fill/w:1200`}
+            alt={storyData.title}
           />
         </Link>
 
@@ -149,9 +161,15 @@ export const StoryCard = ({ storyData, cardStyle = 'default' }) => (
         <Link to={`/${storyData.slug}/`} className="c-teaser__media">
           <img
             className="c-teaser__image"
-            alt={storyData.title}
             data-src={storyData.medium?.url?.proxy}
-            src={storyData.medium?.url?.proxy}
+            srcset={`${storyData.medium?.url?.proxy}?rs:fill/w:320 300w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:640 720w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:720 960w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:960 1200w,
+                    ${storyData.medium?.url?.proxy}?rs:fill/w:1200 2000w`}
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            src={`${storyData.medium?.url?.proxy}?rs:fill/w:1200`}
+            alt={storyData.title}
           />
         </Link>
       </article>

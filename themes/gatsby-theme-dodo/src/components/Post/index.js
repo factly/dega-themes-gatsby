@@ -155,10 +155,16 @@ const Post = ({ post, observer }) => {
         <figure className="c-feature-image-figure">
           <div className="c-feature-image-wrap">
             <img
-              alt=""
               className="c-feature-image lazyloaded"
               data-src={post.medium?.url?.proxy}
-              src={post.medium?.url?.proxy}
+              srcset={`${post.medium?.url?.proxy}?rs:fill/w:320 300w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:640 720w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:720 960w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:960 1200w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:1200 2000w`}
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              src={`${post.medium?.url?.proxy}?rs:fill/w:1200`}
+              alt={post.title}
             />
           </div>
         </figure>
