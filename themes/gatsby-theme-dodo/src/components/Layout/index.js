@@ -12,7 +12,7 @@ import Seo from '@components/Seo';
 const Layout = (props) => {
   const data = useStaticQuery(graphql`
     query {
-      allDegaMenu {
+      menu: allDegaMenu {
         nodes {
           menu
           id
@@ -38,7 +38,7 @@ const Layout = (props) => {
     }
   `);
 
-  const { space, allDegaMenu } = data;
+  const { space, menu } = data;
   const { children } = props;
   return (
     <>

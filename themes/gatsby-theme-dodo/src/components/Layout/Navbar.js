@@ -6,8 +6,8 @@ import { FaHome, FaBars } from 'react-icons/fa';
 import { Link } from 'gatsby';
 
 export default function NavBar({ data }) {
-  const { allDegaMenu, space } = data;
-  const mainMenu = allDegaMenu.nodes.filter((i) => i.slug === 'main')[0];
+  const { menu, space } = data;
+  const mainMenu = menu.nodes.filter((i) => i.slug === 'main')[0];
 
   const defaultMenuItems = [
     { url: '/categories', title: 'Categories', name: 'Categories' },
