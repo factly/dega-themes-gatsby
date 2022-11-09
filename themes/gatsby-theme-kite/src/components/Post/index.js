@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import FactCheckWidget from '@components/Post/FactCheckWidget';
 import Badge from '@components/Post/Badge';
-import parseEditorJsData from '@helpers/parseEditorJsData';
 import Seo from '@components/Seo';
 import { Link } from 'gatsby';
 import parseDate from '@helpers/parseDate';
@@ -17,10 +16,9 @@ import {
   FaLinkedinIn,
   FaEnvelope,
   FaLink,
+  FaLinkedin,
+  FaCopy,
 } from 'react-icons/fa';
-//import { FaTwitter, FaFacebook, FaWhatsapp } from 'react-icons/fa';
-import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '@helpers/generateFluidObject';
 import { isBrowser } from '@helpers/isBrowser';
 
 /**
@@ -29,14 +27,7 @@ import { isBrowser } from '@helpers/isBrowser';
  * TODO: Add backgroudn to embeds if failed like factly.in
  */
 
-const Post = ({ post, observer }) => {
-  const postSection = useRef(null);
-  // const headerSocialIcon = createRef();
-
-  // useEffect(() => {
-  //   observer.observe(postSection.current);
-  //   observer.observe(headerSocialIcon.current);
-  // }, [observer, postSection, headerSocialIcon]);
+const Post = ({ post }) => {
   const title = encodeURIComponent(post.title);
   let url;
   if (isBrowser) {
@@ -54,378 +45,196 @@ const Post = ({ post, observer }) => {
             </script>
           ))}
       </Helmet>
-      <article
-        post={post.id}
-        ref={postSection}
-        slug={post.slug}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          px: (theme) => `${theme.space.spacing6}`,
-          my: (theme) => `${theme.space.spacing6}`,
-          fontSize: (theme) => `${theme.fontSizes.body}`,
-          '&:first-of-type': {
-            mt: 0,
-          },
-        }}
-      >
-        <div
-          sx={{
-            bg: (theme) => `${theme.colors.bgLight}`,
-            borderTopLeftRadius: 'default',
-            borderTopRightRadius: 'default',
-            borderBottomLeftRadius: 'none',
-            borderBottomRightRadius: 'none',
-            overflow: 'hidden',
-          }}
-        >
-          <h1
-            sx={{
-              fontSize: '4rem',
-              fontWeight: 400,
-              // my: '1.5rem',
-              lineHeight: 1.3,
-              textAlign: 'center',
-            }}
-          >
-            {post.title}
-          </h1>
-          <p
-            sx={{
-              //mb: '3rem',
-              fontSize: '1.5rem',
-              maxWidth: '780px',
-              lineHeight: '1.6',
-            }}
-          >
-            {post.excerpt}
-          </p>
-          <div
-            sx={{
-              display: 'flex',
-              position: 'relative',
-              justifyContent: 'center',
-            }}
-          >
-            {/* <div
-              sx={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                bg: 'gray',
-                mr: '8px',
-              }}
-            ></div> */}
-            <div>
-              {/* {post.users &&
-                post.users.map((user, i, arr) => (
-                  <React.Fragment key={i}>
-                    <Link
-                      to={`/author/${user.id}`}
-                      sx={{
-                        fontWeight: 'medium',
-                        color: (theme) => `${theme.colors.textLinkPrimary}`,
-                        fontSize: (theme) => `${theme.fontSizes.h7}`,
-                        px: (theme) => `${theme.space.spacing2}`,
-                        '&:first-of-type': { pl: 0 },
-                        '&:hover': {
-                          color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
-                        },
-                      }}
-                    >
-                      {`${user?.first_name} ${user?.last_name}`}
-                    </Link>
-                    {arr.length - i > 1 && (user?.first_name || user?.last_name) && ','}
-                  </React.Fragment>
-                ))} */}
-              <div
-                sx={{
-                  marginBottom: '16px',
-                  fontWeight: 400,
-                  fontSize: '20px',
-                  lineHeight: '30px',
-                  color: '#667085',
-                }}
-              >
-                {/* <FaRegClock
-                  sx={{ display: 'inline-block', mr: (theme) => `${theme.space.spacing2}` }}
-                />{' '} */}
-                {parseDate(post.published_date)} . <span> 3 min read</span>
-              </div>
-            </div>
-          </div>
-          <div
-            sx={{
-              display: 'flex',
-              gap: '12px',
-              justifyContent: 'center',
-            }}
-          >
-            {post.categories.map((category, i) => (
-              <Badge key={i} url={category.slug} name={category.name} />
-            ))}
-          </div>
-          <div
-            sx={{
-              display: 'flex',
-              flexDirection: ['column', null, 'row'],
-              justifyContent: 'space-between',
-              mt: '2rem',
-            }}
-          >
-            {post.medium && (
-              <div sx={{ flex: '1 1 0%', width: 'full' }}>
-                <Img
-                  fluid={generateFluidObject({
-                    url: post.medium.url.proxy,
-                    dimensions: post.medium.dimensions,
-                  })}
-                />
-              </div>
+
+      <div className="container wrapper">
+        <div className="hero">
+          <ul className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to="/">Home</Link>
+            </li>
+            {post.categories.length > 0 && (
+              <li className="breadcrumb-item">
+                <Link to={`/category/${post.categories[0].slug}/`}>{post.categories[0].name}</Link>
+              </li>
             )}
+            <li className="breadcrumb-item breadcrumb-item-current">{post.title}</li>
+          </ul>
+          <div className="hero__content flex flex-col flex-cc m-b-lg">
+            <div className="tag-list flex flex-wrap m-b-sm">
+              {post.categories.length > 0 && (
+                <Link
+                  className="tag-list__item has-accent flex flex-cc"
+                  to={`/category/${post.categories[0].slug}/`}
+                  title={post.categories[0].name}
+                  aria-label={post.categories[0].name}
+                >
+                  <span
+                    className="tag-list__item--accent"
+                    style={{ backgroundColor: '#D91C38' }}
+                  ></span>
+                  {post.categories[0].name}
+                </Link>
+              )}
+            </div>
+
+            <h1 className="hero__title text-center">{post.title}</h1>
+
+            <div className="hero__post-info flex flex-cc text-acc-3 fw-500">
+              <span>Mar 19, 2021</span>
+              <span className="m-l-sm m-r-sm">—</span>
+              <span>1 min read</span>
+            </div>
+          </div>
+
+          <div className="hero__media">
+            <figure className="hero__figure">
+              <img
+                className="hero__img lazyautosizes lazyloaded"
+                src={post.medium.url.proxy}
+                alt={post.title}
+                sizes="640px"
+              />
+            </figure>
           </div>
         </div>
-
-        <div
-          sx={{
-            width: ['full'],
-            mx: 'auto',
-            fontSize: (theme) => `${theme.fontSizes.body}`,
-          }}
-        >
-          {post.claims && <FactCheckWidget claims={post.claims} />}
-          <div className="parsed">
-            {parseEditorJsData({ content: post.description, scripts: true })}
-          </div>
-          {post.claims &&
-            post.claims.map((claim, i) => (
-              <React.Fragment key={i}>
-                {post.claims.length > 1 && (
-                  <div
-                    sx={{
-                      bg: (theme) => `${theme.colors.bgPrimary}`,
-                      p: (theme) => `${theme.space.spacing5}`,
-                      mt: (theme) => `${theme.space.spacing5}`,
-                    }}
-                  >
-                    <div
-                      sx={{
-                        mb: (theme) => `${theme.space.spacing5}`,
-                      }}
-                    >
-                      <h4
-                        sx={{
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Claim:{' '}
-                      </h4>
-                      {claim.claim}
-                    </div>
-                    <div>
-                      <h4
-                        sx={{
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Fact:
-                      </h4>
-                      <p dangerouslySetInnerHTML={{ __html: claim.fact }} />
-                    </div>
-                  </div>
-                )}
-
-                <div className="parsed">
-                  {parseEditorJsData({ content: claim.description, scripts: true })}
-                </div>
-              </React.Fragment>
-            ))}
-
-          <div
-            sx={{
-              display: 'flex',
-              mt: '2rem',
-              justifyContent: 'space-between',
-            }}
-          >
-            <div
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-              }}
+        <article className="post tag-welcome tag-hash-announcement content-wrap post-access-public">
+          <div className="social-share">
+            <a
+              className="social-share__item js-share"
+              tabindex="0"
+              target="_blank"
+              href="https://twitter.com/share?text=${post.title}&amp;url=${post.slug}"
+              title="Share on Twitter"
+              aria-label="Share on Twitter"
             >
-              <div
-                sx={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  bg: 'gray',
-                  mr: '8px',
-                }}
-              ></div>
-              <div
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                {post.users[0]?.display_name}
-                <p>
-                  {parseDate(post.published_date)} . <span> 3 min read</span>
-                </p>
+              <i className="icon icon-twitter icon--sm">
+                <FaTwitter className="icon__svg" />
+              </i>{' '}
+            </a>
+            <a
+              className="social-share__item js-share"
+              tabindex="0"
+              href="https://www.facebook.com/sharer.php?u=${post.slug}"
+              title="Share on Facebook"
+              aria-label="Share on Facebook"
+            >
+              <i className="icon icon-facebook icon--sm">
+                <FaFacebook className="icon__svg" />
+              </i>{' '}
+            </a>
+            <a
+              className="social-share__item js-share"
+              tabindex="0"
+              target="_blank"
+              href="https://www.linkedin.com/shareArticle?mini=true&amp;url=${post.slug}&amp;title=${post.title}&amp;summary=${post.title}"
+              title="Share on Linkedin"
+              aria-label="Share on Linkedin"
+            >
+              <i className="icon icon-linkedin icon--sm">
+                <FaLinkedin className="icon__svg" />
+              </i>{' '}
+            </a>
+            <a
+              className="social-share__item"
+              tabindex="0"
+              href="mailto:?subject=${post.title}&amp;body=${post.slug}&nbsp;${post.title}"
+              title="Share by email"
+              aria-label="Share by email"
+            >
+              <i className="icon icon-mail icon--sm">
+                <FaEnvelope className="icon__svg" />
+              </i>{' '}
+            </a>
+            <button
+              className="copy-link js-copy-link"
+              tabindex="0"
+              data-url="${post.slug}"
+              title="Copy to clipboard"
+              data-label="Copied!"
+              aria-label="Copy to clipboard"
+            >
+              <i className="icon icon-copy icon--sm">
+                <FaCopy className="icon__svg" />
+              </i>{' '}
+            </button>
+          </div>
+
+          <div className="content">
+            <p className="content-excerpt">{post.excerpt}</p>
+
+            <div dangerouslySetInnerHTML={{ __html: post.description_html }}></div>
+          </div>
+        </article>
+
+        <div className="content-wrap">
+          {post.users.length > 0 && (
+            <div className="post-authors p flex flex-wrap bg-default">
+              <div className="section__title text-acc-3 m-b-sm">Published by</div>
+              <span className="special-delimiter"></span>
+              <div className="card author-card" data-type="post">
+                <Link
+                  className="author-card__media flex flex-cc"
+                  to={`/author/${post.users[0].slug}/`}
+                >
+                  <img
+                    className="author-card__img is-round z-index-1 has-shadow lazyautosizes lazyloaded"
+                    srcset={`${post.users[0].medium?.url?.proxy} 300w, ${post.users[0].medium?.url?.proxy} 600w`}
+                    data-src={post.users[0].medium?.url?.proxy}
+                    src={post.users[0].medium?.url?.proxy}
+                    alt={post.users[0].display_name}
+                    sizes="86px"
+                  />
+                </Link>
+
+                <div className="author-card__content flex-1 flex flex-col text-acc-1">
+                  <div className="author-card__name fw-600 text-lg m-b-xs">
+                    <Link to={`/author/${post.users[0].slug}/`}>{post.users[0].display_name}</Link>
+                  </div>
+
+                  <div className="author-card__descr text-acc-2 m-b">
+                    {post.users[0].description}
+                  </div>
+
+                  <div className="author-card__details flex">
+                    {/* <div className="author-card__social flex">
+                    <a
+                      href=""
+                      target="_blank"
+                      title="Twitter"
+                      aria-label="Twitter"
+                    >
+                      <i className="icon icon-twitter icon--xs">
+                        <FaTwitter className="icon__svg" />
+                      </i>{' '}
+                    </a>
+                    <a
+                      href=""
+                      target="_blank"
+                      title="Facebook"
+                      aria-label="Facebook"
+                    >
+                      <i className="icon icon-facebook icon--xs">
+                        <FaFacebook className="icon__svg" />
+                      </i>{' '}
+                    </a>
+                    <a
+                      href=""
+                      target="_blank"
+                      title="Website"
+                      aria-label="Website"
+                    >
+                      <i className="icon icon-link icon--xs">
+                        <FaLinkedin className="icon__svg" />
+                      </i>{' '}
+                    </a>
+                  </div> */}
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div
-              sx={{
-                display: 'flex',
-              }}
-            >
-              <a
-                sx={{
-                  padding: '10px',
-                  gap: '8px',
-                  width: '40px',
-                  height: '40px',
-                  background: '#FFFFFF',
-                  border: '1px solid #D0D5DD',
-                  boxShadow: '0px 1px 2px rgba(16, 24, 40, 0.05)',
-                  borderRadius: '0.25rem',
-                  display: 'block',
-                  margin: '0.25rem',
-                  fontWeight: 600,
-                }}
-                href={`https://twitter.com/share?text=${title}-&url=${url}`}
-                title="Share by Twitter"
-              >
-                <FaTwitter color="#98A2B3" fontSize="22px" />
-              </a>
-
-              <a
-                sx={{
-                  padding: '10px',
-                  gap: '8px',
-                  width: '40px',
-                  height: '40px',
-                  background: '#FFFFFF',
-                  border: '1px solid #D0D5DD',
-                  boxShadow: '0px 1px 2px rgba(16, 24, 40, 0.05)',
-                  borderRadius: '0.25rem',
-                  display: 'block',
-                  margin: '0.25rem',
-                  fontWeight: 600,
-                }}
-                href={`https://www.facebook.com/sharer.php?u=${url}`}
-                title="Share by Facebook"
-              >
-                <FaFacebook color="#98A2B3" fontSize="22px" />
-              </a>
-              <a
-                sx={{
-                  padding: '10px',
-                  gap: '8px',
-                  width: '40px',
-                  height: '40px',
-                  background: '#FFFFFF',
-                  border: '1px solid #D0D5DD',
-                  boxShadow: '0px 1px 2px rgba(16, 24, 40, 0.05)',
-                  borderRadius: '0.25rem',
-                  display: 'block',
-                  margin: '0.25rem',
-                  fontWeight: 600,
-                }}
-                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                  `${title} - ${url}`,
-                )}`}
-                title="Share by Whatsapp"
-              >
-                <FaWhatsapp color="#98A2B3" fontSize="22px" />
-              </a>
-            </div>
-          </div>
-
-          {/* <div sx={{ textAlign: 'center', mt: '3rem' }}>
-            <h4>Share this article:</h4>
-            <div
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                gap: '2.25rem',
-                mt: (theme) => `${theme.space.spacing6}`,
-                pb: (theme) => `${theme.space.spacing6}`,
-                borderBottomWidth: '1px',
-                a: {
-                  background: '#f9f9f9',
-                  padding: '12px',
-                  borderRadius: '50%',
-                  width: '40px',
-                  height: '40px',
-                },
-                'a:hover': {
-                  bg: '#0066FF',
-                  color: '#ffffff',
-                },
-                button: {
-                  background: '#f9f9f9',
-                  padding: '12px',
-                  borderRadius: '50%',
-                  width: '40px',
-                  height: '40px',
-                },
-                'button:hover': {
-                  bg: '#0066FF',
-                  color: '#ffffff',
-                },
-              }}
-            >
-              <a href={`https://www.facebook.com/sharer.php?u=${url}`} title="Share by Facebook">
-                <FaFacebookF />
-              </a>
-              <a
-                href={`https://twitter.com/share?text=${title}-&url=${url}`}
-                title="Share by Twitter"
-              >
-                <FaTwitter />
-              </a>
-              <a
-                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                  `${title} - ${url}`,
-                )}`}
-                title="Share by Whatsapp"
-              >
-                <FaWhatsapp />
-              </a>
-              <a
-                href={`https://pinterest.com/pin/create/bookmarklet/?url=${url}&description=${title}`}
-                title="Share by Pinterest"
-              >
-                <FaPinterestSquare />
-              </a>
-              <a
-                href={`https://www.linkedin.com/shareArticle?url=${url}-&title=${title}`}
-                title="Share by Linkedin"
-              >
-                <FaLinkedinIn />
-              </a>
-              <a
-                href={`mailto:?subject=${title}&body=Check out this site: ${url}`}
-                title="Share by Email"
-              >
-                <FaEnvelope />
-              </a>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(decodeURIComponent(url));
-                }}
-              >
-                <FaLink />
-              </button>
-            </div>
-          </div> */}
+          )}
         </div>
-      </article>
+      </div>
     </>
   );
 };

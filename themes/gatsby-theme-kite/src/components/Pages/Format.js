@@ -2,7 +2,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import Layout from '@components/Layout/index';
-import BlogCard from '@components/UI/BlogCard';
+import StoryCard from '@components/UI/StoryCard';
 
 const FormatDetails = ({ data }) => {
   const { posts } = data;
@@ -38,13 +38,7 @@ const FormatDetails = ({ data }) => {
               }}
             >
               {posts.nodes.map((item, index) => (
-                <StoryCard
-                  key={index}
-                  cardStyle="iframely"
-                  storyData={item}
-                  excerpt={item.format.slug !== 'fact-check'}
-                  imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-4"
-                />
+                <StoryCard key={index} post={item} />
               ))}
             </div>
           ) : (
