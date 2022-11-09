@@ -1,15 +1,8 @@
 const editorjsHTML = require('editorjs-html');
 
-module.exports = ({
-  spaceId,
-  accessToken,
-  apiUrl,
-  siteUrl = 'https://localhost:9002',
-  youtubeApiKey,
-  channelId,
-}) => ({
+module.exports = ({ spaceId, accessToken, apiUrl, siteUrl = 'https://localhost:9002' }) => ({
   siteMetadata: {
-    title: 'epage',
+    title: 'dodo',
     siteUrl,
     description: 'Gatsby Site built using DegaCMS',
   },

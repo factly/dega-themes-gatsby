@@ -29,7 +29,7 @@ ex -
 
 ```
 
-yarn workspace factly-english start
+yarn workspace factly-quail start
 
 ```
 
