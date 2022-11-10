@@ -86,7 +86,6 @@ exports.sourceNodes = async (
       'X-Space': spaceId,
       'X-Dega-API-Key': accessToken,
     },
-    credentials: 'include',
   });
 
   const cache = new InMemoryCache({
