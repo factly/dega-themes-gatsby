@@ -3,8 +3,8 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import Layout from '@components/Layout';
-import parseEditorJsData from '@helpers/parseEditorJsData';
-import BlogCard from './UI/BlogCard';
+import StoryCard from './UI/StoryCard';
+import { parseTiptapContent } from '@helpers/parseTiptapContent';
 
 const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {
   const slug = useSlug ? item?.slug : item?.degaId;
@@ -30,7 +30,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
           px: (theme) => `${theme.space.spacing5}`,
         }}
       >
-        {parseEditorJsData({ content: item?.description })}
+        {parseTiptapContent(item?.description)}
       </div>
     </>
   );
@@ -56,63 +56,6 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
             }}
           >
             {header ? header(item) : defaultHeader(item)}
-            <div
-              className="tabs"
-              sx={{
-                lineHeight: '18.4px',
-                overflow: 'auto',
-                overflowX: 'auto',
-                overflowY: 'auto',
-                textAlign: 'center',
-                textRendering: 'optimizelegibility',
-                whiteSpace: 'nowrap',
-                borderBottom: '1px solid #919191',
-                marginBottom: (theme) => `${theme.space.spacing5}`,
-              }}
-            >
-              <ul
-                sx={{
-                  fontSize: ' inherit',
-                  fontFamily: 'inherit',
-                  margin: 0,
-                  padding: 0,
-                  border: 0,
-                  lineHeight: 'inherit',
-                  listStyle: 'none',
-                  display: 'inline-flex',
-                  maxWidth: '100vw',
-                  li: {
-                    fontSize: (theme) => `${theme.fontSizes.h7}`,
-                    fontWeight: 700,
-                    hyphens: 'auto',
-                    lineHeight: '16.8px',
-                    marginBottom: '0px',
-                    mx: (theme) => `${theme.space.spacing5}`,
-                    marginTop: 0,
-                    paddingBottom: (theme) => `${theme.space.spacing4}`,
-                    paddingLeft: '0px',
-                    paddingRight: '0px',
-                    paddingTop: (theme) => `${theme.space.spacing5}`,
-                    textAlign: 'center',
-                    textTransform: 'uppercase',
-                    whiteSpace: 'nowrap',
-                  },
-                }}
-              >
-                <li>
-                  <Link to={`/${type}/${slug}`} activeClassName="active">
-                    All
-                  </Link>
-                </li>
-                {formats.map((tab, index) => (
-                  <li key={index}>
-                    <Link to={`/${type}/${slug}/format/${tab.slug}`} activeClassName="active">
-                      {tab.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
             {filteredPosts.length > 0 ? (
               <div
@@ -125,7 +68,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
                 }}
               >
                 {filteredPosts.map((item, index) => (
-                  <BlogCard key={index} type="basic" post={item} />
+                  <StoryCard key={index} type="basic" post={item} />
                 ))}
               </div>
             ) : (

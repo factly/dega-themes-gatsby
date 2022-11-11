@@ -7,5 +7,6 @@ import '@fontsource/inter/900.css';
 import '@static/css/normalize.css';
 import '@static/fonts/fonts.css';
 import '@static/css/styles.css';
+import '@static/css/main.css';
 
 export const onServiceWorkerUpdateReady = () => window.location.reload();

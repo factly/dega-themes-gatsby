@@ -2,10 +2,10 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import Layout from '@components/Layout/index';
-import BlogCard from '@components/UI/BlogCard';
+import StoryCard from '@components/UI/StoryCard';
 
 const FormatDetails = ({ data }) => {
-  const { allDegaPost } = data;
+  const { posts } = data;
   //const filteredPosts = allDegaPost.nodes.filter((post) => post.published_date !== null);
   return (
     <Layout>
@@ -18,7 +18,7 @@ const FormatDetails = ({ data }) => {
             fontSize: [(theme) => `${theme.fontSizes.h5}`, (theme) => `${theme.fontSizes.h4}`],
           }}
         >
-          {allDegaPost[0]?.format.name}
+          {posts.nodes[0]?.format.name}
         </h1>
         <div
           sx={{
@@ -28,7 +28,7 @@ const FormatDetails = ({ data }) => {
             pt: [null, null, null, (theme) => `${theme.space.spacing7}`],
           }}
         >
-          {allDegaPost.nodes.length > 0 ? (
+          {posts.nodes.length > 0 ? (
             <div
               sx={{
                 display: 'grid',
@@ -37,14 +37,8 @@ const FormatDetails = ({ data }) => {
                 px: [null, null, (theme) => `${theme.space.spacing6}`],
               }}
             >
-              {allDegaPost.nodes.map((item, index) => (
-                <StoryCard
-                  key={index}
-                  cardStyle="iframely"
-                  storyData={item}
-                  excerpt={item.format.slug !== 'fact-check'}
-                  imageSize="w-full md:w-1/3 h-48 md:h-full py-4 md:py-4"
-                />
+              {posts.nodes.map((item, index) => (
+                <StoryCard key={index} post={item} />
               ))}
             </div>
           ) : (

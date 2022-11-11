@@ -7,6 +7,80 @@
 /* @import './normalize.css';
 
 @import '../fonts/fonts.css'; */
+
+/*=====================================================
+    Fonts
+=====================================================*/
+:root {
+  --font-family: 'Roboto', sans-serif;
+}
+:root {
+  --dega-accent-color: #0066ff;
+}
+/*=====================================================
+    light theme colors ( as SCSS mixin )
+=====================================================*/
+/*=====================================================
+    dark theme colors ( as SCSS mixin )
+=====================================================*/
+/*=====================================================
+    common variables ( as SCSS mixin ) 
+    define common variable for light and dark here
+=====================================================*/
+/*=====================================================
+    ⚠ WARNING: please do not edit below this line,
+    incorrect coding may break the theme
+
+    Merging common variables with light and dark
+    separately
+=====================================================*/
+:root {
+  /* setting theme color to dega accent color. By default we used #FF3A46 */
+  --dega-accent-color: #0066ff;
+  --logo-header-height: 40px;
+  --logo-footer-height: 40px;
+  --c-white: #ffffff;
+  --c-black: #000000;
+  --c-success: #96ea8c;
+  --c-error: #ff9b84;
+  --c-button-text: var(--c-white);
+  --size-1: 4px;
+  --size-2: 8px;
+  --size-3: 16px;
+  --size-4: 24px;
+  --c-body-bg: #ffffff;
+  --c-text-main: #161f38;
+  --c-text-light: #575861;
+  --c-gray-light: #efefef;
+  --c-gray-lighter: #f9f9f9;
+  --c-border: #dadce5;
+  --c-border-light: var(--c-gray-light);
+  --c-shadow: 0 15px 40px 5px rgba(132, 132, 133, 0.15);
+}
+
+[data-theme='dark'] {
+  /* setting theme color to dega accent color. By default we used #FF3A46 */
+  --dega-accent-color: var(--dega-accent-color);
+  --logo-header-height: 40px;
+  --logo-footer-height: 40px;
+  --c-white: #ffffff;
+  --c-black: #000000;
+  --c-success: #96ea8c;
+  --c-error: #ff9b84;
+  --c-button-text: var(--c-white);
+  --size-1: 4px;
+  --size-2: 8px;
+  --size-3: 16px;
+  --size-4: 24px;
+  --c-body-bg: #272935;
+  --c-text-main: #f9f9fa;
+  --c-text-light: #b2b2b3;
+  --c-gray-light: #454854;
+  --c-gray-lighter: #303340;
+  --c-border: #35394b;
+  --c-border-light: var(--c-gray-light);
+  --c-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
 /* CSS Reset */
 *,
 *::before,
@@ -109,11 +183,11 @@ div {
   background-color: #edf2f7;
 }
 
-.main-content {
+/* .main-content {
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
-}
+} */
 
 /* a:hover {
   color: #ea364a;

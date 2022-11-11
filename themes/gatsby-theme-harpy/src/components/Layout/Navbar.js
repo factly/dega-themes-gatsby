@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import { FaHome, FaBars } from 'react-icons/fa';
+import { FaHome, FaBars, FaSearch } from 'react-icons/fa';
 import isBrowser from '@helpers/isBrowser';
 /**
  * @component Navbar
@@ -14,160 +14,92 @@ import isBrowser from '@helpers/isBrowser';
  * @param {Object} props.menu - menu item
  */
 
-const Navbar = ({ logo, menu }) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [width, setWidth] = useState(0);
+const Navbar = ({ data }) => {
+  const { menu, space } = data;
+  const mainMenu = menu.nodes.filter((i) => i.slug === 'main')[0];
 
-  /**
-   * Updates width when resized for responsiveness of menu item
-   */
-  const updateWidth = () => {
-    const windowWidth = isBrowser && window.innerWidth;
-    setWidth(windowWidth);
-  };
+  const defaultMenuItems = [
+    { url: '/categories', title: 'Categories', name: 'Categories' },
+    { url: '/authors', title: 'Authors', name: 'Authors' },
+  ];
 
-  useEffect(() => {
-    updateWidth();
-    isBrowser && window.addEventListener('resize', updateWidth);
-    if (width >= 1080) {
-      setShowMenu(true);
-    } else {
-      setShowMenu(false);
-    }
-    return () => isBrowser && window.removeEventListener('resize', updateWidth);
-  }, [width]);
-
-  const handleClick = () => {
-    setShowMenu((prevState) => !prevState);
-  };
   return (
     <React.Fragment>
-      <div
-        sx={{
-          position: 'fixed',
-          zIndex: '9999',
-          top: 0,
-          left: 0,
-          right: 0,
-          bg: (theme) => `${theme.colors.bgLight}`,
-          borderBottomWidth: '1px',
-        }}
-      >
-        <nav
-          sx={{
-            position: 'sticky',
-            display: 'flex',
-            maxWidth: '1560px',
-            minHeight: '60px',
-            mx: 'auto',
-            flexWrap: ['wrap', null, null, 'wrap'],
-            alignItems: 'center',
-            justifyContent: ['space-between', null, null, 'flex-start'],
-            px: (theme) => `${theme.space.spacing5}`,
-            py: (theme) => `${theme.space.spacing3}`,
+      <header className="site-header has-theme-icon">
+        <div className="header-inner flex justify-space-between">
+          <div className="header-logo flex">
+            <Link to="/" className="logo-img theme-light-logo">
+              <img src={space.logo?.url?.proxy} alt={space.name} />
+            </Link>
+            <Link to="/" className="logo-img theme-dark-logo">
+              <img src={space.logo?.url?.proxy} alt={space.name} />
+            </Link>
+          </div>
 
-            '& a:hover': {
-              color: (theme) => `${theme.colors.textLinkHoverPrimary}`,
-            },
-          }}
-        >
-          <Link
-            to="/"
-            sx={{
-              position: ['relative', null, null, 'absolute'],
-              transform: ['none', null, null, 'translate(-50%,-50%)'],
-              top: [null, null, null, '50%'],
-              left: [null, null, null, '50%'],
-              zIndex: 999,
-            }}
+          <input id="mobile-menu-toggle" className="mobile-menu-checkbox" type="checkbox" />
+          <label
+            for="mobile-menu-toggle"
+            className="mobile-menu-icon"
+            aria-label="menu toggle button"
           >
-            <img sx={{ height: 8, mx: [null, null, null, 'auto'] }} src={logo} alt="factly" />
-          </Link>
-          <button
-            type="button"
-            sx={{ display: [null, null, null, 'none'] }}
-            onClick={() => handleClick()}
-          >
-            <FaBars />
-          </button>
-          <div
-            sx={{
-              display: showMenu ? 'flex' : 'none',
-              zIndex: 998,
-              position: 'relative',
-              flexDirection: ['column', null, null, 'row'],
-              flexGrow: 1,
-              alignItems: 'center',
-              flexBasis: '100%',
-              overflow: 'hidden',
-            }}
-          >
-            <ul
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                flexDirection: ['column', null, null, 'row'],
-                listStyle: 'none',
-              }}
-            >
-              <li sx={{ display: ['none', null, null, 'block'] }}>
-                <Link
-                  to="/"
-                  sx={{
-                    px: [
-                      (theme) => `${theme.space.spacing3}`,
-                      null,
-                      null,
-                      null,
-                      (theme) => `${theme.space.spacing5}`,
-                    ],
-                    display: 'block',
-                    py: (theme) => `${theme.space.spacing3}`,
-                  }}
-                >
-                  <FaHome />
+            <span className="line"></span>
+            <span className="line"></span>
+            <span className="line"></span>
+            <span className="sr-only">Menu toggle button</span>
+          </label>
+
+          <nav className="nav-wrap flex" role="navigation" aria-label="Main navigation">
+            <ul className="nav-left no-style-list" role="menu">
+              <li className="nav-item" role="menuitem">
+                <Link to="/" className="nav-link">
+                  Home
                 </Link>
               </li>
-
-              {/* {mainMenu?.menu.map((menuItem, index) => (
-                <li key={menuItem.title}>
-                  <Link
-                    key={`navbar-${index}`}
-                    to={menuItem.url}
-                    title={menuItem.title}
-                    sx={{
-                      px: [
-                        (theme) => `${theme.space.spacing3}`,
-                        null,
-                        null,
-                        null,
-                        (theme) => `${theme.space.spacing5}`,
-                      ],
-                      display: 'block',
-                      py: (theme) => `${theme.space.spacing3}`,
-                      textTransform: 'uppercase',
-                      fontWeight: 'semibold',
-                      fontSize: [(theme) => `${theme.fontSizes.h8}`],
-                      '&:focus': { outline: 'none' },
-                    }}
-                  >
-                    {menuItem.name}
+              {!mainMenu?.menu &&
+                defaultMenuItems.map((item) => (
+                  <li className="nav-item" role="menuitem">
+                    <Link to={item.url} className="nav-link">
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              {mainMenu?.menu.map((item) => (
+                <li className="nav-item" role="menuitem">
+                  <Link to={item.url} className="nav-link">
+                    {item.name}
                   </Link>
                 </li>
-              ))} */}
+              ))}
+
+              {/* <li className=" has-dropdown">
+                <a href="#" className="nav-link more-link">
+                  More{' '}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 18c-.39 0-.78-.132-1.097-.398L.617 9.03a1.713 1.713 0 112.194-2.633l9.208 7.673 9.192-7.397a1.715 1.715 0 012.15 2.671l-10.286 8.277A1.714 1.714 0 0112 18z"></path>
+                  </svg>
+                </a>
+                <ul className="no-style-list dropdown-menu">
+                  <li className="nav-item" role="menuitem">
+                    <a href="/authors/">Authors</a>
+                  </li>
+                </ul>
+              </li> */}
             </ul>
-            <ul
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                flexDirection: ['column', null, null, 'row'],
-                listStyle: 'none',
-                ml: [null, null, null, 'auto'],
-              }}
-            ></ul>
-          </div>
-        </nav>
-      </div>
+
+            <ul className="nav-right no-style-list" role="menu"></ul>
+            <div className="icons-wrap">
+              {/* <button href="javascript:;" className="nav-icon search-icon flex js-search-button">
+                <FaSearch />
+              </button> */}
+            </div>
+          </nav>
+        </div>
+      </header>
     </React.Fragment>
   );
 };

@@ -19,45 +19,17 @@ import parseDate from '@helpers/parseDate';
  * TODO: Add loader for infinite-scroller
  */
 const PostDetails = ({ data }) => {
-  const { allDegaPost, degaSpace, degaPost, recentPosts } = data;
-  const { edges: posts } = allDegaPost;
-  const post = posts.filter(({ node }) => node.id === degaPost.id)[0];
+  const { post: degaPost, space, posts, recentPosts } = data;
+
+  const post = posts.edges.filter(({ node }) => node.id === degaPost.id)[0];
   const { previous: previousPost, next: nextPost } = post;
 
-  const [showSocialIcon, setShowSocialIcon] = React.useState(false);
-
-  const [observer, setObserver] = React.useState({
-    observe: () => {},
-  });
-
-  const handleShowSocialIcon = (entry) => {
-    if (entry.intersectionRatio > 0) {
-      setShowSocialIcon(false);
-    } else {
-      setShowSocialIcon(true);
-    }
-  };
-
-  const createObserver = () => {
-    const o = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.target.hasAttribute('social-icon')) {
-          handleShowSocialIcon(entry);
-        }
-      });
-    });
-    setObserver(o);
-  };
-  React.useEffect(() => {
-    createObserver();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   // for sharing links
-  const title = encodeURIComponent(degaPost.title);
-  let url;
-  if (isBrowser) {
-    url = encodeURIComponent(window.location.href);
-  }
+  // const title = encodeURIComponent(degaPost.title);
+  // let url;
+  // if (isBrowser) {
+  //   url = encodeURIComponent(window.location.href);
+  // }
 
   return (
     <Layout>
@@ -65,7 +37,7 @@ const PostDetails = ({ data }) => {
         title={degaPost.title}
         description={degaPost.excerpt}
         image={`${degaPost.medium?.url?.proxy}`}
-        canonical={`${degaSpace.site_address}/${degaPost.slug}`}
+        canonical={`${space.site_address}/${degaPost.slug}`}
         type="article"
       />
       <div
@@ -83,16 +55,9 @@ const PostDetails = ({ data }) => {
             width: '100%',
             maxWidth: 1024,
             mx: 'auto',
-            p: [
-              (theme) => `${theme.space.spacing3}`,
-              null,
-              null,
-              (theme) => `${theme.space.spacing8}`,
-            ],
-            pl: (theme) => [null, null, `${theme.space.spacing8}`],
           }}
         >
-          <Post key={`details${degaPost.id}`} post={degaPost} observer={observer} />
+          <Post key={`details${degaPost.id}`} post={degaPost} />
           <div>
             <div
               sx={{
@@ -113,7 +78,7 @@ const PostDetails = ({ data }) => {
                 {previousPost && (
                   <>
                     <Link
-                      to={`/${previousPost.slug}`}
+                      to={`/${previousPost.slug}/`}
                       sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
                     >
                       <span>
@@ -141,7 +106,7 @@ const PostDetails = ({ data }) => {
                 {nextPost && (
                   <>
                     <Link
-                      to={`/${nextPost.slug}`}
+                      to={`/${nextPost.slug}/`}
                       sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
                     >
                       <div>
@@ -202,7 +167,7 @@ const PostDetails = ({ data }) => {
                         textAlign: 'left',
                       }}
                     >
-                      <Link to={`/${post.slug}`} sx={{ display: 'flex' }}>
+                      <Link to={`/${post.slug}/`} sx={{ display: 'flex' }}>
                         <div sx={{ flex: '0 0 33%' }}>
                           <img src={post.medium.url.proxy} alt="" />
                         </div>
@@ -216,124 +181,6 @@ const PostDetails = ({ data }) => {
               </div>
             </div>
           </div>
-          {showSocialIcon && (
-            <>
-              <div
-                className="top-auto"
-                style={{
-                  top: '40vh',
-                }}
-                sx={{
-                  display: ['none', null, 'flex'],
-                  flexDirection: 'column',
-                  position: 'fixed',
-                  ml: (theme) => `-${theme.space.spacing8}`,
-                  // left: 0,
-                  alignItems: 'center',
-                  justifyContent: ['flex-start', null, 'flex-end'],
-                  top: '40vh',
-                }}
-              >
-                <a
-                  title="Share on Facebook"
-                  href={`https://www.facebook.com/sharer.php?u=${url}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{
-                    display: 'block',
-                    m: (theme) => `${theme.space.spacing1}`,
-                    p: (theme) => `${theme.space.spacing3}`,
-                    '&:first-of-type': { mx: 0 },
-                    fontWeight: 'semibold',
-                    borderRadius: 'default',
-                  }}
-                >
-                  <FaFacebookSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
-                    color="#3b5998"
-                  />
-                </a>
-                <a
-                  title="Tweet it"
-                  href={`https://twitter.com/share?text=${title}-&url=${url}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{
-                    display: 'block',
-                    m: (theme) => `${theme.space.spacing1}`,
-                    '&:first-of-type': { mx: 0 },
-                    p: (theme) => `${theme.space.spacing3}`,
-                    fontWeight: 'semibold',
-                    borderRadius: 'default',
-                  }}
-                >
-                  <FaTwitterSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
-                    color="#1da1f2"
-                  />
-                </a>
-                <a
-                  title="Share on WhatsApp"
-                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                    `${title} - ${url}`,
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{
-                    display: 'block',
-                    m: (theme) => `${theme.space.spacing1}`,
-                    '&:first-of-type': { mx: 0 },
-                    p: (theme) => `${theme.space.spacing3}`,
-                    fontWeight: 'semibold',
-                    borderRadius: 'default',
-                  }}
-                >
-                  <FaWhatsappSquare
-                    sx={{ fontSize: (theme) => `${theme.fontSizes.h4}` }}
-                    color="#25d366"
-                  />
-                </a>
-              </div>
-              {/* Mobile share icon at the bottom */}
-              {/* <div
-                sx={{
-                  display: [null, null, null, 'none'],
-                  position: 'fixed',
-                  m: 2,
-                  bottom: 0,
-                  right: 0,
-                }}
-              >
-                <svg
-                  sx={{
-                    fill: 'currentColor',
-                    stroke: 'currentColor',
-                    color: (theme) => `${theme.colors.gray[4]}`,
-                  }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="36"
-                  height="36"
-                  viewBox="0 0 36 36"
-                >
-                  <g transform="translate(-807 -2277)">
-                    <ellipse
-                      cx="18"
-                      cy="18"
-                      rx="18"
-                      ry="18"
-                      transform="translate(807 2277)"
-                      stroke="#fff"
-                    />
-                    <path
-                      d="M18,0A18,18,0,1,0,36,18,18,18,0,0,0,18,0ZM16,18a3.158,3.158,0,0,1-.188,1.068l5.024,2.417a3.225,3.225,0,1,1-.789,1.64L14.7,20.552a3.162,3.162,0,1,1,0-5.1l5.349-2.572a3.165,3.165,0,1,1,.788,1.64L15.81,16.932A3.153,3.153,0,0,1,16,18Z"
-                      transform="translate(806.999 2277)"
-                      fill="#fff"
-                    />
-                  </g>
-                </svg>
-              </div> */}
-            </>
-          )}
         </div>
       </div>
     </Layout>
