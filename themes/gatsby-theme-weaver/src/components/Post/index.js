@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import FactCheckWidget from '@components/Post/FactCheckWidget';
 import Badge from '@components/Post/Badge';
-import parseEditorJsData from '@helpers/parseEditorJsData';
 import Seo from '@components/Seo';
 import { Link } from 'gatsby';
 import parseDate from '@helpers/parseDate';
@@ -22,6 +21,7 @@ import {
 import Img from 'gatsby-image/withIEPolyfill';
 import generateFluidObject from '@helpers/generateFluidObject';
 import { isBrowser } from '@helpers/isBrowser';
+import { parseTiptapContent } from '@helpers/parseTiptapContent';
 
 /**
  * TODO: URI encoding
@@ -30,19 +30,11 @@ import { isBrowser } from '@helpers/isBrowser';
  */
 
 const Post = ({ post }) => {
-  const postSection = useRef(null);
-
-  // const headerSocialIcon = createRef();
-
-  // useEffect(() => {
-  //   observer.observe(postSection.current);
-  //   observer.observe(headerSocialIcon.current);
-  // }, [observer, postSection, headerSocialIcon]);
-  const title = encodeURIComponent(post.title);
-  let url;
-  if (isBrowser) {
-    url = encodeURIComponent(window.location.href);
-  }
+  // const title = encodeURIComponent(post.title);
+  // let url;
+  // if (isBrowser) {
+  //   url = encodeURIComponent(window.location.href);
+  // }
 
   return (
     <>
@@ -55,186 +47,76 @@ const Post = ({ post }) => {
             </script>
           ))}
       </Helmet>
-      <article
-        post={post.id}
-        ref={postSection}
-        slug={post.slug}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          px: (theme) => `${theme.space.spacing6}`,
-          my: (theme) => `${theme.space.spacing6}`,
-          fontSize: (theme) => `${theme.fontSizes.body}`,
-          '&:first-of-type': {
-            mt: 0,
-          },
-        }}
-      >
-        <div
-          sx={{
-            bg: (theme) => `${theme.colors.bgLight}`,
-            borderTopLeftRadius: 'default',
-            borderTopRightRadius: 'default',
-            borderBottomLeftRadius: 'none',
-            borderBottomRightRadius: 'none',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            sx={{
-              display: 'flex',
-              gap: '12px',
-              mb: '0.5rem',
-            }}
-          >
-            {post.categories.map((category, i) => (
-              <Badge key={i} url={category.slug} name={category.name} />
-            ))}
+
+      <article className="article post tag-getting-started ">
+        <header className="article-header de-canvas">
+          <div className="article-tag post-card-tags">
+            <span className="post-card-primary-tag">
+              {post.categories.length > 0 && (
+                <Link to={`/category/${post.categories[0].slug}/`}>{post.categories[0].name}</Link>
+              )}
+            </span>
           </div>
 
-          <h1
-            sx={{
-              fontSize: '48px',
-              fontWeight: 600,
-              lineHeight: 1.3,
-            }}
-          >
-            {post.title}
-          </h1>
-          <p
-            sx={{
-              mb: '1.5rem',
-              fontSize: '1.5rem',
-              maxWidth: '780px',
-              lineHeight: '1.6',
-            }}
-          >
-            {post.excerpt}
-          </p>
-          <div
-            sx={{
-              display: 'flex',
-              position: 'relative',
-            }}
-          >
-            <div
-              sx={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                bg: 'gray',
-                mr: '8px',
-              }}
-            ></div>
-            <div>
-              {post.users &&
-                post.users.map((user, i, arr) => (
-                  <React.Fragment key={i}>
-                    <p
-                      sx={{
-                        fontWeight: 'medium',
-                        color: '#000',
-                        fontSize: '18px',
-                        px: (theme) => `${theme.space.spacing2}`,
-                        '&:first-of-type': { pl: 0 },
-                      }}
-                    >
-                      {`${user?.first_name} ${user?.last_name}`}
+          <h1 className="article-title">{post.title}</h1>
 
-                      {arr.length - i > 1 && (user?.first_name || user?.last_name) && ','}
-                    </p>
-                  </React.Fragment>
-                ))}
-              <div
-                sx={{
-                  marginBottom: '16px',
-                  fontWeight: 400,
-                  fontSize: '16px',
-                  lineHeight: '30px',
-                  color: '#667085',
-                }}
-              >
-                {parseDate(post.published_date)}
-              </div>
-            </div>
-          </div>
+          <p className="article-excerpt">{post.excerpt}</p>
 
-          <div
-            sx={{
-              display: 'flex',
-              flexDirection: ['column', null, 'row'],
-              justifyContent: 'space-between',
-              mt: '2rem',
-            }}
-          >
-            {post.medium && (
-              <div sx={{ flex: '1 1 0%', width: 'full' }}>
-                <Img
-                  fluid={generateFluidObject({
-                    url: post.medium.url.proxy,
-                    dimensions: post.medium.dimensions,
-                  })}
-                />
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div
-          sx={{
-            width: ['full'],
-            mx: 'auto',
-            fontSize: (theme) => `${theme.fontSizes.body}`,
-          }}
-        >
-          {post.claims && <FactCheckWidget claims={post.claims} />}
-          <div className="parsed">
-            {parseEditorJsData({ content: post.description, scripts: true })}
-          </div>
-          {post.claims &&
-            post.claims.map((claim, i) => (
-              <React.Fragment key={i}>
-                {post.claims.length > 1 && (
-                  <div
-                    sx={{
-                      bg: (theme) => `${theme.colors.bgPrimary}`,
-                      p: (theme) => `${theme.space.spacing5}`,
-                      mt: (theme) => `${theme.space.spacing5}`,
-                    }}
-                  >
-                    <div
-                      sx={{
-                        mb: (theme) => `${theme.space.spacing5}`,
-                      }}
-                    >
-                      <h4
-                        sx={{
-                          fontWeight: 'bold',
-                        }}
+          <div className="article-byline">
+            <section className="article-byline-content">
+              <ul className="author-list">
+                <li className="author-list-item">
+                  {post.users.length > 0 && (
+                    <>
+                      <Link
+                        key={post.id}
+                        to={`/author/${post.users[0].slug}`}
+                        className="author-avatar"
                       >
-                        Claim:{' '}
-                      </h4>
-                      {claim.claim}
-                    </div>
-                    <div>
-                      <h4
-                        sx={{
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Fact:
-                      </h4>
-                      <p dangerouslySetInnerHTML={{ __html: claim.fact }} />
-                    </div>
-                  </div>
-                )}
+                        <img
+                          className="author-profile-image"
+                          src={post.users[0].medium?.url?.proxy}
+                          alt={post.users[0].display_name}
+                        />
+                      </Link>
+                    </>
+                  )}
+                </li>
+              </ul>
 
-                <div className="parsed">
-                  {parseEditorJsData({ content: claim.description, scripts: true })}
+              <div className="article-byline-meta">
+                <h4 className="author-name">
+                  {post.users.length > 0 && (
+                    <Link to={`/author/${post.users[0].slug}`}>{post.users[0].display_name}</Link>
+                  )}
+                </h4>
+                <div className="byline-meta-content">
+                  <time className="byline-meta-date" dateTime={parseDate(post.published_at)}>
+                    {parseDate(post.published_at)}
+                  </time>
+                  {/* <span className="byline-reading-time">
+                    <span className="bull">•</span> 2 min read
+                  </span>  */}
                 </div>
-              </React.Fragment>
-            ))}
-        </div>
+              </div>
+            </section>
+          </div>
+
+          <figure className="article-image">
+            <img
+              srcset={`${post.medium?.url?.proxy}?rs:fill/w:320 300w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:640 720w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:720 960w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:960 1200w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:1200 2000w`}
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              src={`${post.medium?.url?.proxy}?rs:fill/w:1200`}
+              alt={post.title}
+            />
+          </figure>
+        </header>
+
+        {parseTiptapContent(post.description_html)}
       </article>
     </>
   );

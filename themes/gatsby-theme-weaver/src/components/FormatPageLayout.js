@@ -3,144 +3,40 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import Layout from '@components/Layout';
-import parseEditorJsData from '@helpers/parseEditorJsData';
-import BlogCard from './UI/BlogCard';
+import StoryCard from './UI/StoryCard';
+import { parseTiptapContent } from '@helpers/parseTiptapContent';
 
-const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {
-  const slug = useSlug ? item?.slug : item?.degaId;
-  const filteredPosts = posts.filter((post) => post.published_date !== null);
-  const defaultHeader = (item) => (
-    <>
-      <h1
-        sx={{
-          textAlign: 'center',
-          fontSize: [(theme) => `${theme.fontSizes.h5}`, null, (theme) => `${theme.fontSizes.h4}`],
-          mb: (theme) => `${theme.space.spacing5}`,
-          textTransform: 'capitalize',
-        }}
-      >
-        {item?.name}
-      </h1>
-
-      <div
-        id="category-description"
-        sx={{
-          maxHeight: '100%',
-          overflow: 'hidden',
-          px: (theme) => `${theme.space.spacing5}`,
-        }}
-      >
-        {parseEditorJsData({ content: item?.description })}
-      </div>
-    </>
-  );
+const FormatPageLayout = ({ type, posts, item }) => {
   return (
     <Layout>
-      <div
-        sx={{
-          display: 'flex',
-          flexDirection: ['column', null, null, 'row'],
-          justifyContent: 'space-between',
-          borderBottomWidth: [null, null, null, 'px'],
-        }}
-      >
-        <div
-          className="main-content"
-          sx={{ order: [2, null, null, null, 1], maxWidth: 1560, width: '100%', mx: 'auto' }}
-        >
-          <div
-            sx={
-              {
-                // display: 'flex',
-                // flexDirection: 'column',
-              }
-            }
-          >
-            <p
-              sx={{
-                ml: '1.25rem',
-              }}
-            >
-              {header ? header(item) : defaultHeader(item)}
-            </p>
-            {/* <div
-              className="tabs"
-              sx={{
-                lineHeight: '18.4px',
-                overflow: 'auto',
-                overflowX: 'auto',
-                overflowY: 'auto',
-                mt: '1rem',
-                //textAlign: 'center',
-                textRendering: 'optimizelegibility',
-                whiteSpace: 'nowrap',
-                borderBottom: '1px solid #919191',
-                marginBottom: (theme) => `${theme.space.spacing5}`,
-              }}
-            >
-              <ul
-                sx={{
-                  fontSize: ' inherit',
-                  fontFamily: 'inherit',
-                  margin: 0,
-                  padding: 0,
-                  border: 0,
-                  lineHeight: 'inherit',
-                  listStyle: 'none',
-                  display: 'inline-flex',
-                  maxWidth: '100vw',
-                  li: {
-                    fontSize: (theme) => `${theme.fontSizes.h7}`,
-                    fontWeight: 700,
-                    hyphens: 'auto',
-                    lineHeight: '16.8px',
-                    marginBottom: '0px',
-                    mx: (theme) => `${theme.space.spacing5}`,
-                    marginTop: 0,
-                    paddingBottom: (theme) => `${theme.space.spacing4}`,
-                    paddingLeft: '0px',
-                    paddingRight: '0px',
-                    paddingTop: (theme) => `${theme.space.spacing5}`,
-                    textAlign: 'center',
-                    textTransform: 'uppercase',
-                    whiteSpace: 'nowrap',
-                  },
-                }}
-              >
-                <li>
-                  <Link to={`/${type}/${slug}`} activeClassName="active">
-                    All
-                  </Link>
-                </li>
-                {formats.map((tab, index) => (
-                  <li key={index}>
-                    <Link to={`/${type}/${slug}/format/${tab.slug}`} activeClassName="active">
-                      {tab.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div> */}
+      <div className="site-content">
+        <main id="site-main" className="site-main outer">
+          <div className="post-feed inner">
+            <section className="post-card post-card-large">
+              <div className="post-card-content">
+                <div className="post-card-content-link">
+                  {type === 'author' && item.medium?.url?.proxy && (
+                    <img
+                      className="author-profile-pic"
+                      src={item.medium?.url?.proxy}
+                      alt={item.name}
+                    />
+                  )}
 
-            {filteredPosts.length > 0 ? (
-              <div
-                sx={{
-                  display: 'grid',
-                  gridTemplateColumns: ['1fr', null, 'repeat( 2, 1fr )', 'repeat( 3, 1fr)'],
-                  //px: [null, null, (theme) => `${theme.space.spacing6}`],
-                  // mt: (theme) => `${theme.space.spacing7}`,
-                  // gridGap: (theme) => `${theme.space.spacing7}`,
-                }}
-              >
-                {filteredPosts.map((item, index) => (
-                  <BlogCard key={index} type="basic" post={item} />
-                ))}
+                  <header className="post-card-header">
+                    <h2 className="post-card-title">{item.name}</h2>
+                  </header>
+
+                  <div className="post-card-excerpt">{item.description}</div>
+                </div>
               </div>
-            ) : (
-              <h2 sx={{ textAlign: 'center' }}>No posts found</h2>
-            )}
+            </section>
+
+            {posts.map((post) => (
+              <StoryCard post={post} />
+            ))}
           </div>
-        </div>
+        </main>
       </div>
     </Layout>
   );

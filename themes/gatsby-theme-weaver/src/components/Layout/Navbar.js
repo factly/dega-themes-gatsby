@@ -15,127 +15,61 @@ import isBrowser from '@helpers/isBrowser';
  * @param {Object} props.menu - menu item
  */
 
-const Navbar = ({ logo, menu }) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [width, setWidth] = useState(0);
+const Navbar = ({ data }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  /**
-   * Updates width when resized for responsiveness of menu item
-   */
-  const updateWidth = () => {
-    const windowWidth = isBrowser && window.innerWidth;
-    setWidth(windowWidth);
-  };
+  const { menu, space } = data;
+  const mainMenu = menu.nodes.filter((i) => i.slug === 'main')[0];
 
-  useEffect(() => {
-    updateWidth();
-    isBrowser && window.addEventListener('resize', updateWidth);
-    if (width >= 1080) {
-      setShowMenu(true);
-    } else {
-      setShowMenu(false);
-    }
-    return () => isBrowser && window.removeEventListener('resize', updateWidth);
-  }, [width]);
-
-  const handleClick = () => {
-    setShowMenu((prevState) => !prevState);
-  };
-
-  //
+  const defaultMenuItems = [
+    { url: '/categories', title: 'Categories', name: 'Categories' },
+    { url: '/authors', title: 'Authors', name: 'Authors' },
+  ];
 
   return (
     <React.Fragment>
-      <div
-        sx={{
-          display: 'flex',
-          gap: '48px',
-          justifyContent: 'space-Between',
-          ml: '3rem',
-          mr: '3rem',
-          paddingTop: '12px',
-          //borderBottom: '1px solid'
-        }}
+      <header
+        id="de-head"
+        className={`de-head outer  ${isMenuOpen ? 'de-head-open has-cover' : ''}`}
       >
-        <div
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '24px',
-          }}
-        >
-          <div>
-            {/* <Link href="/" passHref>
-              <a sx={{ mx: 'auto' }}>
-                <img
-                  src={space?.logo?.url?.proxy || `/logo.png`}
-                  alt={space.site_title}
-                  sx={{ maxWidth: '4rem', display: 'block', mx: 'auto' }}
-                />
-              </a>
-            </Link> */}
-            <Link to="/">
-              <img sx={{ height: 8, mx: [null, null, null, 'auto'] }} src={logo} alt="factly" />
+        <nav className="de-head-inner inner">
+          <div className="de-head-brand">
+            <Link className="de-head-logo no-image" to="/">
+              {!space?.logo?.url?.proxy &&
+                (space?.title?.toUpperCase() || space?.name?.toUpperCase())}
             </Link>
+            <div className="de-head-brand-wrapper">
+              <button
+                className="de-burger"
+                role="button"
+                onClick={() => setIsMenuOpen((prev) => !prev)}
+              >
+                <div className="de-burger-box">
+                  <div className="de-burger-inner"></div>
+                </div>
+              </button>
+            </div>
           </div>
-          <Link href="/" passHref>
-            <a
-              sx={{
-                display: 'flex',
-                gap: '24px',
-              }}
-            >
-              <p>Home</p>
-              <p>Products</p>
-              <p>Resources</p>
-              <p>Pricing</p>
-            </a>
-          </Link>
-        </div>
-        <div
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '24px',
-          }}
-        >
-          <div
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '16px',
-            }}
-          >
-            <a title="Share on Facebook" href={``} target="_blank" rel="noopener noreferrer">
-              <FaFacebook />
-            </a>
-
-            <a title="Share on Twitter" href={``} target="_blank" rel="noopener noreferrer">
-              <FaTwitter />
-            </a>
+          <div className="de-head-menu">
+            <ul className="nav">
+              <li className="nav-home">
+                <Link to="/">Home</Link>
+              </li>
+              {!mainMenu?.menu &&
+                defaultMenuItems.map((item) => (
+                  <li key={item.title}>
+                    <Link to={item.url}>{item.name}</Link>
+                  </li>
+                ))}
+              {mainMenu?.menu.map((item) => (
+                <li key={item.title}>
+                  <Link to={item.url}>{item.name}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <p
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              border: '1px solid',
-              padding: '12px',
-              borderRadius: '10px',
-              bg: '#F55353',
-              color: 'white',
-              fontSize: '16px',
-              fontWeight: '500',
-            }}
-          >
-            <a href="">Subscribe</a>
-          </p>
-        </div>
-      </div>
-      <hr
-        sx={{
-          mt: '0.75rem',
-        }}
-      />
+        </nav>
+      </header>
     </React.Fragment>
   );
 };

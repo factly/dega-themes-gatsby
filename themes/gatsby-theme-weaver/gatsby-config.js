@@ -9,7 +9,7 @@ module.exports = ({
   channelId,
 }) => ({
   siteMetadata: {
-    title: 'epage',
+    title: 'weaver',
     siteUrl,
     description: 'Gatsby Site built using DegaCMS',
   },

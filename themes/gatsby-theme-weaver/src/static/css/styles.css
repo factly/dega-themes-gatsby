@@ -7,6 +7,9 @@
 /* @import './normalize.css';
 
 @import '../fonts/fonts.css'; */
+
+@import url('./normalize.css');
+@import url('./screen.css');
 /* CSS Reset */
 *,
 *::before,

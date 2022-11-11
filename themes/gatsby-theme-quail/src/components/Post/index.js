@@ -75,13 +75,13 @@ const Post = ({ post, previous, next }) => {
 
           <figure className="sc-article-image">
             <img
-              srcset={`${post.medium?.url?.proxy} 300w,
-                    ${post.medium?.url?.proxy} 720w,
-                    ${post.medium?.url?.proxy} 960w,
-                    ${post.medium?.url?.proxy} 1200w,
-                    ${post.medium?.url?.proxy} 2000w`}
+              srcset={`${post.medium?.url?.proxy}?rs:fill/w:300 300w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:720 720w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:960 960w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:1200 1200w,
+                    ${post.medium?.url?.proxy}?rs:fill/w:1200 2000w`}
               sizes="(max-width: 1200px) 100vw, 1200px"
-              src={`${post.medium?.url?.proxy}`}
+              src={`${post.medium?.url?.proxy}?rs:fill/w:1200`}
               alt={post.title}
             />
           </figure>

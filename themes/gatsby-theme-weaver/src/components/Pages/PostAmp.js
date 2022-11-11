@@ -1,47 +1,47 @@
 /** @jsx jsx */
-import React from 'react'; // eslint-disable-line no-unused-vars
-import { Helmet } from 'react-helmet';
+import React from 'react';
 import { jsx } from 'theme-ui';
-import parseEditorJsData from '@helpers/parseEditorJsData';
-import LayoutAmp from '@components/LayoutAmp';
+import Post from '@components/Post/index.js';
+import Layout from '@components/Layout/index';
+import { isBrowser } from '@helpers/isBrowser';
+import Seo from '@components/Seo';
+import StoryCard from '@components/UI/StoryCard';
 
+/**
+ * TODO: Add loader for infinite-scroller
+ */
 const PostDetails = ({ data }) => {
-  const { post } = data;
-  // console.log({ data, degaPost });
+  const { posts, space, post, recentPosts } = data;
+
+  // for sharing links
+  const title = encodeURIComponent(post.title);
+  let url;
+  if (isBrowser) {
+    url = encodeURIComponent(window.location.href);
+  }
+
   return (
-    <LayoutAmp>
-      <Helmet>
-        <html lang="en" amp />
-        <title>{post.title}</title>
-        {/* <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
-        <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
-        <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
-        <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script> */}
-        {/* <script async custom-element="amp-pinterest" src="https://cdn.ampproject.org/v0/amp-pinterest-0.1.js"></script> */}
-      </Helmet>
-      <article>
-        <h1 className="amp-title">
-          <strong>{post.title}</strong>
-        </h1>
-        {post.users.map((user, i, arr) => (
-          <div key={i}>
-            By <a href={`/author/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
-            {arr.length - i > 1 && ','}
-          </div>
-        ))}
-        <div>
-          {post.excerpt && (
-            <>
-              <strong>Excerpt</strong>
-              <p>{post.excerpt}</p>
-            </>
-          )}
-          <div className="parsed">
-            {parseEditorJsData({ content: post.description, scripts: true, amp: true })}
-          </div>
-        </div>
-      </article>
-    </LayoutAmp>
+    <Layout>
+      <Seo
+        title={post.title}
+        description={post.excerpt}
+        image={`${post.medium?.url?.proxy}`}
+        canonical={`${space.site_address}/${post.slug}`}
+        type="article"
+      />
+      <div className="site-content">
+        <main id="site-main" className="site-main">
+          <Post key={`details${post.id}`} post={post} />
+          <aside className="read-more-wrap outer">
+            <div className="read-more inner">
+              {recentPosts.nodes.slice(0, 3).map((post) => (
+                <StoryCard post={post} />
+              ))}
+            </div>
+          </aside>
+        </main>
+      </div>
+    </Layout>
   );
 };
 
