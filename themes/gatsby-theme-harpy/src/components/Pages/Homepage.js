@@ -12,6 +12,7 @@ const Indexpage = ({ data }) => {
   const recentPosts = posts.nodes.slice(6);
   return (
     <Layout>
+      <Seo title={space.name} />
       <div className="main">
         {(space.title || space.tagline) && (
           <section className="home-cover-area justify-center flex">
