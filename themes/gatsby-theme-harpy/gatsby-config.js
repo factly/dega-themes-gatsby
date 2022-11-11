@@ -27,7 +27,6 @@ module.exports = ({ spaceId, accessToken, apiUrl, siteUrl = 'https://localhost:9
         injectColorFlashScript: false,
       },
     },
-    `gatsby-plugin-sass`,
     'gatsby-plugin-styled-components',
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
