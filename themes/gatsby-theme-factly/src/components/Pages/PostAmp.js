@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
 import parseEditorJsData from '@helpers/parseEditorJsData';
 import LayoutAmp from '@components/LayoutAmp';
+import parseTiptapContent from '@helpers/parseTiptapContent';
 
 const PostDetails = ({ data }) => {
   const { post } = data;
@@ -25,7 +26,7 @@ const PostDetails = ({ data }) => {
         </h1>
         {post.users.map((user, i, arr) => (
           <div key={i}>
-            By <a href={`/author/${user.id}`}>{`${user.first_name} ${user.last_name}`}</a>
+            By <a href={`/author/${user.slug}`}>{`${user.first_name} ${user.last_name}`}</a>
             {arr.length - i > 1 && ','}
           </div>
         ))}
@@ -37,7 +38,7 @@ const PostDetails = ({ data }) => {
             </>
           )}
           <div className="parsed">
-            {parseEditorJsData({ content: post.description, scripts: true, amp: true })}
+            {parseTiptapContent(post.description_html)}
           </div>
         </div>
       </article>

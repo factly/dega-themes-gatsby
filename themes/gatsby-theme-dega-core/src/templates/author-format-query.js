@@ -17,6 +17,7 @@ export const query = graphql`
         url
         dimensions
       }
+      slug
     }
     formats: allDegaFormat {
       nodes {

@@ -4,6 +4,7 @@ import { jsx } from 'theme-ui';
 import parseEditorJsData from '@helpers/parseEditorJsData';
 import { isBrowser } from '@helpers/isBrowser';
 import FormatPageLayout from '@components/FormatPageLayout';
+import parseTiptapContent from '@helpers/parseTiptapContent';
 
 const CategoryDetailsAll = ({ data }) => {
   const { category, formats, posts } = data;
@@ -46,7 +47,7 @@ const CategoryDetailsAll = ({ data }) => {
             px: (theme) => `${theme.space.spacing5}`,
           }}
         >
-          {parseEditorJsData({ content: item.description })}
+          {parseTiptapContent(item.description_html)}
         </div>
         {item.description && isReadMoreNeeded && (
           <button

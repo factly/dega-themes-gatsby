@@ -6,7 +6,7 @@ import Layout from '@components/Layout';
 import StoryCard from '@components/UI/StoryCard';
 
 const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {
-  const slug = useSlug ? item?.slug : item?.degaId;
+  const slug = item?.slug;
   const filteredPosts = posts.filter((post) => post.published_date !== null);
   const defaultHeader = (item) => (
     <h1
