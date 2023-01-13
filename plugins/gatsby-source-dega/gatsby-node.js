@@ -1,9 +1,9 @@
-const { ApolloClient, InMemoryCache, ApolloLink, HttpLink, gql, from } = require('@apollo/client');
-
+const { ApolloClient, InMemoryCache, HttpLink, from } = require('@apollo/client');
 const { RetryLink } = require('@apollo/client/link/retry');
 const { onError } = require('@apollo/client/link/error');
 const { fetchWrapper } = require('./fetch');
-const fetch = require('node-fetch');
+
+
 const {
   getTotalQuery,
   getPostsQuery,
@@ -19,9 +19,9 @@ const {
   getFeaturedCategoriesQuery,
   getFeaturedTagsQuery,
 } = require('./queries');
+
 const { createSchemaCustomization } = require('./createSchemaCustomization');
 
-// Add customized Schema for data from dega-api
 exports.createSchemaCustomization = createSchemaCustomization;
 
 exports.onPreInit = () => console.log('loaded dega plugin');
