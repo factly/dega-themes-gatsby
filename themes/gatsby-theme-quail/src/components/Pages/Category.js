@@ -9,8 +9,8 @@ const CategoryDetailsFormat = ({ data }) => {
 
   return (
     <>
-      <FormatPageLayout type="topic" posts={posts.nodes} item={category} />;
       <Seo title={category.name} />
+      <FormatPageLayout type="topic" posts={posts.nodes} item={category} />;
     </>
   )
 };

@@ -11,10 +11,10 @@ const CategoryDetailsFormat = ({ data }) => {
 
   return (
     <>
-      <FormatPageLayout type="category" posts={posts.nodes} item={category} />;
       <Seo title={category.name} />
+      <FormatPageLayout type="category" posts={posts.nodes} item={category} />;
     </>
-  )
+  );
 };
 
 export default CategoryDetailsFormat;
