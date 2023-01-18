@@ -580,119 +580,121 @@ const IndexPage = ({ data, pageContext }) => {
 // };
 export default IndexPage;
 
-export const query = graphql`query PlaylistsPageQuery {
-  channel {
-    channelId
-    statistics {
-      subscriberCount
-      videoCount
-    }
-    contentDetails {
-      relatedPlaylists {
-        uploads
+export const query = graphql`
+  query PlaylistsPageQuery {
+    channel {
+      channelId
+      statistics {
+        subscriberCount
+        videoCount
       }
-    }
-    image {
-      childImageSharp {
-        gatsbyImageData(layout: FULL_WIDTH)
-      }
-    }
-    snippet {
-      thumbnails {
-        high {
-          url
+      contentDetails {
+        relatedPlaylists {
+          uploads
         }
       }
-      customUrl
-      description
-      title
-    }
-  }
-  allChannelSections(sort: {snippet: {position: ASC}}) {
-    totalCount
-    nodes {
-      id
-      snippet {
-        type
+      image {
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
+        }
       }
-      playlist {
+      snippet {
+        thumbnails {
+          high {
+            url
+          }
+        }
+        customUrl
+        description
+        title
+      }
+    }
+    allChannelSections(sort: { snippet: { position: ASC } }) {
+      totalCount
+      nodes {
         id
         snippet {
-          title
+          type
+        }
+        playlist {
+          id
+          snippet {
+            title
+          }
+        }
+        videos {
+          contentDetails {
+            videoId
+          }
+          image {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
+          snippet {
+            playlistId
+            channelTitle
+            publishedAt(formatString: "MMM DD, YYYY")
+            title
+          }
         }
       }
-      videos {
+    }
+    allVideo(
+      sort: { snippet: { publishedAt: DESC } }
+      filter: { snippet: { title: { nin: ["Private video", "Deleted video"] } } }
+    ) {
+      totalCount
+      nodes {
         contentDetails {
           videoId
         }
         image {
           childImageSharp {
             gatsbyImageData(layout: FULL_WIDTH)
+            original {
+              src
+            }
           }
         }
         snippet {
           playlistId
           channelTitle
+          position
+          description
           publishedAt(formatString: "MMM DD, YYYY")
           title
         }
       }
     }
-  }
-  allVideo(
-    sort: {snippet: {publishedAt: DESC}}
-    filter: {snippet: {title: {nin: ["Private video", "Deleted video"]}}}
-  ) {
-    totalCount
-    nodes {
-      contentDetails {
-        videoId
-      }
-      image {
-        childImageSharp {
-          gatsbyImageData(layout: FULL_WIDTH)
-          original {
-            src
+    allPlaylist(filter: { list: { ne: false } }) {
+      totalCount
+      nodes {
+        id
+        playlistId
+        videos {
+          positions {
+            position
+            playlist
+          }
+          contentDetails {
+            videoId
+          }
+        }
+        contentDetails {
+          itemCount
+        }
+        snippet {
+          channelId
+          publishedAt(formatString: "MMM DD, YYYY")
+          title
+        }
+        image {
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
           }
         }
       }
-      snippet {
-        playlistId
-        channelTitle
-        position
-        description
-        publishedAt(formatString: "MMM DD, YYYY")
-        title
-      }
     }
   }
-  allPlaylist(filter: {list: {ne: false}}) {
-    totalCount
-    nodes {
-      id
-      playlistId
-      videos {
-        positions {
-          position
-          playlist
-        }
-        contentDetails {
-          videoId
-        }
-      }
-      contentDetails {
-        itemCount
-      }
-      snippet {
-        channelId
-        publishedAt(formatString: "MMM DD, YYYY")
-        title
-      }
-      image {
-        childImageSharp {
-          gatsbyImageData(layout: FULL_WIDTH)
-        }
-      }
-    }
-  }
-}`;
+`;

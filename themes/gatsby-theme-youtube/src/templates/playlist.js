@@ -34,7 +34,7 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
 
   let sortedVideos = playlist.videos;
 
-  if (playlist.snippet.title !== 'Uploads') {
+  if (playlist.snippet.title === 'Uploads') {
     sortedVideos = playlist.videos
       .map((video, i) => ({ ...video, pos: positionsArr[i].position }))
       .sort((a, b) => a.pos - b.pos);
@@ -461,6 +461,12 @@ function Playlist({ data: { playlist, channel }, pageContext, location }) {
                           image={playlistVideo.image.childImageSharp.gatsbyImageData}
                           alt={playlistVideo.snippet.title}
                           sx={{ height: 'full', width: 20 }}
+                        />
+                      ) : playlistVideo.snippet.thumbnails.high ? (
+                        <img
+                          src={playlistVideo.snippet.thumbnails.high.url}
+                          alt={playlistVideo.snippet.title}
+                          sx={{ width: 20, height: 'full' }}
                         />
                       ) : (
                         <img

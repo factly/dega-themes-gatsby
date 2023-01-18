@@ -9,10 +9,19 @@ let basePath;
 let bannerData;
 let bannerTitle;
 let logo;
+let navData;
+let footer;
 
 exports.onPreBootstrap = (
-  { store, reporter },
-  { basePath: bp = '/', bannerData: bd = [], bannerTitle: bt = 'Featured Shows', logo: lg = '' },
+  { store, reporter, actions },
+  {
+    basePath: bp = '/',
+    bannerData: bd = [],
+    bannerTitle: bt = 'Featured Shows',
+    logo: lg = '',
+    navData: nd = {},
+    footer: ft = '',
+  },
 ) => {
   // const { program } = store.getState();
   // const dirs = [
@@ -26,11 +35,12 @@ exports.onPreBootstrap = (
   //     mkdirp.sync(dir);
   //   }
   // });
-
+  navData = nd;
   basePath = bp;
   bannerData = bd;
   bannerTitle = bt;
   logo = lg;
+  footer = ft;
 };
 exports.pluginOptionsSchema = ({ Joi }) => {
   return Joi.object({
@@ -40,20 +50,24 @@ exports.pluginOptionsSchema = ({ Joi }) => {
 };
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-
   const result = await graphql(`
     query VideosQuery {
       allPlaylist {
         totalCount
         nodes {
           playlistId
+          snippet {
+            title
+          }
         }
       }
     }
   `);
 
   const baseUrl = basePath === '/' ? '' : urlResolve(basePath);
-
+  const uploadsPlaylistId = result.data.allPlaylist.nodes?.filter(
+    (playlist) => playlist?.snippet?.title === 'Uploads',
+  )[0]?.playlistId;
   createPage({
     path: `${baseUrl}/`,
     component: require.resolve('./src/templates/homepage.js'),
@@ -62,6 +76,7 @@ exports.createPages = async ({ graphql, actions }) => {
       bannerData,
       bannerTitle,
       logo,
+      uploadsPlaylistId,
     },
   });
   // create playlist page for each video
