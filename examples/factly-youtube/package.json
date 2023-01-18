@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@factly/gatsby-theme-youtube": "^0.0.1",
-    "gatsby": "^4.11.1",
+    "gatsby": "^5.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   }

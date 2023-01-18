@@ -9,7 +9,7 @@ function Homepage({ data }) {
   const { degaSpace, allDegaCategory, factchecks, posts } = data;
   return (
     <Layout>
-      <Seo title={degaSpace.site_title} canonical={degaSpace.site_address} type="website" />
+      <Seo title={degaSpace?.site_title} canonical={degaSpace?.site_address} type="website" />
       <div
         sx={{
           display: 'flex',

@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@factly/gatsby-theme-athena": "^1.0.0",
-    "gatsby": "^4.11.1",
-    "gatsby-plugin-manifest": "^4.11.1",
+    "gatsby": "^5.4.0",
+    "gatsby-plugin-manifest": "^5.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   }

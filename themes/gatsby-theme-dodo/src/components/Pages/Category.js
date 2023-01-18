@@ -30,7 +30,7 @@ function CategoryDetailsAll({ data }) {
               {item.name}
             </h1>
             <p className="c-topper__standfirst u-font-standfirst u-mt-8 u-font-family-sansSerif">
-              <InnerHTML className="parsed" html={item.description_html} />{' '}
+              {item.description_html && <InnerHTML className="parsed" html={item.description_html} />}{' '}
               {item.description && isReadMoreNeeded && (
                 <button
                   type="button"

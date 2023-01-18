@@ -580,121 +580,119 @@ const IndexPage = ({ data, pageContext }) => {
 // };
 export default IndexPage;
 
-export const query = graphql`
-  query PlaylistsPageQuery {
-    channel {
-      channelId
-      statistics {
-        subscriberCount
-        videoCount
-      }
-      contentDetails {
-        relatedPlaylists {
-          uploads
-        }
-      }
-      image {
-        childImageSharp {
-          gatsbyImageData(layout: FULL_WIDTH)
-        }
-      }
-      snippet {
-        thumbnails {
-          high {
-            url
-          }
-        }
-        customUrl
-        description
-        title
+export const query = graphql`query PlaylistsPageQuery {
+  channel {
+    channelId
+    statistics {
+      subscriberCount
+      videoCount
+    }
+    contentDetails {
+      relatedPlaylists {
+        uploads
       }
     }
-    allChannelSections(sort: { fields: snippet___position }) {
-      totalCount
-      nodes {
+    image {
+      childImageSharp {
+        gatsbyImageData(layout: FULL_WIDTH)
+      }
+    }
+    snippet {
+      thumbnails {
+        high {
+          url
+        }
+      }
+      customUrl
+      description
+      title
+    }
+  }
+  allChannelSections(sort: {snippet: {position: ASC}}) {
+    totalCount
+    nodes {
+      id
+      snippet {
+        type
+      }
+      playlist {
         id
         snippet {
-          type
-        }
-        playlist {
-          id
-          snippet {
-            title
-          }
-        }
-        videos {
-          contentDetails {
-            videoId
-          }
-          image {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
-          snippet {
-            playlistId
-            channelTitle
-            publishedAt(formatString: "MMM DD, YYYY")
-            title
-          }
+          title
         }
       }
-    }
-    allVideo(
-      sort: { fields: snippet___publishedAt, order: DESC }
-      filter: { snippet: { title: { nin: ["Private video", "Deleted video"] } } }
-    ) {
-      totalCount
-      nodes {
+      videos {
         contentDetails {
           videoId
         }
         image {
           childImageSharp {
             gatsbyImageData(layout: FULL_WIDTH)
-            original {
-              src
-            }
           }
         }
         snippet {
           playlistId
           channelTitle
-          position
-          description
           publishedAt(formatString: "MMM DD, YYYY")
           title
-        }
-      }
-    }
-    allPlaylist(filter: { list: { ne: false } }) {
-      totalCount
-      nodes {
-        id
-        playlistId
-        videos {
-          positions {
-            position
-            playlist
-          }
-          contentDetails {
-            videoId
-          }
-        }
-        contentDetails {
-          itemCount
-        }
-        snippet {
-          channelId
-          publishedAt(formatString: "MMM DD, YYYY")
-          title
-        }
-        image {
-          childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
         }
       }
     }
   }
-`;
+  allVideo(
+    sort: {snippet: {publishedAt: DESC}}
+    filter: {snippet: {title: {nin: ["Private video", "Deleted video"]}}}
+  ) {
+    totalCount
+    nodes {
+      contentDetails {
+        videoId
+      }
+      image {
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
+          original {
+            src
+          }
+        }
+      }
+      snippet {
+        playlistId
+        channelTitle
+        position
+        description
+        publishedAt(formatString: "MMM DD, YYYY")
+        title
+      }
+    }
+  }
+  allPlaylist(filter: {list: {ne: false}}) {
+    totalCount
+    nodes {
+      id
+      playlistId
+      videos {
+        positions {
+          position
+          playlist
+        }
+        contentDetails {
+          videoId
+        }
+      }
+      contentDetails {
+        itemCount
+      }
+      snippet {
+        channelId
+        publishedAt(formatString: "MMM DD, YYYY")
+        title
+      }
+      image {
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
+        }
+      }
+    }
+  }
+}`;

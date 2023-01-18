@@ -43,12 +43,12 @@ const Layout = (props) => {
   return (
     <>
       <Seo
-        title={`${space.site_title} - ${space.tag_line}`}
+        title={`${space?.site_title} - ${space?.tag_line}`}
         // canonical={degaSpace.site_address}
         image={`${space?.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
-        description={space.description !== 'null' ? space.description : space.site_title}
+        description={space?.description !== 'null' ? space?.description : space?.site_title}
       >
-        {space.fav_icon && <link rel="icon" href={`${space.fav_icon?.url?.proxy}`} />}
+        {space?.fav_icon && <link rel="icon" href={`${space?.fav_icon?.url?.proxy}`} />}
       </Seo>
       <Navbar logo={`${space?.logo.url.proxy}?h:60`} menu={menu} />
       <main
