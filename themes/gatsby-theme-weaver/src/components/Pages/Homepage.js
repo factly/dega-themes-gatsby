@@ -12,6 +12,7 @@ const Homepage = ({ data }) => {
 
   return (
     <Layout>
+      <Seo title={space.name} />
       <main id="site-main" className="site-main outer">
         <div className="inner posts">
           <div className="post-feed">

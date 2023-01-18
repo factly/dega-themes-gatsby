@@ -14,6 +14,7 @@ const Homepage = ({ data }) => {
 
   return (
     <Layout>
+      <Seo title={space.name} />
       <main id="sc-main" className="sc-main sc-outer">
         <div className="sc-inner">
           {posts.nodes.length > 0 ? (
