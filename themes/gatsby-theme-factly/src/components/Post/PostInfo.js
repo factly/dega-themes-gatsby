@@ -34,7 +34,7 @@ const PostInfo = ({ users, categories, date }) => (
           users.map((user, i, arr) => (
             <React.Fragment key={i}>
               <Link
-                to={`/author/${user.id}`}
+                to={`/author/${user.slug}`}
                 sx={{
                   fontWeight: 'medium',
                   color: (theme) => `${theme.colors.textLinkPrimary}`,
