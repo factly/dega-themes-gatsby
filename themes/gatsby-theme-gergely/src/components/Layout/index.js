@@ -4,18 +4,14 @@ import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { jsx } from 'theme-ui';
-import Navbar from './Navbar';
-// import Footer from './Footer';
-
-// import { useThemeUI } from 'theme-ui';
-import Footer from './Footer';
-import '../../static/css/tailwind.css';
-import Seo from '../Seo';
+import Navbar from '@components/Layout/Navbar';
+import Footer from '@components/Layout/Footer';
+import Seo from '@components/Seo';
 
 const Layout = (props) => {
   const data = useStaticQuery(graphql`
     query {
-      allDegaMenu {
+      menu: allDegaMenu {
         nodes {
           menu
           id
@@ -23,7 +19,7 @@ const Layout = (props) => {
           name
         }
       }
-      degaSpace {
+      space: degaSpace {
         description
         name
         site_title
@@ -41,23 +37,19 @@ const Layout = (props) => {
     }
   `);
 
-  const { degaSpace, allDegaMenu } = data;
+  const { space, menu } = data;
   const { children } = props;
   return (
     <>
       <Seo
-        title={`${degaSpace.site_title} - ${degaSpace.tag_line}`}
+        title={`${space?.site_title} - ${space?.tag_line}`}
         // canonical={degaSpace.site_address}
-        image={`${degaSpace.logo.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
-        description={
-          degaSpace.description !== 'null' ? degaSpace.description : degaSpace.site_title
-        }
-        fbAppId="587617254726291"
-        fbPages="1521487944736293"
+        image={`${space?.logo?.url?.proxy}?resize:fill:1200:330/enlarge:1/gravity:sm/pd:150:40:150:40`}
+        description={space?.description !== 'null' ? space?.description : space?.site_title}
       >
-        {degaSpace.fav_icon && <link rel="icon" href={`${degaSpace.fav_icon?.url?.proxy}`} />}
+        {space?.fav_icon && <link rel="icon" href={`${space?.fav_icon?.url?.proxy}`} />}
       </Seo>
-      <Navbar logo={`${degaSpace.logo.url.proxy}?h:60`} menu={allDegaMenu} />
+      <Navbar logo={`${space?.logo?.url.proxy}?h:60`} menu={menu} />
       <main
         style={{ maxWidth: '1560px' }}
         sx={{
@@ -75,7 +67,6 @@ const Layout = (props) => {
         }}
       >
         {children}
-        {/* <Footer /> */}
       </main>
       <Footer />
     </>

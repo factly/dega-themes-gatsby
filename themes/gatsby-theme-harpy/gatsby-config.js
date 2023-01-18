@@ -1,99 +1,46 @@
 const editorjsHTML = require('editorjs-html');
 
-module.exports = ({
-  spaceId,
-  accessToken,
-  apiUrl,
-  siteUrl = 'https://localhost:9002',
-  youtubeApiKey,
-  channelId,
-}) => ({
+module.exports = ({ spaceId, accessToken, apiUrl, siteUrl = 'https://localhost:9002' }) => ({
   siteMetadata: {
-    title: 'epage',
-    siteUrl: siteUrl,
+    title: 'harpy',
+    siteUrl,
     description: 'Gatsby Site built using DegaCMS',
   },
 
   plugins: [
     'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-source-dega`,
+      resolve: '@factly/gatsby-theme-dega-core',
       options: {
         spaceId,
         accessToken,
-        uri: apiUrl,
+        apiUrl,
       },
     },
-    youtubeApiKey && channelId
-      ? {
-          resolve: '@factly/gatsby-theme-youtube',
-          options: {
-            apiKey: youtubeApiKey,
-            channelId,
-            basePath: '/videos',
-            logo: 'logo.png',
-            bannerData: [
-              {
-                name: 'Decode',
-                icon: 'decode.png',
-                playlistId: 'PLEQcsVYyf3IA_pPC8LR81vpEPkDl1czou',
-              },
-              {
-                name: 'Decode Lite',
-                icon: 'decode-lite.png',
-                playlistId: 'PLEQcsVYyf3IBlzW5qPaozJZRKeS-aFpfv',
-              },
-              {
-                name: 'Pause',
-                icon: 'pause.png',
-                playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
-              },
-            ],
-          },
-        }
-      : null,
+
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    'gatsby-plugin-image',
     {
       resolve: 'gatsby-plugin-theme-ui',
       options: {
         injectColorFlashScript: false,
       },
     },
-    `gatsby-plugin-sass`,
     'gatsby-plugin-styled-components',
-    {
-      resolve: `gatsby-plugin-amp`,
-      options: {
-        canonicalBaseUrl: `${siteUrl}/`,
-        components: [
-          'amp-social-share',
-          'amp-pinterest',
-          'amp-twitter',
-          'amp-instagram',
-          'amp-youtube',
-          'amp-facebook',
-          'amp-iframe',
-        ],
-        excludedPaths: ['/404*', '/'],
-        pathIdentifier: '/amp/',
-        relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
-        relCanonicalPattern: '{{canonicalBaseUrl}}{{pathname}}',
-      },
-    },
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
       // add options to make sitemaps for other things
     },
     'gatsby-plugin-robots-txt',
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        include_favicon: false,
-        icon: 'src/Icons/favicon.png',
-        cache_busting_mode: 'none',
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-manifest',
+    //   options: {
+    //     include_favicon: false,
+    //     icon: 'src/Icons/favicon.png',
+    //     cache_busting_mode: 'none',
+    //   },
+    // },
 
     {
       resolve: 'gatsby-plugin-offline',

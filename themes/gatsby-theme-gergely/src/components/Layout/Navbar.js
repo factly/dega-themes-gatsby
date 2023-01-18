@@ -4,12 +4,23 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import { FaHome, FaBars } from 'react-icons/fa';
-
-export default function NavBar({ logo, menu }) {
+/**
+ * @component Navbar
+ * @typedef Props
+ * @prop {string} logo - url for logo
+ * @param {Props} props - arguments for Navbar with logo and menu properties
+ * @param {string} props.logo - url for logo
+ * @param {Object} props.menu - menu item
+ * @returns
+ */
+const Navbar = ({ logo, menu }) => {
   const mainMenu = menu.nodes.filter((i) => i.slug === 'main')[0];
   const [showMenu, setShowMenu] = useState(false);
   const [width, setWidth] = useState(0);
 
+  /**
+   * Updates width when resized for responsiveness of menu item
+   */
   const updateWidth = () => {
     const windowWidth = window.innerWidth;
     setWidth(windowWidth);
@@ -18,7 +29,7 @@ export default function NavBar({ logo, menu }) {
   useEffect(() => {
     updateWidth();
     window.addEventListener('resize', updateWidth);
-    if (width >= 1024) {
+    if (width >= 1080) {
       setShowMenu(true);
     } else {
       setShowMenu(false);
@@ -154,6 +165,50 @@ export default function NavBar({ logo, menu }) {
                 ml: [null, null, null, 'auto'],
               }}
             >
+              {/*  <li>
+                <Link
+                  to="/case-studies"
+                  sx={{
+                    px: [
+                      (theme) => `${theme.space.spacing3}`,
+                      null,
+                      null,
+                      null,
+                      (theme) => `${theme.space.spacing5}`,
+                    ],
+                    display: 'block',
+                    py: (theme) => `${theme.space.spacing3}`,
+                    textTransform: 'uppercase',
+                    fontWeight: 'semibold',
+                    fontSize: [(theme) => `${theme.fontSizes.h8}`],
+                    '&:focus': { outline: 'none' },
+                  }}
+                >
+                  Case Studies
+                </Link>
+              </li> */}
+              <li>
+                <Link
+                  to="/health-misinformation-report"
+                  sx={{
+                    px: [
+                      (theme) => `${theme.space.spacing3}`,
+                      null,
+                      null,
+                      null,
+                      (theme) => `${theme.space.spacing5}`,
+                    ],
+                    display: 'block',
+                    py: (theme) => `${theme.space.spacing3}`,
+                    textTransform: 'uppercase',
+                    fontWeight: 'semibold',
+                    fontSize: [(theme) => `${theme.fontSizes.h8}`],
+                    '&:focus': { outline: 'none' },
+                  }}
+                >
+                  Health Misinformation Report
+                </Link>
+              </li>
               <li>
                 <Link
                   to="/about"
@@ -182,4 +237,6 @@ export default function NavBar({ logo, menu }) {
       </div>
     </React.Fragment>
   );
-}
+};
+
+export default Navbar;

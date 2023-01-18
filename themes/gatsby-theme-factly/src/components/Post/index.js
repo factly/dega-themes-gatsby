@@ -7,9 +7,10 @@ import ShareButtonGroup from '@components/Post/ShareButtonGroup';
 import FactCheckWidget from '@components/Post/FactCheckWidget';
 import Tag from '@components/Post/Tag';
 import Excerpt from '@components/Post/Excerpt';
-import { isBrowser } from '@utils/isBrowser';
-import parseEditorJsData from '@utils/parseEditorJsData';
+import { isBrowser } from '@helpers/isBrowser';
+import parseEditorJsData from '@helpers/parseEditorJsData';
 import Seo from '@components/Seo';
+import parseTiptapContent from '@helpers/parseTiptapContent';
 /**
  * TODO: URI encoding
  * TODO: borderradius in theme ui
@@ -98,7 +99,7 @@ const Post = ({ post, observer }) => {
         >
           {post.claims && <FactCheckWidget claims={post.claims} />}
           <div className="parsed">
-            {parseEditorJsData({ content: post.description, scripts: true })}
+            {parseTiptapContent(post.description_html)}
           </div>
           {post.claims &&
             post.claims.map((claim, i) => (
@@ -139,7 +140,7 @@ const Post = ({ post, observer }) => {
                 )}
 
                 <div className="parsed">
-                  {parseEditorJsData({ content: claim.description, scripts: true })}
+                  {parseTiptapContent(claim.description_html)}
                 </div>
               </React.Fragment>
             ))}

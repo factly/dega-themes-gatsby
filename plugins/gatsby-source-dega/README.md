@@ -1,5 +1,5 @@
 <h1 align="center">
-  gatsby-source-dega
+  @factly/gatsby-source-dega
 </h1>
 Source from [DegaCMS](https://dega.factly.in) API in Gatsby.
 
@@ -8,7 +8,7 @@ Source from [DegaCMS](https://dega.factly.in) API in Gatsby.
 ## Install
 
 ```bash
-npm install --save gatsby-source-dega
+npm install --save @factly/gatsby-source-dega
 ```
 
 ## How to use
@@ -30,13 +30,13 @@ SPACE_ID=you-space-id-here
 
 ### gatsby-config
 
-The plugin sets some defaults for the endpoints and options. Hence you can use it only with the two **mandatory** entries `apiKey` and `chanspaceId`.
+The plugin sets some defaults for the endpoints and options. Hence you can use it only with the two **mandatory** entries `apiKey` and `spaceId`.
 
 ```JS
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-source-dega',
+      resolve: '@factly/gatsby-source-dega',
       options: {
         // apiKey and spaceId are mandatory
         apiKey: process.env.API_KEY,

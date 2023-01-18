@@ -42,33 +42,10 @@ exports.onPreBootstrap = (
   logo = lg;
   footer = ft;
 };
-
-exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
-  const { createNode } = actions;
-  const nodeContent = JSON.stringify(navData);
-  const nodeMeta = {
-    id: createNodeId(`nav-data-1`),
-    parent: null,
-    children: [],
-    internal: {
-      type: `NavData`,
-      mediaType: `text/html`,
-      content: nodeContent,
-      contentDigest: createContentDigest(navData),
-    },
-  };
-  const node = Object.assign({}, navData, nodeMeta);
-  createNode(node);
-  createNode({
-    id: createNodeId(`ft-data-1`),
-    parent: null,
-    children: [],
-    internal: {
-      type: 'footer',
-      content: footer,
-      mediaType: `text/html`,
-      contentDigest: createContentDigest(footer),
-    },
+exports.pluginOptionsSchema = ({ Joi }) => {
+  return Joi.object({
+    apiKey: Joi.string().description('Google Private Key for youtube data'),
+    channelId: Joi.string().description(`Specifies youtube channel id`),
   });
 };
 exports.createPages = async ({ graphql, actions }) => {

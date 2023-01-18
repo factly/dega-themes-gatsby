@@ -2,12 +2,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
-// import addDefaultSrc from '../utils/addDefaultSrc';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '../../utils/generateFluidObject';
+import generateFluidObject from '@helpers/generateFluidObject';
 
 /**
- * TODO: Remove Image element if it doesn't load
  * TODO: Add Maxwidth in theme ui
  */
 
@@ -23,17 +21,6 @@ const Excerpt = ({ excerpt, image }) => (
   >
     {image && (
       <div sx={{ flex: '1 1 0%', width: 'full' }}>
-        {/* <img
-          src={image.url.proxy}
-          alt={image.alt_text}
-          sx={{
-            width: 'full',
-            height: 'full',
-            objectFit: 'cover',
-          }}
-          // onError={addDefaultSrc}
-        /> */}
-
         <Img fluid={generateFluidObject({ url: image.url.proxy, dimensions: image.dimensions })} />
       </div>
     )}

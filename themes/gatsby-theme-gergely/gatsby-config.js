@@ -16,48 +16,20 @@ module.exports = ({
 }) => ({
   siteMetadata: {
     title: 'epage',
-    siteUrl: siteUrl,
+    siteUrl,
     description: 'Gatsby site built using Dega CMS',
   },
   // flags: { QUERY_ON_DEMAND: true },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-source-dega`,
+      resolve: '@factly/gatsby-theme-dega-core',
       options: {
         spaceId,
         accessToken,
-        uri: apiUrl,
+        apiUrl,
       },
     },
-    youtubeApiKey && channelId
-      ? {
-          resolve: '@factly/gatsby-theme-youtube',
-          options: {
-            apiKey: youtubeApiKey,
-            channelId,
-            basePath: '/videos',
-            logo: 'logo.png',
-            bannerData: [
-              {
-                name: 'Decode',
-                icon: 'decode.png',
-                playlistId: 'PLEQcsVYyf3IA_pPC8LR81vpEPkDl1czou',
-              },
-              {
-                name: 'Decode Lite',
-                icon: 'decode-lite.png',
-                playlistId: 'PLEQcsVYyf3IBlzW5qPaozJZRKeS-aFpfv',
-              },
-              {
-                name: 'Pause',
-                icon: 'pause.png',
-                playlistId: 'PLEQcsVYyf3IDpDYZ_Y-fuvSgYIY3TyBLv',
-              },
-            ],
-          },
-        }
-      : null,
     // {
     //   resolve: 'gatsby-source-graphql',
     //   options: {
@@ -80,25 +52,6 @@ module.exports = ({
     },
     `gatsby-plugin-sass`,
     'gatsby-plugin-styled-components',
-    {
-      resolve: `gatsby-plugin-amp`,
-      options: {
-        canonicalBaseUrl: `${siteUrl}/`,
-        components: [
-          'amp-social-share',
-          'amp-pinterest',
-          'amp-twitter',
-          'amp-instagram',
-          'amp-youtube',
-          'amp-facebook',
-          'amp-iframe',
-        ],
-        excludedPaths: ['/404*', '/'],
-        pathIdentifier: '/amp/',
-        relAmpHtmlPattern: '{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}',
-        relCanonicalPattern: '{{canonicalBaseUrl}}{{pathname}}',
-      },
-    },
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
       // add options to make sitemaps for other things

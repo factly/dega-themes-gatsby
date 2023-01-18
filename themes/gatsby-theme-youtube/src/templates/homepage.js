@@ -17,23 +17,17 @@ import placeholderImg from '../static/images/placeholder.jpg';
 const tabs = ['Home', 'Videos', 'Playlists'];
 
 const IndexPage = ({ data, pageContext }) => {
-  const { baseUrl, bannerData, bannerTitle, logo, uploadsPlaylistId } = pageContext;
+  const { baseUrl, bannerData, bannerTitle, logo } = pageContext;
   const [activeTab, setActiveTab] = useState({
     Home: true,
   });
+
   const {
     allPlaylist: { nodes: playlists },
-    playlist: uploadPlaylist,
+    allVideo: { nodes: videos },
     channel,
     allChannelSections,
   } = data;
-  let { videos } = uploadPlaylist;
-  const positionsArr = videos.map((video) =>
-    video.positions.find((e) => e.playlist === uploadPlaylist.playlistId),
-  );
-  videos = videos
-    .map((video, i) => ({ ...video, pos: positionsArr[i].position }))
-    .sort((a, b) => a.pos - b.pos);
   const [postItems, setPostItems] = useState(videos.slice(0, 20));
   const [hasNextPage, setHasNextPage] = useState(true);
   const handleLoadMore = () => {
@@ -274,12 +268,6 @@ const IndexPage = ({ data, pageContext }) => {
                                 alt={video.snippet.title}
                                 sx={{ height: 'full', width: 'full' }}
                               />
-                            ) : video.snippet.thumbnails.high ? (
-                              <img
-                                src={video.snippet.thumbnails.high.url}
-                                alt={video.snippet.title}
-                                sx={{ width: 'full', height: 'full' }}
-                              />
                             ) : (
                               <img
                                 src={placeholderImg}
@@ -397,12 +385,6 @@ const IndexPage = ({ data, pageContext }) => {
                             alt={video.snippet.title}
                             sx={{ height: 'full', width: 'full' }}
                           />
-                        ) : video.snippet.thumbnails.high ? (
-                          <img
-                            src={video.snippet.thumbnails.high.url}
-                            alt={video.snippet.title}
-                            sx={{ width: 'full', height: 'full' }}
-                          />
                         ) : (
                           <img
                             src={placeholderImg}
@@ -504,12 +486,6 @@ const IndexPage = ({ data, pageContext }) => {
                           alt={playlist.snippet.title}
                           sx={{ height: 'full', width: 'full' }}
                         />
-                      ) : playlist.snippet.thumbnails.high ? (
-                        <img
-                          src={playlist.snippet.thumbnails.high.url}
-                          alt={playlist.snippet.title}
-                          sx={{ width: 'full', height: 'full' }}
-                        />
                       ) : (
                         <img
                           src={placeholderImg}
@@ -605,66 +581,7 @@ const IndexPage = ({ data, pageContext }) => {
 export default IndexPage;
 
 export const query = graphql`
-  query PlaylistsPageQuery($uploadsPlaylistId: String!) {
-    playlist(playlistId: { eq: $uploadsPlaylistId }) {
-      playlistId
-      id
-      snippet {
-        title
-        publishedAt(formatString: "MMM DD, YYYY")
-        channelTitle
-        thumbnails {
-          default {
-            url
-          }
-          high {
-            url
-          }
-        }
-      }
-      videos {
-        id
-        image {
-          childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-            original {
-              src
-            }
-          }
-        }
-        contentDetails {
-          videoId
-        }
-        positions {
-          position
-          playlist
-        }
-        snippet {
-          position
-          title
-          description
-          thumbnails {
-            default {
-              url
-            }
-            high {
-              url
-            }
-            standard {
-              url
-            }
-            maxres {
-              url
-            }
-            medium {
-              url
-            }
-          }
-          publishedAt(formatString: "MMM DD, YYYY")
-          channelTitle
-        }
-      }
-    }
+  query PlaylistsPageQuery {
     channel {
       channelId
       statistics {
@@ -692,7 +609,7 @@ export const query = graphql`
         title
       }
     }
-    allChannelSections(sort: { fields: snippet___position }) {
+    allChannelSections(sort: { snippet: { position: ASC } }) {
       totalCount
       nodes {
         id
@@ -719,12 +636,34 @@ export const query = graphql`
             channelTitle
             publishedAt(formatString: "MMM DD, YYYY")
             title
-            thumbnails {
-              high {
-                url
-              }
+          }
+        }
+      }
+    }
+    allVideo(
+      sort: { snippet: { publishedAt: DESC } }
+      filter: { snippet: { title: { nin: ["Private video", "Deleted video"] } } }
+    ) {
+      totalCount
+      nodes {
+        contentDetails {
+          videoId
+        }
+        image {
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+            original {
+              src
             }
           }
+        }
+        snippet {
+          playlistId
+          channelTitle
+          position
+          description
+          publishedAt(formatString: "MMM DD, YYYY")
+          title
         }
       }
     }
@@ -749,11 +688,6 @@ export const query = graphql`
           channelId
           publishedAt(formatString: "MMM DD, YYYY")
           title
-          thumbnails {
-            high {
-              url
-            }
-          }
         }
         image {
           childImageSharp {

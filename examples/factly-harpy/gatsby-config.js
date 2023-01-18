@@ -1,19 +1,17 @@
 require('dotenv').config({
   path: `.env`,
 });
+
 module.exports = {
-  flags: {
-    LAZY_IMAGES: true,
-  },
   plugins: [
+    `gatsby-plugin-sass`,
     {
       resolve: '@factly/gatsby-theme-harpy',
       options: {
-        accessToken: process.env.ACCESS_TOKEN,
         spaceId: process.env.SPACE_ID,
-        apiUrl: 'http://127.0.0.1:9001/query',
-        // youtube_api_key: process.env.GOOGLE_PRIVATE_KEY,
-        // channel_id: process.env.CHANNEL_ID,
+        accessToken: process.env.ACCESS_TOKEN,
+        siteUrl: process.env.SITE_URL,
+        apiUrl: process.env.DEGA_API_URL,
       },
     },
   ],

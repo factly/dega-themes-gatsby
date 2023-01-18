@@ -2,11 +2,11 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import Layout from './Layout/index';
-import StoryCard from './UI/StoryCard';
+import Layout from '@components/Layout';
+import StoryCard from '@components/UI/StoryCard';
 
 const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }) => {
-  const slug = useSlug ? item.slug : item.id;
+  const slug = useSlug ? item?.slug : item?.degaId;
   const filteredPosts = posts.filter((post) => post.published_date !== null);
   const defaultHeader = (item) => (
     <h1
@@ -17,7 +17,7 @@ const FormatPageLayout = ({ type, posts, formats, item, header, useSlug = true }
         textTransform: 'capitalize',
       }}
     >
-      {item.name}
+      {item?.name}
     </h1>
   );
   return (

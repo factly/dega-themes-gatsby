@@ -65,7 +65,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
           status
           excerpt
           description
-          html_description
+          description_html
           is_featured
           is_sticky
           is_highlighted
@@ -104,7 +104,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
             name
             slug
             description
-            html_description
+            description_html
             meta_fields
             parent_id
             medium {
@@ -132,7 +132,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
             name
             slug
             description
-            html_description
+            description_html
             space_id
           }
           users {
@@ -175,7 +175,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
             checked_date
             claim_sources
             description
-            html_description
+            description_html
             fact
             review_sources
             rating {
@@ -187,7 +187,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
               description
               background_colour
               text_colour
-              html_description
+              description_html
               numeric_value
               medium {
                 id
@@ -214,7 +214,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
               name
               slug
               description
-              html_description
+              description_html
               tag_line
               medium {
                 id
@@ -260,7 +260,7 @@ exports.getCategoriesQuery = ({ limit, page = 1 }) => {
         name
         slug
         description
-        html_description
+        description_html
         meta_fields
         parent_id
         space_id
@@ -305,7 +305,7 @@ exports.getTagsQuery = ({ limit, page = 1 }) => {
         name
         slug
         description
-        html_description
+        description_html
         space_id
       }
     }
@@ -401,6 +401,9 @@ exports.getSpaceQuery = () => {
         tag_line
         description
         site_address
+        meta_fields
+        header_code
+        footer_code
         logo {
           id
           created_at
@@ -545,7 +548,7 @@ exports.getRatingsQuery = ({ limit, page = 1 }) => {
         name
         slug
         description
-        html_description
+        description_html
         background_colour
         text_colour
         numeric_value
@@ -593,7 +596,7 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
         checked_date
         claim_sources
         description
-        html_description
+        description_html
         fact
         review_sources
         space_id
@@ -604,7 +607,7 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
           name
           slug
           description
-          html_description
+          description_html
           background_colour
           text_colour
           numeric_value
@@ -633,7 +636,7 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
           name
           slug
           description
-          html_description
+          description_html
           tag_line
           space_id
           medium {
@@ -678,7 +681,7 @@ exports.getClaimantsQuery = ({ limit, page = 1 }) => {
         name
         slug
         description
-        html_description
+        description_html
         tag_line
         space_id
         medium {
@@ -723,5 +726,448 @@ exports.getMenuQuery = () => {
         }
       }
     }
+  `;
+};
+
+// Featured Categories Query
+exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
+  return gql`
+  query {
+    featuredCategories(featuredCount: ${limit}, postLimit: ${postLimit}) {
+      nodes {
+        id
+        created_at
+        updated_at
+        name
+        slug
+        description
+        description_html
+        meta_fields
+        parent_id
+        space_id
+        medium {
+          id
+          created_at
+          updated_at
+          name
+          slug
+          type
+          title
+          description
+          caption
+          file_size
+          alt_text
+          url
+          dimensions
+          space_id
+        }
+        posts {
+          nodes {
+            id
+            created_at
+            updated_at
+            title
+            subtitle
+            slug
+            status
+            excerpt
+            description
+            description_html
+            is_featured
+            is_sticky
+            is_highlighted
+            published_date
+            schemas
+            space_id
+            format {
+              id
+              created_at
+              updated_at
+              name
+              slug
+              description
+              space_id
+            }
+            medium {
+              id
+              created_at
+              updated_at
+              name
+              slug
+              type
+              title
+              description
+              caption
+              file_size
+              alt_text
+              url
+              dimensions
+              space_id
+            }
+            categories {
+              id
+              created_at
+              updated_at
+              name
+              slug
+              description
+              description_html
+              meta_fields
+              parent_id
+              medium {
+                id
+                created_at
+                updated_at
+                name
+                slug
+                type
+                title
+                description
+                caption
+                file_size
+                alt_text
+                url
+                dimensions
+                space_id
+              }
+              space_id
+            }
+            tags {
+              id
+              created_at
+              updated_at
+              name
+              slug
+              description
+              description_html
+              space_id
+            }
+            users {
+              id
+              created_at
+              updated_at
+              first_name
+              last_name
+              slug
+              email
+              birth_date
+              gender
+              description
+              display_name
+              social_media_urls
+              medium {
+                id
+                created_at
+                updated_at
+                name
+                slug
+                type
+                title
+                description
+                caption
+                file_size
+                alt_text
+                url
+                dimensions
+                space_id
+              }
+            }
+            claims {
+              id
+              created_at
+              updated_at
+              claim
+              slug
+              claim_date
+              checked_date
+              claim_sources
+              description
+              description_html
+              fact
+              review_sources
+              rating {
+                id
+                created_at
+                updated_at
+                name
+                slug
+                description
+                background_colour
+                text_colour
+                description_html
+                numeric_value
+                medium {
+                  id
+                  created_at
+                  updated_at
+                  name
+                  slug
+                  type
+                  title
+                  description
+                  caption
+                  file_size
+                  alt_text
+                  url
+                  dimensions
+                  space_id
+                }
+                space_id
+              }
+              claimant {
+                id
+                created_at
+                updated_at
+                name
+                slug
+                description
+                description_html
+                tag_line
+                medium {
+                  id
+                  created_at
+                  updated_at
+                  name
+                  slug
+                  type
+                  title
+                  description
+                  caption
+                  file_size
+                  alt_text
+                  url
+                  dimensions
+                  space_id
+                }
+                space_id
+              }
+              space_id
+            }
+          }
+        }
+      }
+    }
+  }
+  `;
+};
+
+// Featured Tags Query
+exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
+  return gql`
+  query {
+    featuredTags(featuredCount: ${limit}, postLimit: ${postLimit}) {
+      nodes {
+        id
+        created_at
+        updated_at
+        name
+        slug
+        description
+        description_html
+        meta_fields
+        space_id
+        medium {
+          id
+          created_at
+          updated_at
+          name
+          slug
+          type
+          title
+          description
+          caption
+          file_size
+          alt_text
+          url
+          dimensions
+          space_id
+        }
+        posts {
+          nodes {
+            id
+            created_at
+            updated_at
+            title
+            subtitle
+            slug
+            status
+            excerpt
+            description
+            description_html
+            is_featured
+            is_sticky
+            is_highlighted
+            published_date
+            schemas
+            space_id
+            format {
+              id
+              created_at
+              updated_at
+              name
+              slug
+              description
+              space_id
+            }
+            medium {
+              id
+              created_at
+              updated_at
+              name
+              slug
+              type
+              title
+              description
+              caption
+              file_size
+              alt_text
+              url
+              dimensions
+              space_id
+            }
+            categories {
+              id
+              created_at
+              updated_at
+              name
+              slug
+              description
+              description_html
+              meta_fields
+              parent_id
+              medium {
+                id
+                created_at
+                updated_at
+                name
+                slug
+                type
+                title
+                description
+                caption
+                file_size
+                alt_text
+                url
+                dimensions
+                space_id
+              }
+              space_id
+            }
+            tags {
+              id
+              created_at
+              updated_at
+              name
+              slug
+              description
+              description_html
+              space_id
+            }
+            users {
+              id
+              created_at
+              updated_at
+              first_name
+              last_name
+              slug
+              email
+              birth_date
+              gender
+              description
+              display_name
+              social_media_urls
+              medium {
+                id
+                created_at
+                updated_at
+                name
+                slug
+                type
+                title
+                description
+                caption
+                file_size
+                alt_text
+                url
+                dimensions
+                space_id
+              }
+            }
+            claims {
+              id
+              created_at
+              updated_at
+              claim
+              slug
+              claim_date
+              checked_date
+              claim_sources
+              description
+              description_html
+              fact
+              review_sources
+              rating {
+                id
+                created_at
+                updated_at
+                name
+                slug
+                description
+                background_colour
+                text_colour
+                description_html
+                numeric_value
+                medium {
+                  id
+                  created_at
+                  updated_at
+                  name
+                  slug
+                  type
+                  title
+                  description
+                  caption
+                  file_size
+                  alt_text
+                  url
+                  dimensions
+                  space_id
+                }
+                space_id
+              }
+              claimant {
+                id
+                created_at
+                updated_at
+                name
+                slug
+                description
+                description_html
+                tag_line
+                medium {
+                  id
+                  created_at
+                  updated_at
+                  name
+                  slug
+                  type
+                  title
+                  description
+                  caption
+                  file_size
+                  alt_text
+                  url
+                  dimensions
+                  space_id
+                }
+                space_id
+              }
+              space_id
+            }
+          }
+        }
+      }
+    }
+  }
   `;
 };

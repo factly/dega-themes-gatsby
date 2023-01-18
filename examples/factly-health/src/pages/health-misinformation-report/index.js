@@ -33,6 +33,7 @@ const ReportPageV2 = () => {
   useEffect(() => {
     window.addEventListener('scroll', listenToScroll);
     return () => window.removeEventListener('scroll', listenToScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const listenToScroll = () => {
     let heightToHideFrom = 1000;

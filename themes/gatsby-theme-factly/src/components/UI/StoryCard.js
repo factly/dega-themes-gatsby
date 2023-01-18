@@ -5,10 +5,10 @@ import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import React from 'react'; // eslint-disable-line no-unused-vars
 import _ from 'lodash';
-import parseDate from '@utils/parseDate';
-import addDefaultSrc from '@utils/addDefaultSrc';
+import parseDate from '@helpers/parseDate';
+import addDefaultSrc from '@helpers/addDefaultSrc';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '@utils/generateFluidObject';
+import generateFluidObject from '@helpers/generateFluidObject';
 
 /**
  * TODO: Change the data structure of props

@@ -17,16 +17,17 @@
   "license": "0BSD",
   "dependencies": {
     "@emotion/react": "^11.8.2",
-    "@factly/gatsby-theme-factly": "^1.0.5",
-    "@mdx-js/react": "v1",
-    "gatsby": "^4.11.1",
-    "gatsby-plugin-sass": "^5.11.1",
-    "gatsby-plugin-theme-ui": "^0.14.2",
-    "node-sass": "^7.0.1",
+    "@factly/gatsby-theme-factly": "^0.0.1",
+    "@mdx-js/react": "^1.6.22",
+    "@theme-ui/mdx": "^0.15.5-develop.0",
+    "gatsby": "^5.4.0",
+    "gatsby-plugin-sass": "^6.4.0",
+    "gatsby-plugin-theme-ui": "^0.15.4",
+    "node-sass": "^8.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
     "react-responsive-modal": "^6.1.0",
-    "theme-ui": "^0.14.2"
+    "theme-ui": "^0.15.4"
   }
 }

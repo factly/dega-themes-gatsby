@@ -4,12 +4,12 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { graphql, Link } from 'gatsby';
 import { jsx } from 'theme-ui';
 import Layout from '@components/Layout';
-import addDefaultSrc from '@utils/addDefaultSrc';
+import addDefaultSrc from '@helpers/addDefaultSrc';
 import Img from 'gatsby-image/withIEPolyfill';
-import generateFluidObject from '@utils/generateFluidObject';
+import generateFluidObject from '@helpers/generateFluidObject';
 
 const PageNotFound = ({ data }) => {
-  const space = data.degaSpace;
+  const { space } = data;
   return (
     <Layout>
       <div sx={{ textAlign: 'center' }}>
@@ -47,7 +47,7 @@ const PageNotFound = ({ data }) => {
 export default PageNotFound;
 export const query = graphql`
   query {
-    degaSpace {
+    space: degaSpace {
       logo {
         url
         dimensions

@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "name": "factly-robin",
+  "description": "factly-robin gatsby theme example",
+  "author": "Mahipat <mahipat@factly.in>",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "start": "gatsby develop",
+    "serve": "gatsby serve -p 9002",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@factly/gatsby-theme-robin": "^1.0.0",
+    "gatsby": "^5.4.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}

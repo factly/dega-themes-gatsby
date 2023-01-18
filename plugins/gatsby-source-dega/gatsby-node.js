@@ -1,9 +1,9 @@
-const { ApolloClient, InMemoryCache, ApolloLink, HttpLink, gql, from } = require('@apollo/client');
-
+const { ApolloClient, InMemoryCache, HttpLink, from } = require('@apollo/client');
 const { RetryLink } = require('@apollo/client/link/retry');
 const { onError } = require('@apollo/client/link/error');
 const { fetchWrapper } = require('./fetch');
-const fetch = require('node-fetch');
+
+
 const {
   getTotalQuery,
   getPostsQuery,
@@ -16,10 +16,12 @@ const {
   getMenuQuery,
   getSpaceQuery,
   getUsersQuery,
+  getFeaturedCategoriesQuery,
+  getFeaturedTagsQuery,
 } = require('./queries');
+
 const { createSchemaCustomization } = require('./createSchemaCustomization');
 
-// Add customized Schema for data from dega-api
 exports.createSchemaCustomization = createSchemaCustomization;
 
 exports.onPreInit = () => console.log('loaded dega plugin');
@@ -42,6 +44,8 @@ const USER_NODE_TYPE = `DegaUser`;
 const SPACE_NODE_TYPE = `DegaSpace`;
 const RATING_NODE_TYPE = `DegaRating`;
 const MENU_NODE_TYPE = `DegaMenu`;
+const FEATURED_CATEGORY_NODE_TYPE = `DegaFeaturedCategory`;
+const FEATURED_TAG_NODE_TYPE = `DegaFeaturedTag`;
 
 exports.sourceNodes = async (
   { actions, createContentDigest, createNodeId, getNodesByType, reporter },
@@ -76,7 +80,7 @@ exports.sourceNodes = async (
 
   const httpLink = new HttpLink({
     uri,
-    // uri: 'http://dega-api.factly.org/query',
+    // uri: 'http://dega-api.factly.in/query',
     fetch: fetchWrapper,
     headers: {
       'X-Space': spaceId,
@@ -102,7 +106,7 @@ exports.sourceNodes = async (
   const client = new ApolloClient({
     // Provide required constructor fields
     cache: cache,
-    //  uri: 'http://dega-api.factly.org/query',
+    //  uri: 'http://dega-api.factly.in/query',
     link: from([retryLink, errorLink, httpLink]),
   });
   const { createNode } = actions;
@@ -130,6 +134,8 @@ exports.sourceNodes = async (
   const getData = async ({ query, total = LIMIT, type }) => {
     let allData = [];
     if (total <= LIMIT) {
+      reporter.log(`Fetching ${type} ${total}`);
+
       const resp = await client.query({
         query: query(),
       });
@@ -137,12 +143,14 @@ exports.sourceNodes = async (
     } else if (total > LIMIT) {
       const pageCount = Math.ceil(total / LIMIT);
       for (let page = 1; page <= pageCount; page++) {
+        reporter.log(`Fetching ${type} ${total > LIMIT ? page * LIMIT : total} of ${total}`);
         const resp = await client.query({
           query: query(page),
         });
         allData = [...allData, ...resp.data[type].nodes];
       }
     }
+
     return allData;
   };
 
@@ -231,6 +239,70 @@ exports.sourceNodes = async (
       },
     });
   });
+
+  //featuredCategories
+  const getFeaturedCategories = async () => {
+    const featuredCategories = await client.query({
+      query: getFeaturedCategoriesQuery({ total: 5, postCount: 20 }),
+    });
+    return featuredCategories;
+  };
+  const { data: featuredCategoriesData } = await getFeaturedCategories();
+  featuredCategoriesData.featuredCategories &&
+    featuredCategoriesData.featuredCategories.nodes.forEach((category) => {
+      createNode({
+        ...category,
+        degaId: category.id,
+        id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+        parent: null,
+        children: [],
+        internal: {
+          type: FEATURED_CATEGORY_NODE_TYPE,
+          content: JSON.stringify({
+            ...category,
+            degaId: category.id,
+            id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+          }),
+          contentDigest: createContentDigest({
+            ...category,
+            degaId: category.id,
+            id: createNodeId(`${FEATURED_CATEGORY_NODE_TYPE}-${category.id}`),
+          }),
+        },
+      });
+    });
+
+  // featuredTags
+  const getFeaturedTags = async () => {
+    const featuredTags = await client.query({
+      query: getFeaturedTagsQuery({ total: 5, postCount: 20 }),
+    });
+    return featuredTags;
+  };
+  const { data: featuredTagsData } = await getFeaturedTags();
+  featuredTagsData.featuredTags &&
+    featuredTagsData.featuredTags.nodes.forEach((tag) => {
+      createNode({
+        ...tag,
+        degaId: tag.id,
+        id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
+        parent: null,
+        children: [],
+        internal: {
+          type: FEATURED_TAG_NODE_TYPE,
+          content: JSON.stringify({
+            ...tag,
+            degaId: tag.id,
+            id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
+          }),
+          contentDigest: createContentDigest({
+            ...tag,
+            degaId: tag.id,
+            id: createNodeId(`${FEATURED_TAG_NODE_TYPE}-${tag.id}`),
+          }),
+        },
+      });
+    });
 
   // formats
   const formats = await getData({
