@@ -12,7 +12,7 @@ const CategoryDetailsFormat = ({ data }) => {
       <Seo title={category.name} />
       <FormatPageLayout type="topic" posts={posts.nodes} item={category} />;
     </>
-  )
+  );
 };
 
 export default CategoryDetailsFormat;

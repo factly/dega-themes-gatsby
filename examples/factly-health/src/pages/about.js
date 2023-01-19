@@ -60,7 +60,7 @@ const informationTools = [
     desc: 'Parlens is a tool for searching data that is indexed from Indian parliament datasets.',
   },
 ];
-const Heading = () => { };
+const Heading = () => {};
 const About = () => {
   const [postActiveIndex, setPostActiveIndex] = useState('background');
 

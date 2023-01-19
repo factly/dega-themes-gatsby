@@ -14,7 +14,7 @@ function UserDetailsFormat({ data }) {
       <Seo title={name} />
       <FormatPageLayout type="author" posts={posts.nodes} item={{ ...user, name }} />;
     </>
-  )
+  );
 }
 
 export default UserDetailsFormat;

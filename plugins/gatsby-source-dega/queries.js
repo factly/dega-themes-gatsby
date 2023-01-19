@@ -8,41 +8,39 @@ const { gql } = require('@apollo/client');
  * @todo filtering users based on space
  * @returns {function}
  */
-exports.getTotalQuery = () => {
-  return gql`
-    query {
-      posts {
-        total
-      }
-      # check for space specific users
-      users {
-        total
-      }
-      ratings {
-        total
-      }
-      tags {
-        total
-      }
-      formats {
-        total
-      }
-      categories {
-        total
-      }
-      claims {
-        total
-      }
-      claimants {
-        total
-      }
-      # check for other spaces data
-      menu {
-        total
-      }
+exports.getTotalQuery = () => gql`
+  query {
+    posts {
+      total
     }
-  `;
-};
+    # check for space specific users
+    users {
+      total
+    }
+    ratings {
+      total
+    }
+    tags {
+      total
+    }
+    formats {
+      total
+    }
+    categories {
+      total
+    }
+    claims {
+      total
+    }
+    claimants {
+      total
+    }
+    # check for other spaces data
+    menu {
+      total
+    }
+  }
+`;
 // Posts Query
 /**
  * Gets data for posts based on limit and page props
@@ -51,8 +49,7 @@ exports.getTotalQuery = () => {
  * @param {number} args.page - Page number
  * @returns {function}
  */
-exports.getPostsQuery = ({ limit, page = 1 }) => {
-  return gql`
+exports.getPostsQuery = ({ limit, page = 1 }) => gql`
     query {
       posts( limit:${limit}, page:${page}) {
         nodes {
@@ -240,7 +237,6 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
       }
     }
   `;
-};
 // Categories Query
 /**
  * Gets data for categories based on limit and page props
@@ -249,8 +245,7 @@ exports.getPostsQuery = ({ limit, page = 1 }) => {
  * @param {number} args.page - Page number
  * @returns {function}
  */
-exports.getCategoriesQuery = ({ limit, page = 1 }) => {
-  return gql`
+exports.getCategoriesQuery = ({ limit, page = 1 }) => gql`
   query {
     categories( limit:${limit}, page:${page}) {
       nodes {
@@ -284,7 +279,6 @@ exports.getCategoriesQuery = ({ limit, page = 1 }) => {
     }
   }
   `;
-};
 
 // Tags Query
 /**
@@ -294,8 +288,7 @@ exports.getCategoriesQuery = ({ limit, page = 1 }) => {
  * @param {number} args.page - Page number
  * @returns {function}
  */
-exports.getTagsQuery = ({ limit, page = 1 }) => {
-  return gql`
+exports.getTagsQuery = ({ limit, page = 1 }) => gql`
   query {
     tags( limit:${limit}, page:${page}) {
       nodes {
@@ -311,30 +304,27 @@ exports.getTagsQuery = ({ limit, page = 1 }) => {
     }
   }
   `;
-};
 
 // Formats Query
 /**
  * Gets data for formats
  * @returns {function}
  */
-exports.getFormatsQuery = () => {
-  return gql`
-    query {
-      formats {
-        nodes {
-          id
-          created_at
-          updated_at
-          name
-          slug
-          description
-          space_id
-        }
+exports.getFormatsQuery = () => gql`
+  query {
+    formats {
+      nodes {
+        id
+        created_at
+        updated_at
+        name
+        slug
+        description
+        space_id
       }
     }
-  `;
-};
+  }
+`;
 
 // Users Query
 // !no spacename only limit and page arguments are defined
@@ -345,8 +335,7 @@ exports.getFormatsQuery = () => {
  * @param {number} args.page - Page number
  * @returns {function}
  */
-exports.getUsersQuery = ({ limit, page = 1 }) => {
-  return gql`
+exports.getUsersQuery = ({ limit, page = 1 }) => gql`
   query {
     users(limit:${limit}, page:${page}) {
       nodes {
@@ -382,153 +371,148 @@ exports.getUsersQuery = ({ limit, page = 1 }) => {
     }
   }
   `;
-};
 // Space Query
 /**
  * Gets data for space details
  * @returns {function}
  */
-exports.getSpaceQuery = () => {
-  return gql`
-    query {
-      space {
+exports.getSpaceQuery = () => gql`
+  query {
+    space {
+      id
+      created_at
+      updated_at
+      name
+      slug
+      site_title
+      tag_line
+      description
+      site_address
+      meta_fields
+      header_code
+      footer_code
+      logo {
         id
         created_at
         updated_at
         name
         slug
-        site_title
-        tag_line
+        type
+        title
         description
-        site_address
-        meta_fields
-        header_code
-        footer_code
-        logo {
-          id
-          created_at
-          updated_at
-          name
-          slug
-          type
-          title
-          description
-          caption
-          file_size
-          alt_text
-          url
-          dimensions
-          space_id
-        }
-        logo_mobile {
-          id
-          created_at
-          updated_at
-          name
-          slug
-          type
-          title
-          description
-          caption
-          file_size
-          alt_text
-          url
-          dimensions
-          space_id
-        }
-        fav_icon {
-          id
-          created_at
-          updated_at
-          name
-          slug
-          type
-          title
-          description
-          caption
-          file_size
-          alt_text
-          url
-          dimensions
-          space_id
-        }
-        mobile_icon {
-          id
-          created_at
-          updated_at
-          name
-          slug
-          type
-          title
-          description
-          caption
-          file_size
-          alt_text
-          url
-          dimensions
-          space_id
-        }
-        verification_codes
-        social_media_urls
-        contact_info
+        caption
+        file_size
+        alt_text
+        url
+        dimensions
+        space_id
       }
+      logo_mobile {
+        id
+        created_at
+        updated_at
+        name
+        slug
+        type
+        title
+        description
+        caption
+        file_size
+        alt_text
+        url
+        dimensions
+        space_id
+      }
+      fav_icon {
+        id
+        created_at
+        updated_at
+        name
+        slug
+        type
+        title
+        description
+        caption
+        file_size
+        alt_text
+        url
+        dimensions
+        space_id
+      }
+      mobile_icon {
+        id
+        created_at
+        updated_at
+        name
+        slug
+        type
+        title
+        description
+        caption
+        file_size
+        alt_text
+        url
+        dimensions
+        space_id
+      }
+      verification_codes
+      social_media_urls
+      contact_info
     }
-  `;
-};
+  }
+`;
 
 // Sitemap
 /**
  * Gets data for sitemap
  * @returns {function}
  */
-exports.getSitemapQuery = () => {
-  return gql`
-    query {
-      sitemap {
-        users {
-          created_at
-          id
-          slug
-        }
-        tags {
-          created_at
-          id
-          slug
-        }
-        ratings {
-          created_at
-          id
-          slug
-        }
-        posts {
-          created_at
-          id
-          slug
-        }
-        formats {
-          created_at
-          id
-          slug
-        }
-        claims {
-          created_at
-          id
-          slug
-        }
-        claimants {
-          created_at
-          id
-          slug
-        }
-        categories {
-          created_at
-          id
-          slug
-        }
+exports.getSitemapQuery = () => gql`
+  query {
+    sitemap {
+      users {
+        created_at
+        id
+        slug
+      }
+      tags {
+        created_at
+        id
+        slug
+      }
+      ratings {
+        created_at
+        id
+        slug
+      }
+      posts {
+        created_at
+        id
+        slug
+      }
+      formats {
+        created_at
+        id
+        slug
+      }
+      claims {
+        created_at
+        id
+        slug
+      }
+      claimants {
+        created_at
+        id
+        slug
+      }
+      categories {
+        created_at
+        id
+        slug
       }
     }
-  `;
-};
+  }
+`;
 // Ratings Query
 /**
  * Gets data for ratings based on limit and page props
@@ -537,8 +521,7 @@ exports.getSitemapQuery = () => {
  * @param {number} args.page - Page number
  * @returns {function}
  */
-exports.getRatingsQuery = ({ limit, page = 1 }) => {
-  return gql`
+exports.getRatingsQuery = ({ limit, page = 1 }) => gql`
   query {
     ratings( limit:${limit}, page:${page}) {
       nodes {
@@ -573,7 +556,6 @@ exports.getRatingsQuery = ({ limit, page = 1 }) => {
     }
   }
   `;
-};
 // Claims Query
 /**
  * Gets data for claims based on limit and page props
@@ -582,8 +564,7 @@ exports.getRatingsQuery = ({ limit, page = 1 }) => {
  * @param {number} args.page - Page number
  * @returns {function}
  */
-exports.getClaimsQuery = ({ limit, page = 1 }) => {
-  return gql`
+exports.getClaimsQuery = ({ limit, page = 1 }) => gql`
   query {
     claims(limit:${limit}, page:${page}) {
       nodes {
@@ -660,9 +641,8 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
     }
   }
   `;
-};
 
-//Claimants Query
+// Claimants Query
 /**
  * Gets data for claimants based on limit and page props
  * @param {Object} args - Arguments for getting claimants
@@ -670,8 +650,7 @@ exports.getClaimsQuery = ({ limit, page = 1 }) => {
  * @param {number} args.page - Page number
  * @returns {function}
  */
-exports.getClaimantsQuery = ({ limit, page = 1 }) => {
-  return gql`
+exports.getClaimantsQuery = ({ limit, page = 1 }) => gql`
   query {
     claimants( limit:${limit}, page:${page}) {
       nodes {
@@ -704,34 +683,30 @@ exports.getClaimantsQuery = ({ limit, page = 1 }) => {
     }
   }
   `;
-};
 
 // Menu Query
 /**
  * Gets data for menu
  * @returns {function}
  */
-exports.getMenuQuery = () => {
-  return gql`
-    query {
-      menu {
-        nodes {
-          id
-          created_at
-          updated_at
-          name
-          slug
-          menu
-          space_id
-        }
+exports.getMenuQuery = () => gql`
+  query {
+    menu {
+      nodes {
+        id
+        created_at
+        updated_at
+        name
+        slug
+        menu
+        space_id
       }
     }
-  `;
-};
+  }
+`;
 
 // Featured Categories Query
-exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
-  return gql`
+exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => gql`
   query {
     featuredCategories(featuredCount: ${limit}, postLimit: ${postLimit}) {
       nodes {
@@ -949,11 +924,9 @@ exports.getFeaturedCategoriesQuery = ({ limit = 5, postLimit = 20 }) => {
     }
   }
   `;
-};
 
 // Featured Tags Query
-exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
-  return gql`
+exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => gql`
   query {
     featuredTags(featuredCount: ${limit}, postLimit: ${postLimit}) {
       nodes {
@@ -1170,4 +1143,3 @@ exports.getFeaturedTagsQuery = ({ limit = 5, postLimit = 20 }) => {
     }
   }
   `;
-};

@@ -3,7 +3,6 @@ const { RetryLink } = require('@apollo/client/link/retry');
 const { onError } = require('@apollo/client/link/error');
 const { fetchWrapper } = require('./fetch');
 
-
 const {
   getTotalQuery,
   getPostsQuery,
@@ -26,13 +25,12 @@ exports.createSchemaCustomization = createSchemaCustomization;
 
 exports.onPreInit = () => console.log('loaded dega plugin');
 
-exports.pluginOptionsSchema = ({ Joi }) => {
-  return Joi.object({
+exports.pluginOptionsSchema = ({ Joi }) =>
+  Joi.object({
     uri: Joi.string().required().description(`api url`),
     spaceId: Joi.string().required().description(`Space Id`),
     accessToken: Joi.string().required().description(`Access Token.`),
   });
-};
 const POST_NODE_TYPE = `DegaPost`;
 const CATEGORY_NODE_TYPE = `DegaCategory`;
 const TAG_NODE_TYPE = `DegaTag`;
@@ -105,7 +103,7 @@ exports.sourceNodes = async (
 
   const client = new ApolloClient({
     // Provide required constructor fields
-    cache: cache,
+    cache,
     //  uri: 'http://dega-api.factly.in/query',
     link: from([retryLink, errorLink, httpLink]),
   });
@@ -240,7 +238,7 @@ exports.sourceNodes = async (
     });
   });
 
-  //featuredCategories
+  // featuredCategories
   const getFeaturedCategories = async () => {
     const featuredCategories = await client.query({
       query: getFeaturedCategoriesQuery({ total: 5, postCount: 20 }),
@@ -364,10 +362,10 @@ exports.sourceNodes = async (
 
   // menu
   const getMenus = async () => {
-    const menus = await client.query({
+    const menusDetails = await client.query({
       query: getMenuQuery(),
     });
-    return menus;
+    return menusDetails;
   };
   const { data: menus } = await getMenus();
   menus.menu.nodes.forEach((menu) => {
@@ -387,13 +385,16 @@ exports.sourceNodes = async (
 
   // space
   const getSpace = async () => {
-    const space = await client.query({
+    const spaceDetails = await client.query({
       query: getSpaceQuery(),
     });
-    return space;
+    return spaceDetails;
   };
   const spaceData = await getSpace();
-  const space = spaceData.data.space;
+  const {
+    data: { space },
+  } = spaceData;
+
   createNode({
     ...space,
     degaId: space.id,
@@ -427,5 +428,4 @@ exports.sourceNodes = async (
       },
     });
   });
-  return;
 };

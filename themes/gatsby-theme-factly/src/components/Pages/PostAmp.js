@@ -37,9 +37,7 @@ const PostDetails = ({ data }) => {
               <p>{post.excerpt}</p>
             </>
           )}
-          <div className="parsed">
-            {parseTiptapContent(post.description_html)}
-          </div>
+          <div className="parsed">{parseTiptapContent(post.description_html)}</div>
         </div>
       </article>
     </LayoutAmp>

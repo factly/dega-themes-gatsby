@@ -98,9 +98,7 @@ const Post = ({ post, observer }) => {
           }}
         >
           {post.claims && <FactCheckWidget claims={post.claims} />}
-          <div className="parsed">
-            {parseTiptapContent(post.description_html)}
-          </div>
+          <div className="parsed">{parseTiptapContent(post.description_html)}</div>
           {post.claims &&
             post.claims.map((claim, i) => (
               <React.Fragment key={i}>
@@ -139,9 +137,7 @@ const Post = ({ post, observer }) => {
                   </div>
                 )}
 
-                <div className="parsed">
-                  {parseTiptapContent(claim.description_html)}
-                </div>
+                <div className="parsed">{parseTiptapContent(claim.description_html)}</div>
               </React.Fragment>
             ))}
           <div

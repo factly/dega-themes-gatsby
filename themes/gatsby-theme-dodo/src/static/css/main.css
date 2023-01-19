@@ -544,7 +544,26 @@ pre[class*='language-'] {
   height: var(--space-48);
 }
 
-:where(body, h1, h2, h3, h4, h5, h6, blockquote, p, pre, dl, dd, ol, ul, figure, hr, fieldset, legend) {
+:where(
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    blockquote,
+    p,
+    pre,
+    dl,
+    dd,
+    ol,
+    ul,
+    figure,
+    hr,
+    fieldset,
+    legend
+  ) {
   margin: 0;
   padding: 0;
 }
@@ -2794,7 +2813,12 @@ table tbody + tbody {
 
 .c-content
   .sc-file-card
-  :is(.sc-file-card-caption, .sc-file-card-metadata, .sc-file-card-filename, .sc-file-card-filesize) {
+  :is(
+    .sc-file-card-caption,
+    .sc-file-card-metadata,
+    .sc-file-card-filename,
+    .sc-file-card-filesize
+  ) {
   font-size: var(--font-size-scale-2);
   line-height: var(--line-height-scale-2);
   font-weight: var(--font-weight-normal);

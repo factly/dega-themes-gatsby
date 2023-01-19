@@ -98,61 +98,63 @@ const IndexPage = ({ data }) => {
 };
 export default IndexPage;
 
-export const query = graphql`{
-  allVideoQuery(sort: {video: {created_at: DESC}}) {
-    nodes {
-      video {
-        created_at
-        id
-        space_id
-        status
-        summary
-        title
-        total_duration
-        updated_at
-        url
-        video_type
-      }
-      claims {
-        checked_date
-        claim
-        claim_date
-        claimant_id
-        created_at
-        description
-        end_time
-        fact
-        id
-        is_claim
-        rating_id
-        rating {
-          id
-          colour
-          background_colour
-          text_colour
+export const query = graphql`
+  {
+    allVideoQuery(sort: { video: { created_at: DESC } }) {
+      nodes {
+        video {
           created_at
-          name
-          deleted_at
-          description
-          numeric_value
-          slug
+          id
           space_id
+          status
+          summary
+          title
+          total_duration
           updated_at
+          url
+          video_type
         }
-        review_sources
-        start_time
-        updated_at
-        video_id
-        claimant {
+        claims {
+          checked_date
+          claim
+          claim_date
+          claimant_id
           created_at
+          description
+          end_time
+          fact
           id
-          name
-          slug
-          space_id
-          tag_line
+          is_claim
+          rating_id
+          rating {
+            id
+            colour
+            background_colour
+            text_colour
+            created_at
+            name
+            deleted_at
+            description
+            numeric_value
+            slug
+            space_id
+            updated_at
+          }
+          review_sources
+          start_time
           updated_at
+          video_id
+          claimant {
+            created_at
+            id
+            name
+            slug
+            space_id
+            tag_line
+            updated_at
+          }
         }
       }
     }
   }
-}`;
+`;

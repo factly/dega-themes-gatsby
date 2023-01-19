@@ -4,7 +4,6 @@ about: Something isn't working as expected? Here is the right place to report.
 title: '[theme name]: Title of your issue'
 labels: 'type: bug'
 assignees: ''
-
 ---
 
 <!--
@@ -34,9 +33,13 @@ What should happen?
 What happened.
 
 ### Screenshots
+
 If applicable, add screenshots to help explain your problem.
+
 ### Your theme version
+
 e.g. 1.1.0
+
 ### Environment
 
 Run `gatsby info --clipboard` in your project directory and paste the output here.
