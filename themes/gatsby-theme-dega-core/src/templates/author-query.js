@@ -26,7 +26,7 @@ export const query = graphql`
         name
       }
     }
-    posts: allDegaPost(filter: { users: { elemMatch: { slug: { eq: $slug } } } }) {
+    posts: allDegaPost(filter: { users: { elemMatch: { slug: { eq: $slug } } } }, limit: 100) {
       nodes {
         users {
           id
