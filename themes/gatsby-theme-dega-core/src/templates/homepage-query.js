@@ -1,11 +1,13 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import React from 'react'
 import { graphql } from 'gatsby';
-
 import Homepage from '@components/Pages/Homepage';
 
 export default Homepage;
 
 export const query = graphql`
-  query ($format_factcheck: [String!], $format_without_factcheck: [String!]) {
+  query HomepageQuery($format_factcheck: [String!], $format_without_factcheck: [String!]) {
     space: degaSpace {
       site_address
       site_title
@@ -51,7 +53,7 @@ export const query = graphql`
         }
       }
     }
-    posts: allDegaPost(filter: { format: { id: { in: $format_without_factcheck } } }) {
+    posts: allDegaPost(limit: 100, filter: { format: { id: { in: $format_without_factcheck } } }) {
       nodes {
         users {
           id

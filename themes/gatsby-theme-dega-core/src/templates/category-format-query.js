@@ -26,6 +26,7 @@ export const query = graphql`
     }
     posts: allDegaPost(
       filter: { categories: { elemMatch: { id: { eq: $id } } }, format: { id: { eq: $format_id } } }
+      limit: 100
     ) {
       nodes {
         users {
