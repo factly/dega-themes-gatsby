@@ -1,13 +1,16 @@
 import React from "react"
-import HomePage from "../components/HomePage"
 import Layout from "../components/Layout"
-import Documentation from "../components/Documentation"
+import DocumentationList from "../components/Documentation/DocumentationList"
+import ThemesList from "../components/Homepage/ThemesList"
+import HeroSection from "../components/Homepage/HeroSection"
 
 const Home = () => {
   return (
     <Layout>
-      <HomePage />
-      <Documentation />
+      <HeroSection />
+      <header></header>
+      <ThemesList />
+      {/* <Documentation />  */}
     </Layout>
   )
 }

@@ -2,363 +2,325 @@
 import { Link } from "gatsby"
 import { jsx } from "theme-ui"
 import React from "react"
-import Navbar from "../../components/Layout/Navbar"
 import Footer from "../../components/Layout/Footer"
 import { BsCheck } from "react-icons/Bs"
+import Layout from "../../components/Layout/index"
 
 const kite = () => {
+  const FEATURES = [
+    {
+      title: "Easy to Set Up",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo quis perferendis maxime eos obcaecati eaque fugiat quibusdam officia, molestiae, similique repudiandae mollitia. At nesciunt reprehenderit provident ea quibusdam eveniet rerum.",
+      image: "",
+    },
+  ]
   return (
-    <>
-      <section
-        sx={{
-          maxWidth: "1200px",
-          margin: "auto",
-          gap: "2rem",
-        }}
-      >
-        <Navbar />
-        <div
-          sx={{
-            display: "flex",
-            gap: "1rem",
-            mb: "3rem",
-          }}
-        >
-          <div>
-            <img
-              src="https://d33wubrfki0l68.cloudfront.net/c0a328b9e2b06f251dfe907cdf86d7d86f8c7463/564a9/images/themes/hue/home.png"
-              alt=""
-            />
-          </div>
-          <div
-            sx={{
-              flex: ["1 0 100%", null, "1 0 calc(30% - 1rem)"],
-              maxWidth: ["100%", null, "calc(30% - 1rem)"],
-            }}
-          >
-            <p
-              sx={{
-                fontSize: "32px",
-              }}
+    <Layout>
+      <div id="content" className="site-content relative">
+        <div id="primary" className="content-area">
+          <main id="main" className="site-main" role="main">
+            <article
+              id="post-16270"
+              className="post-16270 page type-page status-publish hentry entry"
             >
-              Kite
-            </p>
-            <p
-              sx={{
-                mb: "1rem",
-              }}
-            >
-              Dega themes for news and magazine websites
-            </p>
-            <div
-              sx={{
-                display: "flex",
-                p: "1rem",
-                flexDirection: "column",
-                alignItems: "center",
-                border: "1px solid #f4f1f1",
-              }}
-            >
-              <Link to="">
-                <p
-                  sx={{
-                    border: "1px solid blue",
-                    padding: "0.75rem 6rem",
-                    color: "#fff",
-                    bg: "blue",
-                    my: "1rem",
+              <div className="entry-content">
+                <div
+                  className="my-0 px-12 relative"
+                  style={{
+                    background:
+                      "linear-gradient(90deg,rgba(189,237,255,0.4) 0%,rgb(241,250,254) 49%,rgb(255,255,255) 100%)",
                   }}
                 >
-                  View on Github
-                </p>
-              </Link>
-              <Link to="">
-                <p
-                  sx={{
-                    border: "1px solid blue",
-                    padding: "0.75rem 7rem",
-                    color: "blue",
-                    mb: "1rem",
-                  }}
+                  <div className="wp-block-group__inner-container">
+                    <div
+                      style={{ height: "50px" }}
+                      aria-hidden="true"
+                      className="wp-block-spacer"
+                    ></div>
+                    <div className="flex mx-auto max-w-[1240px] justify-between">
+                      <div style={{ flexBasis: "43.33%" }} className="px-4">
+                        <h1 className="text-6xl">
+                          <strong>
+                            <span className="accent-text">Kite</span>
+                          </strong>{" "}
+                        </h1>
+                        <p className="has-text-align-left deco accent has-small-font-size">
+                          <em>Gatsby Theme for News Sites</em>
+                        </p>
+                        <p>
+                          <strong>
+                            <em>Kite</em>
+                          </strong>{" "}
+                          is Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Assumenda, numquam fuga quam ullam
+                          exercitationem ratione aspernatur laudantium, sed
+                          soluta nostrum id consequatur blanditiis error
+                          adipisci rerum eum suscipit laboriosam deserunt?.{" "}
+                        </p>
+                        <div className="flex gap-8 flex-wrap my-8">
+                          <div className="">
+                            <a
+                              className="border-2 border-[#ff7106] px-4 py-2 bg-white"
+                              href="https://www.anarieldesign.com/demos/?theme=BricksyPro"
+                              style={{ borderRadius: "50px" }}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                            >
+                              <strong>Demo</strong>
+                            </a>
+                          </div>
+                          <div className="wp-block-button is-style-fill green">
+                            <a
+                              className="border-[#45e051] border-2 px-4 py-2 hover:shadow-[0 12px 24px -6px #34dd8733] bg-white"
+                              href="#pricing-table"
+                              style={{ borderRadius: "50px" }}
+                            >
+                              <strong>Documentation</strong>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="" style={{ flexBasis: "66.66%" }}>
+                        <div>
+                          {" "}
+                          <figure className="alignright w-full">
+                            <a href="#">
+                              <img
+                                decoding="async"
+                                src="https://source.unsplash.com/random/600x475"
+                                alt=""
+                                width="600"
+                                height="475"
+                              />
+                            </a>
+                          </figure>
+                        </div>
+                        <div className="mt-[-340px] relative z-[100] w-[200px] ">
+                          <div className="wp-block-group__inner-container">
+                            <div className="is-layout-flow wp-block-group anariel-mobile-frame px[3.7%] py-[18%] bg-[#201e21] rounded-[10%/5%]">
+                              <div className="wp-block-group__inner-container">
+                                <div className="is-layout-flow wp-block-group anariel-mobile-ratio">
+                                  <div className="wp-block-group__inner-container">
+                                    {" "}
+                                    <figure className="wp-block-image size-full">
+                                      <a href="#">
+                                        <img
+                                          decoding="async"
+                                          src="https://source.unsplash.com/random/200x348"
+                                          alt=""
+                                          className="wp-image-16933"
+                                          width="200"
+                                          height="348"
+                                        />
+                                      </a>
+                                    </figure>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="is-layout-flex wp-container-9 wp-block-columns alignwide is-style-default">
+                      <div
+                        className="is-layout-flow wp-block-column is-vertically-aligned-top"
+                        style={{ flexBasis: "100%" }}
+                      >
+                        <div
+                          style={{ height: "50px" }}
+                          aria-hidden="true"
+                          className="wp-block-spacer"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* documentatiion section */}
+                <div
+                  className="mx-auto max-w-7xl"
+                  style={{ paddingTop: "40px", paddingBottom: "80px" }}
                 >
-                  Live Demo
-                </p>
-              </Link>
-            </div>
-            <div
-              sx={{
-                display: "flex",
-                p: "1rem",
-                flexDirection: "column",
-                border: "1px solid #f4f1f1",
-                mt: "2rem",
-              }}
-            >
-              <p
-                sx={{
-                  my: "1rem",
-                }}
-              >
-                Dega websites built with Kite
-              </p>
-              <hr
-                sx={{
-                  border: "1px solid #f4f1f1",
-                }}
-              />
-              <div
-                sx={{
-                  display: "flex",
-                  gap: "1rem",
-                  my: "1rem",
-                }}
-              >
-                <p>Documentation</p>
-                <span>.</span>
-                <p>Changelog</p>
+                  <div className="wp-block-group__inner-container">
+                    <div className="flex  justify-between gap-8 p-8">
+                      <div className="is-layout-flow wp-block-column">
+                        {" "}
+                        <p className="has-small-font-size">
+                          Gatsby Version:{" "}
+                          <span className="accent-text">5.0</span>
+                        </p>{" "}
+                        <p className="has-text-align-left anariel-changelog has-extra-small-font-size">
+                          <a href="#" data-type="page">
+                            Theme Updates Changelog
+                          </a>
+                        </p>
+                      </div>
+
+                      <div className="is-layout-flow wp-block-column">
+                        {" "}
+                        <p className="has-text-align-left anariel-documentation">
+                          <a
+                            href="https://www.anarieldesign.com/documentation/bricksy-pro"
+                            target="_blank"
+                            className="underline"
+                            rel="noreferrer noopener"
+                          >
+                            <strong>Documentation</strong>
+                          </a>
+                        </p>{" "}
+                        <p className="has-extra-small-font-size">
+                          Find Answers to All Your Questions
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Features */}
+                {FEATURES.map((feature, i) => (
+                  <div
+                    className=""
+                    style={{
+                      backgroundColor: "#f1fafe",
+                      paddingTop: "120px",
+                      paddingBottom: "120px",
+                    }}
+                  >
+                    <div className="wp-block-group__inner-container mx-auto max-w-7xl p-8">
+                      <div className="mx-auto flex flex-wrap">
+                        <div
+                          className={`md:max-w-[50%] p-4 ${i % 2 === 1 ? "order-1" : "order-2"
+                            }`}
+                        >
+                          <h2 className="text-3xl my-4">
+                            <strong>
+                              <strong>{feature.title}</strong>
+                            </strong>
+                          </h2>{" "}
+                          <p>{feature.description}</p>
+                        </div>
+                        <div className="md:max-w-[50%]">
+                          <figure className="wp-block-video">
+                            <img alt="" src={feature.image}></img>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                <section>
+                  <div sx={{
+                    maxWidth: '1240px',
+                    mx: 'auto'
+                  }}>
+                    <div sx={{ fontSize: '54px', textAlign: 'center', py: '3rem' }}>
+                      <p><strong>Features that are included in <span sx={{ color: '#F7475E' }}>all</span> our themes</strong></p>
+                    </div>
+                    <div sx={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(316px, 1fr))',
+                      gridGap: '48px',
+                      px: '32px',
+                      my: ['5rem', null, '3rem'],
+                      p: {
+                        my: '24px',
+                        fontSize: '20px',
+                        lineHeight: '42px',
+                        color: '#1b1f22'
+                      },
+                      h4: {
+                        fontSize: '24px'
+                      }
+                    }}>
+                      <div>
+                        <div>
+                          <h4>
+                            <strong>Rock Solid Code</strong>
+                          </h4>
+                          <p>
+                            We build our themes following the best gatsby coding practices. This makes them stable and secure and also compatible with most gatsby plugins.
+                          </p>
+                        </div>
+                        <div>
+                          <h4>
+                            <strong>Responsive Design</strong>
+                          </h4>
+                          <p>
+                            Present your message to your audience in the best possible light on any device. Once you set up your site the theme will effortlessly adapt its layout to any device.
+                          </p>
+                        </div>
+                        <div>
+                          <h4>
+                            <strong>Sitemaps</strong>
+                          </h4>
+                          <p>
+                            Having XML sitemaps allows search engines to crawl and index a website sufficiently, and allowing all search engines be notified of site map by inserting it into the robots. txt file.
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <h4>
+                            <strong>RSS Feed</strong>
+                          </h4>
+                          <p>
+                            Our theme offers RSS Feed support. you get notified whenever a post goes up, and then you can read a summary or the whole post.
+                          </p>
+                        </div>
+                        <div>
+                          <h4>
+                            <strong>Amp pages</strong>
+                          </h4>
+                          <p>
+                            Our theme also provide the ability to improve high click-through rates,ranking and traffic performance and allows you to create web pages that load quickly on mobile browsers.
+                          </p>
+                        </div>
+                        <div>
+                          <h4>
+                            <strong>Plugin Compatibility</strong>
+                          </h4>
+                          <p>
+                            Our themes are compatible with all your favorite plugins like MANIFEST, TRANSFORMER-SHARP, GOOGLE-ANALYTICS and many others.
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <h4>
+                            <strong>Competent Support</strong>
+                          </h4>
+                          <p>
+                            Our themes are simple and come with detailed online documentation. However, if you need assistance we'll give support and clarify all your questions.
+                          </p>
+                        </div>
+                        <div>
+                          <h4>
+                            <strong>User friendly</strong>
+                          </h4>
+                          <p>
+                            Our theme also includes and offers support for users by providing simple and understandable documentation which helps users to know about the theme.
+                          </p>
+                        </div>
+                        <div>
+                          <h4>
+                            <strong>Translation Ready</strong>
+                          </h4>
+                          <p>
+                            Easily translate the theme into any language using any popular translation plugin like gatsby translate plugins.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
               </div>
-              <hr
-                sx={{
-                  border: "1px solid #f4f1f1",
-                }}
-              />
-              <div
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  my: "1rem",
-                }}
-              >
-                <p>Current Version</p>
-                <p>1.0.2 — 24 June 2022</p>
-              </div>
-              <hr
-                sx={{
-                  border: "1px solid #f4f1f1",
-                }}
-              />
-              <div
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  my: "1rem",
-                }}
-              >
-                <p>Dega 5.0</p>
-                <BsCheck />
-              </div>
-              <hr
-                sx={{
-                  border: "1px solid #f4f1f1",
-                }}
-              />
-              <div
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  my: "1rem",
-                }}
-              >
-                <p>Images lazy loading</p>
-                <BsCheck />
-              </div>
-            </div>
-          </div>
+            </article>
+          </main>
         </div>
-        <hr
-          sx={{
-            border: "1px solid #f4f1f1",
-          }}
-        />
-        <div
-          sx={{
-            display: "flex",
-            gap: "1rem",
-            maxWidth: "1200px",
-            my: "3rem",
-            bg: "#fafafa",
-          }}
-        >
-          <Link to="">
-            {" "}
-            <img
-              src="https://dl.airtable.com/.attachments/d9dc542946c4e5169641246edced3d44/346756ee/scrimba.jpg"
-              alt=""
-            />
-          </Link>
-          <Link to="">
-            {" "}
-            <img
-              src="https://dl.airtable.com/.attachments/89aea77064034e187597bbae42b0cc98/b93f4c2d/tonyshapshow.jpg"
-              alt=""
-            />
-          </Link>
-          <Link to="">
-            {" "}
-            <img
-              src="https://dl.airtable.com/.attachments/c600dce8d02f6fda2604eab92ea91a06/d8750fdc/thinkfitbefitpodcast.jpg"
-              alt=""
-            />
-          </Link>
-        </div>
-        <hr
-          sx={{
-            border: "1px solid #f4f1f1",
-          }}
-        />
-        <div
-          sx={{
-            maxWidth: "800px",
-            margin: "auto",
-            my: "4rem",
-            img: {
-              mt: "2rem",
-              background: "#FAFAFA",
-            },
-            p: {
-              mt: "1.5rem",
-            },
-            li: {
-              fontSize: "18px",
-              mt: "0.5rem",
-            },
-          }}
-        >
-          <p
-            sx={{
-              fontSize: "24px",
-              color: "blue",
-            }}
-          >
-            Show off your podcast with Hue
-          </p>
-          <p>
-            I designed Hue for podcasts. So you’ll have an easy time showcasing
-            your podcasts in an attractive and organized way.
-          </p>
-          <img
-            src="https://d33wubrfki0l68.cloudfront.net/e0c2c0733d34ca25b73421d9cf756acc55079b6b/71cb1/images/themes/hue/home-page.png"
-            alt=""
-          />
-          <hr
-            sx={{
-              border: "1px solid #f4f1f1",
-              mt: "2rem",
-            }}
-          />
-          <p
-            sx={{
-              fontSize: "24px",
-              color: "blue",
-            }}
-          >
-            Accessible from any device
-          </p>
-          <p>Hue adjusts to phone, tablet, and desktop screens of any size.</p>
-          <img
-            src="https://d33wubrfki0l68.cloudfront.net/be0f8e5888c85fdbb02d42db40acb5a69c32189c/d04d6/images/themes/hue/responsive.png"
-            alt=""
-          />
-          <hr
-            sx={{
-              border: "1px solid #f4f1f1",
-              mt: "2rem",
-            }}
-          />
-          <p
-            sx={{
-              fontSize: "24px",
-              color: "blue",
-            }}
-          >
-            Love dark mode?
-          </p>
-          <p>
-            A dark mode is available based on the Operating System mode.
-            Furthermore, you can choose between dark and light modes from the
-            navigation button.
-          </p>
-          <img
-            src="https://d33wubrfki0l68.cloudfront.net/3ab1e00bd426cfe14993877d9f50b970ae794da8/da787/images/themes/hue/dark.png"
-            alt=""
-          />
-          <hr
-            sx={{
-              border: "1px solid #f4f1f1",
-              mt: "2rem",
-            }}
-          />
-          <p
-            sx={{
-              fontSize: "24px",
-              color: "blue",
-            }}
-          >
-            Find it faster
-          </p>
-          <p>
-            Instantly search your posts as you type. Search organizes your
-            results into links and photos for more visibility.
-          </p>
-          <p>
-            Search supports English, Russian, French, Spanish, German,
-            Portuguese, Italian, Finnish, Dutch, and Danish.
-          </p>
-          <img
-            src="https://d33wubrfki0l68.cloudfront.net/52e084e55f7504ca21527b7d74beef1b4f85410d/57392/images/themes/hue/search.png"
-            alt=""
-          />
-          <hr
-            sx={{
-              border: "1px solid #f4f1f1",
-              mt: "2rem",
-            }}
-          />
-          <p
-            sx={{
-              fontSize: "24px",
-              color: "blue",
-            }}
-          >
-            The icons are for the following services:
-          </p>
-          <ul>
-            <li>Apple Podcasts</li>
-            <li>Overcast</li>
-            <li>Spotify</li>
-            <li>Pocket Casts</li>
-            <li>Castro</li>
-            <li>Breaker</li>
-            <li>Google Podcasts</li>
-            <li>RadioPublic</li>
-            <li>YouTube</li>
-          </ul>
-          <p
-            sx={{
-              fontSize: "24px",
-              color: "blue",
-            }}
-          >
-            Deploy with GitHub
-          </p>
-          <p>
-            Integrated with the Deploy Ghost Theme GitHub Action for easy theme
-            deployment.
-          </p>
-          <img
-            src="https://d33wubrfki0l68.cloudfront.net/f42cb0b960427432a762742f207bcd7b93b2da81/5de68/images/themes/hue/github/actions.png"
-            alt=""
-          />
-        </div>
-      </section>
-      <hr
-        sx={{
-          border: "1px solid #f4f1f1",
-          mt: "2rem",
-        }}
-      />
-      <Footer />
-    </>
+      </div>
+    </Layout>
   )
 }
 

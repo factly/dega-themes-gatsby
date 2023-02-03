@@ -1,11 +1,11 @@
 import React from "react"
 import Layout from "../components/Layout"
-import Documentation from "../components/Documentation"
+import DocumentationList from "../components/Documentation/DocumentationList"
 
 const DocumentationPage = () => {
   return (
     <Layout>
-      <Documentation />
+      <DocumentationList />
     </Layout>
   )
 }

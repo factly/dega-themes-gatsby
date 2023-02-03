@@ -4,9 +4,9 @@ import Footer from "./Footer"
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="isolate bg-white">
       <Navbar />
-      {children}
+      <main style={{ paddingTop: "2rem" }}>{children}</main>
       <Footer />
     </div>
   )
