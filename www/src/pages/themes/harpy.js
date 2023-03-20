@@ -46,7 +46,7 @@ const harpy = () => {
                           </strong>{" "}
                         </h1>
                         <p className="has-text-align-left deco accent has-small-font-size">
-                          <em>Gatsby Theme for News Sites</em>
+                          <em>Gatsby Theme for Blog Sites</em>
                         </p>
                         <p>
                           <strong>
@@ -62,7 +62,7 @@ const harpy = () => {
                           <div className="">
                             <a
                               className="border-2 border-[#ff7106] px-4 py-2 bg-white"
-                              href="https://www.anarieldesign.com/demos/?theme=BricksyPro"
+                              href="https://stag-harpy.netlify.app"
                               style={{ borderRadius: "50px" }}
                               target="_blank"
                               rel="noreferrer noopener"
@@ -73,7 +73,7 @@ const harpy = () => {
                           <div className="wp-block-button is-style-fill green">
                             <a
                               className="border-[#45e051] border-2 px-4 py-2 hover:shadow-[0 12px 24px -6px #34dd8733] bg-white"
-                              href="#pricing-table"
+                              href="/docs/harpy"
                               style={{ borderRadius: "50px" }}
                             >
                               <strong>Documentation</strong>

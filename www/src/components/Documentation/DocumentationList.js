@@ -100,7 +100,6 @@ const DocumentationList = () => {
           </div>
         </div>
       </div>
-      <hr />
     </>
   )
 }

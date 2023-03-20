@@ -62,7 +62,7 @@ const dodo = () => {
                           <div className="">
                             <a
                               className="border-2 border-[#ff7106] px-4 py-2 bg-white"
-                              href="https://www.anarieldesign.com/demos/?theme=BricksyPro"
+                              href="https://stag-dodo.netlify.app"
                               style={{ borderRadius: "50px" }}
                               target="_blank"
                               rel="noreferrer noopener"
@@ -73,7 +73,7 @@ const dodo = () => {
                           <div className="wp-block-button is-style-fill green">
                             <a
                               className="border-[#45e051] border-2 px-4 py-2 hover:shadow-[0 12px 24px -6px #34dd8733] bg-white"
-                              href="#pricing-table"
+                              href="/docs/dodo"
                               style={{ borderRadius: "50px" }}
                             >
                               <strong>Documentation</strong>
@@ -98,7 +98,9 @@ const dodo = () => {
                         </div>
                         <div className="mt-[-340px] relative z-[100] w-[200px] ">
                           <div className="wp-block-group__inner-container">
-                            <div className="is-layout-flow wp-block-group anariel-mobile-frame px[3.7%] py-[18%] bg-[#201e21] rounded-[10%/5%]">
+                            <div
+                              className="is-layout-flow wp-block-group anariel-mobile-frame px[3.7%] py-[18%] bg-[#201e21] rounded-[10%/5%]"
+                            >
                               <div className="wp-block-group__inner-container">
                                 <div className="is-layout-flow wp-block-group anariel-mobile-ratio">
                                   <div className="wp-block-group__inner-container">

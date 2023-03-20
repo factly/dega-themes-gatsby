@@ -6,7 +6,7 @@ import Footer from "../../components/Layout/Footer"
 import { BsCheck } from "react-icons/Bs"
 import Layout from "../../components/Layout/index"
 
-const quail = () => {
+const harpy = () => {
   const FEATURES = [
     {
       title: "Easy to Set Up",
@@ -42,15 +42,15 @@ const quail = () => {
                       <div style={{ flexBasis: "43.33%" }} className="px-4">
                         <h1 className="text-6xl">
                           <strong>
-                            <span className="accent-text">Quail</span>
+                            <span className="accent-text">Harpy</span>
                           </strong>{" "}
                         </h1>
                         <p className="has-text-align-left deco accent has-small-font-size">
-                          <em>Gatsby Theme for Newsletter Sites</em>
+                          <em>Gatsby Theme for Blog Sites</em>
                         </p>
                         <p>
                           <strong>
-                            <em>Quail</em>
+                            <em>HArpy</em>
                           </strong>{" "}
                           is Lorem ipsum dolor sit amet, consectetur adipisicing
                           elit. Assumenda, numquam fuga quam ullam
@@ -62,7 +62,7 @@ const quail = () => {
                           <div className="">
                             <a
                               className="border-2 border-[#ff7106] px-4 py-2 bg-white"
-                              href="https://stag-quail.netlify.app"
+                              href="https://www.anarieldesign.com/demos/?theme=BricksyPro"
                               style={{ borderRadius: "50px" }}
                               target="_blank"
                               rel="noreferrer noopener"
@@ -73,7 +73,7 @@ const quail = () => {
                           <div className="wp-block-button is-style-fill green">
                             <a
                               className="border-[#45e051] border-2 px-4 py-2 hover:shadow-[0 12px 24px -6px #34dd8733] bg-white"
-                              href="/docs/quail"
+                              href="#pricing-table"
                               style={{ borderRadius: "50px" }}
                             >
                               <strong>Documentation</strong>
@@ -324,4 +324,4 @@ const quail = () => {
   )
 }
 
-export default quail
+export default harpy
