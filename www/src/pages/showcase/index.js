@@ -13,7 +13,7 @@ const ThemesListPage = () => {
         title="Showcase Page | Gatsby Themes Website"
         description=""
       />
-      <h1 className='max-w-7xl mx-auto flex justify-center text-2xl font-bold '>Themes</h1>
+      <h1 className='max-w-7xl mx-auto flex justify-center text-2xl font-bold hover:text-blue-600'>Themes</h1>
       <ThemesList />
     </Layout>
   )

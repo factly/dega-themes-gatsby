@@ -37,7 +37,7 @@ const weaver = () => {
                       aria-hidden="true"
                       className="wp-block-spacer"
                     ></div>
-                    <div className="flex mx-auto max-w-[1240px] justify-between">
+                    <div className="flex flex-wrap md:flex-wrap mx-auto max-w-[1240px] justify-between">
                       <div style={{ flexBasis: "40%" }} className="px-4">
                         <h1 className="text-6xl">
                           <strong>
@@ -167,7 +167,7 @@ const weaver = () => {
                         {" "}
                         <p className="has-text-align-left anariel-documentation">
                           <a
-                            href=""
+                            href="/docs/weaver"
                             target="_blank"
                             className="underline"
                             rel="noreferrer noopener"

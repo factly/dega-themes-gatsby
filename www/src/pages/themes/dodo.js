@@ -37,7 +37,7 @@ const dodo = () => {
                       aria-hidden="true"
                       className="wp-block-spacer"
                     ></div>
-                    <div className="flex mx-auto max-w-[1240px] justify-between">
+                    <div className="flex flex-wrap md:flex-wrap mx-auto max-w-[1240px] justify-between">
                       <div style={{ flexBasis: "40%" }} className="px-4">
                         <h1 className="text-6xl">
                           <strong>
@@ -151,7 +151,7 @@ const dodo = () => {
                   style={{ paddingTop: "40px", paddingBottom: "80px" }}
                 >
                   <div className="wp-block-group__inner-container">
-                    <div className="flex  justify-between gap-8 p-8">
+                    <div className="flex flex-wrap justify-between gap-8 p-8">
                       <div className="is-layout-flow wp-block-column">
                         {" "}
                         <p className="has-small-font-size">
@@ -169,7 +169,7 @@ const dodo = () => {
                         {" "}
                         <p className="has-text-align-left anariel-documentation">
                           <a
-                            href="/docs"
+                            href="/docs/dodo"
                             target="_blank"
                             className="underline"
                             rel="noreferrer noopener"

@@ -56,7 +56,7 @@ const ThemesList = () => {
                   />
                 </figure>
                 <header className='flex justify-between items-center'>
-                  <h2 className='text-[2rem] font-semibold tracking-[-0.003em]'>
+                  <h2 className='text-2xl md:text-[2rem] font-semibold tracking-[-0.003em] hover:text-blue-600'>
                     {theme.name}
                   </h2>
                   <div className='flex gap-[2px]'>
@@ -65,7 +65,7 @@ const ThemesList = () => {
                   </div>
                 </header>
                 <footer className='flex justify-between items-center mt-1'>
-                  <div className='flex flex-row-reverse gap-2 items-center text-[1.2rem] font-semibold text-gray-500 uppercase'>
+                  <div className='flex flex-row-reverse gap-2 items-center  text-sm md:text-[1.2rem] font-semibold text-gray-500 uppercase'>
                     <span>{theme.category}</span>
                     {/* <span className='w-[2px] h-[2px] rounded-full bg-gray-500'></span> */}
                   </div>

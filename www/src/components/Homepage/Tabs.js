@@ -37,7 +37,7 @@ export default function Tabs() {
                     href="#"
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
+                      "block px-4 py-2 text-sm hover:text-blue-600"
                     )}
                   >
                     All
@@ -50,7 +50,7 @@ export default function Tabs() {
                     href="/themes/dodo/"
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
+                      "block px-4 py-2 text-sm hover:text-blue-600"
                     )}
                   >
                     Blog
@@ -63,7 +63,7 @@ export default function Tabs() {
                     href=""
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
+                      "block px-4 py-2 text-sm hover:text-blue-600"
                     )}
                   >
                     Fact-Checkers
@@ -76,7 +76,7 @@ export default function Tabs() {
                     href="/themes/kite/"
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
+                      "block px-4 py-2 text-sm hover:text-blue-600"
                     )}
                   >
                     News
@@ -89,7 +89,7 @@ export default function Tabs() {
                     href="/themes/quail/"
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
+                      "block px-4 py-2 text-sm hover:text-blue-600"
                     )}
                   >
                     Newsletter
