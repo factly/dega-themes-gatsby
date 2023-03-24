@@ -15,8 +15,9 @@ const IntroSection = ({ posts }) => {
       <h2 sx={{
         fontFamily: 'Montserrat',
         variant: 'text.xl',
-        color: '#CE212B',
+        color: '#3E3667',
         fontWeight: '600',
+        fontSize: '36px',
         mb: '32px'
       }}>Recents</h2>
       <div sx={{

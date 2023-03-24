@@ -3,8 +3,8 @@ import { Link } from "gatsby"
 import { jsx } from "theme-ui"
 import React from "react"
 import Footer from "../../components/Layout/Footer"
-import { BsCheck } from "react-icons/Bs"
 import Layout from "../../components/Layout/index"
+import { Seo } from '@components/Seo'
 
 const dodo = () => {
   const FEATURES = [
@@ -17,6 +17,10 @@ const dodo = () => {
   ]
   return (
     <Layout>
+      <Seo
+        title="Showcase | Dodo theme"
+        description=""
+      />
       <div id="content" className="site-content relative">
         <div id="primary" className="content-area">
           <main id="main" className="site-main" role="main">
@@ -88,7 +92,7 @@ const dodo = () => {
                             <a href="#">
                               <img
                                 decoding="async"
-                                src="https://source.unsplash.com/random/600x475"
+                                src="/"
                                 alt=""
                                 width="600"
                                 height="475"
@@ -161,7 +165,7 @@ const dodo = () => {
                         {" "}
                         <p className="has-text-align-left anariel-documentation">
                           <a
-                            href="https://www.anarieldesign.com/documentation/bricksy-pro"
+                            href="/docs"
                             target="_blank"
                             className="underline"
                             rel="noreferrer noopener"

@@ -11,6 +11,7 @@ const DocumentationList = () => {
           maxWidth: "1200px",
           margin: "auto",
           pb: "2rem",
+          px: ['1.5rem', '0rem', '0rem']
         }}
       >
         <div>
@@ -19,7 +20,8 @@ const DocumentationList = () => {
               fontSize: "32px",
               fontWeight: "600",
               mb: "1.5rem",
-              color: '#1E1E1E'
+              color: '#1E1E1E',
+              textAlign: 'center'
             }}
           >
             Documentations
@@ -28,6 +30,7 @@ const DocumentationList = () => {
         <div
           sx={{
             display: "flex",
+            justifyContent: 'center',
             gap: "24px",
             flexWrap: "wrap",
             textAlign: "center",
@@ -87,15 +90,6 @@ const DocumentationList = () => {
           >
             <h2>
               <a href="/docs/weaver">weaver</a>
-            </h2>{" "}
-          </div>
-          <div
-            sx={{
-              width: "32%",
-            }}
-          >
-            <h2>
-              <a href="/docs/harpy">Harpy</a>
             </h2>{" "}
           </div>
         </div>

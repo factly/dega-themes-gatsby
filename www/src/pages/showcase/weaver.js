@@ -3,8 +3,8 @@ import { Link } from "gatsby"
 import { jsx } from "theme-ui"
 import React from "react"
 import Footer from "../../components/Layout/Footer"
-import { BsCheck } from "react-icons/Bs"
-import Layout from "../../components/Layout/index"
+import Layout from "../../components/Layout/index";
+import { Seo } from '@components/Seo'
 
 const weaver = () => {
   const FEATURES = [
@@ -17,6 +17,10 @@ const weaver = () => {
   ]
   return (
     <Layout>
+      <Seo
+        title="Showcase | Weaver theme"
+        description=""
+      />
       <div id="content" className="site-content relative">
         <div id="primary" className="content-area">
           <main id="main" className="site-main" role="main">
@@ -161,7 +165,7 @@ const weaver = () => {
                         {" "}
                         <p className="has-text-align-left anariel-documentation">
                           <a
-                            href="https://www.anarieldesign.com/documentation/bricksy-pro"
+                            href="/docs"
                             target="_blank"
                             className="underline"
                             rel="noreferrer noopener"

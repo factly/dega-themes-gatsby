@@ -3,7 +3,6 @@ import { Link } from "gatsby"
 import { jsx } from "theme-ui"
 import React from "react"
 import Footer from "../../components/Layout/Footer"
-import { BsCheck } from "react-icons/Bs"
 import Layout from "../../components/Layout/index"
 
 const quail = () => {
@@ -39,7 +38,7 @@ const quail = () => {
                       className="wp-block-spacer"
                     ></div>
                     <div className="flex mx-auto max-w-[1240px] justify-between">
-                      <div style={{ flexBasis: "43.33%" }} className="px-4">
+                      <div style={{ flexBasis: "40%" }} className="px-4">
                         <h1 className="text-6xl">
                           <strong>
                             <span className="accent-text">Quail</span>
@@ -81,7 +80,14 @@ const quail = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="" style={{ flexBasis: "66.66%" }}>
+                      <div className="" style={{ flexBasis: "60%" }}>
+                        <img src="/images/quail.png"
+                          alt=""
+                          width="600"
+                          height="475"
+                        />
+                      </div>
+                      {/* <div className="" style={{ flexBasis: "66.66%" }}>
                         <div>
                           {" "}
                           <figure className="alignright w-full">
@@ -121,7 +127,7 @@ const quail = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="is-layout-flex wp-container-9 wp-block-columns alignwide is-style-default">
                       <div
@@ -161,7 +167,7 @@ const quail = () => {
                         {" "}
                         <p className="has-text-align-left anariel-documentation">
                           <a
-                            href="https://www.anarieldesign.com/documentation/bricksy-pro"
+                            href="/docs"
                             target="_blank"
                             className="underline"
                             rel="noreferrer noopener"

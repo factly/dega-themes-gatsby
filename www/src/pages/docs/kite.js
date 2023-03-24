@@ -2,10 +2,15 @@
 import { jsx } from "theme-ui"
 import React from "react"
 import Layout from "../../components/Layout"
+import { Seo } from '@components/Seo';
 
 const kitePage = () => {
   return (
     <Layout>
+      <Seo
+        title="Documentation | Kite Theme"
+        description=""
+      />
       <div
         sx={{
           maxWidth: "746px",

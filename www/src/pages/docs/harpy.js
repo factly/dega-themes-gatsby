@@ -2,9 +2,14 @@
 import { jsx } from 'theme-ui'
 import React from 'react'
 import Layout from '../../components/Layout'
+import { Seo } from '@components/Seo';
 
 const harpyPage = () => (
   <Layout>
+    <Seo
+      title="Documentation | Harpy Theme"
+      description=""
+    />
     <div
       sx={{
         maxWidth: '746px',

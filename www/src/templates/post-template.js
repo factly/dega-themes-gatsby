@@ -5,6 +5,7 @@ import { graphql } from 'gatsby';
 import Post from '../components/Post';
 import Layout from '../components/Layout';
 import BlogCard from '../components/BlogPage/BlogCard';
+import { Seo } from '../components/Seo'
 
 const PostPage = ({ data }) => {
   const { posts, post, recentPosts } = data;
@@ -20,6 +21,7 @@ const PostPage = ({ data }) => {
   const { previous: previousPost, next: nextPost } = currentPost
   return (
     <Layout>
+      <Seo title={post.title} description={""} />
       <Post data={post} previousPost={previousPost} nextPost={nextPost} />
       <div sx={{
         px: ['32px', null, '5rem'],

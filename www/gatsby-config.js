@@ -9,6 +9,12 @@ require('dotenv').config({
 
 module.exports = {
   /* Your site config here */
+  siteMetadata: {
+    title: `Gatsby themes Website`,
+    description: `This website contains various gatsby themes.`,
+    siteUrl: process.env.SITE_URL,
+    image: '/images/og-image.png',
+  },
   plugins: ["gatsby-plugin-theme-ui",
     "gatsby-plugin-postcss",
 
@@ -18,6 +24,11 @@ module.exports = {
         spaceId: process.env.SPACE_ID,
         accessToken: process.env.ACCESS_TOKEN,
         uri: process.env.API_ENDPOINT,
+
+        // spaceId: process.env.SPACE_ID,
+        // accessToken: process.env.ACCESS_TOKEN,
+        // siteUrl: process.env.SITE_URL,
+        // apiUrl: process.env.DEGA_API_URL,
       },
     }
 

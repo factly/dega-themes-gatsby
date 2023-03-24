@@ -6,13 +6,17 @@ import Layout from '../components/Layout';
 import { graphql } from 'gatsby';
 import BlogCard from '../components/BlogPage/BlogCard';
 import Pager from '../components/Pager';
-
+import { Seo } from '../components/Seo';
 
 const BlogPage = ({ data, pageContext }) => {
   console.log({ data })
   const { posts } = data
   return (
     <Layout>
+      <Seo
+        title="Blog | Gatsby Themes Website"
+        description=""
+      />
       <IntroSection posts={posts.nodes.slice(0, 3)} />
       <div sx={{
         maxWidth: '1190px',

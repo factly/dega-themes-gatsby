@@ -2,10 +2,15 @@
 import { jsx } from "theme-ui"
 import React from "react"
 import Layout from "../../components/Layout"
+import { Seo } from '@components/Seo';
 
 const quailPage = () => {
   return (
     <Layout>
+      <Seo
+        title="Documentation | Quail Theme"
+        description=""
+      />
       <div
         sx={{
           maxWidth: "746px",

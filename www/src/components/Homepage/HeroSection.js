@@ -14,7 +14,7 @@ export default function HeroSection() {
         }}
       >
         <div className="mx-auto">
-          <div style={{ height: "50px" }} aria-hidden="true"></div>
+          {/* <div style={{ height: "50px" }} aria-hidden="true"></div> */}
           <div className="max-w-[1240px] mx-auto w-full my-8 flex">
             <div
               className="mb-0 flex-grow-0 self-start "
@@ -31,8 +31,7 @@ export default function HeroSection() {
                 />
               </figure> */}
               <h1 id="" className="text-6xl my-4">
-                Professional <span className="accent-text">Dega</span> Themes and
-                Templates. <br />
+                Professional <span className="accent-text">Dega</span> Themes<br />
                 <strong className="text-2xl">
                   Faster with GatsbyJS and NextJS{" "}
                 </strong>
@@ -53,24 +52,24 @@ export default function HeroSection() {
                   </a>
                 </div>
               </div>
-              <div
+              {/* <div
                 style={{ height: "90px" }}
                 aria-hidden="true"
                 className="wp-block-spacer"
-              ></div>
+              ></div> */}
             </div>
             <div style={{ flexBasis: "66.66%" }}>
               {" "}
               <img
                 width="720"
                 height="535"
-                src="/"
+                src="/images/hero.png"
                 alt="HeroSection image"
               // sizes="(max-width: 720px) 100vw, 720px"
               />
             </div>
           </div>
-          <div className="custom-shape-divider-bottom-1622446369 alignfull absolute bottom-0 left-0 w-full overflow-hidden rotate-180">
+          {/* <div className="custom-shape-divider-bottom-1622446369 alignfull absolute bottom-0 left-0 w-full overflow-hidden rotate-180">
             {" "}
             <svg
               data-name="Layer 1"
@@ -85,7 +84,7 @@ export default function HeroSection() {
                 className="fill-white"
               ></path>{" "}
             </svg>
-          </div>
+          </div> */}
         </div>
       </div>
     </main>
