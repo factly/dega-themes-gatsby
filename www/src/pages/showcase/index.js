@@ -2,11 +2,11 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import React from "react"
-import ThemesList from "../../components/Homepage/ThemesList"
+import Showcase from "../../components/Homepage/Showcase"
 import Layout from "../../components/Layout/index"
 import { Seo } from '@components/Seo'
 
-const ThemesListPage = () => {
+const ShowcasePage = () => {
   return (
     <Layout>
       <Seo
@@ -14,9 +14,9 @@ const ThemesListPage = () => {
         description=""
       />
       <h1 className='max-w-7xl mx-auto flex justify-center text-2xl font-bold hover:text-blue-600'>Themes</h1>
-      <ThemesList />
+      <Showcase />
     </Layout>
   )
 }
 
-export default ThemesListPage
+export default ShowcasePage

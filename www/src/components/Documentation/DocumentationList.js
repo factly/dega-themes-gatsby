@@ -10,7 +10,7 @@ const DocumentationList = () => {
         sx={{
           maxWidth: "1200px",
           margin: "auto",
-          pb: "2rem",
+          py: "2rem",
           px: ['1.5rem', '0rem', '0rem']
         }}
       >
@@ -19,7 +19,7 @@ const DocumentationList = () => {
             sx={{
               fontSize: "32px",
               fontWeight: "600",
-              mb: "1.5rem",
+              mb: "2.5rem",
               color: '#1E1E1E',
               textAlign: 'center'
             }}
@@ -31,25 +31,31 @@ const DocumentationList = () => {
           sx={{
             display: "flex",
             justifyContent: 'center',
-            gap: "24px",
+            gap: "48px",
             flexWrap: "wrap",
             textAlign: "center",
             a: {
               color: "#000",
-              background: "#FAFAFA",
+              //background: "#FAFAFA",
               display: "block",
-              p: "32px",
+              px: "24px",
+              py: "16px",
               fontSize: "20px",
-              fontWeight: "500",
+              fontWeight: "400",
               "&:hover": {
-                color: '#45e091'
+                backgroundColor: '#000',
+                color: '#FFFFFF',
+                borderRadius: '8px'
               },
             },
           }}
         >
           <div
             sx={{
-              width: "32%",
+              border: '1px solid',
+              borderColor: '#0B0B0B',
+              borderRadius: '8px'
+              //width: "32%",
             }}
           >
             <h2>
@@ -58,7 +64,10 @@ const DocumentationList = () => {
           </div>
           <div
             sx={{
-              width: "32%",
+              border: '1px solid',
+              borderColor: '#0B0B0B',
+              borderRadius: '8px'
+              //width: "32%",
             }}
           >
             <h2>
@@ -67,7 +76,10 @@ const DocumentationList = () => {
           </div>
           <div
             sx={{
-              width: "32%",
+              border: '1px solid',
+              borderColor: '#0B0B0B',
+              borderRadius: '8px'
+              //width: "32%",
             }}
           >
             <h2>
@@ -76,7 +88,10 @@ const DocumentationList = () => {
           </div>
           <div
             sx={{
-              width: "32%",
+              border: '1px solid',
+              borderColor: '#0B0B0B',
+              borderRadius: '8px'
+              //width: "32%",
             }}
           >
             <h2>
@@ -85,7 +100,10 @@ const DocumentationList = () => {
           </div>
           <div
             sx={{
-              width: "32%",
+              border: '1px solid',
+              borderColor: '#0B0B0B',
+              borderRadius: '8px'
+              //width: "32%",
             }}
           >
             <h2>

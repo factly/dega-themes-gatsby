@@ -18,9 +18,8 @@ const dodo = () => {
   return (
     <Layout>
       <Seo
-        title="Showcase | Dodo theme"
-        description=""
-      />
+        title="Showcase | Dodo Theme"
+        description="" />
       <div id="content" className="site-content relative">
         <div id="primary" className="content-area">
           <main id="main" className="site-main" role="main">
@@ -30,7 +29,7 @@ const dodo = () => {
             >
               <div className="entry-content">
                 <div
-                  className="my-0 px-12 relative"
+                  className="my-0 px-6 relative"
                   style={{
                     background:
                       "linear-gradient(90deg,rgba(189,237,255,0.4) 0%,rgb(241,250,254) 49%,rgb(255,255,255) 100%)",
@@ -42,8 +41,8 @@ const dodo = () => {
                       aria-hidden="true"
                       className="wp-block-spacer"
                     ></div>
-                    <div className="flex flex-wrap md:flex-wrap mx-auto max-w-[1240px] justify-between">
-                      <div style={{ flexBasis: "43.33%" }} className="px-4">
+                    <div className="flex-none md:flex lg:flex flex-wrap md:flex-wrap mx-auto max-w-[1240px] justify-between items-center">
+                      <div style={{ flexBasis: "40%" }} className="px-4">
                         <h1 className="text-6xl">
                           <strong>
                             <span className="accent-text">Dodo</span>
@@ -66,7 +65,7 @@ const dodo = () => {
                           <div className="">
                             <a
                               className="border-2 border-[#ff7106] px-4 py-2 bg-white"
-                              href="https://www.anarieldesign.com/demos/?theme=BricksyPro"
+                              href="https://stag-dodo.netlify.app"
                               style={{ borderRadius: "50px" }}
                               target="_blank"
                               rel="noreferrer noopener"
@@ -77,7 +76,7 @@ const dodo = () => {
                           <div className="wp-block-button is-style-fill green">
                             <a
                               className="border-[#45e051] border-2 px-4 py-2 hover:shadow-[0 12px 24px -6px #34dd8733] bg-white"
-                              href="#pricing-table"
+                              href="/docs/dodo"
                               style={{ borderRadius: "50px" }}
                             >
                               <strong>Documentation</strong>
@@ -85,14 +84,21 @@ const dodo = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="" style={{ flexBasis: "66.66%" }}>
+                      <div className="" style={{ flexBasis: "60%" }}>
+                        <img src="/images/dodo.png"
+                          alt=""
+                          width="600"
+                          height="475"
+                        />
+                      </div>
+                      {/* <div className="" style={{ flexBasis: "66.66%" }}>
                         <div>
                           {" "}
                           <figure className="alignright w-full">
                             <a href="#">
                               <img
                                 decoding="async"
-                                src="/"
+                                src="https://source.unsplash.com/random/600x475"
                                 alt=""
                                 width="600"
                                 height="475"
@@ -102,7 +108,9 @@ const dodo = () => {
                         </div>
                         <div className="mt-[-340px] relative z-[100] w-[200px] ">
                           <div className="wp-block-group__inner-container">
-                            <div className="is-layout-flow wp-block-group anariel-mobile-frame px[3.7%] py-[18%] bg-[#201e21] rounded-[10%/5%]">
+                            <div
+                              className="is-layout-flow wp-block-group anariel-mobile-frame px[3.7%] py-[18%] bg-[#201e21] rounded-[10%/5%]"
+                            >
                               <div className="wp-block-group__inner-container">
                                 <div className="is-layout-flow wp-block-group anariel-mobile-ratio">
                                   <div className="wp-block-group__inner-container">
@@ -125,7 +133,7 @@ const dodo = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="is-layout-flex wp-container-9 wp-block-columns alignwide is-style-default">
                       <div
@@ -144,7 +152,7 @@ const dodo = () => {
                 {/* documentatiion section */}
                 <div
                   className="mx-auto max-w-7xl"
-                  style={{ paddingTop: "40px", paddingBottom: "80px" }}
+                  sx={{ paddingTop: ["32px", null, "60px"], paddingBottom: ["32px", null, "60px"] }}
                 >
                   <div className="wp-block-group__inner-container">
                     <div className="flex flex-wrap justify-between gap-8 p-8">
@@ -186,12 +194,13 @@ const dodo = () => {
                     className=""
                     style={{
                       backgroundColor: "#f1fafe",
-                      paddingTop: "120px",
-                      paddingBottom: "120px",
+                      // paddingTop: "120px",
+                      // paddingBottom: "120px",
+                      py: '24px'
                     }}
                   >
                     <div className="wp-block-group__inner-container mx-auto max-w-7xl p-8">
-                      <div className="mx-auto flex flex-wrap">
+                      <div className="mx-auto flex flex-wrap md:justify-center lg:justify-start">
                         <div
                           className={`md:max-w-[50%] p-4 ${i % 2 === 1 ? "order-1" : "order-2"
                             }`}
@@ -218,15 +227,15 @@ const dodo = () => {
                     maxWidth: '1240px',
                     mx: 'auto'
                   }}>
-                    <div sx={{ fontSize: '54px', textAlign: 'center', py: '3rem' }}>
+                    <div sx={{ fontSize: '54px', textAlign: 'center', py: '3rem', px: '1.5rem' }}>
                       <p><strong>Features that are included in <span sx={{ color: '#F7475E' }}>all</span> our themes</strong></p>
                     </div>
                     <div sx={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(auto-fit, minmax(316px, 1fr))',
                       gridGap: '48px',
-                      px: '32px',
-                      my: ['5rem', null, '3rem'],
+                      //px: '32px',
+                      my: ['1.5rem', null, '3rem'],
                       p: {
                         my: '24px',
                         fontSize: '20px',
@@ -237,7 +246,7 @@ const dodo = () => {
                         fontSize: '24px'
                       }
                     }}>
-                      <div>
+                      <div sx={{ px: '1.5rem' }} >
                         <div>
                           <h4>
                             <strong>Rock Solid Code</strong>
@@ -263,7 +272,7 @@ const dodo = () => {
                           </p>
                         </div>
                       </div>
-                      <div>
+                      <div sx={{ px: '1.5rem' }}>
                         <div>
                           <h4>
                             <strong>RSS Feed</strong>
@@ -289,13 +298,13 @@ const dodo = () => {
                           </p>
                         </div>
                       </div>
-                      <div>
+                      <div sx={{ px: '1.5rem' }}>
                         <div>
                           <h4>
                             <strong>Competent Support</strong>
                           </h4>
                           <p>
-                            Our themes are simple and come with detailed online documentation. However, if you need assistance we'll give support and clarify all your questions.
+                            Our themes are simple with detailed online documentation. However, if you need assistance we'll give support and clarify all your questions.
                           </p>
                         </div>
                         <div>
@@ -318,7 +327,6 @@ const dodo = () => {
                     </div>
                   </div>
                 </section>
-
               </div>
             </article>
           </main>

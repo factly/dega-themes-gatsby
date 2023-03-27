@@ -13,9 +13,9 @@ export default function HeroSection() {
             "linear-gradient(90deg,rgba(189,237,255,0.4) 0%,rgb(241,250,254) 49%,rgb(255,255,255) 100%)",
         }}
       >
-        <div className="mx-auto flex sm:flex-wrap">
+        <div className="mx-auto sm:flex-wrap">
           {/* <div style={{ height: "50px" }} aria-hidden="true"></div> */}
-          <div className="max-w-[1240px] mx-auto w-full my-8 flex flex-wrap md:flex-nowrap">
+          <div className="max-w-[1240px] mx-auto w-full my-8 sm:none md:flex lg:flex flex-wrap md:flex-nowrap">
             <div
               className="mb-0 flex-grow-0 self-start "
               style={{ flexBasis: "63.33%" }}
@@ -30,7 +30,7 @@ export default function HeroSection() {
                   height="31"
                 />
               </figure> */}
-              <h1 id="" className="text-6xl my-4">
+              <h1 id="" className="text-5xl md:text-5xl lg:text-6xl my-4">
                 Professional <span className="accent-text">Dega</span> Themes<br />
                 <strong className="text-2xl">
                   Faster with GatsbyJS and NextJS{" "}
