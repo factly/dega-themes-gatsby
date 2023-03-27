@@ -228,7 +228,7 @@ const harpy = () => {
                     maxWidth: '1240px',
                     mx: 'auto'
                   }}>
-                    <div sx={{ fontSize: '54px', textAlign: 'center', py: '3rem', px: '1.5rem' }}>
+                    <div sx={{ fontSize: ['42px', null, '54px'], textAlign: 'center', py: '3rem', px: '1.5rem' }}>
                       <p><strong>Features that are included in <span sx={{ color: '#F7475E' }}>all</span> our themes</strong></p>
                     </div>
                     <div sx={{
@@ -253,7 +253,7 @@ const harpy = () => {
                             <strong>Rock Solid Code</strong>
                           </h4>
                           <p>
-                            We build our themes following the best gatsby coding practices. This makes them stable and secure and also compatible with most gatsby plugins.
+                            We build our themes following the best gatsby coding practices. This makes them stable and also compatible with most gatsby plugins.
                           </p>
                         </div>
                         <div>
