@@ -46,7 +46,7 @@ const quailPage = () => {
             Documentation
           </a>
         </div>
-        <div
+        {/* <div
           sx={{
             background: "#FAFAFA",
             display: "flex",
@@ -75,8 +75,8 @@ const quailPage = () => {
             1.1.9 - 4 may 2022{" "}
           </code>{" "}
           <p> Changelog</p>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           sx={{
             background: "#E7F5FB",
             marginTop: "32px",
@@ -139,7 +139,7 @@ const quailPage = () => {
               mt: "2rem",
             }}
           />
-        </div>
+        </div> */}
         <h1
           sx={{
             mt: "32px",
@@ -166,230 +166,20 @@ const quailPage = () => {
             }}
           >
             <li>
+              <a href="#Prerequisites"> Prerequisites</a>
+            </li>
+            <li>
               <a href="#Theme_Installation"> Theme Installation</a>
-            </li>
-            <li>
-              <a href="#Upload_yaml_Files">Upload the routes.yaml File</a>
-            </li>
-            <li>
-              {" "}
-              <a href="#"> Members / Subscriptions</a>
-              <ul
-                sx={{
-                  ml: "20px",
-                  mt: "8px",
-                }}
-              >
-                <li>
-                  {" "}
-                  <a href="#">
-                    Remove ‘Log In’ and ‘Subscribe’ from Header
-                  </a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">
-                    Remove Ghost Portal / The Bottom Right Button
-                  </a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">Membership Troubleshooting Tips</a>{" "}
-                </li>
+              <ul sx={{
+                ml: '20px',
+                mt: '8px',
+              }}>
+                <li><a href="#Installation">Installation</a></li>
+                <li><a href="#Configuration">Configuration</a></li>
               </ul>
             </li>
             <li>
-              {" "}
-              <a href="#"> Dark Mode</a>
-              <ul
-                sx={{
-                  ml: "20px",
-                  mt: "8px",
-                }}
-              >
-                <li>
-                  {" "}
-                  <a href="#">Disable Dark Mode</a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">Disable Light Mode</a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">Remove the Header Dark Mode Switch Button</a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">
-                    Add Different Logo Images for Light and Dark Modes
-                  </a>{" "}
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <a href="#">Navigation</a>
-              <ul
-                sx={{
-                  ml: "20px",
-                  mt: "8px",
-                }}
-              >
-                <li>
-                  {" "}
-                  <a href="#">Secondary Navigation</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <a href="#">Search</a>
-              <ul
-                sx={{
-                  ml: "20px",
-                  mt: "8px",
-                }}
-              >
-                <li>
-                  {" "}
-                  <a href="#">ghostHunter Slow Search</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <a href="#">Pages</a>
-              <ul
-                sx={{
-                  ml: "20px",
-                  mt: "8px",
-                }}
-              >
-                <li>
-                  {" "}
-                  <a href="#">Tags Page</a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">Author page</a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">Contact page</a>{" "}
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <a href="#">Homepage Posts by Tag</a>{" "}
-            </li>
-            <li>
-              <a href="#"> Posts Per Page</a>
-            </li>
-            <li>
-              <a href="#">Related Posts</a>
-            </li>
-            <li>
-              <a href="#"> Google Analytics</a>
-            </li>
-            <li>
-              <a href="#">Update Favicon</a>
-            </li>
-            <li>
-              <a href="#">Responsive Tables</a>
-            </li>
-            <li>
-              <a href="#">Social Sharing Icons</a>
-            </li>
-            <li>
-              <a href="#">Footer Social Media Icons</a>
-            </li>
-            <li>
-              <a href="#">Languages</a>
-              <ul
-                sx={{
-                  ml: "20px",
-                  mt: "8px",
-                }}
-              >
-                <li>
-                  <a href="#"> Theme Translation</a>
-                </li>
-                <li>
-                  {" "}
-                  <a href="#"> Add a New Language Translation</a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">Edit Translation</a>{" "}
-                </li>
-                <li>
-                  {" "}
-                  <a href="#"> Portal Text & Translation</a>{" "}
-                </li>
-                <li>
-                  <a href="#"> RTL</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <a href="#">Syntax Highlighting</a>
-              <ul
-                sx={{
-                  ml: "20px",
-                  mt: "8px",
-                }}
-              >
-                <li>Prism</li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <a href="#">Theme Deploy with GitHub Actions</a>{" "}
-            </li>
-            <li>
-              <a href="#">Code Injection</a>
-            </li>
-            <li>
-              <a href="#">Changing Colors with CSS Variables</a>
-            </li>
-            <li>
-              <a href="#">Customize Home Post Card Image Height</a>
-            </li>
-            <li>
-              <a href="#">Customize Home Hero Image Size</a>
-            </li>
-            <li>
-              <a href="#">Customize Logo Size</a>
-            </li>
-            <li>
-              <a href="#">Footer Copyright</a>
-            </li>
-            <li>
-              <a href="#">AMP</a>
-            </li>
-            <li>
-              <a href="#"> Theme Development</a>
-              <ul
-                sx={{
-                  ml: "20px",
-                  mt: "8px",
-                }}
-              >
-                <li>
-                  <a href="#"> My Current Setup</a>
-                </li>
-                <li>
-                  {" "}
-                  <a href="#">Zip Theme Files</a>{" "}
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <a href="#"> Theme Update</a>
+              <a href="#Theme shadowing"> Theme Shadowing</a>
             </li>
           </ul>
         </div>
@@ -399,7 +189,52 @@ const quailPage = () => {
           }}
         />
 
-        <div id="Theme_Installation">
+        <div id="Prerequisites"
+          sx={{
+            background: '#E7F5FB',
+            padding: '32px',
+            h4: {
+              background: '#FAFAFA', padding: '16px', fontSize: '20px', fontWeight: '600'
+            }
+          }}
+        >
+          <h2
+            sx={{
+              fontSize: "24px",
+              fontWeight: "600",
+            }}
+          >
+            Prerequisites
+          </h2>
+          <p>Before installing and using themes based on the Dega CMS, you need to make sure that your system meets the following requirements:</p>
+          <ol>
+            <li>1. Node.js Version 18 or Higher</li>
+            <p>The Dega CMS requires Node.js version 18 or higher to be installed on your system. If you don't have Node.js installed, you can download it from the official Node.js website <a href="(https://nodejs.org/en/).">(https://nodejs.org/en/)</a></p>
+            <li>2. Package Manager (npm or yarn)</li>
+            <p>You also need to have a package manager installed to install the required dependencies. The recommended package managers are either npm <a href="(https://www.npmjs.com/)">(https://www.npmjs.com/)</a> or yarn <a href=" (https://yarnpkg.com/)."> (https://yarnpkg.com/).</a>
+            </p>
+            <p>To check if Node.js and the package manager are installed on your system, you can run the following commands in your terminal:
+            </p>
+            <h4>node-v</h4>
+            <p>This will display the version of Node.js installed on your system. If you see a version number that is less than 18, you need to update your version of Node.js.
+            </p>
+            <h4>npm-v</h4>
+            or
+            <h4>yarn-v</h4>
+            <p>These commands will display the version of npm or yarn installed on your system. If you don't have either of these package managers installed, you can download and install them from the official npm website <a href="(https://www.npmjs.com/)">(https://www.npmjs.com/)</a> or yarn website <a href="(https://yarnpkg.com/)">(https://yarnpkg.com/)</a></p>
+            <p>Once you have Node.js and the package manager installed, you can proceed to install and use themes based on the Dega CMS.</p>
+          </ol>
+
+        </div>
+        <div id="Theme_Installation"
+          sx={{
+            li: {
+              fontWeight: '600',
+              ml: '20px',
+              textDecoration: "underline",
+            }
+          }}
+        >
           <h2
             sx={{
               fontSize: "24px",
@@ -409,162 +244,111 @@ const quailPage = () => {
           >
             Theme Installation
           </h2>
-          <p sx={{ mt: "16px" }}>
-            The first step is to unzip the downloaded package by double-clicking
-            it on Mac or by right-clicking and selecting “Extract All” in
-            Windows.
-          </p>
-          <p sx={{ mt: "32px" }}>
-            Inside the new folder tripoli, you will find the tripoli.zip theme
-            file and an online documentation file.
-          </p>
-          <p sx={{ mt: "32px" }}>
-            Follow these steps to upload the theme to your website:
-          </p>
-          <ol sx={{ mt: "32px", ml: "18px", li: { mt: "8px" } }}>
-            <li>Log in to your Ghost website admin (example.com/ghost).</li>
-            <li>
-              Click the <strong> settings icon</strong> ( ) at the bottom of the
-              left-hand side.
-            </li>
-            <li>
-              Go to <strong> Design {">"} Change theme</strong>.
-            </li>
-            <li>
-              Click <strong>Upload theme</strong> and select the tripoli.zip
-              theme file.
-            </li>
-            <li>
-              Once uploaded, click <strong>Activate now</strong> to activate
-              Tripoli.
-            </li>
-          </ol>
-        </div>
-        <hr sx={{ mt: "40px" }} />
-        <div id="Upload_yaml_Files">
-          <h2
-            sx={{
-              fontSize: "24px",
-              fontWeight: "600",
-              mt: "32px",
-            }}
-          >
-            Upload the routes.yaml File{" "}
-          </h2>
-          <p
-            sx={{
-              mt: "16px",
-            }}
-          >
-            The routes.yaml is required for the following reasons:
-          </p>
-          <ul
-            sx={{
-              mt: "32px",
-              ml: "14px",
-              textDecoration: "underline",
-            }}
-          >
-            <li>Latest page</li>
-            <li>Setup URL</li>
+          <ul>
+            <li id="Installation">Installation</li>
+            <li id="Configuration">Configuration</li>
           </ul>
-          <p
-            sx={{
-              mt: "32px",
-            }}
-          >
-            To upload the file, follow these steps:
-          </p>
-          <ol
-            sx={{
-              mt: "32px",
-              ml: "18px",
-              li: { mt: "8px" },
-            }}
-          >
-            <li>Unzip the tripoli.zip theme file.</li>
-            <li>
-              In your Ghost admin, click the settings icon ( ) at the bottom of
-              the left-hand side.
-            </li>
-            <li>
-              Go to the <strong>Labs</strong>.
-            </li>
-            <li>
-              Scroll down to the Routes section and click the Upload routes YAML
-              button.
-            </li>
-            <li>
-              Select and upload the{" "}
-              <code
-                sx={{
-                  border: "1px solid #D2D2D7",
-                  padding: "4px",
-                  borderRadius: "4px",
-                  background: "#FAFAFA",
-                }}
-              >
-                routes.yaml
-              </code>{" "}
-              file inside the theme folder.
-            </li>
-          </ol>
-        </div>
-        <hr sx={{ mt: "40px" }} />
-        <div sx={{ background: "#E7F5FB", padding: "32px", mt: "32px" }}>
-          <h2
-            sx={{
-              pb: "16px",
-              mb: "8px",
-              borderBottom: "1px solid #181818",
-            }}
-          >
-            Note: upload routes.yaml after uploading the theme zip
-          </h2>
-          <p
-            sx={{
-              mt: "24px",
-            }}
-          >
-            There will already be a default{" "}
-            <code
+          <div sx={{
+            background: '#E7F5FB',
+            padding: '32px',
+            mt: '42px'
+          }}>
+            <h2
               sx={{
-                border: "1px solid #D2D2D7",
-                padding: "4px",
-                borderRadius: "4px",
-                background: "#FFF",
-              }}
-            >
-              {" "}
-              routes.yaml
-            </code>{" "}
-            file uploaded to Ghost. You need to upload your theme’s{" "}
-            <code
+                fontSize: "20px",
+                fontWeight: "600",
+              }}>Installation</h2>
+            <p>Once you have the Dega CMS installed and configured, you can download and install a Dega theme to use on your website. Here are the steps to install a Dega theme using npm or yarn:</p>
+            <p>1. Go to root folder</p>
+            <p>2. Install the theme using npm or yarn:</p>
+            with npm:
+            <p sx={{ background: '#FAFAFA', padding: '16px', fontSize: '20px', fontWeight: '600' }}>npm install @factly/gatsby-theme-quail</p>
+            with yarn:
+            <p sx={{ background: '#FAFAFA', padding: '16px', fontSize: '20px', fontWeight: '600' }}>yarn add @factly/gatsby-theme-quail</p>
+          </div>
+          <div sx={{
+            background: '#E7F5FB',
+            padding: '32px',
+            mt: '42px'
+          }}>
+            <h2
               sx={{
-                border: "1px solid #D2D2D7",
-                padding: "4px",
-                borderRadius: "4px",
-                background: "#FFF",
-              }}
-            >
-              {" "}
-              routes.yaml
-            </code>{" "}
-            to override the default.
-          </p>
-          <p
-            sx={{
-              mt: "24px",
-            }}
-          >
-            Do this separately after uploading your theme zip file
-          </p>
+                fontSize: "20px",
+                fontWeight: "600",
+              }}>Configuration</h2>
+            <p>Once you have installed a Dega theme, you may want to configure it to fit your specific needs. Most Dega themes come with configuration options that can be modified to change the look and feel of your website.</p>
+            <h4>1. SPACE ID</h4>
+            <p>This is the ID of the content space that you want to use with your Dega CMS project. </p>
+            <h4>2. ACCESS TOKEN</h4>
+            <p>This is the access token that allows your Dega CMS project to access the content in your space.</p>
+            <h4>3. URI</h4>
+            <p>This is the URI endpoint of your Dega CMS API.</p>
+            <pre sx={{ background: '#FAFAFA', padding: '16px' }}>
+              <code>
+                {`{
+
+                  module.exports = {
+                    plugins: [
+                      'gatsby-plugin-sass',
+                      {
+                        resolve: '@factly/gatsby-theme-quail',
+                        options: {
+                          spaceId: process.env.SPACE_ID,
+                          accessToken: process.env.ACCESS_TOKEN,
+                          uri: process.env.API_ENDPOINT,
+                        },
+                      },
+                    ],
+                  }
+                }`}
+              </code>
+            </pre>
+          </div>
         </div>
-        <hr
+        <div id='Theme shadowing'
           sx={{
-            mt: "32px",
-          }}
-        />
+            background: '#E7F5FB',
+            padding: '32px',
+            mt: '42px'
+          }}>
+          <h2 sx={{
+            fontSize: "20px",
+            fontWeight: "600",
+          }}>
+            Theme Shadowing
+          </h2>
+          <p>Theme shadowing in Gatsby allows you to override the default components and styles of a theme with your own custom components and styles.</p>
+          <p>To get started with theme shadowing in Dega themes, follow these steps:</p>
+          <ul>
+            <li>1. Inside the `src` folder, create a new folder called `gatsby-plugin-theme-ui`.</li>
+            <li>2. Inside the `gatsby-plugin-theme-ui` folder, create a new file called `index.js`.
+            </li>
+            <li>3. In the `index.js` file, export a theme object that includes the custom styles and components you want to use. For example:</li>
+          </ul>
+          <pre sx={{ background: '#FAFAFA', padding: '16px', my: '20px' }}>
+            <code>
+              {`{
+    import { baseTheme } from 'gatsby-theme-dega';
+
+export default {
+  ...baseTheme,
+  colors: {
+    primary: 'red',
+    secondary: 'blue',
+  },
+  styles: {
+    ...baseTheme.styles,
+    h1: {
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '48px',
+    },
+  },
+};
+  }`}
+            </code>
+          </pre>
+          <p>In this example, we are extending the base theme from gatsby-theme-dega and customizing the colors and styles.</p>
+        </div>
       </div>
     </Layout>
   )
