@@ -377,4 +377,4 @@ export default {
   )
 }
 
-export default harpyoPage
+export default harpyPage
