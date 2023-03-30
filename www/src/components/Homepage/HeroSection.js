@@ -15,7 +15,7 @@ export default function HeroSection() {
       >
         <div className="mx-auto sm:flex-wrap">
           {/* <div style={{ height: "50px" }} aria-hidden="true"></div> */}
-          <div className="max-w-[1240px] mx-auto w-full my-8 sm:none md:flex lg:flex flex-wrap md:flex-nowrap">
+          <div className="max-w-[1240px] mx-auto w-full my-8 sm:none md:flex lg:flex flex-wrap md:flex-nowrap items-center">
             <div
               className="mb-0 flex-grow-0 self-start "
               style={{ flexBasis: "63.33%" }}
