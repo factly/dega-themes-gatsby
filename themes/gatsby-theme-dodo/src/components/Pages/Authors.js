@@ -76,7 +76,7 @@ function AuthorsListPage({ data }) {
           </>
         ))}
       </div>
-    </Layout >
+    </Layout>
   );
 }
 

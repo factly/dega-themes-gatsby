@@ -4,6 +4,8 @@ The repository contains open sourced themes developed by Factly to generate mode
 
 We at Factly are making developing quality websites easier with Dega Themes and Dega CMS.
 
+Themes website: ([https://astonishing-naiad-903741.netlify.app])
+
 ### Prerequisites
 
 - You'll need DegaCMS API key, Space Id and the API endpoint to run a site.
