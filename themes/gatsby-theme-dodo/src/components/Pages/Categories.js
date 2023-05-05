@@ -16,11 +16,11 @@ function CategoriesListPage({ data }) {
       </div>
       <div sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(256px, 1fr))', gridGap: '32px', maxWidth: '1400px', mx: 'auto', mb: '48px', p: '32px' }}>
         {data.allDegaCategory.nodes.map((category) => (
-          <>
-            <Link sx={{ padding: '24px', fontWeight: 500, bg: '#eff8fa', borderRadius: '4px' }} to={`/category/${category.slug}/`}>
-              {category.name}
-            </Link>
-          </>
+
+          <Link sx={{ padding: '24px', fontWeight: 500, bg: '#eff8fa', borderRadius: '4px' }} to={`/category/${category.slug}/`}>
+            {category.name}
+          </Link>
+
         ))}
       </div>
     </Layout>

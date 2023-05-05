@@ -15,7 +15,7 @@ function CategoriesListPage({ data }) {
           Categories
         </h1>
       </div>
-      <div sx={{ maxWidth: '1270px', mx: 'auto', display: 'flex', flexWrap: 'wrap', gap: '32px', textAlign: 'center', px: '24px', mb: '48px', justifyContent: 'center' }}>
+      <div sx={{ maxWidth: '1270px', mx: 'auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(337px, 1fr))', gridGap: '32px', textAlign: 'center', px: '24px', mb: '48px', justifyContent: 'center' }}>
         {data.allDegaCategory.nodes.map((category) => (
           <>
             <div sx={{}}>
