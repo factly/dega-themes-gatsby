@@ -112,7 +112,7 @@ div {
 .main-content {
   display: flex;
   flex-direction: column;
-  padding-top: 2rem;
+  /* padding-top: 2rem; */
 }
 
 /* a:hover {
@@ -151,11 +151,11 @@ div {
 .read-more-state:checked ~ .read-more-wrap .read-more-target {
   opacity: 1;
   font-size: inherit;
-} 
+}
 
 .read-more-state ~ .read-more-trigger:before {
   content: 'show more';
-} 
+}
 
 .read-more-state:checked ~ .read-more-trigger:before {
   content: 'show less';

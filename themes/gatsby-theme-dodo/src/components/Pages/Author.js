@@ -38,52 +38,71 @@ function UserDetailsAll({ data }) {
 
   const header = (item) => {
     return (
-      <div sx={{ mb: (theme) => `${theme.space.spacing5}`, px: (theme) => theme.space.layout2 }}>
-        {item.medium && (
-          <img
-            src={item.medium?.url.proxy}
-            alt=""
-            sx={{
-              borderRadius: '50%',
-              width: 40,
-              height: 40,
-              mx: 'auto',
-              padding: (theme) => `${theme.space.spacing8}`,
-            }}
-          />
-        )}
-        <h1
-          sx={{
-            fontSize: (theme) => `${theme.fontSizes.h4}`,
-            mb: (theme) => `${theme.space.spacing5}`,
-            textTransform: 'capitalize',
-          }}
-        >
-          {name}
-        </h1>
-        {item.description && (
-          <p sx={{ pb: (theme) => `${theme.space.spacing5}` }}>{item.description}</p>
-        )}
+      <div sx={{
+        mb: (theme) => `${theme.space.spacing5}`, px: (theme) => theme.space.layout2, display: 'grid',
+        gridTemplateColumns: 'repeat(2,minmax(0,1fr))',
+        padding: '32px',
+        ml: [null, null, '4rem', null]
+      }}>
+        <div>
+          {item.medium ? (
+            <img
+              src={item.medium.url.proxy}
+              alt=""
+              sx={{
+                borderRadius: '50%',
+                width: '96px',
+                height: '96px',
+                mb: '1rem',
+                padding: (theme) => `${theme.space.spacing8}`,
+              }}
+            />
+          ) : (
+            <div
+              sx={{
+                borderRadius: '50%',
+                width: '96px',
+                height: '96px',
+                mb: '1rem',
+                padding: (theme) => `${theme.space.spacing8}`,
+                background: '#000',
+              }}
+            />
+          )}
 
-        <div sx={{ display: 'flex' }}>
-          {item.social_media_urls &&
-            Object.keys(item.social_media_urls).map((name) => (
-              <a
-                key={name}
-                title={name}
-                href={item.social_media_urls[name]}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ mr: (theme) => `${theme.space.spacing3}` }}
-              >
-                {getIcon(name)}
-              </a>
-            ))}
-          <a href={`mailto:${item.email}`} title="email">
-            {getIcon('email')}
-          </a>
+          <h1
+            sx={{
+              fontSize: (theme) => `${theme.fontSizes.h4}`,
+              mb: (theme) => `${theme.space.spacing5}`,
+              textTransform: 'capitalize',
+            }}
+          >
+            {name}
+          </h1>
+          {item.description && (
+            <p sx={{ pb: (theme) => `${theme.space.spacing5}` }}>{item.description}</p>
+          )}
+
+          <div sx={{ display: 'flex' }}>
+            {item.social_media_urls &&
+              Object.keys(item.social_media_urls).map((name) => (
+                <a
+                  key={name}
+                  title={name}
+                  href={item.social_media_urls[name]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{ mr: (theme) => `${theme.space.spacing3}` }}
+                >
+                  {getIcon(name)}
+                </a>
+              ))}
+            <a href={`mailto:${item.email}`} title="email">
+              {getIcon('email')}
+            </a>
+          </div>
         </div>
-      </div>
+      </div >
     );
   };
   return (
