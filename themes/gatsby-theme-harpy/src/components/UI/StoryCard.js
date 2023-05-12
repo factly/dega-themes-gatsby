@@ -28,9 +28,9 @@ const StoryCard = ({ post, type = 'basic' }) => {
                 <Link to={`/category/${post.categories[0].slug}/`}>{post.categories[0].name}</Link>
               )}
             </div>
-            <h2 className="post-title">
+            <h3 className="post-title">
               <Link to={`/${post.slug}/`}>{post.title}</Link>
-            </h2>
+            </h3>
             <div className="post-excerpt">{post.excerpt}</div>
             <div className="post-meta-wrap flex">
               <div className="author-avatar-wrap">
@@ -67,15 +67,15 @@ const StoryCard = ({ post, type = 'basic' }) => {
           <Link to={`/${post.slug}/`} className="post-img-wrap">
             <img loading="lazy" src={post.medium?.url?.proxy} alt={post.title} />
           </Link>
-          <div className="post-info-wrap">
+          <div className="post-info-wrap" sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div className="tag-wrap">
               {post.categories.length > 0 && (
                 <Link to={`/category/${post.categories[0].slug}/`}>{post.categories[0].name}</Link>
               )}
             </div>
-            <h2 className="h4 post-title">
+            <h4>
               <Link to={`/${post.slug}/`}>{post.title}</Link>
-            </h2>
+            </h4>
           </div>
         </article>
       )}

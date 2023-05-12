@@ -224,7 +224,7 @@ const Post = ({ post }) => {
                     <div class="avatar-wrap">
                       {post.users.length > 0 && (
                         <Link to={`/author/${post.users[0].slug}/`}>
-                          <img
+                          <img sx={{ height: '108px', width: '108px', borderRadius: '50%', background: '#000' }}
                             src={post.users[0].medium?.url?.proxy}
                             loading="lazy"
                             alt={post.users[0].display_name}

@@ -45,7 +45,7 @@ const Indexpage = ({ data }) => {
           <div className="container">
             <div className="row js-post-list-wrap post-list-wrap">
               <div className="col-lg-12">
-                <h2 className="h4 section-title">Most recent posts</h2>
+                <h3 className="h4 section-title">Most recent posts</h3>
               </div>
 
               {recentPosts.map((post) => (

@@ -19,7 +19,7 @@ function CategoriesListPage({ data }) {
         {data.allDegaCategory.nodes.map((category) => (
           <>
             <div sx={{}}>
-              <a href={category.slug}> {category.medium}
+              <a href={`/category/${category.slug}/`}> {category.medium}
                 <img sx={{ borderRadius: '24px' }} src="https://source.unsplash.com/random/280x230" alt="" />
               </a>
 
