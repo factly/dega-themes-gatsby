@@ -535,8 +535,8 @@ h2 {
   font-size: calc(var(--font-size-base) * 1.6 + 0.3vw);
   line-height: 1.36;
   line-height: calc(var(--line-height-base) * 0.85);
-  margin: 0 0 0.6em;
-  margin: 0 0 calc(var(--gap) * 0.6);
+  /* margin: 0 0 0.6em; */
+  /* margin: 0 0 calc(var(--gap) * 0.6); */
 }
 h3 {
   font-size: 1.8rem;
@@ -919,8 +919,8 @@ p {
   font-size: var(--font-size-base);
   line-height: 1.7;
   line-height: calc(0.1 + var(--line-height-base));
-  margin: 0 0 2em;
-  margin: 0 0 var(--gap-lg);
+  /* margin: 0 0 2em;
+  margin: 0 0 var(--gap-lg); */
 }
 a {
   box-shadow: none;
@@ -3688,7 +3688,7 @@ details[open] summary:after {
   margin: 0;
   padding: 0;
 }
-.footer__title {
+/* .footer__title {
   font-size: 1.2rem;
   font-weight: 600;
   font-weight: var(--font-weight-600);
@@ -3696,7 +3696,7 @@ details[open] summary:after {
 .footer__sub-text {
   margin-bottom: 1em;
   margin-bottom: var(--gap);
-}
+} */
 @media only screen and (min-width: 48em) {
   .footer__sub-text {
     margin-bottom: 0;
@@ -4282,7 +4282,7 @@ blockquote.kg-blockquote-alt {
   display: inline-flex;
 }
 .header__brand img {
-  height: 25px;
+  height: 60px;
   -o-object-fit: contain;
   object-fit: contain;
 }

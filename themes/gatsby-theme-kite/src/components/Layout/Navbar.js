@@ -33,14 +33,13 @@ const Navbar = ({ data }) => {
             <div className="col-xs-12 header__left flex items-center">
               <Link className="header__brand nav-current" href="/">
                 {' '}
-                <img className="header__logo" src={space.logo?.url?.proxy} alt="logo" />
+                <img src={space.logo?.url?.proxy} alt="logo" />
               </Link>
               <div className="flex-1"></div>
 
               <button
-                className={`header__menu--toggle flex-cc js-menu-toggle ${
-                  isOpen ? 'is-active' : ''
-                }`}
+                className={`header__menu--toggle flex-cc js-menu-toggle ${isOpen ? 'is-active' : ''
+                  }`}
                 tabindex="0"
                 type="button"
                 title="Menu"
@@ -57,10 +56,20 @@ const Navbar = ({ data }) => {
             </div>
 
             <div className="col-md-6 col-lg-8 header__center middle-xs flex-1" tabindex="0">
-              <ul className="nav" role="menu">
+              <ul sx={{ justifyContent: 'end' }} className="nav" role="menu">
                 <li role="menuitem">
                   <Link to="/">
                     <span>Home</span>
+                  </Link>
+                </li>
+                <li role="menuitem">
+                  <Link to="/authors">
+                    <span>Authors</span>
+                  </Link>
+                </li>
+                <li role="menuitem">
+                  <Link to="/categories">
+                    <span>Categories</span>
                   </Link>
                 </li>
               </ul>
