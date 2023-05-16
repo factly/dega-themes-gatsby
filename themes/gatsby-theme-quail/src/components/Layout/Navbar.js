@@ -17,7 +17,7 @@ export default function NavBar({ data }) {
   return (
     <div className={isMenuOpen ? 'is-head-open' : ''}>
       <header id="sc-head" className="sc-head sc-outer">
-        <div className="sc-head-inner sc-inner">
+        <div sx={{ display: [null, null, null, 'flex'], alignItems: 'center', flexDirection: 'column', }}>
           <div className="sc-head-brand">
             <div className="sc-head-brand-wrapper">
               <Link className="sc-head-logo" to="/">
@@ -44,12 +44,12 @@ export default function NavBar({ data }) {
                   <Link to={item.url}>{item.name}</Link>
                 </li>
               ))}
-              {}
+              { }
             </ul>
           </nav>
 
           {/* <div className="sc-head-actions">
-            
+
           </div> */}
         </div>
       </header>
