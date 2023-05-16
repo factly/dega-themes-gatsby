@@ -3,13 +3,18 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import { Link } from 'gatsby';
+import { AiFillGithub } from 'react-icons/ai';
+import { AiOutlineTwitter } from 'react-icons/ai'
+import { TiSocialFacebook } from 'react-icons/ti'
+import { AiOutlineInstagram } from 'react-icons/ai'
 
 const Footer = ({ space }) => (
   <footer
     sx={{
       width: '100%',
-      py: '2rem',
+      padding: '2rem',
       bg: '#eff8fa',
+      p: { textAlign: 'center' }
     }}
   >
     <h2 sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center', mb: '1rem' }}>
@@ -32,7 +37,13 @@ const Footer = ({ space }) => (
         {space.name}
       </Link>
     </h2>
-    <p sx={{ textAlign: 'center' }}>
+    <p>Harpy is a modern classic blog theme. Use this theme for company blog, magazine, niche or personal blog</p>
+    <div sx={{ display: 'flex', justifyContent: 'center', gap: '16px', mt: '32px' }}>
+      <Link href=''><AiOutlineTwitter /></Link>
+      <Link href=''><TiSocialFacebook /></Link>
+      <Link href=''><AiOutlineInstagram /></Link>
+      <Link href=''><AiFillGithub /></Link>    </div>
+    <p sx={{ fontSize: '0.875rem', mt: '32px' }}>
       © {new Date().getFullYear()} Harpy Theme - Created and maintained by Factly Media and Research
     </p>
   </footer>

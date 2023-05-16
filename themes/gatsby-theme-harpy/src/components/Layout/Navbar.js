@@ -48,7 +48,7 @@ const Navbar = ({ data }) => {
             <span className="sr-only">Menu toggle button</span>
           </label>
 
-          <nav className="nav-wrap flex" role="navigation" aria-label="Main navigation">
+          <nav sx={{ textAlign: 'end', a: { fontWeight: 600 } }} className="nav-wrap flex" role="navigation" aria-label="Main navigation">
             <ul className="nav-left no-style-list" role="menu">
               <li className="nav-item" role="menuitem">
                 <Link to="/" className="nav-link">
