@@ -32,11 +32,16 @@ const Navbar = ({ data }) => {
         id="de-head"
         className={`de-head outer  ${isMenuOpen ? 'de-head-open has-cover' : ''}`}
       >
-        <nav className="de-head-inner inner">
+        <nav sx={{ display: [null, null, 'flex'], justifyContent: 'space-between' }}>
           <div className="de-head-brand">
-            <Link className="de-head-logo no-image" to="/">
-              {!space?.logo?.url?.proxy &&
-                (space?.title?.toUpperCase() || space?.name?.toUpperCase())}
+            <Link href="/" passHref>
+              <a sx={{ mx: 'auto' }}>
+                <img
+                  src={space?.logo?.url?.proxy || `/logo.png`}
+                  alt={space.site_title}
+                  sx={{ maxWidth: '10rem', display: 'block', mx: 'auto' }}
+                />
+              </a>
             </Link>
             <div className="de-head-brand-wrapper">
               <button

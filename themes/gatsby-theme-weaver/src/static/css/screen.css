@@ -44,7 +44,7 @@ production stylesheet in assets/built/screen.css
   --dega-accent-color: #ff5230;
   /*
 
-    
+
 
     You can use this variable throughout your styles
      */
@@ -273,10 +273,13 @@ body:not(.has-cover) .site-header-content:not(.left-aligned) {
 }
 
 .de-head-inner {
-  display: grid;
+  /* display: grid;
   grid-gap: 40px;
   grid-template-columns: auto auto 1fr;
-  grid-auto-flow: row dense;
+  grid-auto-flow: row dense; */
+
+  /* display:flex;
+  justify-content:space-between */
 }
 
 /* Brand
