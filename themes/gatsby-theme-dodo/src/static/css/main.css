@@ -1164,7 +1164,7 @@ table tbody + tbody {
 }
 
 .c-header__top {
-  padding: var(--space-20) 0;
+  /* padding: var(--space-20) 0; */
   border-bottom: var(--border-width) var(--border-style) var(--color-border-secondary);
 }
 
@@ -1372,6 +1372,7 @@ table tbody + tbody {
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  justify-content: center;
 }
 
 .c-nav::-webkit-scrollbar {

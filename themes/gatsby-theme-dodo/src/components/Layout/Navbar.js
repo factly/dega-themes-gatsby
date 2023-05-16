@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { jsx } from 'theme-ui';
 import { FaHome, FaBars } from 'react-icons/fa';
 import { Link } from 'gatsby';
+import { MdMargin } from 'react-icons/md';
 
 export default function NavBar({ data }) {
   const { menu, space } = data;
@@ -17,7 +18,7 @@ export default function NavBar({ data }) {
     <React.Fragment>
       <header className="c-header">
         <div className="c-header__top">
-          <div className="l-grid c-header__top-inner">
+          <div sx={{ display: 'flex', mx: 'auto' }}>
             <div className="c-header__top-block c-header__top-left">
               {/* <button
                 className="c-header__button c-header__button--colorMode c-color-mode-btn js-mode-toggle js-mode-toggle-title"
@@ -38,35 +39,24 @@ export default function NavBar({ data }) {
                 <span className="u-visible-on-desktop">Search</span>
               </button> */}
             </div>
-
-            <div className="c-header__top-block c-header__top-center">
-              <div className="c-logo">
-                <div className="c-logo__dark">
-                  <Link to="/" sx={{ mx: 'auto' }}>
-                    <img
-                      className="c-logo__img"
-                      src={space?.logo?.url?.proxy || `/logo.png`}
-                      alt={space.site_title}
-                      sx={{ maxWidth: '10rem', display: 'block', mx: 'auto' }}
-                    />
-                    {!space?.logo?.url?.proxy &&
-                      (space?.title?.toUpperCase() || space?.name?.toUpperCase())}
-                  </Link>
-                </div>
-
-                <div className="c-logo__light">
-                  <Link to="/" sx={{ mx: 'auto' }}>
-                    <img
-                      className="c-logo__img"
-                      src={space?.logo?.url?.proxy || `/logo.png`}
-                      alt={space.site_title}
-                      sx={{ maxWidth: '10rem', display: 'block', mx: 'auto' }}
-                    />
-                    {!space?.logo?.url?.proxy &&
-                      (space?.title?.toUpperCase() || space?.name?.toUpperCase())}
-                  </Link>
-                </div>
-              </div>{' '}
+            <div
+              sx={{
+                my: '0.5rem',
+                mx: 'auto',
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <Link href="/" passHref>
+                <a sx={{ mx: 'auto' }}>
+                  <img
+                    src={space?.logo?.url?.proxy || `/logo.png`}
+                    alt={space.site_title}
+                    sx={{ maxWidth: '10rem', display: 'block', mx: 'auto' }}
+                  />
+                </a>
+              </Link>
             </div>
 
             <div className="c-header__top-block c-header__top-right">
