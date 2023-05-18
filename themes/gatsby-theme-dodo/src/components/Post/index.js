@@ -78,7 +78,7 @@ const Post = ({ post, observer }) => {
                 {parseDate(post.published_at)}
                 {/* <span className="c-timestamp__detail"> . 12:00 AM</span> */}
               </time>{' '}
-              {/* <div className="c-reading-time c-topper__reading-time">2 min read</div>{' '} */}
+              <div className="c-reading-time c-topper__reading-time">2 min read</div>{' '}
             </div>
             <ul className="c-share u-plain-list">
               <li className="c-share__item">
@@ -87,10 +87,10 @@ const Post = ({ post, observer }) => {
                   href={`https://twitter.com/share?text=${post.title}}&amp;url=${post.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  // onClick={() => {
-                  //   window.open(this.href, 'twitter-share', 'width=550, height=235');
-                  //   return false;
-                  // }}
+                // onClick={() => {
+                //   window.open(this.href, 'twitter-share', 'width=550, height=235');
+                //   return false;
+                // }}
                 >
                   <div className="icon icon--ei-sc-twitter icon--s c-share__icon">
                     <FaTwitter className="icon__cnt" />
@@ -105,10 +105,10 @@ const Post = ({ post, observer }) => {
                   href={`https://www.facebook.com/sharer/sharer.php?u=${post.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  // onClick={() => {
-                  //   window.open(this.href, 'facebook-share', 'width=580, height=296');
-                  //   return false;
-                  // }}
+                // onClick={() => {
+                //   window.open(this.href, 'facebook-share', 'width=580, height=296');
+                //   return false;
+                // }}
                 >
                   <div className="icon icon--ei-sc-facebook icon--s c-share__icon">
                     <FaFacebookF className="icon__cnt" />
@@ -123,10 +123,10 @@ const Post = ({ post, observer }) => {
                   href={`https://www.linkedin.com/shareArticle?mini=true&amp;url=${post.slug}&amp;title=${post.title}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  // onClick={() => {
-                  //   window.open(this.href, 'linkedin-share', 'width=580, height=296');
-                  //   return false;
-                  // }}
+                // onClick={() => {
+                //   window.open(this.href, 'linkedin-share', 'width=580, height=296');
+                //   return false;
+                // }}
                 >
                   <div className="icon icon--ei-sc-linkedin icon--s c-share__icon">
                     <FaLinkedin className="icon__cnt" />

@@ -38,14 +38,13 @@ const Footer = ({ space }) => (
       </Link>
     </h2>
     <div sx={{ display: 'flex', justifyContent: 'center', gap: '16px', mt: '32px', a: { background: '#fff', borderRadius: '50%', padding: '12px' } }}>
-      <Link to=''><AiOutlineTwitter /></Link>
-      <Link to=''><TiSocialFacebook /></Link>
-      <Link to=''><AiOutlineInstagram /></Link>
-      <Link to=''><RiLinkedinBoxFill /></Link>
-      <Link to=''><FaYoutube /></Link>
-
+      <Link to='https://twitter.com'><AiOutlineTwitter /></Link>
+      <Link to='https://www.facebook.com'><TiSocialFacebook /></Link>
+      <Link to='https://www.instagram.com'><AiOutlineInstagram /></Link>
+      <Link to='https://www.linkedin.com'><RiLinkedinBoxFill /></Link>
+      <Link to='https://www.youtube.com'><FaYoutube /></Link>
     </div>
-    <p sx={{ textAlign: 'center', mt: '32px' }}>
+    <p sx={{ textAlign: 'center', mt: '32px', fontSize: '14px' }}>
       © 2022 Dodo Theme - Created and maintained by Factly Media and Research
     </p>
   </footer>

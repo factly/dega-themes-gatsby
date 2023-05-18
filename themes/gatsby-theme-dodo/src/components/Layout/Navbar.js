@@ -69,7 +69,6 @@ export default function NavBar({ data }) {
             </div>
           </div>
         </div>
-
         <div className="c-header__bottom">
           <div className="l-grid">
             <nav className="c-nav-wrap">

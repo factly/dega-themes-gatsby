@@ -1196,7 +1196,7 @@ table tbody + tbody {
 @media (max-width: 39.99em) {
   .c-header__top-left {
     order: 2;
-    margin-left: auto;
+    /* margin-left: auto; */
   }
 
   .c-header__top-center {

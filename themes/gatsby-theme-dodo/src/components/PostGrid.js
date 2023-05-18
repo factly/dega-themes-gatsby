@@ -43,7 +43,7 @@ const PostGrid = ({ type, posts, formats, item, header, useSlug = true }) => {
         >
           {header ? header(item) : defaultHeader(item)}
           {filteredPosts.length > 0 ? (
-            <div className="l-grid l-grid--4-columns">
+            <div sx={{ mb: ['2rem', null, '4rem'] }} className="l-grid l-grid--4-columns">
               {filteredPosts.map((item, index) => (
                 <StoryCard key={index} storyData={item} />
               ))}
