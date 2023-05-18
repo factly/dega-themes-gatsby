@@ -960,6 +960,7 @@ blockquote {
   line-height: var(--line-height-base);
   margin: 0 0 2em;
   margin-bottom: var(--gap-lg);
+  margin-top: var(--gap-lg);
   padding: 2em;
   padding: var(--gap-lg);
   position: relative;

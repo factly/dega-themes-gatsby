@@ -17,7 +17,7 @@ function CategoriesListPage({ data }) {
       <div sx={{ maxWidth: '1400px', mx: 'auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(256px, 1fr))', gridGap: '32px', p: '32px' }}>
         {data.allDegaCategory.nodes.map((category) => (
           <div sx={{ display: 'flex', flexDirection: 'column', gap: '24px', bg: '#D6BBFB', p: '48px', textAlign: 'center', borderRadius: '8px' }}>
-            <a sx={{ display: 'flex', justifyContent: 'center' }} href={category.slug}>
+            <a sx={{ display: 'flex', justifyContent: 'center' }} href={`/category/${category.slug}/`}>
               <img sx={{ width: '96px', height: '96px', bg: '#000', borderRadius: '50%', objectFit: 'cover', maxWidth: "100%" }} src="https://source.unsplash.com/random" alt="" />
             </a>
             <a sx={{ fontWeight: 700 }} href={`/category/${category.slug}/`}>
@@ -29,7 +29,7 @@ function CategoriesListPage({ data }) {
           </div>
         ))}
       </div>
-    </Layout>
+    </Layout >
   );
 }
 
