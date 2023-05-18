@@ -16,12 +16,12 @@ function CategoriesListPage({ data }) {
         </h1>
       </div>
       <div sx={{ maxWidth: '1270px', mx: 'auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(337px, 1fr))', gridGap: '32px', textAlign: 'center', px: '24px', mb: '48px', justifyContent: 'center' }}>
-        {data.allDegaCategory.nodes.map((category) => (
+        {data.categories.nodes.map((category) => (
           <>
             <div sx={{}}>
-              <a href={`/category/${category.slug}/`}> {category.medium}
+              <Link href={`/category/${category.slug}/`}> {category.medium}
                 <img sx={{ borderRadius: '24px' }} src="https://source.unsplash.com/random/280x230" alt="" />
-              </a>
+              </Link>
 
               <a href={`/category/${category.slug}/`}>
                 <p sx={{ mt: '24px', fontWeight: 700 }}> {category.name}</p>

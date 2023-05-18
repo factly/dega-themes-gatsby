@@ -2323,6 +2323,7 @@ blockquote::before {
 .tag-wrap a:hover {
   text-decoration: none;
   color: var(--c-white);
+  background-color: #0066ff;
 }
 .tag-wrap a:hover::before {
   opacity: 1;
