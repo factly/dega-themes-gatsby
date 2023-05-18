@@ -3,6 +3,7 @@ import * as React from 'react'; // eslint-disable-line no-unused-vars
 import { jsx } from 'theme-ui';
 import Helmet from 'react-helmet';
 import Layout from '../Layout';
+import { Link } from 'gatsby';
 
 function CategoriesListPage({ data }) {
   return (
