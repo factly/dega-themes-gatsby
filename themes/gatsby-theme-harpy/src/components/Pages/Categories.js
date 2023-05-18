@@ -16,7 +16,7 @@ function CategoriesListPage({ data }) {
         </h1>
       </div>
       <div sx={{ maxWidth: '1270px', mx: 'auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(337px, 1fr))', gridGap: '32px', textAlign: 'center', px: '24px', mb: '48px', justifyContent: 'center' }}>
-        {data.categories.nodes.map((category) => (
+        {data.allDegaCategory.nodes.map((category) => (
           <>
             <div sx={{}}>
               <Link href={`/category/${category.slug}/`}> {category.medium}
