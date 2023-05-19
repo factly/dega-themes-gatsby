@@ -16,7 +16,7 @@ export const parseTiptapContent = (description) => {
   return (
     <div
       dangerouslySetInnerHTML={{ __html: doc.querySelector('body').innerHTML }}
-      className="c-content"
+      className="content"
     />
   );
 };

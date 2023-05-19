@@ -162,13 +162,13 @@ const Post = ({ post }) => {
           <div className="content">
             <p sx={{ my: '1rem' }} className="content-excerpt">{post.excerpt}</p>
 
-            <div dangerouslySetInnerHTML={{ __html: post.description_html }}></div>
+            <div sx={{ p: { fontSize: ['1rem', null, '1.25rem'], mt: '2rem', }, h2: { mb: '1rem' } }} dangerouslySetInnerHTML={{ __html: post.description_html }}></div>
           </div>
         </article>
 
         <div className="content-wrap">
           {post.users.length > 0 && (
-            <div className="post-authors p flex flex-wrap bg-default">
+            <div className="post-authors p flex-wrap bg-default">
               <div className="section__title text-acc-3 m-b-sm">Published by</div>
               <span className="special-delimiter"></span>
               <div className="card author-card" data-type="post">
