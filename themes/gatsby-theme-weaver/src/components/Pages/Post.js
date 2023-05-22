@@ -32,7 +32,11 @@ const PostDetails = ({ data }) => {
       <div className="site-content">
         <main id="site-main" className="site-main">
           <Post key={`details${post.id}`} post={post} />
+          <div sx={{ maxWidth: '1200px', mx: 'auto', display: 'flex', justifyContent: ['center', null, 'start'] }}>
+            <h2>Recent posts</h2>
+          </div>
           <aside className="read-more-wrap outer">
+
             <div className="read-more inner">
               {recentPosts.nodes.slice(0, 3).map((post) => (
                 <StoryCard post={post} />
