@@ -5,6 +5,7 @@ import Post from '@components/Post/index.js';
 import Layout from '@components/Layout/index';
 import { isBrowser } from '@helpers/isBrowser';
 import Seo from '@components/Seo';
+import StoryCard from '@components/UI/StoryCard';
 
 /**
  * TODO: Add loader for infinite-scroller
@@ -32,6 +33,14 @@ const PostDetails = ({ data }) => {
       />
       <div className="container wrapper">
         <Post post={post} />
+      </div>
+      <div sx={{ px: '2rem', display: 'flex', }}>
+        <h2 sx={{ fontSize: '24px' }}>You may also like</h2>
+      </div>
+      <div sx={{ p: '2rem' }} className="grid post-feed js-post-feed">
+        {recentPosts.nodes.slice(0, 3).map((post) => (
+          <StoryCard post={post} />
+        ))}{' '}
       </div>
     </Layout>
   );
