@@ -116,7 +116,7 @@ const IntroSection = ({ posts }) => {
               </div>
               <h2
                 sx={{
-                  fontSize: '16px',
+                  fontSize: '26px',
                   mt: '1rem',
                   color: '#1E1E1E',
                   fontWeight: '600',
@@ -164,7 +164,7 @@ const IntroSection = ({ posts }) => {
               </div>
               <h2
                 sx={{
-                  fontSize: '16px',
+                  fontSize: '26px',
                   mt: '1rem',
                   color: '#1E1E1E',
                   fontWeight: '600',

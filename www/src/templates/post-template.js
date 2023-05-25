@@ -42,12 +42,15 @@ const PostPage = ({ data }) => {
             display: 'flex',
             gap: '1.5rem',
             flexWrap: 'wrap',
+            h1: {
+              fontSize: '26px'
+            }
           }}
         >
           {recentPosts.nodes.map((post) => <BlogCard key={post.id} data={post} />)}
         </div>
       </div>
-    </Layout >
+    </Layout>
   );
 };
 

@@ -39,7 +39,7 @@ const Post = ({ data }) => {
             fontWeight: '400',
             variant: 'text.normal',
             color: '#667085',
-            lineHeight: '30px'
+            lineHeight: '26px'
           }}>{data.excerpt}</p>
         </div>
 
