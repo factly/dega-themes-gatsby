@@ -4,6 +4,7 @@ import DocumentationList from "../components/Documentation/DocumentationList"
 import ThemesList from "../components/Homepage/ThemesList"
 import HeroSection from "../components/Homepage/HeroSection"
 import { Seo } from "../components/Seo"
+import Showcase from "../components/Homepage/Showcase"
 
 const Home = () => {
   return (
@@ -13,8 +14,8 @@ const Home = () => {
         description=""
       />
       <HeroSection />
-      <header></header>
       <ThemesList />
+      <Showcase />
       {/* <Documentation />  */}
     </Layout>
   )

@@ -2,9 +2,9 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import React from "react"
-import Showcase from "../../components/Homepage/Showcase"
 import Layout from "../../components/Layout/index"
 import { Seo } from '@components/Seo'
+import Showcase from "../../components/Homepage/Showcase"
 
 const ShowcasePage = () => {
   return (
@@ -13,8 +13,7 @@ const ShowcasePage = () => {
         title="Showcase Page | Gatsby Themes Website"
         description=""
       />
-      <h1 className='max-w-7xl mx-auto flex justify-center text-2xl font-bold hover:text-blue-600'>Themes</h1>
-      <Showcase />
+      <h2 className="mt-14"><Showcase /></h2>
     </Layout>
   )
 }

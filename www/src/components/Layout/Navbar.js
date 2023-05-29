@@ -25,7 +25,7 @@ const Navbar = () => {
             aria-label="Global"
           >
             <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-              <Link to="/" className="-m-1.5 p-1.5" sx={{
+              <Link to="/" className="-m-1.5 p-1.5 text-2xl font-semibold" sx={{
                 color: '#1E1E1E',
                 '&:hover': { color: '#cf2e2e' }
               }}>
@@ -60,7 +60,7 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
               <a
-                href="#"
+                href="https://github.com/factly/dega-themes"
                 className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
               >
                 <FaGithub />
@@ -109,7 +109,7 @@ const Navbar = () => {
                   </div>
                   <div className="py-6">
                     <a
-                      href="#"
+                      href="https://github.com/factly/dega-themes"
                       className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
                     >
                       <FaGithub />
