@@ -28,11 +28,11 @@ const Navbar = ({ data }) => {
 
   return (
     <React.Fragment>
-      <header
+      <header sx={{ bg: '#ff0095' }}
         id="de-head"
         className={`de-head outer  ${isMenuOpen ? 'de-head-open has-cover' : ''}`}
       >
-        <nav sx={{ display: [null, null, 'flex'], justifyContent: 'space-between' }}>
+        <nav sx={{ display: [null, null, null, 'flex'], justifyContent: 'space-between', maxWidth: '1200px', mx: 'auto', color: '#fff' }}>
           <div className="de-head-brand">
             <Link href="/" passHref>
               <a sx={{ mx: 'auto' }}>
