@@ -79,8 +79,10 @@ const Post = ({ post }) => {
 
             <h1 className="hero__title text-center">{post.title}</h1>
 
-            <div className="hero__post-info flex flex-cc text-acc-3 fw-500">
-              <span>Mar 19, 2021</span>
+            <div sx={{ fontSize: '1rem' }} className="hero__post-info flex flex-cc text-acc-3 fw-500">
+              <time className="byline-meta-date" dateTime={parseDate(post.published_at)}>
+                {parseDate(post.published_at)}
+              </time>
               <span className="m-l-sm m-r-sm">—</span>
               <span>1 min read</span>
             </div>

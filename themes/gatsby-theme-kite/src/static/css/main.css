@@ -4148,7 +4148,7 @@ blockquote.kg-blockquote-alt {
 .header__left {
   flex: 1;
   height: 60px;
-  padding-right: 0;
+  padding-right: 1rem;
 }
 @media only screen and (min-width: 48em) {
   .header__left {
