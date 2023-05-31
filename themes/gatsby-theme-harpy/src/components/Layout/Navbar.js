@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /** @jsx jsx */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 import { jsx } from 'theme-ui';
-import { FaHome, FaBars, FaSearch } from 'react-icons/fa';
-import isBrowser from '@helpers/isBrowser';
+import { FaSearch } from 'react-icons/fa';
 /**
  * @component Navbar
  * @typedef Props
@@ -25,7 +24,9 @@ const Navbar = ({ data }) => {
 
   return (
     <React.Fragment>
-      <header className="site-header has-theme-icon">
+      <header sx={{
+        px: ['2rem', null, '4rem']
+      }} className="site-header has-theme-icon" >
         <div className="header-inner flex justify-space-between">
           <div className="header-logo flex">
             <Link to="/" className="logo-img theme-light-logo">
@@ -48,7 +49,7 @@ const Navbar = ({ data }) => {
             <span className="sr-only">Menu toggle button</span>
           </label>
 
-          <nav sx={{ textAlign: 'end', a: { fontWeight: 600 } }} className="nav-wrap flex" role="navigation" aria-label="Main navigation">
+          <nav sx={{ li: { textAlign: 'center' } }} className="nav-wrap flex" role="navigation" aria-label="Main navigation">
             <ul className="nav-left no-style-list" role="menu">
               <li className="nav-item" role="menuitem">
                 <Link to="/" className="nav-link">
@@ -71,7 +72,7 @@ const Navbar = ({ data }) => {
                 </li>
               ))}
 
-              {/* <li className=" has-dropdown">
+              <li className=" has-dropdown">
                 <a href="#" className="nav-link more-link">
                   More{' '}
                   <svg
@@ -85,17 +86,30 @@ const Navbar = ({ data }) => {
                 </a>
                 <ul className="no-style-list dropdown-menu">
                   <li className="nav-item" role="menuitem">
-                    <a href="/authors/">Authors</a>
+                    <a href="/">Features</a>
+                  </li>
+                  <li className="nav-item" role="menuitem">
+                    <a href="/">Elements</a>
+                  </li>
+                  <li className="nav-item" role="menuitem">
+                    <a href="/">Tags</a>
                   </li>
                 </ul>
-              </li> */}
+              </li>
             </ul>
-
+            <ul className="no-style-list dropdown-menu">
+              <li className="nav-item" role="menuitem">
+                <a href="/">Sign in</a>
+              </li>
+              <li sx={{ bg: '#0060df', a: { color: '#fff', '&:hover': { color: '#000' } }, borderRadius: '40px', px: '12px', py: '4px' }} className="nav-item" role="menuitem">
+                <a sx={{ padding: '0px' }} href="/">Sign up</a>
+              </li>
+            </ul>
             <ul className="nav-right no-style-list" role="menu"></ul>
-            <div className="icons-wrap">
-              {/* <button href="javascript:;" className="nav-icon search-icon flex js-search-button">
+            <div sx={{ justifyContent: 'center' }} className="icons-wrap">
+              <button href="javascript:;" className="nav-icon search-icon flex js-search-button">
                 <FaSearch />
-              </button> */}
+              </button>
             </div>
           </nav>
         </div>

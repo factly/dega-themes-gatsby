@@ -56,13 +56,13 @@ const Indexpage = ({ data }) => {
             </div>
           </div>
         )}
-        {/* <div className="container">
+        <div className="container">
           <div className="pagination-wrap text-center" id="pagination-wrap">
             <button className="btn btn-lg" id="load-more">
               <span>Show more posts</span>
             </button>
           </div>
-        </div> */}
+        </div>
       </div>
     </Layout>
   );
