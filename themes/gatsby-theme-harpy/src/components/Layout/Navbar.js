@@ -97,7 +97,7 @@ const Navbar = ({ data }) => {
                 </ul>
               </li>
             </ul>
-            <ul className="no-style-list dropdown-menu">
+            <ul sx={{ li: { fontSize: '1rem' } }} className="no-style-list dropdown-menu">
               <li className="nav-item" role="menuitem">
                 <a href="/">Sign in</a>
               </li>
