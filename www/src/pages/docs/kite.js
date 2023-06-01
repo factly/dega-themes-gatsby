@@ -15,9 +15,13 @@ const kitePage = () => {
         sx={{
           maxWidth: "746px",
           margin: "auto",
+          my: '3rem',
+          a: {
+            '&:hover': { textDecoration: 'underline', textUnderlineOffset: '4px' }
+          }
         }}
       >
-        {/* <a
+        <a
           sx={{
             color: "#000",
             fontSize: "14px",
@@ -27,25 +31,7 @@ const kitePage = () => {
         >
           {" "}
           BACK TO DOCUMENTATIONS
-        </a> */}
-        {/* <div sx={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: ['center', 'none', 'none'] }}>
-          <h1
-            sx={{
-              fontSize: "24px",
-              textDecoration: "underline",
-              "&:hover": { color: "blue" },
-            }}
-          >
-            Dodo
-          </h1>
-          <a
-            sx={{ color: "#525252", fontSize: "20px", fontWeight: 400 }}
-            href=""
-          >
-            Documentation
-          </a>
-        </div> */}
-
+        </a>
         <p sx={{
           fontSize: "24px",
           display: 'flex',
@@ -54,101 +40,6 @@ const kitePage = () => {
           textDecoration: "underline",
           "&:hover": { color: "blue" },
         }} href="/themes/kite">Kite</a> documentation</p>
-
-        {/* <div
-          sx={{
-            background: "#FAFAFA",
-            display: "flex",
-            marginleft: "8px",
-            mt: "16px",
-            padding: "16px",
-          }}
-        >
-          {" "}
-          <p
-            sx={{
-              marginRight: "8px",
-            }}
-          >
-            {" "}
-            Theme version:
-          </p>
-          <code
-            sx={{
-              border: "1px solid #D2D2D7",
-              marginRight: "8px",
-              px: "6px",
-            }}
-          >
-            {" "}
-            1.1.9 - 4 may 2022{" "}
-          </code>{" "}
-          <p> Changelog</p>
-        </div> */}
-        {/* <div
-          sx={{
-            background: "#E7F5FB",
-            marginTop: "32px",
-            padding: "32px",
-            borderRadius: "2px",
-            a: {
-              color: "#000",
-              textDecoration: "underline",
-              "&:hover": { color: "blue" },
-              textUnderlineOffset: "4px",
-            },
-          }}
-        >
-          <h1
-            sx={{
-              mb: "8px",
-              pb: "16px",
-            }}
-          >
-            Theme Editing & Tools
-          </h1>
-          <hr />
-          <p
-            sx={{
-              mt: "24px",
-            }}
-          >
-            Edit the theme files mentioned here with a code editor. I recommend{" "}
-            <a href="/">Visual Studio Code,</a> Sublime Text, or Atom. Don’t use
-            TextEdit on Mac.
-          </p>
-          <p
-            sx={{
-              mt: "24px",
-            }}
-          >
-            Once you finish, <a href="/">zip</a> the theme files, and{" "}
-            <a href="/">upload</a> the final zip file to your Ghost website.
-          </p>
-          <p
-            sx={{
-              mt: "24px",
-            }}
-          >
-            If editing the{" "}
-            <code
-              sx={{
-                background: "#FFFFFF",
-                border: "1px solid",
-                padding: "4px",
-                borderRadius: "6px",
-              }}
-            >
-              routes.yaml
-            </code>{" "}
-            file, make sure to upload it after every change you make.
-          </p>
-          <hr
-            sx={{
-              mt: "2rem",
-            }}
-          />
-        </div> */}
         <h1
           sx={{
             display: 'flex',
@@ -342,35 +233,31 @@ module.exports = {
             </li>
             <li>3. In the `index.js` file, export a theme object that includes the custom styles and components you want to use. For example:</li>
           </ul>
-          <pre sx={{ background: '#FAFAFA', padding: '16px', my: '20px' }}>
-            <code>
-              {`{
-    import { baseTheme } from 'gatsby-theme-dega';
-
-export default {
-  ...baseTheme,
-  colors: {
-    primary: 'red',
-    secondary: 'blue',
-  },
-  styles: {
-    ...baseTheme.styles,
-    h1: {
-      fontFamily: 'Arial, sans-serif',
-      fontSize: '48px',
-    },
-  },
-};
-  }`}
-            </code>
-          </pre>
-          <p>In this example, we are extending the base theme from gatsby-theme-dega and customizing the colors and styles.</p>
           <p sx={{
             mt: '16px',
             'a: hover': {
               textDecoration: 'underline',
             }
           }}>Please read the guide <a href="https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/shadowing/">Shadowing in Gatsby Themes</a> to understand how to customize the theme! Generally speaking you will want to place your files into <code>src/@factly/gatsby-theme-kite/</code> to shadow/override files. The Theme UI config can be configured by shadowing its files in <code>src/gatsby-plugin-theme-ui/</code>.</p>
+        </div>
+        <div sx={{
+          background: '#E7F5FB',
+          padding: '32px',
+          mt: '42px',
+          h2: {
+            fontSize: "20px",
+            fontWeight: "600",
+          },
+          p: {
+            my: '16px'
+          }
+        }}>
+          <h2>Editing the content</h2>
+          <p>The content of the page is managed by `DegaCMS`.</p>
+          <h2>Changelog</h2>
+          <p>You can find the extensive [changelog of changes on GitHub] <a href="(https://github.com/factly/dega-themes/blob/main/themes/gatsby-theme-factly/CHANGELOG.md)">(https://github.com/factly/dega-themes/blob/main/themes/gatsby-theme-factly/CHANGELOG.md).</a> You'll be able to see each patch, minor, and major changes and what pull requests contributed to them.</p>
+          <h2> Questions?</h2>
+          <p>If you have general questions or need help with Gatsby, please go to one of the <a href="[support platforms](https://www.gatsbyjs.com/contributing/community/#where-to-get-support)">[support platforms](https://www.gatsbyjs.com/contributing/community/#where-to-get-support)</a> mentioned in Gatsby's documentation. If you have a specific question about this theme, you can head to the <a href="[GitHub Discussions](https://github.com/LekoArts/gatsby-themes/discussions)">[GitHub Discussions](https://github.com/LekoArts/gatsby-themes/discussions)</a></p>
         </div>
       </div>
     </Layout>
