@@ -31,7 +31,7 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.HEALTH_FACTLY_ACCESS_TOKEN }}
           GATSBY_ADOBE_CLIENT_ID: ${{ secrets.HEALTH_FACTLY_GATSBY_ADOBE_CLIENT_ID }}
           SITE_URL: https://www.health.factly.in
-          SPACE_ID: '8'
+          SPACE_ID: '1'
           DEGA_API_URL: https://dega-api.factly.in/query
           NODE_VERSION: '18'
         run: yarn workspace factly-health build --log-pages
