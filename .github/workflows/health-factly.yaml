@@ -1,0 +1,42 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - develop  # or your default branch
+  pull_request:
+    branches:
+      - develop  # This will create preview deployments for PRs
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # or whatever version you're using
+          
+      - name: Install Yarn
+        run: npm install -g yarn
+        
+      - name: Install Dependencies
+        run: yarn install
+        
+      - name: Build
+        env:
+          ACCESS_TOKEN: ${{ secrets.HEALTH_FACTLY_ACCESS_TOKEN }}
+          GATSBY_ADOBE_CLIENT_ID: ${{ secrets.HEALTH_FACTLY_GATSBY_ADOBE_CLIENT_ID }}
+          SITE_URL: https://www.health.factly.in
+          SPACE_ID: '8'
+        run: yarn workspace factly-health build --log-pages
+        
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy examples/factly-health/public --project-name=dega-themes-gatsby
