@@ -1,4 +1,5 @@
 const path = require('path');
+
 const withDefaults = require(`./utils/default-options`);
 
 // TODO: Remove format pages for entities

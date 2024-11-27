@@ -18,8 +18,7 @@
   "workspaces": [
     "themes/*",
     "examples/*",
-    "plugins/*",
-    "www"
+    "plugins/*"
   ],
   "scripts": {
     "lint": "eslint .",

@@ -4,7 +4,6 @@ import { jsx } from 'theme-ui';
 import Layout from '@components/Layout/index';
 import StoryCard from '../UI/StoryCard';
 import Seo from '@components/Seo';
-import { Link } from 'gatsby';
 
 const Homepage = ({ data }) => {
   const { space, categories, factchecks, posts } = data;
